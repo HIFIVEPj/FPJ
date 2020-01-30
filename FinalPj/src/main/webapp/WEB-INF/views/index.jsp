@@ -907,7 +907,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>최신 프로젝트</h1>
-					<p>한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈</p>
+					<p>~한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈~</p>
 				</div>
 				<div class="business-item Marketplace ">
 					<div class="items-gallery">
