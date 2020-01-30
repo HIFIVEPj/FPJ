@@ -2000,47 +2000,7 @@
 										</div>
 									</div>
 										
-								<!-- 	<div class="col-sm-6 col-md-3">
-										<div class="form-group">
-											<label class="form-label">업무가능일</label>
-											<input type="number" class="form-control" placeholder="업무가능일">
-										</div>
-									</div>
-								-->	
-									<!-- 
-									<div class="col-md-5">
-										<div class="form-group">
-											<label class="form-label">선호지역</label>
-											<select class="form-control select2-show-search border-bottom-0 w-100 select2-show-search" data-placeholder="Select">
-												<optgroup label="Categories">
-													<option>--Select--</option>
-													<option value="1">Germany</option>
-													<option value="2">Real Estate</option>
-													<option value="3">Canada</option>
-													<option value="4">Usa</option>
-													<option value="5">Afghanistan</option>
-													<option value="6">Albania</option>
-													<option value="7">China</option>
-													<option value="8">Denmark</option>
-													<option value="9">Finland</option>
-													<option value="10">India</option>
-													<option value="11">Kiribati</option>
-													<option value="12">Kuwait</option>
-													<option value="13">Mexico</option>
-													<option value="14">Pakistan</option>
-												</optgroup>
-											</select>
-										</div>
-									</div> 
-									-->						
-										
-																	
-				<!-- 					<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">Facebook</label>
-											<input type="text" class="form-control" placeholder="https://www.facebook.com/">
-										</div>
-									</div>    -->
+
  
 
 									<div class="col-md-12">
@@ -2049,65 +2009,41 @@
 											<textarea rows="5" class="form-control" placeholder=""></textarea>
 										</div>
 									</div>
-							<!-- 	<div class="col-md-12">
-										<div class="form-group mb-0">
-											<label class="form-label">첨부파일</label>
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" name="example-file-input-custom">
-												<label class="custom-file-label">Choose file</label>
-											</div>
-										</div>
-									</div> 
-									<div class="p-2 border mb-4">
-										<div class="upload-images d-flex">
-											<div>
-												<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
-											</div>
-											<div class="ml-3 mt-2">
-												<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
-												<small>4.5kb</small>
-											</div>
-											<div class="float-right ml-auto">
-												<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
-											</div>
-										</div>
-									</div> -->
-									<div class="col-md-12">
-									<div class="form-group ">
-										<div class="row">
-											<div class="col-md-3">
-												<label class="form-label mt-2">첨부파일</label>
-											</div>
-										</div>
-									</div>
-									</div>		
+
+
 											<div class="col-md-12">
-												<div class="form-group">
-													<div class="row">
-													<div class="custom-file">
-														<input type="file" class="custom-file-input" name="example-file-input-custom">
-														<label class="custom-file-label">Upload Files</label>
-													</div>
-													</div>
-													
+											<div class="form-group ">
+												<label class="form-label mt-2">첨부파일</label>
+												<div class="custom-file">
+													<input type="file" class="custom-file-input" name="example-file-input-custom">
+													<label class="custom-file-label">Upload Files</label>
 												</div>
+											</div>
+											</div>		
+
+											<div class="col-md-12">
+											<div class="form-group ">
+											
+												<div class="p-2 border mb-4">
+												<div class="upload-images d-flex">
+													<div>
+														<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
+													</div>
+													<div class="ml-3 mt-2">
+														<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
+														<small>4.5kb</small>
+													</div>
+													<div class="float-right ml-auto">
+														<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
+													</div>
+												</div>
+												</div>	
+											</div>
 											</div>
 												
-												<div class="p-2 border mb-4">
-													<div class="upload-images d-flex">
-														<div>
-															<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
-														</div>
-														<div class="ml-3 mt-2">
-															<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
-															<small>4.5kb</small>
-														</div>
-														<div class="float-right ml-auto">
-															<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
-														</div>
-													</div>
-												</div>
-											</div>
+									
+									</div>
+
 									
 								</div>
 							</div>
