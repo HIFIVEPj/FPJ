@@ -237,7 +237,7 @@
 											<a href="#" class="text-dark" data-toggle="dropdown"><span> Language <i class="fa fa-caret-down text-muted"></i></span> </a>
 											<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 												<a href="#" class="dropdown-item" >
-													English
+													English12
 												</a>
 												<a class="dropdown-item" href="#">
 													Arabic
@@ -366,7 +366,7 @@
 														<li aria-haspopup="true"><a href="index20.html">Video List</a></li>
 													</ul>
 													<ul class="col link-list">
-														<li aria-haspopup="true"><a href="banner.html">Banner</a></li>
+														<li aria-haspopup="true"><a href="banner.html">Bann123123er</a></li>
 														<li aria-haspopup="true"><a href="domain-search.html">Video Banner</a></li>
 														<li aria-haspopup="true"><a href="slider.html">Image Slider</a></li>
 														<li aria-haspopup="true"><a href="intro-page.html">Intro Page</a></li>
