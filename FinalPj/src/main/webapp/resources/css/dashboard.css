@@ -122,7 +122,7 @@
 	  --green: #00e682;
 	  --teal: #05e6e6;
 	  --cyan:  #17a2b8;
-	  --primary:#6963ff;
+	  --primary:#1f719a;
 	  --secondary: #f6f7fb;
 	  --success: #00e682;
 	  --info: #00d6e6;
@@ -243,7 +243,7 @@ a {
 	-webkit-text-decoration-skip: objects;
 }
 a:hover {
-	color: #6963ff;
+	color: #1f719a;
 	text-decoration: underline;
 }
 a:not([href]):not([tabindex]) {
@@ -16180,7 +16180,7 @@ footer .border-bottom{
     display: inline-flex;
     width: 4rem;
     height: 4rem;
-    padding: 1.3rem 1.4rem;
+    padding: 1.4rem 1.4rem;
     border-radius: 50%;
     text-align: center;
 }
@@ -18289,8 +18289,8 @@ footer .border-top{
 }
 .my-dash.app-sidebar .side-menu__item.active{
    background: #f9faff !important;
-    color: #6963ff !important;
-    border-right: 2px solid #6963ff;
+    color: #1f719a !important;
+    border-right: 2px solid #1f719a;
 }
 
 .my-dash .slide.is-expanded [data-toggle='slide']{
@@ -18755,7 +18755,7 @@ footer .border-top{
 	background:#605e7e;
 }
 .wishlist.active{
-	background:#e62a72;
+	background:#e8564a;
 }
 .constuction-logo{
 	border-bottom:3px solid;
@@ -19711,7 +19711,7 @@ a.typewrite{
 }
 
 *::-ms-backdrop,  .gradient-icon{
-	color:#6963ff;
+	color:#1f719a;
 	background:none;
 }
 *::-ms-backdrop,  .xzoom{
@@ -19744,7 +19744,7 @@ a.typewrite{
     content: "";
     right: -24px;
     border-top: 16px solid transparent;
-    border-left: 24px solid #6963ff;
+    border-left: 24px solid #1f719a;
     border-bottom: 16px solid transparent;
     width: 0;
 }

@@ -53,9 +53,10 @@
 .horizontal-mainwrapper {
 	margin: 0 auto;
 	max-width: 1200px;
+	position: relative;
 }
 .desktoplogo {
-	padding: 1.5rem 0;
+	padding: 13.5px;
 	margin: 0;
 	float: left;
 }
@@ -344,8 +345,8 @@
 /* ================== Desktop Mega Menus CSS  ================== */
 
 .horizontalMenu>.horizontalMenu-list>li>.horizontal-megamenu {
-	width: 100%;
-	left: 0px;
+	width: 60%;
+	right: 0px;
 	position: absolute;
 	top: 80px;
 	color: #000;
@@ -393,6 +394,8 @@
 	text-align: left;
 	padding: 5px 10px 5px 10px;
 }
+
+/*사이트 맵 하단 글씨 색*/
 .horizontalMenu>.horizontalMenu-list>li>.horizontal-megamenu .link-list li a {
 	line-height: 18px;
 	border-right: none;
