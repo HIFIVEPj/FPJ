@@ -891,6 +891,7 @@ $(document).ready(function() {
 								<!--</div> -->
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab-11">
+										<c:forEach var = "dto" items="${list}">
 											<div class="card overflow-hidden">
 												<div class="d-md-flex">													
 												<!-- 		<div class="arrow-ribbon bg-primary">New</div> -->					
@@ -901,20 +902,21 @@ $(document).ready(function() {
 													<div class="card border-0 mb-0">
 														<div class="card-body ">
 															<div class="item-card9">
+															
 																&nbsp;&nbsp;&nbsp;
-																<a href="software.html"><br/>서울시 강서구 / JAVA, PHP / (주)TEST<br/><br/></a>	
+																<a href="software.html"><br/>${dto.pj_loc} / JAVA, PHP /${dto.pj_name}<br/><br/></a>	
 																													
 																<a href="content.do" class="text-dark">
 																<h4 class="font-weight-semibold mt-1">
 																&nbsp;&nbsp;&nbsp;
-																테스트테스트 <span class="fs-14 text-default"></span></h4></a>
+																${dto.pj_sub} <span class="fs-14 text-default"></span></h4></a>
 																
 																<p class="mb-0 leading-tight">
 																&nbsp;&nbsp;&nbsp;
-																프로젝트 주소는 쓰기로 하고 프리랜서는 선호지역을 선택할 수 있게 AJAX로 만들기</p>
+																${dto.pj_cont}</p>
 																<p class="mb-0 leading-tight">
 																&nbsp;&nbsp;&nbsp;<br/>
-																&nbsp;&nbsp;&nbsp;&nbsp;급여 : 협의</p>
+																&nbsp;&nbsp;&nbsp;&nbsp;급여 : ${dto.pj_pay}원</p>
 															</div>
 														</div>
 														<div class="card-footer pt-4 pb-4">
@@ -922,7 +924,7 @@ $(document).ready(function() {
 																<div class="item-card9-cost">
 																	<span class="text-dark font-weight-semibold mb-0 mt-0" style=" font-size:1.5em;">D-3</span>
 																	 &nbsp; &nbsp;
-																	<span class="text-dark font-weight-semibold mb-0 mt-0"  >(마감일 2020/01/25)</span>
+																	<span class="text-dark font-weight-semibold mb-0 mt-0"  >(마감일 ${dto.pj_ddate})</span>
 																	
 																</div>
 																<div class="ml-auto">
@@ -957,145 +959,11 @@ $(document).ready(function() {
 													</div>
 												</div>
 											</div>
-											<div class="card overflow-hidden">
-								
-												<div class="d-md-flex">
-										<!-- 		<div class="arrow-ribbon bg-primary">New</div> -->			
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-												
-													<div class="card border-0 mb-0">
-													
-																<a href="software.html">
-																<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																경기도 고양시 / JavaScript, JQuery, CSS / 버거는버거킹</a>
-																<a href="software.html" class="text-dark"><h4 class="font-weight-semibold mt-1">
-																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																디자이너 모집 <span class="fs-14 text-default"></span></h4></a>
-																<p class="mb-0 leading-tight">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																웹 디자인 해주실 분 모십니다.</p><br/>
-
-														<div class="card-footer pt-4 pb-4">
-																<div class="item-card9-cost">													
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style=" font-size:1.5em;">D-6</span>
-																&nbsp; &nbsp;
-																<span class="text-dark font-weight-semibold mb-0 mt-0"  >(마감일 2020/01/29)</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-																				<div class="card overflow-hidden">
-								
-												<div class="d-md-flex">
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-												
-													<div class="card border-0 mb-0">
-													
-																<a href="software.html">
-																<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																경기도 광주시 / 사용언어사용언어 / 회사회사입니다회사</a>
-																<a href="software.html" class="text-dark"><h4 class="font-weight-semibold mt-1">
-																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																공고제목공고제목<span class="fs-14 text-default"></span></h4></a>
-																<p class="mb-0 leading-tight">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																설명설명설명설명</p><br/>
-
-														<div class="card-footer pt-4 pb-4">
-																<div class="item-card9-cost">													
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style=" font-size:1.5em;">D-5</span>
-																&nbsp; &nbsp;
-																<span class="text-dark font-weight-semibold mb-0 mt-0"  >(마감일 2020/01/28)</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-																				<div class="card overflow-hidden">
-								
-												<div class="d-md-flex">
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>												
-													<div class="card border-0 mb-0">										
-																<a href="software.html">
-																<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																(주)집에가고싶다</a>
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;									
-																<a href="software.html" class="text-dark"><h4 class="font-weight-semibold mt-1">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																인사관리 시스템 개발</a>
-																 <span class="fs-14 text-default"></span></h4></a>
-																<p class="mb-0 leading-tight">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																개발자/경력5년이상    급여: 협의</p><br/>
-														<div class="card-footer pt-4 pb-4">
-																<div class="item-card9-cost">													
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style=" font-size:1.5em;">D-1</span>
-																&nbsp; &nbsp;
-																<span class="text-dark font-weight-semibold mb-0 mt-0"  >(마감일 2020/01/23)</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-													<div class="card overflow-hidden">
-												<div class="d-md-flex">
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>	
-													<div class="card border-0 mb-0">
-																<a href="software.html">
-																<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																JAVA, C, C++</a>
-																<a href="software.html" class="text-dark"><h4 class="font-weight-semibold mt-1">
-																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																개발자 구함 <span class="fs-14 text-default"></span></h4></a>
-																<p class="mb-0 leading-tight">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																석식 제공. 기숙사 제공.</p><br/>
-														<div class="card-footer pt-4 pb-4">
-																<div class="item-card9-cost">													
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style=" font-size:1.5em;">D-10</span>
-																&nbsp; &nbsp;
-																<span class="text-dark font-weight-semibold mb-0 mt-0"  >(마감일 2020/02/01)</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-													<div class="card overflow-hidden">
-														<div class="d-md-flex">
-															<div class="item-card9-icons">
-																<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-															</div>
-													<div class="card border-0 mb-0">
-																<a href="software.html">
-																<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																JAVA, C, C++</a>
-																<a href="software.html" class="text-dark"><h4 class="font-weight-semibold mt-1">
-																<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																개발자 구함 <span class="fs-14 text-default"></span></h4></a>
-																<p class="mb-0 leading-tight">
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																석식 제공. 기숙사 제공.</p><br/>
-														<div class="card-footer pt-4 pb-4">
-																<div class="item-card9-cost">													
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style=" font-size:1.5em;">D-10</span>
-																&nbsp; &nbsp;
-																<span class="text-dark font-weight-semibold mb-0 mt-0"  >(마감일 2020/02/01)</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+											
+											<!-- ///////////////// -->
 
 										<!-- 아래 div지우면 망함 -->	
+										</c:forEach>
 										</div>
 										<div class="tab-pane" id="tab-12">
 											<div class="row">

@@ -378,7 +378,7 @@
 									</div>
 								</li>
 								<li aria-haspopup="true"><a href="about.html">About Us </a></li>
-								<li aria-haspopup="true"><a href="widgets.html">Widgets</a></li>
+								<li aria-haspopup="true"><a href="/project/list">프로젝트</a></li>
 								<li aria-haspopup="true"><a href="#">Pages <span class="fa fa-caret-down m-0"></span></a>
 									<div class="horizontal-megamenu clearfix">
 										<div class="container">
