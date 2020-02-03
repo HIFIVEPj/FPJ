@@ -99,10 +99,7 @@ public class IndexController {
 /*소담*/	
 	
 /*별*/
-	@GetMapping("list.do")
-	public String list() {
-		return "project_list";
-	}
+
 	
 	@GetMapping("content.do")
 	public String content() {
