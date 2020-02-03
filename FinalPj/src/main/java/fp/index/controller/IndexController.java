@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index() {
-		
+	public String index() {	
 		return "index";
 	}
-
+	@RequestMapping("construction")
+	public String construction() {
+		return "construction";
+	}
+	
+	
 /*나영*/
 	@RequestMapping("/register")
 	public String reg() {
@@ -95,59 +99,59 @@ public class IndexController {
 /*소담*/	
 	
 /*별*/
-	@GetMapping("/project/list.do")
+	@GetMapping("list.do")
 	public String list() {
-			return "project/project_list";
+		return "project_list";
 	}
 	
-	@GetMapping("/project/content.do")
+	@GetMapping("content.do")
 	public String content() {
-			return "project/project_content";
+		return "project_content";
 	}
-	@GetMapping("/project/write.do")
+	@GetMapping("write.do")
 	public String write() {
-			return "project/project_write";
+		return "project_write";
 	}
-	@GetMapping("/project/update.do")
+	@GetMapping("update.do")
 	public String update() {
-			return "project/project_update";
+		return "project_update";
 	}
-	@GetMapping("/project/payments.do")
-	public String payments() {
-			return "project/project_payments";
+	@GetMapping("payments.do")
+	public String project_payments() {
+		return "project_payments";
 	}
-	@GetMapping("/project/payments_end.do")
+	@GetMapping("payments_end.do")
 	public String payments_end() {
-			return "project/project_payments_end";
+		return "project_payments_end";
 	}
 /*별*/
 	
 	/*세영*/
-	@RequestMapping(value = "/market/marketList", method = RequestMethod.GET)
+	@RequestMapping(value = "marketList", method = RequestMethod.GET)
 	public String list(Locale locale, Model model) {
 
-		return "market/ad-list-right";
+		return "ad-list-right";
 	}
-	@RequestMapping(value = "/market/marketDetails", method = RequestMethod.GET)
+	@RequestMapping(value = "marketDetails", method = RequestMethod.GET)
 	public String details(Locale locale, Model model) {
 
-		return "market/ad-details";
+		return "ad-details";
 	}
 	
-	@RequestMapping(value = "/market/marketPosts", method = RequestMethod.GET)
+	@RequestMapping(value = "marketPosts", method = RequestMethod.GET)
 	public String post1(Locale locale, Model model) {
 
-		return "market/ad-posts";
+		return "ad-posts";
 	}
-	@RequestMapping(value = "/market/marketPayments", method = RequestMethod.GET)
-	public String payments(Locale locale, Model model) {
+	@RequestMapping(value = "marketPayments", method = RequestMethod.GET)
+	public String sy_payments(Locale locale, Model model) {
 
-		return "market/payments";
+		return "sy_payments";
 	}
-	@RequestMapping(value = "/market/marketPaymentsDone", method = RequestMethod.GET)
+	@RequestMapping(value = "marketPaymentsDone", method = RequestMethod.GET)
 	public String paymentsDone(Locale locale, Model model) {
 
-		return "market/payments-done";
+		return "payments-done";
 	}
 /*세영*/
 

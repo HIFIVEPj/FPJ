@@ -4,8 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    <typeAliases>
- 	<typeAlias alias="Project" type="fp.corporation.domain.Project"/>
-   	<typeAlias alias="ProjectVo" type="fp.corporation.vo.ProjectVo"/>
+   <!-- 
+   	   <typeAlias alias="Address" type="song.md.domain.Address"/>
+   	   <typeAlias alias="Board" type="song.md.domain.Board"/>
+   	   <typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>
+   	   <typeAlias alias="Paging" type="song.md.domain.Paging"/>
+   	   <typeAlias alias="PagingVo" type="song.md.domain.PagingVo"/>
+    -->	   
    </typeAliases>
 
 <!-- 
