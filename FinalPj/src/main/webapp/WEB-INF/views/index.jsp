@@ -432,7 +432,7 @@
 					</div>
 				
 					<div class style="align:center; margin:0 auto;">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -507,7 +507,7 @@
 					</div>
 				
 					<div class style="align:center; margin:0 auto;">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -555,7 +555,7 @@
 					</div>
 				
 					<div class style="align:center; margin:0 auto;">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -656,7 +656,7 @@
 					</div>
 				
 					<div class style="align:center; margin:0 auto;">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -704,7 +704,7 @@
 					</div>
 				
 					<div class style="align:center; margin:0 auto;">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -752,7 +752,7 @@
 					</div>
 				
 					<div class style="align:center; margin:0 auto;">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -1229,7 +1229,7 @@
 					</div>
 					
 					<div class style="align:center; margin:0 auto;">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="marketList" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -1617,7 +1617,7 @@
 				
 				<br/>
 				<div class="text-center">
-						<a href="auction-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="employer-list-right" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 				</div>
 				
 			</div>

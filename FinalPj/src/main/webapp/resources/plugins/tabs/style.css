@@ -18,7 +18,7 @@
 .tab_wrapper > ul {
   clear: both;
   display: inline-block;
-  width: 100%;
+  /*width: 100%;*/
   border-bottom: 1px solid #eff4fc;
   margin-bottom: 0;
 }
