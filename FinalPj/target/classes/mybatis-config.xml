@@ -4,19 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    <typeAliases>
-   <!-- 
-   	   <typeAlias alias="Address" type="song.md.domain.Address"/>
-   	   <typeAlias alias="Board" type="song.md.domain.Board"/>
-   	   <typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>
-   	   <typeAlias alias="Paging" type="song.md.domain.Paging"/>
-   	   <typeAlias alias="PagingVo" type="song.md.domain.PagingVo"/>
-    -->	   
+	   <typeAlias alias="FreeLancer" type="fp.freelancerprofile.domain.FreeLancer"/>
+	   <typeAlias alias="Type" type="fp.freelancerprofile.domain.Type"/>
+	   <typeAlias alias="FreePickKeyWord" type="fp.freelancerprofile.domain.FreePickKeyWord"/>
+	   <typeAlias alias="FreeLancerProfile" type="fp.freelancerprofile.domain.FreeLancerProfile"/>   
+   	   <typeAlias alias="FreeLancerProfilefile" type="fp.freelancerprofile.domain.FreeLancerProfileFile"/>
+   	   <typeAlias alias="FreeLancerProfileListVO" type="fp.freelancerprofile.domain.FreeLancerProfileListVO"/>
+
+  
    </typeAliases>
 
-<!-- 
+
    <mappers>
-   	   <mapper resource="song/md/mapper/AddressMapper1.xml"/>
-   	   <mapper resource="song/md/mapper/AddressMapper2.xml"/>
+   	 <!--  <mapper resource="fp/freelancerprofile/mapper/FreeLancerProfileMapper.xml"/>   -->
    </mappers>
---> 
+
 </configuration>

@@ -90,7 +90,7 @@
 
 		<!-- Cookie js -->
 		<script src="../plugins/cookie/jquery.ihavecookies.js"></script>
-		<script src="..//plugins/cookie/cookie.js"></script>
+		<script src="../plugins/cookie/cookie.js"></script>
 
 		<!-- side-menu Js-->
 		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
@@ -121,8 +121,8 @@
 		<script src="../js/swipe.js"></script>
 		
 		<!--Showmore Js-->
-		<script src="..//js/jquery.showmore.js"></script>
-		<script src="..//js/showmore.js"></script>	
+		<script src="../js/jquery.showmore.js"></script>
+		<script src="../js/showmore.js"></script>	
 
 		<!-- Custom Js-->
 		<script src="../js/custom.js"></script>
@@ -132,6 +132,20 @@
 		$("#loading").fadeOut("slow");
 		})
 		</script>
+		
+		<!-- Datepicker js 날짜입력 -->
+		<script src="../plugins/date-picker/spectrum.js"></script>
+		<script src="../plugins/date-picker/jquery-ui.js"></script>
+		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
+		
+		<!-- Inline js 날짜입력 -->
+		<!-- Custom Js와 겹치기 때문에 주석처리
+		<script src="../js/select2.js"></script>
+		-->
+		<script src="../js/formelements.js"></script>
+		
+		<!-- file uploads js -->
+        <script src="../plugins/fileuploads/js/dropify.js"></script>
 
 	</body>
 </html>

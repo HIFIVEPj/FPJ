@@ -5,6 +5,77 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
+		<!--Sliders Section-->
+		<div>
+			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner7.jpg">
+				<div class="header-text1 mb-0">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+				<!--  				<h1 class=""><span class="font-weight-bold">12,32,523</span> Books Available</h1>  -->	
+								</div>
+								<div class="search-background mb-0">
+						 <!--			<div class="form row no-gutters">
+											<div class="form-group  col-xl-6 col-lg-5 col-md-12 mb-0">
+											<input type="text" class="form-control input-lg border-right-0" id="text" placeholder="Search Your Book">
+										</div>  
+										
+											
+								  	<div class="form-group col-xl-4 col-lg-4 select2-lg  col-md-12 mb-0">
+											<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
+												<optgroup label="Categories">
+													<option>Category</option>
+													<option value="1">Action and adventure</option>
+													<option value="2">Alternate history</option>
+													<option value="3">Anthology</option>
+													<option value="4">Chick lit</option>
+													<option value="5">Children's literature</option>
+													<option value="6">Comic book</option>
+													<option value="7">Coming-of-age</option>
+													<option value="8">Crime</option>
+													<option value="9">Drama</option>
+													<option value="10">Fairytale</option>
+													<option value="11">Fantasy</option>
+													<option value="12">Graphic novel</option>
+													<option value="13">Historical fiction</option>
+													<option value="14">Mystery</option>
+													<option value="15">Paranormal romance</option>
+													<option value="16">Picture book</option>
+													<option value="17">Poetry</option>
+													<option value="18">Political thriller</option>
+													<option value="19">Romance</option>
+													<option value="20">Satire</option>
+													<option value="21">Science fiction</option>
+													<option value="22">Love</option>
+													<option value="23">Short story</option>
+													<option value="24">Suspense</option>
+													<option value="25">Thriller</option>
+													<option value="26">Art</option>
+													<option value="27">Autobiography</option>
+													<option value="28">Biography</option>
+													<option value="29">Book review</option>
+												</optgroup>
+											</select>
+										</div>   
+										
+										
+										
+										<div class="col-xl-2 col-lg-3 col-md-12 mb-0">
+											<a href="#" class="btn btn-lg btn-block btn-secondary">Search</a>
+										</div>
+									</div>  -->	
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+
 		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">

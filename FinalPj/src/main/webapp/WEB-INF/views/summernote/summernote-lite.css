@@ -34,6 +34,8 @@
   speak: none;
 }
 
+/*from 보라*/
+.note-btn {height:30px;}
 
 .note-icon-fw {
   text-align: center;
@@ -124,7 +126,7 @@
 }
 
 .note-icon-caret::before {
-  content: "\ea10";
+  /* content: "\ea10"; */
 }
 
 .note-icon-chain-broken::before {

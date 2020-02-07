@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="fp.freelancerprofile.mapper.FreeLancerProfileMapper">
+
+	   <resultMap type="FreeLancer" id="FreeLancerResult">
+	 
+			<id column="free_code" property="free_code"/>
+			<result column="mem_email" property="mem_email"/>
+			<result column="free_name" property="free_name"/>
+			<result column="free_tel" property="free_tel"/>
+			<result column="free_point" property="free_point"/>
+			<result column="free_rdate" property="free_rdate"/>
+			<result column="free_level" property="free_level"/>
+			<result column="free_acctox" property="free_acctox"/>
+			<result column="free_fname" property="free_fname"/>
+			<result column="free_ofname" property="free_ofname"/>
+	
+			
+		
+		<collection property="freelancerprofile" javaType="java.util.ArrayList" ofType="FreeLancerProfile" column="free_code">	
+			<id property="free_code" column="free_code"/>
+		  <result property="pro_num" column="pro_num"/>
+		  <result property="type_num" column="type_num"/>
+		  <result property="pro_exp" column="pro_exp"/>
+		  <result property="pro_cv" column="pro_cv"/>
+		  <result property="pro_addr" column="pro_addr"/>
+		  <result property="pro_edu" column="pro_edu"/>
+		  <result property="pro_start" column="pro_start"/>
+		  <result property="pro_ox" column="pro_ox"/>
+		  <result property="pro_grade" column="pro_grade"/>
+		  <result property="profile_vcnt" column="profile_vcnt"/>
+		  <result property="profile_pcnt" column="profile_pcnt"/>
+		  <result property="pro_workplace" column="pro_workplace"/>
+		 <result property="profile_sub" column="profile_sub"/>
+		  <result property="profile_date" column="profile_date"/>
+		</collection>	 	
+		
+		<collection property="freeLancerProfileFile" javaType="java.util.ArrayList" ofType="FreeLancerProfilefile" column="free_code">
+		<id property="free_code" column="free_code"/>
+		  <id property="profile_num" column="profile_num"/>
+		  <result property="pro_num" column="pro_num"/>
+		  <result property="profile_fname" column="profile_fname"/>
+		  <result property="profile_ofname" column="profile_ofname"/>
+		  <result property="profile_size" column="profile_size"/>
+		  <result property="profile_ext" column="profile_ext"/>
+		</collection>	
+		
+	   </resultMap>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+ 	<!-- 프리랜서 프로필 리스트 select -->
+   <select id="selectProfileList"  resultMap="FreeLancerResult">
+      <![CDATA[
+		select *
+			from FREELANCER f
+				inner join FREELANCER_PROFILE fp
+				on f.FREE_CODE = fp.FREE_CODE 
+					inner join FREELANCER_PROFILEFILE ffile
+					on f.FREE_CODE = ffile.FREE_CODE 
+      ]]>
+   </select>
+  
+   <!-- 프리랜서 프로필 컨텐츠 1-->
+   <!--  select id="selectProfileContent"  parameterType="object" resultMap="FreeLancer">
+
+      <![CDATA[
+		select fp.PRO_NUM, FREE_NAME, PRO_WORKPLACE, MEM_EMAIL, FREE_TEL,
+		PRO_CV, PROFILE_DATE, PROFILE_OFNAME 
+			from FREELANCER f 
+				inner join FREELANCER_PROFILE fp
+				on f.FREE_CODE = fp.FREE_CODE
+					inner join FREELANCER_PROFILEFILE ffile
+					on f.FREE_CODE = ffile.FREE_CODE
+					where  fp.PRO_NUM=#{PRO_NUM}
+      ]]>
+   </select>
+   
+  
+   <delete id="ProfileListDelete" parameterType="fp.freelancerprofile.domain.FreeLancerProfileListVO">
+   <![CDATA[
+	   	delete from FREELANCER_PROFILEFILE
+			where FREE_CODE in (select FREE_CODE  from FREELANCER_PROFILE where FREE_CODE in 
+					(select FREE_CODE from FREELANCER where FREELANCER.FREE_CODE=FREELANCER_PROFILEFILE.FREE_CODE)
+				and FREELANCER_PROFILE.FREE_CODE=FREELANCER_PROFILE.FREE_CODE) and PRO_NUM=#{PRO_NUM}
+   ]]>
+	</delete>
+-->   
+</mapper>

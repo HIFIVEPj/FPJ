@@ -26,16 +26,14 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+	
 	</bean>
+
 	
-	<!-- 
-	<context:component-scan base-package="song.md.service"/>	
-	<context:component-scan base-package="song.md.dao"/>
-	<context:component-scan base-package="song.md.mapper"/>
-	<mybatis-spring:scan base-package="song.md.mapper"/>
-	
-	<context:component-scan base-package="song.md.aop"/>
-	 -->
+	<context:component-scan base-package="fp.freelancerprofile.service"/>	
+	<context:component-scan base-package="fp.freelancerprofile.mapper"/>
+	<mybatis-spring:scan base-package="fp.freelancerprofile.mapper"/>
+
 	
 	<context:annotation-config></context:annotation-config>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>

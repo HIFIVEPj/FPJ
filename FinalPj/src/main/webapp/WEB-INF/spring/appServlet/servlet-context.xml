@@ -30,7 +30,10 @@
 	
 	<context:component-scan base-package="fp.index.controller" />
 	<context:component-scan base-package="fp.community.controller" />
-	
+	<context:component-scan base-package="fp.freelancerprofile.controller" />
+
+
+
 	
 	
 </beans:beans>

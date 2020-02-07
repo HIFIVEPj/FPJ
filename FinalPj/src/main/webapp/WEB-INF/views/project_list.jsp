@@ -470,7 +470,7 @@
 											</select>
 										</div>
 									</div>
-									<div sytle="margin-left:0px;"><a href="write.do" class="btn btn-success" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									<div sytle="margin-left:0px;"><a href="write.do" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
 									<div class="tab-content">
 										<div class="tab-pane" id="tab-11">
 											<div class="card overflow-hidden">
@@ -1110,7 +1110,7 @@
 										<li class="page-item page-next">
 											<a class="page-link" href="#">Next</a>
 										</li>
-										<div  style="margin-left:553px;"><a href="write.do" class="btn btn-success">글쓰기</a></div>
+										<div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>
 									</ul>
 								</div>
 							</div>

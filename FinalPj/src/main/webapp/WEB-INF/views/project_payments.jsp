@@ -278,7 +278,7 @@
 												</div>
 											</div>
 											<center>
-											<a href="payments_end.do" class="btn btn-success">결제</a>
+											<a href="payments_end.do" class="btn btn-primary">결제</a>
 											</center>
 										</div>				
 									</div>

@@ -18,8 +18,18 @@
 		<meta name="description" content="하이파이브 - 프리랜서 플랫폼">
 		<meta name="author" content="sprukotechnologies">
 		<meta name="keywords" content="classifieds,real estate,education online classess,jobs,business directory,coupons,cars,e-commerce,market place,auctions,tours & travels,domain marketPlace,books listing,doctors listing,rating & reviews,iCO list,wedding,knowledge base,softwares,video listing,booking html template,bootstrap 4 html template,buy templates,directory listing html template,html and css website templates,html app template,html5 web templates,modern html templates,premium bootstrap templates,responsive ui,html template,html5 template,ecommerce html template,directory listing html template,html css js templates,search html template,best ui kits,bootstrap 4 ui kit,bootstrap kit,css ui kit,flat ui kit,html ui kit,kit ui,multipurpose website ui kit,ui kit template,uikit css,web ui kit,website ui kit,wireframe kit,wireframe ui kit,bootstrap ui kit,dashboard ui kit,flat ui,flat ui design,uikit">
-		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="icon" href="hifive.ico" type="image/x-icon"/>
+		<link rel="shortcut icon" type="image/x-icon" href="hifive.ico" />
+
+		<!-- summernote -->			
+		<link href="/summernote/summernote-lite.css" rel="stylesheet">
+		<!--
+		<script src="../js/jquery.js"></script>
+		-->
+		<script src="../plugins/waves/js/jquery-3.2.1.slim.min.js"></script>
+		<script type="text/javascript" src="/summernote/summernote-lite.js"></script>
+		<script src="/summernote/lang/summernote-ko-KR.js"></script>
+
 
 		<!-- Title -->
 		<title>하이파이브 - 프리랜서 플랫폼</title>
@@ -53,6 +63,18 @@
 		<!--Font icons-->
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet">
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet">
+		
+		<!--for datatable-->
+		<!-- Data table css -->
+		<link href="../plugins/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
+		<link href="../plugins/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+		
+		<!-- jquery ui RangeSlider -->
+		<link href="../plugins/jquery-uislider/jquery-ui.css" rel="stylesheet">
+		<!--/for datatable-->
+		
+		<!-- loaders -->
+		<link href="../css/loaders.css" rel="stylesheet" />
 
 	</head>
 	<body>
@@ -62,6 +84,11 @@
 		<div id="global-loader">
 			<img src="../images/other/loader.svg" class="loader-img floating" alt="">
 		</div>
+		<!--
+		<div class="dimmer active">
+			<div class="lds-hourglass"></div>
+		</div>
+		-->
 
 
 		<!--Topbar-->
@@ -129,7 +156,9 @@
 					<div class="container">
 						<a id="horizontal-navtoggle" class="animated-arrow"><span></span></a>
 						<span class="smllogo"><img src="../images/brand/logo1.png" width="120" alt=""/></span>
+						<!--
 						<a href="tel:245-6325-3256" class="callusbtn"><i class="fa fa-phone" aria-hidden="true"></i></a>
+						-->
 					</div>
 				</div>
 			</div>

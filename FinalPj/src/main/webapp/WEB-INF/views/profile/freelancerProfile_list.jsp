@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+<!-- checkbox_all jQuery -->
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+      $( document ).ready( function() {
+        $( '.check-all' ).click( function() {
+          $( '.ab' ).prop( 'checked', this.checked );
+        } );
+      } );
+    </script>
 <!--/header-->
 
 		<!--Breadcrumb-->
@@ -150,7 +160,14 @@
 							<div class="card-body">
 								<ul class="list-unstyled widget-spec  mb-0">
 									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
+										<i class="fa fa- <form>
+      <p><input type="checkbox" name="all" class="check-all"> <label>Check ALL</label></p>
+      <hr>
+      <p><input type="checkbox" name="cb1" class="ab"> <label>Checkbox 1</label></p>
+      <p><input type="checkbox" name="cb2" class="ab"> <label>Checkbox 2</label></p>
+      <p><input type="checkbox" name="cb3" class="ab"> <label>Checkbox 3</label></p>
+      <p><input type="checkbox" name="cb4" class="ab"> <label>Checkbox 4</label></p>
+    </form> text-success" aria-hidden="true"></i> Meet Seller at public Place
 									</li>
 									<li class="">
 										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
@@ -189,52 +206,65 @@
 								<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead>
-											<tr>												
-													<th></th>													
-													<th>프로필명</th>
+											<tr class="text-center">												
+													<th> <label class="custom-control custom-checkbox ">
+															<input type="checkbox" class="custom-control-input check-all" name="checAll" value="">
+															<span class="custom-control-label check-all"></span>
+														</label>  </th>											
+													<th >프로필명</th>
 													<th>이메일</th>
 													<th>등록일</th>
 													<th>첨부파일</th>
 											</tr>
 										</thead>
-										<tbody>
+										
+										 	<c:forEach  var="profile_list" items="${profile_list}" varStatus="status">
+							
 												<tr>
 													<td scope="row">
-														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-															<span class="custom-control-label"></span>
+														<label class="custom-control custom-checkbox ">
+															<input type="checkbox" class="custom-control-input ab" name="checkbox">
+															<span class="custom-control-label"> </span>
 														</label>
 													</td>
-													<td><a href="myprofilecontent" class="btn-link">개발만이 살길이다</td>
-													<td>Associate Developer</td>
-													<td>$450,870</td>
-													<td><a href="#"><i class="fa fa-save"></i>자바.java</a></td>
+															
+														
+													<td><a href='freelancerProfile_content?PRO_NUM='class="btn-link">${profile_list}</a></td>
+													<td>${profile_list}</td>
+													<td class="text-center"><fmt:formatDate value="${profile_list}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
+													<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profile_list}</a></td> 
+				
 												</tr>
-												<tr>
+												
+											</c:forEach>		
+										<!-- 				<tr>
 													<td scope="row">
 														<label class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
 															<span class="custom-control-label"></span>
 														</label>
-													</td>									
+										</td>									
 													<td><a href="myprofilecontent" class="btn-link">Gavin Gibson</td>
 													<td>Account manager</td>
 													<td>$230,540</td>
-													<td><a href="#"><i class="fa fa-save"></i>개발.java</a></td>
-												</tr>												
-										</tbody>
+													<td><a href="#"><i class="fa fa-save"></i>개발.java</a></td>		 
+												</tr>								-->					
+									
 									</table>
 								</div>
 
 
 							</div>
 							</div>
-								
-							
-							<div class="card">
+								<thead>
+ 			
+							<div class="card">	 	
 								<div class="card-footer" align="right">
-								<button type="submit" class="btn btn-primary">등록</button>	
-								<a href="profilelist" class="btn btn-secondary icons">삭제</a>						
+								<a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>	
+								
+								<a href='freelancerProfile_del?PRO_NUM=' class="btn btn-secondary icons" >삭제</a>
+										
+											
 								</div>
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
@@ -329,6 +359,30 @@
 			</footer>
 		</section>
 		<!--Footer Section-->
+
+    
+    <script language="javascript">
+    function fn_delRow(chkObjNm) { 
+    	﻿         if ($("input[name="+chkObjNm+"]").is(":checked")){ 
+    	﻿            if (confirm("삭제 하시겠습니까?")) { 
+    	﻿                for(var i=$("[name='"+chkObjNm+"']:checked").length-1; i>-1; i--){ 
+    	﻿                    $("[name='"+chkObjNm+"']:checked").eq(i).closest("tr").remove(); 
+    	                }﻿ 
+    	            }﻿ 
+    	         } else { 
+    	﻿            alert("선택된 데이터가 없습니다.");  
+    	         }﻿ 
+    	    }﻿ 
+    </script>
+	<script language="javascript">
+
+	function Delete()
+
+	{
+	$("#tbReworkProcess input[type='checkbox']:checked").parent().parent().remove();
+	}
+
+	</script>
 
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>

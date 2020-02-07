@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -177,24 +178,25 @@
 									<table class="table row table-borderless w-100 m-0 ">
 										<tbody class="col-lg-12 col-xl-6 p-0">
 											<tr>
-												<td><strong>이름 :</strong> 강아지</td>
+											
+												<td><strong>이름 :</strong> ${content[0].FREE_NAME}</td>
 											</tr>
 											<tr>
-												<td><strong>업무가능지역 :</strong> 서울시 영등포구</td>
+												<td><strong>업무가능지역 :</strong> ${content[0].PRO_WORKPLACE}</td>
 											</tr>
 											<tr>
-												<td><strong>키워드 :</strong> Java, C++, PHP.</td>
+												<td><strong>키워드 :</strong>${content3[0].KEY_NAME}</td>
 											</tr>
 										</tbody>
 										<tbody class="col-lg-12 col-xl-6 p-0">
 											<tr>
-												<td><strong>직종 :</strong>개발자</td>
+												<td><strong>직종 :${content2[0].TYPE_NAME}</strong></td>
 											</tr>
 											<tr>
-												<td><strong>Email :</strong> georgemestayer@Pinlist.com</td>
+												<td><strong>Email :</strong> ${content[0].MEM_EMAIL}</td>
 											</tr>
 											<tr>
-												<td><strong>연락처 :</strong> +125 254 3562 </td>
+												<td><strong>연락처 :</strong> ${content[0].FREE_TEL}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -204,13 +206,14 @@
 										<div class="media-heading">
 										<h5><strong>자기소개</strong></h5>
 									</div>
-									<p>
-										 Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus</p>
-									<p >because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter but because those who do not know how to pursue consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
+									<p>${content[0].PRO_CV}</p>
+									<p ${content[0].PRO_CV}></p>
 					
 									</div>
+									
 									<div class="col-md-12">			
 										<div class="media-heading">
+										<br/><br/>
 										<h5><strong>첨부파일</strong></h5>
 									</div>
 									<div class="card-body">
@@ -224,13 +227,14 @@
 													</tr>
 												</thead>
 												<tbody>
+												<c:forEach  var="content" items="${content}" varStatus="status">
 													<tr>
-														<td><a href="store.html" class="text-inherit">Untrammelled prevents </a></td>
-														<td>28 May 2019</td>
-														<td><a href="#"><i class="fa fa-save"></i>파일</a></td>
-														
+														<td><a href="store.html" class="text-inherit">${content2[0].pj_sub}</a></td>
+														<td><fmt:formatDate value="${content.PROFILE_DATE}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
+														<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${content.PROFILE_OFNAME}</a></td>
 													</tr>
-													<tr>
+														</c:forEach>
+										<!--  			<tr>
 														<td><a href="store.html" class="text-inherit">Untrammelled prevents</a></td>
 														<td>12 June 2019</td>
 														<td><a href="#"><i class="fa fa-save"></i>파일</a></td>										
@@ -245,7 +249,7 @@
 														<td><a href="store.html" class="text-inherit">Untrammelled prevents</a></td>
 														<td>14 June 2019</td>
 														<td><a href="#"><i class="fa fa-save"></i>파일</a></td>													
-													</tr>													
+													</tr>		-->											
 												</tbody>
 											</table>
 										</div>
@@ -257,9 +261,9 @@
 						</div>
 							</div>
 							<div class="card-footer" align="right">
-								<a href="mydashrewrite" class="btn btn-secondary icons">수정하기</a>
+								<a href="mydash_change" class="btn btn-secondary icons">수정하기</a>
 								<a href="#" class="btn btn-secondary icons">삭제하기</a>		
-								<a href="profilelist" class="btn btn-secondary icons">목록</a>						
+								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>						
 							</div>
 						<!-- 	<div class="card-footer" align="right">
 								<div class="icons">
@@ -273,31 +277,6 @@
 			</div>
 		</section>
 		<!--/User Dashboard-->
-
-		<!-- Newsletter-->
-		<section class="sptb bg-white border-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-7 col-xl-6 col-md-12">
-						<div class="sub-newsletter">
-							<h3 class="mb-2"><i class="fa fa-paper-plane-o mr-2"></i> Subscribe To Our Newsletter</h3>
-							<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-						</div>
-					</div>
-					<div class="col-lg-5 col-xl-6 col-md-12">
-						<div class="input-group sub-input mt-1">
-							<input type="text" class="form-control input-lg " placeholder="Enter your Email">
-							<div class="input-group-append ">
-								<button type="button" class="btn btn-primary btn-lg br-tr-7 br-br-7">
-									Subscribe
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/Newsletter-->
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

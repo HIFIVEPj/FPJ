@@ -30,44 +30,77 @@
 					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">회원정보</h3>
+								<h3 class="card-title">My Dashboard</h3>
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
 									<div class="profile-pic-img">
+										<span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="" data-original-title="online"></span>
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">Robert McLean</h4></a>
 								</div>
 							</div>
 							<aside class="app-sidebar doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
-											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">Edit Profile</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
-												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
-												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+												<li><a class="slide-item" href="mydash.html">Edit Profile-1</a></li>
+												<li><a class="slide-item " href="mydash.html">Edit Profile-2</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-diamond"></i><span class="side-menu__label"> My Ads</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myads.html"> My Ads-1</a></li>
+												<li><a class="slide-item" href="myads.html"> My Ads-2</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label"> My Favorite</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myfavorite.html"> My Favorite-1</a></li>
+												<li><a class="slide-item" href="myfavorite.html"> My Favorite-2</a></li>
+											</ul>
+										</li>
+										<li class="slide">
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">Managed Ads</span><i class="angle fa fa-angle-right"></i></a>
+											<ul class="slide-menu">
+												<li><a class="slide-item" href="manged.html">Managed Ads-1</a></li>
+												<li class="sub-slide">
+													<a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>
+													<ul class="child-sub-menu ">
+														<li><a class="slide-item" href="manged.html">Managed Ads-3</a></li>
+														<li><a class="slide-item" href="manged.html">Managed Ads-4</a></li>
+													</ul>
+												</li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">Payments</span></a>
+										</li>
+										<li class="slide">
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-basket"></i><span class="side-menu__label">Orders</span><i class="angle fa fa-angle-right"></i></a>
+											<ul class="slide-menu">
+												<li><a class="slide-item" href="orders.html">Orders-1</a></li>
+												<li><a class="slide-item" href="orders.html">Orders-2</a></li>
+											</ul>
+										</li>
+										<li class="slide">
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-game-controller"></i><span class="side-menu__label"> Safety Tips</span><i class="angle fa fa-angle-right"></i></a>
+											<ul class="slide-menu">
+												<li><a class="slide-item" href="tips.html">Safety Tips-1</a></li>
+												<li><a class="slide-item" href="tips.html">Safety Tips-2</a></li>
+											</ul>
+										</li>
+										<li class="slide">
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-settings"></i><span class="side-menu__label"> Settings </span><i class="angle fa fa-angle-right"></i></a>
+											<ul class="slide-menu">
+												<li><a class="slide-item" href="settings.html">Settings-1</a></li>
+												<li><a class="slide-item" href="settings.html">Settings-2</a></li>
+											</ul>
 										</li>
 										<li>
 											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
@@ -76,7 +109,6 @@
 								</div>
 							</aside>
 						</div>
-											<!--  
 						<div class="card my-select">
 							<div class="card-header">
 								<h3 class="card-title">Search Ads</h3>
@@ -109,7 +141,6 @@
 								</div>
 							</div>
 						</div>
-						
 						<div class="card mb-xl-0">
 							<div class="card-header">
 								<h3 class="card-title">Safety Tips For Buyers</h3>
@@ -131,7 +162,6 @@
 								</ul>
 							</div>
 						</div>
-						-->
 					</div>
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
@@ -147,7 +177,6 @@
                                  			<select class="form-control">
                                     			<option selected> </option>
                                     			<option>개발</option>
-                                    			<option>퍼블리싱</option>
                                     			<option>디자인</option>
                                    				 <option>기획</option>
                                    				 <option>기타</option>
@@ -176,7 +205,7 @@
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
 										 	<li><a href="#tab1" class="active" data-toggle="tab">개발</a></li> 
-											<li><a href="#tab2" data-toggle="tab">퍼블리싱</a></li>
+											<li><a href="#tab2" data-toggle="tab">퍼블리셔</a></li>
 											<li><a href="#tab3" data-toggle="tab">디자인</a></li>
 											<li><a href="#tab4" data-toggle="tab">기획</a></li>
 											<li><a href="#tab5" data-toggle="tab">기타</a></li>											
@@ -683,11 +712,7 @@
 													</div>																																									
 												</div>												
 											<!------------------------DB 끝---------------------------------------------------->															
-												<div class="row">
-													<div class="col-md-12">											
-														<HR />									
-													</div>	
-												</div>			
+															
 											</div>
 										</div>
 										<!-- 개발자 끝  -->				
@@ -695,11 +720,11 @@
 								<!-- tab 개발 끝   -->
 								
 								<!-- tab 퍼블리셔 시작   -->	
-									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
+									<div class="tab-pane active table-responsive border-top userprof-tab" id="tab2">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
-									<!------------------------ 퍼블리셔 시작----------------------------------------------------------->										
+											<!------------------------ 퍼블리셔 시작----------------------------------------------------------->										
 												<br/>
 												<div class="row">									
 													<div class="col-md-2">																								
@@ -808,21 +833,15 @@
 															<span class="custom-control-label">Git</span>
 														</label>
 													</div>
-												</div>
-												<!-- 선 -->
-												<div class="row">
-													<div class="col-md-12">											
-														<HR />									
-													</div>	
 												</div>								
-												<!-- 선 끝-->			
+															
 											</div>
 										</div>
 										<!-- 개발자 끝  -->				
 									</div> <!-- tab 퍼블리셔 끝   -->	
 									
 							<!-- tab 디자인 시작   -->	
-									<div class="tab-pane table-responsive border-top userprof-tab" id="tab3">
+									<div class="tab-pane active table-responsive border-top userprof-tab" id="tab3">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -912,25 +931,18 @@
 														</label>
 													</div>
 													
-												</div>
-												<!-- 선 -->
-												<div class="row">
-													<div class="col-md-12">											
-														<HR />									
-													</div>	
 												</div>								
-												<!-- 선 끝-->									
 															
 											</div>
 										</div>
 										<!-- 디자인 끝  -->				
 									</div> <!-- tab 디자인 끝   -->
 								<!-- tab 기획 시작   -->	
-									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
+									<div class="tab-pane active table-responsive border-top userprof-tab" id="tab4">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
-									<!------------------------ 기획 시작----------------------------------------------------------->										
+											<!------------------------ 기획 시작----------------------------------------------------------->										
 												<br/>
 												<div class="row">									
 													<div class="col-md-2">																								
@@ -1091,29 +1103,22 @@
 															<span class="custom-control-label">시스템분석/설계</span>
 														</label>
 													</div>												
-												</div>
-												<!-- 선 -->
-												<div class="row">
-													<div class="col-md-12">											
-														<HR />									
-													</div>	
-												</div>								
-												<!-- 선 끝-->																															
+												</div>																													
 															
 											</div>
 										</div>
 										<!-- 기획 끝  -->				
 									</div> <!-- tab 기획 끝   -->	
-							<!-- tab 기타 시작   -->	
-									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab5">
+							<!-- tab 기획 시작   -->	
+									<div class="tab-pane active table-responsive border-top userprof-tab" id="tab5">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
-											<!------------------------ 기타 시작----------------------------------------------------------->										
+											<!------------------------ 기획 시작----------------------------------------------------------->										
 												<br/>
 												<div class="row">									
 													<div class="col-md-2">																								
-													<label class="form-label">기타</label>										
+													<label class="form-label">기획</label>										
 												</div>
 												
 												<div class="col-md-2">											
@@ -1199,15 +1204,9 @@
 															<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
 															<span class="custom-control-label">시스템분석/설계</span>
 														</label>
-													</div>						
-												</div>		
-												<!-- 선 -->
-												<div class="row">
-													<div class="col-md-12">											
-														<HR />									
-													</div>	
+													</div>													
+													
 												</div>								
-												<!-- 선 끝-->								
 															
 											</div>
 										</div>
@@ -1220,27 +1219,16 @@
 							</div>	
 							</div>
 						
-											
+					
+							
 
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="form-label">주소</label>
-											<div class="row gutters-xs">
-												<div class="col">
-													<input type="text" class="form-control" placeholder="Search for...">
-												</div>
-												<span class="col-auto">
-													<button class="btn btn-secondary" type="button"><i class="fe fe-search"></i></button>
-												</span>
-											</div>
+											<input type="text" class="form-control" placeholder="주소">
 										</div>
 									</div>
-									<!--<div class="col-sm-6 col-md-4">
-										<div class="form-group">
-											<label class="form-label">업무가능여부</label>
-											 <input type="text" class="form-control" placeholder="업무가능여부">											
-										</div>										
-									</div>-->
+
 									<div class="col-sm-6 col-md-12">
 										<div class="form-group ">
 										<div class="row">
@@ -1305,48 +1293,47 @@
 										</div>
 									</div>
 
-
-											<div class="col-md-12">
-											<div class="form-group ">
-												<label class="form-label mt-2">첨부파일</label>
-												<div class="custom-file">
-													<input type="file" class="custom-file-input" name="example-file-input-custom">
-													<label class="custom-file-label">Upload Files</label>
-												</div>
-											</div>
-											</div>		
-
-											<div class="col-md-12">
-											<div class="form-group ">
-											
-												<div class="p-2 border mb-4">
-												<div class="upload-images d-flex">
-													<div>
-														<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
-													</div>
-													<div class="ml-3 mt-2">
-														<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
-														<small>4.5kb</small>
-													</div>
-													<div class="float-right ml-auto">
-														<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
-													</div>
-												</div>
-												</div>	
-											</div>
-											</div>
-												
-									
+									<div class="col-md-12">
+									<div class="form-group ">
+										<label class="form-label mt-2">첨부파일</label>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" name="example-file-input-custom">
+											<label class="custom-file-label">Upload Files</label>
+										</div>
 									</div>
+									</div>		
 
+									<div class="col-md-12">
+									<div class="form-group ">
 									
+										<div class="p-2 border mb-4">
+										<div class="upload-images d-flex">
+											<div>
+												<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
+											</div>
+											<div class="ml-3 mt-2">
+												<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
+												<small>4.5kb</small>
+											</div>
+											<div class="float-right ml-auto">
+												<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
+											</div>
+										</div>
+										</div>	
+									</div>
+									</div>								
 								</div>
 							</div>
 							<div class="card-footer" align="right">
 								<button type="submit" class="btn btn-primary">등록하기</button>	
+								<a href="profilelist" class="btn btn-secondary icons">삭제</a>
 								<a href="profilelist" class="btn btn-secondary icons">목록</a>						
 							</div>
-
+						<!-- 	<div class="card-footer" align="right">
+								<div class="icons">
+									<a href="employer-list-right" class="btn btn-secondary icons">목록</a>
+								</div>
+							</div> -->	
 							
 						</div>
 					</div>
@@ -1356,122 +1343,6 @@
 		<!--/User Dashboard-->
 		
 
-		<!--Footer Section-->
-		<section>
-			<footer class="text-white" style="background-color:#0e284c;">
-			<!--
-			<footer class="bg-dark text-white">
-			-->
-				<div class="footer-main">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-4 col-md-12">
-								<h6>하이파이브 소개</h6>
-								<p class="fs-14 mb-1">&nbsp;하이파이브 (HI-FIVE)는 '가치를 찾고 사용하라'는 의미인 HIre & FInd ValuEs에서 유래하였습니다.</p>
-								<p class="fs-14 mb-0">&nbsp;하이파이브는 기업과 프리랜서 분들이 원하시는 가치와 서비스를 충분히 제공받으실 수 있는 플랫폼이 되기 위해 끊임없이 노력할 것을 약속드립니다.</p>
-							</div>
-							<div class="col-lg-4 col-md-12 text-center">
-								<h6>서비스</h6>
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">프로젝트</a></li>
-									<li><a href="#">프리마켓</a></li>
-									<li><a href="#">프리랜서</a></li>
-									<li><a href="#">고객센터</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-4 col-md-12">
-								<h6>연락하기</h6>
-								<ul class="list-unstyled mb-0">
-									<li>주소 : 서울특별시 마포구 백범로 23 구프라자 3층</li>
-									<li>전화 : 02-707-1480</li>
-									<li>메일 : baramoss420@gmail.com</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="text-white p-0" style="background-color:#0e284c;">
-				<!--
-				<div class="bg-dark text-white p-0">
-				-->
-					<div class="container">
-						<div class="row d-flex">
-							<div class="col-lg-12 col-sm-12  mt-2 mb-2 text-center ">
-								Copyright © 2019 <a href="#">Pinlist</a>. Designed by <a href="#">Spruko</a> All rights reserved.
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</section>
-		<!--Footer Section-->
-
-		<!-- Back to top -->
-		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>
-
-		<!-- JQuery js-->
-		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
-
-		<!-- Bootstrap js -->
-		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
-		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-
-		<!--JQuery Sparkline Js-->
-		<script src="../js/vendors/jquery.sparkline.min.js"></script>
-
-		<!-- Circle Progress Js-->
-		<script src="../js/vendors/circle-progress.min.js"></script>
-
-		<!-- Star Rating Js-->
-		<script src="../plugins/rating/jquery.rating-stars.js"></script>
-
-		<!--Owl Carousel js -->
-		<script src="../plugins/owl-carousel/owl.carousel.js"></script>
-
-		<!--Horizontal Menu-->
-		<script src="../plugins/Horizontal2/Horizontal-menu/horizontal.js"></script>
-
-		<!--JQuery TouchSwipe js-->
-		<script src="../js/jquery.touchSwipe.min.js"></script>
-
-		<!--Select2 js -->
-		<script src="../plugins/select2/select2.full.min.js"></script>
-		<script src="../js/select2.js"></script>
-
-		<!-- Cookie js -->
-		<script src="../plugins/cookie/jquery.ihavecookies.js"></script>
-		<script src="../plugins/cookie/cookie.js"></script>
-
-		<!-- side-menu Js-->
-		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
-
-		<!-- Count Down-->
-		<script src="../plugins/count-down/jquery.lwtCountdown-1.0.js"></script>
-
-		<!-- Custom scroll bar Js-->
-		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
-		<!-- sticky Js-->
-		<script src="../js/sticky.js"></script>
-
-		<!-- Custom Js-->
-		<script src="../js/custom.js"></script>
-		<script src="../js/custom2.js"></script>
-		
-
-		<!-- Datepicker js 날짜입력 -->
-		<script src="../plugins/date-picker/spectrum.js"></script>
-		<script src="../plugins/date-picker/jquery-ui.js"></script>
-		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
-		
-		<!-- Inline js 날짜입력 -->
-		<script src="../js/select2.js"></script>
-		<script src="../js/formelements.js"></script>
-	
-		<!-- file uploads js -->
-        <script src="../plugins/fileuploads/js/dropify.js"></script>	
-	
-
-	
-	</body>
-</html>
+<!--footer-->
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<!--/footer-->

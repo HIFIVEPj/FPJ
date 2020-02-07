@@ -137,7 +137,7 @@
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
-								<h3 class="card-title"><b>관심있는 서비스</b></h3>
+								<h3 class="card-title"><b>관심있는 프로젝트</b></h3>
 							</div>
 							<div class="card-body">
 							<div class="ads-tabs">
@@ -145,9 +145,9 @@
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">전체보기</a></li>
-											<li><a href="#tab2" data-toggle="tab">구매한 서비스</a></li>
-											<li><a href="#tab3" data-toggle="tab">판매중인 서비스</a></li>
-											<li><a href="#tab4" data-toggle="tab">마감된 서비스</a></li>
+											<li><a href="#tab2" data-toggle="tab">지원한 프로젝트</a></li>
+											<li><a href="#tab3" data-toggle="tab">모집중인 공고</a></li>
+											<li><a href="#tab4" data-toggle="tab">마감된 공고</a></li>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -156,8 +156,9 @@
 										<thead style="text-align:center;">
 											<tr>
 												<th></th>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
+												<th><b>프로젝트</b></th>
+												<th><b>회사이름</b></th>
+												<th><b>급여</b></th>
 												<th><b>상태</b></th>
 												<th><b>버튼</b></th>
 											</tr>
@@ -170,38 +171,59 @@
 														<span class="custom-control-label"></span>
 													</label>
 												</td>
-												<td colspan="2">
+												<td>
 													<div class="media mt-0 mb-0">
-														<div class="card-aside-img">
-															<a href="#"></a>
-															<img src="../images/products/h1.png" alt="img">
-														</div>
 														<div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class=""><b>반응형 홈페이지 만들어 드립니다</b></h4></a>
-																<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>
-																<div style="padding-top:5px;">
-																<span class="text-warning">
-																	<i class="fa fa-star"> </i>
-																	<i class="fa fa-star"> </i>
-																	<i class="fa fa-star"> </i>
-																	<i class="fa fa-star"> </i>
-																	</span>
-																	<i class="fa fa-star"> </i> | <i class="fa fa-eye"></i> 344<br>
-																</div>
+																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>웹개발자 구합니다</b></h4></a>
+																<a href="#"><i class="fa fa-user mr-1"></i> 개발/초급</a>
+																&nbsp;|&nbsp;
+																<a href="#"><i class="fa fa-clock-o mr-1"></i> 3개월</a>
+																&nbsp;|&nbsp;
+																<a href="#"><b style="text-align:right;">D-25</b></a>
 															</div>
 														</div>
 													</div>
 												</td>
-												
-												<td class="font-weight-semibold fs-16">10,000,000원</td>
+												<td>Restaurant</td>
+												<td class="font-weight-semibold fs-16">1,200,000원</td>
 												<td>
-													<a href="#" class="badge badge-warning">판매중</a>
+													<a href="#" class="badge badge-primary">모집중</a>
 												</td>
 												<td>
 													<a href="#" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-													<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
-					
+													<a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="지원하기"><i class="fa fa-send"></i></a>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+														<span class="custom-control-label"></span>
+													</label>
+												</td>
+												<td>
+													<div class="media mt-0 mb-0">
+														<div class="media-body">
+															<div class="card-item-desc ml-4 p-0 mt-2">
+																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>웹개발자 구합니다</b></h4></a>
+																<a href="#"><i class="fa fa-user mr-1"></i> 개발/초급</a>
+																&nbsp;|&nbsp;
+																<a href="#"><i class="fa fa-clock-o mr-1"></i> 3개월</a>
+																&nbsp;|&nbsp;
+																<a href="#"><b style="text-align:right;">마감</b></a>
+															</div>
+														</div>
+													</div>
+												</td>
+												<td>Restaurant</td>
+												<td class="font-weight-semibold fs-16" id="center">3,800,000원</td>
+												<td>
+													<a href="#" class="badge badge-danger">마감</a>
+												</td>
+												<td>
+													<a href="#" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="지원하기"><i class="fa fa-send"></i></a>
 												</td>
 											</tr>
 										</tbody>
@@ -211,45 +233,35 @@
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
 											<tr>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
+												<th><b>프로젝트</b></th>
+												<th><b>회사이름</b></th>
+												<th><b>급여</b></th>
 												<th><b>상태</b></th>
-												<th><b>구매일</b></th>
+												<th><b>지원날짜</b></th>
 											</tr>
 										</thead>
 										<tbody>
-										<tr>
-											<td colspan="2">
-												<div class="media mt-0 mb-0">
-													<div class="card-aside-img">
-														<a href="#"></a>
-														<img src="../images/products/h1.png" alt="img">
-													</div>
-													<div class="media-body">
-														<div class="card-item-desc ml-4 p-0 mt-2">
-															<a href="#" class="text-dark"><h4 class=""><b>반응형 홈페이지 만들어 드립니다</b></h4></a>
-															<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>
-															<div style="padding-top:5px;">
-															<span class="text-warning">
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																</span>
-																<i class="fa fa-star"> </i> | <i class="fa fa-eye"></i> 344<br>
+											<tr>
+												<td>
+													<div class="media mt-0 mb-0">
+														<div class="media-body">
+															<div class="card-item-desc ml-4 p-0 mt-2">
+																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>웹개발자 구합니다</b></h4></a>
+																<a href="#"><i class="fa fa-user mr-1"></i> 개발/초급</a>
+																&nbsp;|&nbsp;
+																<a href="#"><i class="fa fa-clock-o mr-1"></i> 3개월</a>
+																&nbsp;|&nbsp;
+																<a href="#"><b style="text-align:right;">D-25</b></a>
 															</div>
 														</div>
 													</div>
-												</div>
-											</td>
-											
-											<td class="font-weight-semibold fs-16">10,000,000원</td>
-											<td>
-												<a href="#" class="badge badge-secondary">제작중</a>
-											</td>
-											<td class="font-weight-semibold fs-16">
-												2020-01-29
-											</td>
+												</td>
+												<td>Restaurant</td>
+												<td class="font-weight-semibold fs-16">1,200,000원</td>
+												<td>
+													<a href="#" class="badge badge-primary">검토중</a>
+												</td>
+												<td class="font-weight-semibold fs-16">2020-01-28</td>
 											</tr>
 										</tbody>
 									</table>
@@ -259,8 +271,9 @@
 										<thead style="text-align:center;">
 											<tr>
 												<th></th>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
+												<th><b>프로젝트</b></th>
+												<th><b>회사이름</b></th>
+												<th><b>급여</b></th>
 												<th><b>상태</b></th>
 												<th><b>버튼</b></th>
 											</tr>
@@ -274,8 +287,9 @@
 										<thead style="text-align:center;">
 											<tr>
 												<th></th>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
+												<th><b>프로젝트</b></th>
+												<th><b>회사이름</b></th>
+												<th><b>급여</b></th>
 												<th><b>상태</b></th>
 												<th><b>버튼</b></th>
 											</tr>
@@ -326,112 +340,12 @@
 							<!-- section-wrapper -->
 						</div>
 					</div>
-					</div>
 				</div>
 			</div>
+	
 		</section>
 		<!--/User Dashboard-->
 
-		<!--Footer Section-->
-		<section>
-			<footer class="text-white" style="background-color:#0e284c;">
-			<!--
-			<footer class="bg-dark text-white">
-			-->
-				<div class="footer-main">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-4 col-md-12">
-								<h6>하이파이브 소개</h6>
-								<p class="fs-14 mb-1">&nbsp;하이파이브 (HI-FIVE)는 '가치를 찾고 사용하라'는 의미인 HIre & FInd ValuEs에서 유래하였습니다.</p>
-								<p class="fs-14 mb-0">&nbsp;하이파이브는 기업과 프리랜서 분들이 원하시는 가치와 서비스를 충분히 제공받으실 수 있는 플랫폼이 되기 위해 끊임없이 노력할 것을 약속드립니다.</p>
-							</div>
-							<div class="col-lg-4 col-md-12 text-center">
-								<h6>서비스</h6>
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">프로젝트</a></li>
-									<li><a href="#">프리마켓</a></li>
-									<li><a href="#">프리랜서</a></li>
-									<li><a href="#">고객센터</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-4 col-md-12">
-								<h6>연락하기</h6>
-								<ul class="list-unstyled mb-0">
-									<li>주소 : 서울특별시 마포구 백범로 23 구프라자 3층</li>
-									<li>전화 : 02-707-1480</li>
-									<li>메일 : baramoss420@gmail.com</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="text-white p-0" style="background-color:#0e284c;">
-				<!--
-				<div class="bg-dark text-white p-0">
-				-->
-					<div class="container">
-						<div class="row d-flex">
-							<div class="col-lg-12 col-sm-12  mt-2 mb-2 text-center ">
-								Copyright © 2019 <a href="#">Pinlist</a>. Designed by <a href="#">Spruko</a> All rights reserved.
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</section>
-		<!--Footer Section-->
-
-		<!-- Back to top -->
-		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>
-
-		<!-- JQuery js-->
-		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
-
-		<!-- Bootstrap js -->
-		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
-		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-
-		<!--JQuery Sparkline Js-->
-		<script src="../js/vendors/jquery.sparkline.min.js"></script>
-
-		<!-- Circle Progress Js-->
-		<script src="../js/vendors/circle-progress.min.js"></script>
-
-		<!-- Star Rating Js-->
-		<script src="../plugins/rating/jquery.rating-stars.js"></script>
-
-		<!--Owl Carousel js -->
-		<script src="../plugins/owl-carousel/owl.carousel.js"></script>
-
-		<!--Horizontal Menu-->
-		<script src="../plugins/Horizontal2/Horizontal-menu/horizontal.js"></script>
-
-		<!--JQuery TouchSwipe js-->
-		<script src="../js/jquery.touchSwipe.min.js"></script>
-
-		<!--Select2 js -->
-		<script src="../plugins/select2/select2.full.min.js"></script>
-		<script src="../js/select2.js"></script>
-
-		<!-- Cookie js -->
-		<script src="../plugins/cookie/jquery.ihavecookies.js"></script>
-		<script src="../plugins/cookie/cookie.js"></script>
-
-		<!-- side-menu Js-->
-		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
-
-		<!-- Count Down-->
-		<script src="../plugins/count-down/jquery.lwtCountdown-1.0.js"></script>
-
-		<!-- Custom scroll bar Js-->
-		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
-		<!-- sticky Js-->
-		<script src="../js/sticky.js"></script>
-
-		<!-- Custom Js-->
-		<script src="../js/custom.js"></script>
-		<script src="../js/custom2.js"></script>
-	</body>
-</html>
+		<!--footer-->
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<!--/footer-->
