@@ -100,11 +100,6 @@ public class IndexController {
 	
 /*별*/
 
-	
-	@GetMapping("content.do")
-	public String content() {
-		return "project_content";
-	}
 	@GetMapping("write.do")
 	public String write() {
 		return "project_write";

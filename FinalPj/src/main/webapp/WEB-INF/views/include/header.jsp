@@ -165,7 +165,7 @@
 						<!--Nav-->
 						<nav class="horizontalMenu clearfix d-md-flex">
 							<ul class="horizontalMenu-list">
-								<li aria-haspopup="true"><a href="list.do">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
+								<li aria-haspopup="true"><a href="project_list">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
 								<!--
 								<li aria-haspopup="true"><a href="./" class="active">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
 								-->

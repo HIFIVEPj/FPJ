@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean id="now" class ="java.util.Date" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -470,12 +471,12 @@
 											</select>
 										</div>
 									</div>
-									<div sytle="margin-left:0px;"><a href="write.do" class="btn btn-success" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									<div sytle="margin-left:0px;"><a href="write.do" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									
 									<div class="tab-content">
-										<div class="tab-pane" id="tab-11">
-										
-										<!--  -->
-										<c:forEach var="dto" items="${list}">
+										<div class="tab-pane active" id="tab-11">
+									
+									<c:forEach var="dto" items="${list}">	
 											<div class="card overflow-hidden">
 												<div class="d-md-flex">
 													<div>
@@ -488,304 +489,67 @@
 															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
 														</div>
 													</div>
+													
 													<div class="card border-0 mb-0">
 														<div class="card-body ">
 															<div class="item-card9">
-																<a href="books.html">${dto.pj_loc}/ 사용언어 / ${dto.pj_name}</a><br/><br/>
-																<a href="content.do" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">${dto.pj_sub}</h4></a>
+																${dto.pj_loc} /
+																<c:forEach var="key" items="${keyname}">
+																	<c:if test="${key.pj_num eq dto.pj_num}">
+																		<c:choose>
+																			<c:when test="${key.keyword eq '[]'}">
+																				키워드 없음
+																			</c:when>
+																			<c:otherwise>
+																				<c:forEach var="i" begin="0" end="${key.keyword.size()-1}">
+																					<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
+																				</c:forEach>
+																			</c:otherwise>
+																		</c:choose>
+																	</c:if>
+																</c:forEach>
+																/ ${dto.pj_name}<br/><br/>
+																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">${dto.pj_sub}</h4></a>
 																<small class="">${dto.pj_cont}</small><br/><br/>
-																<p class="mb-0 leading-tight mt-1">급여 : ${dto.pj_pay}</p>
+																<p class="mb-0 leading-tight mt-1">급여 :<fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</p>
 															</div>
 														</div>
 														<div class="card-footer pt-4 pb-4">
 															<div class="item-card9-footer d-flex">
 																<div class="item-card9-cost">
-														<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>D - 10</strong></span>
+														<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>
+															<fmt:parseDate value="${dto.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+															<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+															
+															<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+															<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+															<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+															<c:choose>
+																<c:when test="${endDate > currentDate}">
+																	D -${endDate - currentDate}
+																</c:when>
+																<c:otherwise>
+																	마감
+																</c:otherwise>
+															</c:choose>
+															</strong></span>
 														&nbsp;&nbsp;&nbsp;
-														<span> (2020 / 02 / 10)</span>
+														<span> (${dto.pj_ddate})</span>
 																</div>
 													
 															</div>
 														</div>
 													</div>
+													
 												</div>
 											</div>
-										</c:forEach>
-											<div class="card overflow-hidden">
-										<!-- 		<div class="ribbon ribbon-top-left text-danger"><span class="bg-danger">featured</span></div>  -->
-												<div class="d-md-flex">
-													<div>
-														<div class="item-card9-imgs">
-															<a href="books.html"></a>
-											<!-- 		<img src="../images/products/books/12.png" alt="img" class="cover-image h-100">  -->		
-														</div>
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-													</div>
-													<div class="card border-0 mb-0">
-														<div class="card-body ">
-															<div class="item-card9">
-																<a href="books.html">지역 / 사용언어 / 회사이름</a><br/><br/>
-																<a href="content.do" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">제목제목제목</h4></a>
-																<small class="">내용내용내용내용</small><br/><br/>
-																<p class="mb-0 leading-tight mt-1">급여 : 5,000,000</p>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>D - 10</strong></span>
-																	&nbsp;&nbsp;&nbsp;
-																	<span> (2020 / 02 / 10)</span>
-																</div>
-														<!-- 			<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>    -->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="card overflow-hidden">
-									<!-- 		<div class="ribbon ribbon-top-left text-danger"><span class="bg-danger">featured</span></div>  -->
-												<div class="d-md-flex">
-													<div >
-														<div class="item-card9-imgs">
-															<a href="#"></a>
-													<!--  		<img src="../images/products/books/13.png" alt="img" class="cover-image h-100">-->
-														</div>
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-													</div>
-													<div class="card border-0 mb-0">
-														<div class="card-body ">
-															<div class="item-card9">
-																<a href="books.html">Drama</a>
-													- 		<a href="books.html" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">Voluptatem accusantium</h4></a> 	
-																<small class="">By: Clifton Nam</small>
-																<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-																	<h4 class="text-dark font-weight-semibold mb-0 mt-0">$349.00</h4>
-																</div>
-													<!-- 		<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>  -->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="card overflow-hidden">
-												<div class="d-md-flex">
-													<div >
-														<div class="item-card2-img ">
-											<!-- 				<div class="arrow-ribbon bg-success">Popular</div> -->
-											<!--				<img src="../images/products/books/14.png" alt="img" class="cover-image h-100"> -->
-														</div>
-														<div class="item-card2-icons">
-															<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-													</div>
-													<div class="card border-0 mb-0">
-														<div class="card-body ">
-															<div class="item-card2">
-																<div class="item-card2-desc">
-																	<a href="books.html">Mystery</a>
-																	<a href="books.html" class="text-dark mt-2"><h4 class="font-weight-bold mt-1 mb-1">Doloremque laudantium</h4></a>
-																	<small class="">By: Yasmine Elizalde</small>
-																	<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-																</div>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-																	<h4 class="text-dark font-weight-semibold mb-0 mt-0">$245.00</h4>
-																</div>
-														<!-- 		<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>  -->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="card overflow-hidden">
-												<div class="d-md-flex">
-													<div >
-														<div class="item-card2-img ">
-												<!-- 			<div class="arrow-ribbon bg-danger">Collection</div>  -->
-															<a href="books.html"></a>
-													<!--		<img src="../images/products/books/15.png" alt="img" class="cover-image h-100">-->
-														</div>
-														<div class="item-card2-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-													</div>
-													<div class="card border-0 mb-0">
-														<div class="card-body ">
-															<div class="item-card2">
-																<div class="item-card2-desc">
-																	<a href="books.html">Drama</a>
-																	<a href="books.html" class="text-dark mt-2"><h4 class="font-weight-bold mt-1 mb-1">Consequuntur magni</h4></a>
-																	<small class="">By: Kourtney Drumm</small>
-																	<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-																</div>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-																	<h4 class="text-dark font-weight-semibold mb-0 mt-0">$147.00</h4>
-																</div>
-												<!--  			<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>  -->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="card overflow-hidden">
-												<div class="d-md-flex">
-													<div >
-														<div class="item-card2-img ">
-												<!--		<div class="arrow-ribbon bg-warning">Featured</div>   -->	
-															<a href="#"></a>
-										<!--				<img src="../images/products/books/16.png" alt="img" class="cover-image h-100"> -->
-														</div>
-														<div class="item-card2-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-													</div>
-													<div class="card border-0 mb-0">
-														<div class="card-body ">
-															<div class="item-card2">
-																<div class="item-card2-desc">
-																	<a href="books.html" class="">Fairytale</a>
-															<a href="books.html" class="text-dark mt-2"><h4 class="font-weight-bold mt-1 mb-1">Denouncing pleasure</h4></a>  	
-																	<small class="">By: Willard Hedgecock</small>
-																	<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-																</div>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-																	<h4 class="text-dark font-weight-semibold mb-0 mt-0">$547.40</h4>
-																</div>
-													<!-- 		<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>   -->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+
+											</c:forEach>
+											
 										</div>
-										<div class="tab-pane active" id="tab-12">
+										<div class="tab-pane" id="tab-12">
 											<div class="row">
+											<c:forEach var="dto" items="${list}">	
 												<div class="col-lg-6 col-md-12 col-xl-6">
 													<div class="card overflow-hidden">
 														<div >
@@ -800,10 +564,10 @@
 														</div>
 														<div class="card-body ">
 															<div class="item-card9">
-																<a href="books.html">지역 / 사용언어 / 회사이름</a><br/><br/>
-																<a href="content.do" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">제목제목제목</h4></a>
-																<small class="">내용내용내용내용</small><br/><br/>
-																<p class="mb-0 leading-tight mt-1">급여 : 5,000,000</p>
+																${dto.pj_loc} / 사용언어 / ${dto.pj_name}<br/><br/>
+																<a href="content.do" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">${dto.pj_sub}</h4></a>
+																<small class="">${dto.pj_cont}</small><br/><br/>
+																<p class="mb-0 leading-tight mt-1">급여 : ${dto.pj_pay}</p>
 															</div>
 														</div>
 														<div class="card-footer pt-4 pb-4">
@@ -811,7 +575,7 @@
 																<div class="item-card9-cost">
 																<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>D - 10</strong></span>
 																&nbsp;&nbsp;&nbsp;
-																<span> (2020 / 02 / 10)</span>
+																<span> (${dto.pj_ddate})</span>
 													<!--  					<h4 class="text-dark font-weight-semibold mb-0 mt-0">$263.99</h4>-->	
 																</div>
 														<!-- 		<div class="ml-auto">
@@ -840,281 +604,36 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-lg-6 col-md-12 col-xl-6">
-													<div class="card overflow-hidden">
-										<!-- 				<div class="ribbon ribbon-top-left text-danger"><span class="bg-danger">featured</span></div> -->
-														<div >
-															<div class="item-card9-imgs">
-																<a href="books.html"></a>
-										<!--  						<img src="../images/products/books/12.png" alt="img" class="cover-image h-100"> -->
-															</div>
-															<div class="item-card9-icons">
-																<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-															</div>
-														</div>
-														<div class="card-body ">
-															<div class="item-card9">
-																<a href="books.html">지역 / 사용언어 / 회사이름</a><br/><br/>
-																<a href="content.do" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">제목제목제목</h4></a>
-																<small class="">내용내용내용내용</small><br/><br/>
-																<p class="mb-0 leading-tight mt-1">급여 : 5,000,000</p>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>D - 10</strong></span>
-																&nbsp;&nbsp;&nbsp;
-																<span> (2020 / 02 / 10)</span>		
-												<!--  					<h4 class="text-dark font-weight-semibold mb-0 mt-0">$745.00</h4> -->
-																</div>
-													<!--				<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div> -->
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 col-md-12 col-xl-6">
-													<div class="card overflow-hidden">
-											<!-- 			<div class="ribbon ribbon-top-left text-primary"><span class="bg-primary">featured</span></div> -->
-														<div >
-															<div class="item-card9-imgs">
-																<a href="books.html"></a>
-											<!-- 					<img src="../images/products/books/13.png" alt="img" class="cover-image h-100">  -->
-															</div>
-															<div class="item-card9-icons">
-																<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-															</div>
-														</div>
-														<div class="card-body ">
-															<div class="item-card9">
-																<a href="books.html">Drama</a>
-																<a href="books.html" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">Voluptatem accusantium</h4></a>
-																<small class="">By: Clifton Nam</small>
-																<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-													<!--  				<h4 class="text-dark font-weight-semibold mb-0 mt-0">$349.00</h4>-->
-																</div>
-														<!--			<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>  -->
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 col-md-12 col-xl-6">
-													<div class="card overflow-hidden">
-														<div class="item-card2-img">
-											<!--  	<div class="arrow-ribbon bg-primary">$280</div>-->			
-															<a href="books.html"></a>
-												<!--				<img src="../images/products/books/14.png" alt="img" class="cover-image h-100"> -->		
-														</div>
-														<div class="item-card2-icons">
-															<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-														<div class="card-body ">
-															<div class="item-card2">
-																<div class="item-card2-desc">
-																	<a href="books.html">Mystery</a>
-																	<a href="books.html" class="text-dark mt-2"><h4 class="font-weight-bold mt-1 mb-1">Doloremque laudantium</h4></a>
-																	<small class="">By: Yasmine Elizalde</small>
-																	<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-																</div>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-													<!--  				<h4 class="text-dark font-weight-semibold mb-0 mt-0">$245.00</h4> -->
-																</div>
-														<!--				<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div> -->
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 col-md-12 col-xl-6">
-													<div class="card overflow-hidden">
-														<div class="item-card2-img">
-											<!-- 			<div class="arrow-ribbon bg-primary">$242</div>  -->	
-															<a href="books.html"></a>
-												<!--				<img src="../images/products/books/15.png" alt="img" class="cover-image h-100">  -->	
-														</div>
-														<div class="item-card2-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-														<div class="card-body ">
-															<div class="item-card2">
-																<div class="item-card2-desc">
-																	<a href="books.html">Drama</a>
-																	<a href="books.html" class="text-dark mt-2"><h4 class="font-weight-bold mt-1 mb-1">Consequuntur magni</h4></a>
-																	<small class="">By: Kourtney Drumm</small>
-																	<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-																</div>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-												<!--  				<h4 class="text-dark font-weight-semibold mb-0 mt-0">$147.00</h4>-->	
-																</div>
-														<!--			<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>  -->	
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 col-md-12 col-xl-6">
-													<div class="card overflow-hidden">
-														<div class="item-card2-img">
-											<!-- 				<div class="arrow-ribbon bg-primary">$500</div>  -->
-															<a href="#"></a>
-												<!--			<img src="../images/products/books/16.png" alt="img" class="cover-image h-100">   -->
-														</div>
-														<div class="item-card2-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
-														<div class="card-body ">
-															<div class="item-card2">
-																<div class="item-card2-desc">
-																	<a href="books.html" class="">Fairytale</a>
-																	<a href="books.html" class="text-dark mt-2"><h4 class="font-weight-bold mt-1 mb-1">Denouncing pleasure</h4></a>
-																	<a href="books.html" class="text-dark mt-2"><h4 class="font-weight-bold mt-1 mb-1"></h4></a>
-																	<small class="">By: Willard Hedgecock</small>
-																	<p class="mb-0 leading-tight mt-1">Quis nostrud exercitation ullamco laboris nisi ut</p>
-																</div>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-												<!-- 			<h4 class="text-dark font-weight-semibold mb-0 mt-0">$547.40</h4> -->		
-																</div>
-													<!-- 				<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div>  -->	
-															</div>
-														</div>
-													</div>
-												</div>
+											</c:forEach>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="center-block text-center">
 									<ul class="pagination mb-0">
-										<li class="page-item page-prev disabled">
-											<a class="page-link" href="#" tabindex="-1">Prev</a>
+									<c:if test="${pa.nowPage != 1}">
+														<!--이전 페이지 이동 -->
+										<li class="page-item page-prev">
+											<a class="page-link" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}">prev</a>
 										</li>
-										<li class="page-item active"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
-										<li class="page-item page-next">
-											<a class="page-link" href="#">Next</a>
-										</li>
-										<div  style="margin-left:553px;"><a href="write.do" class="btn btn-success">글쓰기</a></div>
+									</c:if>
+									<!--페이지번호 -->
+									<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
+										<c:choose>
+											<c:when test="${p == pa.nowPage}">
+												<li class='page-item active'><a class="page-link">${p}</a></li>
+											</c:when>
+											<c:when test = "${p != pa.nowPage }">
+												<li class="page-item"><a class="page-link" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
+											</c:when>
+										</c:choose>
+										</c:forEach>
+										<c:if test ="${pa.nowPage != pa.lastPage}">
+											<li class="page-item page-next">
+												<a class="page-link" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+											</li>
+										</c:if>
+										<div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>
 									</ul>
 								</div>
 							</div>
@@ -1125,7 +644,7 @@
 			</div>
 		</section>
 		<!--Add Listing-->
-
+		
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
