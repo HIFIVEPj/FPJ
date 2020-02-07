@@ -113,12 +113,18 @@
 								<label class="form-label">내용</label>
 								
 									<textarea name="notice_cont" id="summernote" class="summernote"></textarea>
-									<input type="text" class="form-control w-100" name="mem_email"> 
+									
+									<!-- 나중에 없앨 부분 -->
+									<br/><br/>
+									<span>나중에 없앨 부분</span>
+									<input type="text" class="form-control w-100" name="mem_email" value="관리자">
+									<!-- /나중에 없앨 부분 -->
+									
 									<div class="card-body text-right">
 									<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#smallModal" value='등록'>
 									-->	
-										<button type="button" class="btn btn-primary waves-effect waves-light" onclick="check()">등록</button>
+										<button type="button" class="btn btn-primary waves-effect waves-light" onclick="check(this.form)">등록</button>
 										<!-- 
 										<input type="button" class="btn btn-danger waves-effect waves-light" value='취소' id='click1'>
 										 -->
@@ -203,9 +209,7 @@
 	
 	
 						
-						<!-- small Modal -->
-						
-				
+		<!-- small Modal -->		
 			<div id="smallModal" class="modal fade">
 				<div class="modal-dialog modal-sm" role="document">
 					<div class="modal-content">
@@ -228,7 +232,6 @@
 				</div><!-- modal-dialog -->
 				
 			</div>
-		
 		<!-- /small Modal -->
 		
 		<!-- 글쓰기 예외처리 -->

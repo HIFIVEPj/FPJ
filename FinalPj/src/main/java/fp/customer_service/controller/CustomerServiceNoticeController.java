@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fp.customer_service.domain.CustomerServiceNotice;
 import fp.customer_service.service.CustomerServiceNoticeService;
+import lombok.extern.log4j.Log4j;
 
-
+@Log4j
 @Controller
 public class CustomerServiceNoticeController {
 	@Autowired
@@ -66,7 +67,7 @@ public class CustomerServiceNoticeController {
 	@PostMapping("customer_service_notice_write")
 	public String customer_service_notice_write(CustomerServiceNotice customerServiceNotice) {
 		customerServiceNoticeService.notice_writeS(customerServiceNotice);
-		return "redirect: /customer_service_notice_content?notice_num=" + customerServiceNotice.getNotice_num();
+		return "redirect:customer_service_notice_content?notice_num="+ customerServiceNotice.getNotice_num();
 	}
 	
 	/*
