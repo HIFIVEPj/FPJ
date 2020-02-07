@@ -1,4 +1,4 @@
-package fp.community.controller;
+package fp.market.controller;
 
 import org.springframework.stereotype.Controller;
 
