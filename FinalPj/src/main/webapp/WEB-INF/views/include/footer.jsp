@@ -146,14 +146,6 @@
 		
 		<!-- file uploads js -->
         <script src="../plugins/fileuploads/js/dropify.js"></script>
-        
-        <!---Tabs JS-->
-		<script src="../plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
-		<script src="../js/tabs.js"></script>
-		
-		<!-- Sweet alert Plugin -->
-		<script src="../plugins/sweet-alert/sweetalert.min.js"></script>
-		<script src="../js/sweet-alert.js"></script>
 
 	</body>
 </html>

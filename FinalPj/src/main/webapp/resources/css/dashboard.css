@@ -9231,17 +9231,8 @@ a.bg-lime-darkest:hover, a.bg-lime-darkest:focus, button.bg-lime-darkest:hover, 
 .leading-loose {
 	line-height: 2 !important;
 }
-/*
 .bg-blue {
 	background-color: #4049ec  !important;
-	color: #fff !important;
-}
-a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
-	background-color: #24987E !important;
-}
-*/
-.bg-blue {
-	background-color: #1f719a  !important;
 	color: #fff !important;
 }
 a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
@@ -17175,16 +17166,6 @@ footer .border-bottom{
 	width: 2rem;
 	display: inline-block;  
     height: 2rem;
-    text-align: center;
-    border-radius: 100px;
-    line-height: 2.1rem;
-	border-radius:50px;
-	color:#fff;
-}
-.item-card3-icons a{
-	width: 4rem;
-	display: inline-block;  
-    height: 4rem;
     text-align: center;
     border-radius: 100px;
     line-height: 2.1rem;

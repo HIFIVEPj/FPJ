@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:JAVA"></property>
 		<property name="username" value="final"></property>
@@ -26,27 +26,22 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-		<!-- 아래 새로 추가 -->
-		<property value="classpath:/fp/customer_service/mapper/*Mapper.xml" name="mapperLocations" />
+	
 	</bean>
 	
 	
-	<context:component-scan base-package="fp.customer_service.service"/>
-	<context:component-scan base-package="fp.customer_service.mapper"/>
-	<mybatis-spring:scan base-package="fp.customer_service.mapper"/>
-	<!-- 
-	<context:component-scan base-package="song.md.service"/>	
-	<context:component-scan base-package="song.md.dao"/>
-	<context:component-scan base-package="song.md.mapper"/>
-	<mybatis-spring:scan base-package="song.md.mapper"/>
+	<context:component-scan base-package="fp.market.service"/>	
 	
+	<context:component-scan base-package="fp.market.utils"/>
+	<mybatis-spring:scan base-package="fp.market.mapper"/>
+	<context:component-scan base-package="fp.market.mapper"/>
+	<!--
 	<context:component-scan base-package="song.md.aop"/>
-	 -->
+	  --> 
 	
 	<context:annotation-config></context:annotation-config>
-	<!--
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	-->
+	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>

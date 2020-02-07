@@ -29,7 +29,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="fp.index.controller" />
-	<context:component-scan base-package="fp.customer_service.controller" />
+	<context:component-scan base-package="fp.market.controller" />
 	
 	
 	

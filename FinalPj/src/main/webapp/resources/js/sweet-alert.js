@@ -106,12 +106,12 @@ $( document ).ready(function() {
 	});
 	$("#click1").click(function(){
 		swal({
-			title: "글 작성 취소",
-			text: "공지사항 메인화면으로 돌아갑니다.",
+			title: "Alert",
+			text: "Waring alert",
 			type: "warning",
 			showCancelButton: true,
-			confirmButtonText: '네',
-			cancelButtonText: '아니오'
+			confirmButtonText: 'Exit',
+			cancelButtonText: 'Stay on the page'
 		});
 	});
 	$("#click2").click(function(){

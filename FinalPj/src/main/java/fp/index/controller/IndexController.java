@@ -16,5 +16,126 @@ public class IndexController {
 	public String index() {	
 		return "index";
 	}
+	@RequestMapping("construction")
+	public String construction() {
+		return "construction";
+	}
+	
+	
+/*나영*/
+	@RequestMapping("/register")
+	public String reg() {
+		return "register";
+	}
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+	@RequestMapping("/mydash")
+	public String mypage() {
+		return "mydash";
+	}
+	@RequestMapping("/mydash_cor")
+	public String mypage_cor() {
+		return "mydash_cor";
+	}
+	@RequestMapping("/payments")
+	public String pay() {
+		return "payments";
+	}
+	@RequestMapping("/myfavorite")
+	public String myfavorite() {
+		return "myfavorite";
+	}
+	@RequestMapping("/myfavorite_cor")
+	public String myfavorite_cor() {
+		return "myfavorite_cor";
+	}
+	@RequestMapping("/myfavorite_market")
+	public String myfavorite_market() {
+		return "myfavorite_market";
+	}
+	@RequestMapping("/forgot-pwd")
+	public String forgotPwd() {
+		return "forgot-pwd";
+	}
+	@RequestMapping("/managed-market")
+	public String managedMarket() {
+		return "managed-market";
+	}
+	@RequestMapping("/managed_order")
+	public String managedOrder() {
+		return "managed_order";
+	}
+/*나영*/
+	
+/*소담*/
+	@RequestMapping("/employer")
+	public String employer() {				
+		return "employer";
+	}	
+	@RequestMapping("/employer-list-right")
+		public String employerlist() {				
+			return "employer-list-right";			
+	}
+	@RequestMapping("/myprofile")
+	public String profiles() {				
+		return "myprofile";			
+	}
+	
+	@RequestMapping("/profilelist")
+	public String profilelist() {				
+		return "profilelist";			
+	}
+	
+	@RequestMapping("myprofilecontent")
+	public String profilecontent() {				
+		return "myprofilecontent";			
+	}
+	@RequestMapping("/myprofilerewrite")
+	public String mydashrewrite() {				
+		return "myprofilerewrite";			
+	}
+/*소담*/	
+	
+/*별*/
+	@GetMapping("list.do")
+	public String list() {
+		return "project_list";
+	}
+	
+	@GetMapping("content.do")
+	public String content() {
+		return "project_content";
+	}
+	@GetMapping("write.do")
+	public String write() {
+		return "project_write";
+	}
+	@GetMapping("update.do")
+	public String update() {
+		return "project_update";
+	}
+	@GetMapping("payments.do")
+	public String project_payments() {
+		return "project_payments";
+	}
+	@GetMapping("payments_end.do")
+	public String payments_end() {
+		return "project_payments_end";
+	}
+/*별*/
+	
 
+
+/*승훈*/	
+	@RequestMapping("terms_of_service")
+	public String terms_of_servicee() {
+		return "terms_of_service";
+	}
+	@RequestMapping("terms_of_personal_info")
+	public String terms_of_personal_info() {
+		return "terms_of_personal_info";
+	}
+/*승훈*/		
 }

@@ -3,23 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
+   <typeAliases>
+   
+		<typeAlias alias="Market" type="fp.market.domain.Market"/>
+		<typeAlias alias="MarketVO" type="fp.market.utils.MarketPagingVO"/>
+		<typeAlias alias="Freelancer" type="fp.market.domain.Freelancer"/>
+		<typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
+   <!-- 
+   	   <typeAlias alias="Board" type="song.md.domain.Board"/>
+   	   <typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>
+   	   <typeAlias alias="Paging" type="song.md.domain.Paging"/>
+   	   <typeAlias alias="PagingVo" type="song.md.domain.PagingVo"/>
+    -->	   
+   </typeAliases>
 
-		
-		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
-		
-	    <!--
-	   	<typeAlias alias="Address" type="song.md.domain.Address"/>
-	   	<typeAlias alias="Board" type="song.md.domain.Board"/>
-	   	<typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>
-	   	<typeAlias alias="Paging" type="song.md.domain.Paging"/>
-	   	<typeAlias alias="PagingVo" type="song.md.domain.PagingVo"/>
-	    -->	   
-	</typeAliases>
-
-<!--
-	<mappers>
-    	<mapper resource="fp/customer_service/mapper/CustomerServiceNotice.xml"/>
-	</mappers>
+<!-- 
+   <mappers>
+   	   <mapper resource="song/md/mapper/AddressMapper1.xml"/>
+   	   <mapper resource="song/md/mapper/AddressMapper2.xml"/>
+   </mappers>
 --> 
 </configuration>
