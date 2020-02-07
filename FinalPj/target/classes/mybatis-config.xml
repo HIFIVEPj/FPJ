@@ -2,16 +2,15 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
 <configuration>
-   <typeAliases>
-   <!-- 
-   	   <typeAlias alias="Address" type="song.md.domain.Address"/>
-   	   <typeAlias alias="Board" type="song.md.domain.Board"/>
-   	   <typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>
-   	   <typeAlias alias="Paging" type="song.md.domain.Paging"/>
-   	   <typeAlias alias="PagingVo" type="song.md.domain.PagingVo"/>
-    -->	   
-   </typeAliases>
+   <typeAliases>   
+   	   <typeAlias alias="Member" type="fp.member.domain.Member"/>
+   	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
+   	   
+    </typeAliases>
+
+
 
 <!-- 
    <mappers>

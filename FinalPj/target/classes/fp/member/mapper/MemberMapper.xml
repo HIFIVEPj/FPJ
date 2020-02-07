@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fp.member.mapper.MemberMapper">
+	
+   	 <resultMap id="EMAIL_AUTHENTICATION" type="EmailAuth">
+		<result property="email" column="MEM_EMAIL" />
+		<result property="dice" column="EMAIL_AUTH" />
+	</resultMap>
+	
+	<select id="selectMemList" resultType="Member">
+  		SELECT MEM_EMAIL,MEM_PWD FROM MEMBER order by SEQ 
+	</select>
+	
+	<select id="selectEmailAuth" resultType="EmailAuth" parameterType="String" resultMap="EMAIL_AUTHENTICATION">
+		SELECT * FROM EMAIL_AUTHENTICATION WHERE MEM_EMAIL=#{email}
+	</select>
+
+	<insert id="insertMem" parameterType="Member">
+		insert into MEMBER(MEM_EMAIL, MEM_PWD, CLASS_NUM, MEM_STATUS) values(#{email}, #{pwd}, #{class_num}, #{status})
+	</insert>
+
+	<insert id="insertAuth" parameterType="Map">
+		insert into EMAIL_AUTHENTICATION(MEM_EMAIL,EMAIL_AUTH )values(#{email}, #{dice})
+	</insert>	
+	
+	<!--  
+	<delete id="delete" parameterType="long">
+		delete from ADDRESS where SEQ=#{seq}
+	</delete>
+	-->
+	
+</mapper>

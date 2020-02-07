@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="song.ct.controller">
+	<logger name="dam.ct.controller">
 		<level value="info" />
 	</logger>
 	

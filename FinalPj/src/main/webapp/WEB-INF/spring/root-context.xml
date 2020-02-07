@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:JAVA"></property>
 		<property name="username" value="final"></property>
@@ -28,17 +28,29 @@
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
 	</bean>
 	
-	<!-- 
-	<context:component-scan base-package="song.md.service"/>	
-	<context:component-scan base-package="song.md.dao"/>
-	<context:component-scan base-package="song.md.mapper"/>
-	<mybatis-spring:scan base-package="song.md.mapper"/>
 	
-	<context:component-scan base-package="song.md.aop"/>
-	 -->
+	<!-- 메일인증 추가  -->
+	  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="dam7319@gmail.com" />
+	    <property name="password" value="ekaqmffl0!" />
+	    <property name="javaMailProperties">
+	    <props>
+	      <prop key="mail.smtp.auth">true</prop>
+	      <prop key="mail.smtp.starttls.enable">true</prop>
+	    </props>
+	    </property>
+	  </bean>
 	
-	<context:annotation-config></context:annotation-config>
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+		<context:component-scan base-package="fp.member.service"/>		
+		<context:component-scan base-package="fp.member.mapper"/>
+		<mybatis-spring:scan base-package="fp.member.mapper"/>
+		
+	
+		<context:component-scan base-package="fp.member.aop"/>
+		<context:annotation-config></context:annotation-config>
+		<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

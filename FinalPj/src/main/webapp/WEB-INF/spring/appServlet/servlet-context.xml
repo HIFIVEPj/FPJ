@@ -29,7 +29,9 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="fp.index.controller" />
+	<context:component-scan base-package="fp.member.controller" />
 	<context:component-scan base-package="fp.community.controller" />
+	<context:component-scan base-package="fp.login.controller" />
 	
 	
 	
