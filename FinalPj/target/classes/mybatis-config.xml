@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   <typeAliases>   
+		<typeAlias type="fp.corporation.domain.Project" alias="Project"/>
+		<typeAlias type="fp.corporation.domain.Keyword" alias="Keyword"/>
+		<typeAlias type="fp.corporation.domain.PjPickKeyword" alias="PjPickKeyword"/>
+		<typeAlias type="fp.corporation.domain.Type" alias="Type"/>	
+		<typeAlias type="fp.corporation.domain.Corporation" alias="Corporation"/>	
+		
+		<typeAlias type="fp.corporation.vo.ProjectVo" alias="ProjectVo"/>
+		<typeAlias type="fp.corporation.vo.ProjectKeyNameVo" alias="ProjectKeyNameVo"/>
+		
+	</typeAliases>
+<!-- 
+   <mappers>
+   	   <mapper resource="song/md/mapper/AddressMapper1.xml"/>
+   	   <mapper resource="song/md/mapper/AddressMapper2.xml"/>
+   </mappers>
+--> 
+</configuration>
