@@ -9,6 +9,7 @@ public interface CustomerServiceNoticeService {
 	CustomerServiceNotice notice_contentS(long notice_num);
 	boolean notice_countS(long notice_num);
 	long notice_writeS(CustomerServiceNotice customerServiceNotice);
+	boolean notice_deleteS(long notice_num);
 	/*
 	void insertS(Address address);
 	void deleteS(long seq);

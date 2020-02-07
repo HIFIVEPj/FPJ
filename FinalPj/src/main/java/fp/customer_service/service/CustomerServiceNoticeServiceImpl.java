@@ -32,6 +32,12 @@ public class CustomerServiceNoticeServiceImpl implements CustomerServiceNoticeSe
 	public long notice_writeS(CustomerServiceNotice customerServiceNotice) {
 		return customerServiceNoticeMapper.notice_write(customerServiceNotice);
 	}
+	
+	@Override
+	public boolean notice_deleteS(long notice_num) {
+		return customerServiceNoticeMapper.notice_delete(notice_num);
+	}
+	
 	/*
 	@Override
 	public void insertS(Address address) {

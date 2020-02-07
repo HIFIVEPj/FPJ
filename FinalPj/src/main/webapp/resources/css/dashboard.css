@@ -5837,7 +5837,10 @@ button.close {
 
 /*------ Modal -------*/
 .modal-open {
+	/*
 	overflow: hidden;
+	*/
+	overflow-y: scroll;
 }
 .modal {
 	position: fixed;
@@ -5847,7 +5850,10 @@ button.close {
 	left: 0;
 	z-index: 1050;
 	display: none;
+	/*
 	overflow: hidden;
+	*/
+	overflow-y: scroll;
 	outline: 0;
 	padding: 0 !important;
 	margin: 0 !important;
@@ -5863,6 +5869,7 @@ button.close {
 .modal-open .modal {
 	overflow-x: hidden;
 	overflow-y: auto;
+
 }
 .modal-open  #homeVideo.modal {
 	background:rgba(25, 36, 79, 0.8);	
@@ -6009,6 +6016,7 @@ button.close {
 	width: 50px;
 	height: 50px;
 	overflow: scroll;
+
 }
 @media (min-width: 576px) {
 	.modal-dialog {

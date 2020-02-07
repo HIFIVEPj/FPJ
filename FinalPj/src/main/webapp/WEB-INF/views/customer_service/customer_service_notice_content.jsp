@@ -51,7 +51,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<span><i class="fa fa-calendar-o text-muted mr-2"></i><fmt:formatDate value="${notice_content.notice_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>	
 									
 									<!--
@@ -95,14 +95,16 @@
 									</ul>
 								</div>
 							</div>
-							<div class="card-footer text-right"">
+							<div class="card-footer text-right">
 								<a href="customer_service_notice_content?notice_num=${notice_content.notice_num+1}" class="btn btn-primary waves-effect waves-light">이전</a>
 								<a href="customer_service_notice_content?notice_num=${notice_content.notice_num-1}" class="btn btn-primary waves-effect waves-light">다음</a>
 								<!--
-								<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="smallModal1" value='삭제'>
-								-->
 								<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
-								<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='modify?notice_num=${notice_content.notice_num}'">
+								-->
+								<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
+								<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='notice_modify?notice_num=${notice_content.notice_num}';">
+
+								
 								<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_notice';">				
 								<a href="customer_service_notice_write" class="btn btn-danger">　글쓰기　</a>
 							</div>
@@ -169,31 +171,32 @@
 		</section>
 		<!--/Add listing-->
 
-		<!-- small Modal -->
-		<!--	
+		<!-- small Modal -->	
 		<div id="smallModal1" class="modal fade">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
+						<!--
 						<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+						-->
+						<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>글을 삭제합니다.</p>
+						<p>글을 정말 삭제할까요?</p>
 					</div>
 					
 					<div class="modal-footer">
 					
-						<a href="customer_service_notice" class="btn btn-primary">네</a>
+						<a href="customer_service_notice_delete?notice_num=${notice_content.notice_num}" class="btn btn-primary">네</a>
+						
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
 					</div>
 				</div>
-			</div>
-			
+			</div>		
 		</div>
-		-->
 		<!-- /small Modal -->
 
 		<!-- Message Modal -->

@@ -28,5 +28,14 @@
 			insert into notice values(#{notice_num}, #{notice_sub}, #{notice_cont}, SYSDATE, 0, #{mem_email}, #{notice_cate}, 0, 0, 0, null)
 	</insert>
 	
+	<delete id="notice_delete" parameterType="long">
+		delete from notice where notice_num = #{notice_num}
+	</delete>
+	
+	<update id="notice_modify" parameterType="CustomerServiceNotice">
+		update notice set notice_cate=#{notice_cate}, notice_sub=#{notice_sub}, notice_cont=#{notice_cont} where notice_num=#{notice_num}
+		
+	</update>
+	
 	
 </mapper>

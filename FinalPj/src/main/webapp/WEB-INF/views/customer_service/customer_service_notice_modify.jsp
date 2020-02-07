@@ -40,14 +40,16 @@
 				<div class="col-md-6 mx-auto">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">공지사항 글쓰기</div>
+							<div class="card-title">공지사항 글 수정하기</div>
 						</div>
 						
-						<form method="post" action="customer_service_notice_write" name="notice_write">
+						<form method="post" action="customer_service_notice_modify" name="notice_modify">
+						<input type="hidden" name="notice_num" value="${notice_content.notice_num}">
 						
 						<!-- 나중에 없앨 부분 -->
 						<input type="hidden" name="mem_email" value="관리자">
 						<!-- /나중에 없앨 부분 -->
+						
 						
 						<script type="text/javascript">
 						   function check() {
@@ -75,19 +77,17 @@
 								<select class="form-control select2" data-placeholder="분류를 선택해 주세요." multiple>
 								-->
 								<select class="form-control select2" name="notice_cate">
-									<!--
-									<option value="1" selected>Vehicle</option>
-									-->
-									<option value="" style="color:#7fa5b8;">&nbsp;분류를 선택해 주세요.</option>
-									<option value="공지">공지</option>
-									<option value="채용">채용</option>
-									<option value="이벤트">이벤트</option>
-									<option value="기타">기타</option>
+								
+				                    <option value="공지" <c:if test="${notice_content.notice_cate=='공지'}">selected</c:if>>공지</option>
+				                    <option value="채용" <c:if test="${notice_content.notice_cate=='채용'}">selected</c:if>>채용</option>
+				                    <option value="이벤트" <c:if test="${notice_content.notice_cate=='이벤트'}">selected</c:if>>이벤트</option>
+				                    <option value="기타" <c:if test="${notice_content.notice_cate=='기타'}">selected</c:if>>기타</option>									
+									
 								</select>
 							</div>
 							<div class="form-group">
 								<label class="form-label">제목</label>
-								<input type="text" class="form-control w-100" value="" placeholder="제목을 입력해 주세요." name="notice_sub">
+								<input type="text" class="form-control w-100" value="${notice_content.notice_sub}" placeholder="제목을 입력해 주세요." name="notice_sub">
 							</div>
 							<!--
 							<div class="form-group ">
@@ -119,11 +119,9 @@
 									<textarea name="notice_cont" id="summernote" class="summernote"></textarea>
 									
 									<!-- 나중에 없앨 부분 -->
-									<!--
 									<br/><br/>
 									<span>나중에 없앨 부분</span>
 									<input type="text" class="form-control w-100" name="mem_email" value="관리자">
-									-->
 									<!-- /나중에 없앨 부분 -->
 									
 									<div class="card-body text-right">
@@ -134,7 +132,7 @@
 										<!-- 
 										<input type="button" class="btn btn-danger waves-effect waves-light" value='취소' id='click1'>
 										 -->
-										 <input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal" value='취소'>
+										 <input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='취소'>
 									</div>
 								
 							</div>
@@ -160,6 +158,8 @@
 									onImageUpload: function(files, editor, welEditable) {
 									sendFile(files[0], editor, welEditable);
 									}
+									//summernote에 글 내용 추가하는 코드
+								 	$(".summernote").summernote('code', '${notice_content.notice_cont}');
 								});
 							</script>
 							
@@ -216,11 +216,11 @@
 	
 						
 		<!-- small Modal -->		
-			<div id="smallModal" class="modal fade">
+			<div id="smallModal1" class="modal fade">
 				<div class="modal-dialog modal-sm" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 작성 취소</b></h5>
+							<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 수정 취소</b></h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>

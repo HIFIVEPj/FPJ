@@ -59,6 +59,9 @@ public class CustomerServiceNoticeController {
 		return "customer_service/customer_service_notice_content";
 	}
 	*/
+	
+	
+	
 	@GetMapping("customer_service_notice_write")
 	public String customer_service_notice_write() {
 		return "customer_service/customer_service_notice_write";
@@ -70,7 +73,13 @@ public class CustomerServiceNoticeController {
 		return "redirect:customer_service_notice_content?notice_num="+ customerServiceNotice.getNotice_num();
 	}
 	
-	/*
+	@GetMapping("customer_service_notice_delete")
+	public String customer_service_notice_delete(@RequestParam("notice_num") long notice_num) {
+		customerServiceNoticeService.notice_deleteS(notice_num);
+		return "redirect:customer_service_notice";
+	}
+	
+
 	@RequestMapping("customer_service_qna")
 	public String customer_service_qna() {
 		return "customer_service/customer_service_qna";
@@ -96,5 +105,5 @@ public class CustomerServiceNoticeController {
 	public String customer_service_terms_of_personal_info() {
 		return "customer_service/customer_service_terms_of_personal_info";
 	}
-	*/
+
 }
