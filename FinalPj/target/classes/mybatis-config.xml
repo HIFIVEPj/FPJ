@@ -14,6 +14,7 @@
 		<typeAlias alias="MarketVO" type="fp.market.utils.MarketPagingVO"/>
 		<typeAlias alias="Freelancer" type="fp.market.domain.Freelancer"/>
 		<typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
+		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
    <!-- 
    	   <typeAlias alias="Board" type="song.md.domain.Board"/>
    	   <typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>

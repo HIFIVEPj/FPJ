@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -17,9 +18,9 @@
 		<meta name="MobileOptimized" content="320">
 		<meta name="description" content="하이파이브 - 프리랜서 플랫폼">
 		<meta name="author" content="sprukotechnologies">
-		<meta name="keywords" content="classifieds,real estate,education online classess,jobs,business directory,coupons,cars,e-commerce,market place,auctions,tours & travels,domain marketPlace,books listing,doctors listing,rating & reviews,iCO list,wedding,knowledge base,softwares,video listing,booking html template,bootstrap 4 html template,buy templates,directory listing html template,html and css website templates,html app template,html5 web templates,modern html templates,premium bootstrap templates,responsive ui,html template,html5 template,ecommerce html template,directory listing html template,html css js templates,search html template,best ui kits,bootstrap 4 ui kit,bootstrap kit,css ui kit,flat ui kit,html ui kit,kit ui,multipurpose website ui kit,ui kit template,uikit css,web ui kit,website ui kit,wireframe kit,wireframe ui kit,bootstrap ui kit,dashboard ui kit,flat ui,flat ui design,uikit">
-		<link rel="icon" href="hifive.ico" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="hifive.ico" />
+		<meta name="keywords" content="freelancer,freelance,project,market service, free market">
+		<link rel="icon" type="image/png" href="../images/hifive.png" />
+		<link rel="shortcut icon" type="image/png" href="../images/hifive.png" />
 
 		<!-- summernote -->			
 		<link href="/summernote/summernote-lite.css" rel="stylesheet">
@@ -63,19 +64,21 @@
 		<!--Font icons-->
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet">
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet">
+		<link href="../plugins/sweet-alert/sweetalert.css" rel="stylesheet" />
 		
 		<!--for datatable-->
 		<!-- Data table css -->
 		<link href="../plugins/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
-		<link href="../plugins/datatable/jquery.dataTables.min.css" rel="stylesheet" />
-		
+		<link href="../plugins/datatable/jquery.dataTables.min.css" rel="stylesheet" />		
 		<!-- jquery ui RangeSlider -->
 		<link href="../plugins/jquery-uislider/jquery-ui.css" rel="stylesheet">
 		<!--/for datatable-->
 		
-
 		<!-- loaders -->
 		<link href="../css/loaders.css" rel="stylesheet" />
+		
+		<!-- Tabs Style -->
+		<link href="../plugins/tabs/style.css" rel="stylesheet" />
 
 	</head>
 	<body>
@@ -85,6 +88,12 @@
 		<div id="global-loader">
 			<img src="../images/other/loader.svg" class="loader-img floating" alt="">
 		</div>
+		<!--
+		<div class="dimmer active">
+			<div class="lds-hourglass"></div>
+		</div>
+		-->
+
 
 		<!--Topbar-->
 		<div class="header-main">
@@ -163,7 +172,7 @@
 				<div class="horizontal-main clearfix">
 					<div class="horizontal-mainwrapper container clearfix">
 						<div class="desktoplogo">
-							<a href="./"><img src="../images/brand/logo1.png" style="width: 220px; height:auto;" alt=""></a>
+							<a href="../"><img src="../images/brand/logo1.png" style="width: 220px; height:auto;" alt=""></a>
 						</div>
 
 						<!--Nav-->
@@ -190,20 +199,14 @@
 										<li aria-haspopup="true"><a href="#">기타</a></li>
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="employer-list-right">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
-									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="#">개발</a></li>
-										<li aria-haspopup="true"><a href="#">디자인</a></li>
-									</ul>	
-								</li>
-								<li aria-haspopup="true"><a href="community_list">고객센터 <span class="fa fa-caret-down m-0"></span></a>
+								<li aria-haspopup="true"><a href="customer_service_list">고객센터 <span class="fa fa-caret-down m-0"></span></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">하이파이브 소개</a></li>
-										<li aria-haspopup="true"><a href="community_notice">공지사항</a></li>
-										<li aria-haspopup="true"><a href="community_faq">FAQ</a></li>
-										<li aria-haspopup="true"><a href="community_qna">1:1 문의</a></li>
-										<li aria-haspopup="true"><a href="#">이용약관</a></li>
-										<li aria-haspopup="true"><a href="#">개인정보처리방침</a></li>
+										<li aria-haspopup="true"><a href="customer_service_notice">공지사항</a></li>
+										<li aria-haspopup="true"><a href="customer_service_faq">FAQ</a></li>
+										<li aria-haspopup="true"><a href="customer_service_qna">1:1 문의</a></li>
+										<li aria-haspopup="true"><a href="customer_service_terms_of_service">이용약관</a></li>
+										<li aria-haspopup="true"><a href="customer_service_terms_of_personal_info">개인정보처리방침</a></li>
 										<li aria-haspopup="true"><a href="#">찾아오시는 길</a></li>
 									</ul>	
 								</li>
@@ -231,22 +234,28 @@
 														</li>														
 													</ul>
 													<ul class="col link-list">
-														<li class="title"><a href="market-list">프리마켓</a></li>
-														<li>
-															<a href="#">개발</a>
+														<li class="title"><a href="marketList">프리마켓</a></li>
+														<li style="color:white;">
+															<a href="#">　</a>
 														</li>
-														<li>
-															<a href="#">퍼블리싱</a>
+														<li style="color:white;">
+															<a href="#">　</a>
 														</li>
-														<li>
-															<a href="#">디자인</a>
+														<li style="color:white;">
+															<a href="#">　</a>
 														</li>
-														<li>
-															<a href="#">기획</a>
+														<li style="color:white;">
+															<a href="#">　</a>
 														</li>
-														<li>
-															<a href="#">기타</a>
-														</li>					
+														<li style="color:white;">
+															<a href="#">　</a>
+														</li>
+														<li style="color:white;">
+															<a href="#">　</a>
+														</li>
+														<li style="color:white;">
+															<a href="#">　</a>
+														</li>
 													</ul>
 													<ul class="col link-list">
 														<li class="title"><a href="employer-list-right">프리랜서</a></li>
@@ -273,24 +282,24 @@
 														</li>
 													</ul>
 													<ul class="col link-list">
-														<li class="title"><a href="community_list">고객센터</a></li>
+														<li class="title"><a href="customer_service_list">고객센터</a></li>
 														<li>
 															<a href="#">하이파이브 소개</a>
 														</li>
 														<li>
-															<a href="community_notice">공지사항</a>
+															<a href="customer_service_notice">공지사항</a>
 														</li>
 														<li>
-															<a href="community_faq">FAQ</a>
+															<a href="customer_service_faq">FAQ</a>
 														</li>
 														<li>
-															<a href="community_qna">1:1 문의</a>
+															<a href="customer_service_qna">1:1 문의</a>
 														</li>
 														<li>
-															<a href="#">이용약관</a>
+															<a href="customer_service_terms_of_service">이용약관</a>
 														</li>
 														<li>
-															<a href="#">개인정보처리방침</a>
+															<a href="customer_service_terms_of_personal_info">개인정보처리방침</a>
 														</li>
 														<li>
 															<a href="#">찾아오시는 길</a>

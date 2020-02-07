@@ -5837,7 +5837,10 @@ button.close {
 
 /*------ Modal -------*/
 .modal-open {
+	/*
 	overflow: hidden;
+	*/
+	overflow-y: scroll;
 }
 .modal {
 	position: fixed;
@@ -5847,7 +5850,10 @@ button.close {
 	left: 0;
 	z-index: 1050;
 	display: none;
+	/*
 	overflow: hidden;
+	*/
+	overflow-y: scroll;
 	outline: 0;
 	padding: 0 !important;
 	margin: 0 !important;
@@ -5863,6 +5869,7 @@ button.close {
 .modal-open .modal {
 	overflow-x: hidden;
 	overflow-y: auto;
+
 }
 .modal-open  #homeVideo.modal {
 	background:rgba(25, 36, 79, 0.8);	
@@ -6009,6 +6016,7 @@ button.close {
 	width: 50px;
 	height: 50px;
 	overflow: scroll;
+
 }
 @media (min-width: 576px) {
 	.modal-dialog {
@@ -9231,8 +9239,17 @@ a.bg-lime-darkest:hover, a.bg-lime-darkest:focus, button.bg-lime-darkest:hover, 
 .leading-loose {
 	line-height: 2 !important;
 }
+/*
 .bg-blue {
 	background-color: #4049ec  !important;
+	color: #fff !important;
+}
+a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
+	background-color: #24987E !important;
+}
+*/
+.bg-blue {
+	background-color: #1f719a  !important;
 	color: #fff !important;
 }
 a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
@@ -17172,6 +17189,16 @@ footer .border-bottom{
 	border-radius:50px;
 	color:#fff;
 }
+.item-card3-icons a{
+	width: 4rem;
+	display: inline-block;  
+    height: 4rem;
+    text-align: center;
+    border-radius: 100px;
+    line-height: 2.1rem;
+	border-radius:50px;
+	color:#fff;
+}
 /*--item-list--*/
 .item-list .list-group-item{
 	border:0;
@@ -19769,4 +19796,5 @@ a.typewrite{
 	.select2-container {
 		width: 100% !important;
 	}
+>>>>>>> dfc852cb8dc1d54086b28feda358be90730cf353
 }

@@ -31,6 +31,6 @@
 	<context:component-scan base-package="fp.index.controller" />
 	<context:component-scan base-package="fp.market.controller" />
 	<context:component-scan base-package="fp.corporation.controller" />
-	
+   <context:component-scan base-package="fp.customer_service.controller" />
 	
 </beans:beans>
