@@ -115,14 +115,14 @@
 	  --blue:#4049ec;
 	  --indigo: #6574cd;
 	  --purple: #604dd8;
-	  --pink: #ff2b88;
+	  --pink: #e8564a;
 	  --red: #ff382b;
 	  --orange: #e67605;
 	  --yellow:  #ffa22b;
 	  --green: #00e682;
 	  --teal: #05e6e6;
 	  --cyan:  #17a2b8;
-	  --primary:#6963ff;
+	  --primary:#1f719a;
 	  --secondary: #f6f7fb;
 	  --success: #00e682;
 	  --info: #00d6e6;
@@ -243,7 +243,7 @@ a {
 	-webkit-text-decoration-skip: objects;
 }
 a:hover {
-	color: #6963ff;
+	color: #1f719a;
 	text-decoration: underline;
 }
 a:not([href]):not([tabindex]) {
@@ -5381,7 +5381,7 @@ ul.dropdown-menu li.dropdown ul.dropdown-menu .dropdown-plus-title {
 	background-color: #604dd8;
 }
 .label-pink{
-	background-color: #ff2b88;
+	background-color: #e8564a;
 }
 .label-secondary{
 	background-color:rgba(5, 117, 230,0.1);
@@ -9231,8 +9231,17 @@ a.bg-lime-darkest:hover, a.bg-lime-darkest:focus, button.bg-lime-darkest:hover, 
 .leading-loose {
 	line-height: 2 !important;
 }
+/*
 .bg-blue {
 	background-color: #4049ec  !important;
+	color: #fff !important;
+}
+a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
+	background-color: #24987E !important;
+}
+*/
+.bg-blue {
+	background-color: #1f719a  !important;
 	color: #fff !important;
 }
 a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
@@ -9268,7 +9277,7 @@ a.bg-purple:hover, a.bg-purple:focus, button.bg-purple:hover, button.bg-purple:f
 	color: #26eda2 !important;
 }
 .bg-pink {
-	background-color: #ff2b88 !important;
+	background-color: #e8564a !important;
 	color: #fff !important;
 }
 .bg-darkpink {
@@ -9279,7 +9288,7 @@ a.bg-pink:hover, a.bg-pink:focus, button.bg-pink:hover, button.bg-pink:focus {
 	background-color: #f92884 !important;
 }
 .text-pink {
-	color: #ff2b88 !important;
+	color: #e8564a !important;
 }
 .bg-red {
 	background-color: #ff382b !important;
@@ -11015,7 +11024,7 @@ a.card-tabs-item.active {
 }
 .avatar-pink {
 	background-color: #fcd3e1;
-	color: #ff2b88;
+	color: #e8564a;
 }
 .avatar-red {
 	background-color: #f0bcbc;
@@ -12002,7 +12011,7 @@ a.tag-addon:hover {
 	color: #fff;
 }
 .tag-pink {
-	background-color: #ff2b88;
+	background-color: #e8564a;
 	color: #fff;
 }
 .tag-red {
@@ -13768,7 +13777,7 @@ svg {
     content: "";
     right: -15px;
     border-top: 15px solid transparent;
-    border-left: 15px solid #ff2b88;
+    border-left: 15px solid #e8564a;
     border-bottom: 15px solid transparent;
     width: 0;
 }
@@ -13990,7 +13999,7 @@ svg {
     width: 0;
 }
 .badge-offer.bg-pink:after{
-	border-top: 12px solid #ff2b88;
+	border-top: 12px solid #e8564a;
 	border-left: 25px solid transparent;
     border-right: 25px solid transparent;
     content: "";
@@ -14091,7 +14100,7 @@ svg {
     width: 0;
 }
 .badge-offer1.bg-pink:after{
-	border-top: 12px solid #ff2b88;
+	border-top: 12px solid #e8564a;
 	border-left: 25px solid transparent;
     border-right: 25px solid transparent;
     content: "";
@@ -16180,7 +16189,7 @@ footer .border-bottom{
     display: inline-flex;
     width: 4rem;
     height: 4rem;
-    padding: 1.3rem 1.4rem;
+    padding: 1.4rem 1.4rem;
     border-radius: 50%;
     text-align: center;
 }
@@ -17166,6 +17175,16 @@ footer .border-bottom{
 	width: 2rem;
 	display: inline-block;  
     height: 2rem;
+    text-align: center;
+    border-radius: 100px;
+    line-height: 2.1rem;
+	border-radius:50px;
+	color:#fff;
+}
+.item-card3-icons a{
+	width: 4rem;
+	display: inline-block;  
+    height: 4rem;
     text-align: center;
     border-radius: 100px;
     line-height: 2.1rem;
@@ -18289,8 +18308,8 @@ footer .border-top{
 }
 .my-dash.app-sidebar .side-menu__item.active{
    background: #f9faff !important;
-    color: #6963ff !important;
-    border-right: 2px solid #6963ff;
+    color: #1f719a !important;
+    border-right: 2px solid #1f719a;
 }
 
 .my-dash .slide.is-expanded [data-toggle='slide']{
@@ -18755,7 +18774,7 @@ footer .border-top{
 	background:#605e7e;
 }
 .wishlist.active{
-	background:#e62a72;
+	background:#e8564a;
 }
 .constuction-logo{
 	border-bottom:3px solid;
@@ -18792,7 +18811,7 @@ footer .border-top{
 }
 .tabs-menu ul.eductaional-tabs li a{
 	padding: 10px 20px 11px 20px;
-    background: #ff2b88;
+    background: #e8564a;
     border-radius: 23px;
     margin: 10px;
     color: #fff;
@@ -19501,7 +19520,7 @@ button#ihavecookiesBtn {
 #gdpr-cookie-message button,
 button#ihavecookiesBtn {
     border: none;
-    background:#ff2b88;
+    background:#e8564a;
     color: white;
     font-size: 15px;
     padding: 7px 18px;
@@ -19711,7 +19730,7 @@ a.typewrite{
 }
 
 *::-ms-backdrop,  .gradient-icon{
-	color:#6963ff;
+	color:#1f719a;
 	background:none;
 }
 *::-ms-backdrop,  .xzoom{
@@ -19744,7 +19763,7 @@ a.typewrite{
     content: "";
     right: -24px;
     border-top: 16px solid transparent;
-    border-left: 24px solid #6963ff;
+    border-left: 24px solid #1f719a;
     border-bottom: 16px solid transparent;
     width: 0;
 }

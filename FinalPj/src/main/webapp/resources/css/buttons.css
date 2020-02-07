@@ -41,29 +41,29 @@ a.btn.disabled, fieldset:disabled a.btn {
 }
 .btn-secondary {
 	color: #fff;
-    background-color: #ff2b88;
-    border-color: #ff2b88;
+    background-color: #e8564a;
+    border-color: #e8564a;
 }
 .btn-secondary:hover {
 	color: #fff;
-	background-color: #e61470;
-	border-color: #e61470;
+	background-color: #e8564a;
+	border-color: #e8564a;
 }
 .btn-secondary:focus, .btn-secondary.focus {
-	box-shadow: 0 0 0 2px rgba(246, 109, 155, 0.5);
+	box-shadow: 0 0 0 2px rgba(232, 86, 74, 0.5);
 }
 .btn-secondary.disabled, .btn-secondary:disabled {
 	color: #fff;
-	background-color: #ff2b88;
-	border-color: #ff2b88;
+	background-color: #e8564a;
+	border-color: #e8564a;
 }
 .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show>.btn-secondary.dropdown-toggle {
 	color: #fff;
-	background-color: #e61470;
-	border-color: #e61470;
+	background-color: #e8564a;
+	border-color: #e8564a;
 }
 .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .show>.btn-secondary.dropdown-toggle:focus {
-	box-shadow: 0 0 0 2px rgba(246, 109, 155, 0.5);
+	box-shadow: 0 0 0 2px rgba(232, 86, 74, 0.5);
 }
 .btn-success {
 	color: #fff;
@@ -488,6 +488,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 	padding-right: .5rem;
 	text-align: center;
 }
+/*
 .btn.btn-app {
     position: relative;
     padding: 15px 5px;
@@ -521,6 +522,42 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     position: absolute;
     top: -3px;
     right: -10px;
+    font-weight: 400
+}
+*/
+.btn.btn-app {
+    position: relative;
+    padding: 10px 0px;
+    margin: 0 0 10px 10px;
+    min-width: 50px;
+    height: 40px;
+    box-shadow: none;
+    border-radius: 0;
+    text-align: center;
+    color: #a7b4c9;
+    border: 1px solid #e8ebf3;
+    background-color: #f9faff;
+    font-size: 12px
+}
+.btn.btn-app>.fa,
+.btn.btn-app>.glyphicon,
+.btn.btn-app>.ion {
+    font-size: 20px;
+    display: block
+}
+.btn.btn-app:hover {
+    background: #f9faff;
+    color: #3f5068;
+    border-color: #e8ebf3;
+}
+.btn.btn-app:active,
+.btn.btn-app:focus {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+}
+.btn.btn-app>.badge {
+    position: absolute;
+    top: -9px;
+    right: -19px;
     font-weight: 400
 }
 /*.btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,

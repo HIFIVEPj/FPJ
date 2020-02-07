@@ -1,5 +1,5 @@
 $(function () {
-	 var austDay = new Date("October 10, 2020");
+	 var austDay = new Date("March 19, 2020");
 		$('#launch_date').countdown(
 	{
 	until: austDay,
