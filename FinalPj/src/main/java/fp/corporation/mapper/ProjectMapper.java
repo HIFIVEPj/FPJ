@@ -12,5 +12,6 @@ public interface ProjectMapper {
 	List<Project> pjKeywords();
 	Project content(long pj_num);
 	Corporation corInfo(long pj_num);
-	
+	void deletePj(long pj_num);
+	void deleteKeyword(long pj_num);
 }

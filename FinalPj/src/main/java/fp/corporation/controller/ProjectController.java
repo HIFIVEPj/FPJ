@@ -55,5 +55,11 @@ public class ProjectController {
 		return mv;
 	}
 	
+	@RequestMapping("project_delete")
+	public String delete(long pj_num) {
+		service.deletePj(pj_num);
+		return "redirect:project_list";
+	}
+	
 	
 }

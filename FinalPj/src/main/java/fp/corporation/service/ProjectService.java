@@ -14,4 +14,5 @@ public interface ProjectService {
 	List<Project> keywords();
 	Project showContent(long pj_num);
 	Corporation corInfo(long pj_num);
+	void deletePj(long pj_num);
 }

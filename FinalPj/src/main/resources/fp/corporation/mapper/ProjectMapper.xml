@@ -107,10 +107,13 @@
 		 values(pj_num.nextval, #{type_num}, #{cate_num},#{subject},#{content},sysdate)		
 	</insert>
 	 -->
-	 
-	<delete id="delete" parameterType="long">
+
+	<delete id="deletePj" parameterType="long">
 		delete from PROJECT where PJ_NUM=#{pj_num}
 	</delete>
+	<delete id="deleteKeyword" parameterType="long">
+	 	delete from PJ_PICK_KEYWORD where PJ_NUM=#{pj_num}
+	 </delete>
 	<!-- 
 	<update id="update" parameterType="Board" >
 		update BOARD set email=#{email}, subject=#{subject}, content=#{content} where seq=#{seq}
