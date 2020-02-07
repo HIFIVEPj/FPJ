@@ -24,6 +24,6 @@ public class Market {
 	//리스트뽑는데 필요한 컬럼
 	private Freelancer freelancer;//free_name
 	private MarketRev marketRev;//marketRev_star
-	
+	ㅇㄹㅇㄹ
 	
 }
