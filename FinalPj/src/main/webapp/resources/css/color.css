@@ -14,8 +14,8 @@
 }
 .btn-primary.disabled, .btn-primary:disabled {
 	color: #fff;
-	background-color: #5a54f8;
-	border-color: #5a54f8;
+	background-color: #1f719a;
+	border-color: #1f719a;
 }
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show>.btn-primary.dropdown-toggle {
 	color: #fff;
@@ -967,4 +967,5 @@ form.convFormDynamic button.submit:hover {
    color: #fff;
    background-color: #e64a3d;
    border-color: #e64a3d;
+>>>>>>> dfc852cb8dc1d54086b28feda358be90730cf353
 }

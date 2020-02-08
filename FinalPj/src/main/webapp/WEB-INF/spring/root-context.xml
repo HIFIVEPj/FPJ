@@ -26,25 +26,37 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+		<property value="classpath:/fp/customer_service/mapper/*Mapper.xml" name="mapperLocations" />
 	</bean>
-
 	
+	<!-- 내꺼 -->
 	<context:component-scan base-package="fp.corporation.service"/>	
-	<context:component-scan base-package="fp.corporation.vo"/>
-	<context:component-scan base-package="fp.corporation.mapper"/>
+	<context:component-scan base-package="fp.corporation.mapper"/>	
+	<context:component-scan base-package="fp.corporation.vo"/>	
 	<mybatis-spring:scan base-package="fp.corporation.mapper"/>
-	<!--  
+	
+	<!-- 세영씨 부분 -->
+	<context:component-scan base-package="fp.market.service"/>	
+	<context:component-scan base-package="fp.market.utils"/>
+	<mybatis-spring:scan base-package="fp.market.mapper"/>
+	<context:component-scan base-package="fp.market.mapper"/>
+	
+	<!-- 오빠 부분 -->
+	<context:component-scan base-package="fp.customer_service.service"/>
+   <context:component-scan base-package="fp.customer_service.mapper"/>
+   <mybatis-spring:scan base-package="fp.customer_service.mapper"/>
+	
+	<!--
 	<context:component-scan base-package="song.md.aop"/>
-	 -->
-
+	  --> 
+	
 	<context:annotation-config></context:annotation-config>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<tx:annotation-driven />
 
-
 </beans> 
+

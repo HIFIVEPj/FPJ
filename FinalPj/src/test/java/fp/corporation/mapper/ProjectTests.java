@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 public class ProjectTests {
 	@Autowired
 	private ProjectMapper projectMapper;
-	/*
+	
 	@Test
 	public void testList() {
 		ProjectVo projectVo = new ProjectVo(5,1,5);
@@ -42,7 +42,7 @@ public class ProjectTests {
 		Project project = projectMapper.content(1);
 		log.info("@@@content: "+project);
 	}
-	*/
+	/**/
 	@Test
 	public void testCor(){
 		

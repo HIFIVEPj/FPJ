@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fp.market.mapper.MarketMapper">
+
+ 	<!--mybatis-config.xml에서 알리아스줄 수 있음↓type-->
+	<resultMap id="resultMarket" type="Market">
+		<id property="market_num" column="market_num" />
+		<result property="free_code" column="free_code" />
+		<result property="cate_num" column="cate_num" />
+		<result property="market_price" column="market_price" />
+		<result property="market_sub" column="market_sub" />
+		<result property="market_cont" column="market_cont" />
+		<result property="market_vcnt" column="market_vcnt" />
+		<result property="market_fname" column="market_fname" />
+		<result property="market_ofname" column="market_ofname" />
+		<result property="market_state" column="market_state" />
+		<result property="market_pcnt" column="market_pcnt" />
+
+		<association property="freelancer" javaType="Freelancer" column ="free_code" >
+	       <id property="free_code" column ="free_code" />
+	         <result property="free_name" column ="free_name" />
+	          
+    	</association>
+    	<association property="marketRev" javaType="MarketRev" column ="marketRev_num">
+	       <id property="marketRev_num" column ="marketRev_num" />
+	         <result property="marketRev_star" column ="marketRev_star" />
+	         <result property="market_num" column ="마켓넘" />
+    	</association>
+	</resultMap>
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="getCountMarket" resultType="int">
+		SELECT COUNT(*) FROM MARKET
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	
+	<select id="getMarketList" resultMap="resultMarket" parameterType="MarketVO">
+		<![CDATA[
+		select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+		(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE) A
+		right outer join
+		(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM group by m.MARKET_NUM) B
+		on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
+		where rnum>#{start} and rnum<=#{end}
+
+  			
+		]]>
+	</select>
+</mapper>	

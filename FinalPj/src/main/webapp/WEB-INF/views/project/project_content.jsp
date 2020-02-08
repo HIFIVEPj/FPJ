@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="now" class ="java.util.Date" />
@@ -187,7 +188,7 @@
 
 							<span style="float:right;" >
 									<a href="update.do" class="btn btn-secondary icons" >수정</a>
-									<a href="#" class="btn btn-secondary icons">삭제</a>
+									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1"">삭제</button>
 							</span>
 					</div>
 			<!--Jobs Description-->
@@ -697,7 +698,34 @@
 				</div>
 			</div>
 		</div>
-
+<!-- small Modal -->   
+      <div id="smallModal1" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>글을 정말 삭제할까요?</p>
+               </div>
+               
+               <div class="modal-footer">
+               
+                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num= ${projectCont.pj_num}">네</a> 
+                  
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+      <!-- /small Modal -->
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+
 <!--/footer-->
