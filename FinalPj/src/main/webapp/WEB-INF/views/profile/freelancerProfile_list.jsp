@@ -218,7 +218,7 @@
 											</tr>
 										</thead>
 										
-										 	<c:forEach  var="profile_list" items="${profile_list}" varStatus="status">
+										 	<c:forEach  var="freeLancer" items="${profile_list}" varStatus="status">
 							
 												<tr>
 													<td scope="row">
@@ -228,12 +228,19 @@
 														</label>
 													</td>
 															
-														
-													<td><a href='freelancerProfile_content?PRO_NUM='class="btn-link">${profile_list}</a></td>
-													<td>${profile_list}</td>
-													<td class="text-center"><fmt:formatDate value="${profile_list}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
-													<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profile_list}</a></td> 
-				
+													<c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">	
+														<td><a href='freelancerProfile_content?PRO_NUM=${profile.pro_num}'class="btn-link">${profile.profile_sub}</a></td>
+													</c:forEach>
+													
+													<td>${freeLancer.mem_email}</td>
+													
+													<c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">	
+													<td class="text-center"><fmt:formatDate value="${profile.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
+													</c:forEach>	
+												
+													<c:forEach  var="profilefile" items="${freeLancer.freeLancerProfileFile}" varStatus="status">	
+													<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td> 
+													</c:forEach>
 												</tr>
 												
 											</c:forEach>		

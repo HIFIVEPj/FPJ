@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Type {
-	
 	//직종//
-	private int type_num; //계좌등록여부
-	private String type_name; //파일이름
-	
-	private FreeLancerProfile freelancerprofile;
-	private Project projcet;
-	
+	private int type_num;  
+	private String type_name; 
+
+
+	private List<FreeLancerProfile> freelancerprofile;
 	private Type type;
+	private List<Project> project;
+
 }

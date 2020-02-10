@@ -177,26 +177,43 @@
 								<div class="table-responsive border ">
 									<table class="table row table-borderless w-100 m-0 ">
 										<tbody class="col-lg-12 col-xl-6 p-0">
+										
+										
 											<tr>
 											
-												<td><strong>이름 :</strong> ${content[0].FREE_NAME}</td>
+												<td><strong>이름 :</strong> ${content[0].free_name}</td>
 											</tr>
+											
+											<c:forEach  var="contentdata" items="${content}" varStatus="status">
+											<c:forEach  var="place" items="${contentdata.freelancerprofile}" varStatus="status">
 											<tr>
-												<td><strong>업무가능지역 :</strong> ${content[0].PRO_WORKPLACE}</td>
+												<td><strong>업무가능지역 : </strong>${place.pro_workplace}</td>
 											</tr>
+											</c:forEach>
+											</c:forEach>
+											
+											<c:forEach  var="key" items="${content3}" varStatus="status">
+											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">
 											<tr>
-												<td><strong>키워드 :</strong>${content3[0].KEY_NAME}</td>
+												<td><strong>사용언어 : </strong>${keyname.key_name}</td>
 											</tr>
+											</c:forEach>
+											</c:forEach>
+										
 										</tbody>
 										<tbody class="col-lg-12 col-xl-6 p-0">
+											
+											<c:forEach  var="typenum" items="${content2}" varStatus="status">
 											<tr>
-												<td><strong>직종 :${content2[0].TYPE_NAME}</strong></td>
+												<td><strong>직종 : </strong>${typenum.type_name}</td>
+											</tr>
+											</c:forEach>
+											
+											<tr>
+												<td><strong>Email : </strong>${content[0].mem_email}</td>
 											</tr>
 											<tr>
-												<td><strong>Email :</strong> ${content[0].MEM_EMAIL}</td>
-											</tr>
-											<tr>
-												<td><strong>연락처 :</strong> ${content[0].FREE_TEL}</td>
+												<td><strong>연락처 : </strong>${content[0].free_tel}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -206,9 +223,11 @@
 										<div class="media-heading">
 										<h5><strong>자기소개</strong></h5>
 									</div>
-									<p>${content[0].PRO_CV}</p>
-									<p ${content[0].PRO_CV}></p>
-					
+									<c:forEach  var="contentdata" items="${content}" varStatus="status">
+										<c:forEach  var="cv" items="${contentdata.freelancerprofile}" varStatus="status">
+									<p>${cv.pro_cv}</p>					
+										</c:forEach>
+									</c:forEach>
 									</div>
 									
 									<div class="col-md-12">			
@@ -227,11 +246,22 @@
 													</tr>
 												</thead>
 												<tbody>
-												<c:forEach  var="content" items="${content}" varStatus="status">
+												
+												
+											
 													<tr>
-														<td><a href="store.html" class="text-inherit">${content2[0].pj_sub}</a></td>
-														<td><fmt:formatDate value="${content.PROFILE_DATE}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
-														<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${content.PROFILE_OFNAME}</a></td>
+													<c:forEach  var="content" items="${content2}" varStatus="status">
+													<c:forEach  var="name" items="${content.project}" varStatus="status">
+														<td><a href="store.html" class="text-inherit">${name.pj_sub}</a></td>
+													</c:forEach>
+													</c:forEach>
+													<c:forEach  var="profilecontent" items="${content}" varStatus="status">
+														<c:forEach  var="profile" items="${profilecontent.freelancerprofile}" varStatus="status">	
+														<td><fmt:formatDate value="${profile.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
+														</c:forEach>
+														<c:forEach  var="profilefile" items="${profilecontent.freeLancerProfileFile}" varStatus="status">	
+														<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td>
+														</c:forEach>
 													</tr>
 														</c:forEach>
 										<!--  			<tr>
@@ -261,10 +291,15 @@
 						</div>
 							</div>
 							<div class="card-footer" align="right">
+							
 								<a href="mydash_change" class="btn btn-secondary icons">수정하기</a>
-								<a href="#" class="btn btn-secondary icons">삭제하기</a>		
-								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>						
+								
+								<a href='freelancerProfile_delete?PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
+								
+								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>				
+									
 							</div>
+						
 						<!-- 	<div class="card-footer" align="right">
 								<div class="icons">
 									<a href="employer-list-right" class="btn btn-secondary icons">목록</a>

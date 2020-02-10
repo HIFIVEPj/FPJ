@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Project {
+	
+	private Project(long PRO_NUM) {}
 	//프리랜서//
 	private int type_num; //직종번호
 	private long pj_num; //프로젝트번호long
@@ -36,7 +38,6 @@ public class Project {
 	private long pj_pcnt; //찜수long
 	private long pj_vcnt; // 조회수long
 	
-	private Project project;
-
+	
 
 }

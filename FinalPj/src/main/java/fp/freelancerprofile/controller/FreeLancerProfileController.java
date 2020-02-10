@@ -1,5 +1,7 @@
 package fp.freelancerprofile.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,17 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.KeyWord;
+import fp.freelancerprofile.domain.Project;
+import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
+import lombok.extern.log4j.Log4j;
 
 
 
 
 @Controller
+@Log4j
 public class FreeLancerProfileController {
 	
 	@Autowired
@@ -38,28 +45,32 @@ public class FreeLancerProfileController {
 	
 	@RequestMapping("freelancerProfile_list") //프로필 리스트 **
 	public ModelAndView Profile_list() { 
+		
 		List<FreeLancer> profile_list = service.selectProfileList();
+	//	log.info("#0: " + profile_list.size()); //5
+	//	log.info("#1: " + profile_list.get(0).getFreelancerprofile().size()); //1
+	//	log.info("#2: " + profile_list.get(0).getFreelancerprofile().get(0)); //1
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile/freelancerProfile_list");
 		mv.addObject("profile_list",profile_list);
-	
 		return mv;
 	}
-	@GetMapping("freelancerProfile_content") //프로필 컨텐츠
+	@GetMapping("freelancerProfile_content") //프로필 컨텐츠//
 	public ModelAndView ProFileContent(@RequestParam long PRO_NUM) {
 		List<FreeLancer> content = service.selectProfileContent(PRO_NUM);
-		//List<FreeLancer> content2 = service.selectProfileContent2(PRO_NUM);
-	//	List<FreeLancer> content3 = service.selectProfileContent3(PRO_NUM);
+		List<FreeLancerProfile> content2 = service.selectProfileContent2(PRO_NUM);	
+		List<KeyWord> content3 = service.selectProfileContent3(PRO_NUM);
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile/freelancerProfile_content");
 		mv.addObject("content", content);
-	//	mv.addObject("content2", content2);
-	//	mv.addObject("content2", content3);
+		mv.addObject("content2", content2);
+		mv.addObject("content3", content3);
 		return mv;
 	}
 
-	@RequestMapping("freelancerProfile_del")
+	@RequestMapping("freelancerProfile_delete")
 	public String ProfileListDelete(@RequestParam long PRO_NUM) {
 		service.listDelete(PRO_NUM);
 		return "redirect:freelancerProfile_list";

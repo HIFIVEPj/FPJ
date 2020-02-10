@@ -12,7 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class KeyWord {
-	private int key_num; //계좌등록여부
-	private String key_name; //파일이름
-	private KeyWord keyWord;
+	//사용언어//
+	private long key_num;
+	private String key_name;
+	
+	private List<FreeLancerProfile> freelancerprofile;
+	//private  List<Project> projcet;
 }

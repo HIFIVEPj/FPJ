@@ -2,7 +2,6 @@ package fp.freelancerprofile.domain;
 
 import java.sql.Date;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,16 +22,13 @@ public class FreeLancer {
 	private int free_acctox; //계좌등록여부
 	private String free_fname; //파일이름
 	private String free_ofname; //오리지널파일이름 
-	
-	//private FreeLancer freelancer;
-	
+
 	private List<FreeLancerProfile> freelancerprofile;
 	private List<FreeLancerProfileFile> freeLancerProfileFile;
 	
 	private Type type;
-	private KeyWord keyword;
-	private Project projcet;
-	private Project freepickkeyword;
+	private List<KeyWord> keyword;
+	private List<Project> projcet;
 	
 	
 }

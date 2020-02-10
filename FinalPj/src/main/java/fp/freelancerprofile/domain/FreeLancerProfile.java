@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FreeLancerProfile {
+	private FreeLancerProfile(long pro_num) {}
+	
 	private long free_code; //개인등록번호
 	private long pro_num; //개인프로필번호
 	private int type_num; //직종번호 
@@ -25,10 +27,10 @@ public class FreeLancerProfile {
 	private long profile_vcnt;//조회수
 	private long profile_pcnt;//찜수
 	private String pro_workplace; //업무장소
-	private Object profile_sub; //프로필명
+	private String profile_sub; //프로필명
 	private Date profile_date; //프로필 등록일
 	
-	//private FreeLancerProfile freeLancerProfile;
-	private List<FreeLancerProfile> ProfileList;
-
+	private List<FreeLancerProfile> freelancerprofile;
+	private Type type;
+	private List<Project> projcet;
 }
