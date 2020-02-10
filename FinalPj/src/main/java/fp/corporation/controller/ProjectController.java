@@ -3,6 +3,7 @@ package fp.corporation.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,9 +57,20 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("project_delete")
-	public String delete(long pj_num) {
+	public String project_delete(@RequestParam long pj_num) {
 		service.deletePj(pj_num);
 		return "redirect:project_list";
+	}
+	
+	@GetMapping("project_update")
+	public ModelAndView project_update(@RequestParam long pj_num) {
+		Project project = service.showContent(pj_num);
+		Corporation corInfo = service.corInfo(pj_num);
+		ModelAndView mv = new ModelAndView ("project/project_update");
+		mv.addObject("projectCont", project);
+		mv.addObject("corInfo", corInfo);
+		return mv;
+	
 	}
 	
 	

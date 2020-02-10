@@ -10,20 +10,16 @@
 		<typeAlias type="fp.corporation.domain.Type" alias="Type"/>	
 		<typeAlias type="fp.corporation.domain.Corporation" alias="Corporation"/>	
 
+		<typeAlias type="fp.corporation.vo.ProjectVo" alias="ProjectVo"/>
+		<typeAlias type="fp.corporation.vo.ProjectKeyNameVo" alias="ProjectKeyNameVo"/>
+
 		<typeAlias alias="Market" type="fp.market.domain.Market"/>
 		<typeAlias alias="MarketVO" type="fp.market.utils.MarketPagingVO"/>
 		<typeAlias alias="Freelancer" type="fp.market.domain.Freelancer"/>
 		<typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
 		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
-   <!-- 
-   	   <typeAlias alias="Board" type="song.md.domain.Board"/>
-   	   <typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>
-   	   <typeAlias alias="Paging" type="song.md.domain.Paging"/>
-   	   <typeAlias alias="PagingVo" type="song.md.domain.PagingVo"/>
-    -->	   
+		
 
-		<typeAlias type="fp.corporation.vo.ProjectVo" alias="ProjectVo"/>
-		<typeAlias type="fp.corporation.vo.ProjectKeyNameVo" alias="ProjectKeyNameVo"/>
 
 	</typeAliases>
 <!-- 

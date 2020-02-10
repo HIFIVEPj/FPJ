@@ -2,6 +2,7 @@
 <jsp:useBean id="now" class ="java.util.Date" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -476,6 +477,10 @@
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab-11">
 									
+									<c:if test="${empty list}">
+										등록된 프로젝트가 없습니다
+									</c:if>
+									<c:if test="${not empty list}">
 									<c:forEach var="dto" items="${list}">	
 											<div class="card overflow-hidden">
 												<div class="d-md-flex">
@@ -485,13 +490,13 @@
 															<a href="books.html"></a>
 											<!--				<img src alt="img" class="cover-image h-100">-->	
 														</div>
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-														</div>
+														
 													</div>
-													
 													<div class="card border-0 mb-0">
-														<div class="card-body ">
+														<div class="card-body" style="padding:30px;">
+														<div class="item-card9-icons">
+															<a href="#" class="item-card9-icons wishlist" style="margin-right:40%"> <i class="fa fa fa-heart-o"></i></a>
+														</div>
 															<div class="item-card9">
 																${dto.pj_loc} /
 																<c:forEach var="key" items="${keyname}">
@@ -501,22 +506,42 @@
 																				키워드 없음
 																			</c:when>
 																			<c:otherwise>
-																				<c:forEach var="i" begin="0" end="${key.keyword.size()-1}">
-																					<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
-																				</c:forEach>
+																				<c:choose>
+																				<c:when test="${key.keyword.size()>2}">
+																					<c:forEach var="i" begin="0" end="2">
+																						<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
+																					</c:forEach>
+																				</c:when>
+																				<c:otherwise>
+																					<c:forEach var="i" begin="0" end="${key.keyword.size()-1}">
+																						<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
+																					</c:forEach>
+																				</c:otherwise>
+																				</c:choose>
 																			</c:otherwise>
 																		</c:choose>
 																	</c:if>
 																</c:forEach>
 																/ ${dto.pj_name}<br/><br/>
-																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">${dto.pj_sub}</h4></a>
-																<small class="">${dto.pj_cont}</small><br/><br/>
+																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
+																<div style="width:85%">
+																<span style="width:10px">
+														          <c:choose>
+														           <c:when test="${fn:length(dto.pj_cont) > 101}">
+														            <c:out value="${fn:substring(dto.pj_cont,0,100)}"/>....
+														           </c:when>
+														           <c:otherwise>
+														            <c:out value="${dto.pj_cont}"/>
+														           </c:otherwise> 
+														          </c:choose>
+																</span>
+																</div><br/>
 																<p class="mb-0 leading-tight mt-1">급여 :<fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</p>
 															</div>
 														</div>
 														<div class="card-footer pt-4 pb-4">
 															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
+																<div class="item-card9-cost" style="padding-left: 10px">
 														<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>
 															<fmt:parseDate value="${dto.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
 															<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
@@ -545,7 +570,7 @@
 											</div>
 
 											</c:forEach>
-											
+										</c:if>
 										</div>
 										<div class="tab-pane" id="tab-12">
 											<div class="row">
@@ -633,7 +658,7 @@
 												<a class="page-link" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
 											</li>
 										</c:if>
-										<div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>
+										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
 									</ul>
 								</div>
 							</div>

@@ -1,9 +1,7 @@
 package fp.index.controller;
 
-import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,10 +32,6 @@ public class IndexController {
 	@RequestMapping("/mydash")
 	public String mypage() {
 		return "mydash";
-	}
-	@RequestMapping("/mydash_cor")
-	public String mypage_cor() {
-		return "mydash_cor";
 	}
 	@RequestMapping("/payments")
 	public String pay() {
@@ -104,10 +98,7 @@ public class IndexController {
 	public String write() {
 		return "project_write";
 	}
-	@GetMapping("update.do")
-	public String update() {
-		return "project_update";
-	}
+
 	@GetMapping("payments.do")
 	public String project_payments() {
 		return "project_payments";
