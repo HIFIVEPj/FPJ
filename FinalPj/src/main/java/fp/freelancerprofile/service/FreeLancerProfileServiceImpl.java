@@ -9,6 +9,7 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.KeyWord;
+import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.mapper.FreeLancerProfileMapper;
@@ -27,6 +28,16 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<FreeLancer> selectProfileList(){
 		return mapper.selectProfileList();
 	}
+	///리스트페이지 페이징///
+	@Override
+	public int countProfileList() {
+		return mapper.countProfileList();
+	}
+	@Override
+	public List<FreeLancer> selectPageList(PagingVO vo){
+		return mapper.selectPageList(vo);
+	}
+	//////
 	
 	@Override
 	public List<FreeLancer> selectProfileContent(long PRO_NUM){

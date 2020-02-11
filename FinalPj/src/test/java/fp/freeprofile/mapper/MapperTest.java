@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.ui.ModelMap;
 
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.mapper.FreeLancerProfileMapper;
 import lombok.extern.log4j.Log4j;
 
@@ -25,13 +26,13 @@ public class MapperTest {
 	@Autowired
 	private FreeLancerProfileMapper mapper;
 
-	
+		/*
 	@Test
 	public void testList() throws Exception{
 		log.info("#######freeProfileMapper: #######" + mapper.getClass().getName());
 		List<FreeLancer>list = mapper.selectProfileList();
 		log.info("#######freeProfileMapperTests testList(): #######"+list);
-	}
+	}*/
 	
 	
 /*		@Test
@@ -48,4 +49,11 @@ public class MapperTest {
 		log.info("#AddressTests delete() 수행완료");
 	} 
 	}*/
+	
+		/*	
+	@Test
+	public int countFreeLancer();
+	//페이징처리 게시글 조회
+	public List<PagingVO> selectListPaging(PagingVO vo);
+*/
 }

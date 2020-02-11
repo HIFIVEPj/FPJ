@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -25,13 +26,13 @@ public class ProfileTests {
 
 	@Setter(onMethod_ = {@Autowired})
 	private FreeLancerProfileService service;
-	
+	/*	
 	@Test
 	public void testList() {
 		List<FreeLancer> selectProfileList = service.selectProfileList();
 		log.info("list(1): " + selectProfileList);
 	}
-
+*/
 /*	
 	@Test
 	public void testInsert() {
@@ -47,4 +48,5 @@ public class ProfileTests {
 		List<Address> list = addressService.listS();
 		log.info("list(3): " + list);
 	}	*/
+
 }

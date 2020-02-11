@@ -18,13 +18,11 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.KeyWord;
+import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import lombok.extern.log4j.Log4j;
-
-
-
 
 @Controller
 @Log4j
@@ -42,8 +40,9 @@ public class FreeLancerProfileController {
 	public String Profile_content() { 
 		return "profile/freelancerProfile_content";
 	}
-	
-	@RequestMapping("freelancerProfile_list") //프로필 리스트 **
+	/*
+	//프로필 리스트 **
+	@RequestMapping("freelancerProfile_list") 
 	public ModelAndView Profile_list() { 
 		
 		List<FreeLancer> profile_list = service.selectProfileList();
@@ -56,7 +55,53 @@ public class FreeLancerProfileController {
 		mv.addObject("profile_list",profile_list);
 		return mv;
 	}
-	@GetMapping("freelancerProfile_content") //프로필 컨텐츠//
+	
+	//프로필 리스트 페이징//
+	@GetMapping("freelancerProfile_list")
+	public String ProfileList(PagingVO vo, Model model
+						, @RequestParam(value="nowPage", required=false)String nowPage
+						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+		int total = service.countProfileList();
+			if(nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "4";
+			}else if(nowPage == null) {
+				nowPage="1";
+			}else if(cntPerPage ==null) {
+				cntPerPage="4";
+			}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging", vo);
+		model.addAttribute("viewAll", service.selectPageList(vo));
+			return "profile/freelancerProfile_list";
+	}
+	*/
+	@GetMapping("freelancerProfile_list")
+	public ModelAndView ProfileList(PagingVO vo
+						, @RequestParam(value="nowPage", required=false)String nowPage
+						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+		int total = service.countProfileList();
+			if(nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "4";
+			}else if(nowPage == null) {
+				nowPage="1";
+			}else if(cntPerPage ==null) {
+				cntPerPage="4";
+			}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));	
+		   
+		List<FreeLancer> profile_list = service.selectPageList(vo);
+		ModelAndView mv = new ModelAndView("profile/freelancerProfile_list");
+		mv.addObject("paging", vo);
+		mv.addObject("profile_list", profile_list);
+
+		return mv;
+	}
+
+	
+	//프로필 컨텐츠//
+	@GetMapping("freelancerProfile_content") 
 	public ModelAndView ProFileContent(@RequestParam long PRO_NUM) {
 		List<FreeLancer> content = service.selectProfileContent(PRO_NUM);
 		List<FreeLancerProfile> content2 = service.selectProfileContent2(PRO_NUM);	
@@ -95,9 +140,9 @@ public class FreeLancerProfileController {
 		return "profile/payments";
 	}
 
-	@RequestMapping("employer-list-right")	//관심있는프로젝트
-	public String employer_list_right() { 
-		return "profile/employer-list-right";
+	@RequestMapping("freelancerList")	//관심있는프로젝트
+	public String FreelancerList() { 
+		return "profile/freelancerList";
 	}
 
 }

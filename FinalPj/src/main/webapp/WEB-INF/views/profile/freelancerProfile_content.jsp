@@ -292,7 +292,7 @@
 							</div>
 							<div class="card-footer" align="right">
 							
-								<a href="mydash_change" class="btn btn-secondary icons">수정하기</a>
+								<a href="freelancerMyprofile_change" class="btn btn-secondary icons">수정하기</a>
 								
 								<a href='freelancerProfile_delete?PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								

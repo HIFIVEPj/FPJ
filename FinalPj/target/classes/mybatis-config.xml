@@ -11,6 +11,8 @@
    	   <typeAlias alias="FreeLancerProfilefile" type="fp.freelancerprofile.domain.FreeLancerProfileFile"/>
    	   <typeAlias alias="FreeLancerProfileListVO" type="fp.freelancerprofile.domain.FreeLancerProfileListVO"/>
 
+  	   <typeAlias alias="PagingVO" type="fp.freelancerprofile.domain.PagingVO"/>
+
  	   <typeAlias alias="Type" type="fp.freelancerprofile.domain.Type"/>
   	   <typeAlias alias="KeyWord" type="fp.freelancerprofile.domain.KeyWord"/>
  	   <typeAlias alias="Project" type="fp.freelancerprofile.domain.Project"/>

@@ -60,7 +60,7 @@
 		</collection>	
 		</resultMap>
 		
-		<!-- 오류원인 -->
+
 		  <resultMap type="type" id="find_pro_sub">
 		  	<id property="type_num" column="type_num"/>
 			<result property="type_name" column="type_name"/>
@@ -100,13 +100,43 @@
  	<!-- 프리랜서 프로필 리스트 select -->
    <select id="selectProfileList"  resultMap="FreeLancerResult">
       <![CDATA[
-		select *
+		select MEM_EMAIL, fp.PROFILE_SUB, fp.PROFILE_DATE, ffile.PROFILE_OFNAME
 			from FREELANCER f
 				inner join FREELANCER_PROFILE fp
 				on f.FREE_CODE = fp.FREE_CODE 
 					inner join FREELANCER_PROFILEFILE ffile
-					on f.FREE_CODE = ffile.FREE_CODE 
+					on f.FREE_CODE = ffile.FREE_CODE
       ]]>
+   </select>
+   <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
+    <select id="countProfileList" resultType="int">
+   		select count(*) from FREELANCER
+    </select>
+   <!-- 리스트 페이징 (페이징 처리 후 게시글 조회 ) -->
+   <select id="selectPageList" parameterType="PagingVO" resultMap="FreeLancerResult">
+  <!--  	select * from 
+   			(select ROWNUM RN, PAGING.*
+   				from(select *
+			from FREELANCER f
+				inner join FREELANCER_PROFILE fp
+				on f.FREE_CODE = fp.FREE_CODE 
+					inner join FREELANCER_PROFILEFILE ffile
+					on f.FREE_CODE = ffile.FREE_CODE ) PAGING
+   				where ROWNUM between #{start} and #{end})-->
+   				
+   				
+   		<![CDATA[		 	
+   		select f.rnum, f.MEM_EMAIL, f.PROFILE_SUB, f.PROFILE_DATE, f.PROFILE_OFNAME, f.PRO_NUM from
+			(select rownum rnum, free.MEM_EMAIL, free.PROFILE_SUB, free.PROFILE_DATE, free.PROFILE_OFNAME, free.PRO_NUM from
+				(select MEM_EMAIL, fp.PROFILE_SUB, fp.PROFILE_DATE, ffile.PROFILE_OFNAME, fp.PRO_NUM 
+							from FREELANCER f
+								inner join FREELANCER_PROFILE fp
+								on f.FREE_CODE = fp.FREE_CODE 
+									inner join FREELANCER_PROFILEFILE ffile
+									on f.FREE_CODE = ffile.FREE_CODE) free
+										where rownum <= #{end}) f
+										where f.rnum>= #{start}	
+   				]]>
    </select>
    
      <!-- 프리랜서 프로필 컨텐츠 1-->

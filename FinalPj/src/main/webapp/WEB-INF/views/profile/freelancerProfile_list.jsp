@@ -6,13 +6,15 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!-- checkbox_all jQuery -->
   <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- 체크박스 -->
     <script>
       $( document ).ready( function() {
         $( '.check-all' ).click( function() {
           $( '.ab' ).prop( 'checked', this.checked );
-        } );
+        } );f
       } );
     </script>
+
 <!--/header-->
 
 		<!--Breadcrumb-->
@@ -59,6 +61,7 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash.html">회원정보</a></li>
 												<li><a class="slide-item " href="profilelist">프로필</a></li>
+											
 											</ul>
 										</li>
 										<li class="slide">
@@ -227,7 +230,7 @@
 															<span class="custom-control-label"> </span>
 														</label>
 													</td>
-															
+													
 													<c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">	
 														<td><a href='freelancerProfile_content?PRO_NUM=${profile.pro_num}'class="btn-link">${profile.profile_sub}</a></td>
 													</c:forEach>
@@ -242,7 +245,7 @@
 													<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td> 
 													</c:forEach>
 												</tr>
-												
+											
 											</c:forEach>		
 										<!-- 				<tr>
 													<td scope="row">
@@ -256,10 +259,9 @@
 													<td>$230,540</td>
 													<td><a href="#"><i class="fa fa-save"></i>개발.java</a></td>		 
 												</tr>								-->					
-									
+										
 									</table>
 								</div>
-
 
 							</div>
 							</div>
@@ -269,12 +271,47 @@
 								<div class="card-footer" align="right">
 								<a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>	
 								
-								<a href='freelancerProfile_del?PRO_NUM=' class="btn btn-secondary icons" >삭제</a>
-										
-											
+								<a href='freelancerProfile_del?PRO_NUM=' class="btn btn-secondary icons" >삭제</a>		
 								</div>
+    				<div class="center-block text-center">
+                           <ul class="pagination mb-0">			
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
+                     
+                           <c:if test="${paging.nowPage != 1} ">           
+                           <!--이전 페이지 이동 -->
+							<li class="page-item">
+								<a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
+								<i class="fa fa-angle-left"></i></a>
+							</li>				
+                           </c:if>
+                           <!--페이지번호 -->
+             
+ <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+                              <c:choose>
+                                 <c:when test="${p == paging.nowPage}">
+                                    <li class='page-item active'><a class="page-link"  >${p}</a></li>
+                                 </c:when>
+                                 <c:when test = "${p != paging.nowPage }">
+                                    <li class="page-item"><a class="page-link"  href="freelancerProfile_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+                                 </c:when>
+                              </c:choose>
+                           </c:forEach>
+                              <c:if test ="${paging.nowPage != paging.lastPage}">
+                                 <li class="page-item">
+									<a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+								 </li>  
+								<li class="page-item">
+									<a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
+								</li>
+                              </c:if>
+                            </li>
+                           </ul>
+                           </div>
+                           </ul>
+                           </div>
+                             										            
+<!--  
 										<li class="page-item">
 											<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
 										</li>
@@ -304,8 +341,10 @@
 										<li class="page-item">
 											<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
 										</li>
-									</ul>
+-->
 								</div>
+                        </div>
+
 								<!-- pagination-wrapper -->
 							</div>
 							<!-- section-wrapper -->
