@@ -9,8 +9,22 @@
 		<result property="dice" column="EMAIL_AUTH" />
 	</resultMap>
 	
-	<select id="selectMemList" resultType="Member">
-  		SELECT MEM_EMAIL,MEM_PWD FROM MEMBER order by SEQ 
+	 <resultMap id="MemberMap" type="Member">	 	
+	 	<id property="email" column="MEM_EMAIL"/>		
+		<result property="pwd" column="MEM_PWD"/>		
+		<result property="class_num" column="CLASS_NUM"/>
+		<result property="enabled" column="ENABLED"/>		
+		<collection property="authList" resultMap="authMap">
+		</collection>
+	</resultMap>
+	
+	<resultMap id="authMap" type="MemberAuth" >
+		<result property="email" column="MEM_EMAIL" />
+		<result property="auth" column="MEM_AUTH" />		
+	</resultMap>
+	
+	<select id="selectMemList" resultMap="MemberMap">
+  		SELECT m.MEM_EMAIL, m.MEM_PWD, m.ENABLED, a.MEM_AUTH FROM MEMBER m LEFT OUTER JOIN MEMBER_AUTH a on m.MEM_EMAIL=a.MEM_EMAIL WHERE m.MEM_EMAIL= #{email} 
 	</select>
 	
 	<select id="selectEmailAuth" resultType="EmailAuth" parameterType="String" resultMap="EMAIL_AUTHENTICATION">
@@ -18,7 +32,7 @@
 	</select>
 
 	<insert id="insertMem" parameterType="Member">
-		insert into MEMBER(MEM_EMAIL, MEM_PWD, CLASS_NUM, MEM_STATUS) values(#{email}, #{pwd}, #{class_num}, #{status})
+		insert into MEMBER(MEM_EMAIL, MEM_PWD, CLASS_NUM) values(#{email}, #{pwd}, #{class_num})
 	</insert>
 
 	<insert id="insertAuth" parameterType="Map">

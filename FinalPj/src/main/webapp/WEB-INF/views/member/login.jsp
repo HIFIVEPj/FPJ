@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -45,6 +47,7 @@
 											<div class="card-header">
 												<h3 class="card-title">Login to your Account</h3>
 											</div>
+											
 											<div class="card-body">
 												<div class="text-center">
 													<div class="btn-group btn-block mt-2 mb-2">
@@ -68,14 +71,21 @@
 													</div>
 												</div>
 												<hr class="divider">
+												<form class="form-group" action='<c:url value="/login_check"/>' method="post">
 												<div class="form-group">
-													<label class="form-label text-dark">Email address</label>
-													<input type="email" class="form-control" placeholder="Enter email">
+													<label class="form-label text-dark">Email</label>
+													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요">
 												</div>
 												<div class="form-group">
-													<label class="form-label text-dark">Password</label>
-													<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+													<label class="form-label text-dark">비밀번호</label>
+													<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password">
 												</div>
+												
+												<c:if test="${param.err == true}">
+												<p style="color: red">에러났다 확인바람확인바람.</p>
+												</c:if>											
+
+												
 												<div class="form-group">
 													<label class="custom-control custom-checkbox">
 														<a href="forgot-pwd.html" class="float-right small text-dark mt-1 font-12" class="color-hover-sign">비밀번호 찾기</a>
@@ -84,13 +94,16 @@
 													</label>
 												</div>
 												<div class="form-footer mt-2">
-													<a href="index.html" class="btn btn-primary btn-block">SignIn</a>
+													<!-- <a href="index.html" class="btn btn-primary btn-block">SignIn</a> -->													
+													<input type="submit" class="btn btn-primary btn-block" value="로그인">
+													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
 												</div>
 												<div class="text-center  mt-3 text-dark">
-													<span class="font-12">아직 멤버가 아니십니까?</span> <a href="register.html" class="color-hover-sign">SignUp</a>
+													<span class="font-12">아직 멤버가 아니십니까?</span> <a href="register" class="color-hover-sign">SignUp</a>
 												</div>
-
-											</div>
+											</form>
+											</div>											
 										</div>
 									</div>
 									<div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">

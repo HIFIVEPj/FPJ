@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fp.member.domain.EmailAuth;
@@ -18,10 +19,11 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	/*
 	@Override
-	public List<Member> listM() {
-		return memberMapper.selectMemList();
-	}
+	public Member listM(String email) {
+		return memberMapper.selectMemList(email);
+	} */
 	@Override
 	public List<EmailAuth> listA(String email) {		
 		return memberMapper.selectEmailAuth(email);
@@ -29,6 +31,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void insertM(Member member) {
+		BCryptPasswordEncoder passwodrdEncoder =new BCryptPasswordEncoder();
+		member.setPwd(passwodrdEncoder.encode(member.getPwd()));
 		memberMapper.insertMem(member);
 
 	}

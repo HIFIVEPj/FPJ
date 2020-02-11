@@ -7,6 +7,7 @@
    <typeAliases>   
    	   <typeAlias alias="Member" type="fp.member.domain.Member"/>
    	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
+   	    <typeAlias alias="MemberAuth" type="fp.member.domain.MemberAuth"/>
    	   
     </typeAliases>
 

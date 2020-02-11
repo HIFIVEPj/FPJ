@@ -8,7 +8,7 @@ $('#emailBtn').click(function(){
 	injeung.style.display = "block";
 	$.ajax({
 		url:"auth.do",
-		type:"post",
+		type:"get",
 		data:{"email": email},
 		dataType:"json",
 		success:function(data){

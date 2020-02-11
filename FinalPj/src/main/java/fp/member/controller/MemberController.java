@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +37,9 @@ import org.springframework.web.servlet.ModelAndView;
 import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.service.MemberService;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Controller    //컨트롤러 빈 선언
 public class MemberController {
 	
@@ -45,15 +49,17 @@ public class MemberController {
     @Autowired
     MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
     
+    @Autowired
+    BCryptPasswordEncoder pwdEncoder;
     
 	@RequestMapping("/register")
 	public String reg() {
 		return "member/register";
 	}    
     // mailSending 코드
-        @RequestMapping(value = "auth.do" , method=RequestMethod.POST )
+        @GetMapping(value = "auth.do" )
         public ModelAndView mailSending(HttpServletRequest request,String email,HttpServletResponse response_email) throws IOException {
-        	
+        	log.info("#email: " + email);
             Random r = new Random();
             int dice = r.nextInt(4589362) + 49311; //이메일로 받는 인증코드 부분 (난수)
           
@@ -95,7 +101,7 @@ public class MemberController {
                 System.out.println(e);
             }       
             ModelAndView mv = new ModelAndView();    //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을 지정한다.
-            mv.setViewName("member/register");  //뷰의이름                   
+            mv.setViewName("member/join_confirm");  //뷰의이름                   
             mv.addObject("email", email);
             
             
@@ -152,6 +158,8 @@ public class MemberController {
     
     @RequestMapping(value = "signup.do" , method=RequestMethod.POST )
     public String signUp (Member member) throws IOException {
+    	member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
+    	//dto.setPassword(BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt()));
     	memberservice.insertM(member);
     	System.out.println("member: " + member);
     	return "index";

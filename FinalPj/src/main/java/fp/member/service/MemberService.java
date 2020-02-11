@@ -10,7 +10,7 @@ import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 
 public interface MemberService {
-	List<Member> listM();
+	//Member listM(String email);
 	List<EmailAuth> listA(String email);
 	void insertM(Member member);	
 	void insertAuth(Map map);
