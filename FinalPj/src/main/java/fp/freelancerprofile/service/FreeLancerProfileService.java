@@ -3,6 +3,7 @@ package fp.freelancerprofile.service;
 import java.util.*;
 
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.Transactional;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
@@ -29,8 +30,9 @@ public interface FreeLancerProfileService {
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
 
-	
-	void listDelete(long PRO_NUM);
-	
+	//삭제//
+	public void listDelete(long PRO_NUM);
+
+		   
 
 }

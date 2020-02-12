@@ -98,19 +98,19 @@
 	
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
  	<!-- 프리랜서 프로필 리스트 select -->
-   <select id="selectProfileList"  resultMap="FreeLancerResult">
-      <![CDATA[
-		select MEM_EMAIL, fp.PROFILE_SUB, fp.PROFILE_DATE, ffile.PROFILE_OFNAME
+   <!--<select id="selectProfileList"  resultMap="FreeLancerResult">
+ 	     <![CDATA[
+	select MEM_EMAIL, fp.PROFILE_SUB, fp.PROFILE_DATE, ffile.PROFILE_OFNAME
 			from FREELANCER f
 				inner join FREELANCER_PROFILE fp
 				on f.FREE_CODE = fp.FREE_CODE 
 					inner join FREELANCER_PROFILEFILE ffile
 					on f.FREE_CODE = ffile.FREE_CODE
       ]]>
-   </select>
+   </select>-->
    <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
     <select id="countProfileList" resultType="int">
-   		select count(*) from FREELANCER
+   		select count(*) from FreeLancer_Profile
     </select>
    <!-- 리스트 페이징 (페이징 처리 후 게시글 조회 ) -->
    <select id="selectPageList" parameterType="PagingVO" resultMap="FreeLancerResult">
@@ -124,11 +124,15 @@
 					on f.FREE_CODE = ffile.FREE_CODE ) PAGING
    				where ROWNUM between #{start} and #{end})-->
    				
-   				
+      	<!-- Freelancer 테이블 조인필요없음				
    		<![CDATA[		 	
-   		select f.rnum, f.MEM_EMAIL, f.PROFILE_SUB, f.PROFILE_DATE, f.PROFILE_OFNAME, f.PRO_NUM from
-			(select rownum rnum, free.MEM_EMAIL, free.PROFILE_SUB, free.PROFILE_DATE, free.PROFILE_OFNAME, free.PRO_NUM from
-				(select MEM_EMAIL, fp.PROFILE_SUB, fp.PROFILE_DATE, ffile.PROFILE_OFNAME, fp.PRO_NUM 
+	select f.rnum, f.MEM_EMAIL, 
+   			   f.PROFILE_SUB, f.PROFILE_DATE, 
+   			   f.PROFILE_OFNAME, f.PRO_NUM from
+			(select rownum rnum, free.MEM_EMAIL, free.PROFILE_SUB, 
+			        free.PROFILE_DATE, free.PROFILE_OFNAME, free.PRO_NUM from
+				(select MEM_EMAIL, fp.PROFILE_SUB, fp.PROFILE_DATE, 
+				        ffile.PROFILE_OFNAME, fp.PRO_NUM 
 							from FREELANCER f
 								inner join FREELANCER_PROFILE fp
 								on f.FREE_CODE = fp.FREE_CODE 
@@ -136,28 +140,53 @@
 									on f.FREE_CODE = ffile.FREE_CODE) free
 										where rownum <= #{end}) f
 										where f.rnum>= #{start}	
-   				]]>
+   				]]>-->
+   	<![CDATA[	
+   		select f.rnum, f.MEM_EMAIL, 
+   			   f.PROFILE_SUB, f.PROFILE_DATE, 
+   			   f.PROFILE_OFNAME, f.PRO_NUM from
+			(select rownum rnum, free.MEM_EMAIL, free.PROFILE_SUB, 
+			        free.PROFILE_DATE, free.PROFILE_OFNAME, free.PRO_NUM from
+				(select fp.MEM_EMAIL
+					, fp.PROFILE_SUB
+					, fp.PROFILE_DATE
+					, ffile.PROFILE_OFNAME
+					, fp.PRO_NUM 
+					from FREELANCER_PROFILE fp
+						inner join FREELANCER_PROFILEFILE ffile
+							on fp.PRO_NUM = ffile.PRO_NUM ) free
+								where rownum <=  #{end}) f
+								 where f.rnum>= #{start}	
+	 ]]>
    </select>
    
      <!-- 프리랜서 프로필 컨텐츠 1-->
      <select id="selectProfileContent"  parameterType="long" resultMap="FreeLancerResult">
 
       <![CDATA[
-		select fp.PRO_NUM, FREE_NAME, PRO_WORKPLACE, MEM_EMAIL, FREE_TEL,
-		PRO_CV, PROFILE_DATE, PROFILE_OFNAME 
-			from FREELANCER f 
-				inner join FREELANCER_PROFILE fp
-				on f.FREE_CODE = fp.FREE_CODE
-					inner join FREELANCER_PROFILEFILE ffile
-					on f.FREE_CODE = ffile.FREE_CODE
-					where fp.PRO_NUM=#{PRO_NUM}
+		select fp.PRO_NUM
+		         , FREE_NAME
+		         , PRO_WORKPLACE
+		         , fp.MEM_EMAIL
+		         , FREE_TEL
+		         , PRO_CV
+		         , PROFILE_DATE
+		         , PROFILE_OFNAME 
+			from FREELANCER_PROFILE fp
+				inner join FREELANCER f 
+					on fp.FREE_CODE = f.FREE_CODE
+						inner join FREELANCER_PROFILEFILE ffile
+						on f.FREE_CODE = ffile.FREE_CODE
+						where fp.PRO_NUM=#{PRO_NUM}
       ]]>
    </select>
    <!-- 프리랜서 프로필 컨텐츠 2-->
         <select id="selectProfileContent2"  parameterType="long" resultMap="find_pro_sub">
 
       <![CDATA[
-		select p.PJ_SUB, t.TYPE_NAME, fp.PRO_NUM
+		select p.PJ_SUB
+			   , t.TYPE_NAME
+			   , fp.PRO_NUM
 			from Type t
 				full outer join FREELANCER_PROFILE fp
 				on t.TYPE_NUM = fp.TYPE_NUM 
@@ -180,14 +209,26 @@
    </select>
    
 
+	<!-- 삭제1 (프로필파일 데이터 삭제) -->
    <delete id="listDelete" parameterType="long">
-   <![CDATA[
-	   	delete from FREELANCER_PROFILEFILE
+    <!-- <![CDATA[
+	 	delete from FREELANCER_PROFILEFILE 
 			where FREE_CODE in (select FREE_CODE  from FREELANCER_PROFILE where FREE_CODE in 
 					(select FREE_CODE from FREELANCER where FREELANCER.FREE_CODE=FREELANCER_PROFILEFILE.FREE_CODE)
-				and FREELANCER_PROFILE.FREE_CODE=FREELANCER_PROFILE.FREE_CODE) and PRO_NUM=#{PRO_NUM}
+				and FREELANCER_PROFILE.FREE_CODE=FREELANCER_PROFILE.FREE_CODE) and PRO_NUM=#{PRO_NUM}		
+   ]]> -->
+   <![CDATA[
+	 	delete from FREELANCER_PROFILEFILE where PRO_NUM=#{PRO_NUM}
+   ]]>
+	</delete>
+	
+	<!-- 삭제2 (프로필파일 데이터 삭제) -->
+	
+	<delete id="listDelete2" parameterType="long">
+	<![CDATA[
+	 	delete from FREELANCER_PROFILE where PRO_NUM=#{PRO_NUM}
    ]]>
 	</delete>
 
- 
+
 </mapper>

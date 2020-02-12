@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
@@ -37,8 +38,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<FreeLancer> selectPageList(PagingVO vo){
 		return mapper.selectPageList(vo);
 	}
-	//////
-	
+	//프로필컨텐츠//
 	@Override
 	public List<FreeLancer> selectProfileContent(long PRO_NUM){
 		return mapper.selectProfileContent(PRO_NUM);
@@ -52,11 +52,13 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.selectProfileContent3(PRO_NUM);
 	}
 
+	//삭제//
+	@Transactional
 	@Override
-	public void listDelete(long PRO_NUM) {
-		mapper.listDelete(PRO_NUM);
+	   public void listDelete(long PRO_NUM) {
+		   mapper.listDelete(PRO_NUM);
+		   mapper. listDelete2(PRO_NUM);
 	}
-
 	/*		
 	@Override
 	public void listDeleteAll(PRO_NUM) {

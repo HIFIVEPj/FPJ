@@ -18,7 +18,6 @@
  	   <typeAlias alias="Project" type="fp.freelancerprofile.domain.Project"/>
    </typeAliases>
 
-
    <mappers>
    	 <!--  <mapper resource="fp/freelancerprofile/mapper/FreeLancerProfileMapper.xml"/>   -->
    </mappers>

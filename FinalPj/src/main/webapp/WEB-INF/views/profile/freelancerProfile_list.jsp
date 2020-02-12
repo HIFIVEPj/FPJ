@@ -60,7 +60,7 @@
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash.html">회원정보</a></li>
-												<li><a class="slide-item " href="profilelist">프로필</a></li>
+												<li><a class="slide-item " href="freelancerProfile_list">프로필</a></li>
 											
 											</ul>
 										</li>
@@ -198,7 +198,7 @@
 										<!--  <ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">등록</a></li> 
 											<li><a href="mydash" class="btn btn-secondary icons">등록</a></li>
-											<li><a href="#" class="btn btn-secondary icons">삭제</a></li>
+											<li><a href="#" class="btn btn-secondry icons">삭제</a></li>
 										</ul> -->
 									</div>  
 									
@@ -211,7 +211,7 @@
 										<thead>
 											<tr class="text-center">												
 													<th> <label class="custom-control custom-checkbox ">
-															<input type="checkbox" class="custom-control-input check-all" name="checAll" value="">
+															<input type="checkbox" class="custom-control-input check-all" name="checkAll">
 															<span class="custom-control-label check-all"></span>
 														</label>  </th>											
 													<th >프로필명</th>
@@ -226,7 +226,7 @@
 												<tr>
 													<td scope="row">
 														<label class="custom-control custom-checkbox ">
-															<input type="checkbox" class="custom-control-input ab" name="checkbox">
+															<input type="checkbox" class="custom-control-input ab" name="checkbox" value="{profile_list_pro_num}">
 															<span class="custom-control-label"> </span>
 														</label>
 													</td>
@@ -266,25 +266,33 @@
 							</div>
 							</div>
 								<thead>
- 			
+ 		
 							<div class="card">	 	
 								<div class="card-footer" align="right">
 								<a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>	
 								
-								<a href='freelancerProfile_del?PRO_NUM=' class="btn btn-secondary icons" >삭제</a>		
+								<a href='freelancerProfile_delete2?PRO_NUM=${delnum}' class="btn btn-secondary icons" >삭제</a>		
 								</div>
     				<div class="center-block text-center">
                            <ul class="pagination mb-0">			
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
                      
-                           <c:if test="${paging.nowPage != 1} ">           
+                          <c:if test ="${paging.nowPage != paging.startPage}">
+                          
                            <!--이전 페이지 이동 -->
+                            <li class="page-item">
+								<a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
+								<i class="fa fa-angle-double-left"></i></a>
+							
+							</li>	
 							<li class="page-item">
 								<a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
 								<i class="fa fa-angle-left"></i></a>
-							</li>				
-                           </c:if>
+							</li>	
+										
+                  			</c:if>
+                            
                            <!--페이지번호 -->
              
  <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
@@ -297,6 +305,7 @@
                                  </c:when>
                               </c:choose>
                            </c:forEach>
+                           
                               <c:if test ="${paging.nowPage != paging.lastPage}">
                                  <li class="page-item">
 									<a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
@@ -305,6 +314,7 @@
 									<a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
 								</li>
                               </c:if>
+                              
                             </li>
                            </ul>
                            </div>
