@@ -42,7 +42,7 @@
 		<link href="../css/dashboard.css" rel="stylesheet" />
 
 		<!-- Font-awesome  Css -->
-		<link rel="stylesheet" href="..//fonts/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
 
 		<!--Horizontal Menu-->
 		<link href="../plugins/Horizontal2/Horizontal-menu/dropdown-effects/fade-down.css" rel="stylesheet" />

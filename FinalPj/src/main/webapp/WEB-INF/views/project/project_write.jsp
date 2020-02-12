@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -25,8 +25,8 @@
 		
 		<div class="col-md-6 mx-auto">
 			<div class="container">
-			 <form method='post' name='edit_list' action="project_update">
-				<div class="row ">
+			 <form method='post' name='pj_input' action="project_write">
+				<div class="row">
 					<div class="col-lg-12 col-md-12 col-md-12">
 						<div class="card mb-lg-0">
 							<div class="card-header ">
@@ -34,35 +34,26 @@
 							</div>
 							<div class="card-body">
 							
-							<div class="col-md-12">
+														<div class="col-md-12">
 								<div class="row">									
 									<div class="form-group col-md-6">		
 									<label class="form-label text-dark"><b>근무형태</b></label>
 
 									<div class="d-md-flex ad-post-details">
 										<label class="custom-control custom-radio mb-2 mr-4">
-											<input type="radio" class="custom-control-input" name="pj_place" value="0" 
-											<c:if test="${projectCont.pj_place eq 0}">
-														checked
-													</c:if>>
+											<input type="radio" class="custom-control-input" name="pj_place" value="0" checked>
 											<span class="custom-control-label text-muted">비상주</span>
 										</label>
 										<div>
 										<label class="custom-control custom-radio  mb-2  mr-4"> 
-											<input type="radio" class="custom-control-input" name="pj_place" value="1" 
-											<c:if test="${projectCont.pj_place eq 1}">
-														checked
-													</c:if>>
+											<input type="radio" class="custom-control-input" name="pj_place" value="1" >
 											<span class="custom-control-label text-muted">상주</span>
 										
 										</label>	
 										</div>
 										<div>
 										<label class="custom-control custom-radio  mb-2  mr-4">
-											<input type="radio" class="custom-control-input" name="pj_place" value="2"
-											<c:if test="${projectCont.pj_place eq 2}">
-														checked
-													</c:if>>
+											<input type="radio" class="custom-control-input" name="pj_place" value="2">
 											<span class="custom-control-label text-muted">반상주</span>
 											
 										</label>					
@@ -73,28 +64,19 @@
 									<label class="form-label text-dark"><b>경력</b></label>
 									<div class="d-md-flex ad-post-details">
 										<label class="custom-control custom-radio mb-2 mr-4">
-											<input type="radio" class="custom-control-input" name="pj_fgrade" value="0" 
-											<c:if test="${projectCont.pj_fgrade eq 1}">
-														checked
-													</c:if>>
+											<input type="radio" class="custom-control-input" name="pj_fgrade" value="0" checked>
 											<span class="custom-control-label text-muted">초급</span>
 										</label>
 										<div>
 											<label class="custom-control custom-radio  mb-2  mr-4"> 
-												<input type="radio" class="custom-control-input" name="pj_fgrade" value="1" 
-												<c:if test="${projectCont.pj_fgrade eq 2}">
-															checked
-														</c:if>>
+												<input type="radio" class="custom-control-input" name="pj_fgrade" value="1">
 												<span class="custom-control-label text-muted">중급</span>
 											
 											</label>	
 										</div>
 										<div>
 											<label class="custom-control custom-radio  mb-2  mr-4">
-												<input type="radio" class="custom-control-input" name="pj_fgrade" value="2"
-												<c:if test="${projectCont.pj_fgrade eq 3}">
-															checked
-														</c:if>>
+												<input type="radio" class="custom-control-input" name="pj_fgrade" value="2">
 												<span class="custom-control-label text-muted">고급</span>
 											</label>					
 										</div>
@@ -114,21 +96,22 @@
 									<div class="tabs-menus">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
-										 	<li><a href="#tab1" <c:if test="${projectCont.type_num eq 1}"> class ="active" </c:if> data-toggle="tab">개발</a>
-											<li><a href="#tab2" <c:if test="${projectCont.type_num eq 2}"> class ="active" </c:if> data-toggle="tab">퍼블리셔</a></li>
-											<li><a href="#tab3" <c:if test="${projectCont.type_num eq 3}"> class ="active" </c:if> data-toggle="tab">디자인</a></li>
-											<li><a href="#tab4"  <c:if test="${projectCont.type_num eq 4}"> class ="active" </c:if> data-toggle="tab">기획</a></li>
-											<li><a href="#tab5" <c:if test="${projectCont.type_num eq 5}"> class ="active" </c:if> data-toggle="tab">기타</a></li>											
+										 	<li><a href="#tab1" class ="active" value="1" data-toggle="tab" onclick="javascript:type_set();">개발</a>
+											<li><a href="#tab2"  name="type" value="2" data-toggle="tab"onclick="javascript:type_set();" >퍼블리셔</a></li>
+											<li><a href="#tab3"  name="type" value="3" data-toggle="tab" onclick="javascript:type_set();">디자인</a></li>
+											<li><a href="#tab4" name="type"  value="4" data-toggle="tab" onclick="javascript:type_set();">기획</a></li>
+											<li><a href="#tab5"  name="type" value="5" data-toggle="tab" onclick="javascript:type_set();">기타</a></li>										
 										</ul>
+										<input type="hidden" name="type_num" value="" id="type_num" />	
 									</div>
 									<label class="form-label"><b>키워드</b></label>
 									
 									<div class="tab-content">		
 										<!-- tab 개발 시작   -->	
-										<div class="tab-pane tab-pane <c:if test="${projectCont.type_num eq 1}"> active </c:if> table-responsive border-top userprof-tab" id="tab1">
+										<div class="tab-pane tab-pane active table-responsive border-top userprof-tab" id="tab1">
 											<!-- 개발자 시작  -->											
 											<div class="col-sm-6 col-md-12">									
-											<div class="form-group ">
+											<div class="form-group">
 										
 											<!------------------------ java 시작----------------------------------------------------------->										
 												<br/>
@@ -139,47 +122,32 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="key_num" value="1" 
-													<c:if test="${projectCont.keyname().contains('Front-end')}">
-														checked
-													</c:if>>
+													<input type="checkbox" class="custom-control-input" name="key_num" value="1">
 													<span class="custom-control-label">Front-end </span>
 													</label>
 												</div>
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="2"
-														<c:if test="${projectCont.keyname().contains('Back-end')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="2">
 														<span class="custom-control-label">Back-end</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="3"
-														<c:if test="${projectCont.keyname().contains('Java')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="3">
 														<span class="custom-control-label">Java</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="4"
-														<c:if test="${projectCont.keyname().contains('Spring')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="4">
 														<span class="custom-control-label">Spring</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="5"
-														<c:if test="${projectCont.keyname().contains('Xplatform')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="5">
 														<span class="custom-control-label">Xplatform</span>
 													</label>
 												</div>
@@ -190,47 +158,32 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="6"
-														<c:if test="${projectCont.keyname().contains('Miplantform')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="6">
 														<span class="custom-control-label">Miplantform</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="7"
-														<c:if test="${projectCont.keyname().contains('Nexacro')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="7">
 														<span class="custom-control-label">Nexacro</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="8"
-														<c:if test="${projectCont.keyname().contains('Proframe')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="8">
 														<span class="custom-control-label">Proframe</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="9"
-														<c:if test="${projectCont.keyname().contains('Maven')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="9">
 														<span class="custom-control-label">Maven</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="10"
-															<c:if test="${projectCont.keyname().contains('Jenkins')}">
-														checked
-													</c:if>>
+														<input type="checkbox" class="custom-control-input" name="key_num" value="10">
 														<span class="custom-control-label">Jenkins</span>
 													</label>
 												</div>	
@@ -242,19 +195,13 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="11"
-															<c:if test="${projectCont.keyname().contains('Sencha')}">
-																checked
-															</c:if>>
+															<input type="checkbox" class="custom-control-input" name="key_num" value="11">
 															<span class="custom-control-label">Sencha</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="12"
-															<c:if test="${projectCont.keyname().contains('Trustform')}">
-																checked
-															</c:if>>
+															<input type="checkbox" class="custom-control-input" name="key_num" value="12">
 															<span class="custom-control-label">Trustform</span>
 														</label>
 														</div>
@@ -670,7 +617,7 @@
 								<!-- tab 개발 끝   -->
 								
 								<!-- tab 퍼블리셔 시작   -->	
-									<div class="tab-pane <c:if test="${projectCont.type_num eq 2}"> active </c:if> table-responsive border-top userprof-tab" id="tab2">
+									<div class="tab-pane table-responsive border-top userprof-tab" id="tab2">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -791,7 +738,7 @@
 									</div> <!-- tab 퍼블리셔 끝   -->	
 									
 							<!-- tab 디자인 시작   -->	
-									<div class="tab-pane <c:if test="${projectCont.type_num eq 3}"> active </c:if> table-responsive border-top userprof-tab" id="tab3">
+									<div class="tab-pane table-responsive border-top userprof-tab" id="tab3">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -888,7 +835,7 @@
 										<!-- 디자인 끝  -->				
 									</div> <!-- tab 디자인 끝   -->
 								<!-- tab 기획 시작   -->	
-									<div class="tab-pane <c:if test="${projectCont.type_num eq 4}"> active </c:if> table-responsive border-top userprof-tab" id="tab4">
+									<div class="tab-pane table-responsive border-top userprof-tab" id="tab4">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -1060,7 +1007,7 @@
 										<!-- 기획 끝  -->				
 									</div> <!-- tab 기획 끝   -->	
 							<!-- tab 기타 시작   -->	
-									<div class="tab-pane <c:if test="${projectCont.type_num eq 5}"> active </c:if> table-responsive border-top userprof-tab" id="tab5">
+									<div class="tab-pane table-responsive border-top userprof-tab" id="tab5">
 																					
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -1171,20 +1118,21 @@
 									<HR />									
 								</div>		
 							</div>
-										<div class="col-sm-6 col-md-12">
+									
+											<div class="col-sm-6 col-md-12">
 												<div class="row">
 												<div class="col-md-6">
 													<div class="form-group ">
 														<label class="form-label"><b>급여</b></label>
-														<input type="text" class="form-control" value="${projectCont.pj_pay}" placeholder="전체 기간 동안 지급하는 총 금액을 입력하세요">
+														<input type="text" class="form-control" placeholder="전체 기간 동안 지급하는 총 금액을 입력하세요" name="pj_pay">
 													</div>	
 												</div>
 											<div class="col-sm-6 col-md-6">
-												<div class="form-group ">
-													<label class="form-label"><b>홈페이지</b></label>
-													<input type="text" class="form-control" value="${projectCont.pj_homepage}">
-												</div>	
-											</div>
+											<div class="form-group ">
+												<label class="form-label"><b>홈페이지</b></label>
+												<input type="text" class="form-control" name="pj_homepage">
+											</div>	
+										</div>
 										</div>
 									</div>
 								<div class="col-sm-6 col-md-12">
@@ -1192,7 +1140,7 @@
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>프로젝트 기간</b></label>
-												<input type="text" class="form-control" value="${projectCont.pj_term}"  placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3">
+												<input type="text" class="form-control" placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3" name="pj_term">
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
@@ -1202,7 +1150,7 @@
 													<div class="input-group-text">
 														<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 													</div>
-													<input class="form-control fc-datepicker" type="text" value="${projectCont.pj_ddate}">
+													<input class="form-control fc-datepicker" placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
 												</div>
 											</div>
 										</div>
@@ -1213,13 +1161,13 @@
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>모집인원</b></label>
-												<input type="number" class="form-control" value="${projectCont.pj_recnum}">
+												<input type="number" class="form-control" name="pj_recnum">
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>총 투입인원</b></label>
-												<input type="number" class="form-control" value="${projectCont.pj_totalp}">
+												<input type="number" class="form-control" name="pj_totalp">
 											</div>	
 										</div>
 									</div>
@@ -1229,53 +1177,31 @@
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
 												<label classㅇ="form-label text-dark"><b>제목</b></label>
-												<input type="text" class="form-control" value="${projectCont.pj_sub}">
+												<input type="text" class="form-control" name="pj_sub">
 											</div>
-							
+											</div>
+											</div>
 								<div class="col-sm-6 col-md-12">
 									<div class="row">
 									<div class="col-sm-12 col-md-12">
 									<div class="form-group">
-                                		 <label class="form-label"></label>
-                                 		<div name="content" class="summernote" class="summernote">${projectCont.pj_cont}</div>
-                             		 </div>
-                              <script>
-                                 $(document).ready(function() { $('#summernote').summernote();
-                                 });
-                                 
-                                 $('.summernote').summernote({
-                                	 placeholder: '내용을 입력해 주세요.',
-                                    height: 300,
-                                    minHeight: null,
-                                    maxHeight: null,
-                                    lang : 'ko-KR',
-                                    onImageUpload: function(files, editor, welEditable) {
-                                    sendFile(files[0], editor, welEditable);
-                                    }
-                                 });
-                              </script>
-								  </div>
-								</div>
-								</div>
-
-								<div class="form-group">
-									<div class="custom-file">
-										<input type="file" class="custom-file-input" name="example-file-input-custom">
-										<label class="custom-file-label"></label>
-									</div>
-								</div>
-										<div class="p-2 border mb-4">
-									<div class="upload-images d-flex">
-										<div>
-											<img src="../images/products/h1.jpg" alt="img" class="w73 h73 border p-0">
-										</div>
-										<div class="ml-3 mt-2">
-											<h6 class="mb-0 mt-3 font-weight-bold">h1.jpg</h6>
-											<small>4.5kb</small>
-										</div>
-										<div class="float-right ml-auto">
-											<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5" ><i class="fa fa-trash-o"></i></a>
-										</div>
+	                                 <label class="form-label"></label>
+	                                 <textarea class="summernote" class="summernote" name="pj_cont"></textarea>
+	                              </div>
+	                              <script>
+	                                 $('.summernote').summernote({
+	                      
+	                                	placeholder: '내용을 입력해 주세요.',
+	                                    height: 300,
+	                                    minHeight: null,
+	                                    maxHeight: null,
+	                                    lang : 'ko-KR',
+	                                    onImageUpload: function(files, editor, welEditable) {
+	                                    sendFile(files[0], editor, welEditable);
+	                                    }
+	                                 });
+	                              </script>
+	                              </div>
 									</div>
 								</div>
 								
@@ -1286,63 +1212,64 @@
 										<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
-											<label class="form-label "><b>회사명</b></label>
-											<input type="text" class="form-control" >
+											<label class="form-label mb-0"><b>회사명</b></label>
+											<input type="text" class="form-control" name="cor_name" value="coporation에서 회사 이름가져오기"> <!--로그인 구현후에 readonly해야됨 -->
 										</div>
 									</div>
-									<div class="col-sm-6 col-md-6 ">
+									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
-											<label class="form-label "><b>담당자명</b></label>
-											<input type="text" class="form-control" >
+											<label class="form-label"><b>담당자명</b></label>
+											<input type="text" class="form-control" name="cor_mname" value="coporation에서 매니저 이름가져오기"> <!--로그인 구현후에 readonly해야됨 -->
 										</div>	
 									</div>
 								</div>
-										<div class="row">
+								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>이메일</b></label>
-											<input type="email" class="form-control">
+											<input type="email" class="form-control" value="이메일 가져오기" name="mem_email"><!--로그인 구현후에 readonly해야됨 -->
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>연락처</b></label>
-											<input type="number" class="form-control">
+											<input type="text" class="form-control" value="corporation에서 연락처 가져오기" name="cor_tel">
 										</div>	
 									</div>
 								</div>	
 								<!-- 주소 api부분 -->
 								<div class="row">
 									<div class="col-sm-3 col-md-3">
-									<label class="form-label"><b>주소 </b></label>
+									<label class="form-label"><b>주소</b></label>
 										<div class="form-group">
-											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode">
+											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode" value="corporation에서 우편번호가져오기">
 										</div>
 									</div>
 									<div class="col-sm-4 col-md-4">
 									<label class="form-label"><br/></label>
 										<div class="form-group">
-											<input type="button" class="btn btn-primary"  onclick="execDaumPostcode()" value="우편번호 찾기">	
+											<input type="button" class="btn btn-primary" onclick="execDaumPostcode()" value="우편번호 찾기">
 										</div>
+											
 										</div>
 									</div>
 									<div class="row">
 									<div class="col-sm-12 col-md-7">
 										<div class="form-group">
-											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc"><br>
+											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc" value="corporation에서  주소가져오기"><br>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-5">
 										<div class="form-group">	
-											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pj_detailloc">
+											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pj_detailloc" value="corporation에서  상세주소가져오기">
 										</div>
 									</div>
 									</div>
 									<div id="map" style="width:100%;height:350px;"></div>
 									
 								<!-- 좌표 부분 1차 시작 , (좌표를 위한 추가)지도 쓸일 없으면 안해도 됨 -->
-									<input type="hidden" id="address_x"  class="form-control" placeholder="x좌표" name="pj_loc_x"> 
-									<input type="hidden" id="address_y"  class="form-control" placeholder="y좌표" name="pj_loc_y">
+									<input type="hidden" id="address_x"  class="form-control" placeholder="x좌표" name="pj_loc_x" value="corporation에서  x좌표 가져오기"> 
+									<input type="hidden" id="address_y"  class="form-control" placeholder="y좌표" name="pj_loc_y" value="corporation에서  y좌표 가져오기">
 								<!-- 좌표를 위한 카카오 key 추가,지도 쓸 일 없으면 지워도 됨 -->
 									<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=50e87f1e8bcbb6ac445c4b87fdbcf76e&libraries=services"></script>
 								<!-- 좌표부분 1차 끝 // -->
@@ -1351,7 +1278,7 @@
 									<script>
 								    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 								        mapOption = {
-								            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+								            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표 
 								            level: 5 // 지도의 확대 레벨
 								        };
 
@@ -1436,11 +1363,12 @@
 									        }).open();
 									    }
 									</script>
+									<input type="hidden" value ="1" name ="cor_code"/>
 								<!-- 주소 api끝 -->
 								<div class="card-footer ">
 									<div class ="row">
 									<div class="mx-auto">
-										<a href="content.do" class="btn btn-primary">수정</a> 
+										<a href="javascript:void(0)" onclick="javascript:check();" class="btn btn-primary">완료</a> 
 											&nbsp;&nbsp;&nbsp;
 										<a href="project_list" class="btn btn-danger">취소</a>
 									</div>
@@ -1455,6 +1383,39 @@
 				
 		</section>
 		<!--/Add posts-section-->
+		<script>
+		
+		//function type_set(){
+		//	var type_num ="1";
+		//	$(document).on(".active",function(){
+		//		type_num= $(this).attr('value');
+		//		document.getElementById('type_num').value= type_num;
+		//		alert(type_num);
+		//	 });
+		//}
+		
+	function check(){
+		var type_num = $('.active').attr('value');
+		document.getElementById('type_num').value = type_num;
+		var key_num = new Array();
+		var key_cnt = 0;
+		//for(var i=0; i<key_num_size; i++){
+		 $('input:checkbox[name="key_num"]').each(function() {
+			if(this.checked){
+				key_num[key_cnt] = this.value;
+				key_cnt++;
+			}
+		 });
+	
+		// alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
+		// alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
+		 //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
+		// alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
+		// alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+		 pj_input.submit();
+		}
+	//});
+</script>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

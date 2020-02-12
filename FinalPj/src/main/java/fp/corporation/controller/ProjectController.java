@@ -1,14 +1,23 @@
 package fp.corporation.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.Corporation;
+import fp.corporation.domain.Keyword;
 import fp.corporation.domain.Project;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
@@ -73,5 +82,30 @@ public class ProjectController {
 	
 	}
 	
+	@GetMapping("project_write")
+	public String project_write() {
+		return "project/project_write";
+	}
+	
+	@PostMapping("project_write")
+	public String project_write(Project project, HttpServletRequest request) {
+		//String type_num = request.getParameter("type_num");
+		
+		String[] ListKeyNum = request.getParameterValues("key_num");
+		ArrayList<String> arraykeynum = new ArrayList<String>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		for(int i = 0; i<ListKeyNum.length; i++) {
+			arraykeynum.add(ListKeyNum[i]);
+		}
+		map.put("key_num", arraykeynum);
+		
+		service.insertpj(project);
+		service.insertPjpkeyword(map);
+		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
+		//log.info("@#!#@$  project: " +project);
+		log.info("@#!#@$  map: "+ map);
+		return "redirect:project_list";
+	}
 	
 }

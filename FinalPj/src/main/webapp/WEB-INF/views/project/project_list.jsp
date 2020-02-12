@@ -471,8 +471,9 @@
 												<option value="5">Price:Hight-to-Low</option>
 											</select>
 										</div>
+										
 									</div>
-									<div sytle="margin-left:0px;"><a href="write.do" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									<div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
 									
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab-11">
@@ -522,7 +523,7 @@
 																		</c:choose>
 																	</c:if>
 																</c:forEach>
-																/ ${dto.pj_name}<br/><br/>
+																/ ${dto.corporation.cor_name}<br/><br/>
 																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
 																<div style="width:85%">
 																<span style="width:10px">
@@ -589,7 +590,7 @@
 														</div>
 														<div class="card-body ">
 															<div class="item-card9">
-																${dto.pj_loc} / 사용언어 / ${dto.pj_name}<br/><br/>
+																${dto.pj_loc} / 사용언어 /${dto.corporation.cor_name}<br/><br/>
 																<a href="content.do" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">${dto.pj_sub}</h4></a>
 																<small class="">${dto.pj_cont}</small><br/><br/>
 																<p class="mb-0 leading-tight mt-1">급여 : ${dto.pj_pay}</p>

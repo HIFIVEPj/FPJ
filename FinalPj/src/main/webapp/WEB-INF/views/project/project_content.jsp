@@ -6,8 +6,8 @@
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-<!--/header-->
 
+<!--/header-->
 		<!--Sliders Section-->
 		<div>
 			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
@@ -53,7 +53,7 @@
 				<div class="row">
 					<div class="col-xl-8 col-lg-12 col-md-12">
 						<!--Jobs Description-->
-						<div class="card overflow-hidden">
+						<div class="card overflow-hidden" id="printarea" >
 					<!-- <div class="ribbon ribbon-top-right text-danger"><span class="bg-danger">긴급</span></div> -->
 							<div class="card-body">
 								<div class="item-det">
@@ -62,7 +62,7 @@
 									</div>
 									<div class="d-flex">
 										<ul class="mb-0 d-flex">
-											<li class="mr-5"><i class="si si-briefcase text-muted mr-1"></i> ${projectCont.pj_name}</li>
+											<li class="mr-5"><i class="si si-briefcase text-muted mr-1"></i> ${corInfo.cor_name}</li>
 											<li class="mr-5"><i class="si si-location-pin text-muted mr-1"></i> 서울 금천구</li>
 											<li class="mr-5"><i class="si si-calendar text-muted mr-1"></i> 
 												<fmt:parseDate value="${projectCont.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
@@ -174,23 +174,23 @@
 									</div>
 								</div>
 								</div>
-								
 								    <div class="card-header">
                                  	<h4 class="mb-0 font-weight-semibold"><strong>내용</strong></h4>       
   	                                  </div>
 								  <div style="width:95%; margin:0 auto;"><P style="padding-top:15px;">${projectCont.pj_cont}</P></div>
 								
 							</div>
-							<span class="card-footer icons"  >
+							<span class="card-footer icons" >
 									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply"> 지원하기</a>
 									<a href="#" class="btn btn-primary icons"><i class="si si-share mr-1"></i> 공유하기</a>
-									<a href="#" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
-
-							<span style="float:right;" >
-									<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
-									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1"">삭제</button>
+									<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
+							
+								<span style="float:right;" >
+										<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
+										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1"">삭제</button>
+								</span>
 							</span>
-					</div>
+						</div>
 			<!--Jobs Description-->
 					<h3 class="mb-5 mt-4">비슷한 프로젝트</h3>
 						<!--Related Posts-->
@@ -440,7 +440,7 @@
 									
 									<div class="">
 										<h4 class="mt-3 mb-1 font-weight-semibold">
-										<strong>${projectCont.pj_name}</strong></h4>
+										<strong>${corInfo.cor_name}</strong></h4>
 										<br/>
 										<span class="text-gray"> ${corInfo.cor_type}</span><br/>
 										<!--  <span class="text-gray"> IT솔루션 채널영업 및 영업관리 </span><br/>-->
@@ -740,7 +740,7 @@
                
                <div class="modal-footer">
                
-                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num= ${projectCont.pj_num}">네</a> 
+                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num=${projectCont.pj_num}">네</a> 
                   
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
                </div>
@@ -750,5 +750,26 @@
       <!-- /small Modal -->
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
 <!--/footer-->
+
+<!-- 프린트 특정영역 인쇄  
+<script type="text/javascript">
+
+var initBody;
+
+function beforePrint() {
+ printareas = document.body.innerHTML;
+ document.body.innerHTML = printarea.innerHTML;
+}
+function afterPrint() { 
+ document.body.innerHTML = printareas;
+}
+function printArea() {
+ window.print();
+}
+
+window.onbeforeprint = beforePrint;
+window.onafterprint = afterPrint;
+
+</script>
+-->

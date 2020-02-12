@@ -7,8 +7,7 @@
 
 		<script>
 			function check(){
-				$("#typeSelect").val();
-				alert($("#typeSelect").val());
+				//$("#typeSelect").val();
 				input_cor.submit();
 			}
 		</script>

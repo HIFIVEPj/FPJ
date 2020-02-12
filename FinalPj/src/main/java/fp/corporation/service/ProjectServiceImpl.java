@@ -1,6 +1,7 @@
 package fp.corporation.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,5 +48,11 @@ public class ProjectServiceImpl implements ProjectService {
 		mapper.deletePj(pj_num);
 		
 	}
-
+	@Override
+	public void insertpj(Project project) {
+		mapper.insertpj(project);
+	};
+	public void insertPjpkeyword(Map<String, Object> map) {
+		mapper.insertPjpkeyword(map);
+	}
 }

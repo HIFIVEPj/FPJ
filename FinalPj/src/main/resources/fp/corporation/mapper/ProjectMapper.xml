@@ -20,7 +20,6 @@
 		<result property="pj_totalp" column ="pj_totalp" />
 		<result property="pj_status" column ="pj_status" />
 		<result property="pj_place" column ="pj_place" />
-		<result property="pj_name" column ="pj_name" />
 		<result property="pj_homepage" column ="pj_homepage" />
 		<result property="pj_paycate" column ="pj_paycate" />
 		<result property="pj_pcnt" column ="pj_pcnt" />
@@ -36,17 +35,22 @@
 			<id property="type_num" column ="type_num" />
 			<result property="type_name" column ="type_name" />
 		</association>
+		<association javaType="Corporation" property="corporation" column="cor_code">
+			<id property ="cor_code" column="cor_code"/>
+			<result property ="cor_name" column="cor_name"/>
+		</association>
 		<collection ofType="Keyword" property="keyword" column="key_num" javaType="ArrayList">
 			<id property="key_num" column ="kw_key_num" />
 			<id property="key_name" column ="kw_key_name" />
 		</collection>
-		
+
 		<collection ofType="Project" property="pjKeywords" column="key_num" javaType="ArrayList">
 			<id property="key_num" column ="key_num" />
 			<id property="key_name" column ="key_num" />
 		</collection>
 	</resultMap>
-		<resultMap type="Corporation" id="corporationMap">
+	
+	<resultMap type="Corporation" id="corporationMap">
 		<id property ="cor_code" column="cor_code"/>
 		<result property ="mem_email" column="mem_email"/>
 		<result property ="cor_reg" column="cor_reg"/>
@@ -72,10 +76,10 @@
 		
 	</resultMap>
 	
-	<select id="list" parameterType="ProjectVo" resultType="project"> 
+	<select id="list" parameterType="ProjectVo" resultMap="projectMap"> 
 		 <![CDATA[
 			select * from (select ROWNUM rnum , aa.* from 
-			(select * from PROJECT order by PJ_NUM desc)aa) where rnum>#{start} and rnum<=#{end}
+			(select * from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code order by PJ_NUM desc)aa) where rnum>#{start} and rnum<=#{end}
 	    ]]>
 	</select>
 	
@@ -103,13 +107,18 @@
 		select count(PJ_NUM) from PROJECT
 	</select>
 	
-	<!-- 
-	<insert id="insert" parameterType="Project" >
+	
+	<insert id="insertpj" parameterType="Project" >
 		insert into PROJECT
-		(PJ_NUM, TYPE_NUM, CATE_NUM, COR_NUM, PJ_SUB, PJ_DDATE, PJ_PAY, PJ_CONT, PJ_TERM, PJ_LOC, PJ_RECNUM, PJ_APPNUM, PJ_TOTALP, PJ_STATUS, PJ_PLACE, PJ_NAME, PJ_HOMEPAGE, PJ_PAYCATE, PJ_PCNT, PJ_VCNT, OPTION1, OPTION2, OPTION3)
-		 values(pj_num.nextval, #{type_num}, #{cate_num},#{subject},#{content},sysdate)		
+		(PJ_NUM, TYPE_NUM, COR_CODE, PJ_SUB, PJ_CONT, PJ_DDATE, PJ_PAY, PJ_TERM, PJ_LOC, PJ_RECNUM, PJ_APPNUM, PJ_RDATE, PJ_TOTALP, PJ_PLACE, PJ_HOMEPAGE, PJ_FGRADE)
+		 values(PJ_NUM_SEQ.nextval, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},#{pj_term},#{pj_loc},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})		
 	</insert>
-	 -->
+
+	 <insert id="insertPjpkeyword" parameterType="map">
+	 	 <foreach collection ="key_num" item="key_num" separator="," open="(" close=")">
+		 insert into PjPickKeyword values (pjp_keynum.nextval, #{key_num}, pj_num.currentval)
+		 </foreach>
+	 </insert>
 
 	<delete id="deletePj" parameterType="long">
 		delete from PROJECT where PJ_NUM=#{pj_num}
