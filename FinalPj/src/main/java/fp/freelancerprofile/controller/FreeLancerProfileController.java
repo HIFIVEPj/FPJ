@@ -37,11 +37,11 @@ public class FreeLancerProfileController {
 	public String freelancerMyprofile_write() { 
 		return "profile/freelancerMyprofile_write";
 	}
-	
+/*	
 	@RequestMapping("freelancerProfile_content") //프로필내용
 	public String Profile_content() { 
 		return "profile/freelancerProfile_content";
-	}
+	}*/
 	/*
 	//프로필 리스트 **
 	@RequestMapping("freelancerProfile_list") 
@@ -145,9 +145,5 @@ public class FreeLancerProfileController {
 		return "profile/payments";
 	}
 
-	@RequestMapping("freelancerList")	//관심있는프로젝트
-	public String FreelancerList() { 
-		return "profile/freelancerList";
-	}
 
 }

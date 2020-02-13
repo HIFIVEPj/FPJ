@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fp.freelancerprofile.domain.FreeLancer;
-import fp.freelancerprofile.domain.FreeLancerProfileListVO;
-import fp.freelancerprofile.domain.PagingVO;
-import fp.freelancerprofile.service.FreeLancerProfileService;
+import fp.freelancerlist.domain.List_FreeLancer;
+import fp.freelancerlist.domain.List_PagingVO;
+import fp.freelancerlist.service.FreeLancerListService;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -22,18 +22,19 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Log4j
-public class ProfileTests {
+public class ListServiceTest {
 
 	@Setter(onMethod_ = {@Autowired})
-	private FreeLancerProfileService service;
-	/*	
+	private FreeLancerListService service;
+		
 	@Test
-	public void testList() {
-		List<FreeLancer> selectProfileList = service.selectProfileList();
-		log.info("list(1): " + selectProfileList);
+	public void selectPageList() {
+		List_PagingVO vo = new List_PagingVO(5,1,5);
+		List<List_FreeLancer> SelectList = service.SelectList(vo);
+		log.info("###list(1)### : " + SelectList);
+
 	}
-*/
-/*	
+/*	s
 	@Test
 	public void testInsert() {
 			Address address = new Address(-1, "이순신", "광주", null);

@@ -15,7 +15,7 @@ import fp.freelancerprofile.domain.Type;
 
 public interface FreeLancerProfileMapper {
 	
-	List<FreeLancer> selectProfileList();
+	//List<FreeLancer> selectProfileList();
 	
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);

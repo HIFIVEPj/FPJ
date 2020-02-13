@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    <typeAliases>
+   	<!-- 프리랜서 프로필 리스트 -->
 	   <typeAlias alias="FreeLancer" type="fp.freelancerprofile.domain.FreeLancer"/>
 	   <typeAlias alias="Type" type="fp.freelancerprofile.domain.Type"/>
 	   <typeAlias alias="FreePickKeyWord" type="fp.freelancerprofile.domain.FreePickKeyWord"/>
@@ -16,10 +17,20 @@
  	   <typeAlias alias="Type" type="fp.freelancerprofile.domain.Type"/>
   	   <typeAlias alias="KeyWord" type="fp.freelancerprofile.domain.KeyWord"/>
  	   <typeAlias alias="Project" type="fp.freelancerprofile.domain.Project"/>
+ 	   
+ 	 <!-- 프리랜서 리스트 페이지 -->
+ 	   <typeAlias alias="FreeLancerListVO" type="fp.freelancerlist.domain.FreeLancerListVO"/>
+	   <typeAlias alias="List_FreeLancer" type="fp.freelancerlist.domain.List_FreeLancer"/>
+	   <typeAlias alias="List_FreeLancerProfile" type="fp.freelancerlist.domain.List_FreeLancerProfile"/>
+	   <typeAlias alias="List_FreeLancerReview" type="fp.freelancerlist.domain.List_FreeLancerReview"/>
+	   <typeAlias alias="List_PagingVO" type="fp.freelancerlist.domain.List_PagingVO"/>
+	   <typeAlias alias="List_Project" type="fp.freelancerlist.domain.List_Project"/>
+	   <typeAlias alias="List_Type" type="fp.freelancerlist.domain.List_Type"/>  
    </typeAliases>
 
    <mappers>
    	 <!--  <mapper resource="fp/freelancerprofile/mapper/FreeLancerProfileMapper.xml"/>   -->
+   	 <mapper resource="fp/freelancerlist/mapper/FreeLancerListMapper.xml"/> 
    </mappers>
 
 </configuration>

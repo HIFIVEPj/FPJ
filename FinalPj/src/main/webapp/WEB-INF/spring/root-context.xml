@@ -33,6 +33,10 @@
 	<context:component-scan base-package="fp.freelancerprofile.service"/>	
 	<context:component-scan base-package="fp.freelancerprofile.mapper"/>
 	<mybatis-spring:scan base-package="fp.freelancerprofile.mapper"/>
+	
+	<context:component-scan base-package="fp.freelancerlist.service"/>	
+	<context:component-scan base-package="fp.freelancerlist.mapper"/>
+	<mybatis-spring:scan base-package="fp.freelancerlist.mapper"/>
 
 	
 	<context:annotation-config></context:annotation-config>

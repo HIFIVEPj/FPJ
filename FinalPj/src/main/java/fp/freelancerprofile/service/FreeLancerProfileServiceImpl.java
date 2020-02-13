@@ -25,10 +25,10 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Autowired
 	private FreeLancerProfileMapper mapper;
 
-	@Override
+/*	@Override
 	public List<FreeLancer> selectProfileList(){
 		return mapper.selectProfileList();
-	}
+	}*/
 	///리스트페이지 페이징///
 	@Override
 	public int countProfileList() {

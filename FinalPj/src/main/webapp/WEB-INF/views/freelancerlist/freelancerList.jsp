@@ -80,7 +80,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Users List</h4>
+					<h4 class="page-title">Freelancer List</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
 						<li class="breadcrumb-item"><a href="#">Pages</a></li>
@@ -404,30 +404,43 @@
 							</div>
 						</div>
 						<!--Add lists-->
+					<c:forEach var="list" items="${freelancerList}" varStatus="status">
+					<div> <!-- div 추가 빼면 겹침.(c:forEach때문) -->
 						<div class="card overflow-hidden">
 							<!-- <div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div> -->
+							
+						
 							<div class="card-header pt-5 pb-5">
 								<div  class="d-flex">
 							<!-- 		<span class="avatar avatar-md  d-block brround cover-image mr-4" data-image-src="../images/faces/male/25.jpg"></span>  -->
 									<a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i></a>
+									
 									<div>
-										<a href="employer" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;김○○</a><br>
-										<a href="employer"><small>&nbsp;&nbsp;경력 3년</small></a>&nbsp;|
-										<a href="employer.html"><small>&nbsp;&nbsp;${slelctFreelancerList }</small></a>
+										
+										<a href="employer" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;${list.free_name}</a><br>
+									<c:forEach var="exp" items="${list.list_freelancerprofile}" varStatus="status">
+										<a href="employer"><small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small></a>&nbsp;|
+									</c:forEach>
+										<a href="employer.html"><small>&nbsp;&nbsp;</small></a>
+							
 									</div>
+								
 								</div>
 								<div class="item-card2-icons">
 									<a href="" class="item-card9-icons1 wishlist active"><i  class="fa fa fa-heart-o"></i></a>
 								</div>
 							</div>
+							
+							
 						<div class="card-body pb-2 hide-details">
 								<ul class="usertab-list mb-0">
 									<h4>수행한 프로젝트</h4>								
-									<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold"></span> Cafe24 app Clic, 비디오 모니터링 시스템, WITbiz IT 여성 채용사이트, 게임물 모니터링 시스템, 아이코다 웹사이트 리뉴얼<br/>									
-									
+									<c:forEach var="project" items="${list.list_project}" varStatus="status">
+									<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold"></span> ${project.pj_sub}<br/>									
+									</c:forEach>
 								</ul>								
 							</div> 
-
+					
 							<div class="card-footer">
 								<div class="row">
 									<div class="product-filter-desc col">										
@@ -439,20 +452,24 @@
 		                                          <i class="fa fa-star text-warning"> </i>
 		                                          <i class="fa fa-star-half-o text-warning"> </i>
 		                                          <i class="fa fa-star-o text-warning"> </i>
-		                                       </span>	3.5 &nbsp;&nbsp;&nbsp;									
-												
-												<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>23,030,042 views</a>
-												
+		                                          <c:forEach  var="star" items="${list.list_review}" varStatus="status">	
+		                                       </span>&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;							
+												 </c:forEach>
+												 <c:forEach  var="views" items="${list.list_freelancerprofile}" varStatus="status">	
+												<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>${views.pro_vcnt}&nbsp;&nbsp;views</a>
+												 </c:forEach>
 										</div>
 									</div>
 									<div class="col col-auto dams" >
 										<a class="icons" href="employer"><i class="fa fa-angle-double-right text-muted mr-1"></i>더보기</a>
 									</div>
+										
 								</div>
-							</div>				
-							
+							</div>		
+							</div>		
+							</c:forEach>
 						</div>
- 
+					
 						<!--Add lists-->
 	<!-- 					<div class="card overflow-hidden">
 							 <div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div> 
@@ -502,9 +519,62 @@
 							
 						</div>-->
 
+						<!-- 페이징 -->
+						
+							<div class="center-block text-center" style=align:'center'>
+                           <ul class="pagination mb-0">			
+								<div class="card-body" style="margin:0 auto; align:center;">
+									<ul class="pagination mg-b-0 page-0 ">
+                     
+                          <c:if test ="${paging.nowPage != paging.startPage}">
+                          
+                           <!--이전 페이지 이동 -->
+                            <li class="page-item">
+								<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
+								<i class="fa fa-angle-double-left"></i></a>
+							
+							</li>	
+							<li class="page-item">
+								<a aria-label="Next" class="page-link" href="freelancerList?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
+								<i class="fa fa-angle-left"></i></a>
+							</li>	
+										
+                  			</c:if>
+                            
+                           <!--페이지번호 -->
+             
+ <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+                              <c:choose>
+                                 <c:when test="${p == paging.nowPage}">
+                                    <li class='page-item active'><a class="page-link"  >${p}</a></li>
+                                 </c:when>
+                                 <c:when test = "${p != paging.nowPage }">
+                                    <li class="page-item"><a class="page-link"  href="freelancerList?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+                                 </c:when>
+                              </c:choose>
+                           </c:forEach>
+                           
+                              <c:if test ="${paging.nowPage != paging.lastPage}">
+                                 <li class="page-item">
+									<a aria-label="Next" class="page-link" href="freelancerList?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+								 </li>  
+								<li class="page-item">
+									<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
+								</li>
+                              </c:if>
+                              
+                            </li>
+                           </ul>
+                           </div>
+                           </ul>
+                           </div>
+						
+						
+							
+						
+						
 
-
-						<div class="card-body" style="margin:0 auto; align:center;">
+				<!--		<div class="card-body" style="margin:0 auto; align:center;">
 							<ul class="pagination mg-b-0 page-0 ">
 								<li class="page-item">
 									<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
@@ -530,13 +600,13 @@
 								</li>
 						
 								<li class="page-item">
-									<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+									<a aria-label="Next" class="page-link" href="freelancerList?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
 								</li>
 								<li class="page-item">
-									<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
+									<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
 								</li>
 							</ul>
-						</div>
+						</div>-->
 						<!--Add lists-->
 					</div>
 				</div>
