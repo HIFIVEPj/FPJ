@@ -503,14 +503,14 @@
 									<script>
 									var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 									    mapOption = { 
-									        center: new kakao.maps.LatLng('${corInfo.cor_addr_y}', '${corInfo.cor_addr_x}'), // 지도의 중심좌표
+									        center: new kakao.maps.LatLng('${projectCont.pj_loc_y}', '${projectCont.pj_loc_x}'), // 지도의 중심좌표
 									        level: 3 // 지도의 확대 레벨
 									    };
 									
 									var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 									
 									// 마커가 표시될 위치입니다 
-									var markerPosition  = new kakao.maps.LatLng('${corInfo.cor_addr_y}', '${corInfo.cor_addr_x}'); 
+									var markerPosition  = new kakao.maps.LatLng('${projectCont.pj_loc_y}', '${projectCont.pj_loc_x}'); 
 									
 									// 마커를 생성합니다
 									var marker = new kakao.maps.Marker({

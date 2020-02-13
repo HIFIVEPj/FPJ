@@ -1,6 +1,7 @@
 package fp.corporation.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,12 +66,6 @@ public class ProjectController {
 		return mv;
 	}
 	
-	@RequestMapping("project_delete")
-	public String project_delete(@RequestParam long pj_num) {
-		service.deletePj(pj_num);
-		return "redirect:project_list";
-	}
-	
 	@GetMapping("project_update")
 	public ModelAndView project_update(@RequestParam long pj_num) {
 		Project project = service.showContent(pj_num);
@@ -79,7 +74,37 @@ public class ProjectController {
 		mv.addObject("projectCont", project);
 		mv.addObject("corInfo", corInfo);
 		return mv;
-	
+		
+	}
+	@PostMapping("project_update")
+	public String project_update(Project project, HttpServletRequest request) {
+		
+		String[] ListPjp_keynum = request.getParameterValues("pjp_keynum");
+		ArrayList<Long> arrayPjp_keynum = new ArrayList<Long>();
+		long[] ListIntPjp_keynum = Arrays.stream(ListPjp_keynum).mapToLong(Long::parseLong).toArray();
+		for(int i = 0; i<ListIntPjp_keynum.length; i++) {
+			arrayPjp_keynum.add(ListIntPjp_keynum[i]);
+		}
+		
+		String[] ListKeyNum = request.getParameterValues("key_num");
+		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
+		int[] ListIntKeyNum = Arrays.stream(ListKeyNum).mapToInt(Integer::parseInt).toArray();
+		for(int i = 0; i<ListIntKeyNum.length; i++) {
+			arraykeynum.add(ListIntKeyNum[i]);
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pjp_keynum", arrayPjp_keynum);
+		map.put("key_num", arraykeynum);
+		//map.put("pj_num",project.getPj_num());
+		log.info("@#!#@$  map: "+ map);
+		service.updatePj(project);
+		service.updateKeyword(map);
+		//log.info("!@#$# arraykeynum: "+ arraykeynum);
+		//log.info("@#!#@$  project: " +project);
+		//log.info("@#!#@$  pj_num: "+project.getPj_num());
+		
+		return "redirect:project_list";
 	}
 	
 	@GetMapping("project_write")
@@ -92,11 +117,13 @@ public class ProjectController {
 		//String type_num = request.getParameter("type_num");
 		
 		String[] ListKeyNum = request.getParameterValues("key_num");
-		ArrayList<String> arraykeynum = new ArrayList<String>();
+		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
 		
+		int[] ListIntKeyNum = Arrays.stream(ListKeyNum).mapToInt(Integer::parseInt).toArray();
+				
 		Map<String, Object> map = new HashMap<String, Object>();
-		for(int i = 0; i<ListKeyNum.length; i++) {
-			arraykeynum.add(ListKeyNum[i]);
+		for(int i = 0; i<ListIntKeyNum.length; i++) {
+			arraykeynum.add(ListIntKeyNum[i]);
 		}
 		map.put("key_num", arraykeynum);
 		
@@ -104,7 +131,13 @@ public class ProjectController {
 		service.insertPjpkeyword(map);
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
-		log.info("@#!#@$  map: "+ map);
+		//log.info("@#!#@$  map: "+ map);
+		return "redirect:project_list";
+	}
+	
+	@RequestMapping("project_delete")
+	public String project_delete(@RequestParam long pj_num) {
+		service.deletePj(pj_num);
 		return "redirect:project_list";
 	}
 	

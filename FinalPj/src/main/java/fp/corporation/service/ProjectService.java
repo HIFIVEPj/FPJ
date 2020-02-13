@@ -1,5 +1,6 @@
 package fp.corporation.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,4 +20,7 @@ public interface ProjectService {
 	
 	void insertpj(Project project);
 	void insertPjpkeyword(Map<String, Object> map);
+	
+	void updatePj(Project project);
+	void updateKeyword(Map<String, Object> map);
 }

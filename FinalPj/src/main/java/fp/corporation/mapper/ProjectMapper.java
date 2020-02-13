@@ -1,5 +1,6 @@
 package fp.corporation.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +19,7 @@ public interface ProjectMapper {
 	
 	void insertpj(Project project);
 	void insertPjpkeyword(Map<String, Object> map);
+	
+	void updatePj(Project project);
+	void updateKeyword(Map<String, Object> map);
 }

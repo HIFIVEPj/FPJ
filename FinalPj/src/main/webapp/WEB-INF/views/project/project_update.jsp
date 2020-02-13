@@ -25,7 +25,7 @@
 		
 		<div class="col-md-6 mx-auto">
 			<div class="container">
-			 <form method='post' name='edit_list' action="project_update">
+			 <form method='post' name='edit_list' action="project_update?pj_num=${projectCont.pj_num}">
 				<div class="row ">
 					<div class="col-lg-12 col-md-12 col-md-12">
 						<div class="card mb-lg-0">
@@ -114,14 +114,22 @@
 									<div class="tabs-menus">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
-										 	<li><a href="#tab1" <c:if test="${projectCont.type_num eq 1}"> class ="active" </c:if> data-toggle="tab">개발</a>
-											<li><a href="#tab2" <c:if test="${projectCont.type_num eq 2}"> class ="active" </c:if> data-toggle="tab">퍼블리셔</a></li>
-											<li><a href="#tab3" <c:if test="${projectCont.type_num eq 3}"> class ="active" </c:if> data-toggle="tab">디자인</a></li>
-											<li><a href="#tab4"  <c:if test="${projectCont.type_num eq 4}"> class ="active" </c:if> data-toggle="tab">기획</a></li>
-											<li><a href="#tab5" <c:if test="${projectCont.type_num eq 5}"> class ="active" </c:if> data-toggle="tab">기타</a></li>											
+										 	<li><a href="#tab1" <c:if test="${projectCont.type_num eq 1}"> class ="active" </c:if> data-toggle="tab" name="type" value="1">개발</a></li>
+											<li><a href="#tab2" <c:if test="${projectCont.type_num eq 2}"> class ="active" </c:if> data-toggle="tab"  name="type" value="2">퍼블리셔</a></li>
+											<li><a href="#tab3" <c:if test="${projectCont.type_num eq 3}"> class ="active" </c:if> data-toggle="tab" name="type" value="3">디자인</a></li>
+											<li><a href="#tab4"  <c:if test="${projectCont.type_num eq 4}"> class ="active" </c:if> data-toggle="tab" name="type" value="4">기획</a></li>
+											<li><a href="#tab5" <c:if test="${projectCont.type_num eq 5}"> class ="active" </c:if> data-toggle="tab" name="type" value="5">기타</a></li>											
 										</ul>
+										<input type="hidden" name="type_num" value="" id="type_num" />
 									</div>
 									<label class="form-label"><b>키워드</b></label>
+									<c:choose>
+										<c:when test="${projectCont.pjpickKeyword ne '[]'}">
+											<c:forEach var="i" begin="0" end="${projectCont.pjpickKeyword.size()-1}">
+												<input type="hidden" value="${projectCont.pjpickKeyword.get(i).pjp_keynum}" name = "pjp_keynum">
+											</c:forEach>
+										</c:when>
+									</c:choose>
 									
 									<div class="tab-content">		
 										<!-- tab 개발 시작   -->	
@@ -134,7 +142,8 @@
 												<br/>
 												<div class="row">									
 													<div class="col-md-2">																								
-													<label class="form-label">JAVA</label>										
+													<label class="form-label">JAVA
+													</label>										
 												</div>
 												
 												<div class="col-md-2">											
@@ -260,19 +269,28 @@
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="13">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="13"
+															<c:if test="${projectCont.keyname().contains('Tuxedo')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Tuxedo</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="14">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="14"
+															<c:if test="${projectCont.keyname().contains('Gauce')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Gauce</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="15">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="15"
+															<c:if test="${projectCont.keyname().contains('Pro*C')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Pro*C</span>
 														</label>
 													</div>
@@ -283,13 +301,19 @@
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="16">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="16"
+															<c:if test="${projectCont.keyname().contains('DecOn')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">DecOn</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="17">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="17"
+															<c:if test="${projectCont.keyname().contains('Thymeleaf')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Thymeleaf</span>
 														</label>
 													</div>
@@ -307,31 +331,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="18">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="18"
+															<c:if test="${projectCont.keyname().contains('Hybrid')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Hybrid</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="19">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="19"
+															<c:if test="${projectCont.keyname().contains('Android')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Android</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="20">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="20"
+															<c:if test="${projectCont.keyname().contains('ios(Object-C)')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">ios(Object-C)</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="21">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="21"
+															<c:if test="${projectCont.keyname().contains('ios(Swift)')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">ios(Swift)</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="22">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="22"
+															<c:if test="${projectCont.keyname().contains('WebView')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">WebView</span>
 														</label>
 													</div>
@@ -342,7 +381,10 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="23">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="23"
+															<c:if test="${projectCont.keyname().contains('IoT')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">IoT</span>
 														</label>
 													</div>	
@@ -360,31 +402,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="24">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="24"
+															<c:if test="${projectCont.keyname().contains('PHP')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">PHP</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="25">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="25"
+															<c:if test="${projectCont.keyname().contains('Laravel')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Laravel</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="26">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="26"
+															<c:if test="${projectCont.keyname().contains('Codeigniter')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Codeigniter</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="27">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="27"
+															<c:if test="${projectCont.keyname().contains('Symfony')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Symfony</span>
 														</label>
 													</div>		
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="29">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="29"
+															<c:if test="${projectCont.keyname().contains('WordPress')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">WordPress</span>
 														</label>
 													</div>
@@ -395,13 +452,19 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="30">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="30"
+															<c:if test="${projectCont.keyname().contains('ASP')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">ASP</span>
 														</label>
 													</div>	
 													<div class="col-md-4">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="28">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="28"
+															<c:if test="${projectCont.keyname().contains('ZendFramework')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">ZendFramework</span>
 														</label>
 													</div>	
@@ -419,31 +482,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="31">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="31"
+															<c:if test="${projectCont.keyname().contains('ASP.net')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">ASP.net</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="32">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="32"
+															<c:if test="${projectCont.keyname().contains('C')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">C</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="33">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="33"
+															<c:if test="${projectCont.keyname().contains('C++')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">C++</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="34">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="34"
+															<c:if test="${projectCont.keyname().contains('C#')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">C#</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="35">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="35"
+															<c:if test="${projectCont.keyname().contains('MFC')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">MFC</span>
 														</label>
 													</div>
@@ -454,19 +532,28 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="36">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="36"
+															<c:if test="${projectCont.keyname().contains('OpenGL')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">OpenGL</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="38">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="38"
+															<c:if test="${projectCont.keyname().contains('VBA')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">VBA</span>
 														</label>
 													</div>														
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="37">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="37"
+															<c:if test="${projectCont.keyname().contains('DevExpress')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">DevExpress</span>
 														</label>
 													</div>	
@@ -484,31 +571,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="39">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="39"
+															<c:if test="${projectCont.keyname().contains('node.js')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">node.js</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="40">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="40"
+															<c:if test="${projectCont.keyname().contains('AngularJS')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">AngularJS</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="41">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="41"
+															<c:if test="${projectCont.keyname().contains('React.js')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">React.js</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="42">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="42"
+															<c:if test="${projectCont.keyname().contains('Vue.js')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Vue.js</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="43">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="43"
+															<c:if test="${projectCont.keyname().contains('jQuery')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">jQuery</span>
 														</label>
 													</div>
@@ -519,7 +621,10 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="44">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="44"
+															<c:if test="${projectCont.keyname().contains('JavaScript')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">JavaScript</span>
 														</label>
 													</div>		
@@ -537,31 +642,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="45">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="45"
+															<c:if test="${projectCont.keyname().contains('Server')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Server</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="46">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="46"
+															<c:if test="${projectCont.keyname().contains('UNIX')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">UNIX</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="47">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="47"
+															<c:if test="${projectCont.keyname().contains('Embedded')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Embedded</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="48">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="48"
+															<c:if test="${projectCont.keyname().contains('Firmware')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Firmware</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="50">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="50"
+															<c:if test="${projectCont.keyname().contains('Aduino')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Aduino</span>
 														</label>
 													</div>
@@ -572,25 +692,37 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="51">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="51"
+															<c:if test="${projectCont.keyname().contains('Qt')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Qt</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="53">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="53"
+															<c:if test="${projectCont.keyname().contains('LabVIEW')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">LabVIEW</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="52">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="52"
+															<c:if test="${projectCont.keyname().contains('MetaLab')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">MetaLab</span>
 														</label>
 													</div>	
 													<div class="col-md-4">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="49">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="49"
+															<c:if test="${projectCont.keyname().contains('Machine Vision')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Machine Vision</span>
 														</label>
 													</div>																																									
@@ -609,31 +741,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="54">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="54"
+															<c:if test="${projectCont.keyname().contains('Oracle')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Oracle</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="55">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="55"
+															<c:if test="${projectCont.keyname().contains('MSSQL')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">MSSQL</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="56">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="56"
+															<c:if test="${projectCont.keyname().contains('MySQL')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">MySQL</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="57">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="57"
+															<c:if test="${projectCont.keyname().contains('MariaDB')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">MariaDB</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="58">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="58"
+															<c:if test="${projectCont.keyname().contains('MongoDB')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">MongoDB</span>
 														</label>
 													</div>
@@ -644,19 +791,28 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="60">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="60"
+															<c:if test="${projectCont.keyname().contains('CUBRID')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">CUBRID</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="61">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="61"
+															<c:if test="${projectCont.keyname().contains('Tibero')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Tibero</span>
 														</label>
 													</div>	
 													<div class="col-md-4">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="59">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="59"
+															<c:if test="${projectCont.keyname().contains('Postgresql')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Postgresql</span>
 														</label>
 													</div>																																									
@@ -683,31 +839,46 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="key_num" value="62">
+													<input type="checkbox" class="custom-control-input" name="key_num" value="62"
+													<c:if test="${projectCont.keyname().contains('HTML5')}">
+																checked
+															</c:if>>
 													<span class="custom-control-label">HTML5</span>
 													</label>
 												</div>
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="63">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="63"
+														<c:if test="${projectCont.keyname().contains('CSS')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">CSS</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="64">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="64"
+														<c:if test="${projectCont.keyname().contains('ActionScript')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">ActionScript</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="40">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="40"
+														<c:if test="${projectCont.keyname().contains('AngularJS')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">AngularJS</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="41">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="41"
+														<c:if test="${projectCont.keyname().contains('React.js')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">React.js</span>
 													</label>
 												</div>
@@ -718,32 +889,47 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="42">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="42"
+														<c:if test="${projectCont.keyname().contains('Vue.js')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">Vue.js</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="43">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="43"
+														<c:if test="${projectCont.keyname().contains('jQuery')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">jQuery</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="44">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="44"
+														<c:if test="${projectCont.keyname().contains('JavaScript')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">JavaScript</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="29">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="29"
+														<c:if test="${projectCont.keyname().contains('WordPress')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">WordPress</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="65">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="65"
+														<c:if test="${projectCont.keyname().contains('BootStrap')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">BootStrap</span>
 													</label>
 												</div>	
@@ -755,31 +941,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="66">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="66"
+															<c:if test="${projectCont.keyname().contains('Photoshop')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Photoshop</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="67">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="67"
+															<c:if test="${projectCont.keyname().contains('Flash')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Flash</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="68">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="68"
+															<c:if test="${projectCont.keyname().contains('웹접근성')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">웹접근성</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="69">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="69"
+															<c:if test="${projectCont.keyname().contains('웹표준')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">웹표준</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="70">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="70"
+															<c:if test="${projectCont.keyname().contains('Git')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">Git</span>
 														</label>
 													</div>
@@ -804,31 +1005,46 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="key_num" value="71">
+													<input type="checkbox" class="custom-control-input" name="key_num" value="71"
+													<c:if test="${projectCont.keyname().contains('웹디자인')}">
+																checked
+															</c:if>>
 													<span class="custom-control-label">웹디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="72">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="72"
+														<c:if test="${projectCont.keyname().contains('앱디자인')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">앱디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="74">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="74"
+														<c:if test="${projectCont.keyname().contains('게임디자인')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">게임디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="76">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="76"
+														<c:if test="${projectCont.keyname().contains('3D디자인')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">3D디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="77">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="77"
+														<c:if test="${projectCont.keyname().contains('그래픽디자인')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">그래픽디자인</span>
 													</label>
 												</div>
@@ -839,32 +1055,47 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="78">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="78"
+														<c:if test="${projectCont.keyname().contains('패키지디자인')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">패키지디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="79">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="79"
+														<c:if test="${projectCont.keyname().contains('아트 디렉션')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">아트 디렉션</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="80">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="80"
+														<c:if test="${projectCont.keyname().contains('애니메이션')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">애니메이션</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="81">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="81"
+														<c:if test="${projectCont.keyname().contains('로고브랜딩')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">로고브랜딩</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="75">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="75"
+														<c:if test="${projectCont.keyname().contains('판촉물디자인')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">판촉물디자인</span>
 													</label>
 												</div>	
@@ -876,7 +1107,10 @@
 													</div>	
 													<div class="col-md-6">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="73">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="73"
+															<c:if test="${projectCont.keyname().contains('출판/편집디자인')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">출판/편집디자인</span>
 														</label>
 													</div>
@@ -901,31 +1135,46 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="key_num" value="82">
+													<input type="checkbox" class="custom-control-input" name="key_num" value="82"
+													<c:if test="${projectCont.keyname().contains('PM')}">
+																checked
+															</c:if>>
 													<span class="custom-control-label">PM</span>
 													</label>
 												</div>
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="83">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="83"
+														<c:if test="${projectCont.keyname().contains('PL')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">PL</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="86">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="86"
+														<c:if test="${projectCont.keyname().contains('웹기획')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">웹기획</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="87">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="87"
+														<c:if test="${projectCont.keyname().contains('앱기획')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">앱기획</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="88">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="88"
+														<c:if test="${projectCont.keyname().contains('컨설팅')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">컨설팅</span>
 													</label>
 												</div>
@@ -936,32 +1185,47 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="89">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="89"
+														<c:if test="${projectCont.keyname().contains('제안')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">제안</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="90">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="90"
+														<c:if test="${projectCont.keyname().contains('쇼핑몰')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">쇼핑몰</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="91">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="91"
+														<c:if test="${projectCont.keyname().contains('여행사')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">여행사</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="92">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="92"
+														<c:if test="${projectCont.keyname().contains('금융')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">금융</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="checkbox" value="93">
+														<input type="checkbox" class="custom-control-input" name="checkbox" value="93"
+														<c:if test="${projectCont.keyname().contains('증권')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">증권</span>
 													</label>
 												</div>	
@@ -973,31 +1237,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="94">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="94"
+															<c:if test="${projectCont.keyname().contains('카드')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">카드</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="99">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="99"
+															<c:if test="${projectCont.keyname().contains('물류')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">물류</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="95">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="95"
+															<c:if test="${projectCont.keyname().contains('보험')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">보험</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="96">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="96"
+															<c:if test="${projectCont.keyname().contains('대학')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">대학</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="97">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="97"
+															<c:if test="${projectCont.keyname().contains('병원')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">병원</span>
 														</label>
 													</div>													
@@ -1008,31 +1287,46 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="100">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="100"
+															<c:if test="${projectCont.keyname().contains('회계')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">회계</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="101">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="101"
+															<c:if test="${projectCont.keyname().contains('제조')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">제조</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="102">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="102"
+															<c:if test="${projectCont.keyname().contains('건설')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">건설</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="103">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="103"
+															<c:if test="${projectCont.keyname().contains('암호화폐')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">암호화폐</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="84">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="84"
+															<c:if test="${projectCont.keyname().contains('PMO')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">PMO</span>
 														</label>
 													</div>													
@@ -1043,13 +1337,19 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="98">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="98"
+															<c:if test="${projectCont.keyname().contains('공공기관')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">공공기관</span>
 														</label>
 													</div>
 													<div class="col-md-6">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="85">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="85"
+															<c:if test="${projectCont.keyname().contains('시스템분석/설계')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">시스템분석/설계</span>
 														</label>
 													</div>												
@@ -1073,31 +1373,46 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="key_num" value="82">
+													<input type="checkbox" class="custom-control-input" name="key_num" value="82"
+													<c:if test="${projectCont.keyname().contains('PM')}">
+																checked
+															</c:if>>
 													<span class="custom-control-label">PM</span>
 													</label>
 												</div>
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="83">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="83"
+														<c:if test="${projectCont.keyname().contains('PL')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">PL</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="84">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="84"
+														<c:if test="${projectCont.keyname().contains('PMO')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">PMO</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="104">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="104"
+														<c:if test="${projectCont.keyname().contains('DA')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">DA</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="105">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="105"
+														<c:if test="${projectCont.keyname().contains('DBA')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">DBA</span>
 													</label>
 												</div>
@@ -1108,32 +1423,47 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="106">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="106"
+														<c:if test="${projectCont.keyname().contains('TA')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">TA</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="107">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="107"
+														<c:if test="${projectCont.keyname().contains('AA')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">AA</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="108">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="108"
+														<c:if test="${projectCont.keyname().contains('NA')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">NA</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="109">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="109"
+														<c:if test="${projectCont.keyname().contains('SE')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">SE</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="key_num" value="110">
+														<input type="checkbox" class="custom-control-input" name="key_num" value="110"
+														<c:if test="${projectCont.keyname().contains('QA')}">
+																checked
+															</c:if>>
 														<span class="custom-control-label">QA</span>
 													</label>
 												</div>	
@@ -1145,13 +1475,19 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="111">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="111"
+															<c:if test="${projectCont.keyname().contains('QC')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">QC</span>
 														</label>
 													</div>
 													<div class="col-md-6">	
 														<label class="custom-control custom-checkbox">
-															<input type="checkbox" class="custom-control-input" name="key_num" value="85">
+															<input type="checkbox" class="custom-control-input" name="key_num" value="85"
+															<c:if test="${projectCont.keyname().contains('시스템분석/설계')}">
+																checked
+															</c:if>>
 															<span class="custom-control-label">시스템분석/설계</span>
 														</label>
 													</div>													
@@ -1176,13 +1512,13 @@
 												<div class="col-md-6">
 													<div class="form-group ">
 														<label class="form-label"><b>급여</b></label>
-														<input type="text" class="form-control" value="${projectCont.pj_pay}" placeholder="전체 기간 동안 지급하는 총 금액을 입력하세요">
+														<input type="text" class="form-control" value="${projectCont.pj_pay}" placeholder="전체 기간 동안 지급하는 총 금액을 입력하세요" name="pj_pay">
 													</div>	
 												</div>
 											<div class="col-sm-6 col-md-6">
 												<div class="form-group ">
 													<label class="form-label"><b>홈페이지</b></label>
-													<input type="text" class="form-control" value="${projectCont.pj_homepage}">
+													<input type="text" class="form-control" value="${projectCont.pj_homepage}" name="pj_homepage">
 												</div>	
 											</div>
 										</div>
@@ -1192,7 +1528,7 @@
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>프로젝트 기간</b></label>
-												<input type="text" class="form-control" value="${projectCont.pj_term}"  placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3">
+												<input type="text" class="form-control" value="${projectCont.pj_term}"  placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3" name="pj_term">
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
@@ -1202,7 +1538,7 @@
 													<div class="input-group-text">
 														<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 													</div>
-													<input class="form-control fc-datepicker" type="text" value="${projectCont.pj_ddate}">
+													<input class="form-control fc-datepicker" type="text" value="${projectCont.pj_ddate}" name="pj_ddate">
 												</div>
 											</div>
 										</div>
@@ -1213,13 +1549,13 @@
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>모집인원</b></label>
-												<input type="number" class="form-control" value="${projectCont.pj_recnum}">
+												<input type="number" class="form-control" value="${projectCont.pj_recnum}" name="pj_recnum">
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>총 투입인원</b></label>
-												<input type="number" class="form-control" value="${projectCont.pj_totalp}">
+												<input type="number" class="form-control" value="${projectCont.pj_totalp}" name="pj_totalp">
 											</div>	
 										</div>
 									</div>
@@ -1229,7 +1565,7 @@
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
 												<label classㅇ="form-label text-dark"><b>제목</b></label>
-												<input type="text" class="form-control" value="${projectCont.pj_sub}">
+												<input type="text" class="form-control" value="${projectCont.pj_sub}" name="pj_sub">
 											</div>
 							
 								<div class="col-sm-6 col-md-12">
@@ -1237,7 +1573,7 @@
 									<div class="col-sm-12 col-md-12">
 									<div class="form-group">
                                 		 <label class="form-label"></label>
-                                 		<div name="content" class="summernote" class="summernote">${projectCont.pj_cont}</div>
+                                 		<textarea name="pj_cont" class="summernote" class="summernote">${projectCont.pj_cont}</textarea>
                              		 </div>
                               <script>
                                  $(document).ready(function() { $('#summernote').summernote();
@@ -1258,26 +1594,6 @@
 								</div>
 								</div>
 
-								<div class="form-group">
-									<div class="custom-file">
-										<input type="file" class="custom-file-input" name="example-file-input-custom">
-										<label class="custom-file-label"></label>
-									</div>
-								</div>
-										<div class="p-2 border mb-4">
-									<div class="upload-images d-flex">
-										<div>
-											<img src="../images/products/h1.jpg" alt="img" class="w73 h73 border p-0">
-										</div>
-										<div class="ml-3 mt-2">
-											<h6 class="mb-0 mt-3 font-weight-bold">h1.jpg</h6>
-											<small>4.5kb</small>
-										</div>
-										<div class="float-right ml-auto">
-											<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5" ><i class="fa fa-trash-o"></i></a>
-										</div>
-									</div>
-								</div>
 								
 									<div class="card-header ">
 										<h3 class="card-title"><b>회사 정보</b></h3>
@@ -1287,13 +1603,13 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label "><b>회사명</b></label>
-											<input type="text" class="form-control" >
+											<input type="text" class="form-control" value="${corInfo.cor_name}">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6 ">
 										<div class="form-group ">
 											<label class="form-label "><b>담당자명</b></label>
-											<input type="text" class="form-control" >
+											<input type="text" class="form-control" value="${corInfo.cor_mname}">
 										</div>	
 									</div>
 								</div>
@@ -1301,13 +1617,13 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>이메일</b></label>
-											<input type="email" class="form-control">
+											<input type="email" class="form-control" value="${corInfo.mem_email}">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>연락처</b></label>
-											<input type="number" class="form-control">
+											<input type="number" class="form-control" value="${corInfo.cor_tel}">
 										</div>	
 									</div>
 								</div>	
@@ -1316,7 +1632,7 @@
 									<div class="col-sm-3 col-md-3">
 									<label class="form-label"><b>주소 </b></label>
 										<div class="form-group">
-											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode">
+											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode"  value="${projectCont.pj_postcode}">
 										</div>
 									</div>
 									<div class="col-sm-4 col-md-4">
@@ -1329,20 +1645,20 @@
 									<div class="row">
 									<div class="col-sm-12 col-md-7">
 										<div class="form-group">
-											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc"><br>
+											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc" value="${projectCont.pj_loc}"><br>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-5">
 										<div class="form-group">	
-											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pj_detailloc">
+											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pj_detailloc" value="${projectCont.pj_detailloc}">
 										</div>
 									</div>
 									</div>
 									<div id="map" style="width:100%;height:350px;"></div>
 									
 								<!-- 좌표 부분 1차 시작 , (좌표를 위한 추가)지도 쓸일 없으면 안해도 됨 -->
-									<input type="hidden" id="address_x"  class="form-control" placeholder="x좌표" name="pj_loc_x"> 
-									<input type="hidden" id="address_y"  class="form-control" placeholder="y좌표" name="pj_loc_y">
+									<input type="hidden" id="address_x"  class="form-control" placeholder="x좌표" name="pj_loc_x" value="${projectCont.pj_loc_x}"> 
+									<input type="hidden" id="address_y"  class="form-control" placeholder="y좌표" name="pj_loc_y" value="${projectCont.pj_loc_y}">
 								<!-- 좌표를 위한 카카오 key 추가,지도 쓸 일 없으면 지워도 됨 -->
 									<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=50e87f1e8bcbb6ac445c4b87fdbcf76e&libraries=services"></script>
 								<!-- 좌표부분 1차 끝 // -->
@@ -1351,7 +1667,7 @@
 									<script>
 								    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 								        mapOption = {
-								            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+								            center: new daum.maps.LatLng('${projectCont.pj_loc_y}', '${projectCont.pj_loc_x}'), // 지도의 중심좌표
 								            level: 5 // 지도의 확대 레벨
 								        };
 
@@ -1361,7 +1677,7 @@
 								    var geocoder = new daum.maps.services.Geocoder();
 								    //마커를 미리 생성
 								    var marker = new daum.maps.Marker({
-								        position: new daum.maps.LatLng(37.537187, 127.005476),
+								        position: new daum.maps.LatLng('${projectCont.pj_loc_y}', '${projectCont.pj_loc_x}'),
 								        map: map
 								    });
 									    function execDaumPostcode() {
@@ -1440,7 +1756,7 @@
 								<div class="card-footer ">
 									<div class ="row">
 									<div class="mx-auto">
-										<a href="content.do" class="btn btn-primary">수정</a> 
+										<a href="javascript:void(0)" onclick="javascript:check();" class="btn btn-primary">수정</a> 
 											&nbsp;&nbsp;&nbsp;
 										<a href="project_list" class="btn btn-danger">취소</a>
 									</div>
@@ -1455,6 +1771,34 @@
 				
 		</section>
 		<!--/Add posts-section-->
-
+<script>
+	function check(){
+		var type_num = $('.active').attr('value');
+		document.getElementById('type_num').value = type_num;
+		var key_num = new Array();
+		var key_cnt = 0;
+		//for(var i=0; i<key_num_size; i++){
+		 $('input:checkbox[name="key_num"]').each(function() {
+			if(this.checked){
+				key_num[key_cnt] = this.value;
+				key_cnt++;
+			}
+		 });
+		var pjp_keynum = new Array();
+		var pjp_cnt=0;
+		 $('input[name=pjp_keynum]').each(function(){
+				 pjp_keynum[pjp_cnt]=this.value;
+				 pjp_cnt++;
+		 });
+		 
+		// alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
+		// alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
+		 //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
+		// alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
+		// alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+		 edit_list.submit();
+		}
+	//});
+</script>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

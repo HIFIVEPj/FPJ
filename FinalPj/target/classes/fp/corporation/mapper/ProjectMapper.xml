@@ -14,6 +14,12 @@
 		<result property="pj_cont" column ="pj_cont" />
 		<result property="pj_term" column ="pj_term" />
 		<result property="pj_loc" column ="pj_loc" />
+
+		<result property="pj_postcode" column ="pj_postcode" />
+		<result property="pj_detailloc" column ="pj_detailloc" />
+		<result property="pj_loc_x" column ="pj_loc_x" />
+		<result property="pj_loc_y" column ="pj_loc_y" />
+
 		<result property="pj_recnum" column ="pj_recnum" />
 		<result property="pj_appnum" column ="pj_appnum" />
 		<result property="pj_rdate" column ="pj_rdate" />
@@ -26,11 +32,7 @@
 		<result property="pj_vcnt" column ="pj_vcnt" />
 		<result property="pj_fgrade" column ="pj_fgrade" />
 		
-		<association javaType="PjPickKeyword" property="pjpickKeyword" column="pjp_keynum">
-			<id property="pjp_keynum" column ="pjp_keynum" />
-			<result property="pj_num" column ="pj_num" />
-			<result property="key_num" column ="key_num" />
-		</association>
+
 		<association javaType="Type" property="type" column="type_num">
 			<id property="type_num" column ="type_num" />
 			<result property="type_name" column ="type_name" />
@@ -43,7 +45,11 @@
 			<id property="key_num" column ="kw_key_num" />
 			<id property="key_name" column ="kw_key_name" />
 		</collection>
-
+		<collection ofType="PjPickKeyword" property="pjpickKeyword" column="pjp_keynum" javaType="ArrayList">
+			<id property="pjp_keynum" column ="pjp_keynum" />
+			<result property="pj_num" column ="pj_num" />
+			<result property="key_num" column ="key_num" />
+		</collection>
 		<collection ofType="Project" property="pjKeywords" column="key_num" javaType="ArrayList">
 			<id property="key_num" column ="key_num" />
 			<id property="key_name" column ="key_num" />
@@ -94,7 +100,7 @@
 	
 	<select id="content" parameterType="long" resultMap="projectMap"> 
 	 	<![CDATA[
-		  SELECT pj.*, kw.KEY_NAME as kw_key_name , t.TYPE_NAME, kw.KEY_NUM as kw_key_num
+		  SELECT pj.*, kw.KEY_NAME as kw_key_name , t.TYPE_NAME, kw.KEY_NUM as kw_key_num, pjpkw.pjp_keynum
 		   FROM PROJECT pj
 		   INNER JOIN TYPE t ON t.TYPE_NUM = pj.TYPE_NUM  
 		   LEFT OUTER JOIN PJ_PICK_KEYWORD pjpkw ON pjpkw.PJ_NUM = pj.PJ_NUM
@@ -109,17 +115,43 @@
 	
 	
 	<insert id="insertpj" parameterType="Project" >
+	<selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
+		select pj_num_seq.nextval from dual
+	</selectKey>
 		insert into PROJECT
-		(PJ_NUM, TYPE_NUM, COR_CODE, PJ_SUB, PJ_CONT, PJ_DDATE, PJ_PAY, PJ_TERM, PJ_LOC, PJ_RECNUM, PJ_APPNUM, PJ_RDATE, PJ_TOTALP, PJ_PLACE, PJ_HOMEPAGE, PJ_FGRADE)
-		 values(PJ_NUM_SEQ.nextval, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},#{pj_term},#{pj_loc},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})		
+		(PJ_NUM, TYPE_NUM, COR_CODE, PJ_SUB, PJ_CONT, PJ_DDATE, PJ_PAY, PJ_TERM, PJ_LOC, pj_postcode,
+		 pj_detailloc, pj_loc_x, pj_loc_y,PJ_RECNUM, PJ_APPNUM, PJ_RDATE, PJ_TOTALP, PJ_PLACE, PJ_HOMEPAGE, PJ_FGRADE)
+		 values(#{pj_num}, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},
+		 #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})		
 	</insert>
 
 	 <insert id="insertPjpkeyword" parameterType="map">
-	 	 <foreach collection ="key_num" item="key_num" separator="," open="(" close=")">
-		 insert into PjPickKeyword values (pjp_keynum.nextval, #{key_num}, pj_num.currentval)
-		 </foreach>
+		 <selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
+			 select pj_num_seq.currval from dual
+		 </selectKey>
+		 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num)
+		 	select  PJP_KEYNUM_SEQ.nextval, A.* from(
+		  <foreach collection ="key_num" item="key_num" separator="UNION ALL "> 
+			 select #{key_num} as key_num, #{pj_num} as pj_num from dual
+		 </foreach>) A
 	 </insert>
 
+	
+	<update id ="updatePj" parameterType="Project">
+		update Project set
+		type_num=#{type_num}, PJ_SUB=#{pj_sub}, PJ_CONT=#{pj_cont}, PJ_DDATE= #{pj_ddate}, PJ_PAY=#{pj_pay}, PJ_TERM=#{pj_term}, PJ_LOC=#{pj_loc}
+		, pj_postcode=#{pj_postcode}, pj_detailloc=#{pj_detailloc}, pj_loc_x=#{pj_loc_x}, pj_loc_y=#{pj_loc_y}, 
+		PJ_RECNUM=#{pj_recnum}, PJ_APPNUM=#{pj_appnum}, PJ_TOTALP=#{pj_totalp}, PJ_PLACE=#{pj_place}, PJ_HOMEPAGE=#{pj_homepage}, PJ_FGRADE=#{pj_fgrade}
+		where Pj_num = #{pj_num}
+	</update>
+	
+	<update id="updateKeyword" parameterType="map">
+			 Update PJ_PICK_KEYWORD set 
+			  <foreach collection= "map.entrySet()" item="key" separator=", " index="index">
+			  key_num= ${index} = #{key.key_num} where pjp_keynum= ${index}= #{key.pjp_keynum}
+		</foreach>
+	</update>
+	
 	<delete id="deletePj" parameterType="long">
 		delete from PROJECT where PJ_NUM=#{pj_num}
 	</delete>
@@ -131,6 +163,7 @@
 		update BOARD set email=#{email}, subject=#{subject}, content=#{content} where seq=#{seq}
 	</update>
 	-->
+
 	
 	<!-- 기업정보 뽑기 -->
 	<select id="corInfo" parameterType="long" resultMap="corporationMap">

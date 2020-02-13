@@ -1,5 +1,6 @@
 package fp.corporation.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +53,16 @@ public class ProjectServiceImpl implements ProjectService {
 	public void insertpj(Project project) {
 		mapper.insertpj(project);
 	};
+	@Override
 	public void insertPjpkeyword(Map<String, Object> map) {
 		mapper.insertPjpkeyword(map);
+	}
+	@Override
+	public void updatePj(Project project) {
+		mapper.updatePj(project);
+	}
+	@Override
+	public void updateKeyword(Map<String, Object> map) {
+		mapper.updateKeyword(map);
 	}
 }

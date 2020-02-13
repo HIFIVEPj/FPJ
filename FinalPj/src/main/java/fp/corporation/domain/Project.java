@@ -43,7 +43,7 @@ public class Project {
 	private List<Integer> keynums;
 	private List<String> keynames;
 	
-	private PjPickKeyword pjpickKeyword;
+	private List<PjPickKeyword> pjpickKeyword;
 	private List<Keyword> pjKeywords;
 	private Type type;
 	
