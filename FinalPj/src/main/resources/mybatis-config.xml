@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
    <typeAliases>   
-		<typeAlias type="fp.corporation.domain.Project" alias="Project"/>
-		<typeAlias type="fp.corporation.domain.Keyword" alias="Keyword"/>
+		<typeAlias type="fp.corporation.domain.Project" alias="corProject"/>
+		<typeAlias type="fp.corporation.domain.Keyword" alias="corKeyword"/>
 		<typeAlias type="fp.corporation.domain.PjPickKeyword" alias="PjPickKeyword"/>
-		<typeAlias type="fp.corporation.domain.Type" alias="Type"/>	
+		<typeAlias type="fp.corporation.domain.Type" alias="corType"/>	
 		<typeAlias type="fp.corporation.domain.Corporation" alias="Corporation"/>	
 
 		<typeAlias type="fp.corporation.vo.ProjectVo" alias="ProjectVo"/>

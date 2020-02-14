@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fp.corporation.mapper.ProjectMapper">
-	<resultMap type="Project" id="projectMap">
+	<resultMap type="corProject" id="projectMap">
 		<id property="pj_num" column ="pj_num" />
 		<result property="type_num" column ="type_num" />
 		<result property="cate_num" column ="cate_num" />
@@ -33,7 +33,7 @@
 		<result property="pj_fgrade" column ="pj_fgrade" />
 		
 
-		<association javaType="Type" property="type" column="type_num">
+		<association javaType="corType" property="type" column="type_num">
 			<id property="type_num" column ="type_num" />
 			<result property="type_name" column ="type_name" />
 		</association>
@@ -41,7 +41,7 @@
 			<id property ="cor_code" column="cor_code"/>
 			<result property ="cor_name" column="cor_name"/>
 		</association>
-		<collection ofType="Keyword" property="keyword" column="key_num" javaType="ArrayList">
+		<collection ofType="corKeyword" property="keyword" column="key_num" javaType="ArrayList">
 			<id property="key_num" column ="kw_key_num" />
 			<id property="key_name" column ="kw_key_name" />
 		</collection>
@@ -50,7 +50,7 @@
 			<result property="pj_num" column ="pj_num" />
 			<result property="key_num" column ="key_num" />
 		</collection>
-		<collection ofType="Project" property="pjKeywords" column="key_num" javaType="ArrayList">
+		<collection ofType="corProject" property="pjKeywords" column="key_num" javaType="ArrayList">
 			<id property="key_num" column ="key_num" />
 			<id property="key_name" column ="key_num" />
 		</collection>
@@ -76,7 +76,7 @@
 		<result property ="cor_fname" column="cor_fname"/>
 		<result property ="cor_ofname" column="cor_ofname"/>
 		
-		<collection ofType="Project" property="project" column="pj_num" javaType="ArrayList">
+		<collection ofType="corProject" property="project" column="pj_num" javaType="ArrayList">
 			<id property="pj_num" column ="pj_num" />
 		</collection>
 		
@@ -114,7 +114,7 @@
 	</select>
 	
 	
-	<insert id="insertpj" parameterType="Project" >
+	<insert id="insertpj" parameterType="corProject" >
 	<selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
 		select pj_num_seq.nextval from dual
 	</selectKey>
@@ -124,20 +124,22 @@
 		 values(#{pj_num}, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},
 		 #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})		
 	</insert>
-
+	
 	 <insert id="insertPjpkeyword" parameterType="map">
 		 <selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
 			 select pj_num_seq.currval from dual
 		 </selectKey>
+		 <if test="key_num != null">
 		 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num)
 		 	select  PJP_KEYNUM_SEQ.nextval, A.* from(
 		  <foreach collection ="key_num" item="key_num" separator="UNION ALL "> 
 			 select #{key_num} as key_num, #{pj_num} as pj_num from dual
 		 </foreach>) A
+		 </if>
 	 </insert>
 
 	
-	<update id ="updatePj" parameterType="Project">
+	<update id ="updatePj" parameterType="corProject">
 		update Project set
 		type_num=#{type_num}, PJ_SUB=#{pj_sub}, PJ_CONT=#{pj_cont}, PJ_DDATE= #{pj_ddate}, PJ_PAY=#{pj_pay}, PJ_TERM=#{pj_term}, PJ_LOC=#{pj_loc}
 		, pj_postcode=#{pj_postcode}, pj_detailloc=#{pj_detailloc}, pj_loc_x=#{pj_loc_x}, pj_loc_y=#{pj_loc_y}, 
@@ -145,13 +147,23 @@
 		where Pj_num = #{pj_num}
 	</update>
 	
-	<update id="updateKeyword" parameterType="map">
-			 Update PJ_PICK_KEYWORD set 
-			  <foreach collection= "map.entrySet()" item="key" separator=", " index="index">
-			  key_num= ${index} = #{key.key_num} where pjp_keynum= ${index}= #{key.pjp_keynum}
+	
+	<delete id="updateKeyword_Del" parameterType="PjPickKeyword">
+	 	delete from PJ_PICK_KEYWORD where PJ_NUM=#{pj_num}
+	 </delete>
+	 <insert id="updateKeyword_In" parameterType="PjPickKeyword">
+		  	<foreach collection ="key_numList" item="key_num" separator=";" open="DECLARE BEGIN " close="; END;">
+			 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num) values(PJP_KEYNUM_SEQ.nextval, #{key_num},  #{pj_num})
+			 </foreach>
+	 </insert>
+<!-- 
+	<update id="updateKeyword" parameterType="PjPickKeyword">
+	   <foreach collection= "PjPickKeyword" item="value" separator=" " >
+		   Update PJ_PICK_KEYWORD set
+		   key_num = #{value.key_numList, jdbcType=INTEGER} where pjp_keynum = #{value.pjpkeynumList, jdbcType=NUMERIC}
 		</foreach>
 	</update>
-	
+ -->	 
 	<delete id="deletePj" parameterType="long">
 		delete from PROJECT where PJ_NUM=#{pj_num}
 	</delete>
