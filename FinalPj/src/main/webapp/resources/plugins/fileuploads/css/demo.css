@@ -1,10 +1,11 @@
 /*!
- * =============================================================
- * dropify v0.2.2 - Override your input files with style.
- * https://github.com/JeremyFagis/dropify
- *
- * (c) 2017 - Jeremy FAGIS <jeremy@fagis.fr> (http://fagis.fr)
- * =============================================================
+ * dropify-multiple - Override your input files with style. Supports mulitple file upload
+ * @version v1.0.0
+ * @link http://github.com/brewengage/dropify-multiple
+ * @author Ravi Kannan <ravi@brewengage.com> (https://github.com/brewengage)
+ * @contributors Jeremy FAGIS <jeremy@fagis.fr> (http://fagis.fr)
+ * @contributors BrewEngage (added support for multi file upload)
+ * @license MIT
  */
 
 * {
@@ -1060,7 +1061,6 @@ p.help {
   padding: 6px 10px;
   border-radius: 4px;
   margin-left: 10px;
-  -webkit-transition: background 0.1s linear;
   transition: background 0.1s linear; }
   #toggleDropify:hover {
     background: #EEE; }

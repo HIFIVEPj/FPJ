@@ -1,3 +1,4 @@
+
 package fp.market.domain;
 
 import java.sql.Date;
@@ -20,4 +21,8 @@ public class Freelancer {
 	private int free_acctox;
 	private String free_fname;
 	private String free_ofname;
+	
+	private Market market;
+	//public FreelancerProfile freeProfile;
+	
 }

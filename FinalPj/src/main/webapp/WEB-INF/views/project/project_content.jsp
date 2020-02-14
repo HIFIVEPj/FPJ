@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="now" class ="java.util.Date" />
@@ -6,8 +5,8 @@
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-<!--/header-->
 
+<!--/header-->
 		<!--Sliders Section-->
 		<div>
 			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
@@ -53,15 +52,16 @@
 				<div class="row">
 					<div class="col-xl-8 col-lg-12 col-md-12">
 						<!--Jobs Description-->
-						<div class="card overflow-hidden">
+						<div class="card overflow-hidden" id="printarea" >
 					<!-- <div class="ribbon ribbon-top-right text-danger"><span class="bg-danger">긴급</span></div> -->
 							<div class="card-body">
 								<div class="item-det">
-									<a href="#" class="text-dark"><h3><strong>${projectCont.pj_sub}</strong></h3></a>
-									<br/>
+									<div style="margin-top:10px">
+										<h3><strong>${projectCont.pj_sub}</strong></h3>
+									</div>
 									<div class="d-flex">
 										<ul class="mb-0 d-flex">
-											<li class="mr-5"><i class="si si-briefcase text-muted mr-1"></i> ${projectCont.pj_name}</li>
+											<li class="mr-5"><i class="si si-briefcase text-muted mr-1"></i> ${corInfo.cor_name}</li>
 											<li class="mr-5"><i class="si si-location-pin text-muted mr-1"></i> 서울 금천구</li>
 											<li class="mr-5"><i class="si si-calendar text-muted mr-1"></i> 
 												<fmt:parseDate value="${projectCont.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
@@ -81,11 +81,9 @@
 											<li class="mr-5"><i class="si si-eye text-muted mr-1"></i> ${projectCont.pj_vcnt}</li>
 										</ul>
 							
-										<div class="rating-stars d-inline-flex mb-4">
+										<div class="rating-stars d-inline-flex">
 											<div class="rating-stars-container mr-1">
-												<div class="rating-star sm">
-													<i class="fa fa-heart"></i>
-												</div>
+												<div class="rating-star sm"><i class="fa fa-heart"></i></div>
 											</div> ${projectCont.pj_pcnt}
 										</div>
 									</div>
@@ -100,19 +98,19 @@
 											<table class="table row table-borderless w-100 m-0 text-nowrap ">
 												<tbody class="col-lg-12 col-xl-6 p-0">
 													<tr>
-													<td><span class="font-weight-bold">	프로젝트 명 : </span>${projectCont.pj_sub}</td>
+													<th colspan="12"><span class="font-weight-bold">	프로젝트 명 : </span>${projectCont.pj_sub}</th>
 													
 													</tr>
 													<tr>
 														<td><span class="font-weight-bold">근무 형태 : </span> 
 															<c:if test="${projectCont.pj_place eq 0}">
-																 상주
+																 비상주
 															</c:if>
 															<c:if test="${projectCont.pj_place eq 1}">
-																 반상주
+																 상주
 															</c:if>
 															<c:if test="${projectCont.pj_place eq 2}">
-															 	자택
+															 	반상주
 															</c:if>
 														</td>
 													</tr>
@@ -137,16 +135,17 @@
 														</td>
 													</tr>
 													<tr>
-														<td><span class="font-weight-bold">사용 기술 :</span><c:choose>
-																			<c:when test="${projectCont.keyword eq '[]'}">
-																				키워드 없음
-																			</c:when>
-																			<c:otherwise>
-																				<c:forEach var="i" begin="0" end="${projectCont.keyword.size()-1}">
-																					<span class="tag tag-gray">${projectCont.keyword.get(i).key_name}</span>
-																				</c:forEach>
-																			</c:otherwise>
-																		</c:choose>
+														<td><span class="font-weight-bold">사용 기술 :</span>
+															<c:choose>
+																<c:when test="${projectCont.keyword eq '[]' }">
+																		키워드 없음
+																</c:when>
+																	<c:otherwise>
+																		<c:forEach var="i" begin="0" end="${projectCont.keyword.size()-1}">
+																			<span class="tag tag-gray">${projectCont.keyword.get(i).key_name}</span>
+																		</c:forEach>
+																	</c:otherwise>
+																</c:choose>
 															</td>
 													</tr>
 													<tr>
@@ -174,23 +173,23 @@
 									</div>
 								</div>
 								</div>
-								
 								    <div class="card-header">
                                  	<h4 class="mb-0 font-weight-semibold"><strong>내용</strong></h4>       
   	                                  </div>
-								  <div><P style=" padding-top:15px;">${projectCont.pj_cont}</P></div>
+								  <div style="width:95%; margin:0 auto;"><P style="padding-top:15px;">${projectCont.pj_cont}</P></div>
 								
 							</div>
-							<span class="card-footer icons"  >
+							<span class="card-footer icons" >
 									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply"> 지원하기</a>
 									<a href="#" class="btn btn-primary icons"><i class="si si-share mr-1"></i> 공유하기</a>
-									<a href="#" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
-
-							<span style="float:right;" >
-									<a href="update.do" class="btn btn-secondary icons" >수정</a>
-									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1"">삭제</button>
+									<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
+							
+								<span style="float:right;" >
+										<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
+										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1"">삭제</button>
+								</span>
 							</span>
-					</div>
+						</div>
 			<!--Jobs Description-->
 					<h3 class="mb-5 mt-4">비슷한 프로젝트</h3>
 						<!--Related Posts-->
@@ -440,7 +439,7 @@
 									
 									<div class="">
 										<h4 class="mt-3 mb-1 font-weight-semibold">
-										<strong>${projectCont.pj_name}</strong></h4>
+										<strong>${corInfo.cor_name}</strong></h4>
 										<br/>
 										<span class="text-gray"> ${corInfo.cor_type}</span><br/>
 										<!--  <span class="text-gray"> IT솔루션 채널영업 및 영업관리 </span><br/>-->
@@ -495,11 +494,34 @@
 							<div class="card-header">
 								<h3 class="card-title">지도</h3>
 							</div>
-							<div class="card-body">
-								<div class="map-header">
-									<div class="map-header-layer" id="map2"></div>
-								</div>
-							</div>
+							<!-- 카카오 map 등록 -->
+								
+								<div id="map" class="mx-auto" style="width:90%; height:300px; margin-top:20px; margin-bottom:20px;"></div>
+									
+									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=50e87f1e8bcbb6ac445c4b87fdbcf76e"></script>
+									<script>
+									var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+									    mapOption = { 
+									        center: new kakao.maps.LatLng('${projectCont.pj_loc_y}', '${projectCont.pj_loc_x}'), // 지도의 중심좌표
+									        level: 3 // 지도의 확대 레벨
+									    };
+									
+									var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+									
+									// 마커가 표시될 위치입니다 
+									var markerPosition  = new kakao.maps.LatLng('${projectCont.pj_loc_y}', '${projectCont.pj_loc_x}'); 
+									
+									// 마커를 생성합니다
+									var marker = new kakao.maps.Marker({
+									    position: markerPosition
+									});
+									
+									// 마커가 지도 위에 표시되도록 설정합니다
+									marker.setMap(map);
+									
+									// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+									// marker.setMap(null);    
+									</script>
 						</div>
 				<!-- 	<div class="card">
 							<div class="card-header">
@@ -717,7 +739,7 @@
                
                <div class="modal-footer">
                
-                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num= ${projectCont.pj_num}">네</a> 
+                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num=${projectCont.pj_num}">네</a> 
                   
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
                </div>
@@ -727,5 +749,26 @@
       <!-- /small Modal -->
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
 <!--/footer-->
+
+<!-- 프린트 특정영역 인쇄  
+<script type="text/javascript">
+
+var initBody;
+
+function beforePrint() {
+ printareas = document.body.innerHTML;
+ document.body.innerHTML = printarea.innerHTML;
+}
+function afterPrint() { 
+ document.body.innerHTML = printareas;
+}
+function printArea() {
+ window.print();
+}
+
+window.onbeforeprint = beforePrint;
+window.onafterprint = afterPrint;
+
+</script>
+-->

@@ -28,9 +28,31 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	<!-- file Upload 세영 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
+        <!-- max size of file in memory (in bytes) -->
+        <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </beans:bean>
+	
+	<!-- 승훈 -->
 	<context:component-scan base-package="fp.index.controller" />
+	<context:component-scan base-package="fp.customer_service.controller" />
+	
+	<!-- 세영 -->
 	<context:component-scan base-package="fp.market.controller" />
+	
+	<!-- 별 -->
+	<context:component-scan base-package="fp.freelancerprofile.controller" />
+
+	<!-- 나영 -->
 	<context:component-scan base-package="fp.corporation.controller" />
-   <context:component-scan base-package="fp.customer_service.controller" />
+
+	<!-- 소담 -->
+	<context:component-scan base-package="fp.member.controller" />
+	<context:component-scan base-package="fp.login.controller" />
+	
 	
 </beans:beans>

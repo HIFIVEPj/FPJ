@@ -11,8 +11,8 @@
 				<div class="header-text mb-0">
 					<div class="container">
 						<div class="text-center text-white ">
-							<h1 class="mb-1">한나영 김소담 윤별 김세영 송승훈</h1>
-							<p>한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈</p>
+							<h1 class="mb-1">당신이 원하는 그 가치, 바로 이 곳에 있습니다.</h1>
+							<p>프로젝트 & 서비스 & IT 프리랜서 플랫폼 - 하이파이브</p>
 						</div>
 						<div class="row">
 							<div class="col-xl-10 col-lg-12 col-md-12 d-block mx-auto">

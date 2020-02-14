@@ -29,25 +29,60 @@
 		<property value="classpath:/fp/customer_service/mapper/*Mapper.xml" name="mapperLocations" />
 	</bean>
 	
+	<!-- 소담 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+	<!-- 소담 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="구글아이디" />
+	    <property name="password" value="구글비밀번호" />
+	    <property name="javaMailProperties">
+	    <props>
+	      <prop key="mail.smtp.auth">true</prop>
+	      <prop key="mail.smtp.starttls.enable">true</prop>
+	    </props>
+	    </property>
+	</bean>
+
 	
-	<!-- 내꺼 -->
+	<!-- 승훈 -->
+	<context:component-scan base-package="fp.customer_service.service"/>
+	<context:component-scan base-package="fp.customer_service.mapper"/>
+	<mybatis-spring:scan base-package="fp.customer_service.mapper"/>
+	
+	<!-- 세영 -->
+	<context:component-scan base-package="fp.market.service"/>	
+	<context:component-scan base-package="fp.market.utils"/>
+	<context:component-scan base-package="fp.market.mapper"/>
+	<mybatis-spring:scan base-package="fp.market.mapper"/>
+	
+	<!-- 별 -->
+	<context:component-scan base-package="fp.freelancerprofile.service"/>	
+	<context:component-scan base-package="fp.freelancerprofile.mapper"/>
+	<mybatis-spring:scan base-package="fp.freelancerprofile.mapper"/>
+	
+	<!-- 나영 -->
 	<context:component-scan base-package="fp.corporation.service"/>	
 	<context:component-scan base-package="fp.corporation.mapper"/>	
 	<context:component-scan base-package="fp.corporation.vo"/>	
 	<mybatis-spring:scan base-package="fp.corporation.mapper"/>
+
+	<!-- 소담 -->
+	<!-- 메일인증 추가  -->
+	<context:component-scan base-package="fp.member.service"/>
+	<context:component-scan base-package="fp.member.domain"/>
+	<context:component-scan base-package="fp.member.dao"/>				
+	<context:component-scan base-package="fp.member.mapper"/>
+	<mybatis-spring:scan base-package="fp.member.mapper"/>
 	
-	<!-- 세영씨 부분 -->
-	<context:component-scan base-package="fp.market.service"/>	
-	<context:component-scan base-package="fp.market.utils"/>
-	<mybatis-spring:scan base-package="fp.market.mapper"/>
-	<context:component-scan base-package="fp.market.mapper"/>
 	
-	<!-- 오빠 부분 -->
-	<context:component-scan base-package="fp.customer_service.service"/>
-   <context:component-scan base-package="fp.customer_service.mapper"/>
-   <mybatis-spring:scan base-package="fp.customer_service.mapper"/>
 	
-	<!--
+	
+	<!-- 
+>>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 	<context:component-scan base-package="song.md.aop"/>
 	  --> 
 	

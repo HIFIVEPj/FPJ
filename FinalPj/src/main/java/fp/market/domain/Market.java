@@ -1,3 +1,4 @@
+
 package fp.market.domain;
 
 import lombok.AllArgsConstructor;
@@ -19,11 +20,14 @@ public class Market {
 	private long market_vcnt;
 	private String market_fname;
 	private String market_ofname;
-	private int market_state;
+	private int market_state;//0승인전1승인2거절
 	private long market_pcnt;
+	private String option3;//기타선택시 입력
 	//리스트뽑는데 필요한 컬럼
 	private Freelancer freelancer;//free_name
 	private MarketRev marketRev;//marketRev_star
-
+	private FreelancerProfile freelancerProfile;//매퍼xml에 association prorerty이름과 같아야 한다!!
+	
+	
 	
 }

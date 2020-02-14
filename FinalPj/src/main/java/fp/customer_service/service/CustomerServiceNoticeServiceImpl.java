@@ -1,3 +1,4 @@
+
 package fp.customer_service.service;
 
 import java.util.List;
@@ -36,6 +37,11 @@ public class CustomerServiceNoticeServiceImpl implements CustomerServiceNoticeSe
 	@Override
 	public boolean notice_deleteS(long notice_num) {
 		return customerServiceNoticeMapper.notice_delete(notice_num);
+	}
+	
+	@Override
+	public boolean notice_modifyS(CustomerServiceNotice customerServiceNotice) {
+		return customerServiceNoticeMapper.notice_modify(customerServiceNotice);
 	}
 	
 	/*

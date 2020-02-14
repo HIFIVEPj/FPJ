@@ -53,17 +53,17 @@
 						
 						<script type="text/javascript">
 						   function check() {
-						       if(document.notice_write.notice_cate.value==''){
+						       if(document.notice_modify.notice_cate.value==''){
 						    	   alert('분류를 선택해 주세요.');
-						    	   document.notice_write.notice_cate.focus();
+						    	   document.notice_modify.notice_cate.focus();
 						    	   return false;
 						       }
-						       if(document.notice_write.notice_sub.value==''){
+						       if(document.notice_modify.notice_sub.value==''){
 						    	   alert('제목을 입력해 주세요.');
 						    	   document.input.notice_sub.focus();
 						    	   return false;
 						       }
-						    	document.notice_write.submit();
+						    	document.notice_modify.submit();
 						          
 					       }
 						</script>
@@ -119,9 +119,11 @@
 									<textarea name="notice_cont" id="summernote" class="summernote"></textarea>
 									
 									<!-- 나중에 없앨 부분 -->
+									<!--
 									<br/><br/>
 									<span>나중에 없앨 부분</span>
 									<input type="text" class="form-control w-100" name="mem_email" value="관리자">
+									-->
 									<!-- /나중에 없앨 부분 -->
 									
 									<div class="card-body text-right">
@@ -158,9 +160,9 @@
 									onImageUpload: function(files, editor, welEditable) {
 									sendFile(files[0], editor, welEditable);
 									}
-									//summernote에 글 내용 추가하는 코드
-								 	$(".summernote").summernote('code', '${notice_content.notice_cont}');
 								});
+								
+								$("#summernote").summernote('code', '${notice_content.notice_cont}');
 							</script>
 							
 							

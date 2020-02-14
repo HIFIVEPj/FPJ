@@ -20,13 +20,7 @@ import lombok.extern.log4j.Log4j;
 public class CustomerServiceNoticeController {
 	@Autowired
 	private CustomerServiceNoticeService customerServiceNoticeService;
-	
-	/*
-	@RequestMapping("customer_service_list")
-	public String customer_service_list() {
-		return "customer_service/customer_service_list";
-	}
-	*/
+
 	
 	/*
 	@RequestMapping("customer_service_notice")
@@ -60,8 +54,6 @@ public class CustomerServiceNoticeController {
 	}
 	*/
 	
-	
-	
 	@GetMapping("customer_service_notice_write")
 	public String customer_service_notice_write() {
 		return "customer_service/customer_service_notice_write";
@@ -79,31 +71,16 @@ public class CustomerServiceNoticeController {
 		return "redirect:customer_service_notice";
 	}
 	
+	@GetMapping("customer_service_notice_modify")
+	public String customer_service_notice_modify(Model model, @RequestParam("notice_num") long notice_num) {
+		model.addAttribute("notice_content", customerServiceNoticeService.notice_contentS(notice_num));
+		return "customer_service/customer_service_notice_modify";
+	}
 
-	@RequestMapping("customer_service_qna")
-	public String customer_service_qna() {
-		return "customer_service/customer_service_qna";
-	}
-	@RequestMapping("customer_service_qna_content")
-	public String customer_service_qna_content() {
-		return "customer_service/customer_service_qna_content";
-	}
-	@RequestMapping("customer_service_qna_write")
-	public String customer_service_qna_write() {
-		return "customer_service/customer_service_qna_write";
-	}	
-	
-	@RequestMapping("customer_service_faq")
-	public String customer_service_faq() {
-		return "customer_service/customer_service_faq";
-	}
-	
-	@RequestMapping("customer_service_terms_of_service")
-	public String customer_service_terms_of_service() {
-		return "customer_service/customer_service_terms_of_service";
-	}@RequestMapping("customer_service_terms_of_personal_info")
-	public String customer_service_terms_of_personal_info() {
-		return "customer_service/customer_service_terms_of_personal_info";
+	@PostMapping("customer_service_notice_modify")
+	public String customer_service_notice_modify(CustomerServiceNotice customerServiceNotice) {
+		customerServiceNoticeService.notice_modifyS(customerServiceNotice);
+		return "redirect:customer_service_notice_content?notice_num="+ customerServiceNotice.getNotice_num();
 	}
 
 }

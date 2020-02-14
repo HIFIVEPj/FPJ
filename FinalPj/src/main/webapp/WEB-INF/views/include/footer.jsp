@@ -56,12 +56,14 @@
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>
 
 		<!-- JQuery js-->
+		<!--
 		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
-
+		-->
 		<!-- Bootstrap js -->
+		<!--	
 		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
 		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-
+		-->
 		<!--JQuery Sparkline Js-->
 		<script src="../js/vendors/jquery.sparkline.min.js"></script>
 
@@ -127,6 +129,7 @@
 		<!-- Custom Js-->
 		<script src="../js/custom.js"></script>
 		<script src="../js/custom2.js"></script>
+		<script src="../js/admin-custom.js"></script>
 		<script>
 		$(window).on("load", function(e) {
 		$("#loading").fadeOut("slow");
@@ -145,7 +148,27 @@
 		<script src="../js/formelements.js"></script>
 		
 		<!-- file uploads js -->
+		<!--
         <script src="../plugins/fileuploads/js/dropify.js"></script>
+        -->
+        <script src="../plugins/fileuploads/js/dropify.min.js"></script>
+        <script src="../plugins/fileuploads/js/dropify-multiple.min.js"></script>
+        <script src="../plugins/fileuploads/js/dropify-multiple.js"></script>
+        <!--
+        <script type="text/javascript">
+            $(document).ready(function(){
+                // Basic
+               $('.dropify').dropify();
+            });
+         </script>
+         
+
+         <script type="text/javascript">   
+         	$(".dropify-clear").trigger("click");
+      	 </script>
+		-->
+
+
         
         <!---Tabs JS-->
 		<script src="../plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
@@ -154,7 +177,45 @@
 		<!-- Sweet alert Plugin -->
 		<script src="../plugins/sweet-alert/sweetalert.min.js"></script>
 		<script src="../js/sweet-alert.js"></script>
+		
+		<!-- Animation -->
+        <script src="../plugins/particles/particles.js"></script>
+        <script src="../plugins/particles/particlesapp_default.js"></script>
+        
+        <!--InputMask Js-->
+		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+		
+		<!-- Vertical scroll bar Js-->
+		<script src="../plugins/vertical-scroll/jquery.bootstrap.newsbox.js"></script>
+		<script src="../plugins/vertical-scroll/vertical-scroll.js"></script>
+		
+		<!-- Google Maps Plugin -->
+		<!--
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyAykAdIIsNMu0V2wyGOMQcguo8zKngWlyM"></script>
+		<script src="../plugins/maps-google/jquery.googlemap.js"></script>
+		<script src="../plugins/maps-google/map.js"></script>
+		-->
+		<!-- Dashboard js -->
+		<!--
+		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
+		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
+		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+		<script src="../js/vendors/jquery.sparkline.min.js"></script>
+		<script src="../js/vendors/circle-progress.min.js"></script>
+		<script src="../plugins/rating/jquery.rating-stars.js"></script>
+		-->
+		<script src="../js/vendors/selectize.min.js"></script>
+		<script src="../js/vendors/jquery.tablesorter.min.js"></script>
+		
+		<!-- Fullside-menu Js-->
+		<!--
+		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
+		-->
+		
+		<!-- popover js -->
+        <script src="../js/popover.js"></script>
 
 	</body>
 </html>
+>>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 <!--/footer-->
