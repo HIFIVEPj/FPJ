@@ -7,6 +7,7 @@
 <!--/header-->
 
 		<!--Breadcrumb-->
+		<!--
 		<section>
 			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
 				<div class="header-text mb-0">
@@ -15,14 +16,54 @@
 							<h1 class="">공지사항</h1>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">커뮤니티</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">커뮤니티</li>
+								<li class="breadcrumb-item"><a href="#">고객센터</a></li>
+								<li class="breadcrumb-item active text-white" aria-current="page">공지사항</li>
 							</ol>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
+		-->
+		<!--/Breadcrumb-->
+		
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:1rem;">공지사항</h1>
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="community_faq">공지사항</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">공지사항</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item active" aria-current="page">공지사항</li>
+					</ol>
+				</div>
+			</div>
+		</div>
 		<!--/Breadcrumb-->
 
 		<!--Add listing-->
@@ -31,10 +72,10 @@
 				<div class="row">
 					<div class="col-xl-8 col-lg-8 col-md-12">
 						<div class="card">
-							<div class="card-header">	
+							<div class="card-body text-justify">	
 								<div class="font-weight-semibold" style="font-size: 1.6rem;">${notice_content.notice_sub}</div>
 							</div>
-							<div class="card-header text-justify" style="background-color:#f6f3ed;">
+							<div class="card-header border-top" style="background-color:#f6f3ed;">
 
 								<div class="item7-card-desc d-flex mb-2 mt-2">
 									<a href="#"><i class="fa fa-user text-muted mr-2"></i>${notice_content.mem_email}</a>
@@ -84,10 +125,23 @@
 							</div>
 							<div class="card-footer mx-auto" style="border-top: #fff;">	
 								<a class="btn btn-app">
-									<span class="badge badge-pill bg-blue">345</span>
+									<span class="badge badge-pill bg-blue">5</span>
 									<i class="fa fa-thumbs-o-up"></i>
 								</a>
+								
+								<!--
+								<div class="icons">
+									<a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a>
+								</div>
+								
+								<div class="product-tags clearfix">
+									<ul class="list-unstyled mb-0">
+										<li><a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a></li>
+									</ul>
+								</div>
+								-->
 							</div>
+							<!--
 							<div class="card-body product-filter-desc">
 								<div class="product-tags clearfix">
 									<ul class="list-unstyled mb-0">
@@ -95,14 +149,19 @@
 									</ul>
 								</div>
 							</div>
+							-->
+							
 							<div class="card-footer text-right">
+						
+								
 								<a href="customer_service_notice_content?notice_num=${notice_content.notice_num+1}" class="btn btn-primary waves-effect waves-light">이전</a>
+								
 								<a href="customer_service_notice_content?notice_num=${notice_content.notice_num-1}" class="btn btn-primary waves-effect waves-light">다음</a>
 								<!--
 								<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 								-->
 								<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-								<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='notice_modify?notice_num=${notice_content.notice_num}';">
+								<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_notice_modify?notice_num=${notice_content.notice_num}';">
 
 								
 								<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_notice';">				

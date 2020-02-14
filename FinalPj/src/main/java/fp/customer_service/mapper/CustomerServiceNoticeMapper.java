@@ -10,6 +10,7 @@ public interface CustomerServiceNoticeMapper {
 	boolean notice_count(long notice_num);
 	long notice_write(CustomerServiceNotice customerServiceNotice);
 	boolean notice_delete(long notice_num);
+	boolean notice_modify(CustomerServiceNotice customerServiceNotice);
 	/*
 	void insert(Address address);
 	void delete(long seq);

@@ -343,7 +343,7 @@ a.chip:hover {
 	box-shadow: 0 0 0 2px rgb(105, 99, 255, 0.25);
 }
 .ui-datepicker .ui-datepicker-title {
-	color: #1f719a;
+	color: #e8564a;
 }
 #back-to-top {
 	background: linear-gradient(120deg, #1f719a 0%, #1f719a 100%);

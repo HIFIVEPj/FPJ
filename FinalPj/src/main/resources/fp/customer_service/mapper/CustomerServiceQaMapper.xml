@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fp.customer_service.mapper.CustomerServiceQaMapper">
+
+	<select id="qa_list" resultType="CustomerServiceQa">
+		select * from qa order by qa_num desc
+	</select>
+	
+	<select id="qa_content" resultType="CustomerServiceQa" parameterType="long">
+		select * from qa where qa_num = #{qa_num}
+	</select>
+	
+	<update id="qa_count" parameterType="long">
+		update qa set qa_vcnt = qa_vcnt + 1 where qa_num = #{qa_num}
+	</update>
+	
+	<!--
+	<insert id="notice_write" parameterType="CustomerServiceNotice">
+		insert into notice values(NOTICE_NUM_SEQ.nextval, #{notice_sub}, #{notice_cont}, SYSDATE, 0, #{mem_email}, #{notice_cate}, 0, 0, 0, null)
+	</insert>
+	-->
+	<insert id="qa_write" parameterType="CustomerServiceQa">
+		<selectKey keyProperty="qa_num" order="BEFORE" resultType="long">
+			select QA_NUM_SEQ.nextval from dual
+		</selectKey>
+			insert into qa values(#{qa_num}, #{mem_email}, #{qa_sub}, #{qa_cont}, SYSDATE, 0, 0, 0, 0, 0, #{qa_cate}, 0, 0, 0, null)
+	</insert>
+	
+	<delete id="qa_delete" parameterType="long">
+		delete from qa where qa_num = #{qa_num}
+	</delete>
+	
+	<update id="qa_modify" parameterType="CustomerServiceQa">
+		update qa set qa_cate=#{qa_cate}, qa_sub=#{qa_sub}, qa_cont=#{qa_cont} where qa_num=#{qa_num}
+	</update>
+	
+	
+</mapper>

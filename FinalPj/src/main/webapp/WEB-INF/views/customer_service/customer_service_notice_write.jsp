@@ -6,17 +6,29 @@
 <!--/header-->
 
 		<!--Sliders Section-->
-		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
 			</div>
-		</section>
+		</div>
 		<!--/Sliders Section-->
 
 		<!--Breadcrumb-->
@@ -74,10 +86,7 @@
 								<!--
 								<select class="form-control select2" data-placeholder="분류를 선택해 주세요." multiple>
 								-->
-								<select class="form-control select2" name="notice_cate">
-									<!--
-									<option value="1" selected>Vehicle</option>
-									-->
+								<select class="form-control custom-select select1" name="notice_cate" data-placeholder="분류를 선택해 주세요.">
 									<option value="" style="color:#7fa5b8;">&nbsp;분류를 선택해 주세요.</option>
 									<option value="공지">공지</option>
 									<option value="채용">채용</option>

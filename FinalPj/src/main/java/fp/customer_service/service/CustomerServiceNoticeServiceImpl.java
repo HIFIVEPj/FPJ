@@ -38,6 +38,11 @@ public class CustomerServiceNoticeServiceImpl implements CustomerServiceNoticeSe
 		return customerServiceNoticeMapper.notice_delete(notice_num);
 	}
 	
+	@Override
+	public boolean notice_modifyS(CustomerServiceNotice customerServiceNotice) {
+		return customerServiceNoticeMapper.notice_modify(customerServiceNotice);
+	}
+	
 	/*
 	@Override
 	public void insertS(Address address) {

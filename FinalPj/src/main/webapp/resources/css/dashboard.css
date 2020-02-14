@@ -1614,8 +1614,8 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 .table thead th, .text-wrap table thead th {
 	border-top: 0;
 	border-bottom-width: 1px;
-	padding-top: .5rem;
-	padding-bottom: .5rem;
+	padding-top: .75rem;
+	padding-bottom: .75rem;
 }
 .table th, .text-wrap table th {
 	color: #605e7e;
