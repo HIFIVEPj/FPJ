@@ -23,24 +23,43 @@
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 
+	<!-- 원래 있던거  -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+	<!-- 	<property name="mapperLocations" value="classpath*:fp/member/mapper/*.xml" /> -->
 	</bean>
-	
-	 <!-- SqlSession 객체 주입 -->
+		<!-- 내가 추가해보기  여기는 됨     -->
+		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+		</bean> 
+		 <!-- SqlSession 객체 주입 
     <bean id="sqlSession" class= "org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory">
-        
-        </constructor-arg>
-    </bean>
+        </constructor-arg> 
+    </bean> -->
+
+		<!--  또추가 여기하면 오류 
+		<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSession"/>
+		</bean> -->
 	
+
+    <!-- 20.02.12 집에서 추가해봄 -->
+	  <!--     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+		</bean> 
+	   <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSession"/>
+    </bean> -->
+
 	<!-- 메일인증 추가  -->
 	  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	    <property name="host" value="smtp.gmail.com" />
 	    <property name="port" value="587" />
-	    <property name="username" value="dam7319@gmail.com" />
-	    <property name="password" value="" />
+	    <property name="username" value="구글아이디" />
+	    <property name="password" value="구글비밀번호" />
 	    <property name="javaMailProperties">
 	    <props>
 	      <prop key="mail.smtp.auth">true</prop>
@@ -49,10 +68,11 @@
 	    </property>
 	  </bean>
 	
-		<context:component-scan base-package="fp.member.service"/>		
+		<context:component-scan base-package="fp.member.service"/>
+		<context:component-scan base-package="fp.member.domain"/>
+		<context:component-scan base-package="fp.member.dao"/>				
 		<context:component-scan base-package="fp.member.mapper"/>
-		<mybatis-spring:scan base-package="fp.member.mapper"/>
-		
+		<mybatis-spring:scan base-package="fp.member.mapper"/>	
 	
 		<context:component-scan base-package="fp.member.aop"/>
 		<context:annotation-config></context:annotation-config>

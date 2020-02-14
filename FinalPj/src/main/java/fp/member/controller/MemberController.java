@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.service.MemberService;
@@ -49,10 +48,10 @@ public class MemberController {
     @Autowired
     MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
     
-    @Autowired
-    BCryptPasswordEncoder pwdEncoder;
+   @Autowired
+    BCryptPasswordEncoder bcryptPasswordEncoder;
     
-	@RequestMapping("/register")
+	@RequestMapping("register")
 	public String reg() {
 		return "member/register";
 	}    
@@ -158,7 +157,12 @@ public class MemberController {
     
     @RequestMapping(value = "signup.do" , method=RequestMethod.POST )
     public String signUp (Member member) throws IOException {
-    	member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
+    	String bcpwd=member.getPwd();
+    	member.setPwd(BCrypt.hashpw(bcpwd, BCrypt.gensalt(10)));
+    	//BCryptPasswordEncoder pwEncoder =new BCryptPasswordEncoder();
+    	//String password = pwEncoder.encode(member.getPwd());
+    	//member.setPwd(password);
+    	//member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
     	//dto.setPassword(BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt()));
     	memberservice.insertM(member);
     	System.out.println("member: " + member);

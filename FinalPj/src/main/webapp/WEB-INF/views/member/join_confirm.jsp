@@ -39,7 +39,8 @@
 									<div class="input-group mb-5">
 										<input type="text" name="email_injeung" value="${email_injeung}" class="form-control" placeholder="인증번호를 입력해 주세요.">
 										<div class="input-group-append">
-											<button class="btn btn-secondary"  id="emailAuthBtn">인증</button>
+											<button type="submit" class="btn btn-primary btn-block">인증하기</button>
+										<!--<button class="btn btn-secondary"  id="emailAuthBtn">인증</button> -->
 										</div>
 									</div>
 									<div class="" id="email_check">여기여기여기여기여기여기여기</div>

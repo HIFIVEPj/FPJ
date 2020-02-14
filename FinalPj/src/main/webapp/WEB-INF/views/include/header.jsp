@@ -43,7 +43,7 @@
 		<link href="../css/dashboard.css" rel="stylesheet" />
 
 		<!-- Font-awesome  Css -->
-		<link rel="stylesheet" href="..//fonts/fonts/font-awesome.min.css">
+		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
 
 		<!--Horizontal Menu-->
 		<link href="../plugins/Horizontal2/Horizontal-menu/dropdown-effects/fade-down.css" rel="stylesheet" />
@@ -114,14 +114,19 @@
 						<div class="col-xl-4 col-lg-4 col-sm-8 col-5">
 							<div class="top-bar-right">
 								<ul class="custom">
+									<c:choose>
+									<c:when test="${empty sessionScope.email}">
 									<li>
 										<a href="register" class="text-dark"><i class="fa fa-user mr-1" style="color:#1f719a;"></i> <span>회원가입</span></a>
 									</li>
+									
 									<li>
-										<!--<sec:authorize access="isAnonymous()">	-->								
-										<a href='<c:url value="/member/login"/>' class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
-										<!--</sec:authorize>		-->								
+									<!--<a href='<c:url value="/member/login"/>' class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a> -->	
+										<a href="member/login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
 									</li>
+									</c:when>
+									<c:otherwise>
+										<h>${sessionScope.email}님 환영합니다.</h>														
 									<li class="dropdown">
 										<a href="#" class="text-dark" data-toggle="dropdown"><i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
@@ -142,11 +147,13 @@
 												<i class="dropdown-icon  si si-settings" style="color:#1f719a;"></i> Account Settings
 											</a>
 											-->
-											<a class="dropdown-item" href="#">
+											<a href="logout.do" class="dropdown-item">
 												<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
 											</a>
 										</div>
 									</li>
+									</c:otherwise>
+									</c:choose>
 								</ul>
 							</div>
 						</div>

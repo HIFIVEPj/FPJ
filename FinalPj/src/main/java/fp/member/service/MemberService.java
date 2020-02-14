@@ -10,12 +10,15 @@ import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 
 public interface MemberService {
-	//Member listM(String email);
-	List<EmailAuth> listA(String email);
+
+	List<EmailAuth> listA(String email); 
+	public boolean mailCheck(EmailAuth emailAuth);
+	
 	void insertM(Member member);	
 	void insertAuth(Map map);
 	void deleteS(long seq);
 	
+
 	/*
 	public boolean loginCheck(Member member,HttpSession session);
 	public void logout(HttpSession session); */

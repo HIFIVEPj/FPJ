@@ -2,11 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
-
 		<!--Sliders Section-->
 		<section>
 			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
@@ -71,14 +69,14 @@
 													</div>
 												</div>
 												<hr class="divider">
-												<form class="form-group" action='<c:url value="/login_check"/>' method="post">
+												<form class="form-group" action="/login_check" method="post">
 												<div class="form-group">
 													<label class="form-label text-dark">Email</label>
-													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요">
+													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" >
 												</div>
 												<div class="form-group">
 													<label class="form-label text-dark">비밀번호</label>
-													<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password">
+													<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" >
 												</div>
 												
 												<c:if test="${param.err == true}">
@@ -94,10 +92,10 @@
 													</label>
 												</div>
 												<div class="form-footer mt-2">
-													<!-- <a href="index.html" class="btn btn-primary btn-block">SignIn</a> -->													
-													<input type="submit" class="btn btn-primary btn-block" value="로그인">
-													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
+													<!-- <a href="index.html" class="btn btn-primary btn-block">SignIn</a> -->									
+													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>													
+													<input type="submit" class="btn btn-primary btn-block" id="login_bt" value="로그인">
+													
 												</div>
 												<div class="text-center  mt-3 text-dark">
 													<span class="font-12">아직 멤버가 아니십니까?</span> <a href="register" class="color-hover-sign">SignUp</a>
