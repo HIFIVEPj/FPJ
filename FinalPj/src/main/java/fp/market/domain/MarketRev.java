@@ -2,6 +2,7 @@ package fp.market.domain;
 
 import java.sql.Date;
 
+import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,8 @@ public class MarketRev {
 	private long market_num;
 	private String mem_email;
 
-	
+//	private MarketRevComm marketRevComm; 없애버려
+	public MarketPagingVO marketRevVO;
+	private Freelancer freelancer;
+	private Corporation corporation;
 }

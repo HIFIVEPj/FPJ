@@ -7,8 +7,12 @@
    
 		<typeAlias alias="Market" type="fp.market.domain.Market"/>
 		<typeAlias alias="MarketVO" type="fp.market.utils.MarketPagingVO"/>
-		<typeAlias alias="Freelancer" type="fp.market.domain.Freelancer"/>
+		<typeAlias alias="mFreelancer" type="fp.market.domain.Freelancer"/>
 		<typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
+		<typeAlias alias="MarketRevComm" type="fp.market.domain.MarketRevComm"/>
+		<typeAlias alias="MarketQA" type="fp.market.domain.MarketQA"/>
+		<typeAlias alias="mFreelancerProfile" type="fp.market.domain.FreelancerProfile"/>
+		<typeAlias alias="mCorporation" type="fp.market.domain.Corporation"/>
    <!-- 
    	   <typeAlias alias="Board" type="song.md.domain.Board"/>
    	   <typeAlias alias="BoardVo" type="song.md.domain.BoardVo"/>
@@ -24,3 +28,4 @@
    </mappers>
 --> 
 </configuration>
+

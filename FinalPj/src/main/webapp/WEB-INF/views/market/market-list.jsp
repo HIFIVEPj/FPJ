@@ -188,7 +188,7 @@
 													<div class="d-md-flex">
 														<div class="item-card9-img">
 															<div class="item-card9-imgs">
-																<a href="market-details"></a>
+																<a href="market-content"></a>
 																<img src="../images/products/h4.png" alt="img" class="cover-image h-100">
 															</div>
 															<div class="item-card9-icons">
@@ -242,7 +242,7 @@
 														<div class="item-card9-img">
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
-																<a href="market-details"></a>
+																<a href="market-content?market_num=${list.market_num}"></a>    
 																<img src="../images/products/h4.png" alt="img" class="cover-image h-100">
 															</div>
 															<div class="item-card9-icons">
@@ -251,25 +251,27 @@
 														</div>
 														<div class="card-body">
 															<div class="item-card9">
-																<a href="market-details">${list.freelancer.free_name}</a>
-																<a href="market-details" class="text-dark mt-2"><h4 class="font-weight-semibold mt-1">개발자다 </h4></a>
-																<p>나는개발자 올사람은 와라 돈많이줄사람만</p>
+																<a href="market-content?market_num=${list.market_num}">${list.freelancer.free_name}</a>
+																<a href="market-content?market_num=${list.market_num}" class="text-dark mt-2"><h4 class="font-weight-semibold mt-1">${list.market_sub}</h4></a>
+																<p>${list.market_cont}</p>
 																<div class="item-card9-desc">
-																	<h2>22,000 <span class="fs-16">원</span></h2>
+																	<h2>${list.market_price}<span class="fs-16">원</span></h2>
 																	<div class="item-card2-rating mb-0">
 																	 <div class="rating-stars d-inline-flex">
 																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="5">
 																		<span class="rated-products-ratings">
-																			<i class="fa fa-star text-warning"> </i>
-																			<i class="fa fa-star text-warning"> </i>
-																			<i class="fa fa-star text-warning"> </i>
-																			<i class="fa fa-star text-warning"> </i>
-																			<i class="fa fa-star-o text-warning"> </i>
-																		</span>&nbsp;5.0&nbsp;&nbsp;&nbsp;
-																		
+																			<c:if test="${list.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																				<c:forEach var="1" begin="1" end="${list.marketRev.marketRev_star}">
+																					<i class="fa fa-star text-warning"> </i>
+																				</c:forEach>
+																				<c:forEach var="1" begin="1" end="${5-list.marketRev.marketRev_star}">
+																					<i class="fa fa-star-o text-warning"> </i>
+																				</c:forEach>	
+																			</c:if>
+																		</span>&nbsp;${list.marketRev.marketRev_star}&nbsp;&nbsp;&nbsp;
 																		<div>
-																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
+																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> ${list.marketRev.marketRev_num}</span></a>
+																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i>${list.market_vcnt}</span></a>
 																		</div>
 																		
 																	 </div>
