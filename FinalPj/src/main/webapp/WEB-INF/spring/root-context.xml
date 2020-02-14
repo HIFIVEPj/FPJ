@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
 <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
@@ -28,7 +28,6 @@
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
 		<property value="classpath:/fp/customer_service/mapper/*Mapper.xml" name="mapperLocations" />
 	</bean>
-	
 	<!-- 소담 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"/>
@@ -82,18 +81,16 @@
 	
 	
 	<!-- 
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 	<context:component-scan base-package="song.md.aop"/>
 	  --> 
 	
 	<context:annotation-config></context:annotation-config>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<tx:annotation-driven />
-	
-	
-</beans>
+
+</beans> 
+

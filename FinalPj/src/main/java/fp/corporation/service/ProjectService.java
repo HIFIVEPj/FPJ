@@ -7,6 +7,7 @@ import java.util.Map;
 
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.Keyword;
+import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
 import fp.corporation.vo.ProjectKeyNameVo;
 import fp.corporation.vo.ProjectVo;
@@ -23,5 +24,5 @@ public interface ProjectService {
 	void insertPjpkeyword(Map<String, Object> map);
 	
 	void updatePj(Project project);
-	void updateKeyword(Map<String, Object> map);
+	void updateKeyword(PjPickKeyword pjpkeyword);
 }
