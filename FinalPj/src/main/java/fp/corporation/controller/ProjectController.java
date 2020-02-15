@@ -97,6 +97,7 @@ public class ProjectController {
 		for(int i = 0; i<ListIntKeyNum.length; i++) {
 			arraykeynum.add(ListIntKeyNum[i]);
 		}
+
 		pjpkeyword.setKey_numList(arraykeynum);
 		
 		//Map<String,Object> updateMap  = new HashMap<String,Object>();

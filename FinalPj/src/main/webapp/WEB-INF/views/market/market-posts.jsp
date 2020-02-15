@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -95,11 +96,13 @@
 										
 									</div>
 								<input type="text" class="form-control" placeholder="기타 선택시 입력하세요">
-								</div>		
+								</div>
+								<!--		
 								<div class="form-group">
 									<label class="form-label text-dark"></label>
 								    <div id="summernote"></div>
 								</div>
+								-->
 					<!-- 썸머노트 -->
 	                     <textarea name="content" id="summernote" class="summernote"></textarea>     
 	                     <script src="/summernote/lang/summernote-ko-KR.js"></script>
@@ -270,4 +273,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 <!--/footer-->

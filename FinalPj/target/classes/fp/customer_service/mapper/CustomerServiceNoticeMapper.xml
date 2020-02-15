@@ -34,8 +34,6 @@
 	
 	<update id="notice_modify" parameterType="CustomerServiceNotice">
 		update notice set notice_cate=#{notice_cate}, notice_sub=#{notice_sub}, notice_cont=#{notice_cont} where notice_num=#{notice_num}
-		
 	</update>
-	
 	
 </mapper>

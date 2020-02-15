@@ -1805,4 +1805,5 @@
 	//});
 </script>
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 40adcb1c1bb4048ace11f8f638431fb91f0f837d
 <!--/footer-->

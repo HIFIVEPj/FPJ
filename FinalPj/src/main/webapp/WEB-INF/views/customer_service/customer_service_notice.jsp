@@ -7,17 +7,45 @@
 <!--/header-->
 
 		<!--Sliders Section-->
+		<!--
 		<section>
 			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
 				<div class="header-text mb-0">
 					<div class="container">
-						<div class="text-center text-white ">
+						<div class="text-center text-white">
 							<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		-->
+		<!--/Sliders Section-->
+
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
 			</div>
-		</section>
+		</div>
 		<!--/Sliders Section-->
 
 		<!--Breadcrumb-->
@@ -86,4 +114,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 <!--/footer-->

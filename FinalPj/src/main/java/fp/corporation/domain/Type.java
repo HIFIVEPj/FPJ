@@ -1,3 +1,4 @@
+
 package fp.corporation.domain;
 
 import lombok.Data;

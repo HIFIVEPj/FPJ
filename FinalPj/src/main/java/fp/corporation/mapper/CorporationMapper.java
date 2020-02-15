@@ -1,3 +1,4 @@
+
 package fp.corporation.mapper;
 
 import fp.corporation.domain.Corporation;

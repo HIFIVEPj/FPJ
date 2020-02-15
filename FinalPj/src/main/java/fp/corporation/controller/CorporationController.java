@@ -1,3 +1,4 @@
+
 package fp.corporation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import lombok.extern.log4j.Log4j;
 public class CorporationController {
 	@Autowired
 	private CorporationService service;
-	
+
 	@GetMapping("mydash_cor")
 	public String write() {
 		return "mydash_cor";
@@ -27,3 +28,4 @@ public class CorporationController {
 		return "mydash_cor";
 	}
 }
+

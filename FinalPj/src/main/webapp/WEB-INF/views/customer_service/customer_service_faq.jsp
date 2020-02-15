@@ -6,6 +6,7 @@
 <!--/header-->
 
 		<!--Breadcrumb-->
+		<!--
 		<section>
 			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
 				<div class="header-text mb-0">
@@ -22,6 +23,47 @@
 				</div>
 			</div>
 		</section>
+		 -->
+		<!--/Breadcrumb-->
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">FAQ</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">FAQ</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item active" aria-current="page">FAQ</li>
+					</ol>
+				</div>
+			</div>
+		</div>
 		<!--/Breadcrumb-->
 
 		<!--Add listing-->
@@ -34,10 +76,10 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색어 입력">
 									<div class="input-group-append ">
 										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
-											Search
+											<i class="fa fa-binoculars"></i>&nbsp;&nbsp;검색
 										</button>
 									</div>
 								</div>
@@ -45,7 +87,7 @@
 						</div>
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Categories</h3>
+								<h3 class="card-title">FAQ 분류</h3>
 							</div>
 							<div class="card-body p-0">
 								<div class="list-catergory">
@@ -53,44 +95,50 @@
 										<ul class="list-group mb-0">
 											<li class="list-group-item">
 												<a href="#" class="">
-													Settings
-													<span class="badgetext badge badge-pill badge-secondary mb-0">14</span>
+													프로젝트
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">14</span>
 												</a>
 											</li>
 											<li class="list-group-item">
 												<a href="#" class="">
-													Account
-													<span class="badgetext badge badge-pill badge-secondary mb-0">63</span>
+													프리마켓
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">63</span>
 												</a>
 											</li>
 											<li class="list-group-item">
 												<a href="#" class="">
-													Billing
-													<span class="badgetext badge badge-pill badge-secondary mb-0">25</span>
+													프리랜서
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">25</span>
 												</a>
 											</li>
 											<li class="list-group-item">
 												<a href="#" class="">
-													Copyright
-													<span class="badgetext badge badge-pill badge-secondary mb-0">74</span>
+													가입/탈퇴
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">74</span>
 												</a>
 											</li>
 											<li class="list-group-item">
 												<a href="#" class="">
-													Customization
-													<span class="badgetext badge badge-pill badge-secondary mb-0">18</span>
+													회원정보
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">18</span>
 												</a>
 											</li>
 											<li class="list-group-item">
 												<a href="#" class="">
-													Getting Started
-													<span class="badgetext badge badge-pill badge-secondary mb-0">32</span>
+													결제/환불
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">32</span>
+												</a>
+											</li>
+											<li class="list-group-item">
+												<a href="#" class="">
+													할인
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">08</span>
 												</a>
 											</li>
 											<li class="list-group-item border-bottom-0">
 												<a href="#" class="">
-													Trouble Shooting
-													<span class="badgetext badge badge-pill badge-secondary mb-0">08</span>
+													기타
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a; color:#fff;">08</span>
 												</a>
 											</li>
 										</ul>
@@ -102,22 +150,47 @@
 							<div class="card-header">
 								<h3 class="card-title">최신 문의글</h3>
 							</div>
-							<div class="card-body">
-								<div class="pb-3 border-bottom">
-									<div class="mb-2"><a href="support.html"><span class=""><i class="fa fa-question-circle-o" aria-hidden="true"></i> How Can I Add another page in Template?</span></a></div>
-									<span class="badge badge-primary"><i class="fa fa-eye"></i> 522</span>
-									<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 23</span>
-								</div>
-								<div class="pb-3 pt-3 border-bottom">
-									<div class="mb-2"><a href="support.html"><span class=""><i class="fa fa-question-circle-o" aria-hidden="true"></i> Move Detials From One Page to Another Page?</span></a></div>
-									<span class="badge badge-primary"><i class="fa fa-eye"></i> 652</span>
-									<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 54</span>
-								</div>
-								<div class="pt-3">
-									<div class="mb-2"><a href="support.html"><span class=""><i class="fa fa-question-circle-o" aria-hidden="true"></i> How Can I Change My Details?</span></a></div>
-									<span class="badge badge-primary"><i class="fa fa-eye"></i> 147</span>
-									<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 14</span>
-								</div>
+							<div class="card-body pb-3">
+								<ul class="vertical-scroll">
+									<li class="item">
+										<div class="p-3">
+											<!--
+											<div class="mb-2"><a href="support.html"><span class="fs-16"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 최신 문의글 테스트1</span></a></div>
+											-->
+											<div class="mb-2" data-toggle="tooltip" data-placement="bottom" title="공사중"><span class="fs-16"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 최신 문의글 테스트1</span></a></div>
+											<span class="badge badge-primary"><i class="fa fa-eye"></i> 522</span>
+											<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 23</span>
+										</div>
+									</li>
+									<li class="item">
+										<div class="p-3">
+											<div class="mb-2" data-toggle="tooltip" data-placement="bottom" title="공사중"><span class="fs-16"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 최신 문의글 테스트2</span></a></div>
+											<span class="badge badge-primary"><i class="fa fa-eye"></i> 652</span>
+											<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 54</span>
+										</div>
+									</li>
+									<li class="item">
+										<div class="p-3">
+											<div class="mb-2" data-toggle="tooltip" data-placement="bottom" title="공사중"><span class="fs-16"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 최신 문의글 테스트3</span></a></div>
+											<span class="badge badge-primary"><i class="fa fa-eye"></i> 147</span>
+											<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 14</span>
+										</div>
+									</li>
+									<li class="item">
+										<div class="p-3">
+											<div class="mb-2" data-toggle="tooltip" data-placement="bottom" title="공사중"><span class="fs-16"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 최신 문의글 테스트4</span></a></div>
+											<span class="badge badge-primary"><i class="fa fa-eye"></i> 965</span>
+											<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 35</span>
+										</div>
+									</li>
+									<li class="item">
+										<div class="p-3">
+											<div class="mb-2" data-toggle="tooltip" data-placement="bottom" title="공사중"><span class="fs-16"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 최신 문의글 테스트5</span></a></div>
+											<span class="badge badge-primary"><i class="fa fa-eye"></i> 654</span>
+											<span class="badge badge-success"><i class="fa fa-thumbs-up"></i> 17</span>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -126,141 +199,147 @@
 					<div class="col-xl-9 col-lg-8 col-md-12">
 						<div class="card mb-lg-0">
 							<div class="card-header">
-								<h3 class="card-title">Frequently Asked Questions / Settings</h3>
+								<h3 class="card-title">FAQ / 프로젝트</h3>
 							</div>
 							<div class="card-body">
 								<div class="panel-group1" id="accordion2">
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1 ">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse1" aria-expanded="false">How To Insert All The Plugins?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse1" aria-expanded="false">FAQ 테스트1</a>
 											</h4>
 										</div>
+										<!--
 										<div id="collapse1" class="panel-collapse collapse show" role="tabpanel" aria-expanded="false">
+										-->
+										<div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트1</p>
+												<p>FAQ 테스트1</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false">Can I use this Plugins in Another Template?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false">FAQ 테스트2</a>
 											</h4>
 										</div>
 										<div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트2</p>
+												<p>FAQ 테스트2</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1 ">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse3" aria-expanded="false">How Can I Add another page in Template?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse3" aria-expanded="false">FAQ 테스트3</a>
 											</h4>
 										</div>
 										<div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트3</p>
+												<p>FAQ 테스트3</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse4" aria-expanded="false">How Can I contact?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse4" aria-expanded="false">FAQ 테스트4</a>
 											</h4>
 										</div>
 										<div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트4</p>
+												<p>FAQ 테스트4</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1 ">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse5" aria-expanded="false">How can I download This template?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse5" aria-expanded="false">FAQ 테스트5</a>
 											</h4>
 										</div>
 										<div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트5</p>
+												<p>FAQ 테스트5</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse6" aria-expanded="false">It is Easy to Customizable?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse6" aria-expanded="false">FAQ 테스트6</a>
 											</h4>
 										</div>
 										<div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트6</p>
+												<p>FAQ 테스트6</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse7" aria-expanded="false">What does it Cost to advertise?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse7" aria-expanded="false">FAQ 테스트7</a>
 											</h4>
 										</div>
 										<div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트7</p>
+												<p>FAQ 테스트7</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1 ">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse8" aria-expanded="false">What Classifieds Categories do you offer?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse8" aria-expanded="false">FAQ 테스트8</a>
 											</h4>
 										</div>
 										<div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트8</p>
+												<p>FAQ 테스트8</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default mb-4">
 										<div class="panel-heading1">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse9" aria-expanded="false">How do I pay for my classified ad?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse9" aria-expanded="false">FAQ 테스트9</a>
 											</h4>
 										</div>
 										<div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트9</p>
+												<p>FAQ 테스트9</p>
 											</div>
 										</div>
 									</div>
 									<div class="panel panel-default">
 										<div class="panel-heading1 ">
 											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse10" aria-expanded="false">Do you offer frequency Discounts?</a>
+												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse10" aria-expanded="false">FAQ 테스트10</a>
 											</h4>
 										</div>
 										<div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
 											<div class="panel-body border-top-0 text-justify">
-												<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+												<p>FAQ 테스트10</p>
+												<p>FAQ 테스트10</p>
 											</div>
 										</div>
 									</div>
 								</div>
+							</div>
+							<div class="card-footer text-right">				
+								<div class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="공사중"><i class="si si-pencil"></i>&nbsp;글쓰기</div>
 							</div>
 						</div>
 					</div>
@@ -343,4 +422,5 @@
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
+>>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 		
