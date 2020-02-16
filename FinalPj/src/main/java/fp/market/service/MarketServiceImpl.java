@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import fp.corporation.domain.Corporation;
+import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketContent;
 import fp.market.domain.MarketQA;
@@ -22,13 +24,13 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.getMarketCount();
 	}
 	@Override
-	public int getMarketRevCount() {
-		return mapper.getMarketRevCount();
+	public int getMarketRevCount(long market_num) {
+		return mapper.getMarketRevCount(market_num);
 	}
 
 	@Override
-	public int getMarketQACount() {
-		return mapper.getMarketQACount();
+	public int getMarketQACount(long market_num) {
+		return mapper.getMarketQACount(market_num);
 	}
 
 	@Override
@@ -42,7 +44,6 @@ public class MarketServiceImpl implements MarketService {
 	}
 	@Override
 	public int getMarketStar(long market_num) {
-		// TODO Auto-generated method stub
 		return mapper.getMarketStar(market_num);
 	}
 
@@ -83,6 +84,12 @@ public class MarketServiceImpl implements MarketService {
 		mapper.insertMarket(market);
 		
 	}
+	@Override
+	public void insertMarketRev(MarketRev mareketRev) {
+		mapper.insertMarketRev(mareketRev);
+		
+	}
+	
 
 	
 

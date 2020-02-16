@@ -183,13 +183,13 @@
 		SELECT COUNT(*) FROM MARKET where market_state=1
 	</select>
 	<!-- 마켓리뷰 총 게시글 갯수 출력 -->
-	<select id="getMarketRevCount" resultType="Integer">
+	<select id="getMarketRevCount" resultType="Integer" parameterType="long">
 	<!-- SELECT (SELECT COUNT(*) FROM MARKET_REVIEW) + (SELECT COUNT(*) FROM MARKET_REVIEWCOMMENT) FROM DUAL -->
-		SELECT COUNT(*) FROM MARKET_REVIEW
+		SELECT COUNT(*) FROM MARKET_REVIEW where market_num=#{market_num}
 	</select>
 	<!-- 마켓문의 총 게시글 갯수 출력 -->
-	<select id="getMarketQACount" resultType="Integer">
-		SELECT COUNT(*) FROM MARKET_QA
+	<select id="getMarketQACount" resultType="Integer" parameterType="long">
+		SELECT COUNT(*) FROM MARKET_QA where market_num=#{market_num}
 	</select>
 	
 	<!-- 페이징 처리 후 게시글 조회 -->
@@ -216,10 +216,11 @@
 	<!-- 마켓문의페이징 -->	
 	<select id="getMarketQA" resultMap="resultMarketQA" parameterType="hashmap">
 		<![CDATA[
-		select * from (select * from 
-		(select rownum rnum , aa.* from
-		(select COR_MNAME,MARKETQA_NUM,MARKET_NUM,MARKETQA_SUB,MARKETQA_CONT,MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX,mq.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_QA mq left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) aa )
-		where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd})where MARKET_NUM=#{market_num}
+		select * from 
+	    (select rownum rnum , aa.* from
+	        (select COR_MNAME,MARKETQA_NUM,MARKET_NUM,MARKETQA_SUB,MARKETQA_CONT,MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX,mq.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_QA mq 
+	        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
+	    aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
 		]]>
 	</select>
 								<!--	select * from (select * from 
@@ -249,21 +250,44 @@
 <!-- 마켓문의 insert update -->	
 
 	
-	
+<!-- 마켓리뷰 페이징보기 -->	
 	<select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">
 		<![CDATA[
-		select * from (select * from 
-		(select rownum rnum ,aa.* from
-		(select COR_MNAME,MARKETREV_NUM,MARKETREV_CONT,MARKETREV_STAR,MARKETREV_RDATE,MARKET_NUM,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL  left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL order by MARKETREV_NUM desc) aa )
-		where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
+			select * from (select rownum rnum , aa.* from (select COR_MNAME,COR_FNAME,COR_OFNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
+			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETREV_NUM desc) aa )where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd}
 		]]>
+		
+		<!--이상하게봅히는 전쿼리
+			<![CDATA[
+			select * from (select * from 
+			(select rownum rnum ,aa.* from
+			(select COR_MNAME,MARKETREV_NUM,MARKETREV_CONT,MARKETREV_STAR,MARKETREV_RDATE,MARKET_NUM,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
+			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL 
+			JOIN CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL order by MARKETREV_NUM desc) aa )
+			where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
+			]]>
+		-->
+		<!--	프리이름이안뽑히는쿼리
+			select * from (select * from 
+			(select rownum rnum , aa.* from
+			(select * from MARKET_REVIEW order by MARKETREV_NUM desc) aa )
+			where rnum >#{marketVORevStart}  and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
+		-->	
 	</select>
-										<!--	프리이름이안뽑히는쿼리
-											select * from (select * from 
-											(select rownum rnum , aa.* from
-											(select * from MARKET_REVIEW order by MARKETREV_NUM desc) aa )
-											where rnum >#{marketVORevStart}  and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
-										-->	
+	<!-- 마켓리뷰 프리이름									
+	<select id="getMarketRevFree" resultType="Freelancer" parameterType="long">
+		select FREE_CODE, mr.MEM_EMAIL, FREE_NAME,FREE_FNAME,FREE_OFNAME from FREELANCER f join MARKET_REVIEW mr
+		on mr.MEM_EMAIL=f.MEM_EMAIL where mr.MARKET_NUM=#{market_num}
+	</select>	
+	또는 기업이름			
+	<select id="getMarketRevCor" resultType="Corporation" parameterType="long" >
+		select COR_MNAME, COR_FNAME ,COR_OFNAME, mr.MEM_EMAIL from CORPORATION cor join MARKET_REVIEW mr on mr.MEM_EMAIL=cor.MEM_EMAIL where mr.MARKET_NUM=#{market_num}
+	</select>									
+	-->									
+<!-- 마켓리뷰insert -->
+<insert id="insertMarketRev" parameterType="MarketRev" >
+	insert into MARKET_REVIEW values(MARKETREV_NUM_SEQ.NEXTVAL,#{marketRev_cont},#{marketRev_star},SYSDATE,#{market_num},#{mem_email},null,null,null)
+</insert>
 <!-- 마켓 프리랜서 정보뽑기 -->
 	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">
 		select f.FREE_NAME, fp.PRO_CV, f.FREE_RDATE, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME

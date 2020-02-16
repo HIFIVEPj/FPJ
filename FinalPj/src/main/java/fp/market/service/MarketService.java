@@ -3,6 +3,8 @@ package fp.market.service;
 import java.util.HashMap;
 import java.util.List;
 
+import fp.corporation.domain.Corporation;
+import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
@@ -12,10 +14,10 @@ public interface MarketService {
 	 int getMarketCount();
 	 
 	 //리뷰 페이징에 필요한 총 리뷰 수	 
-	int getMarketRevCount();
+	int getMarketRevCount(long market_num);
 	
 	//문의 페이징에 필요한 총 문의 수 
-	 int getMarketQACount();
+	 int getMarketQACount(long market_num);
 	 
 	 List<Market> getMarketList(MarketPagingVO marketVO);
 //	 Market getMarketContent(long market_num);
@@ -28,7 +30,12 @@ public interface MarketService {
 	 void deleteMarket(long market_num);
 	 Market updateMarket1(long market_num);
 	 void updateMarket2(Market market);
-	 MarketQA insertMarketQA(MarketQA marketQA);
 	 void insertMarket(Market market);
+	
+	 MarketQA insertMarketQA(MarketQA marketQA);
+	 void insertMarketRev(MarketRev mareketRev);
+	 
+	// List<Freelancer> getMarketRevFree(long market_num);
+	// List<Corporation> getMarketRevCor(long market_num);
 
 }

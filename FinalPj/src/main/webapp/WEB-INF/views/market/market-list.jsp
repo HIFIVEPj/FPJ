@@ -92,15 +92,15 @@
 									<div class="filter-product-checkboxs">
 										<label for="개발" class="custom-control custom-checkbox mb-3">
 											<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1"  id="개발">
-											<span class="custom-control-label" class="text-dark">개발<span class="label label-secondary float-right">14</span>
+											<span class="custom-control-label" class="text-dark">개발자<span class="label label-secondary float-right">14</span>
 											</span>
 										</label>
 										<label for="퍼블리싱" class="custom-control custom-checkbox mb-3">
 											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="퍼블리싱">
-											<span class="custom-control-label" class="text-dark">퍼블리싱<span class="label label-secondary float-right">22</span>
+											<span class="custom-control-label" class="text-dark">디자이너<span class="label label-secondary float-right">22</span>
 											</span>
 										</label>
-										<label for="디자인" class="custom-control custom-checkbox mb-3">
+									<!--<label for="디자인" class="custom-control custom-checkbox mb-3">
 											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="디자인">
 											<span class="custom-control-label" class="text-dark">디자인<span class="label label-secondary float-right">22</span>
 											</span>
@@ -114,7 +114,7 @@
 											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="기타">
 											<span class="custom-control-label" class="text-dark">기타<span class="label label-secondary float-right">22</span>
 											</span>
-										</label>
+										</label>  -->	
 									</div>
 								</div>
 							</div>

@@ -256,42 +256,41 @@
 					<c:if test="${fn:length(marketRev) > 0}">	
 						<c:forEach var="marketRev" items="${marketRev}">
 							<div class="card-body p-0">
-								<div class="media mt-0 p-5">
+								<div class="media mt-0 p-5" id="ajaxRev">
                                     <div class="d-flex mr-3">
                                         <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
                                     </div>
                                     <div class="media-body">
-                                    	<c:choose>
-	                                    	<c:when test="${marketRev.freelancer != null}">
-	                                       		<h5 class="mt-0 mb-1 font-weight-semibold">${marketRev.freelancer.free_name}</h5> 
-	                                     	</c:when>
-	                                     	<c:otherwise>
-	                                       		<h5 class="mt-0 mb-1 font-weight-semibold">${marketRev.corporation.cor_mname} </h5>
-	                                     	</c:otherwise>
-                                     	</c:choose>
+                                    	<h5>
+	                                    	<c:if test="${marketRev.freelancer != null}">
+	                                       		<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_name">${marketRev.freelancer.free_name}</h5> 
+	                                     	</c:if>
+	                                     	<c:if  test="${marketRev.freelancer == null && marketRev.corporation !=null }">
+	                                       		<h5 class="mt-0 mb-1 font-weight-semibold" name="cor_mname" id="cor_mname">${marketRev.corporation.cor_mname} </h5>
+	                                     	</c:if>
+                                     		<c:if  test="${marketRev.freelancer == null && marketRev.corporation ==null }">
+	                                       		<h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_email">${marketRev.mem_email} </h5>
+	                                     	</c:if>
 											<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-											<span class="fs-14 ml-2"> ${marketRev.marketRev_star}  <i class="fa fa-star text-yellow"></i></span>
+											<span class="fs-14 ml-2" name="marketRev_star" id="star" > ${marketRev.marketRev_star}  <i class="fa fa-star text-yellow"></i></span>
 										</h5>
-										<small class="text-muted"><i class="fa fa-calendar"></i> ${marketRev.marketRev_rdate} </small>
-                                        <p class="font-13  mb-2 mt-2">
-                                         
-                                          ${marketRev.marketRev_cont}
-                                        </p>
-									<!--<a href="#" class="mr-2"><span class="badge badge-primary">Helpful</span></a>  -->	
-									<!--<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary">comment</span></a>-->	
-									<!--<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-primary">Report</span></a>-->	
-                            <!-- 댓글 -->	
-                            <!-- 대댓글 -->           
-
-				                            &nbsp;&nbsp; <!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
-
+										<small class="text-muted" id="rdate" name="marketRev_rdate"><i class="fa fa-calendar"></i> ${marketRev.marketRev_rdate} </small>
+                                        <p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="content"> ${marketRev.marketRev_cont}</p>
 								<!-- 대댓글 -->     		
 									</div>
 								</div>
 							</div>
 					</c:forEach>	
 					</c:if>		
-						</div>
+					<c:if test="${fn:length(marketRev) == 0}">		
+							<div class="card-body p-0">
+								<div class="media mt-0 p-5">
+					               <div class="media-body"><text align="center"> 등록된 리뷰가 없습니다</text></div>
+								</div>
+							</div>
+					</c:if>		
+										
+				</div>
 						
 				<!--마켓리뷰페이징  -->		
 				<c:if test="${fn:length(marketRev) > 0}">	
@@ -341,7 +340,11 @@
 				
 						<br/><br/>
 						<!--/Comments-->
-					<form name="mrInput" id="mrInputID" method="post" action="marketRev-insert">
+					<form name="mrInput" id="mrInputID" action="marketRev-insert" >
+						<input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.email}"><!-- value="hyunbin@naver.com" -->
+					<!--<input type="hidden" id="marketRev_num" name="marketRev_num" value="${marketRev_num}"> -->
+					<!--<input type="hidden" id="marketRev_rdate" name="marketRev_rdate" value="${marketRev_rdate}"> -->
+					    <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">리뷰 남기기</h3>
@@ -368,20 +371,26 @@
 													<i class="fa fa-star"></i>
 												</div>
 											</div>
-											
 										</div>
-									</div>
-									
+									</div>									
 									<div class="col-md-6 text-center align-items-center"></div>
 									<!--
 									<div class="form-group">
 										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
 									</div>
 									  -->
-									<div class="form-group">
-										<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="Comment"></textarea>
-									</div>
-									<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
+									 <c:if test="${sessionScope.email !=null}" >
+										<div class="form-group">
+											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="Comment">${marketRev_cont}</textarea>
+										</div>	
+										<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
+									</c:if>		
+									<c:if test="${sessionScope.email ==null}" >
+										<div class="form-group">
+											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+										</div>	
+									</c:if>		
+									
 								</div>
 							</div>
 						</div>
@@ -393,10 +402,8 @@
 							<div class="card-header">
 								<h3 class="card-title">문의</h3>
 							</div>
-						<c:if test="${fn:length(marketQA) > 0}">		
-							
-							 <div class="card-body p-0">
-											 
+						<c:if test="${fn:length(marketQA) > 0}">				
+							 <div class="card-body p-0">									 
 								<c:forEach var="marketQA" items="${marketQA}">
 								<div  id="replyItem<c:out value="${replylist.reno}"/>" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: <c:out value="${40*marketQA.marketQA_lev}"/>px; display: inline-block">
 								<div class="media mt-0 p-5">
@@ -439,6 +446,13 @@
 								</c:forEach>
 							</div>
 						</c:if>	
+						<c:if test="${fn:length(marketQA) == 0}">		
+							<div class="card-body p-0">
+								<div class="media mt-0 p-5">
+					               <div class="media-body"><text align="center"> 등록된 문의가 없습니다</text></div>
+								</div>
+							</div>
+					</c:if>		
 						</div>
 
 					<c:if test="${fn:length(marketQA) > 0}">							
@@ -501,18 +515,26 @@
 								     <input type="hidden" id="marketQA_lev" name="marketQA_lev" value="${marketQA_lev}">
 								     <input type="hidden" id="marketQA_sun" name="marketQA_sun" value="${marketQA_sun}">
 								     <input type="hidden" id="mem_email" name="mem_email" value="${mem_email}">		
-									<div class="form-group">
-										<input type="text" class="form-control" id="marketQA_sub" name="marketQA_sub" placeholder="subject">
-									</div>
-									<div class="form-group">
-										<textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="Comment"></textarea>
-									</div>
-									<input type=button id="submitQA" class="btn btn-primary" value="Send Reply">
-									&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
-									&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-									&emsp; &emsp; &emsp; &emsp;
-									<input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
-									<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
+									<c:if test="${sessionScope.email !=null}" >
+										<div class="form-group">
+											<input type="text" class="form-control" id="marketQA_sub" name="marketQA_sub" placeholder="subject">
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="Comment"></textarea>
+										</div>
+										<input type=button id="submitQA" class="btn btn-primary" value="Send Reply">
+										
+										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+										&emsp; &emsp; &emsp; &emsp;
+										<input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
+										<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
+									</c:if>
+									<c:if test="${sessionScope.email ==null}" >
+										<div class="form-group">
+											<textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+										</div>
+									</c:if>
 									<!--
 										<div class="d-md-flex ad-post-details">
 											<label class="custom-control custom-radio mb-2 mr-4">
@@ -1026,34 +1048,48 @@
 </script>-->
 <script>
 	$("#checkMR").on('click', function(){
-		 alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
-		 alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+		// alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
+		// alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+		 console.log("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+		 console.log("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
 		 
 		    if ($.trim($("#marketRev_contID").val()) == "") {
 		        alert("글 내용을 입력해주세요.");
 		        $("#marketRev_contID").focus();
 		        return;
 		    }
-	    $.ajax({
-	        url: "marketQA-insert",
-	        type: "POST",	        
-	        data: $("#mqInput").serialize(),
-	        success: function(result){
-	                if (result!=="") {
-	                    var parent = $("#marketQA_prnum").val();
-	                    $("#replyItem"+parent).after(result);
-	                
-	                    alert("저장되었습니다.");
-	                } else{
-	                    alert("서버에 오류가 있어서 저장되지 않았습니다.");
-	                }
-	            },
-	        error: function(request,status,error){
-	        	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-	        }
+		    if ($.trim($("#marketRev_starID").val()) == "") {
+		        alert("별점을 선택해주세요.");
+		        $("#marketRev_starID").focus();
+		        return;
+		    }
+		    var queryString = $("#mrInputID").serialize();
+		    var url=$("#mrInputID").attr("action");
+		    console.log("url:"+url);
+		    console.log("queryString:"+queryString);
+	    $.ajax({ //free_name,content,star,rdate
+	    	type:'post',
+	    	url:url,
+	    	data:queryString,
+	    	dataType:'json',
+	    	error:onError,
+	    	success:onSuccess
 	    });
+	    	
+	    	
 	});
+	function onError(){}
+	function onSuccess(data,status){
+		console.log(data);
+		$("#ajaxRev").text(mr);
+	}
 </script>
+
+
+
+
+
+
 <!--
 <script>
 function formSubmit() {

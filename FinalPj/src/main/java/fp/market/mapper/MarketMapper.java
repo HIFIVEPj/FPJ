@@ -3,6 +3,8 @@ package fp.market.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import fp.corporation.domain.Corporation;
+import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
@@ -12,9 +14,9 @@ public interface MarketMapper {
 //자동 Impl파일 생성해줌
 	public int getMarketCount();
 	 //리뷰 페이징에 필요한 총 리뷰 수	 
-	public int getMarketRevCount();
+	public int getMarketRevCount(long market_num);
 	//문의 페이징에 필요한 총 문의 수 
-	public int getMarketQACount();
+	public int getMarketQACount(long market_num);
 	
 	
 	
@@ -25,11 +27,15 @@ public interface MarketMapper {
 	
 	public List<MarketRev> getMarketRev(HashMap<String, Object> map);//
 	public List<MarketQA> getMarketQA(HashMap<String, Object> map);//
+	
 	public Market getMarketFreelancer(long market_num);
 	public void deleteMarket(long market_num);
 	public Market updateMarket1(long market_num);
 	public void updateMarket2(Market market);
 	public MarketQA insertMarketQA(MarketQA marketQA);  
 	public void insertMarket(Market market);
-	
+	public void insertMarketRev(MarketRev marketRev);	
+	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
+	//public List<Freelancer> getMarketRevFree(long market_num);
+//	public List<Corporation> getMarketRevCor(long market_num);
 }

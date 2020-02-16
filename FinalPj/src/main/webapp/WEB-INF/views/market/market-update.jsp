@@ -32,8 +32,8 @@
 <!-- /////////////////////////서버로 보내는 폼 ///////////////////////////-->		
 					<form name="updateForm" method="post" action="market-update2?market_num=${market.market_num}" enctype="multipart/form-data">		
 						<div class="card mb-lg-0">
-							<div class="card-header">
-								<h3 class="card-title">마켓수정</h3>
+							<div class="card-header ">
+								<h3 class="card-title">마켓등록</h3>
 							</div>
 							<div class="card-body">
 								<div class="form-group">
@@ -97,11 +97,13 @@
 									  -->	
 									</div>
 								
-								</div>		
+								</div>
+								<!--		
 								<div class="form-group">
 									<label class="form-label text-dark"></label>
 								    <div id="summernote"></div>
 								</div>
+								-->
 							
 					<!-- 썸머노트 -->
 	                    <textarea name="market_cont" id="summernote" class="summernote" >${market.market_cont}</textarea>     
@@ -127,7 +129,7 @@
 						<br></br>
 						<div class="form-group">
 							<div class="custom-file">
-					 			<input type="file" class="custom-file-input" name="ofname" >
+					 			<input multiple="multiple" type="file" class="custom-file-input" name="fnames" value="파이리다">
 								<label class="custom-file-label">썸네일</label>
 							</div>
 						</div>
@@ -173,7 +175,7 @@
 		                  <p>글을 정말 수정하시겠습니까?</p>
 		               </div>
 		               <div class="modal-footer">
-		                 <a class="btn btn-primary" style="color:white;" onclick="javascript:updateCheck();">네</a>
+		                 <a class="btn btn-primary" style="color:white;" onclick="javascript:updateCheck()">네</a>
 		                 <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
 		               </div>
 		            </div>
@@ -299,7 +301,7 @@
 				$('#smallModal1').modal("hide"); //닫기 
 				return false;
 			}
-			if(updateForm.market_cont.value==""  ){
+			if(updateForm.cate_num.value==""  ){
 				 alert("내용을 적어주세요");
 				 $('#smallModal1').modal("hide"); //닫기 
 				 return false;
@@ -309,7 +311,7 @@
 			   $('#smallModal1').modal("hide"); //닫기 
 			   return false;
 			}
-		  if(updateForm.ofname.value==""){		   
+		  if(updateForm.fnames.value==""){		   
 			   alert("썸네일파일을 선택해주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
 			   return false;

@@ -1,0 +1,29 @@
+<!-- 
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	
+	 <resultMap id="Login" type="fp.password.security.CustomUserDetails">	 	
+	 	<id property="email" column="MEM_EMAIL"/>		
+		<result property="pwd" column="MEM_PWD"/>		
+		<result property="class_num" column="CLASS_NUM"/>
+		<result property="enabled" column="ENABLED"/>
+		<result property="auth" column="MEM_AUTH"/>				
+	</resultMap>
+	
+	<select id="selectUserById"  resultType="fp.password.security.CustomUserDetails" resultMap="Login">
+  		<![CDATA[
+			SELECT
+				MEM_EMAIL, MEM_PWD ,MEM_AUTH
+			FROM
+				MEMBER
+			WHERE
+				MEM_EMAIL=#{email}
+		]]>
+	</select>
+	
+	
+	
+</mapper> -->

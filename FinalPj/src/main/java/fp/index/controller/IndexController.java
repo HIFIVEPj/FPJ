@@ -23,6 +23,7 @@ public class IndexController {
 	
 	
 /*나영*/
+	/*
 	@RequestMapping("/register")
 	public String reg() {
 		return "register";
@@ -67,9 +68,11 @@ public class IndexController {
 	public String managedOrder() {
 		return "managed_order";
 	}
+	*/
 /*나영*/
 	
 /*소담*/
+	/*
 	@RequestMapping("/employer")
 	public String employer() {				
 		return "employer";
@@ -96,9 +99,11 @@ public class IndexController {
 	public String mydashrewrite() {				
 		return "myprofilerewrite";			
 	}
+	*/
 /*소담*/	
 	
 /*별*/
+	/*
 	@GetMapping("list.do")
 	public String list() {
 		return "project_list";
@@ -124,11 +129,42 @@ public class IndexController {
 	public String payments_end() {
 		return "project_payments_end";
 	}
+	*/
 /*별*/
 	
+/*세영*/
+	/*
+	@RequestMapping(value = "marketList", method = RequestMethod.GET)
+	public String list(Locale locale, Model model) {
 
+		return "ad-list-right";
+	}
+	@RequestMapping(value = "marketDetails", method = RequestMethod.GET)
+	public String details(Locale locale, Model model) {
+
+		return "ad-details";
+	}
+	
+	@RequestMapping(value = "marketPosts", method = RequestMethod.GET)
+	public String post1(Locale locale, Model model) {
+
+		return "ad-posts";
+	}
+	@RequestMapping(value = "marketPayments", method = RequestMethod.GET)
+	public String sy_payments(Locale locale, Model model) {
+
+		return "sy_payments";
+	}
+	@RequestMapping(value = "marketPaymentsDone", method = RequestMethod.GET)
+	public String paymentsDone(Locale locale, Model model) {
+
+		return "payments-done";
+	}
+	*/
+/*세영*/
 
 /*승훈*/	
+	/*
 	@RequestMapping("terms_of_service")
 	public String terms_of_servicee() {
 		return "terms_of_service";
@@ -137,5 +173,6 @@ public class IndexController {
 	public String terms_of_personal_info() {
 		return "terms_of_personal_info";
 	}
-/*승훈*/		
+	*/
+/*승훈*/
 }
