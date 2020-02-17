@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:JAVA"></property>
 		<property name="username" value="final"></property>
@@ -26,27 +26,81 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+		<!-- 승훈-->
+		<property value="classpath:/fp/customer_service/mapper/*Mapper.xml" name="mapperLocations" />
+	</bean>
 	
+	<!-- 소담 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+	<!-- 소담 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="구글아이디" />
+	    <property name="password" value="구글비밀번호" />
+	    <property name="javaMailProperties">
+	    <props>
+	      <prop key="mail.smtp.auth">true</prop>
+	      <prop key="mail.smtp.starttls.enable">true</prop>
+	    </props>
+	    </property>
 	</bean>
 
 	
+	
+	<!-- 승훈 -->
+	<context:component-scan base-package="fp.customer_service.service"/>
+	<context:component-scan base-package="fp.customer_service.mapper"/>
+	<mybatis-spring:scan base-package="fp.customer_service.mapper"/>
+	
+	<!-- 세영 -->
+	<context:component-scan base-package="fp.market.service"/>	
+	<context:component-scan base-package="fp.market.utils"/>
+	<context:component-scan base-package="fp.market.mapper"/>
+	<mybatis-spring:scan base-package="fp.market.mapper"/>
+	
+	<!-- 별 -->
 	<context:component-scan base-package="fp.freelancerprofile.service"/>	
 	<context:component-scan base-package="fp.freelancerprofile.mapper"/>
 	<mybatis-spring:scan base-package="fp.freelancerprofile.mapper"/>
-	
+		<!-- 프리랜서 리스트페이지 추가 -->
 	<context:component-scan base-package="fp.freelancerlist.service"/>	
 	<context:component-scan base-package="fp.freelancerlist.mapper"/>
 	<mybatis-spring:scan base-package="fp.freelancerlist.mapper"/>
+	
+	
+	<!-- 나영 -->
+	<context:component-scan base-package="fp.corporation.service"/>	
+	<context:component-scan base-package="fp.corporation.mapper"/>	
+	<context:component-scan base-package="fp.corporation.vo"/>	
+	<mybatis-spring:scan base-package="fp.corporation.mapper"/>
 
+	<!-- 소담 -->
+	<!-- 메일인증 추가  -->
+	<context:component-scan base-package="fp.member.service"/>
+	<context:component-scan base-package="fp.member.domain"/>
+	<context:component-scan base-package="fp.member.dao"/>				
+	<context:component-scan base-package="fp.member.mapper"/>
+	<mybatis-spring:scan base-package="fp.member.mapper"/>
+	
+	
+	
+	
+	<!-- 
+	<context:component-scan base-package="song.md.aop"/>
+	 -->
 	
 	<context:annotation-config></context:annotation-config>
+	<!--
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
+	-->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<tx:annotation-driven />
-
+	
 	
 </beans>

@@ -191,13 +191,13 @@
 											</tr>
 											</c:forEach>
 											</c:forEach>
-											
+										
 											<c:forEach  var="key" items="${content3}" varStatus="status">
-											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">
+									
 											<tr>
-												<td><strong>사용언어 : </strong>${keyname.key_name}</td>
+												<td><strong>사용언어 : 	${content3}</strong></td>
 											</tr>
-											</c:forEach>
+										
 											</c:forEach>
 										
 										</tbody>

@@ -17,5 +17,5 @@ public class KeyWord {
 	private String key_name;
 	
 	private List<FreeLancerProfile> freelancerprofile;
-	//private  List<Project> projcet;
+	private  List<KeyWord> frKeyWord;
 }

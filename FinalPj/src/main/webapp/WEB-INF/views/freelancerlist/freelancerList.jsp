@@ -408,21 +408,24 @@
 					<div> <!-- div 추가 빼면 겹침.(c:forEach때문) -->
 						<div class="card overflow-hidden">
 							<!-- <div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div> -->
-							
-						
+					
+						${list}
 							<div class="card-header pt-5 pb-5">
 								<div  class="d-flex">
 							<!-- 		<span class="avatar avatar-md  d-block brround cover-image mr-4" data-image-src="../images/faces/male/25.jpg"></span>  -->
 									<a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i></a>
 									
 									<div>
-										
-										<a href="employer" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;${list.free_name}</a><br>
+									
+										<a href="freelancercontent?free_code=${list.free_code}" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;${list.free_name}</a><br>
+									
 									<c:forEach var="exp" items="${list.list_freelancerprofile}" varStatus="status">
 										<a href="employer"><small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small></a>&nbsp;|
 									</c:forEach>
-										<a href="employer.html"><small>&nbsp;&nbsp;</small></a>
-							
+									
+										<c:forEach var="type" items="${pjsubNtype}" varStatus="status">
+										<a href="employer.html"><small>&nbsp;&nbsp;${type}</small></a>
+										</c:forEach>
 									</div>
 								
 								</div>
@@ -436,6 +439,7 @@
 								<ul class="usertab-list mb-0">
 									<h4>수행한 프로젝트</h4>								
 									<c:forEach var="project" items="${list.list_project}" varStatus="status">
+									
 									<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold"></span> ${project.pj_sub}<br/>									
 									</c:forEach>
 								</ul>								
@@ -445,14 +449,16 @@
 								<div class="row">
 									<div class="product-filter-desc col">										
 										<div class="rating-stars d-inline-flex mb-2 mr-3">
-												<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="4">
+										<c:forEach  var="star" items="${list.list_review}" varStatus="status">	
+												<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="${star.freerev_star}">
+									<!-- 	</c:forEach> -->
 		                                       <span class="rated-products-ratings">
 		                                          <i class="fa fa-star text-warning"> </i>
 		                                          <i class="fa fa-star text-warning"> </i>
 		                                          <i class="fa fa-star text-warning"> </i>
 		                                          <i class="fa fa-star-half-o text-warning"> </i>
 		                                          <i class="fa fa-star-o text-warning"> </i>
-		                                          <c:forEach  var="star" items="${list.list_review}" varStatus="status">	
+		                                         <!-- <c:forEach  var="star" items="${list.list_review}" varStatus="status"> -->	
 		                                       </span>&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;							
 												 </c:forEach>
 												 <c:forEach  var="views" items="${list.list_freelancerprofile}" varStatus="status">	

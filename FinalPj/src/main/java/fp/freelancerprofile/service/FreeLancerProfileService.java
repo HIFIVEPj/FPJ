@@ -16,7 +16,7 @@ import fp.freelancerprofile.domain.Type;
 
 public interface FreeLancerProfileService {
 	
-	//List<FreeLancer> selectProfileList();
+	List<FreeLancer> selectProfileList();
 	
 	///프로필 리스트 페이징///
 	public int countProfileList();

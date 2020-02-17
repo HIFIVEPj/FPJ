@@ -38,6 +38,9 @@ public class Project {
 	private long pj_pcnt; //찜수long
 	private long pj_vcnt; // 조회수long
 	
+	private List<Pj_Pick_Keyword> Pj_Pick_Keyword;
+	private List<KeyWord> frKeyWord;
+	
 	
 
 }

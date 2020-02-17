@@ -7,11 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+ @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class List_FreeLancerProfile {
 
+		List_FreeLancerProfile(long free_code){}
+	
 		private long free_code; //개인등록번호
 		private long pro_num; //개인프로필번호
 		private int type_num; //직종번호 

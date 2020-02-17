@@ -18,7 +18,7 @@ public class Type {
 
 
 	private List<FreeLancerProfile> freelancerprofile;
-	private Type type;
+	private List<Type> type;
 	private List<Project> project;
-
+	private List<Freelancer_FreeLancerProfile> Freelancer_FreeLancerProfile;
 }

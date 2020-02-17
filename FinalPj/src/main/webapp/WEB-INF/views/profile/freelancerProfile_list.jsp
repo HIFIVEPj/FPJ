@@ -50,7 +50,7 @@
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold"><br/>김소담</h4></a>
 								</div>
 							</div>
 							<aside class="app-sidebar doc-sidebar my-dash">
@@ -120,8 +120,13 @@
 										</li>
 									</ul>
 								</div>
+							
+							
+							
+							
 							</aside>
 						</div>
+						
 						<!--  
 						<div class="card my-select">
 							<div class="card-header">
@@ -242,7 +247,7 @@
 													</c:forEach>	
 												
 													<c:forEach  var="profilefile" items="${freeLancer.freeLancerProfileFile}" varStatus="status">	
-													<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td> 
+													<!-- <td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td>  -->
 													</c:forEach>
 												</tr>
 											
@@ -320,6 +325,7 @@
                            </div>
                            </ul>
                            </div>
+                           
                              										            
 <!--  
 										<li class="page-item">
