@@ -33,8 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void insertM(Member member) {
-		//BCryptPasswordEncoder passwodrdEncoder =new BCryptPasswordEncoder();
-		//member.setPwd(passwodrdEncoder.encode(member.getPwd()));
+
 		memberMapper.insertMem(member);
 
 	}

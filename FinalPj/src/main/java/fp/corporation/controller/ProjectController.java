@@ -99,16 +99,9 @@ public class ProjectController {
 		}
 
 		pjpkeyword.setKey_numList(arraykeynum);
-		
-		//Map<String,Object> updateMap  = new HashMap<String,Object>();
-		//updateMap.put("pjpkeyword", pjpkeyword);
 		service.updatePj(project);
 		service.updateKeyword(pjpkeyword);
-		//log.info("!@#$# arraykeynum: "+ arraykeynum);
-		//log.info("@#!#@$  project: " +project);
-		//log.info("@#!#@$  pj_num: "+project.getPj_num());
-		
-		return "redirect:project_list";
+		return "redirect:project_content?pj_num="+project.getPj_num();
 	}
 	
 	@GetMapping("project_write")
@@ -144,5 +137,8 @@ public class ProjectController {
 		service.deletePj(pj_num);
 		return "redirect:project_list";
 	}
-	
+	@RequestMapping("project_payments")
+	public String project_payment(){
+		return "project/project_payments";
+	}
 }

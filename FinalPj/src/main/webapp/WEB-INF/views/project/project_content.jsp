@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="now" class ="java.util.Date" />
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -62,7 +63,14 @@
 									<div class="d-flex">
 										<ul class="mb-0 d-flex">
 											<li class="mr-5"><i class="si si-briefcase text-muted mr-1"></i> ${corInfo.cor_name}</li>
-											<li class="mr-5"><i class="si si-location-pin text-muted mr-1"></i> 서울 금천구</li>
+											<li class="mr-5"><i class="si si-location-pin text-muted mr-1"></i>
+											<c:set var = "loc" value="${fn:split(projectCont.pj_loc,' ')}"/>
+												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+													<c:if test="${g.count<3}" >
+														${pj_loc}
+													</c:if>
+												</c:forEach>
+											</li>
 											<li class="mr-5"><i class="si si-calendar text-muted mr-1"></i> 
 												<fmt:parseDate value="${projectCont.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
 												<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
@@ -95,12 +103,11 @@
 										<div class="row">
 									<div class="col-xl-12 col-md-12">
 										<div class="table-responsive">
+										
+													
+													
 											<table class="table row table-borderless w-100 m-0 text-nowrap ">
 												<tbody class="col-lg-12 col-xl-6 p-0">
-													<tr>
-													<th colspan="12"><span class="font-weight-bold">	프로젝트 명 : </span>${projectCont.pj_sub}</th>
-													
-													</tr>
 													<tr>
 														<td><span class="font-weight-bold">근무 형태 : </span> 
 															<c:if test="${projectCont.pj_place eq 0}">
@@ -127,25 +134,8 @@
 												</tbody>
 												<tbody class="col-lg-12 col-xl-6 p-0">
 													<tr>
-														<td>
-															<span class="font-weight-bold">
-																급여 :
-															</span>
-															 <fmt:formatNumber value="${projectCont.pj_pay}" pattern="#,###,###,###" />원
-														</td>
-													</tr>
-													<tr>
-														<td><span class="font-weight-bold">사용 기술 :</span>
-															<c:choose>
-																<c:when test="${projectCont.keyword eq '[]' }">
-																		키워드 없음
-																</c:when>
-																	<c:otherwise>
-																		<c:forEach var="i" begin="0" end="${projectCont.keyword.size()-1}">
-																			<span class="tag tag-gray">${projectCont.keyword.get(i).key_name}</span>
-																		</c:forEach>
-																	</c:otherwise>
-																</c:choose>
+														<td><span class="font-weight-bold">급여 :</span>
+															<fmt:formatNumber value="${projectCont.pj_pay}" pattern="#,###,###,###" />원
 															</td>
 													</tr>
 													<tr>
@@ -173,6 +163,24 @@
 									</div>
 								</div>
 								</div>
+									<div class="col-xl-12 col-md-12" >
+									<hr style="margin-top:20px; margin-bottom:15px;">											
+												<span class="font-weight-bold">필요기술 : </span>
+												<p style="margin-top:10px;">
+													<c:choose>
+														<c:when test="${projectCont.keyword eq '[]' }">
+																키워드 없음
+														</c:when>
+														<c:otherwise>
+															<c:forEach var="i" begin="0" end="${projectCont.keyword.size()-1}">
+																<span class="tag tag-gray">${projectCont.keyword.get(i).key_name}</span>
+															</c:forEach>
+														</c:otherwise>
+													</c:choose>
+													</p>
+												<hr style="margin-top:20px; margin-bottom:10px;">
+											</div>	
+								
 								    <div class="card-header">
                                  	<h4 class="mb-0 font-weight-semibold"><strong>내용</strong></h4>       
   	                                  </div>
@@ -181,12 +189,12 @@
 							</div>
 							<span class="card-footer icons" >
 									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply"> 지원하기</a>
-									<a href="#" class="btn btn-primary icons"><i class="si si-share mr-1"></i> 공유하기</a>
+									<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
 									<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
 							
 								<span style="float:right;" >
 										<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
-										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1"">삭제</button>
+										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
 								</span>
 							</span>
 						</div>
@@ -432,7 +440,7 @@
 					<div class="col-xl-4 col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Posted By</h3>
+								<h3 class="card-title">회사정보</h3>
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
@@ -466,30 +474,7 @@
 									<a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
 								</div>
 							</div>
-							<div class="card-footer">
-								<div class="text-left">
-									<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 문의하기</a>
-								</div>
-							</div>
 						</div>
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Keywords</h3>
-							</div>
-							<div class="card-body product-filter-desc">
-								<div class="product-tags clearfix">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#">JAVA</a></li>
-										<li><a href="#">PHP</a></li>
-										<li><a href="#">DB</a></li>
-										<li><a href="#">ORACLE</a></li>
-										<li><a href="#">Python</a></li>
-										<li><a href="#">C</a></li>
-										<li><a href="#">C++</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>		
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">지도</h3>
@@ -721,7 +706,7 @@
 			</div>
 		</div>
 <!-- small Modal -->   
-      <div id="smallModal1" class="modal fade">
+      <div id="deleteModal" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -747,9 +732,103 @@
          </div>      
       </div>
       <!-- /small Modal -->
+      
+    <!-- small Modal -->   
+      <div id="" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                 
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+               
+               </div>
+            </div>
+         </div>      
+      </div>
+      <!-- /small Modal -->  
+      
+      		<!-- Modal -->
+			<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"> <span class="float-right btn btn-icon btn-primary btn-sm mt-3"><i class="si si-share mr-1"></i></span></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body " style="margin:0 auto;">
+							<a id="kakao-link-btn" href="javascript:sendLink()" class="btn btn-icon brround kakao-btn">
+								<span class="fa fa-comment"></span><!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
+							</a>
+						</div>
+						<div class="modal-footer">
+						
+						 <input type="text" id = "shareUrl"  class="form-control">
+               	 <span><button class = "btn btn-secondary" onclick="javascript:copyUrlToClipboard()">URL복사</button></span>
+						</div>
+					</div>
+				</div>
+			</div>
+      <!--Modal 끝-->
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
+<script>
+var obShareUrl = document.getElementById("shareUrl");
+obShareUrl.value=window.document.location.href;	
+	function copyUrlToClipboard(){
+		obShareUrl.select();
+		document.execCommand("copy");
+		obShareUrl.blur();
+		alert("URL이 클립보드에 복사되었습니다.")
+	}
+
+</script>
+<!-- 카카오 공유하기 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('50e87f1e8bcbb6ac445c4b87fdbcf76e');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    function sendLink() {
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '프로젝트 & 서비스 & IT 프리랜서 플랫폼 - 하이파이브',
+          description: '${projectCont.pj_sub}',
+          imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          link: {
+            mobileWebUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}',
+            webUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}'
+          }
+        },
+        social: {
+      		viewCount: ${projectCont.pj_vcnt},
+       		likeCount: ${projectCont.pj_pcnt}
+        },
+        buttons: [
+          {
+            title: '페이지로 바로가기',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com'
+            }
+          }
+        ]
+      });
+    }
+  //]]>
+</script>
+<!-- 카카오 공유하기 -->
 
 <!-- 프린트 특정영역 인쇄  
 <script type="text/javascript">

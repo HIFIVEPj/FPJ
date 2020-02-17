@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 
 import fp.member.dao.MemberDao;
 import fp.member.domain.Member;
+import lombok.extern.log4j.Log4j;
 
+
+@Log4j
 @Service("LoginService")
 public class LoginServiceImpl implements LoginService {
 	
@@ -21,6 +24,9 @@ public class LoginServiceImpl implements LoginService {
 		if (result == true) {	//true 일경우 세션 등록
 			//세션 변수 등록
 			session.setAttribute("email",member.getEmail());
+			session.setAttribute("class_num", member.getClass_num());
+			log.info("@#@$ class_num: "+member.getClass_num());
+			
 		}
 		
 		return result;

@@ -161,16 +161,27 @@
 									</li>
 									</c:when>
 									<c:otherwise>
-										<h>${sessionScope.email}님 환영합니다.</h>														
+										<h>${sessionScope.email} 님 환영합니다.
+										${sessionScope.class_num}</h>														
 									<li class="dropdown">
+									
 										<a href="#" class="text-dark" data-toggle="dropdown"><i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+											<c:if test="${sessionScope.class_num==1}">
 											<a href="construction" class="dropdown-item" >
 												<i class="dropdown-icon si si-settings" style="color:#1f719a;"></i> 관리자
 											</a>
+											</c:if>
+											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
+												<a href="mydash_cor" class="dropdown-item" >
+													<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
+												</a>
+											</c:if>
+											<c:if test="${sessionScope.class_num==4}">
 											<a href="freelancerProfile_list" class="dropdown-item" >
 												<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 											</a>
+											</c:if>
 											<!--
 											<a class="dropdown-item" href="#">
 												<i class="dropdown-icon si si-envelope" style="color:#1f719a;"></i> Inbox

@@ -63,7 +63,7 @@
                                  <ul class="slide-menu">
                                     <li><a class="slide-item" href="mydash.html">회원정보</a></li>
                                     <li><a class="slide-item " href="freelancerProfile_list">프로필</a></li>
-                                 
+                                 	<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
                                  </ul>
                               </li>
                               <li class="slide">
