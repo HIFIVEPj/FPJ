@@ -196,12 +196,16 @@
 	<select id="getMarketList" resultMap="resultMarket" parameterType="MarketVO">
 		<![CDATA[
 		select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-		(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+		(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
 		right outer join
 		(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
 		on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
 		where rnum>#{start} and rnum<=#{end}
 		]]>
+		
+		
+		
+		
 		
 	</select>
 	

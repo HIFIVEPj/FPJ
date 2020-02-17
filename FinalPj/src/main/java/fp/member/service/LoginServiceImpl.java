@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fp.market.domain.Freelancer;
 import fp.member.dao.MemberDao;
 import fp.member.domain.Member;
 
@@ -13,6 +14,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
 	private MemberDao dao;
+
 	
 	@Override
 	public boolean loginCheck(Member member,HttpSession session) {
@@ -21,6 +23,8 @@ public class LoginServiceImpl implements LoginService {
 		if (result == true) {	//true 일경우 세션 등록
 			//세션 변수 등록
 			session.setAttribute("email",member.getEmail());
+			
+			
 		}
 		
 		return result;

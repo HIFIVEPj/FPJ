@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
@@ -57,6 +58,8 @@ public class MarketRestController {
 		map.put("marketVORevEnd", marketVORev.getEnd());
 		map.put("market_num", marketRev.getMarket_num());
 		List<MarketRev> mr = marketService.getMarketRev(map);
+		log.info("@!@@@@@mr:"+mr);
+		ModelAndView mv = new ModelAndView();
 		
 		return mr;
 

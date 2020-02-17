@@ -243,7 +243,7 @@
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    
-																<img src="../images/products/h4.png" alt="img" class="cover-image h-100">
+																<img src="../marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100">
 															</div>
 															<div class="item-card9-icons">
 																<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>

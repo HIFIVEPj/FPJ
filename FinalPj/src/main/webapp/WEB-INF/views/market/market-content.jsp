@@ -95,8 +95,9 @@
 									<div id="carousel" class="carousel slide" data-ride="carousel">
 										<!--<div class="arrow-ribbon2 bg-primary">$539</div>-->
 										<div class="carousel-inner">
-											<div class="carousel-item active"> <img src="../images/products/products/h1.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h2.jpg" alt="img"> </div>
+											<div class="carousel-item active"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
+										<!--
+											<div class="carousel-item"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
@@ -105,16 +106,17 @@
 											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
+										-->
 										</div>
-										<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+									<!-- <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
 											<i class="fa fa-angle-left" aria-hidden="true"></i>
 										</a>
 										<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
 											<i class="fa fa-angle-right" aria-hidden="true"></i>
-										</a>
+										</a>-->
 									</div>
 									<div class="clearfix">
-										<div id="thumbcarousel" class="carousel slide" data-interval="false">
+								<!--	<div id="thumbcarousel" class="carousel slide" data-interval="false">
 											<div class="carousel-inner">
 												<div class="carousel-item active">
 													<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="../images/products/h3.png" alt="img"></div>
@@ -137,7 +139,7 @@
 											<a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
 												<i class="fa fa-angle-right" aria-hidden="true"></i>
 											</a>
-										</div>
+										</div>  -->
 									</div>
 								</div>
 							</div>
@@ -272,9 +274,9 @@
 	                                       		<h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_email">${marketRev.mem_email} </h5>
 	                                     	</c:if>
 											<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-											<span class="fs-14 ml-2" name="marketRev_star" id="star" > ${marketRev.marketRev_star}  <i class="fa fa-star text-yellow"></i></span>
+											<span class="fs-14 ml-2" name="marketRev_star" id="marketRev_star" > ${marketRev.marketRev_star}  <i class="fa fa-star text-yellow"></i></span>
 										</h5>
-										<small class="text-muted" id="rdate" name="marketRev_rdate"><i class="fa fa-calendar"></i> ${marketRev.marketRev_rdate} </small>
+										<small class="text-muted" id="marketRev_rdate" name="marketRev_rdate"><i class="fa fa-calendar"></i> ${marketRev.marketRev_rdate} </small>
                                         <p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="content"> ${marketRev.marketRev_cont}</p>
 								<!-- 대댓글 -->     		
 									</div>
@@ -500,7 +502,7 @@
 		
 						<br/><br/>
 						<!--/Comments-->
-					<form name="mqInput" id="mqInput">
+					<form name="mqInput" id="mqInput" action="marketQA-insert">
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">문의 남기기</h3>
@@ -530,11 +532,13 @@
 										<input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
 										<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
 									</c:if>
+									
 									<c:if test="${sessionScope.email ==null}" >
 										<div class="form-group">
 											<textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
 										</div>
 									</c:if>
+									
 									<!--
 										<div class="d-md-flex ad-post-details">
 											<label class="custom-control custom-radio mb-2 mr-4">
@@ -607,7 +611,7 @@
 								
 								<!--	<a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
 										<a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-										<a href="marketPayments" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</a>
+										<a href="market-payments" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</a>
 									</div>
 								</div>
 						
@@ -1079,9 +1083,17 @@
 	    	
 	});
 	function onError(){}
-	function onSuccess(data,status){
+	function onSuccess(data){
 		console.log(data);
-		$("#ajaxRev").text(mr);
+	    var str = " ";
+		if(data.length > 0){
+			$.each(data, function(i,item){
+
+                 console.log("i : "+i);
+                 console.log("item : "+item.version);
+                 console.log("item : "+item.codename);
+             });
+       }
 	}
 </script>
 
