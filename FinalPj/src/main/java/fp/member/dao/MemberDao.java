@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fp.member.domain.Member;
 
@@ -33,6 +34,11 @@ public class MemberDao {
 	public void logout(HttpSession session) {
 		System.out.println("===> 로그아웃 기능 처리");
 		session.invalidate();
+	}
+	
+	@Transactional
+	public int update_pw(Member member) throws Exception{
+		return sqlSession.update(ns+".update_pw", member);
 	}
 
 }

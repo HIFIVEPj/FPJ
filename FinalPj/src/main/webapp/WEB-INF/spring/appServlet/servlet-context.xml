@@ -34,11 +34,18 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginController" class="fp.login.naver.NaverLoginController" />
+	<beans:bean id="kakaoController" class="fp.login.naver.KakaoController" />
 	
 	
 	<context:component-scan base-package="fp.index.controller" />
 	<context:component-scan base-package="fp.member.controller" />
 	<context:component-scan base-package="fp.community.controller" />
 	<context:component-scan base-package="fp.login.controller" />
+	<context:component-scan base-package="fp.login.naver" />
+
+
+
 	
 </beans:beans>

@@ -51,7 +51,7 @@
 												<h3 class="card-title">가입하기</h3>
 											</div>
 											<div class="card-body">
-												<div class="text-center">
+											<!-- 	<div class="text-center">
 													<div class="btn-group mt-2 mb-2">
 														<a href="https://www.naver.com/" id="naver-btn" class="btn btn-icon brround naver-btn" >
 															<span><b>N</b></span>
@@ -69,7 +69,7 @@
 													</div>
 													
 												</div>
-												<hr class="divider">
+												<hr class="divider">  -->
 																				
 												
 												<div class="form-group" >
@@ -143,7 +143,7 @@
 												<h3 class="card-title">회원가입</h3>
 											</div>
 											<div class="card-body">
-												<div class="text-center">
+											<!--  <div class="text-center">
 													<div class="btn-group mt-2 mb-2">
 														<a href="https://www.naver.com/" id="naver-btn" class="btn btn-icon brround naver-btn" >
 															<span><b>N</b></span>
@@ -160,8 +160,8 @@
 														</a>
 													</div>
 													
-												</div>
-												<hr class="divider">
+												</div> 
+												<hr class="divider"> -->
 												
 													<form class="form-group" action="auth.do" method="post">
 													<label class="form-label text-dark">Email</label>
