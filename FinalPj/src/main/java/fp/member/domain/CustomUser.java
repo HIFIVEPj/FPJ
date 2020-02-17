@@ -1,4 +1,4 @@
-/*
+
 package fp.member.domain;
 
 import java.util.Collection;
@@ -29,4 +29,3 @@ public class CustomUser extends User{
 	
 	
 }
-*/

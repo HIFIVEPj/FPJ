@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!--header-->
 <!doctype html>
@@ -47,6 +48,7 @@
 		<!-- Dashboard Css -->
 		<link href="../css/dashboard.css" rel="stylesheet" />
 		<link href="../css/admin-custom.css" rel="stylesheet" />
+
 
 		<!-- Font-awesome  Css -->
 		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
@@ -145,9 +147,7 @@
 						</div>
 						<div class="col-xl-4 col-lg-4 col-sm-8 col-5">
 							<div class="top-bar-right">
-								<ul class="custom">
-								
-								
+								<ul class="custom">						
 								
 								<c:choose>
 									<c:when test="${empty sessionScope.email}">
@@ -157,7 +157,7 @@
 									
 									<li>
 									<!--<a href='<c:url value="/member/login"/>' class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a> -->	
-										<a href="member/login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
+										<a href="login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
 									</li>
 									</c:when>
 									<c:otherwise>

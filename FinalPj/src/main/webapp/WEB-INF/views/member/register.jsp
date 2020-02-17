@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% String format=request.getParameter("format");%>
@@ -51,7 +52,7 @@
 												<h3 class="card-title">가입하기</h3>
 											</div>
 											<div class="card-body">
-												<div class="text-center">
+											<!-- 	<div class="text-center">
 													<div class="btn-group mt-2 mb-2">
 														<a href="https://www.naver.com/" id="naver-btn" class="btn btn-icon brround naver-btn" >
 															<span><b>N</b></span>
@@ -69,7 +70,7 @@
 													</div>
 													
 												</div>
-												<hr class="divider">
+												<hr class="divider">  -->
 																				
 												
 												<div class="form-group" >
@@ -119,11 +120,11 @@
 												<div class="form-group" style="font-size:12px; line-height:25px;">
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input">
-														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('customer_service_terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
 													</label>
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input">
-														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('customer_service_terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
 													</label>
 												</div>
 												<div class="form-footer mt-2">
@@ -143,7 +144,7 @@
 												<h3 class="card-title">회원가입</h3>
 											</div>
 											<div class="card-body">
-												<div class="text-center">
+											<!--  <div class="text-center">
 													<div class="btn-group mt-2 mb-2">
 														<a href="https://www.naver.com/" id="naver-btn" class="btn btn-icon brround naver-btn" >
 															<span><b>N</b></span>
@@ -160,8 +161,8 @@
 														</a>
 													</div>
 													
-												</div>
-												<hr class="divider">
+												</div> 
+												<hr class="divider"> -->
 												
 													<form class="form-group" action="auth.do" method="post">
 													<label class="form-label text-dark">Email</label>
@@ -266,4 +267,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 6639d0921df9b65c8efd3090a1a3933ebc32d277
 <!--/footer-->
