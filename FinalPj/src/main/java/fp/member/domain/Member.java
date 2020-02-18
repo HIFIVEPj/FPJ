@@ -16,14 +16,15 @@ import lombok.NoArgsConstructor;
 
 public class Member {
 	private String email;
+	private String name;
 	private String pwd;
 	private int class_num;
-	private boolean enabled;
-	//private String auth;
-	//private Date rdate;
+	private int status;	
+	private Date rdate;
 	private int option1;
 	private int option2;
 	private String option3;	
-	private List<MemberAuth> authList;
-	//private MemberAuth memberAuth;
+
 }
+
+

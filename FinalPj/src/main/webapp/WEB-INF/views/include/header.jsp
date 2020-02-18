@@ -1,6 +1,5 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!--header-->
 <!doctype html>
@@ -151,7 +150,7 @@
 
 								
 								<c:choose>
-									<c:when test="${empty sessionScope.email}">
+									<c:when test="${empty sessionScope.name}">
 									<li>
 										<a href="register" class="text-dark"><i class="fa fa-user mr-1" style="color:#1f719a;"></i> <span>회원가입</span></a>
 									</li>
@@ -163,7 +162,8 @@
 									</li>
 									</c:when>
 									<c:otherwise>
-										<h>${sessionScope.email} 님 환영합니다. </h>														
+
+										<h>${sessionScope.name} 님 환영합니다. </h>														
 
 									<li class="dropdown">
 									

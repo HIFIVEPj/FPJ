@@ -8,8 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.stereotype.Service;
 
 import fp.member.domain.EmailAuth;
@@ -22,18 +20,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-
-	@Override
-	public List<EmailAuth> listA(String email) {		
-		return memberMapper.selectEmailAuth(email);
-	}
-	
-	@Override
-	public boolean mailCheck(EmailAuth emailAuth) {
-		boolean result =memberMapper.mailCheck(emailAuth);
-		return result;
-	}
-	
+		
 	@Override
 
 	public void insertM(Member member) {		
