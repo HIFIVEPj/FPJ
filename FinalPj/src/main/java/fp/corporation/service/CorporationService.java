@@ -6,8 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 import fp.corporation.domain.Corporation;
 
 public interface CorporationService {
+	Corporation mydash_cor_select(String mem_email); 
 	void insert(Corporation corporation);
-	String saveStore(MultipartFile cor_fname);
-	boolean writeFile(MultipartFile cor_fname, String saveFileName);
+	void mydash_cor_update(Corporation corporation);
 }
 

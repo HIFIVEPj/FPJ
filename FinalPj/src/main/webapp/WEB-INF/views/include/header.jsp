@@ -171,7 +171,7 @@
 											</a>
 											</c:if>
 											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
-												<a href="mydash_cor" class="dropdown-item" >
+												<a href="mydash_cor?mem_email=${sessionScope.email}" class="dropdown-item" >
 													<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 												</a>
 											</c:if>
