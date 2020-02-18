@@ -117,7 +117,7 @@
 						<div class="form-group">
 							<div class="custom-file">
 					 			<input type="file" class="custom-file-input" name="ofname" id="file" onchange="upfile()">
-								<label class="custom-file-label" id="cor_fname_label" value="${market.market_fname}">Thumbnail Images</label>
+								<label class="custom-file-label" id="cor_fname_label" value="">${market.market_fname}</label>
 							</div>
 						</div>
 					

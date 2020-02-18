@@ -173,7 +173,7 @@ public class MarketController {
 	@RequestMapping(value = "market-posts", method = RequestMethod.GET)
 	public String market_post(Locale locale, Model model) {
 
-		return "redirect:market/market-posts";
+		return "market/market-posts";
 	}
 
 	@PostMapping("market-insert")
@@ -189,7 +189,7 @@ public class MarketController {
 		marketService.insertMarket(market);
 		return "redirect:market-list";
 	}	
-/*	
+
 	@PostMapping("market-update")
 	public ModelAndView market_update1(@RequestParam long market_num){
 		Market m=marketService.updateMarket1(market_num);
@@ -199,6 +199,7 @@ public class MarketController {
 		return mv;		
 
 	}
+
 	
 	@PostMapping("market-update2")
 	public String market_update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
@@ -219,7 +220,7 @@ public class MarketController {
 		marketService.deleteMarket(market_num);	
 		return "redirect:market-list";
 		
-	}*/
+	}
 	public List<String> Fileupload(MultipartHttpServletRequest mtfRequest) {
 		String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\marketThumbnails\\";
 		File Folder = new File(path);
@@ -253,54 +254,6 @@ public class MarketController {
 		list.add(fileName);
 		return list;
 	}
-	
-	@PostMapping("market-update")
-	public ModelAndView market_update1(@RequestParam long market_num){
-		Market m=marketService.updateMarket1(market_num);
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("market/market-update");
-		mv.addObject("market", m);
-		return mv;		
-	}
-	@PostMapping("market-update2")
-	public String market_update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
-		log.info("market"+market);
-		List<MultipartFile> fileList= mtfRequest.getFiles("fnames");
-	//	String src  = "C:\\FinalPj\\MarketFiles";
-		String path  = "C:\\FinalPj\\MarketFiles\\";
-		for(MultipartFile mf:fileList) {
-			String originFileName= mf.getOriginalFilename();
-			long fileSize=mf.getSize();
-			
-			log.info("originFileName"+originFileName);
-			log.info("fileSize"+fileSize);
-			
-			String safeFile=path+System.currentTimeMillis()+originFileName;
-			try {
-				mf.transferTo(new File(safeFile));
-			}catch(IllegalStateException  e) {
-				e.printStackTrace();
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-			return "redirect:market-list";
-		}
-
-		int cate=market.getCate_num();
-		log.info("######cate:"+cate);
-		marketService.updateMarket2(market);
-		ModelAndView mv= new ModelAndView();
-		mv.setViewName("market/market-update");
-		return "redirect:market-list";
-		
-	}
-	@GetMapping("market-delete")
-	public String market_delete(@RequestParam long market_num) {
-		marketService.deleteMarket(market_num);	
-		return "redirect:market-list";
-		
-	}
-	
 
 	
 }
