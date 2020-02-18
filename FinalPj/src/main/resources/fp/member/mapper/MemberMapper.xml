@@ -13,19 +13,13 @@
 	 	<id property="email" column="MEM_EMAIL"/>		
 		<result property="pwd" column="MEM_PWD"/>
 		<result property="class_num" column="CLASS_NUM"/>
-		<result property="enabled" column="ENABLED"/>
+		<result property="MEM_STATUS" column="MEM_STATUS"/>
 		<result property="option1" column="OPTION1"/>
 		<result property="option2" column="OPTION2"/>
-		<result property="option3" column="OPTION3"/>
+		<result property="option3" column="OPTION3"/>	
 		
-		<collection property="authList" resultMap="authMap">
-		</collection>
 	</resultMap>
 	
-	<resultMap id="authMap" type="MemberAuth" >
-		<result property="email" column="MEM_EMAIL" />
-		<result property="auth" column="MEM_AUTH" />		
-	</resultMap>
 	
 	<select id="loginCheck" resultType="Member" resultMap="MemberMap">
 		<![CDATA[
