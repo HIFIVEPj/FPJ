@@ -12,9 +12,6 @@ import fp.member.domain.Member;
 
 public interface MemberService {
 
-	List<EmailAuth> listA(String email); 
-	public boolean mailCheck(EmailAuth emailAuth);
-	
 	void insertM(Member member);	
 	void insertAuth(Map map);
 	void deleteS(long seq);

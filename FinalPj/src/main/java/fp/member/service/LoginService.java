@@ -10,6 +10,9 @@ public interface LoginService {
 	public boolean loginCheck(Member member,HttpSession session);
 	//로그 아웃
 	public void logout(HttpSession session);
-	//public void find_pw(HttpServletResponse response, Member member);
+
+	//패스워드 찾기
+	public int find_pw(Member member);
+
 
 }
