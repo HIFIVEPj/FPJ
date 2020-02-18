@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -47,21 +46,19 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class="doc-sidebar my-dash">
+							<!--<aside class="app-sidebar doc-sidebar my-dash">-->
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
-												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
 												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
 												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
 											</ul>
@@ -103,7 +100,7 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">담당자 이메일</label>
-											<input type="email" class="form-control" value="" name="mem_email">
+											<input type="email" class="form-control" value="${sessionScope.email}" name="mem_email" readonly>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-4">
@@ -271,10 +268,8 @@
 										<div class="form-group mb-0">
 											<label class="form-label">기업이미지 등록</label>
 											<div class="custom-file">
-												<input type="file" class="custom-file-input">
-												<input type="text" class="form-control" name="cor_ofname">
-												<input type="text" class="form-control" name="cor_fname">
-												<label class="custom-file-label">Choose file</label>
+												<input type="file" class="custom-file-input" name="cor_fname" id="file" onchange="upfile()">
+												<label class="custom-file-label" id="cor_fname_label"></label>
 											</div>
 										</div>
 									</div>
@@ -292,10 +287,15 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
 		</section>
 		<!--/User Dashboard-->
-
+	<script>
+	function upfile(){
+		var filename = document.getElementById("file").value;
+		document.getElementById("cor_fname_label").innerHTML=filename;
+	}
+		
+	</script>
 		<!--footer-->
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/include/footer.jsp"%>
+		<!-- /footer  -->

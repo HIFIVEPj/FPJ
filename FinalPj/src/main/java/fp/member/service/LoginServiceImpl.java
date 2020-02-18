@@ -39,9 +39,11 @@ public class LoginServiceImpl implements LoginService {
 		if (BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd()) == true) {	//true 일경우 세션 등록
 			//세션 변수 등록
 			session.setAttribute("email",member.getEmail());
-			
+			session.setAttribute("class_num",dao.loginCheck(member).getClass_num());
+			//System.out.println("@!#!#$$@class_num : "+dao.loginCheck(member).getClass_num());
+			return true;
 		}
-		return true;
+		return false;
 
 	}
 	

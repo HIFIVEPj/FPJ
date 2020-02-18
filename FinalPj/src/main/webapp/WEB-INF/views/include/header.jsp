@@ -161,11 +161,10 @@
 									</li>
 									</c:when>
 									<c:otherwise>
-										<h>${sessionScope.email} 님 환영합니다.
-										${sessionScope.class_num}</h>														
+										<h>${sessionScope.email} 님 환영합니다. </h>														
 									<li class="dropdown">
 									
-										<a href="#" class="text-dark" data-toggle="dropdown"><i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
+										<a href="#" class="text-dark" data-toggle="dropdown">  &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 											<c:if test="${sessionScope.class_num==1}">
 											<a href="construction" class="dropdown-item" >
