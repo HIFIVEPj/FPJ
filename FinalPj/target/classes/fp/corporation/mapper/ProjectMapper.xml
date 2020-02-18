@@ -1,172 +1,186 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fp.corporation.mapper.ProjectMapper">
-   <resultMap type="corProject" id="projectMap">
-      <id property="pj_num" column ="pj_num" />
-      <result property="type_num" column ="type_num" />
-      <result property="cate_num" column ="cate_num" />
-      <result property="cor_code" column ="cor_code" />
-      <result property="pj_sub" column ="pj_sub" />
-      <result property="pj_pay" column ="pj_pay" />
-      <result property="pj_ddate" column ="pj_ddate" />
-      <result property="pj_cont" column ="pj_cont" />
-      <result property="pj_term" column ="pj_term" />
-      <result property="pj_loc" column ="pj_loc" />
 
-      <result property="pj_postcode" column ="pj_postcode" />
-      <result property="pj_detailloc" column ="pj_detailloc" />
-      <result property="pj_loc_x" column ="pj_loc_x" />
-      <result property="pj_loc_y" column ="pj_loc_y" />
+	<resultMap type="corProject" id="projectMap">
+		<id property="pj_num" column ="pj_num" />
+		<result property="type_num" column ="type_num" />
+		<result property="cate_num" column ="cate_num" />
+		<result property="cor_code" column ="cor_code" />
+		<result property="pj_sub" column ="pj_sub" />
+		<result property="pj_pay" column ="pj_pay" />
+		<result property="pj_ddate" column ="pj_ddate" />
+		<result property="pj_cont" column ="pj_cont" />
+		<result property="pj_term" column ="pj_term" />
+		<result property="pj_loc" column ="pj_loc" />
 
-      <result property="pj_recnum" column ="pj_recnum" />
-      <result property="pj_appnum" column ="pj_appnum" />
-      <result property="pj_rdate" column ="pj_rdate" />
-      <result property="pj_totalp" column ="pj_totalp" />
-      <result property="pj_status" column ="pj_status" />
-      <result property="pj_place" column ="pj_place" />
-      <result property="pj_homepage" column ="pj_homepage" />
-      <result property="pj_paycate" column ="pj_paycate" />
-      <result property="pj_pcnt" column ="pj_pcnt" />
-      <result property="pj_vcnt" column ="pj_vcnt" />
-      <result property="pj_fgrade" column ="pj_fgrade" />
-      
+		<result property="pj_postcode" column ="pj_postcode" />
+		<result property="pj_detailloc" column ="pj_detailloc" />
+		<result property="pj_loc_x" column ="pj_loc_x" />
+		<result property="pj_loc_y" column ="pj_loc_y" />
 
-      <association javaType="corType" property="type" column="type_num">
-         <id property="type_num" column ="type_num" />
-         <result property="type_name" column ="type_name" />
-      </association>
-      <association javaType="Corporation" property="corporation" column="cor_code">
-         <id property ="cor_code" column="cor_code"/>
-         <result property ="cor_name" column="cor_name"/>
-      </association>
-      <collection ofType="corKeyword" property="keyword" column="key_num" javaType="ArrayList">
-         <id property="key_num" column ="kw_key_num" />
-         <id property="key_name" column ="kw_key_name" />
-      </collection>
-      <collection ofType="PjPickKeyword" property="pjpickKeyword" column="pjp_keynum" javaType="ArrayList">
-         <id property="pjp_keynum" column ="pjp_keynum" />
-         <result property="pj_num" column ="pj_num" />
-         <result property="key_num" column ="key_num" />
-      </collection>
-      <collection ofType="corProject" property="pjKeywords" column="key_num" javaType="ArrayList">
-         <id property="key_num" column ="key_num" />
-         <id property="key_name" column ="key_num" />
-      </collection>
-   </resultMap>
-   
-   <resultMap type="Corporation" id="corporationMap">
-      <id property ="cor_code" column="cor_code"/>
-      <result property ="mem_email" column="mem_email"/>
-      <result property ="cor_reg" column="cor_reg"/>
-      <result property ="cor_name" column="cor_name"/>
-      <result property ="cor_mname" column="cor_mname"/>
-      <result property ="cor_tel" column="cor_tel"/>
-      <result property ="cor_rdate" column="cor_rdate"/>
-      <result property ="cor_point" column="cor_point"/>
-      <result property ="cor_level" column="cor_level"/>
-      <result property ="cor_postcode" column="cor_postcode"/>
-      <result property ="cor_addr" column="cor_addr"/>
-      <result property ="cor_detailaddr" column="cor_detailaddr"/>
-      <result property ="cor_addr_x" column="cor_addr_x"/>
-      <result property ="cor_addr_y" column="cor_addr_y"/>
-      <result property ="cor_profile" column="cor_profile"/>
-      <result property ="cor_type" column="cor_type"/>
-      <result property ="cor_fname" column="cor_fname"/>
-      <result property ="cor_ofname" column="cor_ofname"/>
-      
-      <collection ofType="corProject" property="project" column="pj_num" javaType="ArrayList">
-         <id property="pj_num" column ="pj_num" />
-      </collection>
-      
-   </resultMap>
-   
-   <select id="list" parameterType="ProjectVo" resultMap="projectMap"> 
-       <![CDATA[
-         select * from (select ROWNUM rnum , aa.* from 
-         (select * from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code order by PJ_NUM desc)aa) where rnum>#{start} and rnum<=#{end}
-       ]]>
-   </select>
-   
-   <select id="pjKeywords" resultMap="projectMap">
-      <![CDATA[
-         SELECT pj.PJ_NUM, kw.KEY_NAME as kw_key_name
-            FROM KEYWORD kw
-           LEFT OUTER JOIN PJ_PICK_KEYWORD pjpkw ON pjpkw.KEY_NUM = kw.KEY_NUM
-            RIGHT OUTER JOIN PROJECT pj ON pj.PJ_NUM = pjpkw.PJ_NUM
-      ]]>
-   </select>
-   
-   <select id="content" parameterType="long" resultMap="projectMap"> 
-       <![CDATA[
-        SELECT pj.*, kw.KEY_NAME as kw_key_name , t.TYPE_NAME, kw.KEY_NUM as kw_key_num, pjpkw.pjp_keynum
-         FROM PROJECT pj
-         INNER JOIN TYPE t ON t.TYPE_NUM = pj.TYPE_NUM  
-         LEFT OUTER JOIN PJ_PICK_KEYWORD pjpkw ON pjpkw.PJ_NUM = pj.PJ_NUM
-         LEFT OUTER JOIN KEYWORD kw ON kw.KEY_NUM = pjpkw.KEY_NUM
-         WHERE pj.PJ_NUM=#{pj_num}
-        ]]>
-   </select>
-   
-   <select id="getTotalCount" resultType="long" >
-      select count(PJ_NUM) from PROJECT
-   </select>
-   
-   
-   <insert id="insertpj" parameterType="corProject" >
-   <selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
-      select pj_num_seq.nextval from dual
-   </selectKey>
-      insert into PROJECT
-      (PJ_NUM, TYPE_NUM, COR_CODE, PJ_SUB, PJ_CONT, PJ_DDATE, PJ_PAY, PJ_TERM, PJ_LOC, pj_postcode,
-       pj_detailloc, pj_loc_x, pj_loc_y,PJ_RECNUM, PJ_APPNUM, PJ_RDATE, PJ_TOTALP, PJ_PLACE, PJ_HOMEPAGE, PJ_FGRADE)
-       values(#{pj_num}, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},
-       #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})      
-   </insert>
+		<result property="pj_recnum" column ="pj_recnum" />
+		<result property="pj_appnum" column ="pj_appnum" />
+		<result property="pj_rdate" column ="pj_rdate" />
+		<result property="pj_totalp" column ="pj_totalp" />
+		<result property="pj_status" column ="pj_status" />
+		<result property="pj_place" column ="pj_place" />
+		<result property="pj_homepage" column ="pj_homepage" />
+		<result property="pj_paycate" column ="pj_paycate" />
+		<result property="pj_pcnt" column ="pj_pcnt" />
+		<result property="pj_vcnt" column ="pj_vcnt" />
+		<result property="pj_fgrade" column ="pj_fgrade" />
+		
 
-    <insert id="insertPjpkeyword" parameterType="map">
-       <selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
-          select pj_num_seq.currval from dual
-       </selectKey>
-          insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num)
-          select  PJP_KEYNUM_SEQ.nextval, A.* from(
-        <foreach collection ="key_num" item="key_num" separator="UNION ALL "> 
-          select #{key_num} as key_num, #{pj_num} as pj_num from dual
-       </foreach>) A
-    </insert>
+		<association javaType="corType" property="type" column="type_num">
+			<id property="type_num" column ="type_num" />
+			<result property="type_name" column ="type_name" />
+		</association>
+		<association javaType="Corporation" property="corporation" column="cor_code">
+			<id property ="cor_code" column="cor_code"/>
+			<result property ="cor_name" column="cor_name"/>
+		</association>
+		<collection ofType="corKeyword" property="keyword" column="key_num" javaType="ArrayList">
+			<id property="key_num" column ="kw_key_num" />
+			<id property="key_name" column ="kw_key_name" />
+		</collection>
+		<collection ofType="PjPickKeyword" property="pjpickKeyword" column="pjp_keynum" javaType="ArrayList">
+			<id property="pjp_keynum" column ="pjp_keynum" />
+			<result property="pj_num" column ="pj_num" />
+			<result property="key_num" column ="key_num" />
+		</collection>
+		<collection ofType="corProject" property="pjKeywords" column="key_num" javaType="ArrayList">
+			<id property="key_num" column ="key_num" />
+			<id property="key_name" column ="key_num" />
+		</collection>
+	</resultMap>
+	
+	<resultMap type="Corporation" id="corporationMap">
+		<id property ="cor_code" column="cor_code"/>
+		<result property ="mem_email" column="mem_email"/>
+		<result property ="cor_reg" column="cor_reg"/>
+		<result property ="cor_name" column="cor_name"/>
+		<result property ="cor_mname" column="cor_mname"/>
+		<result property ="cor_tel" column="cor_tel"/>
+		<result property ="cor_rdate" column="cor_rdate"/>
+		<result property ="cor_point" column="cor_point"/>
+		<result property ="cor_level" column="cor_level"/>
+		<result property ="cor_postcode" column="cor_postcode"/>
+		<result property ="cor_addr" column="cor_addr"/>
+		<result property ="cor_detailaddr" column="cor_detailaddr"/>
+		<result property ="cor_addr_x" column="cor_addr_x"/>
+		<result property ="cor_addr_y" column="cor_addr_y"/>
+		<result property ="cor_profile" column="cor_profile"/>
+		<result property ="cor_type" column="cor_type"/>
+		<result property ="cor_fname" column="cor_fname"/>
+		<result property ="cor_ofname" column="cor_ofname"/>
+		
+		<collection ofType="corProject" property="project" column="pj_num" javaType="ArrayList">
+			<id property="pj_num" column ="pj_num" />
+		</collection>
+		
+	</resultMap>
+	
+	<select id="list" parameterType="ProjectVo" resultMap="projectMap"> 
+		 <![CDATA[
+			select * from (select ROWNUM rnum , aa.* from 
+			(select * from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code order by PJ_NUM desc)aa) where rnum>#{start} and rnum<=#{end}
+	    ]]>
+	</select>
+	
+	<select id="pjKeywords" resultMap="projectMap">
+		<![CDATA[
+			SELECT pj.PJ_NUM, kw.KEY_NAME as kw_key_name
+   			FROM KEYWORD kw
+  			LEFT OUTER JOIN PJ_PICK_KEYWORD pjpkw ON pjpkw.KEY_NUM = kw.KEY_NUM
+   			RIGHT OUTER JOIN PROJECT pj ON pj.PJ_NUM = pjpkw.PJ_NUM
+		]]>
+	</select>
+	
+	<select id="content" parameterType="long" resultMap="projectMap"> 
+	 	<![CDATA[
+		  SELECT pj.*, kw.KEY_NAME as kw_key_name , t.TYPE_NAME, kw.KEY_NUM as kw_key_num, pjpkw.pjp_keynum
+		   FROM PROJECT pj
+		   INNER JOIN TYPE t ON t.TYPE_NUM = pj.TYPE_NUM  
+		   LEFT OUTER JOIN PJ_PICK_KEYWORD pjpkw ON pjpkw.PJ_NUM = pj.PJ_NUM
+		   LEFT OUTER JOIN KEYWORD kw ON kw.KEY_NUM = pjpkw.KEY_NUM
+		   WHERE pj.PJ_NUM=#{pj_num}
+		  ]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="long" >
+		select count(PJ_NUM) from PROJECT
+	</select>
+	
+	
+	<insert id="insertpj" parameterType="corProject" >
+	<selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
+		select pj_num_seq.nextval from dual
+	</selectKey>
+		insert into PROJECT
+		(PJ_NUM, TYPE_NUM, COR_CODE, PJ_SUB, PJ_CONT, PJ_DDATE, PJ_PAY, PJ_TERM, PJ_LOC, pj_postcode,
+		 pj_detailloc, pj_loc_x, pj_loc_y,PJ_RECNUM, PJ_APPNUM, PJ_RDATE, PJ_TOTALP, PJ_PLACE, PJ_HOMEPAGE, PJ_FGRADE)
+		 values(#{pj_num}, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},
+		 #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})		
+	</insert>
+	
+	 <insert id="insertPjpkeyword" parameterType="map">
+		 <selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
+			 select pj_num_seq.currval from dual
+		 </selectKey>
+		 <if test="key_num != null">
+		 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num)
+		 	select  PJP_KEYNUM_SEQ.nextval, A.* from(
+		  <foreach collection ="key_num" item="key_num" separator="UNION ALL "> 
+			 select #{key_num} as key_num, #{pj_num} as pj_num from dual
+		 </foreach>) A
+		 </if>
+	 </insert>
 
-   
-   <update id ="updatePj" parameterType="corProject">
-      update Project set
-      type_num=#{type_num}, PJ_SUB=#{pj_sub}, PJ_CONT=#{pj_cont}, PJ_DDATE= #{pj_ddate}, PJ_PAY=#{pj_pay}, PJ_TERM=#{pj_term}, PJ_LOC=#{pj_loc}
-      , pj_postcode=#{pj_postcode}, pj_detailloc=#{pj_detailloc}, pj_loc_x=#{pj_loc_x}, pj_loc_y=#{pj_loc_y}, 
-      PJ_RECNUM=#{pj_recnum}, PJ_APPNUM=#{pj_appnum}, PJ_TOTALP=#{pj_totalp}, PJ_PLACE=#{pj_place}, PJ_HOMEPAGE=#{pj_homepage}, PJ_FGRADE=#{pj_fgrade}
-      where Pj_num = #{pj_num}
-   </update>
-   
-   <update id="updateKeyword" parameterType="List">
-     <foreach collection= "list" item="value" separator=" " index="k" >
-         Update PJ_PICK_KEYWORD set
-        key_num= #{value, typeHandler=org.apache.ibatis.type.EnumTypeHandler} where pjp_keynum= #{value, typeHandler=org.apache.ibatis.type.EnumTypeHandler}
-        </foreach>
-   </update>
-   
-   <delete id="deletePj" parameterType="long">
-      delete from PROJECT where PJ_NUM=#{pj_num}
-   </delete>
-   <delete id="deleteKeyword" parameterType="long">
-       delete from PJ_PICK_KEYWORD where PJ_NUM=#{pj_num}
-    </delete>
-   <!-- 
-   <update id="update" parameterType="Board" >
-      update BOARD set email=#{email}, subject=#{subject}, content=#{content} where seq=#{seq}
-   </update>
-   -->
+	
+	<update id ="updatePj" parameterType="corProject">
+		update Project set
+		type_num=#{type_num}, PJ_SUB=#{pj_sub}, PJ_CONT=#{pj_cont}, PJ_DDATE= #{pj_ddate}, PJ_PAY=#{pj_pay}, PJ_TERM=#{pj_term}, PJ_LOC=#{pj_loc}
+		, pj_postcode=#{pj_postcode}, pj_detailloc=#{pj_detailloc}, pj_loc_x=#{pj_loc_x}, pj_loc_y=#{pj_loc_y}, 
+		PJ_RECNUM=#{pj_recnum}, PJ_APPNUM=#{pj_appnum}, PJ_TOTALP=#{pj_totalp}, PJ_PLACE=#{pj_place}, PJ_HOMEPAGE=#{pj_homepage}, PJ_FGRADE=#{pj_fgrade}
+		where Pj_num = #{pj_num}
+	</update>
+	
+	
+	<delete id="updateKeyword_Del" parameterType="PjPickKeyword">
+	 	delete from PJ_PICK_KEYWORD where PJ_NUM=#{pj_num}
+	 </delete>
+	 <insert id="updateKeyword_In" parameterType="PjPickKeyword">
+		  	<foreach collection ="key_numList" item="key_num" separator=";" open="DECLARE BEGIN " close="; END;">
+			 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num) values(PJP_KEYNUM_SEQ.nextval, #{key_num},  #{pj_num})
+			 </foreach>
+	 </insert>
+<!-- 
+	<update id="updateKeyword" parameterType="PjPickKeyword">
+	   <foreach collection= "PjPickKeyword" item="value" separator=" " >
+		   Update PJ_PICK_KEYWORD set
+		   key_num = #{value.key_numList, jdbcType=INTEGER} where pjp_keynum = #{value.pjpkeynumList, jdbcType=NUMERIC}
+		</foreach>
+	</update>
+ -->	 
+	<delete id="deletePj" parameterType="long">
+		delete from PROJECT where PJ_NUM=#{pj_num}
+	</delete>
+	<delete id="deleteKeyword" parameterType="long">
+	 	delete from PJ_PICK_KEYWORD where PJ_NUM=#{pj_num}
+	 </delete>
+	<!-- 
+	<update id="update" parameterType="Board" >
+		update BOARD set email=#{email}, subject=#{subject}, content=#{content} where seq=#{seq}
+	</update>
+	-->
 
-   
-   <!-- 기업정보 뽑기 -->
-   <select id="corInfo" parameterType="long" resultMap="corporationMap">
-      select * from CORPORATION cor join PROJECT pj on cor.COR_CODE=pj.COR_CODE where PJ_NUM=#{pj_num}
-   </select>
+	
+	<!-- 기업정보 뽑기 -->
+	<select id="corInfo" parameterType="long" resultMap="corporationMap">
+		select * from CORPORATION cor join PROJECT pj on cor.COR_CODE=pj.COR_CODE where PJ_NUM=#{pj_num}
+	</select>
+
 </mapper>

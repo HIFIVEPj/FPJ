@@ -1,3 +1,4 @@
+
 package fp.market.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
@@ -9,16 +10,27 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
+
 import javax.servlet.http.HttpSession;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -94,7 +106,7 @@ public class MarketController {
 		}else if(cntPerPageR == null) {
 			cntPerPageR = "4";
 		}
-		
+
 		HashMap<String,Object> mapr=new HashMap<String,Object>();
 		HashMap<String,Object> mapq=new HashMap<String,Object>();
 		MarketRev marketRev = new MarketRev();
@@ -158,13 +170,12 @@ public class MarketController {
 	}
 
 	
-	
-	
 	@RequestMapping(value = "market-posts", method = RequestMethod.GET)
 	public String market_post(Locale locale, Model model) {
 
 		return "redirect:market/market-posts";
 	}
+
 	@PostMapping("market-insert")
 	public String market_insert(Market market,MultipartHttpServletRequest mtfRequest) {
 	//	log.info("@##$market: "+market);
@@ -178,7 +189,7 @@ public class MarketController {
 		marketService.insertMarket(market);
 		return "redirect:market-list";
 	}	
-	
+/*	
 	@PostMapping("market-update")
 	public ModelAndView market_update1(@RequestParam long market_num){
 		Market m=marketService.updateMarket1(market_num);
@@ -186,6 +197,7 @@ public class MarketController {
 		mv.setViewName("market/market-update");
 		mv.addObject("market", m);
 		return mv;		
+
 	}
 	
 	@PostMapping("market-update2")
@@ -201,12 +213,13 @@ public class MarketController {
 		marketService.updateMarket2(market);		
 		return "redirect:market-list";
 	}
+	
 	@GetMapping("market-delete")
 	public String market_delete(@RequestParam long market_num) {
 		marketService.deleteMarket(market_num);	
 		return "redirect:market-list";
 		
-	}
+	}*/
 	public List<String> Fileupload(MultipartHttpServletRequest mtfRequest) {
 		String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\marketThumbnails\\";
 		File Folder = new File(path);
@@ -240,7 +253,54 @@ public class MarketController {
 		list.add(fileName);
 		return list;
 	}
+	
+	@PostMapping("market-update")
+	public ModelAndView market_update1(@RequestParam long market_num){
+		Market m=marketService.updateMarket1(market_num);
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("market/market-update");
+		mv.addObject("market", m);
+		return mv;		
+	}
+	@PostMapping("market-update2")
+	public String market_update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
+		log.info("market"+market);
+		List<MultipartFile> fileList= mtfRequest.getFiles("fnames");
+	//	String src  = "C:\\FinalPj\\MarketFiles";
+		String path  = "C:\\FinalPj\\MarketFiles\\";
+		for(MultipartFile mf:fileList) {
+			String originFileName= mf.getOriginalFilename();
+			long fileSize=mf.getSize();
+			
+			log.info("originFileName"+originFileName);
+			log.info("fileSize"+fileSize);
+			
+			String safeFile=path+System.currentTimeMillis()+originFileName;
+			try {
+				mf.transferTo(new File(safeFile));
+			}catch(IllegalStateException  e) {
+				e.printStackTrace();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			return "redirect:market-list";
+		}
+
+		int cate=market.getCate_num();
+		log.info("######cate:"+cate);
+		marketService.updateMarket2(market);
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("market/market-update");
+		return "redirect:market-list";
+		
+	}
+	@GetMapping("market-delete")
+	public String market_delete(@RequestParam long market_num) {
+		marketService.deleteMarket(market_num);	
+		return "redirect:market-list";
+		
+	}
+	
 
 	
 }
-

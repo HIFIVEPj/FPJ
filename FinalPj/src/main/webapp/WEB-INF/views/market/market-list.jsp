@@ -1,5 +1,8 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--header-->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -206,7 +209,7 @@
 															<div class="card-footer pt-4 pb-4">
 																<div class="item-card9-footer d-flex">
 																	<div class="item-card9-cost">
-																		<h4 class="text-dark font-weight-semibold mb-0 mt-0">${list.market_price}</h4>
+																		<h4 class="text-dark font-weight-semibold mb-0 mt-0"><fmt:formatNumber value="${list.market_price}" pattern="#,###,###,###" /></h4>
 																	</div>
 																	<div class="ml-auto">
 																		<div class="rating-stars block">
@@ -243,7 +246,9 @@
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    
+
 																<img src="../marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100">
+
 															</div>
 															<div class="item-card9-icons">
 																<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
@@ -253,13 +258,16 @@
 															<div class="item-card9">
 																<a href="market-content?market_num=${list.market_num}">${list.freelancer.free_name}</a>
 																<a href="market-content?market_num=${list.market_num}" class="text-dark mt-2"><h4 class="font-weight-semibold mt-1">${list.market_sub}</h4></a>
+
 															<!--<p>${list.market_cont}</p>  -->
 																<div class="item-card9-desc">
 																	<h2>${list.market_price}<span class="fs-16">원</span></h2>
+
 																	<div class="item-card2-rating mb-0">
 																	 <div class="rating-stars d-inline-flex">
 																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="5">
 																		<span class="rated-products-ratings">
+
 																			<c:if test="${list.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
 																				<c:forEach var="1" begin="1" end="${list.marketRev.marketRev_star}">
 																					<i class="fa fa-star text-warning"> </i>
@@ -269,6 +277,7 @@
 																				</c:forEach>	
 																			</c:if>
 																		</span>&nbsp;${list.marketRev.marketRev_star}&nbsp;&nbsp;&nbsp;
+
 																		<div>
 																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> ${list.marketRev.marketRev_num}</span></a>
 																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i>${list.market_vcnt}</span></a>
@@ -339,35 +348,11 @@
 		</section>
 		<!--/Add Listing-->
 
-		<!-- Newsletter-->
-		<section class="sptb bg-white border-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-7 col-xl-6 col-md-12">
-						<div class="sub-newsletter">
-							<h3 class="mb-2"><i class="fa fa-paper-plane-o mr-2"></i> Subscribe To Our Newsletter</h3>
-							<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-						</div>
-					</div>
-					<div class="col-lg-5 col-xl-6 col-md-12">
-						<div class="input-group sub-input mt-1">
-							<input type="text" class="form-control input-lg " placeholder="Enter your Email">
-							<div class="input-group-append ">
-								<button type="button" class="btn btn-primary btn-lg br-tr-7 br-br-7">
-									Subscribe
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- Newsletter-->
-
 
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
 	
 
+>>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 </html>

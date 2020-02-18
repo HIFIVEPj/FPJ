@@ -1,3 +1,4 @@
+
 package fp.member.service;
 
 import java.util.List;
@@ -6,7 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import fp.member.domain.EmailAuth;
@@ -32,9 +35,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public void insertM(Member member) {
-		//BCryptPasswordEncoder passwodrdEncoder =new BCryptPasswordEncoder();
-		//member.setPwd(passwodrdEncoder.encode(member.getPwd()));
+
+	public void insertM(Member member) {		
+
 		memberMapper.insertMem(member);
 
 	}

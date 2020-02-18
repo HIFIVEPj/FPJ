@@ -1,3 +1,4 @@
+
 package fp.market.domain;
 
 import lombok.AllArgsConstructor;

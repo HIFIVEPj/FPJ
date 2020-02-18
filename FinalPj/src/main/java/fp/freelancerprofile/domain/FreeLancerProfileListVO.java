@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.domain;
 
 import java.sql.Date;
@@ -22,3 +23,4 @@ public class FreeLancerProfileListVO {
 	//list에 freelancer클래스의 객체들이 담김.
 	private FreeLancerProfileListVO freeLancerProfileListVO;
 }
+

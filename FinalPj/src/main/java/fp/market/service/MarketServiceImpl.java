@@ -1,3 +1,4 @@
+
 package fp.market.service;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.getMarketCount();
 	}
 	@Override
+
 	public int getMarketRevCount(long market_num) {
 		return mapper.getMarketRevCount(market_num);
 	}
@@ -42,6 +44,7 @@ public class MarketServiceImpl implements MarketService {
 	public Market getMarket(long market_num) {
 		return mapper.getMarket(market_num);
 	}
+
 	@Override
 	public int getMarketStar(long market_num) {
 		return mapper.getMarketStar(market_num);
@@ -79,6 +82,7 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.insertMarketQA(marketQA);
 		
 	}
+
 	@Override
 	public void insertMarket(Market market) {
 		mapper.insertMarket(market);
@@ -91,12 +95,6 @@ public class MarketServiceImpl implements MarketService {
 	}
 	
 
-	
-
-	
-
-
-
 //	@Override
 //	public MarketContent getMarketContent(long market_num) {
 		// TODO Auto-generated method stub
@@ -104,3 +102,4 @@ public class MarketServiceImpl implements MarketService {
 //	}
 
 }
+

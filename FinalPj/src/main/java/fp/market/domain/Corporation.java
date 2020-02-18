@@ -1,3 +1,4 @@
+
 package fp.market.domain;
 
 import java.sql.Date;
@@ -28,3 +29,4 @@ public class Corporation {
 	
 
 }
+

@@ -1,3 +1,4 @@
+
 $(function(e) {
 	$('#example').DataTable({
 		"order": [[0, "desc"]]
@@ -11,4 +12,6 @@ $(document).ready(function() {
 //,
 //"language": {
 //	"url": "dataTables.korean.lang"
+
 //}
+

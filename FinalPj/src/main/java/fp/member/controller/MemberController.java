@@ -1,3 +1,4 @@
+
 package fp.member.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
@@ -8,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
@@ -22,8 +25,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-//import org.springframework.security.crypto.bcrypt.BCrypt;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,10 +53,12 @@ public class MemberController {
     @Autowired
     MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
     
- /*   @Autowired
-    BCryptPasswordEncoder pwdEncoder;
-    */ 
-	@RequestMapping("/register")
+
+   @Autowired
+    BCryptPasswordEncoder bcryptPasswordEncoder;
+    
+	@RequestMapping("register")
+
 	public String reg() {
 		return "member/register";
 	}    
@@ -157,10 +164,19 @@ public class MemberController {
     
     @RequestMapping(value = "signup.do" , method=RequestMethod.POST )
     public String signUp (Member member) throws IOException {
+
+    	String bcpwd=member.getPwd();
+    	member.setPwd(BCrypt.hashpw(bcpwd, BCrypt.gensalt(10)));
+    	//BCryptPasswordEncoder pwEncoder =new BCryptPasswordEncoder();
+    	//String password = pwEncoder.encode(member.getPwd());
+    	//member.setPwd(password);
+
     	//member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
     	//dto.setPassword(BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt()));
     	memberservice.insertM(member);
     	System.out.println("member: " + member);
     	return "index";
     } 
+
 }
+

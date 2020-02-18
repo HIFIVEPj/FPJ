@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
@@ -149,3 +150,4 @@ public class FreeLancerProfileController {
 		return "profile/freelancerList";
 	}
 }
+

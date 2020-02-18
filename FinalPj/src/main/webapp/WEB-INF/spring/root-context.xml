@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
@@ -23,18 +23,13 @@
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 
+	<!-- 원래 있던거  -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-		<!-- 승훈-->
+
 		<property value="classpath:/fp/customer_service/mapper/*Mapper.xml" name="mapperLocations" />
 	</bean>
-	
-	<!-- 소담 -->
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory"/>
-	</bean>
-	<!-- 소담 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	    <property name="host" value="smtp.gmail.com" />
 	    <property name="port" value="587" />
@@ -48,13 +43,14 @@
 	    </property>
 	</bean>
 
-	
+
 	
 	<!-- 승훈 -->
 	<context:component-scan base-package="fp.customer_service.service"/>
 	<context:component-scan base-package="fp.customer_service.mapper"/>
 	<mybatis-spring:scan base-package="fp.customer_service.mapper"/>
-	
+
+
 	<!-- 세영 -->
 	<context:component-scan base-package="fp.market.service"/>	
 	<context:component-scan base-package="fp.market.utils"/>
@@ -65,7 +61,7 @@
 	<context:component-scan base-package="fp.freelancerprofile.service"/>	
 	<context:component-scan base-package="fp.freelancerprofile.mapper"/>
 	<mybatis-spring:scan base-package="fp.freelancerprofile.mapper"/>
-	
+
 	<!-- 나영 -->
 	<context:component-scan base-package="fp.corporation.service"/>	
 	<context:component-scan base-package="fp.corporation.mapper"/>	
@@ -78,24 +74,28 @@
 	<context:component-scan base-package="fp.member.domain"/>
 	<context:component-scan base-package="fp.member.dao"/>				
 	<context:component-scan base-package="fp.member.mapper"/>
-	<mybatis-spring:scan base-package="fp.member.mapper"/>
+	<mybatis-spring:scan base-package="fp.member.mapper"/>	
 	
-	
-	
-	
-	<!-- 
-	<context:component-scan base-package="song.md.aop"/>
-	 -->
-	
+	<context:component-scan base-package="fp.member.aop"/>
 	<context:annotation-config></context:annotation-config>
 	<!--
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+<<<<<<< HEAD
 	-->
+
+
+
+	<!-- 	<property name="mapperLocations" value="classpath*:fp/member/mapper/*.xml" /> -->
+		<!-- 내가 추가해보기  여기는 됨     -->
+		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+		</bean> 
+
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<tx:annotation-driven />
-	
-	
-</beans>
+
+</beans> 
+

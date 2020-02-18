@@ -36,5 +36,4 @@
 		update qa set qa_cate=#{qa_cate}, qa_sub=#{qa_sub}, qa_cont=#{qa_cont} where qa_num=#{qa_num}
 	</update>
 	
-	
 </mapper>

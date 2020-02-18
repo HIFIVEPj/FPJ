@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -47,17 +49,25 @@
 											
 											<div class="card-body">
 												<div class="text-center">
-													<div class="btn-group btn-block mt-2 mb-2">
-														<a href="https://www.naver.com/" class="btn btn-naver active">
-															<span><b>N</b></span>
-														</a>
-														<a href="https://www.naver.com/" class="btn btn-block btn-naver">Naver</a>
+
+													<div  id="naver_id_login" class="btn-group btn-block mt-2 mb-2">
+														<a href="${url}" class="btn btn-naver active">
+			                                             <span><b>N</b></span>
+			                                          </a>
+			                                          <a href="${url}" class="btn btn-block btn-naver">Naver</a>
+													
+														<!--<a href="${url}" class="btn btn-naver active">
+														<img width="223"src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /> 
+															  <span><b>N</b></span> 
+														</a> -->
+														<!-- <a href="https://www.naver.com/" class="btn btn-block btn-naver">Naver</a> -->
 													</div>
-													<div class="btn-group btn-block mt-2 mb-2">
-														<a href="https://www.kakaocorp.com/" class="btn btn-kakao active">
+													<div  id="kakao_id_login" class="btn-group btn-block mt-2 mb-2">
+														<a href="${kakao_url}" class="btn btn-kakao active">
 															<span class="fa fa-comment"></span>
 														</a>
-														<a href="https://www.kakaocorp.com/" class="btn btn-block btn-kakao">Kakao</a>
+														<a href="${kakao_url}" class="btn btn-block btn-kakao">Kakao</a>
+
 													</div>
 													
 													<div class="btn-group btn-block mt-2 mb-2">
@@ -69,37 +79,33 @@
 												</div>
 												<hr class="divider">
 												<form class="form-group" action="/login_check" method="post">
-													<div class="form-group">
-														<label class="form-label text-dark">Email</label>
-														<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" >
-													</div>
-													<div class="form-group">
-														<label class="form-label text-dark">비밀번호</label>
-														<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" >
-													</div>
+
+												<div class="form-group">
+													<label class="form-label text-dark">Email</label>
+													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" >
+												</div>
+												<div class="form-group">
+													<label class="form-label text-dark">비밀번호</label>
+													<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" >
+												</div>
+												
+												<div class="form-group">
+													<label class="custom-control custom-checkbox">
+														<a href="forgot-pwd.html" class="float-right small text-dark mt-1 font-12" class="color-hover-sign">비밀번호 찾기</a>
+														<input type="checkbox" class="custom-control-input">
+														<span class="custom-control-label text-dark font-12">자동로그인</span>
+													</label>
+												</div>
+												<div class="form-footer mt-2">
+													<!-- <a href="index.html" class="btn btn-primary btn-block">SignIn</a> -->	
+													<input type="submit" class="btn btn-primary btn-block" id="login_bt" value="로그인">
 													
-													<c:if test="${param.err == true}">
-													<p style="color: red">에러났다 확인바람확인바람.</p>
-													</c:if>											
-	
-													
-													<div class="form-group">
-														<label class="custom-control custom-checkbox">
-															<a href="forgot-pwd.html" class="float-right small text-dark mt-1 font-12" class="color-hover-sign">비밀번호 찾기</a>
-															<input type="checkbox" class="custom-control-input">
-															<span class="custom-control-label text-dark font-12">자동로그인</span>
-														</label>
-													</div>
-													<div class="form-footer mt-2">
-														<!-- <a href="index.html" class="btn btn-primary btn-block">SignIn</a> -->									
-														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>													
-														<input type="submit" class="btn btn-primary btn-block" id="login_bt" value="로그인">
-														
-													</div>
-													<div class="text-center  mt-3 text-dark">
-														<span class="font-12">아직 멤버가 아니십니까?</span> <a href="register" class="color-hover-sign">SignUp</a>
-													</div>
-												</form>
+												</div>
+												<div class="text-center  mt-3 text-dark">
+													<span class="font-12">아직 멤버가 아니십니까?</span> <a href="register" class="color-hover-sign">가입하기</a>
+												</div>
+											</form>
+
 											</div>											
 										</div>
 									</div>
@@ -110,17 +116,25 @@
 											</div>
 											<div class="card-body">
 												<div class="text-center">
-													<div class="btn-group btn-block mt-2 mb-2">
-														<a href="https://www.naver.com/" class="btn btn-naver active">
-															<span>N</span>
-														</a>
-														<a href="https://www.naver.com/" class="btn btn-block btn-naver">Naver</a>
+
+													<div  id="naver_id_login" class="btn-group btn-block mt-2 mb-2">
+														<a href="${url}" class="btn btn-naver active">
+			                                             <span><b>N</b></span>
+			                                          </a>
+			                                          <a href="${url}" class="btn btn-block btn-naver">Naver</a>
+													
+														<!--<a href="${url}" class="btn btn-naver active">
+														<img width="223"src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /> 
+															  <span><b>N</b></span> 
+														</a> -->
+														<!-- <a href="https://www.naver.com/" class="btn btn-block btn-naver">Naver</a> -->
 													</div>
-													<div class="btn-group btn-block mt-2 mb-2">
-														<a href="https://www.kakaocorp.com/" class="btn btn-kakao active">
+													<div  id="kakao_id_login" class="btn-group btn-block mt-2 mb-2">
+														<a href="${kakao_url}" class="btn btn-kakao active">
 															<span class="fa fa-comment"></span>
 														</a>
-														<a href="https://www.kakaocorp.com/" class="btn btn-block btn-kakao">Kakao</a>
+														<a href="${kakao_url}" class="btn btn-block btn-kakao">Kakao</a>
+
 													</div>
 													
 													<div class="btn-group btn-block mt-2 mb-2">
@@ -141,7 +155,9 @@
 												</div>
 												<div class="form-group">
 													<label class="custom-control custom-checkbox">
-														<a href="forgot-pwd.html" class="float-right small text-dark mt-1 font-12">비밀번호 찾기</a>
+
+														<a href="forgot-pwd" class="float-right small text-dark mt-1 font-12">비밀번호 찾기</a>
+
 														<input type="checkbox" class="custom-control-input">
 														<span class="custom-control-label text-dark font-12">자동로그인</span>
 													</label>
@@ -150,7 +166,9 @@
 													<a href="index.html" class="btn btn-primary btn-block">SignIn</a>
 												</div>
 												<div class="text-center  mt-3 text-dark">
-													<span style="font-size:12px;">아직 멤버가 아니십니까?</span>  <a href="register.html" class="color-hover-sign">SignUp</a>
+
+													<span style="font-size:12px;">아직 멤버가 아니십니까?</span>  <a href="register" class="color-hover-sign">가입하기</a>
+
 												</div>
 
 											</div>
@@ -167,4 +185,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+
 <!--/footer-->

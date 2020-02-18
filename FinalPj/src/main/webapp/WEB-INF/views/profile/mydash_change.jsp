@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -22,7 +23,9 @@
 			</div>
 		</section>
 		<!--Breadcrumb-->
-
+	<c:choose>
+	
+		
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
@@ -46,9 +49,13 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
+											<c:when test="${sessionScope. CLASS_NUM == 4}">
 												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
 												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
+												</c:when>
+												<c:when test="${sessionScope. CLASS_NUM ==2}">
 												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+												</c:when>
 											</ul>
 										</li>
 										<li class="slide">
@@ -228,9 +235,13 @@
 			</div>
 		</div>
 		</section>
+		
+		
+		</c:choose>
 		<!--/User Dashboard-->
 
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> b1c1c09c3d9f1dffa0a9b5aa66034261f9603eb9
 <!--/footer-->

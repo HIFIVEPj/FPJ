@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -63,7 +64,7 @@
                                  <ul class="slide-menu">
                                     <li><a class="slide-item" href="mydash.html">회원정보</a></li>
                                     <li><a class="slide-item " href="freelancerProfile_list">프로필</a></li>
-                                 
+                                 	<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
                                  </ul>
                               </li>
                               <li class="slide">
@@ -608,4 +609,5 @@
 
 	</body>
 </html>
+>>>>>>> b1c1c09c3d9f1dffa0a9b5aa66034261f9603eb9
 <!--/footer-->

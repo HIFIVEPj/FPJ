@@ -27,12 +27,21 @@
 		<result property="auth" column="MEM_AUTH" />		
 	</resultMap>
 	
+	<select id="loginCheck" resultType="Member" resultMap="MemberMap">
+		<![CDATA[
+			SELECT * FROM member WHERE MEM_EMAIL = #{email} 
+		]]>
+	</select>
+	<!-- 
+
 	<select id="loginCheck" resultType="String">
 		<![CDATA[
 			SELECT count(*) FROM member
 			WHERE MEM_EMAIL = #{email} AND MEM_PWD = #{pwd}
 		]]>
-	</select>
+
+	</select> -->
+
 	<!--  시큐리티 적용해보기 
 	<select id="selectMemList" resultMap="MemberMap" resultType="Member"  parameterType="String">
   		SELECT m.*, a.MEM_AUTH FROM MEMBER m LEFT OUTER JOIN MEMBER_AUTH a on m.MEM_EMAIL=a.MEM_EMAIL WHERE m.MEM_EMAIL= #{email} 
@@ -56,6 +65,9 @@
 		insert into EMAIL_AUTHENTICATION(MEM_EMAIL,EMAIL_AUTH )values(#{email}, #{dice})
 	</insert>	
 	
+	<update id="update_pw">
+		UPDATE MEMBER SET MEM_PWD WHERE MEM_EMAIL=#{email} 
+	</update>
 	<!--  
 	<delete id="delete" parameterType="long">
 		delete from ADDRESS where SEQ=#{seq}

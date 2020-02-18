@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!--header-->
 <!doctype html>
@@ -145,9 +146,9 @@
 						</div>
 						<div class="col-xl-4 col-lg-4 col-sm-8 col-5">
 							<div class="top-bar-right">
-								<ul class="custom">
-								
-								
+
+								<ul class="custom">						
+
 								
 								<c:choose>
 									<c:when test="${empty sessionScope.email}">
@@ -157,20 +158,34 @@
 									
 									<li>
 									<!--<a href='<c:url value="/member/login"/>' class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a> -->	
-										<a href="member/login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
+
+										<a href="login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
 									</li>
 									</c:when>
 									<c:otherwise>
-										<h>${sessionScope.email}님 환영합니다.</h>														
+										<h>${sessionScope.email} 님 환영합니다. </h>														
+
 									<li class="dropdown">
-										<a href="#" class="text-dark" data-toggle="dropdown"><i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
+									
+										<a href="#" class="text-dark" data-toggle="dropdown">  &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+											<c:if test="${sessionScope.class_num==1}">
 											<a href="construction" class="dropdown-item" >
 												<i class="dropdown-icon si si-settings" style="color:#1f719a;"></i> 관리자
 											</a>
+
+											</c:if>
+											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
+												<a href="mydash_cor" class="dropdown-item" >
+													<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
+												</a>
+											</c:if>
+											<c:if test="${sessionScope.class_num==4}">
+
 											<a href="freelancerProfile_list" class="dropdown-item" >
 												<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 											</a>
+											</c:if>
 											<!--
 											<a class="dropdown-item" href="#">
 												<i class="dropdown-icon si si-envelope" style="color:#1f719a;"></i> Inbox

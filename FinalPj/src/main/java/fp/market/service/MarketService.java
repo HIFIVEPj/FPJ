@@ -1,3 +1,4 @@
+
 package fp.market.service;
 
 import java.util.HashMap;
@@ -14,6 +15,7 @@ public interface MarketService {
 	 int getMarketCount();
 	 
 	 //리뷰 페이징에 필요한 총 리뷰 수	 
+
 	int getMarketRevCount(long market_num);
 	
 	//문의 페이징에 필요한 총 문의 수 
