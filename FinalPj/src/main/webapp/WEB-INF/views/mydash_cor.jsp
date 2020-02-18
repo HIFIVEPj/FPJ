@@ -7,8 +7,9 @@
 
 		<script>
 			function check(){
+				alert(input_cor.cor_fname.value);
 				//$("#typeSelect").val();
-				input_cor.submit();
+				//input_cor.submit();
 			}
 		</script>
 		<!--Breadcrumb-->
@@ -88,7 +89,7 @@
 								<h3 class="card-title"><b>회원정보</b></h3>
 							</div>
 							
-							<form name="input_cor" method="post" action="mydash_cor">
+							<form name="input_cor" method="post" action="mydash_cor" enctype="multiPART/form-data">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
@@ -291,9 +292,11 @@
 		<!--/User Dashboard-->
 	<script>
 	function upfile(){
-		var filename = document.getElementById("file").value;
-		document.getElementById("cor_fname_label").innerHTML=filename;
+		//var filename = document.getElementById("file").value;
+		//document.getElementById("cor_fname_label").innerHTML=filename;
 	}
+	
+	
 		
 	</script>
 		<!--footer-->
