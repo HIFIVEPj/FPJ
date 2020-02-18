@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import org.apache.http.HttpRequest;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -51,19 +55,103 @@ public class LoginController {
 	private void setNaverLoginController(NaverLoginController naverLoginController) {
 	this.naverLoginController = naverLoginController;
 	}
- 
+	
     @Autowired 
     LoginService loginService;
-    
+	
+    @Autowired    //서비스를 호출하기 위해서 의존성을 주입
+    JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
    
     @GetMapping("/forgot-pwd")
     public String findPwd() {
     	return "member/forgot-pwd";
     }
-    @RequestMapping(value = "find_pwd.do", method = RequestMethod.POST)
-    public void find_pw(@ModelAttribute Member member, HttpServletResponse response) throws Exception{
-    	loginService.find_pw(response, member);
+    @RequestMapping(value="find_pwd.do", method = RequestMethod.POST)
+	public String updatePwd(Member member, Model model) {
+		
+		String repwd="";
+		String st[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+		Random r = new Random();
+		for(int i=1; i<=6; i++) {
+			repwd+=st[r.nextInt(26)];
+			
+		}
+		log.info("!!!!!!!!!!!!!!!!!!!!******************8"+member.getEmail()+"!@#@!##@#!#!@"+repwd);
+		member.setEmail(member.getEmail());
+		member.setPwd(BCrypt.hashpw(repwd, BCrypt.gensalt(10)));
+		//member.setPwd(repwd);
+		
+		Integer result = loginService.find_pw(member);		
+		model.addAttribute("result",result);		
+		System.out.println("result : " + result);
+		
+		try {
+			if(result>=1) {
+				log.info("비번체크성공");
+			}else {
+				return "member/forgot-pwd";
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return "member/login";
 	}
+    /*
+    @RequestMapping(value = "find_pwd.do", method = RequestMethod.POST)
+    public void find_pw(@ModelAttribute Member member, HttpServletRequest request,HttpServletResponse response) throws Exception{
+    	String repwd = "";
+		for (int i = 0; i < 12; i++) {
+			repwd += (char) ((Math.random() * 26) + 97);
+		}
+
+      
+        String setfrom = "dam7319@gamil.com";
+        String tomail = request.getParameter("email"); // 받는 사람 이메일
+        String title = "[HIFIVE]임시 비밀번호입니다"; // 제목
+        String content =
+        
+        System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
+        
+        System.getProperty("line.separator")+
+                
+        "안녕하세요.[HIFIVE]입니다."
+        
+        +System.getProperty("line.separator")+
+        
+        System.getProperty("line.separator")+
+
+        " 임시 비밀번호는 " +repwd+ " 입니다. "
+        
+        +System.getProperty("line.separator")+
+        
+        System.getProperty("line.separator")+
+        
+        "보안을 위해 사이트에 접속하셔서 비밀번호를 꼭 변경해주세요"; // 내용            
+        
+     
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+            messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+            messageHelper.setTo(tomail); // 받는사람 이메일
+            messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+            messageHelper.setText(content); // 메일 내용
+            
+            mailSender.send(message);
+        } catch (Exception e) {
+            System.out.println(e);
+        }       
+       // ModelAndView mv = new ModelAndView();    //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을 지정한다.
+       // mv.setViewName("member/join_confirm");  //뷰의이름                   
+       // mv.addObject("pwd",repwd);
+                
+        member.setPwd(repwd);
+    	loginService.find_pw(member);
+	}*/
+    
     
   //로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
@@ -155,7 +243,7 @@ public class LoginController {
   		log.warn("*******************************member: "+ member.getPwd());
   		log.warn("*********************result" + result);
   		if(result == true) {  
-  			//session.getAttribute("email");
+  			session.getAttribute("email");
   			//String email =(String)session.getAttribute("email");
   			//log.info("###################$$$$$$$$$$$$$$$$$$$$#"+email);
   			mv.addObject("msg","성공");

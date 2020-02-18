@@ -78,7 +78,7 @@
 												<form class="form-group" action="/login_check" method="post">
 												<div class="form-group">
 													<label class="form-label text-dark">Email</label>
-													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" >
+													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" value="${email}" >
 												</div>
 												<div class="form-group">
 													<label class="form-label text-dark">비밀번호</label>

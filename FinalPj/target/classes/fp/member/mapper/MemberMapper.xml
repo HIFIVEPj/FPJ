@@ -62,8 +62,8 @@
 		insert into EMAIL_AUTHENTICATION(MEM_EMAIL,EMAIL_AUTH )values(#{email}, #{dice})
 	</insert>	
 	
-	<update id="update_pw">
-		UPDATE MEMBER SET MEM_PWD WHERE MEM_EMAIL=#{email} 
+	<update id="update_pw"  parameterType="Member">
+		UPDATE MEMBER SET MEM_PWD=#{pwd} WHERE MEM_EMAIL=#{email} 
 	</update>
 	<!--  
 	<delete id="delete" parameterType="long">
