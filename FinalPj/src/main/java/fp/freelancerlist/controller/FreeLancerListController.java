@@ -84,4 +84,9 @@ public class FreeLancerListController {
 		
 		return mv;
 	}
+	
+	/*@GetMapping("del") 
+	public ModelAndView DeleteCont(long free_code){
+
+	}*/
 }

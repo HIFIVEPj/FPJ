@@ -318,7 +318,7 @@
 							on p.PJ_NUM= pk.PJ_NUM
 						left outer join KEYWORD k
 							on pk.KEY_NUM=k.KEY_NUM
-								where pk.KEY_NUM=#{KEY_NUM}			
+								where pk.PJ_NUM=#{PJ_NUM}			
 			]]>		
 	</select> 
 	

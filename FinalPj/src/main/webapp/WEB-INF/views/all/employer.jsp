@@ -14,7 +14,7 @@
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
 									<h2 class=""><span class="font-weight-bold"></span> Freelancer</h2>
-									<h6>56,868개의 클라이언트 기업과 73,392개의 개발회사 & 프리랜서가 함께하는 sdfdsfdsfdsfsdfds</h6>
+									<h6>56,868개의 클라이언트 기업과 73,392개의 개발회사 & 프리랜서가 함께하는 위시켓</h6>
 								</div>
 
 							</div>
@@ -52,29 +52,18 @@
 								<div class="row">
 									<div class="col">
 										<div class="profile-pic mb-0">
-											<div class="d-md-flex">
+											<div class="d-md-flex"> 
 											   <!--	<img src="../images/faces/female/25.jpg" class="w100 h-100 brround" alt="user">   --> 
 											 	<a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i></a> 
-												<c:forEach items="${content}" var="list"  varStatus="status">
 												<div class="ml-4">
-												<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
-													<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">${profile.free_name}</h4></a>
-													</c:forEach>
-														
-													<span class="text-gray"></span>&nbsp;
-										
-													<span class="text-muted">${list.pro_exp}&nbsp;년</span><br>
-											<c:forEach items="${content3}" var="key"  varStatus="status">
-											<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status">
-													<span class="text-muted">${keyword.key_name} </span><br>
-											</c:forEach>
-											</c:forEach>
-													<span class="text-gray">${list.pro_addr}</span>&nbsp;
-													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i> ${list.pro_vcnt} Views</a><br>
+													<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">김OO</h4></a>
+													<span class="text-gray">개발자</span>&nbsp;
+													<span class="text-muted">3년</span><br>
+													<span class="text-muted">java/oracle/javaScript/jQuery</span><br>
+													<span class="text-gray">서울</span>&nbsp;
+													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i> 22 Views</a><br>
 													<div class="rating-stars d-inline-flex mb-2 mr-3">
-													<c:forEach items="${list.list_freeLancerreview}" var="star"  varStatus="status">
-														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="${star.freerev_star}">
-										
+														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
 														<div class="rating-stars-container mr-2">
 															<div class="rating-star sm">
 																<i class="fa fa-star"></i>
@@ -91,12 +80,9 @@
 															<div class="rating-star sm">
 																<i class="fa fa-star"></i>
 															</div>
-					<!-- 별점표시 텍스트 위치 -->				</div> 
-														${star.freerev_star}
-													</c:forEach>
+														</div> 4.0
 													</div>
 												</div>
-												</c:forEach>
 											</div>
 										</div>
 									</div>
@@ -106,38 +92,25 @@
 								</div>
 	
 								</div>
-								
 								<h4 class="pb-3 border-bottom mt-4">Profile</h4>
-								<c:forEach items="${content}" var="list"  varStatus="status">
-									<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
 								<ul class="usertab-list mb-0">
-									<li><span class="font-weight-semibold">이름 :</span> ${profile.free_name}</li>
-									<li><span class="font-weight-semibold">경력 :</span> ${list.pro_exp}&nbsp;년</li>
-									</c:forEach>
-								</c:forEach>
-								<c:forEach items="${content4}" var="content"  varStatus="status">
-									<li><span class="font-weight-semibold">직종:</span>&nbsp;${content4[0].type_name}</li>
-									</c:forEach>
-								<c:forEach items="${content}" var="list"  varStatus="status">
-								<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
-								<c:forEach items="${content3}" var="key"  varStatus="status">
-								<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status">
-									<li><span class="font-weight-semibold">사용기술 :</span>${keyword.key_name}</li>			
-								</c:forEach>
-								</c:forEach>																								
-									<li><span class="font-weight-semibold">주소 :</span> ${list.pro_addr} </li>
-									<li><span class="font-weight-semibold">선호지역 :</span> ${list.pro_workplace}</li>														
-									<li><span class="font-weight-semibold">Email :</span> ${list.mem_email} </li>
-									<li><span class="font-weight-semibold">연락처 :</span> ${profile.free_tel} </li>
-									<li><span class="font-weight-semibold">현재 근무가능여부 :</span>  ${list.pro_ox}</li>
-									<li><span class="font-weight-semibold">업무가능일 :</span>  ${list.pro_start} </li>									
+									<li><span class="font-weight-semibold">이름 :</span> 김oo</li>
+									<li><span class="font-weight-semibold">경력 :</span> 3년</li>
+									<li><span class="font-weight-semibold">직업:</span> 개발자</li>
+									<li><span class="font-weight-semibold">분야 :</span> It Software/ Developer </li>																											
+									<li><span class="font-weight-semibold">주소 :</span> 서울시 마포구</li>
+									<li><span class="font-weight-semibold">선호지역 :</span> 서울시</li>														
+									<li><span class="font-weight-semibold">Email :</span> rubincarmody@Pinlist.com</li>
+									<li><span class="font-weight-semibold">연락처 :</span> +82 10 9283 3562 </li>
+									<li><span class="font-weight-semibold">현재 근무가능여부 :</span> yes </li>
+									<li><span class="font-weight-semibold">업무가능일 :</span> 20-02-17 </li>									
 									<br/><br/><br/>
-									<li class="w-100 mt-3"><span class="font-weight-semibold">최종학력 : &nbsp;${list.pro_edu}</span> </li>
-									<!-- <li><span class="font-weight-semibold"></span> 201402</li> 
-									<li><span class="font-weight-semibold"></span>  ${list.pro_edu}</li>-->
-									</ul>
-								</c:forEach>
-								</c:forEach>
+									<li class="w-100 mt-3"><span class="font-weight-semibold">최종학력 </span> </li>
+									<li><span class="font-weight-semibold"></span> 201402</li>
+									<li><span class="font-weight-semibold"></span> 서강대학교</li>
+								
+								</ul>
+
 
 					<!--  		<h4 class="pb-3 border-bottom mt-4">Employment Details</h4>
 								<div><i class="fa fa-caret-right mr-2"></i> Currently Working at  <span class="font-weight-bold">Info Tech Pvt Ltd</span></div>
@@ -147,53 +120,28 @@
 									<table class="table table-bordered border-top mb-0">
 										<thead>
 											<tr>
-												<th>프로젝트</th>
+												<th>프로젝트 & 담당업무</th>
 												<th>사용언어  & 주요기술</th>
-											<!-- 	<th>첨부파일</th> -->
+												<th>첨부파일</th>
 											</tr>
 										</thead>
-							
-										<tbody>		
-										<c:forEach items="${content2}" var="content"  varStatus="status">
-											<c:forEach items="${content.frProject}" var="project"  varStatus="status">
-											
-												<c:forEach items="${content5}" var="content"  varStatus="status">${content5}
-												<c:forEach items="${content.frKeyWord}" var="key"  varStatus="status">
-											
+										<tbody>
 											<tr>
-												<td scope="row"><b>${project.pj_sub}</b><br/>
-												<span>2017-09-08!2018-09-07</span></td>
-												<td>${key.key_name}</td>	
-											
-											</c:forEach>
-											</c:forEach>			
-												</c:forEach>
-												</c:forEach>
-											
-											
-												</tr>
-										
+												<td scope="row"><b>Cafe24 app</b>
 												<br/>  
-										
-										<!--		<c:forEach items="${content}" var="list"  varStatus="status">
-												<tr>
+												<span>2017-09-08!2018-09-07</span>
+												</td>
+												<td>java/oracle/http</td>
+												<td><a href="#"><i class="fa fa-save"></i>java.zip</td>
 												
-												
-											<c:forEach items="${list.freelancerprofilefile}" var="file"  varStatus="status">
-												<td><a href="#"><i class="fa fa-save"></i>${file.profile_ofname}</td>
-												</c:forEach>
-													</c:forEach>
-									
-											</tr>-->
+											</tr>
 										</tbody>
-										
-											
 									</table>
 								</div>
 							</div>
 							<div class="card-footer" align="right">
 								<div class="icons">
-									<a href="freelancerList" class="btn btn-secondary icons">목록</a>
+									<a href="employer-list-right" class="btn btn-secondary icons">목록</a>
 								</div>
 							</div>
 						</div>
