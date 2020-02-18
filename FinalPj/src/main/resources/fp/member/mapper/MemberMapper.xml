@@ -16,7 +16,9 @@
 		<result property="option3" column="OPTION3"/>	
 		
 	</resultMap>
-	
+	<select id = "idCheck" parameterType = "String" resultType = "int">
+    	SELECT COUNT(*) FROM MEMBER WHERE MEM_EMAIL = #{email}
+	</select>
 	
 	<select id="loginCheck" resultType="Member" resultMap="MemberMap">
 		<![CDATA[

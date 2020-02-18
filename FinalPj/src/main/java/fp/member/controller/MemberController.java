@@ -24,18 +24,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
@@ -46,9 +46,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller    //컨트롤러 빈 선언
 public class MemberController {
-	
-    @Autowired    //서비스를 호출하기 위해서 의존성을 주입
-    JavaMailSender mailSender;     //메일 서비스를 사용하기 위해 의존성을 주입함.
+
    
     @Autowired
     MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
@@ -59,6 +57,19 @@ public class MemberController {
 		return "member/register";
 	}    
     
+	@RequestMapping(value = "id_ck.do" , method = RequestMethod.POST)
+	public @ResponseBody String idCheck(@RequestParam String email) throws Exception{
+		String str = "";
+	  	int result =memberservice.idCheck(email);
+	  	if(result==1){ //이미 존재하는 계정
+			str = "NO";	
+		}else{	//사용 가능한 계정
+			str = "YES";	
+		}
+		return str;
+
+
+	}
     
     @RequestMapping(value = "signup.do" , method=RequestMethod.POST )
     public String signUp (Member member) throws IOException {

@@ -58,30 +58,15 @@
 																						
 												<div class="form-group">
 													<label class="form-label text-dark">Email</label>											
-													<input type="email" name="email" id=email class="form-control" placeholder="이메일을 입력해 주세요.">
-													<div class="" id="email_check">여기나오니이니이니ㅣ</div>
+													<input type="email" name="email" id=email class="form-control" placeholder="이메일을 입력해 주세요." >
+													<div class="" id="email_check"></div>
 										
 												</div>
-												
-											<!-- <c:if test="${!empty email}" > 
-													<div class="form-group" id="injeung_div">
-													 <form action="join_injeung.do${email}" method="post">
-														<label class="form-label text-dark">인증번호</label>
-														<div class="input-group mb-5">
-															<input type="text" id="email_injeung" name="email_injeung" value="${email_injeung}" class="form-control" placeholder="인증번호를 입력해 주세요.">
-															<div class="input-group-append">
-																<button class="btn btn-secondary"  id="emailAuthBtn" onclick="emailAuthBtn_check()">인증</button>
-															</div>
-														</div>
-														<div class="" id="email_check">여기여기여기여기여기여기여기</div>
-													</form>
-													</div>
-											 </c:if> -->
-											 
+
 											 	<div class="form-group">
 													<label class="form-label text-dark">이름 or 닉네임</label>
 													<input type="text" class="form-control" name="name" placeholder="이름 또는 닉네임을 입력해주세요">
-												
+													<div class="" id="email_check"></div>
 												</div>																
 												
 												<div class="form-group">
@@ -126,8 +111,8 @@
 												<div class="card-body">												
 												<div class="form-group">
 													<label class="form-label text-dark">Email</label>											
-													<input type="email" name="email" id=email class="form-control" placeholder="이메일을 입력해 주세요.">
-													<div class="" id="email_check">여기나오니이니이니ㅣ</div>
+													<input type="email" name="email" id="c_email" class="form-control" placeholder="이메일을 입력해 주세요.">
+													<div class="" id="c_email_check"></div>
 										
 												</div>	
 												
@@ -138,14 +123,14 @@
 														
 												<div class="form-group">
 													<label class="form-label text-dark">비밀번호</label>
-													<input type="password" class="form-control" id="mem_pw" name="pwd"  placeholder="Password">
-													<div class="" id="pw_check"></div>
+													<input type="password" class="form-control" id="c_mem_pw" name="pwd"  placeholder="Password">
+													<div class="" id="c_pw_check"></div>
 												</div>
 
 												<div class="form-group">
 													<label class="form-label text-dark">비밀번호 확인</label>
 													<input type="password" class="form-control" id="mem_pw2" placeholder="Password">
-													<div class="" id="pw2_check"></div>
+													<div class="" id="c_pw2_check"></div>
 												</div>
 												<div class="form-group" style="font-size:12px; line-height:25px;">
 													<label class="custom-control custom-checkbox">

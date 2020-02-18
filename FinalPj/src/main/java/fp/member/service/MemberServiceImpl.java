@@ -19,16 +19,19 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	@Override
+	public int idCheck(String email){
+		int result=memberMapper.idCheck(email);
+		
+		return result;
+	}
 		
 	@Override
 	public void insertM(Member member) {		
 		memberMapper.insertMem(member);
 
 	}
-	@Override
-	public void insertAuth(Map map) {
-		memberMapper.insertAuth(map);
-	}
+
 
 	@Override
 	public void deleteS(long seq) {
