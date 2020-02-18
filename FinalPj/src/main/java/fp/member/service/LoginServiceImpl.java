@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
 		if (result == true) {	//true 일경우 세션 등록
 			//세션 변수 등록
 			session.setAttribute("email",member.getEmail());
-			
+			session.setAttribute("class_num",member.getClass_num());
 			
 		}
 		

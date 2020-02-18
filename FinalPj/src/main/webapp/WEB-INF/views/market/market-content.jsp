@@ -454,7 +454,7 @@
 					               <div class="media-body"><text align="center"> 등록된 문의가 없습니다</text></div>
 								</div>
 							</div>
-					</c:if>		
+						</c:if>		
 						</div>
 
 					<c:if test="${fn:length(marketQA) > 0}">							
@@ -1061,26 +1061,54 @@
 		        alert("글 내용을 입력해주세요.");
 		        $("#marketRev_contID").focus();
 		        return;
-		    }
+		   		 }
 		    if ($.trim($("#marketRev_starID").val()) == "") {
 		        alert("별점을 선택해주세요.");
 		        $("#marketRev_starID").focus();
 		        return;
-		    }
-		    var queryString = $("#mrInputID").serialize();
+		    	}
+		  //  var queryString = $("#mrInputID").serialize();
+		  var mem_email = $("#mem_emailID").val();
+		  var market_num = $("#market_numID").val();
+		  var marketRev_star = $("#marketRev_starID").val();
+		  var marketRev_cont = $("#marketRev_contID").val();
+		  var arr=[marketRev_cont,marketRev_star,market_num,mem_email]
+/*		  
+		  var arr = new Array(); //Object를 배열로 저장할 Array
+	      
+		  var obj = new Object(); //key, value형태로 저장할 Object
+	      obj.key = "mem_email";
+	      obj.val = $("#mem_emailID").val();
+	      arr.push(obj);
+	      
+	      obj = new Object();
+	      obj.key = "market_num";
+	      obj.val = $("#market_numID").val();
+	      arr.push(obj);
+		      
+	      obj = new Object();
+	      obj.key = "marketRev_star";
+	      obj.val = $("#marketRev_starID").val();
+	      arr.push(obj);
+		      
+	      obj = new Object();
+	      obj.key = "marketRev_cont";
+	      obj.val = $("#marketRev_contID").val();
+	      arr.push(obj);
+*/		      
+
+
 		    var url=$("#mrInputID").attr("action");
 		    console.log("url:"+url);
 		    console.log("queryString:"+queryString);
 	    $.ajax({ //free_name,content,star,rdate
 	    	type:'post',
 	    	url:url,
-	    	data:queryString,
+	    	data:JSON.stringify(arr),
 	    	dataType:'json',
 	    	error:onError,
 	    	success:onSuccess
-	    });
-	    	
-	    	
+	    	});
 	});
 	function onError(){}
 	function onSuccess(data){

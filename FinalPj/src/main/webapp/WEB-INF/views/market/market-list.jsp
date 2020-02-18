@@ -253,7 +253,7 @@
 															<div class="item-card9">
 																<a href="market-content?market_num=${list.market_num}">${list.freelancer.free_name}</a>
 																<a href="market-content?market_num=${list.market_num}" class="text-dark mt-2"><h4 class="font-weight-semibold mt-1">${list.market_sub}</h4></a>
-																<p>${list.market_cont}</p>
+															<!--<p>${list.market_cont}</p>  -->
 																<div class="item-card9-desc">
 																	<h2>${list.market_price}<span class="fs-16">원</span></h2>
 																	<div class="item-card2-rating mb-0">
@@ -325,7 +325,9 @@
 											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 										</li>
 										</c:if>
-										<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+										<c:if test="${sessionScope.class_num==5 }">
+											<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+										</c:if>
 									</ul>
 							 	 </div>
 							</div>

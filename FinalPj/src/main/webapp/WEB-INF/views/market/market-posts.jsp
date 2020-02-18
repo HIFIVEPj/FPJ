@@ -85,11 +85,14 @@
 						<br></br>
 						<div class="form-group">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="ofname">
-								<label class="custom-file-label">Upload Images</label>
+								<input type="file" class="custom-file-input" name="ofname" id="file" onchange="upfile()">
+								<label class="custom-file-label" id="cor_fname_label">Thumbnail Images</label>
 							</div>
 						</div>
 					</div>
+					
+					
+					
 					<div class="card-footer ">
 						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#smallModal1">Submit Now</button>
 					</div>
@@ -228,7 +231,12 @@
 		</section>
 		<!--/Add posts-section-->
 		
-		
+<script>
+	   function upfile(){
+	      var filename = document.getElementById("file").value;
+	      document.getElementById("cor_fname_label").innerHTML=filename;
+	   }   
+</script>		
 <script>
 	   function insertCheck(){
 		   alert("insertForm.cate_num."+insertForm.ofname.value);

@@ -115,8 +115,8 @@
 						<br></br>
 						<div class="form-group">
 							<div class="custom-file">
-					 			<input type="file" class="custom-file-input" name="ofname" >
-								<label class="custom-file-label">썸네일</label>
+					 			<input type="file" class="custom-file-input" name="ofname" id="file" onchange="upfile()">
+								<label class="custom-file-label" id="cor_fname_label" value="${market.market_fname}">Thumbnail Images</label>
 							</div>
 						</div>
 					
@@ -274,6 +274,13 @@
 			</div>
 		</section>
 		<!--/Add posts-section-->
+<script>
+	   function upfile(){
+	      var filename = document.getElementById("file").value;
+	      document.getElementById("cor_fname_label").innerHTML=filename;
+	   }   
+</script>		
+		
 <script>
 	   function updateCheck(){
 		   alert(" updateForm.cate_num."+updateForm.cate_num.value);

@@ -47,7 +47,6 @@ public class MarketController {
 	public ModelAndView market_list(MarketPagingVO marketVO
 			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
 			,@RequestParam(value="cntPerPage", required=false,defaultValue="9")String cntPerPage){
-		
 		int total = marketService.getMarketCount();
 	/*	if(nowPage ==null &&cntPerPage ==null) {
 			nowPage="1";
@@ -164,7 +163,7 @@ public class MarketController {
 	@RequestMapping(value = "market-posts", method = RequestMethod.GET)
 	public String market_post(Locale locale, Model model) {
 
-		return "market/market-posts";
+		return "redirect:market/market-posts";
 	}
 	@PostMapping("market-insert")
 	public String market_insert(Market market,MultipartHttpServletRequest mtfRequest) {
@@ -216,10 +215,10 @@ public class MarketController {
 			try{
 			    Folder.mkdirs(); //폴더 생성합니다.
 			    System.out.println("폴더가 생성되었습니다.");
-		        } 
-		        catch(Exception e){
+		    	} 
+		    catch(Exception e){
 			    e.getStackTrace();
-			}        
+		    	}        
 	    }else {
 			System.out.println("이미 폴더가 생성되어 있습니다.");
 		}
