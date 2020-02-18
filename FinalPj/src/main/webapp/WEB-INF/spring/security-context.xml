@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> 
+</beans:beans>
+<!-- 
+<beans:bean id="CustomUserDetailService" class="fp.member.service.CustomUserDetailService"/>			
+<beans:bean id="customizeAuthenticationSuccessHandler" class="fp.password.security.CustomizeAuthenticationSuccessHandler" />
+<beans:bean id="customizeAuthenticationFailureHandler" class="fp.password.security.CustomizeAuthenticationFailureHandler" />-->
+ 
+<!-- 
+ <beans:bean id="userAuthProvider" class="fp.password.security.CustomAuthenticationProvider"/>
+ 	<beans:constructor-arg name ="sqlSession" ref = "sqlSession" /> -->
+
+<!-- 
+<bean id="customUserDetailService" class="fp.member.service.CustomUserDetailService">
+	<beans:constructor-arg name ="sqlSession" ref = "sqlSession" /> 
+</bean>  -->
+<!-- 	<http pattern="/resources/**" security="none"/>  -->
+
+	<!-- 
+	<http pattern="/resources/css/*.css" security="none"/> 
+	<http pattern="/resources/fonts/feather/*" security="none"/> 
+	<http pattern="/resources/fonts/fonts/*" security="none"/> 
+	<http pattern="/resources/images/**/*jpg" security="none"/> 
+	<http pattern="/resources/images/**/*.png" security="none"/>	
+	<http pattern="/resources/js/**" security="none"/> 
+	<http pattern="/resources/js/vendors/*" security="none"/> 
+	<http pattern="/resources/plugins/**/*" security="none"/> 
+	<http pattern="/resources/video/**/*" security="none"/>
+	<http pattern="/**/*.js" security="none"/>
+	<http pattern="/images/**" security="none"/>
+	<http pattern="**/*.css" security="none" />  -->
+	
+<!--	
+   <http auto-config="true" use-expressions="true"> 
+   <csrf disabled="false"/>  
+   		<intercept-url pattern="/member/index" access="hasRole('ROLE_USER')" /> 
+   		<intercept-url pattern="/" access="permitAll" /> 
+   		<intercept-url pattern="/*" access="permitAll"/> 
+   		<intercept-url pattern="/**" access="permitAll"/>   -->
+   
+     
+     <!--커스터마이징 추가 
+      <form-login login-page="/member/login"
+ 			username-parameter="email"
+			password-parameter="pwd"
+			login-processing-url="/login_check"		
+			authentication-success-handler-ref="customizeAuthenticationSuccessHandler"
+			authentication-failure-handler-ref="customizeAuthenticationFailureHandler" />  
+	
+	
+	<session-management>
+	<concurrency-control max-sessions="1" expired-url="/" />
+	</session-management>
+	<access-denied-handler error-page="/" /> -->
+     
+        <!-- 로그아웃 관련 처리 
+        <logout delete-cookies=
+        "JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE"
+            logout-success-url="/" 
+            logout-url="/"
+            invalidate-session="true" />-->
+
+        <!-- ref는 bean의 id이다. -->
+        <!-- 자동 로그인 관련 쿠키 저장, 세션이 종료된 후에도 자동 로그인할 수 있는 기능 86400 1일, 604800 7일 
+        <remember-me key="userKey" token-validity-seconds="86400" /> -->
+  	<!-- 여기 한번 추가해봤음 url 제대로 고치기
+    </http> 
+
+    <authentication-manager> -->
+    	<!-- <authentication-provider ref="userAuthProvider"/> 
+        <authentication-provider user-service-ref="CustomUserDetailService">    
+        <password-encoder ref="bcryptPasswordEncoder" />
+        </authentication-provider> 
+    </authentication-manager>  -->
+  <!--  <beans:bean id="userService" class="fp.password.security.CustomUserDetailsService"/> -->
+   
+    
+	    <!-- @Secured 어노테이션 활성화, 사용 권한 제한 
+    <global-method-security secured-annotations="enabled" /> -->
+
