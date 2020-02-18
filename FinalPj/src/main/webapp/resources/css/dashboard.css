@@ -1614,8 +1614,8 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 .table thead th, .text-wrap table thead th {
 	border-top: 0;
 	border-bottom-width: 1px;
-	padding-top: .5rem;
-	padding-bottom: .5rem;
+	padding-top: .75rem;
+	padding-bottom: .75rem;
 }
 .table th, .text-wrap table th {
 	color: #605e7e;
@@ -5837,7 +5837,10 @@ button.close {
 
 /*------ Modal -------*/
 .modal-open {
+	/*
 	overflow: hidden;
+	*/
+	overflow-y: scroll;
 }
 .modal {
 	position: fixed;
@@ -5847,7 +5850,10 @@ button.close {
 	left: 0;
 	z-index: 1050;
 	display: none;
+	/*
 	overflow: hidden;
+	*/
+	overflow-y: scroll;
 	outline: 0;
 	padding: 0 !important;
 	margin: 0 !important;
@@ -5863,6 +5869,7 @@ button.close {
 .modal-open .modal {
 	overflow-x: hidden;
 	overflow-y: auto;
+
 }
 .modal-open  #homeVideo.modal {
 	background:rgba(25, 36, 79, 0.8);	
@@ -6009,6 +6016,7 @@ button.close {
 	width: 50px;
 	height: 50px;
 	overflow: scroll;
+
 }
 @media (min-width: 576px) {
 	.modal-dialog {
@@ -9231,8 +9239,17 @@ a.bg-lime-darkest:hover, a.bg-lime-darkest:focus, button.bg-lime-darkest:hover, 
 .leading-loose {
 	line-height: 2 !important;
 }
+/*
 .bg-blue {
 	background-color: #4049ec  !important;
+	color: #fff !important;
+}
+a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
+	background-color: #24987E !important;
+}
+*/
+.bg-blue {
+	background-color: #1f719a  !important;
 	color: #fff !important;
 }
 a.bg-blue:hover, a.bg-blue:focus, button.bg-blue:hover, button.bg-blue:focus {
@@ -17166,6 +17183,16 @@ footer .border-bottom{
 	width: 2rem;
 	display: inline-block;  
     height: 2rem;
+    text-align: center;
+    border-radius: 100px;
+    line-height: 2.1rem;
+	border-radius:50px;
+	color:#fff;
+}
+.item-card3-icons a{
+	width: 4rem;
+	display: inline-block;  
+    height: 4rem;
     text-align: center;
     border-radius: 100px;
     line-height: 2.1rem;

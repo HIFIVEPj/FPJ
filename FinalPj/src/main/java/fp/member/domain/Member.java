@@ -15,11 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 public class Member {
 	private String email;
+	private String name;
 	private String pwd;
 	private int class_num;
-	private boolean status;	
+	private int status;	
 	private Date rdate;
 	private int option1;
 	private int option2;
 	private String option3;	
 }
+

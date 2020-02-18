@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -78,7 +78,7 @@
 												<form class="form-group" action="/login_check" method="post">
 												<div class="form-group">
 													<label class="form-label text-dark">Email</label>
-													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" value="${email}" >
+													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" >
 												</div>
 												<div class="form-group">
 													<label class="form-label text-dark">비밀번호</label>
@@ -174,4 +174,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 6639d0921df9b65c8efd3090a1a3933ebc32d277
 <!--/footer-->

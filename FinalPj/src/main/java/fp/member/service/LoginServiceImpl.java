@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import fp.member.dao.MemberDao;
 import fp.member.domain.Member;
 import lombok.extern.log4j.Log4j;
+
+
 
 @Log4j
 @Service("LoginService")
@@ -20,19 +22,26 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private MemberDao dao;
 	
+	/*
 	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	private BCryptPasswordEncoder bcryptPasswordEncoder; 
+	*/
 	
 	@Override
 	public boolean loginCheck(Member member,HttpSession session) {
 		
-		BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd());	
-		log.info("!@#!@#!#!@#!@#!#!@"+member.getPwd());
-		log.info("!@#!@#!#!@#!@#!#!@"+dao.loginCheck(member).getPwd());
+		boolean result=BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd());	
+		log.info("(1)"+result);
+		log.info("(2)"+member.getPwd());
+		log.info("(3)"+dao.loginCheck(member).getPwd());
+		
 		if (BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd()) == true) {	//true 일경우 세션 등록
 			//세션 변수 등록
+			session.setAttribute("name",dao.loginCheck(member).getName());
 			session.setAttribute("email",member.getEmail());
-			System.out.println("!@#$#%$member.getEmail(): " + member.getEmail());
+			session.setAttribute("class_num",dao.loginCheck(member).getClass_num());
+			System.out.println("@!#!#$$@class_num : "+member.getName());
+
 			return true;
 		}
 		return false;

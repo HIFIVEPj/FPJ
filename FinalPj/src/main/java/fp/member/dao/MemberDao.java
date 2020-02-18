@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,15 +15,14 @@ public class MemberDao {
 	@Autowired
 	SqlSession sqlSession;
 	
-	@Autowired
-	private BCryptPasswordEncoder pwEncoder;
-	
+
 	private String ns = "fp.member.mapper.MemberMapper";
 	//로그인 체크
 	public Member loginCheck(Member member) {
 		System.out.println("===> Mybatis로 loginCheck() 기능 처리");
 		Member member1= sqlSession.selectOne(ns+".loginCheck",member);
-			
+		
+		System.out.println("꺄아아아아앙아아아아아아아아앙아아아아아아아아:"+member1.getPwd());
 		return member1;
 	}
 	//로그 아웃

@@ -4,16 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fp.member.mapper.MemberMapper">
 	
-   	 <resultMap id="EMAIL_AUTHENTICATION" type="EmailAuth">
-		<result property="email" column="MEM_EMAIL" />
-		<result property="dice" column="EMAIL_AUTH" />
-	</resultMap>
-	
 	 <resultMap id="MemberMap" type="Member">	 	
-	 	<id property="email" column="MEM_EMAIL"/>		
+	 	<id property="email" column="MEM_EMAIL"/>
+	 	<result property="name" column="MEM_NAME"/>		
 		<result property="pwd" column="MEM_PWD"/>
 		<result property="class_num" column="CLASS_NUM"/>
-		<result property="MEM_STATUS" column="MEM_STATUS"/>
+		<result property="status" column="MEM_STATUS"/>
+		<result property="rdate" column="MEM_RDATE"/>
 		<result property="option1" column="OPTION1"/>
 		<result property="option2" column="OPTION2"/>
 		<result property="option3" column="OPTION3"/>	
@@ -26,35 +23,18 @@
 			SELECT * FROM member WHERE MEM_EMAIL = #{email} 
 		]]>
 	</select>
-	<!-- 
-	<select id="loginCheck" resultType="String">
-		<![CDATA[
-			SELECT count(*) FROM member
-			WHERE MEM_EMAIL = #{email} AND MEM_PWD = #{pwd}
-		]]>
-	</select> -->
+
 	<!--  시큐리티 적용해보기 
 	<select id="selectMemList" resultMap="MemberMap" resultType="Member"  parameterType="String">
   		SELECT m.*, a.MEM_AUTH FROM MEMBER m LEFT OUTER JOIN MEMBER_AUTH a on m.MEM_EMAIL=a.MEM_EMAIL WHERE m.MEM_EMAIL= #{email} 
-	</select>-->
+	</select>-->	
 	
-	
-	<select id="selectEmailAuth" resultType="EmailAuth" parameterType="String" resultMap="EMAIL_AUTHENTICATION">
-		SELECT * FROM EMAIL_AUTHENTICATION WHERE MEM_EMAIL=#{email}
-	</select>   
-	<!-- 메일인증 1 
-		<select id="selectEmailAuth" resultType="EmailAuth" resultMap="EMAIL_AUTHENTICATION">
-		<![CDATA[
-			SELECT count(*) FROM EMAIL_AUTHENTICATION WHERE MEM_EMAIL=#{email}
-		]]>
-	</select> -->
+
+
 	<insert id="insertMem" parameterType="Member">
-		insert into MEMBER(MEM_EMAIL, MEM_PWD, CLASS_NUM) values(#{email}, #{pwd}, #{class_num})
+		insert into MEMBER(MEM_EMAIL, MEM_NAME, MEM_PWD, CLASS_NUM, MEM_RDATE) values(#{email},#{name}, #{pwd}, #{class_num} ,SYSDATE)
 	</insert>
 
-	<insert id="insertAuth" parameterType="Map">
-		insert into EMAIL_AUTHENTICATION(MEM_EMAIL,EMAIL_AUTH )values(#{email}, #{dice})
-	</insert>	
 	
 	<update id="update_pw"  parameterType="Member">
 		UPDATE MEMBER SET MEM_PWD=#{pwd} WHERE MEM_EMAIL=#{email} 

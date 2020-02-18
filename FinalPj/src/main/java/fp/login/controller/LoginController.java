@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +41,9 @@ import fp.member.domain.Member;
 import fp.member.service.LoginService;
 import lombok.extern.log4j.Log4j;
 import com.fasterxml.jackson.databind.JsonNode;
+
+
+
 
 @Controller
 @Log4j
@@ -66,6 +69,7 @@ public class LoginController {
     public String findPwd() {
     	return "member/forgot-pwd";
     }
+
     @RequestMapping(value="find_pwd.do", method = RequestMethod.POST)
 	public String updatePwd(Member member, Model model) {
 		
@@ -97,6 +101,7 @@ public class LoginController {
 		}
 		
 		return "member/login";
+
 	}
     /*
     @RequestMapping(value = "find_pwd.do", method = RequestMethod.POST)
@@ -242,7 +247,8 @@ public class LoginController {
   		
   		log.warn("*******************************member: "+ member.getPwd());
   		log.warn("*********************result" + result);
-  		if(result == true) {  
+  		if(result == true) { 
+  			session.getAttribute("name");
   			session.getAttribute("email");
   			//String email =(String)session.getAttribute("email");
   			//log.info("###################$$$$$$$$$$$$$$$$$$$$#"+email);

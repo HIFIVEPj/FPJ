@@ -4,9 +4,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> 
-</beans:beans>
-<!-- 
+<!-- <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> -->
+</beans:beans> 
+<!--  
 <beans:bean id="CustomUserDetailService" class="fp.member.service.CustomUserDetailService"/>			
 <beans:bean id="customizeAuthenticationSuccessHandler" class="fp.password.security.CustomizeAuthenticationSuccessHandler" />
 <beans:bean id="customizeAuthenticationFailureHandler" class="fp.password.security.CustomizeAuthenticationFailureHandler" />-->
@@ -70,7 +70,6 @@
         <remember-me key="userKey" token-validity-seconds="86400" /> -->
   	<!-- 여기 한번 추가해봤음 url 제대로 고치기
     </http> 
-
     <authentication-manager> -->
     	<!-- <authentication-provider ref="userAuthProvider"/> 
         <authentication-provider user-service-ref="CustomUserDetailService">    
@@ -82,4 +81,3 @@
     
 	    <!-- @Secured 어노테이션 활성화, 사용 권한 제한 
     <global-method-security secured-annotations="enabled" /> -->
-
