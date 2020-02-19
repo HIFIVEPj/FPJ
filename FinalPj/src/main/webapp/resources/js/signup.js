@@ -116,37 +116,37 @@ $("#email").blur(function() {
 });//blur
 */
 
-
+//개인 유효성 form
 $('form').on('submit',function(){
-var inval_Arr = new Array(2).fill(false);
+var inval_Arr = new Array(3).fill(false);
 // 이메일 정규식
 if (mailJ.test($('#email').val())){
-console.log(phoneJ.test($('#email').val()));
+console.log(mailJ.test($('#email').val()));
 inval_Arr[0] = true;
 } else {
 inval_Arr[0] = false;
 alert('이메일을 확인하세요.');
 return false;
 } 
+//이름 입력여부
+if (($('#mem_name').val() == null)){
+		inval_Arr[1] = false;
+		alert('이름 또는 닉네임을 입력해주세요.');
+		return false;
+	} else {
+		inval_Arr[1] = true;	
+	} 
 
 // 개인비밀번호가 같은 경우 && 비밀번호 정규식
 if (($('#mem_pw').val() == ($('#mem_pw2').val()))
 && pwJ.test($('#mem_pw').val())) {
-inval_Arr[1] = true;
+inval_Arr[2] = true;
 } else {
-inval_Arr[1] = false;
+inval_Arr[2] = false;
 alert('비밀번호를 확인하세요.');
 return false;
 }
-//기업비밀번호가 같은 경우 && 비밀번호 정규식
-if (($('#c_mem_pw').val() == ($('#c_mem_pw2').val()))
-&& pwJ.test($('#c_mem_pw').val())) {
-inval_Arr[1] = true;
-} else {
-inval_Arr[1] = false;
-alert('비밀번호를 확인하세요.');
-return false;
-}
+
 //else inval_Arr[7] = true;
 
 //전체 유효성 검사
@@ -157,11 +157,57 @@ for(var i = 0; i < inval_Arr.length; i++){
 	}
 }
 if(validAll == true){ // 유효성 모두 통과
-alert('HIFIVE 가족이 되어주셔 감사합니다.');
+	alert('HIFIVE 가족이 되어주셔 감사합니다.');
 } else{
-alert('정보를 다시 확인하세요.')
+	alert('정보를 다시 확인하세요.')
 }
 }); //form 끝
+
+//기업 유효성 form 
+$('form').on('submit',function(){
+	var inval_Arr = new Array(2).fill(false);
+	// 이메일 정규식
+	if (mailJ.test($('#c_email').val())){
+	console.log(phoneJ.test($('#c_email').val()));
+	inval_Arr[0] = true;
+	} else {
+	inval_Arr[0] = false;
+	alert('이메일을 확인하세요.');
+	return false;
+	} 
+	//이름 입력여부
+	if (($('#c_mem_name').val() != null)){
+			inval_Arr[1] = false;
+			alert('이름 또는 닉네임을 입력해주세요.');
+			return false;
+		} else {
+			inval_Arr[1] = true;	
+		} 	
+
+	//기업비밀번호가 같은 경우 && 비밀번호 정규식
+	if (($('#c_mem_pw').val() == ($('#c_mem_pw2').val()))
+	&& pwJ.test($('#c_mem_pw').val())) {
+	inval_Arr[1] = true;
+	} else {
+	inval_Arr[1] = false;
+	alert('비밀번호를 확인하세요.');
+	return false;
+	}
+	//else inval_Arr[7] = true;
+
+	//전체 유효성 검사
+	var validAll = true;
+	for(var i = 0; i < inval_Arr.length; i++){
+		if(inval_Arr[i] == false){
+		validAll = false;
+		}
+	}
+	if(validAll == true){ // 유효성 모두 통과
+		alert('HIFIVE 가족이 되어주셔 감사합니다.');
+	} else{
+		alert('정보를 다시 확인하세요.')
+	}
+	}); //form 끝
 
 
 //개인이메일양식검사

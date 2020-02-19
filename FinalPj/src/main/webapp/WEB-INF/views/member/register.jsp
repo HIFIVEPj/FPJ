@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% String format=request.getParameter("format");%>
@@ -65,7 +64,7 @@
 
 											 	<div class="form-group">
 													<label class="form-label text-dark">이름 or 닉네임</label>
-													<input type="text" class="form-control" name="name" placeholder="이름 또는 닉네임을 입력해주세요">
+													<input type="text" class="form-control" id="mem_name" name="name" placeholder="이름 또는 닉네임을 입력해주세요">
 													<div class="" id="email_check"></div>
 												</div>																
 												
@@ -118,7 +117,7 @@
 												
 											 	<div class="form-group">
 													<label class="form-label text-dark">이름 or 닉네임</label>
-													<input type="text" class="form-control" name="name" placeholder="이름 또는 닉네임을 입력해주세요">												
+													<input type="text" class="form-control" id="c_mem_name" name="name" placeholder="이름 또는 닉네임을 입력해주세요">												
 												</div>	
 														
 												<div class="form-group">

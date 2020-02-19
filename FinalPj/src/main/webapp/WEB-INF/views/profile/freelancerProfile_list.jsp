@@ -55,7 +55,7 @@
                            <a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
                         </div>
                      </div>
-                     <aside class="app-sidebar doc-sidebar my-dash">
+                     <aside class="doc-sidebar my-dash">
                         <div class="app-sidebar__user clearfix">
                            <ul class="side-menu">
                               <li class="slide">

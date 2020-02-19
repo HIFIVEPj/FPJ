@@ -21,5 +21,9 @@ public class IndexController {
 	public String index(Locale locale, Model model) {	
 		return "index";
 	}
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String admin(Locale locale, Model model) {	
+		return "admin/admin_page";
+	}
 
 }
