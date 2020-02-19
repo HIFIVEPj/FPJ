@@ -43,15 +43,22 @@ public class CorporationController {
 		corporation.setCor_fname(saveStore(fileName));
 		corporation.setCor_ofname(fileName.getOriginalFilename());
 		service.insert(corporation);
-		return "mydash_cor?mem_email="+corporation.getMem_email();
+		return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
 	}
 	@PostMapping("mydash_cor_update")
 	public String update(@RequestParam MultipartFile fileName, Corporation corporation) {
 		Corporation cor = service.mydash_cor_select(corporation.getMem_email());
-		String str = cor.getCor_fname();
-		 delFile(str);
-		 corporation.setCor_fname(saveStore(fileName));
-		 corporation.setCor_ofname(fileName.getOriginalFilename());
+		log.info("@!#$#T$%#@$fileName:"+fileName.getOriginalFilename()+", ofname: "+cor.getCor_ofname());
+		if(fileName.getOriginalFilename() != "") {
+			String str = cor.getCor_fname();
+			delFile(str);
+			corporation.setCor_fname(saveStore(fileName));
+			corporation.setCor_ofname(fileName.getOriginalFilename());
+			service.mydash_cor_update(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		}
+		corporation.setCor_fname(cor.getCor_fname());
+		corporation.setCor_ofname(cor.getCor_ofname());
 		 service.mydash_cor_update(corporation);
 		return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
 	}

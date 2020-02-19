@@ -42,7 +42,6 @@ public class LoginServiceImpl implements LoginService {
 			session.setAttribute("name",dao.loginCheck(member).getName());
 			session.setAttribute("email",member.getEmail());
 			session.setAttribute("class_num",dao.loginCheck(member).getClass_num());
-			System.out.println("@!#!#$$@class_num : "+member.getName());
 
 			return true;
 		}
@@ -66,5 +65,4 @@ public class LoginServiceImpl implements LoginService {
 		System.out.print("i: "+i);
 			return i;
 	}
-
 }
