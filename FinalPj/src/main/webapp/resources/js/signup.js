@@ -177,7 +177,7 @@ $(document).ready(function() { //여기부터 시작
 			} 
 			
 		//이름 입력여부
-		if (($('#name').val() == null)){
+		if (($('#name').val() == "")){
 				inval_Arr[1] = false;
 				alert('이름 또는 닉네임을 입력해주세요.');
 				return false;
@@ -198,6 +198,7 @@ $(document).ready(function() { //여기부터 시작
 			inval_Arr[3] = true;
 		}else{
 			inval_Arr[3] = false;
+			alert('이용약관에 동의해주세요.');
 			return false;
 		}
 		//개인 개인정보 체크박스
@@ -205,6 +206,7 @@ $(document).ready(function() { //여기부터 시작
 			inval_Arr[4] = true;
 		}else{
 			inval_Arr[4] = false;
+			alert('개인정보 제공에 동의해 주세요.');
 			return false;
 		}
 	
