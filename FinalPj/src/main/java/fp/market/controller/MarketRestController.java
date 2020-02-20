@@ -42,26 +42,30 @@ public class MarketRestController {
 	
 //마켓리뷰 글insert
 	@PostMapping("marketRev-insert")
-	public @ResponseBody List<MarketRev> marketRev_insert(MarketRev marketRev
+	public List<MarketRev> marketRev_insert(MarketRev marketRev
 			,@RequestParam(value="nowPageR",required=false,defaultValue="1")String nowPageR
-			,@RequestParam(value="cntPerPageR", required=false,defaultValue="4" )String cntPerPageR)
+			,@RequestParam(value="cntPerPageR", required=false, defaultValue="4")String cntPerPageR)
 	{
+
 		marketService.insertMarketRev(marketRev);
 		log.info("!@@#@!#@!#!marketRev:"+ marketRev.getMarketRev_num());
 		log.info("!@@#@!#@!#!marketRev:"+ marketRev);
 		
 		int mrTotal=marketService.getMarketRevCount(marketRev.getMarket_num());
-		MarketPagingVO marketVORev = new MarketPagingVO(mrTotal,Integer.parseInt(nowPageR),Integer.parseInt(cntPerPageR));
-	
+		MarketPagingVO marketVORev = new MarketPagingVO(mrTotal, Integer.parseInt(nowPageR), Integer.parseInt(cntPerPageR));
+		log.info("~~~~~~~~~~~~~~~~~~marketVORev.getStart() : "+marketVORev.getStart());
+		log.info("~~~~~~~~~~~~~~~~~~marketVORev.getLastPage() : "+marketVORev.getLastPage());
+	log.info("!@#@!@!$!@#@!marketVORev:"+marketVORev);
 		HashMap<String, Object> map= new HashMap<String, Object>();
 		map.put("marketVORevStart", marketVORev.getStart());
 		map.put("marketVORevEnd", marketVORev.getEnd());
 		map.put("market_num", marketRev.getMarket_num());
 		List<MarketRev> mr = marketService.getMarketRev(map);
 		log.info("@!@@@@@mr:"+mr);
-		ModelAndView mv = new ModelAndView();
+		//ModelAndView mv = new ModelAndView();
 		
 		return mr;
 
-	} 	
+	}
+
 }

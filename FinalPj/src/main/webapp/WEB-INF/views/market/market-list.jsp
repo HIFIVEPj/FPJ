@@ -247,7 +247,7 @@
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    
 
-																<img src="../marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100">
+																<img src="../marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
 
 															</div>
 															<div class="item-card9-icons">

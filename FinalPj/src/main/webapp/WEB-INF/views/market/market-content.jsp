@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -256,35 +257,64 @@
 
 					
 						<!-- 댓글 -->		
+				
 					<c:if test="${fn:length(marketRev) > 0}">	
 						<c:forEach var="marketRev" items="${marketRev}">
-							<div class="card-body p-0">
-								<div class="media mt-0 p-5" id="ajaxRev">
-                                    <div class="d-flex mr-3">
-                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
-                                    </div>
-                                    <div class="media-body">
-                                    	<h5>
-	                                    	<c:if test="${marketRev.freelancer != null}">
-	                                       		<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_name">${marketRev.freelancer.free_name}</h5> 
-	                                     	</c:if>
-	                                     	<c:if  test="${marketRev.freelancer == null && marketRev.corporation !=null }">
-	                                       		<h5 class="mt-0 mb-1 font-weight-semibold" name="cor_mname" id="cor_mname">${marketRev.corporation.cor_mname} </h5>
-	                                     	</c:if>
-                                     		<c:if  test="${marketRev.freelancer == null && marketRev.corporation ==null }">
-	                                       		<h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_email">${marketRev.mem_email} </h5>
-	                                     	</c:if>
-											<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-											<span class="fs-14 ml-2" name="marketRev_star" id="marketRev_star" > ${marketRev.marketRev_star}  <i class="fa fa-star text-yellow"></i></span>
-										</h5>
-										<small class="text-muted" id="marketRev_rdate" name="marketRev_rdate"><i class="fa fa-calendar"></i> ${marketRev.marketRev_rdate} </small>
-                                        <p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="content"> ${marketRev.marketRev_cont}</p>
-								<!-- 대댓글 -->     		
-									</div>
-								</div>
+							<div class="card-body p-0" id="ajaxRev">
+                                    	<c:choose>
+	                                    	<c:when test="${marketRev.freelancer != null}">
+					                            <div class="media mt-0 p-5" >
+			                                    	<div class="d-flex mr-3">
+			                                      		  <a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../marketImages/${marketRev.freelancer.free_fname}"> </a>
+			                                    	</div>
+			                                   		 <div class="media-body">
+				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">${marketRev.freelancer.free_name}</h5> 
+				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
+														</h5>
+														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
+			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>			
+													</div>
+												</div>
+	                                     	</c:when>
+	                                    
+	                                     	<c:when test="${marketRev.freelancer == null && marketRev.corporation!=null}">
+				                            	<div class="media mt-0 p-5">
+			                                    	<div class="d-flex mr-3">
+			                                      		 <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+			                                    	</div>
+			                                   		 <div class="media-body">
+				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="cor_mname" id="cor_mnameR">${marketRev.corporation.cor_mname} </h5>
+				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
+														</h5>
+														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
+			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>		
+													</div>
+												</div>
+	                                     	</c:when>
+	                                    
+	                                     	<c:otherwise>
+	                                     		<div class="media mt-0 p-5">
+			                                    	<div class="d-flex mr-3">
+			                                      		<a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a>
+			                                    	</div>
+			                                   		<div class="media-body">
+				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">${marketRev.mem_email} </h5>
+				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
+														</h5>
+														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
+			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>	
+													</div>
+												</div>
+	                                     	</c:otherwise>                                     	
+                                </c:choose>
 							</div>
-					</c:forEach>	
+						</c:forEach>	
 					</c:if>		
+					
+					
 					<c:if test="${fn:length(marketRev) == 0}">		
 							<div class="card-body p-0">
 								<div class="media mt-0 p-5">
@@ -417,6 +447,11 @@
 	                                   <c:choose>
 		                                    <c:when test="${marketQA.freelancer != null}">
 		                                      <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.freelancer.free_name}
+												<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+											</h5>
+		                                    </c:when>
+		                                     <c:when test="${marketQA.freelancer == null && marketQA.corporation.cor_mname== null}">
+		                                      <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.mem_name}
 												<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
 											</h5>
 		                                    </c:when>
@@ -1055,81 +1090,180 @@
 	$("#checkMR").on('click', function(){
 		// alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
 		// alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
-		 console.log("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
-		 console.log("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
-		 
-		    if ($.trim($("#marketRev_contID").val()) == "") {
-		        alert("글 내용을 입력해주세요.");
-		        $("#marketRev_contID").focus();
-		        return;
-		   		 }
-		    if ($.trim($("#marketRev_starID").val()) == "") {
+		// console.log("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+		// console.log("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
+	 
+	    if ($.trim($("#marketRev_contID").val()) == "") {
+	        alert("글 내용을 입력해주세요.");
+	        $("#marketRev_contID").focus();
+	        return;
+	   		 }
+	    if (document.getElementById('marketRev_starID')){//별점이 존재한다면 밑에 실행
+		    if ($.trim($("#marketRev_starID").val()) == ""){
 		        alert("별점을 선택해주세요.");
 		        $("#marketRev_starID").focus();
 		        return;
-		    	}
-		  //  var queryString = $("#mrInputID").serialize();
+		    }
+	    } 
+		  var queryString = $("#mrInputID").serialize();
 		  var mem_email = $("#mem_emailID").val();
 		  var market_num = $("#market_numID").val();
 		  var marketRev_star = $("#marketRev_starID").val();
 		  var marketRev_cont = $("#marketRev_contID").val();
 		  var arr=[marketRev_cont,marketRev_star,market_num,mem_email]
-/*		  
-		  var arr = new Array(); //Object를 배열로 저장할 Array
-	      
-		  var obj = new Object(); //key, value형태로 저장할 Object
-	      obj.key = "mem_email";
-	      obj.val = $("#mem_emailID").val();
-	      arr.push(obj);
-	      
-	      obj = new Object();
-	      obj.key = "market_num";
-	      obj.val = $("#market_numID").val();
-	      arr.push(obj);
-		      
-	      obj = new Object();
-	      obj.key = "marketRev_star";
-	      obj.val = $("#marketRev_starID").val();
-	      arr.push(obj);
-		      
-	      obj = new Object();
-	      obj.key = "marketRev_cont";
-	      obj.val = $("#marketRev_contID").val();
-	      arr.push(obj);
-*/		      
 
 
-		    var url=$("#mrInputID").attr("action");
-		    console.log("url:"+url);
-		    console.log("queryString:"+queryString);
+		   var url=$("#mrInputID").attr("action");
+		 //   console.log("url:"+url);
+		//    console.log("queryString:"+queryString);
 	    $.ajax({ //free_name,content,star,rdate
 	    	type:'post',
 	    	url:url,
-	    	data:JSON.stringify(arr),
+	    	data:queryString,
 	    	dataType:'json',
 	    	error:onError,
-	    	success:onSuccess
-	    	});
+	    	//beforeSend:{}
+	    	success:function onSuccess(data){
+    	//	for(var i=0; i<1; i++){ 
+    			console.log(data);	
+    			 console.log("1"+data[0].marketRev_cont);	
+    			 console.log("2"+data[0].marketRev_star);	
+    			 console.log("3"+data[0].corporation.cor_name);	
+    			 console.log("4"+data[0].freelancer.free_name);	
+    			 console.log("5"+data[0].mem_email);	
+    			 console.log("6"+data[0].marketRev_rdate);	
+    			 console.log("7"+data[0].corporation.cor_fname);	 
+    			 console.log("8"+data[0].freelancer.free_fname);
+    			 //서버로부터 받은 날짜데이터를 포맷에맞게 바꾸기
+    			 
+    			 var cor=data[0].corporation.cor_name;
+    			 var free=data[0].freelancer.free_name;
+    			// console.log("cor"+cor); console.log("free"+free);
+    			 var someTimestamp = Number(data[0].marketRev_rdate);
+    			 var dateTime = new Date(someTimestamp);
+    			 dateTime=dateToYYYYMMDD(dateTime);
+	
+    			 revfree='';
+    			 revcor ='';
+    			 revmem='';
+    			 rev='';
+	    	 	 /* 
+	   			 rev +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><c:if test="${marketRev[0].freelancer!= null}"> <a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../marketImages/'+data[0].freelancer.free_fname+ ' "> </a> </div> ';
+	   			 rev +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name + '</h5></c:if>';
+	   			 rev +='<c:if  test="${marketRev[0].freelancer == null && marketRev[0].corporation!=null }"><a href="#"><img class="media-object brround" id="corfnameR" alt="64x64" src="../marketImages/'+data[0].corporation.cor_fname+'"></a></div>';
+	   			 rev +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="cor_mname" id="cor_mnameR">'+data[0].corporation.cor_mname+'</h5></c:if>';
+	   			 rev +='<c:if  test="${marketRev[0].freelancer== null && marketRev[0].corporation==null }"> <a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a></div>';
+	   			 rev +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">'+data[0].mem_email+'</h5></c:if>';				 
+	   			 rev +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
+	   			 rev +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+ data[0].marketRev_star+'</span><i class="fa fa-star text-yellow"></i></h5>';
+	   			 rev +='<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+ dateTime+'</small>';
+	  			 rev += '<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont + '</p></div></div>';
+	  			 */
+	 			revfree +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../marketImages/'+data[0].freelancer.free_fname+'"> </a></div>';
+	 			revfree +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name +'</h5>'; 
+   	   			revfree +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
+   	   			revfree +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
+   	   			revfree +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
+   	   			revfree +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
+   	   			
+	 			revcor +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../marketImages/'+data[0].corporation.cor_fname+'"> </a></div>';
+	 			revcor +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].corporation.cor_mname +'</h5>';
+	 			revcor +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
+   	   			revcor +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
+   	   			revcor +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
+   	   			revcor +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
+   	   			 
+   	   			revmem +='<c:if  test="${marketRev[0].freelancer== null && marketRev[0].corporation==null }"> <a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a></div>';
+   	   			revmem +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">'+data[0].mem_email+'</h5></c:if>'
+   	   			revmem +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
+   	   			revmem +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
+   	   			revmem +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
+   	   			revmem +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
+	   	   		if(cor !=null){
+	   	   			rev=revcor;
+	   	 		}else if(free != null){
+	   	 			rev=revfree;
+	   	 		}else{
+	   	 			rev=revmem;
+	   	 		}
+				 
+	  			 
+	  		/*	
+	  			if("${fn:length(marketRev)}" > 0){	
+	  				$('#ajaxRev').prepend(rev);	
+	  			}
+	  			var child=$('#ajaxRev').children;
+	  			console.log("@@@@@child:"+child.length);
+	  			var remv=$("child:eq(3)");
+	  			if(child.length == 4 || child.length > 4){	
+	  			//	$('#ajaxRev').lastChild.remove();
+	  			//	$("#ajaxRev:eq(3)").remove();
+	  				$("#ajaxRev:last-child").remove();	
+	  				$('#ajaxRev').prepend(rev);
+		  				
+		  			}
+	  		*/	
+	  			/*
+	  			var remv=$("#ajaxRev:eq(3)");
+	  			console.log("remv"+remv);
+	  			if("${fn:length(marketRev)}" >= 4){	
+	  			//	$('#ajaxRev').lastChild.remove();
+	  			//	$("#ajaxRev:eq(3)").remove();
+	  				$("#ajaxRev:last-child").remove();	
+	  				$('#ajaxRev').prepend(rev);
+	  				
+	  			}*/
+	  			//오류 댓글 4개쓰면 2페이지로 넘어가면서 댓글이 사라짐, 리로드 = 다시생김
+	  			
+	  			var ele = document.getElementById('ajaxRev');
+				var eleCount = ele.childElementCount;
+				console.log("eleCount__"+eleCount);
+				console.log("22eleCount__"+"${fn:length(marketRev)}");
+	  			if("${fn:length(marketRev)}" == 0){		
+  					//$('#ajaxRev').html(html);
+	  				location.reload();
+	  			}else if("${fn:length(marketRev)}" >= 3){
+	  				$("#ajaxRev:last-child").remove();	
+  					$('#ajaxRev').prepend(rev);
+	  			}else if("${fn:length(marketRev)}" > 0){
+	  				$('#ajaxRev').prepend(rev);
+	  			}
+	    			 /*			 
+	    			  $('#contentR').text(data[i].marketRev_cont);
+	    			  $('#starR').text(data[i].marketRev_star);
+	    			  $('#cor_mnameR').text(data[i].corporation.cor_name);
+	    			  $('#free_nameR').text(data[i].freelancer.free_name);
+	    			  $('#mem_emailR').text(data[i].mem_email);
+	    			  $('#rdateR').text(data[i].marketRev_rdate);
+	    			  $('#corfnameR').text(data[i].corporation.cor_fname);
+	    			  $('#freefnameR').text(data[i].freelancer.free_fname);
+	    	     
+	    			 $("#contentR").text(data[i].freelancer.free_fname);
+	    			 $("#starR").text(data[i].marketRev_star);
+	    			 $("#cor_mnameR").text(data[i].corporation.cor_name);
+	    			 $("#free_nameR").text(data[i].freelancer.free_name);
+	    			 $("#mem_emailR").text(data[i].mem_email);
+	    			 $("#rdateR").text(data[i].marketRev_rdate);  
+	    			 $("#corfnameR").text(data[i].corporation.cor_fname);
+	    			 $("#freefnameR").text(data[i].freelancer.free_fname);
+	    			 */
+	               // }
+	    	}
+	    });
 	});
+	
+	
 	function onError(){}
-	function onSuccess(data){
-		console.log(data);
-	    var str = " ";
-		if(data.length > 0){
-			$.each(data, function(i,item){
-
-                 console.log("i : "+i);
-                 console.log("item : "+item.version);
-                 console.log("item : "+item.codename);
-             });
-       }
+		
+	function dateToYYYYMMDD(date){
+	    function pad(num) {
+	        num = num + '';
+	        return num.length < 2 ? '0' + num : num;
+	    }
+	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
 	}
+
 </script>
-
-
-
-
-
 
 <!--
 <script>

@@ -20,7 +20,8 @@ public class MarketRev {
 	private String mem_email;
 
 //	private MarketRevComm marketRevComm; 없애버려
-	public MarketPagingVO marketRevVO;
+//	public MarketPagingVO marketRevVO;
 	private Freelancer freelancer;
 	private Corporation corporation;
+	private Member member;
 }
