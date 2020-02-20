@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
-import fp.market.domain.MarketContent;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
@@ -95,11 +94,6 @@ public class MarketServiceImpl implements MarketService {
 	}
 	
 
-//	@Override
-//	public MarketContent getMarketContent(long market_num) {
-		// TODO Auto-generated method stub
-//		return mapper.getMarketContent(market_num);
-//	}
 
 }
 

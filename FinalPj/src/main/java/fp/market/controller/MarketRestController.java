@@ -28,10 +28,9 @@ public class MarketRestController {
 	@Autowired
 	MarketService marketService;
 	
-	
 //마켓문의 글insert
+	
 	@PostMapping("marketQA-insert")
-	@ResponseBody
 	public String marketQA_insert(MarketQA marketQA){
 		log.info("dfdfsfdsfdfdsfdsfdsfds");
 		MarketQA mq=marketService.insertMarketQA(marketQA);
@@ -46,7 +45,6 @@ public class MarketRestController {
 			,@RequestParam(value="nowPageR",required=false,defaultValue="1")String nowPageR
 			,@RequestParam(value="cntPerPageR", required=false, defaultValue="4")String cntPerPageR)
 	{
-
 		marketService.insertMarketRev(marketRev);
 		log.info("!@@#@!#@!#!marketRev:"+ marketRev.getMarketRev_num());
 		log.info("!@@#@!#@!#!marketRev:"+ marketRev);
@@ -62,7 +60,7 @@ public class MarketRestController {
 		map.put("market_num", marketRev.getMarket_num());
 		List<MarketRev> mr = marketService.getMarketRev(map);
 		log.info("@!@@@@@mr:"+mr);
-		//ModelAndView mv = new ModelAndView();
+
 		
 		return mr;
 
