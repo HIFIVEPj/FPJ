@@ -78,7 +78,6 @@ public class MarketServiceImpl implements MarketService {
 		
 	}
 	
-
 	@Override
 	public void insertMarket(Market market) {
 		mapper.insertMarket(market);

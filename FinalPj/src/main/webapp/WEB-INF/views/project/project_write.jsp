@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -1222,6 +1220,7 @@
 										<div class="form-group ">
 											<label class="form-label"><b>담당자명</b></label>
 											<input type="text" class="form-control" name="cor_mname" value="${cor.cor_mname}">
+
 										</div>	
 									</div>
 								</div>
@@ -1399,7 +1398,7 @@
 	function check(){
 		var type_num = $('.active').attr('value');
 		document.getElementById('type_num').value = type_num;
-		
+
 		var key_num = new Array();
 		var key_cnt = 0;
 		//for(var i=0; i<key_num_size; i++){

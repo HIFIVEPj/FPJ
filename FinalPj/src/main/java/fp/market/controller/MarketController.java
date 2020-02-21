@@ -8,16 +8,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
 import java.util.Vector;
 
 
 import javax.servlet.http.HttpSession;
 
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,14 +30,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
@@ -168,8 +167,6 @@ public class MarketController {
 		marketFreelancer=marketService.getMarketFreelancer(market_num);
 		return marketFreelancer;
 	}
-
-	
 	@RequestMapping(value = "market-posts", method = RequestMethod.GET)
 	public String market_post(Locale locale, Model model) {
 
@@ -214,7 +211,6 @@ public class MarketController {
 		marketService.updateMarket2(market);		
 		return "redirect:market-list";
 	}
-	
 	@GetMapping("market-delete")
 	public String market_delete(@RequestParam long market_num) {
 		marketService.deleteMarket(market_num);	
@@ -254,6 +250,7 @@ public class MarketController {
 		list.add(fileName);
 		return list;
 	}
+
 
 	
 }

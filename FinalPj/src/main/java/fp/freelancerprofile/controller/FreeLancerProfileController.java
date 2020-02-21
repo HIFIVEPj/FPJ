@@ -3,7 +3,10 @@ package fp.freelancerprofile.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
-import java.util.List;
+
+import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,52 +38,41 @@ public class FreeLancerProfileController {
 	
 	@Autowired
 	private FreeLancerProfileService service;
-	
-	@RequestMapping("freelancerMyprofile_write") //프로필등록
-	public String freelancerMyprofile_write() { 
+
+
+	@GetMapping("freelancerMyprofile_write")
+	public String freelancerMyprofile_write() {
 		return "profile/freelancerMyprofile_write";
 	}
 	
+	
+	@PostMapping("freelancerMyprofile_write")
+		public String freelancerMyprofile_write(FreeLancerProfile freelancerprofile, HttpServletRequest request) {
+		   //String type_num = request.getParameter("type_num");
+		      
+		   String[] ListKeyNum = request.getParameterValues("key_num");
+		   ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
+		      
+		   int[] ListIntKeyNum = Arrays.stream(ListKeyNum).mapToInt(Integer::parseInt).toArray();
+		            
+		//   Map<String, Object> map = new HashMap<String, Object>();
+		//	   for(int i = 0; i<ListIntKeyNum.length; i++) {
+		//	      arraykeynum.add(ListIntKeyNum[i]);
+		//	   }
+		//	   map.put("key_num", arraykeynum);
+		      
+		   service.listInsert(freelancerprofile);
+	//	   service.insertPjpkeyword(map);
+		      log.info("@#!#@$  arraykeynum: "+ arraykeynum);
+		      log.info("@#!#@$  project: " +freelancerprofile);
+	//	      log.info("@#!#@$  map: "+ map);
+		   return "redirect:freelancerProfile_list";
+		   }
+
 	@RequestMapping("freelancerProfile_content") //프로필내용
 	public String Profile_content() { 
 		return "profile/freelancerProfile_content";
 	}
-	/*
-	//프로필 리스트 **
-	@RequestMapping("freelancerProfile_list") 
-	public ModelAndView Profile_list() { 
-		
-		List<FreeLancer> profile_list = service.selectProfileList();
-	//	log.info("#0: " + profile_list.size()); //5
-	//	log.info("#1: " + profile_list.get(0).getFreelancerprofile().size()); //1
-	//	log.info("#2: " + profile_list.get(0).getFreelancerprofile().get(0)); //1
-
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile/freelancerProfile_list");
-		mv.addObject("profile_list",profile_list);
-		return mv;
-	}
-	
-	//프로필 리스트 페이징//
-	@GetMapping("freelancerProfile_list")
-	public String ProfileList(PagingVO vo, Model model
-						, @RequestParam(value="nowPage", required=false)String nowPage
-						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-		int total = service.countProfileList();
-			if(nowPage == null && cntPerPage == null) {
-				nowPage = "1";
-				cntPerPage = "4";
-			}else if(nowPage == null) {
-				nowPage="1";
-			}else if(cntPerPage ==null) {
-				cntPerPage="4";
-			}
-		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		model.addAttribute("paging", vo);
-		model.addAttribute("viewAll", service.selectPageList(vo));
-			return "profile/freelancerProfile_list";
-	}
-	*/
 	@GetMapping("freelancerProfile_list")
 	public ModelAndView ProfileList(PagingVO vo
 						, @RequestParam(value="nowPage", required=false)String nowPage
@@ -118,13 +112,38 @@ public class FreeLancerProfileController {
 		return mv;
 	}
 	//삭제//
-	
 	@RequestMapping("freelancerProfile_delete")
 	public String ProfileListDelete(@RequestParam long PRO_NUM) {
 		service.listDelete(PRO_NUM);
 		
 		return "redirect:freelancerProfile_list";
 	}
+
+	
+	@GetMapping("freelancerProfile_cehck_delete")
+		public String List_checkbox_delete(HttpServletRequest request) {
+	      
+			   String[] ListCheckNum = request.getParameterValues("check_num"); 
+//			   log.info("#ListCheckNum.length: "  + ListCheckNum.length );
+			   
+			   ArrayList<Integer> arrayChecknum = new ArrayList<Integer>();
+			   
+			      
+		   int[] ListIntCheckNum = Arrays.stream(ListCheckNum).mapToInt(Integer::parseInt).toArray();
+		   
+			
+			   Map<String, Object> map = new HashMap<String, Object>();
+				   for(int i = 0; i<ListIntCheckNum.length; i++) {
+					   arrayChecknum.add(ListIntCheckNum[i]);
+				   }
+				   log.info("@#!#@$  arraykeynum: "+ arrayChecknum);
+				   map.put("check_num", arrayChecknum);
+			      log.info("@#@@#@#map: "+map);
+			   service.checkdelete1();
+			   //service.checkdelete2(PRO_NUM);
+			      
+			   return "redirect:freelancerProfile_list";
+			 }
 
 	
 	@RequestMapping("mydash_change")	//회원정보수정
@@ -141,13 +160,9 @@ public class FreeLancerProfileController {
 	public String Myfavorite() { 
 		return "profile/myfavorite";
 	}
-	@RequestMapping("payments")	//관심있는프로젝트
+	@RequestMapping("payments")	//
 	public String payments() { 
 		return "profile/payments";
 	}
-	@RequestMapping("freelancerList")	//관심있는프로젝트
-	public String FreelancerList() { 
-		return "profile/freelancerList";
-	}
+	
 }
-

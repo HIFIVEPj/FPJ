@@ -15,7 +15,6 @@ import fp.member.domain.Member;
 public interface MemberMapper {
 	
 	
-	
 	int idCheck(String email);
 	void insertMem(Member member);		
 	void insertAuth(Map map);

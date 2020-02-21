@@ -1,6 +1,4 @@
 package fp.member.service;
-
-
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +22,6 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
 	private MemberDao dao;
-
-	
 	
 	@Override
 	public boolean loginCheck(Member member,HttpSession session) {
@@ -43,17 +39,12 @@ public class LoginServiceImpl implements LoginService {
 			return true;
 		}
 		return false;
-
-
 	}
 	
 	@Override
 	public void logout(HttpSession session) {
 		dao.logout(session);
 	}
-
-	
-
 	@Override
 	public int find_pw(Member member){
 		int i =0;

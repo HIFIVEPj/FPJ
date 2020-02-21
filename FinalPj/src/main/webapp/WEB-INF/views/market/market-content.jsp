@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -257,7 +256,6 @@
 
 					
 						<!-- 댓글 -->		
-				
 					<c:if test="${fn:length(marketRev) > 0}">	
 						<c:forEach var="marketRev" items="${marketRev}">
 							<div class="card-body p-0" id="ajaxRev">
@@ -378,6 +376,7 @@
 					<!--<input type="hidden" id="marketRev_num" name="marketRev_num" value="${marketRev_num}"> -->
 					<!--<input type="hidden" id="marketRev_rdate" name="marketRev_rdate" value="${marketRev_rdate}"> -->
 					    <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
+
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">리뷰 남기기</h3>
@@ -435,6 +434,7 @@
 							<div class="card-header">
 								<h3 class="card-title">문의</h3>
 							</div>
+<<<<<<< HEAD
 						<c:if test="${fn:length(marketQA) > 0}">				
 							 <div class="card-body p-0">									 
 								<c:forEach var="marketQA" items="${marketQA}">
@@ -981,7 +981,6 @@
 		<!--/Add listing-->
 
 		<!-- Message Modal -->
-
 <!--Comment Modal -->
 <!-- 문의 모달창 -->
 	<form name="mqIREnput" id="mqREInput" action="marketQARE-insert" method="post">
@@ -1022,36 +1021,6 @@
 	    </div>
 	</form>
 <!-- 문의 모달창 -->			
-		<div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input type="text" class="form-control" id="customername" placeholder="Your Name">
-						</div>
-						<div class="form-group">
-							<input type="email" class="form-control" id="customeremail" placeholder="Email Address">
-						</div>
-						<div class="form-group mb-0">
-							<textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-success">Send</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!--Comment Modal -->
-
 		<!-- Report Modal -->
 		<div class="modal fade" id="report" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -1158,19 +1127,6 @@
 	        },
 </script>-->
 <script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	$("#checkMR").on('click', function(){
 		// alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
@@ -1347,7 +1303,6 @@
 	   }   
 	 
 </script>
-
 <!--
 <script>
 function formSubmit() {

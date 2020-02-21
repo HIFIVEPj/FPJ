@@ -66,15 +66,27 @@ public class MemberTests {
 	@Test
 	public void insertMem() {
 		String sql ="update MEMBER set MEM_PWD=? where MEM_EMAIL=?";
+<<<<<<< HEAD
 			Connection con =null;
 			PreparedStatement pstmt =null;
 		
+=======
+			//dao.hashCode("pw");
+			Connection con =null;
+			PreparedStatement pstmt =null;
+			//BCrypt.hashpw(rawPassword.toString(), salt);
+>>>>>>> 66928d0945675f40d16aa344255e94d26080ed14
 			try {
 				con=ds.getConnection();
 				pstmt=con.prepareStatement(sql);
 				//pstmt.setString(1, pwcoder.encode("pw"));
+<<<<<<< HEAD
 				pstmt.setString(1, BCrypt.hashpw("1234", BCrypt.gensalt(10)));
 				pstmt.setString(2,"se@naver.com");
+=======
+				pstmt.setString(1, BCrypt.hashpw("pwd", BCrypt.gensalt(10)));
+				pstmt.setString(2,"hun@gmail.com");
+>>>>>>> 66928d0945675f40d16aa344255e94d26080ed14
 				pstmt.executeUpdate();
 			}catch(Exception e) {
 				e.printStackTrace();

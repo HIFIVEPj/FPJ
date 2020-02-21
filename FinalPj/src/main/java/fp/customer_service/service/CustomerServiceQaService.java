@@ -17,4 +17,3 @@ public interface CustomerServiceQaService {
 	void deleteS(long seq);
 	*/
 }
-

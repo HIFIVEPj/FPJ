@@ -233,7 +233,6 @@
 			</div>
 		</section>
 		<!--/Add posts-section-->
-		
 <script>
 	   function upfile(){
 	      var filename = document.getElementById("file").value;

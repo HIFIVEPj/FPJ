@@ -1,6 +1,5 @@
 package fp.member.service;
 
-
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
@@ -13,10 +12,8 @@ public interface LoginService {
 	//로그 아웃
 	public void logout(HttpSession session);
 
-
 	//패스워드 찾기
 	public int find_pw(Member member);
-
 
 
 }

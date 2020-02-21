@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fp.index</groupId>
 	<artifactId>controller</artifactId>
@@ -290,8 +290,8 @@
 	    <version>1.16</version>
 	</dependency>
 	-->
-
-		<!-- 메일 전송 -->
+	
+	<!-- 메일 전송 -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -307,7 +307,7 @@
 		    <version>1.6.2</version>
 		</dependency>
 		    
-		    
+		   
 	    <dependency>
 		    <groupId>javax.mail</groupId>
 		    <artifactId>mail</artifactId>
@@ -364,9 +364,7 @@
 		            <artifactId>httpclient</artifactId>
 		            <version>4.5.2</version>
 		        </dependency>
-		        
-
-
+		       
 	</dependencies>
 	
 

@@ -26,5 +26,3 @@ public class Member {
 	private String option3;	
 
 }
-
-

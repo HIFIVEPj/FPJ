@@ -14,6 +14,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Qualifier;
+
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,7 +52,6 @@ import fp.member.domain.Member;
 import fp.member.service.MailService;
 import fp.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
-
 
 @Log4j
 @Controller    //컨트롤러 빈 선언
@@ -111,7 +112,6 @@ public class MemberController {
     
     @RequestMapping(value = "signup.do" , method=RequestMethod.POST )
     public String signUp (Member member) throws IOException {
-
     	String bcpwd=member.getPwd();
     	
     	
@@ -122,12 +122,10 @@ public class MemberController {
     	//BCryptPasswordEncoder pwEncoder =new BCryptPasswordEncoder();
     	//String password = pwEncoder.encode(member.getPwd());
     	//member.setPwd(password);
-
     	//member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
        	memberservice.insertM(member);
     	System.out.println("member: 꺄아아아아앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + member);
     	return "index";
     } 
-
 }
 

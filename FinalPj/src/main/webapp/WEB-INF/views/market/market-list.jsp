@@ -96,6 +96,7 @@
 										<label for="개발" class="custom-control custom-checkbox mb-3">
 											<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1"  id="개발">
 											<span class="custom-control-label" class="text-dark">개발자<span class="label label-secondary float-right">14</span>
+
 											</span>
 										</label>
 										<label for="퍼블리싱" class="custom-control custom-checkbox mb-3">
@@ -246,7 +247,6 @@
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    
-
 																<img src="../marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
 
 															</div>
@@ -258,7 +258,6 @@
 															<div class="item-card9">
 																<a href="market-content?market_num=${list.market_num}">${list.freelancer.free_name}</a>
 																<a href="market-content?market_num=${list.market_num}" class="text-dark mt-2"><h4 class="font-weight-semibold mt-1">${list.market_sub}</h4></a>
-
 															<!--<p>${list.market_cont}</p>  -->
 																<div class="item-card9-desc">
 																	<h2>${list.market_price}<span class="fs-16">원</span></h2>
@@ -277,7 +276,6 @@
 																				</c:forEach>	
 																			</c:if>
 																		</span>&nbsp;${list.marketRev.marketRev_star}&nbsp;&nbsp;&nbsp;
-
 																		<div>
 																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> ${list.marketRev.marketRev_num}</span></a>
 																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i>${list.market_vcnt}</span></a>
@@ -337,6 +335,7 @@
 										<c:if test="${sessionScope.class_num==5 }">
 											<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 										</c:if>
+
 									</ul>
 							 	 </div>
 							</div>
@@ -352,7 +351,4 @@
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
-	
-
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 </html>

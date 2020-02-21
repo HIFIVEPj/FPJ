@@ -1,3 +1,4 @@
+
 //모든 공백 체크 정규식
 var empJ = /\s/g;
 // 비밀번호 정규식
@@ -203,7 +204,3 @@ $(document).ready(function() { //여기부터 시작
 	
 	
 }); //ready function 끝
-
-
-
-

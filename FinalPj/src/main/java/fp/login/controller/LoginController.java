@@ -2,7 +2,6 @@ package fp.login.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Principal;
@@ -28,7 +27,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -110,7 +108,11 @@ public class LoginController {
     @RequestMapping(value = "find_pwd.do", method = RequestMethod.POST)
     public void find_pw(@ModelAttribute Member member, HttpServletRequest request,HttpServletResponse response) throws Exception{
     	String repwd = "";
+<<<<<<< HEAD
 		for (int i = 0; i < 12; i++) {r
+=======
+		for (int i = 0; i < 12; i++) {
+>>>>>>> 66928d0945675f40d16aa344255e94d26080ed14
 			repwd += (char) ((Math.random() * 26) + 97);
 		}
 
@@ -266,7 +268,6 @@ public class LoginController {
   		
   		return mv;
   	}
-  	
 
 	//로그아웃 처리
 	@RequestMapping("logout.do")

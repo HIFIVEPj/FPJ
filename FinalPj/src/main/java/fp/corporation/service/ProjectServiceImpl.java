@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fp.corporation.domain.Corporation;
-
 import fp.corporation.domain.PjPickKeyword;
 
 import fp.corporation.domain.Project;
@@ -77,7 +76,6 @@ public class ProjectServiceImpl implements ProjectService {
 		mapper.updatePj(project);
 	}
 	@Override
-
 	public void updateKeyword(Map<String, Object> map) {
 		mapper.updateKeyword(map);
 	}

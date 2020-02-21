@@ -22,6 +22,7 @@ import fp.corporation.domain.Keyword;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
 import fp.corporation.service.CorporationService;
+
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 import lombok.extern.log4j.Log4j;
@@ -33,6 +34,7 @@ public class ProjectController {
 	private ProjectService service;
 	@Autowired
 	private CorporationService corService;
+
 	
 	@RequestMapping("project_list")
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
@@ -81,7 +83,6 @@ public class ProjectController {
 		
 	}
 	@PostMapping("project_update")
-
 	public String project_update(Project project, HttpServletRequest request, PjPickKeyword pjpkeyword) {
 		String[] ListPjp_keynum = request.getParameterValues("pjp_keynum");
 		ArrayList<Long> arrayPjp_keynum = new ArrayList<Long>();
@@ -94,7 +95,6 @@ public class ProjectController {
 		}
 		pjpkeyword.setPjpkeynumList(arrayPjp_keynum);
 		log.info("@@@@@@@@@@pjpkeyword: "+pjpkeyword);
-
 		
 		String[] ListKeyNum = request.getParameterValues("key_num");
 		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
@@ -102,7 +102,6 @@ public class ProjectController {
 		for(int i = 0; i<ListIntKeyNum.length; i++) {
 			arraykeynum.add(ListIntKeyNum[i]);
 		}
-
 
 		pjpkeyword.setKey_numList(arraykeynum);
 		service.updatePj(project);
@@ -125,6 +124,7 @@ public class ProjectController {
 		log.info("!@!#(@#*@&$(&*(@!#&&(*@#");
 		String mem_email = request.getParameter("mem_email");
 		log.info("!@*@#&(*#&(*&@# mem_email: "+mem_email);
+
 		String[] ListKeyNum = request.getParameterValues("key_num");
 		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
 		
@@ -154,5 +154,4 @@ public class ProjectController {
 	public String project_payment(){
 		return "project/project_payments";
 	}
-
 }

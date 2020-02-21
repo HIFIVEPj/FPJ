@@ -38,10 +38,10 @@
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class="doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
@@ -49,7 +49,9 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
 												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
+												<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
 												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+												</c:if>
 											</ul>
 										</li>
 										<li class="slide">
@@ -218,7 +220,7 @@
 							</div>
 								<div class="col-md-12">
 									<div class="card-footer" style="text-align:center;">
-										<button type="submit" class="btn btn-primary" id="edit_ok">수정완료</button>
+										<button type="submit" class="btn btn-primary" id="edit_ok">수정</button>
 										<a href="#" class="btn btn-primary" id="edit_update"><span>프로필 쓰러가기</span></a>
 									</div>
 								</div>						

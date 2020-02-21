@@ -34,6 +34,12 @@ public interface FreeLancerProfileService {
 	//삭제//
 	public void listDelete(long PRO_NUM);
 
+	
+	//작성//
+	public String listInsert(FreeLancerProfile freelancerprofile);
+	public String insertPjpkeyword(Map<String, Object> map);
+
+	void checkdelete1();
 		   
 
 }

@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fp.corporation.mapper.ProjectMapper">
-
 	<resultMap type="corProject" id="projectMap">
 		<id property="pj_num" column ="pj_num" />
 		<result property="type_num" column ="type_num" />
@@ -83,10 +82,6 @@
 		</collection>
 		
 	</resultMap>
-
-
-	
-	
 	<!-- 프로젝트 리스트 -->
 	<select id="list" parameterType="ProjectVo" resultMap="projectMap"> 
 		 <![CDATA[
@@ -198,5 +193,4 @@
 	<select id="corInfo" parameterType="long" resultMap="corporationMap">
 		select * from CORPORATION cor join PROJECT pj on cor.COR_CODE=pj.COR_CODE where PJ_NUM=#{pj_num}
 	</select>
-
 </mapper>
