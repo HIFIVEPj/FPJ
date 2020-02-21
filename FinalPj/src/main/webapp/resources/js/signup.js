@@ -7,94 +7,10 @@ var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a
 //이름&닉네임 정규식
 var nameJ=/^[가-힣a-zA-Z0-9]{2,10}$/;
 
-$(document).ready(function() { //여기부터 시작
-	//프리랜서 이메일중복
-	$(function(){	
-		$("#email").blur(function() {
-			if($('#email').val()==''){
-				$('#email_check').text('이메일을 입력하세요.');
-				$('#email_check').css('color', 'red');
-			} else if(mailJ.test($('#email').val())!=true){
-				$('#email_check').text('이메일 형식으로 입력해주세요.');
-				$('#email_check').css('color', 'red');
-			} else if($('#email').val()!=''){
-				var email=$('#email').val();
-		/**/  $.ajax({
-				 type:"POST",
-				 url:"id_ck.do",
-				 data:{
-						"email":$('#email').val()
-				 },
-				 success:function(data){	//data : checkSignup에서 넘겨준 결과값
-						if($.trim(data)=="YES"){
-						   if($('#email').val()!=''){ 
-							   $('#email_check').text('사용가능한 아이디 입니다.');
-							   $('#email_check').css('font-size', '11px');
-							   $('#email_check').css('color', 'blue');
-						   }else if($('#email').val()==''){
-								$('#email_check').text('아이디를 입력해주세요.');
-								$('#email_check').css('color', 'red');						
-							}else{
-								$('#email_check').text("이메일 양식을 확인해주세요.");
-								$('#email_check').css('color', 'red');						
-							}
-						}else{
-						   if($('#email').val()!=''){		                 
-							 $('#email_check').text('중복된 아이디입니다.');
-							 $('#email_check').css('font-size', '11px');
-							$('#email_check').css('color', 'red');
-						   }
-						}
-					 }
-				}) //ajax
-			}//else if
-		});//blur
-	});//메일function 끝
+
+$(document).ready(function() { //여기부터 시작	
 	
-	
-	//기업 이메일중복
-	$(function(){	
-		$("#c_email").blur(function() {
-			if($('#c_email').val()==''){
-				$('#c_email_check').text('이메일을 입력하세요.');
-				$('#c_email_check').css('color', 'red');
-			} else if(mailJ.test($('#c_email').val())!=true){
-				$('#c_email_check').text('이메일 형식으로 입력해주세요.');
-				$('#c_email_check').css('color', 'red');
-			} else if($('#c_email').val()!=''){
-				var email=$('#c_email').val();
-		/**/  $.ajax({
-				 type:"POST",
-				 url:"id_ck.do",
-				 data:{
-						"email":$('#c_email').val()
-				 },
-				 success:function(data){	//data : checkSignup에서 넘겨준 결과값
-						if($.trim(data)=="YES"){
-						   if($('#c_email').val()!=''){ 
-							   $('#c_email_check').text('사용가능한 아이디 입니다.');
-							   $('#c_email_check').css('font-size', '11px');
-							   $('#c_email_check').css('color', 'blue');
-						   }else if($('#c_email').val()==''){
-								$('#c_email_check').text('아이디를 입력해주세요.');
-								$('#c_email_check').css('color', 'red');						
-							}else{
-								$('#c_email_check').text("이메일 양식을 확인해주세요.");
-								$('#c_email_check').css('color', 'red');						
-							}
-						}else{
-						   if($('#c_email').val()!=''){		                 
-							 $('#c_email_check').text('중복된 아이디입니다.');
-							 $('#c_email_check').css('font-size', '11px');
-							$('#c_email_check').css('color', 'red');
-						   }
-						}
-					 }
-				}) //ajax
-			}//else if
-		});//blur
-	});//메일function 끝
-	
+
 	//개인비번검사
 	$('#mem_pw').blur(function() {
 			if (pwJ.test($('#mem_pw').val())) {
@@ -164,17 +80,17 @@ $(document).ready(function() { //여기부터 시작
 
 /*전체유효성체크*/
 	//개인 유효성 form
-	$('form').on('submit',function(){
+	$('#membercheck').on('submit',function(){
 		var inval_Arr = new Array(4).fill(false);
-		// 이메일 정규식
-		if (mailJ.test($('#email').val())){
-			console.log(mailJ.test($('#email').val()));
-			inval_Arr[0] = true;
-			} else {
+		//메일 입력여부
+		if (($('#email').val() == "")){
 				inval_Arr[0] = false;
-				alert('이메일을 확인하세요.');
+				alert('이메일을 입력해주세요.');
 				return false;
+			} else {
+				inval_Arr[0] = true;	
 			} 
+		
 			
 		//이름 입력여부
 		if (($('#name').val() == "")){
@@ -203,6 +119,67 @@ $(document).ready(function() { //여기부터 시작
 		}
 		//개인 개인정보 체크박스
 		if($("input:checkbox[id='topi']").is(":checked") == true){
+			inval_Arr[4] = true;
+		}else{
+			inval_Arr[4] = false;
+			alert('개인정보 제공에 동의해 주세요.');
+			return false;
+		}
+	
+		//전체 유효성 검사
+		var validAll = true;
+		for(var i = 0; i < inval_Arr.length; i++){
+			if(inval_Arr[i] == false){			
+				validAll = false;		
+			}	
+		}
+		if(validAll == true){ // 유효성 모두 통과
+			alert('HIFIVE 가족이 되어주셔 감사합니다.');
+		} else{
+			alert('정보를 다시 확인하세요.');
+		}
+	}); //form 끝	
+	
+	//기업유효성 form
+	$('#c_membercheck').on('submit',function(){
+		var inval_Arr = new Array(4).fill(false);
+		//메일 입력여부
+		if (($('#c_email').val() == "")){
+				inval_Arr[0] = false;
+				alert('이메일을 입력해주세요.');
+				return false;
+			} else {
+				inval_Arr[0] = true;	
+			} 
+		
+			
+		//이름 입력여부
+		if (($('#c_name').val() == "")){
+				inval_Arr[1] = false;
+				alert('이름 또는 닉네임을 입력해주세요.');
+				return false;
+			} else {
+				inval_Arr[1] = true;	
+			} 
+	
+		// 개인비밀번호가 같은 경우 && 비밀번호 정규식
+		if (($('#c_mem_pw').val() == ($('#c_mem_pw2').val()))&& pwJ.test($('#c_mem_pw').val())) {
+				inval_Arr[2] = true;
+			} else {
+				inval_Arr[2] = false;
+				alert('비밀번호를 확인하세요.');
+				return false;
+			}
+		//개인 이용약관 체크박스
+		if($("input:checkbox[id='c_tos']").is(":checked") == true){
+			inval_Arr[3] = true;
+		}else{
+			inval_Arr[3] = false;
+			alert('이용약관에 동의해주세요.');
+			return false;
+		}
+		//개인 개인정보 체크박스
+		if($("input:checkbox[id='c_topi']").is(":checked") == true){
 			inval_Arr[4] = true;
 		}else{
 			inval_Arr[4] = false;

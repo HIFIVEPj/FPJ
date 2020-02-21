@@ -6,8 +6,8 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
-<script  src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/signup.js"></script>
+<script type="text/javascript" src="../js/email.js"></script>
 		<!--Sliders Section-->
 
 		<section>
@@ -47,72 +47,74 @@
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 										<div class="card mb-0">
-										<form class="form-group" action="signup.do" method="post">	
+										<form class="form-group" action="signup.do" method="post" id="membercheck">	
 											<div class="card-header">
 												<h3 class="card-title">가입하기</h3>
-												<input type="hidden" name="class_num" value=4>
+												<input type="hidden" name="class_num" value=2>
 											</div>
 											
 											<div class="card-body">	
 																						
 												<div class="form-group">
-													<label class="form-label text-dark">Email</label>											
-													<input type="email" name="email" id=email class="form-control" placeholder="이메일을 입력해 주세요." >
-													<div class="" id="email_check"></div>
+													<label class="form-label text-dark">Email</label>	
+													<input type="email" id="email" class="form-control" value="" name="email" data-toggle="modal" data-target="#emailModal" readonly>										
+												<!-- <input type="email" name="email" id=email class="form-control" placeholder="이메일을 입력해 주세요." > -->
+												<!-- 	<div class="" id="email_check"></div> -->
+											</div>
+											
+			                                    
+									 	<div class="form-group">
+											<label class="form-label text-dark">이름 or 닉네임</label>
+											<input type="text" class="form-control" id="name" name="name" placeholder="이름 또는 닉네임을 입력해주세요">
+											<div class="" id="name_check"></div>
+										</div>																
 										
-												</div>
+										<div class="form-group">
+											<label class="form-label text-dark">비밀번호</label>
+											<input type="password" class="form-control" id="mem_pw" name="pwd" placeholder="Password">
+											<div class="" id="pw_check"></div>
+										</div>
 
-											 	<div class="form-group">
-													<label class="form-label text-dark">이름 or 닉네임</label>
-													<input type="text" class="form-control" id="name" name="name" placeholder="이름 또는 닉네임을 입력해주세요">
-													<div class="" id="name_check"></div>
-												</div>																
-												
-												<div class="form-group">
-													<label class="form-label text-dark">비밀번호</label>
-													<input type="password" class="form-control" id="mem_pw" name="pwd" placeholder="Password">
-													<div class="" id="pw_check"></div>
-												</div>
-
-												<div class="form-group">
-													<label class="form-label text-dark">비밀번호 확인</label>
-													<input type="password" class="form-control" id="mem_pw2" placeholder="Password">
-													<div class="" id="pw2_check"></div>
-												</div>
-												<div class="form-group" style="font-size:12px; line-height:25px;">
-													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" id="tos">
-														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
-													</label>
-													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" id="topi">
-														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
-													</label>
-												</div>
-												<div class="form-footer mt-2">
-												<!--  <button class="btn btn-primary btn-block"  onclick="signup()" name="status" value=0>가입</button> -->
-													 <input type="hidden" name="status" value=0>
-													 <input type="submit" class="btn btn-primary btn-block" name="status" value="가입하기">
-												</div>
-												<div class="text-center  mt-3 text-dark">
-													<span class="font-12">이미 회원가입을 했다면?</span> <a href="login" class="color-hover-sign font-12">로그인</a>
-												</div>
-												</div>
-											</form>
+										<div class="form-group">
+											<label class="form-label text-dark">비밀번호 확인</label>
+											<input type="password" class="form-control" id="mem_pw2" placeholder="Password">
+											<div class="" id="pw2_check"></div>
+										</div>
+										<div class="form-group" style="font-size:12px; line-height:25px;">
+											<label class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="tos">
+												<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+											</label>
+											<label class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="topi">
+												<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+											</label>
+										</div>
+										<div class="form-footer mt-2">
+										<!--  <button class="btn btn-primary btn-block"  onclick="signup()" name="status" value=0>가입</button> -->
+											 <input type="hidden" name="status" value=0>
+											 <input type="submit" class="btn btn-primary btn-block" name="status" value="가입하기">
+										</div>
+										<div class="text-center  mt-3 text-dark">
+											<span class="font-12">이미 회원가입을 했다면?</span> <a href="login" class="color-hover-sign font-12">로그인</a>
+										</div>
+										</div>
+									</form>
 										</div>
 									</div>
 									<div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 											<div class="card mb-0">
-											<form class="form-group" action="signup.do" method="post">	
+											<form class="form-group" action="signup.do" method="post" id="c_membercheck">	
 												<div class="card-header">
 													<h3 class="card-title">회원가입</h3>
-													<input type="hidden" name="class_num" value=2>
+													<input type="hidden" name="class_num" value=4>
 												</div>
 												<div class="card-body">												
 												<div class="form-group">
-													<label class="form-label text-dark">Email</label>											
-													<input type="email" name="email" id="c_email" class="form-control" placeholder="이메일을 입력해 주세요.">
-													<div class="" id="c_email_check"></div>
+													<label class="form-label text-dark">Email</label>
+													<input type="email" id="c_email" class="form-control" value="" name="email" data-toggle="modal" data-target="#c_emailModal" readonly>													
+												<!-- 	<input type="email" name="email" id="c_email" class="form-control" placeholder="이메일을 입력해 주세요."> -->
+												<!-- >	<div class="email_check" id="c_email_check"></div> -->
 										
 												</div>	
 												
@@ -130,7 +132,7 @@
 
 												<div class="form-group">
 													<label class="form-label text-dark">비밀번호 확인</label>
-													<input type="password" class="form-control" id="mem_pw2" placeholder="Password">
+													<input type="password" class="form-control" id="c_mem_pw2" placeholder="Password">
 													<div class="" id="c_pw2_check"></div>
 												</div>
 												<div class="form-group" style="font-size:12px; line-height:25px;">
@@ -164,6 +166,65 @@
 			</div>		
 		</section>
 		<!--/Login-Section-->
+		   <!-- Modal -->
+                     <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel"> <span class=" btn btn-icon btn-primary btn-sm mb-1"><i class="fa fa-envelope"></i> </span> &nbsp; <b>이메일인증</b> </h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body " >
+                              	<div class="input-group mb-12" id="emailAuth_div1">
+                                 <input type="text" id="emailMD" name="emailMD" placeholder="이메일을 입력하세요" class="form-control" />
+                                <div class="input-group-append">
+									<button class="btn btn-secondary"  id="emailBtn">메일발송</button>
+								</div>
+                        <!--          <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button> -->
+                               	</div> 
+                               	<div class="emailAuth_div" id="email_check" ></div>
+                       
+                             </div> 
+                              
+                              <div class="modal-footer">
+                              <input type="hidden" path="random" id="random" value="${random}" />
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+             <!--Modal 끝-->
+   			<!-- Modal -->
+                     <div class="modal fade" id="c_emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel"> <span class=" btn btn-icon btn-primary btn-sm mb-1"><i class="fa fa-envelope"></i> </span> &nbsp; <b>이메일인증</b> </h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                 </button>
+                              </div>
+                              <div class="modal-body " >
+                              	<div class="input-group mb-12" id="c_emailAuth_div1">
+                                 <input type="text" id="c_emailMD" name="c_emailMD" placeholder="이메일을 입력하세요" class="form-control" />
+                                <div class="input-group-append">
+									<button class="btn btn-secondary"  id="c_emailBtn">메일발송</button>
+								</div>
+                        <!--          <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button> -->
+                               	</div> 
+                               	<div class="c_emailAuth_div" id="c_email_check" ></div>
+                       
+                             </div> 
+                              
+                              <div class="modal-footer">
+                              <input type="hidden" path="random" id="random" value="${random}" />
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+             <!--Modal 끝-->             
+
 		
 		
 

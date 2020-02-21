@@ -15,7 +15,7 @@ public class IndexController {
 
 	@RequestMapping("construction")
 	public String construction() {
-		return "construction";
+		return "admin/admin_page";
 	}
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {	
@@ -24,6 +24,10 @@ public class IndexController {
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Locale locale, Model model) {	
 		return "admin/admin_page";
+	}
+	@RequestMapping(value = "/admin_member", method = RequestMethod.GET)
+	public String memberManagement(Locale locale, Model model) {	
+		return "admin/admin_member";
 	}
 
 }

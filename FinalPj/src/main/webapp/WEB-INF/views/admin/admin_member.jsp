@@ -258,7 +258,7 @@
 					</div> -->
 					<ul class="side-menu">
 						    <li>	
-                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
@@ -286,7 +286,7 @@
 					</ul>
 					
 
-	
+<!--  본문 시작 -->	
 					<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
@@ -362,257 +362,361 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">Profits Analysis</h3>
-									</div>
-								<!-- 	<div class="card-body">
-										<div id="morrisBar3" class="chart-visitors overflow-hidden"></div>
-									</div> -->
-									<div class="card-body">
-										<div id="placeholder2" class="chartsh"></div>
+<!--  -->
+<!-- 시작 -->
+		<div class="row">
+			<div class="col-lg-12">
+			<!-- 	<div class="app-content  my-3 my-md-5"> -->
+				<!-- 	<div class="side-app"> -->
+						<div class="page-header">
+							<h1 class="page-title">HIFIVE 회원관리</h1>
+						
+						</div>
+						<div class="row ">
+							<div class="col-lg-12">
+								<div class="panel panel-primary">
+									<div class=" ">
+										<div class="user-tabs mb-4">
+											<!-- Tabs -->
+											<ul class="nav panel-tabs">
+												<li class=""><a href="#tab1" class="active" data-toggle="tab">전체 (1,737)</a></li>
+												<li><a href="#tab2" data-toggle="tab">기업 (1,734)</a></li>
+												<li><a href="#tab3" data-toggle="tab">개인 (1,243)</a></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">Ratings</h3>
-									</div>
-									<div class="card-body">
-										<div id="chart-donut3" class="chartsh"></div>
-									</div>
 
+								<div class="card">
+									<div class="card-body">
+										<div class="tab-content">
+											<div class="tab-pane active " id="tab1">
+												<div class="mail-option">
+													<div class="chk-all">
+														<div class="btn-group">
+															<a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
+																Bulk Actions
+																<i class="fa fa-angle-down "></i>
+															</a>
+															<ul class="dropdown-menu">
+																<li><a href="#">Bulk Actions</a></li>
+																<li><a href="#">Delete</a></li>
+																<li><a href="#">Activate</a></li>
+																<li><a href="#">Deactivate</a></li>
+															</ul>
+														</div>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Apply
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Bulk Check Sploggers
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Bulk Report Sploggers
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
+															Change role to
+															<i class="fa fa-angle-down "></i>
+														</a>
+														<ul class="dropdown-menu">
+															<li><a href="#">Contributor</a></li>
+															<li><a href="#">Register</a></li>
+														</ul>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn mini blue">
+															Change
+														</a>
+													</div>
+													<ul class="unstyled inbox-pagination">
+														<li><span>1-20 of 1,737 items</span></li>
+														<li>
+															<a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+														</li>
+													</ul>
+												</div>
+												<div class="table-responsive border-top">
+													<table class="table card-table table-bordered table-hover table-vcenter mb-0 text-nowrap">
+														<tbody>
+															<tr>
+																<th class="w-1"></th>	
+																<th>Email</th>
+																<th>이름</th>
+																<th>개인/기업</th>
+																<th>인증</th>																
+																<th>최종 접속일</th>
+																<th>가입일</th>
+															</tr>
+															<tr>
+																<th>
+																	<label class="custom-control custom-checkbox">
+																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+																		<span class="custom-control-label"></span>
+																	</label>
+																</th>	
+																<td>jakespeson@gmail.com</td>
+																<td>박민하</td>
+																<td>개인</td>
+																<td class="text-danger">N</td>																
+																<td class="w-100">Jan 17,2019 11.30pm</td>
+																<td>Apr 02,2015 09.30pm</td>
+															</tr>
+															<tr>
+																<th>
+																	<label class="custom-control custom-checkbox">
+																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+																		<span class="custom-control-label"></span>
+																	</label>
+																</th>	
+																<td>kim@gmail.com</td>
+																<td>김민정</td>
+																<td>기업</td>
+																<td class="text-success">Y</td>																
+																<td class="w-100">Jan 17,2019 11.30pm</td>
+																<td>Apr 02,2015 09.30pm</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="tab-pane " id="tab2">
+												<div class="mail-option">
+													<div class="chk-all">
+														<div class="btn-group">
+															<a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
+																Bulk Actions
+																<i class="fa fa-angle-down "></i>
+															</a>
+															<ul class="dropdown-menu">
+																<li><a href="#">Bulk Actions</a></li>
+																<li><a href="#">Delete</a></li>
+																<li><a href="#">Activate</a></li>
+																<li><a href="#">Deactivate</a></li>
+															</ul>
+														</div>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Apply
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Bulk Check Sploggers
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Bulk Report Sploggers
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
+															Change role to
+															<i class="fa fa-angle-down "></i>
+														</a>
+														<ul class="dropdown-menu">
+															<li><a href="#">Contributor</a></li>
+															<li><a href="#">Register</a></li>
+														</ul>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn mini blue">
+															Change
+														</a>
+													</div>
+													<ul class="unstyled inbox-pagination">
+														<li><span>1-20 of 1,734 items</span></li>
+														<li>
+															<a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+														</li>
+													</ul>
+												</div>
+												<div class="table-responsive border-top">
+													<table class="table card-table table-bordered table-hover table-vcenter mb-0 text-nowrap">
+														<tbody>
+															<tr>
+																<th class="w-1"></th>	
+																<th>Email</th>
+																<th>이름/닉네임</th>
+																<th>개인/기업</th>
+																<th>인증</th>
+																<th>최종 접속일</th>
+																<th>가입일</th>
+															</tr>
+															<tr>
+																<th>
+																<label class="custom-control custom-checkbox">
+																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+																		<span class="custom-control-label"></span>
+																	</label>
+																</th>	
+																<td>kim@gmail.com</td>
+																<td>김민정</td>
+																<td>기업</td>
+																<td class="text-success">Y</td>																
+																<td class="w-100">Jan 17,2019 11.30pm</td>
+																<td>Apr 02,2015 09.30pm</td>
+
+														</tbody>
+													</table>
+												</div>
+
+											</div>
+											<div class="tab-pane " id="tab3">
+												<div class="mail-option">
+													<div class="chk-all">
+														<div class="btn-group">
+															<a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
+																Bulk Actions
+																<i class="fa fa-angle-down "></i>
+															</a>
+															<ul class="dropdown-menu">
+																<li><a href="#">Bulk Actions</a></li>
+																<li><a href="#">Delete</a></li>
+																<li><a href="#">Activate</a></li>
+																<li><a href="#">Deactivate</a></li>
+															</ul>
+														</div>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Apply
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Bulk Check Sploggers
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn" aria-expanded="false">
+															Bulk Report Sploggers
+														</a>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
+															Change role to
+															<i class="fa fa-angle-down "></i>
+														</a>
+														<ul class="dropdown-menu">
+															<li><a href="#">Contributor</a></li>
+															<li><a href="#">Register</a></li>
+														</ul>
+													</div>
+													<div class="btn-group hidden-phone">
+														<a  href="#" class="btn mini blue">
+															Change
+														</a>
+													</div>
+													<ul class="unstyled inbox-pagination">
+														<li><span>1-3 of 3 items</span></li>
+														<li>
+															<a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
+														</li>
+													</ul>
+												</div>
+												<div class="table-responsive border-top">
+													<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
+														<tbody>
+															<tr>
+																<th class="w-1"></th>																																
+																<th>Email</th>
+																<th>이름/닉네임</th>
+																<th>기업/개인</th>
+																<th>인증</th>
+																<th>최종 접속일</th>
+																<th>가입일</th>
+															</tr>
+															<tr>
+																<th>
+																<label class="custom-control custom-checkbox">
+																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+																		<span class="custom-control-label"></span>
+																</label>
+																</th>	
+																<td>part@gmail.com</td>
+																<td>박민하</td>
+																<td>개인</td>
+																<td class="text-danger">N</td>																
+																<td class="w-100">Jan 17,2019 11.30pm</td>
+																<td>Apr 02,2015 09.30pm</td>
+															</tr>
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+								<ul class="pagination mb-5">
+									<li class="page-item page-prev disabled">
+										<a class="page-link" href="#" tabindex="-1">Prev</a>
+									</li>
+									<li class="page-item active"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">4</a></li>
+									<li class="page-item"><a class="page-link" href="#">5</a></li>
+									<li class="page-item page-next">
+										<a class="page-link" href="#">Next</a>
+									</li>
+								</ul>
 							</div>
 						</div>
-
-						<div class="row">
-							<div class="col-md-12">
+					</div>
+			</div> 	
+		<!-- users 끝 -->					
+<!--  
+					<div class="row">
+							<div class="col-lg-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Product List</h3>
+										<h3 class="card-title">HIFIVE MEMBER LIST</h3>
 									</div>
 									<div class="card-body">
-										<div class="table-responsive border-top userprof-tab">
+										<div class="table-responsive border-top">
 											<table class="table table-bordered table-hover mb-0">
 												<thead>
 													<tr>
-														<th></th>
-														<th>Item</th>
-														<th>Category</th>
-														<th>Price</th>
-														<th>Ad Status</th>
-														<th>Action</th>
+														<th>Email</th>
+														<th>이름</th>
+														<th>기업/개인</th>
+														<th>??</th>
+														<th>가입일</th>
+														<th>인증여부</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Camera 2d33</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>sale</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$54</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring IT Developers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Oct-23-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$156</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">2Bk Delux Rooms</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-15-2018 , 12:45</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Rent</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>RealEstate</td>
-														<td class="font-weight-semibold fs-16">$22,765</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/f1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Chiness Food</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Restaurant</td>
+														<td>#INV-348</td>
+														<td>Resturant</td>
+														<td>07-12-2018</td>
 														<td class="font-weight-semibold fs-16">$89</td>
+														<td>17-12-2018</td>
 														<td>
-															<a href="#" class="badge badge-success">Active</a>
+															<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+															<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
 														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
+													</tr>																	
 													<tr>
+														<td>#INV-986</td>
+														<td>Pet &amp; Animals</td>
+														<td>18-11-2018</td>
+														<td class="font-weight-semibold fs-16">$378</td>
+														<td>07-12-2018</td>
 														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/l1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Lenova laptop</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>used</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$25</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring Civil Engineers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-22-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$14,000</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+															<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+															<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
 														</td>
 													</tr>
 												</tbody>
@@ -621,9 +725,9 @@
 									</div>
 								</div>
 							</div>
-
-						</div>
-					</div>
+			 		</div>
+	 -->
+					</div> 
 				</div>
 			</div>
 
