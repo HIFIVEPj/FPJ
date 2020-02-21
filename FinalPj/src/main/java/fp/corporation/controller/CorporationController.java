@@ -4,23 +4,19 @@ package fp.corporation.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.Corporation;
 import fp.corporation.service.CorporationService;
-import fp.member.domain.EmailAuth;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -29,12 +25,25 @@ import lombok.extern.log4j.Log4j;
 public class CorporationController {
 	@Autowired
 	private CorporationService service;
-
+	
+	@RequestMapping("managed-market")
+	public String managed_market(){
+		return "managed-market";
+	}
+	@RequestMapping("managed-project")
+	public ModelAndView managed_project(String mem_email){
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("managed-project");
+		mv.addObject("cor",corporation);
+		return mv;
+	}
 	@GetMapping("mydash_cor")
 	public ModelAndView write(String mem_email) {
 		Corporation corporation = service.mydash_cor_select(mem_email);
+		int ran = new Random().nextInt(900000)+100000;
 		ModelAndView mv = new ModelAndView("mydash_cor");
 		mv.addObject("cor",corporation);
+		mv.addObject("random", ran);
 		return mv;
 	}
 	@PostMapping("mydash_cor_insert")

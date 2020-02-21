@@ -37,9 +37,9 @@
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
 									<div class="profile-pic-img">
-										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+										<img src="../images/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
 							<aside class=" doc-sidebar my-dash">
@@ -139,7 +139,7 @@
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
-								<h3 class="card-title">마켓관리</h3>
+								<h3 class="card-title">내가 쓴 프로젝트</h3>
 							</div>
 							<div class="card-body">
 								<div class="managed-ad table-responsive border-top userprof-tab">

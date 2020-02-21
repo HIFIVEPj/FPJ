@@ -474,7 +474,7 @@
 										</div>
 										
 									</div>
-									<div><a href="project_payments" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									<div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
 									
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab-11">

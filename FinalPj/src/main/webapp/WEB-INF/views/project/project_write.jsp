@@ -1176,7 +1176,7 @@
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
-												<label classㅇ="form-label text-dark"><b>제목</b></label>
+												<label class="form-label text-dark"><b>제목</b></label>
 												<input type="text" class="form-control" name="pj_sub">
 											</div>
 											</div>
