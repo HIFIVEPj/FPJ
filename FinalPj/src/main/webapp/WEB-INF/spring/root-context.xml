@@ -33,7 +33,7 @@
 	    <property name="host" value="smtp.gmail.com" />
 	    <property name="port" value="587" />
 	    <property name="username" value="구글아이디" />
-	    <property name="password" value="구글 비밀번호" />
+	    <property name="password" value="구글비밀번호" />
 	    <property name="javaMailProperties">
 	    <props>
 	      <prop key="mail.smtp.auth">true</prop>

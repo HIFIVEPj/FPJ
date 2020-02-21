@@ -30,6 +30,17 @@ public class ProjectServiceImpl implements ProjectService {
 		return mapper.getTotalCount();
 	}
 
+	//mydash_cor에서 project 관리부분들
+	@Override
+	public List<Project> listMydashCor(Map<String, Object> map){
+		return mapper.listMydashCor(map);
+	}
+	@Override
+	public long getTotalCountCor(long cor_code) {
+		return mapper.getTotalCountCor(cor_code);
+	}
+	//------
+	
 	@Override
 	public List<Project> keywords(){
 		return mapper.pjKeywords();

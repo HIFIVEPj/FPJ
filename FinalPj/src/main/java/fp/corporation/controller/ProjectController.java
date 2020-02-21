@@ -21,6 +21,7 @@ import fp.corporation.domain.Corporation;
 import fp.corporation.domain.Keyword;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
+import fp.corporation.service.CorporationService;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 import lombok.extern.log4j.Log4j;
@@ -30,6 +31,8 @@ import lombok.extern.log4j.Log4j;
 public class ProjectController {
 	@Autowired
 	private ProjectService service;
+	@Autowired
+	private CorporationService corService;
 	
 	@RequestMapping("project_list")
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
@@ -105,14 +108,19 @@ public class ProjectController {
 	}
 	
 	@GetMapping("project_write")
-	public String project_write() {
-		return "project/project_write";
+	public ModelAndView project_write(String mem_email) {
+		Corporation cor = corService.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("project/project_write");
+		mv.addObject("cor", cor);
+		return mv;
 	}
 	
 	@PostMapping("project_write")
 	public String project_write(Project project, HttpServletRequest request) {
 		//String type_num = request.getParameter("type_num");
-		
+		log.info("!@!#(@#*@&$(&*(@!#&&(*@#");
+		String mem_email = request.getParameter("mem_email");
+		log.info("!@*@#&(*#&(*&@# mem_email: "+mem_email);
 		String[] ListKeyNum = request.getParameterValues("key_num");
 		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
 		
@@ -129,7 +137,7 @@ public class ProjectController {
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
 		//log.info("@#!#@$  map: "+ map);
-		return "redirect:project_list";
+		return "managed_project";
 	}
 	
 	@RequestMapping("project_delete")

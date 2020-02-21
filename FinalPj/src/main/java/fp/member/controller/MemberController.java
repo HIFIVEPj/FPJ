@@ -46,8 +46,6 @@ import fp.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
 
 
-
-
 @Log4j
 @Controller    //컨트롤러 빈 선언
 public class MemberController {

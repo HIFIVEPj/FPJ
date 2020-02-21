@@ -17,11 +17,12 @@ public class CorporationServiceImpl implements CorporationService {
 		return mapper.mydash_cor_select(mem_email);
 	} 
 	
+	
+	//@Transactional
 	@Override
-	@Transactional
 	public void insert(Corporation corporation) {
 		mapper.insert(corporation);
-		mapper.update_cor_auth(corporation.getMem_email());
+		//mapper.update_cor_auth(corporation.getMem_email());
 	}
 	
 	@Override

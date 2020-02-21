@@ -85,82 +85,9 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">담당자 이메일</label>
-											<input type="email" id="mem_email" class="form-control" value="" name="mem_email" data-toggle="modal" data-target="#emailModal" readonly>
+											<input type="email" id="mem_email" class="form-control" value="${sessionScope.email}" name="mem_email" readonly>
 										</div>
 									</div>
-								<!-- Modal -->
-									<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel"> <span class=" btn btn-icon btn-primary btn-sm mb-1"><i class="fa fa-envelope"></i> </span> &nbsp; <b>이메일인증</b> </h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">×</span>
-													</button>
-												</div>
-												<div class="modal-body " style="margin:0 auto;">
-													<input type="text" id="email" name="email" placeholder="이메일을 입력하세요" class="form-control" style="width:250px; float:left;" />
-													<button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button>
-												</div>
-												<div class="modal-footer">
-												
-												
-
-												<input type="hidden" path="random" id="random" value="${random}" />
-												</div>
-											</div>
-										</div>
-									</div>
-						      <!--Modal 끝-->
-						      <!-- 메일발송 스크립트 -->
-						      <script>
-						      $(function(){
-						    	  /*이메일 인증 버튼 클릭 시 발생하는 이벤트*/
-						    	  $(document).on("click","#emailBtn", function(){
-						    		  if($("#email").val()==""){
-						    			  alert("이메일을 입력하세요.");
-						    			  return;
-						    		  }
-						    		  $.ajax({
-						    			  type:"get",
-						    			  url:"<c:url value='createEmailCheck.do'/>",
-						    			  data:"userEmail="+$("#email").val()+"&random="+$("#random").val(),
-						    			  success: function(data){
-						    				  alert("이메일이 발송되었습니다. 인증번호를 입력하세요.");
-						    				  $("#emailBtn").after("<div style='margin-top:10px;'><input type='text' id='emailAuth' name='emailAuth' placeholder='인증번호를 입력하세요' class='form-control' style='width:250px; float:left;' />");
-						    				  $("#emailAuth").after("<button type='button' class='btn btn-info' id='emailAuthBtn' style='margin-left:10px;'>인증하기</button></div>");
-						    			  	},
-						    		  	error: function(data){
-						    		  		  alert("에러가 발생했습니다");
-						    		  		  return false;
-						    		  		}
-						    		  })
-						    		  
-						    	  })
-						    	  $(document).on("click", "#emailAuthBtn", function(){
-						    		  
-						    		  $.ajax({
-						    			  type:"get",
-						    			  url:"<c:url value='emailAuth.do'/>",
-						    			  data:"authCode="+$('#emailAuth').val()+"&random="+$('#random').val(),
-						    			  success:function(data){
-						    				  if(data == "complete"){
-						    					  alert("사용자가 확인되었습니다.");
-						    					  $("#mem_email").val("${sessionScope.email}");
-						    					  $('#emailModal').modal("hide");
-						    				  }else if(data == "false"){
-						    					  alert("인증번호를 잘못 입력하셨습니다.");
-						    					  $('#emailModal').find('form')[0].reset();
-						    				  }
-						    			  },
-						    			  error:function(data){
-						    				  alert("에러가 발생했습니다.");
-						    			  }
-						    		  })
-						    	  })
-						    	  
-						      })
-						      </script>
 									
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
@@ -404,16 +331,15 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_market">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
-												<li><a class="slide-item" href="managed-project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
+												<li><a class="slide-item" href="project_write?mem_email=${sessionScope.email}">프로젝트 작성하기</a></li>
+												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
 											</ul>
 										</li>
 										<li>

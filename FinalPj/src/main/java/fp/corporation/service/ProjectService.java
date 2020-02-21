@@ -15,6 +15,7 @@ import fp.corporation.vo.ProjectVo;
 public interface ProjectService {
 	List<Project> list (ProjectVo projectVo);
 	long getTotalCount();
+	
 	List<Project> keywords();
 	Project showContent(long pj_num);
 	Corporation corInfo(long pj_num);
@@ -25,4 +26,8 @@ public interface ProjectService {
 	
 	void updatePj(Project project);
 	void updateKeyword(PjPickKeyword pjpkeyword);
+	
+	//mydash_cor에서 project 관리부분들
+	List<Project> listMydashCor (Map<String, Object> map);
+	long getTotalCountCor(long cor_code);
 }

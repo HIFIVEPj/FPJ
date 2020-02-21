@@ -4,6 +4,9 @@ package fp.corporation.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.Corporation;
+import fp.corporation.domain.Project;
 import fp.corporation.service.CorporationService;
+import fp.corporation.service.ProjectService;
+import fp.corporation.vo.ProjectVo;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -26,16 +32,12 @@ public class CorporationController {
 	@Autowired
 	private CorporationService service;
 	
-	@RequestMapping("managed-market")
-	public String managed_market(){
-		return "managed-market";
-	}
-	@RequestMapping("managed-project")
-	public ModelAndView managed_project(String mem_email){
-		Corporation corporation = service.mydash_cor_select(mem_email);
-		ModelAndView mv = new ModelAndView("managed-project");
-		mv.addObject("cor",corporation);
-		return mv;
+	@Autowired
+	private ProjectService pjService;
+	
+	@RequestMapping("myfavorite_cor")
+	public String myfavorite_cor(){
+		return "myfavorite_cor";
 	}
 	@GetMapping("mydash_cor")
 	public ModelAndView write(String mem_email) {
@@ -70,6 +72,40 @@ public class CorporationController {
 		corporation.setCor_ofname(cor.getCor_ofname());
 		 service.mydash_cor_update(corporation);
 		return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+	}
+	
+	@RequestMapping("managed_project")
+	public ModelAndView managed_project(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		long totalCount = pjService.getTotalCountCor(corporation.getCor_code());
+		
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "4";
+		}else if (nowPage == null) {
+			nowPage ="1";
+		}else if(cntPerPage == null) {
+			cntPerPage ="4";
+		}
+		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ProjectVo", projectVo);
+		map.put("cor_code",corporation.getCor_code());
+		
+		List<Project> listMydashCor = pjService.listMydashCor(map);
+		ModelAndView mv = new ModelAndView("managed_project");
+		mv.addObject("cor",corporation);
+		mv.addObject("list", listMydashCor);
+		mv.addObject("pa",projectVo);
+		
+		log.info("#@#^#$%^#$ projectVO: "+ projectVo);
+		log.info("#@#^#$%^#$ map: "+ corporation);
+		log.info("#@#^#$%^#$ map: "+ map);
+		List<Project> keyname = pjService.keywords();
+		mv.addObject("keyname", keyname);
+		return mv;
 	}
 	
 	public String saveStore(MultipartFile fileName) {
