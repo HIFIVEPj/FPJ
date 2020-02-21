@@ -51,7 +51,7 @@
 		<section class="sptb">
 			<div class="container">
 				<div class="row">
-				
+					<!--
 					<div class="col-xl-2 col-lg-3 col-md-12">
 						
 						<div class="card">
@@ -122,12 +122,15 @@
 							</div>						
 						</div>					
 					</div>
+					-->
+		
+				<!--
+				<div class="col-xl-10 col-lg-9 col-md-12">
+				-->
+				<div class="col-xl-12 col-lg-12 col-md-12">
+				<!-- 문의하기 -->
+
 				
-				
-				
-					<div class="col-xl-10 col-lg-9 col-md-12">
-				
-				<!-- 문의하기  연습-->
 					<div class="card mb-0">
 							<div class="card-header">	
 								<div class="wd-20 mg-b-10">
@@ -153,28 +156,50 @@
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
 									<label class="form-label" style="margin-bottom:-0.05rem;">
+									<!--
 									<select class="form-control select2">
+									-->
 										<!--
 										<optgroup label="Mountain Time Zone">
 										-->
+										<!--
 											<option value="전체" selected>전체</option>
 											<option value="분류">분류</option>
 											<option value="제목">제목</option>
 											<option value="내용">내용</option>
 											<option value="제목+내용">제목+내용</option>
 											<option value="글쓴이">글쓴이</option>
+										-->	
 										<!--
 										</optgroup>
 										-->
+										<!--
 									</select>
-										<span>에서 검색&nbsp;:&nbsp;</span>
+									-->
+									<select class="form-control select2" id="type">
+										<option value="TWCG" ${pageMaker.cri.type eq 'TWCG' ? "selected" : ''}>전체</option>
+					                    <option value="G" ${pageMaker.cri.type eq 'G' ? "selected" : ''}>분류</option>
+					                    <option value="T" ${pageMaker.cri.type eq 'T' ? "selected" : ''}>제목</option>
+					                    <option value="C" ${pageMaker.cri.type eq 'C' ? "selected" : ''}>내용</option>
+					                    <option value="TC" ${pageMaker.cri.type eq 'TC' ? 'selected' : ''}>제목+내용</option>
+					                    <option value="W" ${pageMaker.cri.type eq 'W' ? "selected" : ''}>작성자</option>
+					                    
+					                </select>
+									
+										<span>(으)로 검색&nbsp;:&nbsp;</span>
 									</label>
 									</div>
 								</div>
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
+										<!--
 										<input type="text" class="form-control" id="search-text" placeholder="검색어 입력">
+										-->
+										<input type="text" class="form-control" id="keyword" placeholder="검색어 입력">
 									</div>
+								</div>
+								<div class="wd-20 mg-b-10">
+									<button class="btn btn-primary" id="searchBtn" name="searchBtn" type="submit"><i class="fa fa-search"></i></button>
 								</div>
 							</div>
 							<div class="card-body">
@@ -182,8 +207,12 @@
 							<div class="panel panel-primary">
 								<div class="tab_wrapper first_tab">
 									<ul class="tab_list">
-										<li class="">전체(100)</li>
-										<li>프로젝트(20)</li>
+										<!--
+										<li class="">전체(${paging.total})</li>
+										<li>프로젝트(${paging.qa_cate_count_project})</li>
+										-->
+										<li class="">전체()</li>
+										<li>프로젝트()</li>
 										<li>프리마켓(20)</li>
 										<li>프리랜서(10)</li>
 										<li>가입/탈퇴(10)</li>
@@ -219,8 +248,9 @@
 												<tr class="border-bottom">
 													<td class="text-center">${qa_list.qa_num}</td>
 													<td class="text-center">${qa_list.qa_cate}</td>
-													<td><a href='customer_service_qa_content?qa_num=${qa_list.qa_num}'>${qa_list.qa_sub}</a></td>
-													<td class="text-center">${qa_list.mem_email}</td>
+													<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}">${qa_list.qa_sub}</a></td>
+													<!--<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}&pageNum=${pageMaker.cri.pageNum}&amount='+sel+'&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${qa_list.qa_sub}</a></td>-->
+													<td class="text-center">${qa_list.mem_name}</td>
 													<td class="text-center"><fmt:formatDate value="${qa_list.qa_rdate}" pattern="yyyy.MM.dd"/></td>
 													<td class="text-center">${qa_list.qa_vcnt}</td>
 													<td class="text-center">${qa_list.qa_recommnum}</td>
@@ -231,22 +261,117 @@
 									</tbody>
 									</table>
 								</div>
+								
+								
+								
+								<script>
+									function selChange() {
+										var sel = document.getElementById('amount').value;
+										location.href="customer_service_qa?pageNum=${pageMaker.cri.pageNum}&amount="+sel+"&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}";
+									}
+								</script>
+								
+								
+								<form id="listGetForm" action="customer_service_qa" method="get">
+									<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+									<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+									<input type="hidden" name="type" value="${pageMaker.cri.type}">
+									<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+									<!--<input type="hidden" name="sel" value="document.getElementById('amount').value">-->
+								</form>
+							    <script>
+							    	var actionForm = $("#listGetForm");
+							    	
+								    $('#searchBtn').on('click', function(e) {
+										$("input[name='keyword']").val($('#keyword').val());
+										$("input[name='type']").val($("#type option:selected").val());
+										$("input[name='pageNum']").val(1); //검색 버튼을 누르면 1페이지로 이동
+										actionForm.submit();
+									});
+								    
+								    $("#keyword").keyup(function(key) {
+										if (key.keyCode == 13) {
+											$("input[name='keyword']").val($('#keyword').val());
+											$("input[name='type']").val($("#type option:selected").val());
+											$("input[name='pageNum']").val(1); //검색 버튼을 누르면 1페이지로 이동
+											actionForm.submit();
+										}
+									});
+								    
+								    /*
+								    $('#amount').on('change', function(e) {
+										$("input[name='amount']").val($('#amount option:selected').val());
+										actionForm.submit();
+									});
+								    */
+								    
+								    $(".paginate_button a").on("click", function(e) {
+										e.preventDefault();
+										actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+										actionForm.submit();
+									});
+							    </script>
+								
+								
+								
 								<div class="row">
 									<div class="col-md-4 text-left">
 										<div class="row" style="padding-left: 0.75rem;">
 											<label class="form-label">페이지당
-											<select class="form-control select2">
+											
+											
+											
+												
+											<!--
+											<select class="form-control select2" id="cntPerPage" name="sel" onchange="selChange()">
+											-->
+											<!--
+											<select class="form-control select2" id="amount">
+											-->
+											<select class="form-control select2" id="amount" name="sel" onchange="selChange()">
 												<!--
 												<optgroup label="Mountain Time Zone">
-												-->
 													<option value="5">5</option>
 													<option value="10" selected>10</option>
 													<option value="20">20</option>
 													<option value="50">50</option>
 													<option value="100">100</option>
-												<!--
 												</optgroup>
 												-->
+												<!--
+													<option value="5"
+														<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5
+													</option>
+													<option value="10"
+														<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10
+													</option>
+													<option value="50"
+														<c:if test="${paging.cntPerPage == 50}">selected</c:if>>50
+													</option>
+													<option value="100"
+														<c:if test="${paging.cntPerPage == 100}">selected</c:if>>100
+													</option>
+												-->
+												<!--
+													<option value="5">5</option>
+													<option value="10" selected="selected">10</option>
+													<option value="20">20</option>
+													<option value="50">50</option>
+													<option value="100">100</option>
+												-->	
+													
+													<option value="5"
+														<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5
+													</option>
+													<option value="10"
+														<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10
+													</option>
+													<option value="50"
+														<c:if test="${pageMaker.cri.amount == 50}">selected</c:if>>50
+													</option>
+													<option value="100"
+														<c:if test="${pageMaker.cri.amount == 100}">selected</c:if>>100
+													</option>							
 											</select>
 											개씩 보기
 											</label>
@@ -254,7 +379,7 @@
 									</div>
 		
 									
-									
+									<!--
 									<div class="col-md-4 text-center">
 										<ul class="pagination mg-b-0 page-0">
 											<li class="page-item disabled">
@@ -270,12 +395,7 @@
 											<li class="page-item">
 												<a class="page-link" href="#">2</a>
 											</li>
-											<li class="page-item">
-												<a class="page-link" href="#">3</a>
-											</li>
-											<li class="page-item">
-												<a class="page-link" href="#">4</a>
-											</li>
+
 											<li class="page-item">
 												<a class="page-link hidden-xs-down" href="#">5</a>
 											</li>
@@ -287,17 +407,111 @@
 												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</ul>
-									</div>
+									</div>	
+									-->
 									
+									
+									<div class="col-md-4 text-center">
+										<ul class="pagination mg-b-0 page-0">
+											<!--
+											<c:if test="${paging.startPage != 1}">
+												<li class="page-item">
+													<a aria-label="Last" class="page-link" href="customer_service_qa?nowPage=${1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
+												</li>
+												<li class="page-item">
+													<a aria-label="Next" class="page-link" href="customer_service_qa?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
+												</li>
+											</c:if>
+											
+											
+											<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+												<c:choose>
+													<c:when test="${p == paging.nowPage}">
+														<li class="page-item active" style="color:#fff">
+															<div class="page-link">${p}</div>
+														</li>
+													</c:when>
+													<c:when test="${p != paging.nowPage}">
+														<li class="page-item">
+															<a class="page-link" href="customer_service_qa?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+														</li>
+													</c:when>
+												</c:choose>
+											</c:forEach>
+											
+											
+											<c:if test="${paging.endPage != paging.lastPage}">
+												<li class="page-item">
+													<a aria-label="Next" class="page-link" href="customer_service_qa?nowPage=${paging.endPage + 1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+												</li>
+												
+												<li class="page-item">
+													<a aria-label="Last" class="page-link" href="customer_service_qa?nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
+												</li>
+											</c:if>
+											-->	
+											
+											
+											<c:if test="${pageMaker.prev}">
+												<li class="page-item">
+													<a aria-label="Last" class="page-link" href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-double-left"></i></a>
+												</li>
+											</c:if>
+											<c:if test="${pageMaker.prev}">
+												<li class="page-item">
+													<a aria-label="Next" class="page-link" href="customer_service_qa?pageNum=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-left"></i></a>
+												</li>
+											</c:if>
+											<!--
+											<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+												<li class="page-item active ${pageMaker.cri.pageNum == num? "active":"" }">
+													<a class="page-link" href="customer_service_qa?pageNum=${num}&amount=${pageMaker.cri.amount}">${num}</a>
+												</li>
+											</c:forEach>
+											-->
+											<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+												<c:choose>
+													<c:when test="${num == pageMaker.cri.pageNum}">
+														<li class="page-item active" style="color:#fff">
+															<div class="page-link">${num}</div>
+														</li>
+													</c:when>
+													<c:when test="${num != pageMaker.cri.pageNum}">
+														<li class="page-item">
+															<a class="page-link" href="customer_service_qa?pageNum=${num}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${num}</a>
+														</li>
+													</c:when>
+												</c:choose>
+											</c:forEach>
+											
+											
+											<c:if test="${pageMaker.next}">
+												<li class="page-item">
+													<a aria-label="Next" class="page-link" href="customer_service_qa?pageNum=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-right"></i></a>
+												</li>
+											</c:if>
+											<c:if test="${pageMaker.next}">
+												<li class="page-item">
+													<a aria-label="Last" class="page-link" href="customer_service_qa?pageNum=${pageMaker.lastPage}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-double-right"></i></a>
+												</li>
+											</c:if>	
+												
+											
+																
+										</ul>									
+									</div>	
+					
+									<c:if test="${sessionScope.class_num > 0}">
 									<div class="col-md-4 text-right">
 										<a href="customer_service_qa_test" class="btn btn-primary"><i class="fa fa-user-circle"></i>&nbsp;내 문의 보기</a>
 										<a href="customer_service_qa_write#" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
 									</div>
+									</c:if>
 								</div>
 								
 							</div>
 						</div>
-					<!-- /문의하기 연습-->
+					<!-- /문의하기-->
 						<div>
 						<br/>
 						<br/>
@@ -336,29 +550,43 @@
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
 									<label class="form-label" style="margin-bottom:-0.05rem;">
+									
 									<select class="form-control select2">
+									
 										<!--
 										<optgroup label="Mountain Time Zone">
 										-->
+										
 											<option value="전체" selected>전체</option>
 											<option value="분류">분류</option>
 											<option value="제목">제목</option>
 											<option value="내용">내용</option>
 											<option value="제목+내용">제목+내용</option>
 											<option value="글쓴이">글쓴이</option>
+										
 										<!--
 										</optgroup>
 										-->
+										
 									</select>
-										<span>에서 검색&nbsp;:&nbsp;</span>
+
+									
+										<span>(으)로 검색&nbsp;:&nbsp;</span>
 									</label>
 									</div>
 								</div>
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
+										<!--
 										<input type="text" class="form-control" id="search-text" placeholder="검색어 입력">
+										-->
+										<input type="text" class="form-control" id="keyword" placeholder="검색어 입력">
 									</div>
 								</div>
+								<div class="wd-20 mg-b-10">
+									<button class="btn btn-primary" id="searchBtn" name="searchBtn" type="submit"><i class="fa fa-binoculars"></i>&nbsp;검색</button>
+								</div>
+								
 							</div>
 							<div class="card-body">
 							
@@ -630,7 +858,7 @@
 						</div>
 					<!-- /문의하기 연습-->		
 					
-					
+					<!--
 						<div>
 						<br/>
 						<br/>
@@ -662,7 +890,7 @@
 							
 								<table id="example" class="table table-bordered ico-listing text-nowrap">
 									<thead>
-									<!-- #1f719a -->
+									
 										<tr class="border-bottom text-center" style="background-color: #f6f3ed;">
 											<th class="font-weight-bold">번호</th>
 											<th class="font-weight-bold">분류</th>
@@ -819,7 +1047,7 @@
 								
 							</div>
 						</div>
-					
+						-->
 					
 								
 					</div>

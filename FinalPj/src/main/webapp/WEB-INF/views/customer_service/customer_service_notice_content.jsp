@@ -78,7 +78,7 @@
 							<div class="card-header border-top" style="background-color:#f6f3ed;">
 
 								<div class="item7-card-desc d-flex mb-2 mt-2">
-									<a href="#"><i class="fa fa-user text-muted mr-2"></i>${notice_content.mem_email}</a>
+									<a href="#"><i class="fa fa-user text-muted mr-2"></i>${notice_content.mem_name}</a>
 									<span><i class="fa fa-tags text-muted mr-2"></i>${notice_content.notice_cate}</span>&nbsp;&nbsp;&nbsp;&nbsp;
 									<!--
 									<div class="ml-auto">

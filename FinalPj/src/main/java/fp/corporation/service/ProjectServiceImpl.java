@@ -1,3 +1,4 @@
+
 package fp.corporation.service;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fp.corporation.domain.Corporation;
+import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
 import fp.corporation.mapper.ProjectMapper;
 import fp.corporation.vo.ProjectVo;
@@ -62,7 +64,10 @@ public class ProjectServiceImpl implements ProjectService {
 		mapper.updatePj(project);
 	}
 	@Override
-	public void updateKeyword(Map<String, Object> map) {
-		mapper.updateKeyword(map);
+	@Transactional
+	public void updateKeyword(PjPickKeyword pjpkeyword) {
+		mapper.updateKeyword_Del(pjpkeyword);
+		mapper.updateKeyword_In(pjpkeyword);
 	}
 }
+

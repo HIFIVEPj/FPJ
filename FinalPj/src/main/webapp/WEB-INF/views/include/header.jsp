@@ -66,8 +66,9 @@
 		<link href="../plugins/owl-carousel/owl.carousel.css" rel="stylesheet" />
 
 		<!-- Custom scroll bar css-->
+		
 		<link href="../plugins/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet" />
-
+		
 		<!--Font icons-->
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet">
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet">
@@ -108,7 +109,12 @@
 		<link href="../plugins/fileuploads-test/fileup.css" rel="stylesheet" type="text/css">
 		
 		<!-- 카카오맵 -->
-		<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script> 
+		<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+		
+		<!-- Notifications  Css -->
+		<!--
+		<link href="..plugins/notify/css/jquery.growl.css" rel="stylesheet" />
+		-->
 
 	</head>
 	<body>
@@ -145,32 +151,40 @@
 						</div>
 						<div class="col-xl-4 col-lg-4 col-sm-8 col-5">
 							<div class="top-bar-right">
-								<ul class="custom">
-								
-								
+								<ul class="custom">						
 								
 								<c:choose>
-									<c:when test="${empty sessionScope.email}">
+									<c:when test="${empty sessionScope.name}">
 									<li>
 										<a href="register" class="text-dark"><i class="fa fa-user mr-1" style="color:#1f719a;"></i> <span>회원가입</span></a>
 									</li>
 									
 									<li>
 									<!--<a href='<c:url value="/member/login"/>' class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a> -->	
-										<a href="member/login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
+										<a href="login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
 									</li>
 									</c:when>
 									<c:otherwise>
-										<h>${sessionScope.email}님 환영합니다.</h>														
+										<h>${sessionScope.name} 님 환영합니다. </h>														
 									<li class="dropdown">
-										<a href="#" class="text-dark" data-toggle="dropdown"><i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
+									
+										<a href="#" class="text-dark" data-toggle="dropdown">  &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+											<c:if test="${sessionScope.class_num==1}">
 											<a href="construction" class="dropdown-item" >
 												<i class="dropdown-icon si si-settings" style="color:#1f719a;"></i> 관리자
 											</a>
+											</c:if>
+											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
+												<a href="mydash_cor?mem_email=${sessionScope.email}" class="dropdown-item" >
+													<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
+												</a>
+											</c:if>
+											<c:if test="${empty sessionScope.class_num || sessionScope.class_num==4 || sessionScope.class_num==5}">
 											<a href="freelancerProfile_list" class="dropdown-item" >
 												<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 											</a>
+											</c:if>
 											<!--
 											<a class="dropdown-item" href="#">
 												<i class="dropdown-icon si si-envelope" style="color:#1f719a;"></i> Inbox

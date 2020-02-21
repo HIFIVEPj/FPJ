@@ -57,9 +57,9 @@
 						
 						<form method="post" action="customer_service_notice_write" name="notice_write">
 						
-						<!-- 나중에 없앨 부분 -->
-						<input type="hidden" name="mem_email" value="관리자">
-						<!-- /나중에 없앨 부분 -->
+						
+						<input type="hidden" name="mem_email" value="${sessionScope.email}">
+						
 						
 						<script type="text/javascript">
 						   function check() {
