@@ -11,4 +11,3 @@ public interface CorporationService {
 	void mydash_cor_update(Corporation corporation);
 
 }
-

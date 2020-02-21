@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 66928d0945675f40d16aa344255e94d26080ed14
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -64,12 +60,13 @@
 						-->
 						<form method="post" action="customer_service_qa_write" name="qa_write">
 						
-						<!-- 나중에 없앨 부분 -->
-						<input type="hidden" name="mem_email" value="kimse@gmail.com">
+						
+						<input type="hidden" name="mem_email" value="${sessionScope.email}">
+						<!-- 나중에 수정해야 할 부분 -->
 						<input type="hidden" name="qa_prnum" value=0>
 						<input type="hidden" name="qa_lev" value=0>
 						<input type="hidden" name="qa_sun" value=0>
-						<!-- /나중에 없앨 부분 -->
+						<!-- /나중에 수정해야 할 부분 -->
 						
 						<script type="text/javascript">
 						   function check() {
@@ -448,8 +445,4 @@
 			
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
-<<<<<<< HEAD
-
-=======
->>>>>>> 66928d0945675f40d16aa344255e94d26080ed14
 <!--/footer-->

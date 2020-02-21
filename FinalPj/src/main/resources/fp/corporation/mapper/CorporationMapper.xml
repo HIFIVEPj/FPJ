@@ -21,5 +21,4 @@
 		update CORPORATION set 
 		cor_reg = #{cor_reg}, cor_name=#{cor_name}, cor_addr=#{cor_addr}, cor_postcode=#{cor_postcode}, cor_detailaddr=#{cor_detailaddr}, cor_addr_x=#{cor_addr_x}, cor_addr_y=#{cor_addr_y}, cor_profile=#{cor_profile}, cor_type=#{cor_type}, cor_fname=#{cor_fname}, cor_ofname=#{cor_ofname} 
 	</update>
-	
 </mapper>

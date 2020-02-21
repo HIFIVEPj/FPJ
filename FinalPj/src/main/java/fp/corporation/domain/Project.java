@@ -1,3 +1,4 @@
+
 package fp.corporation.domain;
 
 import java.sql.Date;
@@ -70,4 +71,3 @@ public class Project {
 	}
 	
 }
-

@@ -1,3 +1,4 @@
+
 package fp.login.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
@@ -108,11 +109,7 @@ public class LoginController {
     @RequestMapping(value = "find_pwd.do", method = RequestMethod.POST)
     public void find_pw(@ModelAttribute Member member, HttpServletRequest request,HttpServletResponse response) throws Exception{
     	String repwd = "";
-<<<<<<< HEAD
-		for (int i = 0; i < 12; i++) {r
-=======
 		for (int i = 0; i < 12; i++) {
->>>>>>> 66928d0945675f40d16aa344255e94d26080ed14
 			repwd += (char) ((Math.random() * 26) + 97);
 		}
 

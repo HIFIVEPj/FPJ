@@ -651,5 +651,4 @@ function check(){
 
 	</body>
 </html>
-
 <!--/footer-->

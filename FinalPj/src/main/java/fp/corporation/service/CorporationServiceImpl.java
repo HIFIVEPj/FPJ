@@ -1,3 +1,4 @@
+
 package fp.corporation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,3 @@ public class CorporationServiceImpl implements CorporationService {
 	}
 
 }
-

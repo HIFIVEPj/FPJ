@@ -45,5 +45,5 @@
 		delete from ADDRESS where SEQ=#{seq}
 	</delete>
 	-->
-	
+
 </mapper>

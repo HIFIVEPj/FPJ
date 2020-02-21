@@ -20,3 +20,4 @@ public interface MemberMapper {
 	void insertAuth(Map map);
 	void delete(long seq);
 }
+

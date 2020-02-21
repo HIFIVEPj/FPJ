@@ -1398,7 +1398,6 @@
 	function check(){
 		var type_num = $('.active').attr('value');
 		document.getElementById('type_num').value = type_num;
-
 		var key_num = new Array();
 		var key_cnt = 0;
 		//for(var i=0; i<key_num_size; i++){
@@ -1408,7 +1407,6 @@
 				key_cnt++;
 			}
 		 });
-
 		if(key_num == ""){
 			alert("키워드는 1개 이상 설정해야합니다.")
 			return;
@@ -1419,7 +1417,6 @@
 		// alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
 		// alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
 		pj_input.submit();
-
 		}
 	//});
 </script>

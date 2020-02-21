@@ -14,3 +14,4 @@ public class MemberAuth {
 	private String email;
 	private String auth;
 }
+

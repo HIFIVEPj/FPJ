@@ -1,4 +1,3 @@
-
 package fp.market.utils;
 
 import lombok.AllArgsConstructor;
@@ -103,4 +102,3 @@ public class MarketPagingVO {
 		",cntPerPage=" +cntPerPage +",lastPage"+lastPage+", start=" + start+",end=" +end +",cntPage="+cntPage+"]";
 	}
 }
-

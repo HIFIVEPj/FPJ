@@ -65,6 +65,9 @@ public class CustomerServiceNoticeController {
 		return "redirect:customer_service_notice_content?notice_num="+ customerServiceNotice.getNotice_num();
 	}
 	
+	/*
+	@PostMapping("customer_service_notice_delete")
+	*/
 	@GetMapping("customer_service_notice_delete")
 	public String customer_service_notice_delete(@RequestParam("notice_num") long notice_num) {
 		customerServiceNoticeService.notice_deleteS(notice_num);
