@@ -81,6 +81,7 @@ public class ProjectController {
 		
 	}
 	@PostMapping("project_update")
+
 	public String project_update(Project project, HttpServletRequest request, PjPickKeyword pjpkeyword) {
 		String[] ListPjp_keynum = request.getParameterValues("pjp_keynum");
 		ArrayList<Long> arrayPjp_keynum = new ArrayList<Long>();
@@ -93,6 +94,7 @@ public class ProjectController {
 		}
 		pjpkeyword.setPjpkeynumList(arrayPjp_keynum);
 		log.info("@@@@@@@@@@pjpkeyword: "+pjpkeyword);
+
 		
 		String[] ListKeyNum = request.getParameterValues("key_num");
 		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
@@ -101,10 +103,12 @@ public class ProjectController {
 			arraykeynum.add(ListIntKeyNum[i]);
 		}
 
+
 		pjpkeyword.setKey_numList(arraykeynum);
 		service.updatePj(project);
 		service.updateKeyword(pjpkeyword);
 		return "redirect:project_content?pj_num="+project.getPj_num();
+
 	}
 	
 	@GetMapping("project_write")
@@ -145,8 +149,10 @@ public class ProjectController {
 		service.deletePj(pj_num);
 		return "redirect:project_list";
 	}
+
 	@RequestMapping("project_payments")
 	public String project_payment(){
 		return "project/project_payments";
 	}
+
 }

@@ -53,6 +53,7 @@
 												<h3 class="card-title">가입하기</h3>
 												<input type="hidden" name="class_num" value=4>
 											</div>
+
 											
 											<div class="card-body">	
 																						
@@ -98,11 +99,13 @@
 												<div class="form-group" style="font-size:12px; line-height:25px;">
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input">
+
 														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
 													</label>
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input">
 														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+
 													</label>
 												</div>
 												<div class="form-footer mt-2">
@@ -117,6 +120,7 @@
 										</div>
 									</div>
 									<div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
 											<div class="card mb-0">
 											<form class="form-group" action="signup.do" method="post">	
 												<div class="card-header">
@@ -127,6 +131,7 @@
 												<div class="form-group">
 													<label class="form-label text-dark">Email</label>											
 													<input type="email" name="email" id=email class="form-control" placeholder="이메일을 입력해 주세요.">
+
 													<div class="" id="email_check">여기나오니이니이니ㅣ</div>
 										
 												</div>	
@@ -182,4 +187,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+
 <!--/footer-->

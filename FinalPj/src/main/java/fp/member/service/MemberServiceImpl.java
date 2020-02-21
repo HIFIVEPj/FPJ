@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import fp.member.domain.EmailAuth;
@@ -21,7 +22,9 @@ public class MemberServiceImpl implements MemberService {
 	
 		
 	@Override
+
 	public void insertM(Member member) {		
+
 		memberMapper.insertMem(member);
 
 	}
@@ -37,4 +40,3 @@ public class MemberServiceImpl implements MemberService {
 	
 
 }
-

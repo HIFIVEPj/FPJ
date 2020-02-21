@@ -2,6 +2,7 @@ package fp.login.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Principal;
@@ -17,14 +18,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+
 import org.springframework.security.crypto.bcrypt.BCrypt;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,11 +47,10 @@ import lombok.extern.log4j.Log4j;
 import com.fasterxml.jackson.databind.JsonNode;
 
 
-
-
 @Controller
 @Log4j
 public class LoginController {
+
 	/* NaverLoginBO */
 	private NaverLoginController naverLoginController;
 	private String apiResult = null;
@@ -264,19 +267,18 @@ public class LoginController {
   		return mv;
   	}
   	
+
 	//로그아웃 처리
 	@RequestMapping("logout.do")
 	public ModelAndView logout(HttpSession session) {
 		
 		loginService.logout(session);
 		ModelAndView mav = new ModelAndView();
+
 		mav.setViewName("member/index");
+
 		mav.addObject("msg", "logout");
 		
 		return mav;
 	}
-
-
-	
-
 }

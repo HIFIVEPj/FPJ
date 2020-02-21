@@ -24,6 +24,7 @@ public interface ProjectMapper {
 	void insertPjpkeyword(Map<String, Object> map);
 	
 	void updatePj(Project project);
+	void updateKeyword(Map<String, Object> map);
 	void updateKeyword_Del(PjPickKeyword pjpkeyword);
 	void updateKeyword_In(PjPickKeyword pjpkeyword);
 	

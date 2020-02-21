@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.domain;
 
 import java.util.Date;
@@ -34,3 +35,4 @@ public class FreeLancerProfile {
 	private Type type;
 	private List<Project> projcet;
 }
+

@@ -5,10 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import fp.corporation.domain.Corporation;
+import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
-import fp.market.domain.MarketContent;
 import fp.market.domain.MarketQA;
+import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
 import fp.market.utils.MarketPagingVO;
@@ -23,13 +26,14 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.getMarketCount();
 	}
 	@Override
-	public int getMarketRevCount() {
-		return mapper.getMarketRevCount();
+
+	public int getMarketRevCount(long market_num) {
+		return mapper.getMarketRevCount(market_num);
 	}
 
 	@Override
-	public int getMarketQACount() {
-		return mapper.getMarketQACount();
+	public int getMarketQACount(long market_num) {
+		return mapper.getMarketQACount(market_num);
 	}
 
 	@Override
@@ -40,6 +44,11 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public Market getMarket(long market_num) {
 		return mapper.getMarket(market_num);
+	}
+
+	@Override
+	public int getMarketStar(long market_num) {
+		return mapper.getMarketStar(market_num);
 	}
 
 	@Override
@@ -69,22 +78,26 @@ public class MarketServiceImpl implements MarketService {
 		
 	}
 	
+
 	@Override
-	public MarketQA insertMarketQA(MarketQA marketQA) {
-		return mapper.insertMarketQA(marketQA);
+	public void insertMarket(Market market) {
+		mapper.insertMarket(market);
 		
 	}
-	
+	@Override
+	public void insertMarketRev(MarketRev mareketRev) {
+		mapper.insertMarketRev(mareketRev);
+		
+	}
+	@Transactional
+	public void insertMarketQA(MarketQA marketQA) {
+		mapper.insertMarketQA(marketQA);
+		mapper.updateMarketQA(marketQA);
+	}
+	public void insertMarketQAFile(MarketQAFile marketQAFile) {
+		mapper.insertMarketQAFile(marketQAFile);
+	}
 
-	
-
-
-
-//	@Override
-//	public MarketContent getMarketContent(long market_num) {
-		// TODO Auto-generated method stub
-//		return mapper.getMarketContent(market_num);
-//	}
 
 }
 

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -48,6 +49,7 @@
 											
 											<div class="card-body">
 												<div class="text-center">
+
 													<div  id="naver_id_login" class="btn-group btn-block mt-2 mb-2">
 														<a href="${url}" class="btn btn-naver active">
 			                                             <span><b>N</b></span>
@@ -65,6 +67,7 @@
 															<span class="fa fa-comment"></span>
 														</a>
 														<a href="${kakao_url}" class="btn btn-block btn-kakao">Kakao</a>
+
 													</div>
 													
 													<div class="btn-group btn-block mt-2 mb-2">
@@ -76,6 +79,7 @@
 												</div>
 												<hr class="divider">
 												<form class="form-group" action="/login_check" method="post">
+
 												<div class="form-group">
 													<label class="form-label text-dark">Email</label>
 													<input type="text" name="email" id="email" class="form-control" placeholder="이메일을 입력해주세요" >
@@ -101,6 +105,7 @@
 													<span class="font-12">아직 멤버가 아니십니까?</span> <a href="register" class="color-hover-sign">가입하기</a>
 												</div>
 											</form>
+
 											</div>											
 										</div>
 									</div>
@@ -111,6 +116,7 @@
 											</div>
 											<div class="card-body">
 												<div class="text-center">
+
 													<div  id="naver_id_login" class="btn-group btn-block mt-2 mb-2">
 														<a href="${url}" class="btn btn-naver active">
 			                                             <span><b>N</b></span>
@@ -128,6 +134,7 @@
 															<span class="fa fa-comment"></span>
 														</a>
 														<a href="${kakao_url}" class="btn btn-block btn-kakao">Kakao</a>
+
 													</div>
 													
 													<div class="btn-group btn-block mt-2 mb-2">
@@ -148,7 +155,9 @@
 												</div>
 												<div class="form-group">
 													<label class="custom-control custom-checkbox">
+
 														<a href="forgot-pwd" class="float-right small text-dark mt-1 font-12">비밀번호 찾기</a>
+
 														<input type="checkbox" class="custom-control-input">
 														<span class="custom-control-label text-dark font-12">자동로그인</span>
 													</label>
@@ -157,7 +166,9 @@
 													<a href="index.html" class="btn btn-primary btn-block">SignIn</a>
 												</div>
 												<div class="text-center  mt-3 text-dark">
+
 													<span style="font-size:12px;">아직 멤버가 아니십니까?</span>  <a href="register" class="color-hover-sign">가입하기</a>
+
 												</div>
 
 											</div>
@@ -174,4 +185,8 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 876d058d76275ed12c92e74255d591830c707e4c
 <!--/footer-->

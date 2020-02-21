@@ -19,6 +19,8 @@
         <typeAlias alias="MarketQA" type="fp.market.domain.MarketQA"/>
         <typeAlias alias="mFreelancerProfile" type="fp.market.domain.FreelancerProfile"/>
         <typeAlias alias="mCorporation" type="fp.market.domain.Corporation"/>
+        <typeAlias alias="mMember" type="fp.market.domain.Member"/>
+        <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
 		
 		<!-- 별 -->
 		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
@@ -49,6 +51,7 @@
    	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
    	    <typeAlias alias="MemberAuth" type="fp.member.domain.MemberAuth"/>
    	    <!-- <typeAlias alias="CustomUserDetails" type="fp.password.security.CustomUserDetails"/> -->
+
 	</typeAliases>
 
 <!--

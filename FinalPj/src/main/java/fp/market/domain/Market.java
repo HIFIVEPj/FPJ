@@ -27,7 +27,6 @@ public class Market {
 	private Freelancer freelancer;//free_name
 	private MarketRev marketRev;//marketRev_star
 	private FreelancerProfile freelancerProfile;//매퍼xml에 association prorerty이름과 같아야 한다!!
-	
-	
+
 	
 }

@@ -1,5 +1,6 @@
 package fp.member.service;
 
+
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
 	private MemberDao dao;
+
 	
 	/*
 	@Autowired
@@ -47,13 +49,16 @@ public class LoginServiceImpl implements LoginService {
 		}
 		return false;
 
+
 	}
 	
 	@Override
 	public void logout(HttpSession session) {
 		dao.logout(session);
 	}
+
 	
+
 	@Override
 	public int find_pw(Member member){
 		int i =0;

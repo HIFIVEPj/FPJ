@@ -1,8 +1,8 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -97,8 +97,9 @@
 									<div id="carousel" class="carousel slide" data-ride="carousel">
 										<!--<div class="arrow-ribbon2 bg-primary">$539</div>-->
 										<div class="carousel-inner">
-											<div class="carousel-item active"> <img src="../images/products/products/h1.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h2.jpg" alt="img"> </div>
+											<div class="carousel-item active"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
+										<!--
+											<div class="carousel-item"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
@@ -107,16 +108,17 @@
 											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
+										-->
 										</div>
-										<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+									<!-- <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
 											<i class="fa fa-angle-left" aria-hidden="true"></i>
 										</a>
 										<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
 											<i class="fa fa-angle-right" aria-hidden="true"></i>
-										</a>
+										</a>-->
 									</div>
 									<div class="clearfix">
-										<div id="thumbcarousel" class="carousel slide" data-interval="false">
+								<!--	<div id="thumbcarousel" class="carousel slide" data-interval="false">
 											<div class="carousel-inner">
 												<div class="carousel-item active">
 													<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="../images/products/h3.png" alt="img"></div>
@@ -139,7 +141,7 @@
 											<a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
 												<i class="fa fa-angle-right" aria-hidden="true"></i>
 											</a>
-										</div>
+										</div>  -->
 									</div>
 								</div>
 							</div>
@@ -223,9 +225,6 @@
 <!--/Add Description-->
 
 						<!--Comments-->
-	
-
-
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">리뷰</h3>
@@ -233,18 +232,21 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-md-12">
-										<div class="badge badge-default mb-2">5 <i class="fa fa-star"></i></div>
+										<div class="badge badge-default mb-2">${mrStar}<i class="fa fa-star"></i></div>
 										
 										<!--
 										<div class="progress progress-md mb-4">
 											<div class="progress-bar bg-success w-100">6,532</div>
 										</div>-->
 										<span class="rated-products-ratings">
-											<i class="fa fa-star text-warning"> </i>
-											<i class="fa fa-star text-warning"> </i>
-											<i class="fa fa-star text-warning"> </i>
-											<i class="fa fa-star-o text-warning"> </i>
-											<i class="fa fa-star-o text-warning"> </i>
+										<c:if test="${mrStar >= 0}">
+											<c:forEach var="1" begin="1" end="${mrStar}">
+												<i class="fa fa-star text-warning"> </i>
+											</c:forEach>
+											<c:forEach var="1" begin="1" end="${5-mrStar}">
+												<i class="fa fa-star-o text-warning"> </i>
+											</c:forEach>
+										</c:if>
 										</span>
 									</div>
 									<div class="col-md-6 text-center align-items-center">
@@ -255,45 +257,73 @@
 
 					
 						<!-- 댓글 -->		
+				
 					<c:if test="${fn:length(marketRev) > 0}">	
 						<c:forEach var="marketRev" items="${marketRev}">
-							<div class="card-body p-0">
-								<div class="media mt-0 p-5">
-                                    <div class="d-flex mr-3">
-                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
-                                    </div>
-                                    <div class="media-body">
+							<div class="card-body p-0" id="ajaxRev">
                                     	<c:choose>
 	                                    	<c:when test="${marketRev.freelancer != null}">
-	                                       		<h5 class="mt-0 mb-1 font-weight-semibold">${marketRev.freelancer.free_name}</h5> 
+					                            <div class="media mt-0 p-5" >
+			                                    	<div class="d-flex mr-3">
+			                                      		  <a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../marketImages/${marketRev.freelancer.free_fname}"> </a>
+			                                    	</div>
+			                                   		 <div class="media-body">
+				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">${marketRev.freelancer.free_name}
+				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
+														</h5>														
+														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
+			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>			
+													</div>
+												</div>
 	                                     	</c:when>
+	                                    
+	                                     	<c:when test="${marketRev.freelancer == null && marketRev.corporation!=null}">
+				                            	<div class="media mt-0 p-5">
+			                                    	<div class="d-flex mr-3">
+			                                      		 <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+			                                    	</div>
+			                                   		 <div class="media-body">
+				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="cor_mname" id="cor_mnameR">${marketRev.corporation.cor_mname}
+				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
+														</h5>
+														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
+			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>		
+													</div>
+												</div>
+	                                     	</c:when>
+	                                    
 	                                     	<c:otherwise>
-	                                       		<h5 class="mt-0 mb-1 font-weight-semibold">${marketRev.corporation.cor_mname} </h5>
-	                                     	</c:otherwise>
-                                     	</c:choose>
-											<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-											<span class="fs-14 ml-2"> ${marketRev.marketRev_star}  <i class="fa fa-star text-yellow"></i></span>
-										</h5>
-										<small class="text-muted"><i class="fa fa-calendar"></i> ${marketRev.marketRev_rdate} </small>
-                                        <p class="font-13  mb-2 mt-2">
-                                         
-                                          ${marketRev.marketRev_cont}
-                                        </p>
-									<!--<a href="#" class="mr-2"><span class="badge badge-primary">Helpful</span></a>  -->	
-									<!--<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary">comment</span></a>-->	
-									<!--<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-primary">Report</span></a>-->	
-                            <!-- 댓글 -->	
-                            <!-- 대댓글 -->           
-
-				                            &nbsp;&nbsp; <!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
-
-								<!-- 대댓글 -->     		
-									</div>
+	                                     		<div class="media mt-0 p-5">
+			                                    	<div class="d-flex mr-3">
+			                                      		<a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a>
+			                                    	</div>
+			                                   		<div class="media-body">
+				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">${marketRev.mem_email}
+				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
+														</h5>
+														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
+			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>	
+													</div>
+												</div>
+	                                     	</c:otherwise>                                     	
+                                </c:choose>
+							</div>
+						</c:forEach>	
+					</c:if>		
+					
+					
+					<c:if test="${fn:length(marketRev) == 0}">		
+							<div class="card-body p-0">
+								<div class="media mt-0 p-5">
+					               <div class="media-body"><text align="center"> 등록된 리뷰가 없습니다</text></div>
 								</div>
 							</div>
-					</c:forEach>	
 					</c:if>		
-						</div>
+										
+				</div>
 						
 				<!--마켓리뷰페이징  -->		
 				<c:if test="${fn:length(marketRev) > 0}">	
@@ -343,25 +373,20 @@
 				
 						<br/><br/>
 						<!--/Comments-->
-					<form name="mrinput" method="post" action="marketRev-insert">
+					<form name="mrInput" id="mrInputID" action="marketRev-insert" >
+						<input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.email}"><!-- value="hyunbin@naver.com" -->
+					<!--<input type="hidden" id="marketRev_num" name="marketRev_num" value="${marketRev_num}"> -->
+					<!--<input type="hidden" id="marketRev_rdate" name="marketRev_rdate" value="${marketRev_rdate}"> -->
+					    <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">리뷰 남기기</h3>
 							</div>
 							<div class="card-body">
-							
 								<div>
-							<!--	<li class="icons">><a href="#" >
-								 <i class="fa fa-star text-warning"><a href="#" ></a></i>
-									<i class="fa fa-star text-warning"><a href="#" ></a></i>
-									<i class="fa fa-star text-warning"><a href="#" ></a></i>
-									<i class="fa fa-star text-warning"><a href="#" ></a></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>4.5</a></li><br/>
-									 -->	
-									
 									<div class="ml-auto">
 										<div class="rating-stars block">
-											<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
+											<input id="marketRev_starID" type="number" readonly="readonly" class="rating-value star"  name="marketRev_star"  value="${marketRev_star}"><!-- name="rating-stars-value" -->
 											<div class="rating-stars-container">
 												<div class="rating-star sm">
 													<i class="fa fa-star"></i>
@@ -380,16 +405,25 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div>									
 									<div class="col-md-6 text-center align-items-center"></div>
+									<!--
 									<div class="form-group">
 										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
 									</div>
+									  -->
+									 <c:if test="${sessionScope.email !=null}" >
+										<div class="form-group">
+											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="Comment">${marketRev_cont}</textarea>
+										</div>	
+										<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
+									</c:if>		
+									<c:if test="${sessionScope.email ==null}" >
+										<div class="form-group">
+											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+										</div>	
+									</c:if>		
 									
-									<div class="form-group">
-										<textarea class="form-control" name="content" rows="6" placeholder="Comment"></textarea>
-									</div>
-									<a href="#" class="btn btn-primary">Send Reply</a>
 								</div>
 							</div>
 						</div>
@@ -401,52 +435,125 @@
 							<div class="card-header">
 								<h3 class="card-title">문의</h3>
 							</div>
-						<c:if test="${fn:length(marketQA) > 0}">		
-							
-							 <div class="card-body p-0">
-											 
+						<c:if test="${fn:length(marketQA) > 0}">				
+							 <div class="card-body p-0">									 
 								<c:forEach var="marketQA" items="${marketQA}">
 								<div  id="replyItem<c:out value="${replylist.reno}"/>" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: <c:out value="${40*marketQA.marketQA_lev}"/>px; display: inline-block">
 								<div class="media mt-0 p-5">
-                                    <div class="d-flex mr-3">
-                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
-                                    </div>
-                                    <div class="media-body">
 	                                   <c:choose>
+	                                   
 		                                    <c:when test="${marketQA.freelancer != null}">
-		                                      <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.freelancer.free_name}
-												<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-											</h5>
+		                                  		 <div class="d-flex mr-3">
+			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../marketImages/${marketQA.freelancer.free_fname}"> </a>
+			                                      </div>
+			                                      <div class="media-body"> 
+						                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.freelancer.free_name}
+														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+													 </h5>
+													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
+			                                     	 <c:choose>
+				                                     	 <c:when test="${marketQA.marketQA_ox != 0}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                          ${marketQA.marketQA_sub}<br>
+					                                          ${marketQA.marketQA_cont}
+				                                        	</p>
+				                                        </c:when>
+				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                       		 <비밀글 입니다.><br>
+					                                          ${marketQA.marketQA_sub}<br>
+					                                          ${marketQA.marketQA_cont}
+				                                        	</p>
+				                                        </c:when>
+				                                        <c:otherwise>
+					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
+				                                        </c:otherwise>
+			                                        </c:choose> 
+			                                      	<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
+													<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+												 </div>                        
 		                                    </c:when>
+		                                    
+		                                     <c:when test="${marketQA.freelancer == null && marketQA.corporation.cor_mname== null}">
+		                                  		  <div class="d-flex mr-3">
+			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+			                                      </div>
+			                                      <div class="media-body"> 
+						                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.mem_email}
+														 <span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+													 </h5>
+													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
+			                                     	 <c:choose>
+				                                     	 <c:when test="${marketQA.marketQA_ox != 0}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                          ${marketQA.marketQA_sub}<br>
+					                                          ${marketQA.marketQA_cont}
+				                                        	</p>
+				                                        </c:when>
+				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                       		 <비밀글 입니다.><br>
+					                                          ${marketQA.marketQA_sub}<br>
+					                                          ${marketQA.marketQA_cont}
+				                                        	</p>
+				                                        </c:when>
+				                                        <c:otherwise>
+					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
+				                                        </c:otherwise>
+			                                        </c:choose> 
+			                                      	<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
+													<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+												 </div>                         
+		                                    </c:when>
+		                                    
 		                                    <c:otherwise>
-			                                    <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.corporation.cor_mname}
-													<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-												</h5>
+					                            <div class="d-flex mr-3">
+			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+			                                    </div>
+			                                    <div class="media-body"> 
+						                            <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.corporation.cor_mname}
+														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+												    </h5>
+													<small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
+			                                     	<c:choose>
+				                                     	 <c:when test="${marketQA.marketQA_ox != 0}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                          ${marketQA.marketQA_sub}<br>
+					                                          ${marketQA.marketQA_cont}
+				                                        	</p>
+				                                        </c:when>
+				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                       		 <비밀글 입니다.> <br>
+					                                          ${marketQA.marketQA_sub}<br>
+					                                          ${marketQA.marketQA_cont}
+				                                        	</p>
+				                                        </c:when>
+				                                        <c:otherwise>
+					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
+				                                        </c:otherwise>
+			                                      	</c:choose> 
+			                                      	<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
+													<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+												</div>
 		                                    </c:otherwise>
+		                                    
 		                                </c:choose>						
-										<small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
-                                     	<c:choose>
-	                                     	 <c:when test="${marketQA.marketQA_ox != 0}">
-		                                        <p class="font-13  mb-2 mt-2">
-		                                          ${marketQA.marketQA_sub}<br>
-		                                          ${marketQA.marketQA_cont}
-	                                        	</p>
-	                                        </c:when>
-	                                        <c:otherwise>
-		                                        <p class="font-13  mb-2 mt-2">
-		                                       		   비밀글 입니다.
-	                                      	  </p>
-	                                        </c:otherwise>
-                                      	</c:choose> 
-										<a href="#" class="mr-2"><span class="badge badge-primary">Comment</span></a>
-										<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="">수정</span></a>
-										<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="">삭제</span></a>
-									</div>
 								</div>	
 								</div>
 								</c:forEach>
 							</div>
 						</c:if>	
+						<c:if test="${fn:length(marketQA) == 0}">		
+							<div class="card-body p-0">
+								<div class="media mt-0 p-5">
+					               <div class="media-body"><text align="center"> 등록된 문의가 없습니다</text></div>
+								</div>
+							</div>
+						</c:if>		
 						</div>
 
 					<c:if test="${fn:length(marketQA) > 0}">							
@@ -494,33 +601,43 @@
 		
 						<br/><br/>
 						<!--/Comments-->
-					<form name="mqInput" id="mqInput">
+						
+					<form name="mqInput" id="mqInput" action="marketQA-insert"  method="post"  enctype="multipart/form-data" >
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">문의 남기기</h3>
 							</div>
 							<div class="card-body">
 								<div>
-									 <input type="hidden" id="QAname" name="QAname" value="이미남">
-									 <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
-								 	 <input type="hidden" id="marketQA_rdate" name="marketQA_rdate" value="${marketQA_rdate}">
-									 <input type="hidden" id="marketQA_vcnt" name="marketQA_vcnt" value="${marketQA_rdate}">
-								     <input type="hidden" id="marketQA_prnum" name="marketQA_prnum" value="${marketQA_prnum}">
-								     <input type="hidden" id="marketQA_lev" name="marketQA_lev" value="${marketQA_lev}">
-								     <input type="hidden" id="marketQA_sun" name="marketQA_sun" value="${marketQA_sun}">
-								     <input type="hidden" id="mem_email" name="mem_email" value="${mem_email}">		
-									<div class="form-group">
-										<input type="text" class="form-control" id="marketQA_sub" name="marketQA_sub" placeholder="subject">
-									</div>
-									<div class="form-group">
-										<textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="Comment"></textarea>
-									</div>
-									<input type=button id="submitQA" class="btn btn-primary" value="Send Reply">
-									&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
-									&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-									&emsp; &emsp; &emsp; &emsp;
-									<input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
-									<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
+									<input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
+								    <input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.mem_email}">		
+									<c:if test="${sessionScope.name !=null}" >
+										<div class="form-group">
+											<input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" name="marketQA_cont" id="marketQA_contID" rows="6" placeholder="Comment"></textarea>
+										</div><br>
+										<div class="custom-file">
+											<input  type="file" multiple="multiple" class="custom-file-input" name="fname" id="file" onchange="upfile()">
+											<label class="custom-file-label" id="cor_fname_label">file upload</label>
+										</div><br>
+										
+										<button type="submit" class="btn btn-primary" >Send Reply</button> <!-- id="checkMQ()" -->
+										
+										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+										&emsp; &emsp; &emsp; &emsp;
+										<input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
+										<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
+									</c:if>
+									
+									<c:if test="${sessionScope.email ==null}" >
+										<div class="form-group">
+											<textarea class="form-control" name="marketQA_cont"  rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+										</div>
+									</c:if>
+									
 									<!--
 										<div class="d-md-flex ad-post-details">
 											<label class="custom-control custom-radio mb-2 mr-4">
@@ -546,7 +663,7 @@
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
-									<img src="../images/faces/male/25.jpg" class="brround avatar-xxl" alt="user">
+									<img src="../marketImages/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
 										경력:
@@ -585,7 +702,7 @@
 								<div class="card-footer">
 									<div style="text-align: right; vertical-align:center;">
 										<span style="font-size:20px">결제금액</span></br>
-										<span style="font-size:30px"><fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span></span>
+										<span style="font-size:30px">${market.market_price}</span>
 									</div>
 								</div>
 								<div class="card-footer">	
@@ -593,7 +710,7 @@
 								
 								<!--	<a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
 										<a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-										<a href="marketPayments" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</a>
+										<a href="market-payments" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</a>
 									</div>
 								</div>
 						
@@ -864,7 +981,47 @@
 		<!--/Add listing-->
 
 		<!-- Message Modal -->
-		
+
+<!--Comment Modal -->
+<!-- 문의 모달창 -->
+	<form name="mqIREnput" id="mqREInput" action="marketQARE-insert" method="post">
+       <div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
+	        <div class="modal-dialog" role="document">
+	           <div class="modal-content">
+				 <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
+			     <input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.mem_email}">		
+	              <div class="modal-header">
+	                 <h5 class="modal-title">댓글쓰기</h5>
+	                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                   <span aria-hidden="true">&times;</span>
+	                 </button>
+	              </div>
+	              <div class="modal-body">
+	                 <div class="form-group mb-0">
+	                    <textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="메세지 입력"></textarea>
+	                 </div>
+	              </div>
+	              <div class="modal-footer">
+	                 <div class="col">
+	                    <label class="custom-control custom-checkbox mb-0">
+		                    <input type="radio"  name="marketQA_ox" value="1" >비밀글
+							<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
+	        <!--	     
+	        			  <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
+	                       <span class="custom-control-label" name="marketQA_ox"  value="1" checked="" >비밀글</span>
+	                  -->       
+	                    </label>
+	                 </div>   
+	                 <div class="col col-auto">
+	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+	                    <button type="submit" id="submitQA" class="btn btn-primary">확인</button>
+	                 </div>
+	              </div>
+	           </div>
+	        </div>
+	    </div>
+	</form>
+<!-- 문의 모달창 -->			
 		<div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -894,39 +1051,7 @@
 		</div>
 		
 		<!--Comment Modal -->
-	<!--원글폼<form name="marketQA-reply" action="singUp_ok.jsp" method="post">
-		<form name="marketQA-reply" action="marketQA-reply" method="post" onsubmit="required()">
-		<div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleCommentLongTitle">Leave a Comment</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input type="text" class="form-control" id="Comment-name" name="comment_name"placeholder="Your Name" readonly>
-						</div>
-						<div class="form-group">
-							<input type="email" class="form-control" id="Comment-email" name="comment_email"placeholder="Email Address" readonly>
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="Comment-subject"  name="comment_subject"placeholder="subject" >
-						</div>
-						<div class="form-group mb-0">
-							<textarea class="form-control" name="comment_content" rows="6" placeholder="Message"></textarea>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-success" >Send</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		</form>-->
+
 		<!-- Report Modal -->
 		<div class="modal fade" id="report" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -1033,43 +1158,196 @@
 	        },
 </script>-->
 <script>
-	$("#submitQA").on('click', function(){
-		 alert("mqInput.QAname.value:" +mqInput.QAname.value);
-		 alert("mqInput.marketQA_prnum.value:" +mqInput.marketQA_prnum.value);
-		 alert("mqInput.marketQA_lev.value:" +mqInput.marketQA_lev.value);
-		 alert("mqInput.marketQA_sun.value:" +mqInput.marketQA_sun.value);
-		 alert("mqInput.marketQA_ox.value:" +mqInput.marketQA_ox.value);
-		 
-		 if ( $.trim($("#marketQA_sub").val()) == "") {
-		        alert("제목을 입력해주세요.");
-		        $("#marketQA_sub").focus();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	$("#checkMR").on('click', function(){
+		// alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
+		// alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+		// console.log("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+		// console.log("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
+	 
+	    if ($.trim($("#marketRev_contID").val()) == "") {
+	        alert("글 내용을 입력해주세요.");
+	        $("#marketRev_contID").focus();
+	        return;
+	   		 }
+	    if (document.getElementById('marketRev_starID')){//별점이 존재한다면 밑에 실행
+		    if ($.trim($("#marketRev_starID").val()) == ""){
+		        alert("별점을 선택해주세요.");
+		        $("#marketRev_starID").focus();
 		        return;
 		    }
-		    if ($.trim($("#marketQA_cont").val()) == "") {
-		        alert("글 내용을 입력해주세요.");
-		        $("#marketQA_cont").focus();
-		        return;
-		    }
-	    $.ajax({
-	        url: "marketQA-insert",
-	        type: "POST",	        
-	        data: $("#mqInput").serialize(),
-	        success: function(result){
-	                if (result!=="") {
-	                    var parent = $("#marketQA_prnum").val();
-	                    $("#replyItem"+parent).after(result);
-	                
-	                    alert("저장되었습니다.");
-	                } else{
-	                    alert("서버에 오류가 있어서 저장되지 않았습니다.");
-	                }
-	            },
-	        error: function(request,status,error){
-	        	alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-	        }
+	    } 
+		  var queryString = $("#mrInputID").serialize();
+		  var mem_email = $("#mem_emailID").val();
+		  var market_num = $("#market_numID").val();
+		  var marketRev_star = $("#marketRev_starID").val();
+		  var marketRev_cont = $("#marketRev_contID").val();
+		  var arr=[marketRev_cont,marketRev_star,market_num,mem_email]
+
+
+		   var url=$("#mrInputID").attr("action");
+		 //   console.log("url:"+url);
+		//    console.log("queryString:"+queryString);
+	    $.ajax({ //free_name,content,star,rdate
+	    	type:'post',
+	    	url:url,
+	    	data:queryString,
+	    	dataType:'json',
+	    	async :false,
+	    	error:onError,
+	    //	beforeSend:{},
+	    	success:function onSuccess(data){
+    	//	for(var i=0; i<1; i++){ 
+    			console.log(data);	
+    			 console.log("1"+data[0].marketRev_cont);	
+    			 console.log("2"+data[0].marketRev_star);	
+    			 console.log("3"+data[0].corporation.cor_name);	
+    			 console.log("4"+data[0].freelancer.free_name);	
+    			 console.log("5"+data[0].mem_email);	
+    			 console.log("6"+data[0].marketRev_rdate);	
+    			 console.log("7"+data[0].corporation.cor_fname);	 
+    			 console.log("8"+data[0].freelancer.free_fname);
+    			 //서버로부터 받은 날짜데이터를 포맷에맞게 바꾸기
+    			 
+    			 var cor=data[0].corporation.cor_name;
+    			 var free=data[0].freelancer.free_name;
+    			// console.log("cor"+cor); console.log("free"+free);
+    			 var someTimestamp = Number(data[0].marketRev_rdate);
+    			 var dateTime = new Date(someTimestamp);
+    			 dateTime=dateToYYYYMMDD(dateTime);
+	
+    			 revfree='';
+    			 revcor ='';
+    			 revmem='';
+    			 rev='';
+	 			revfree +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../marketImages/'+data[0].freelancer.free_fname+'"> </a></div>';
+	 			revfree +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name +'</h5>'; 
+   	   			revfree +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
+   	   			revfree +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
+   	   			revfree +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
+   	   			revfree +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
+   	   			
+	 			revcor +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../marketImages/'+data[0].corporation.cor_fname+'"> </a></div>';
+	 			revcor +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].corporation.cor_mname +'</h5>';
+	 			revcor +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
+   	   			revcor +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
+   	   			revcor +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
+   	   			revcor +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
+   	   			 
+   	   			revmem +='<c:if  test="${marketRev[0].freelancer== null && marketRev[0].corporation==null }"> <a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a></div>';
+   	   			revmem +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">'+data[0].mem_email+'</h5></c:if>'
+   	   			revmem +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
+   	   			revmem +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
+   	   			revmem +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
+   	   			revmem +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
+	   	   		if(cor !=null){
+	   	   			rev=revcor;
+	   	 		}else if(free != null){
+	   	 			rev=revfree;
+	   	 		}else{
+	   	 			rev=revmem;
+	   	 		}
+				 
+	  			 
+	  		/*	
+	  			if("${fn:length(marketRev)}" > 0){	
+	  				$('#ajaxRev').prepend(rev);	
+	  			}
+	  			var child=$('#ajaxRev').children;
+	  			console.log("@@@@@child:"+child.length);
+	  			var remv=$("child:eq(3)");
+	  			if(child.length == 4 || child.length > 4){	
+	  			//	$('#ajaxRev').lastChild.remove();
+	  			//	$("#ajaxRev:eq(3)").remove();
+	  				$("#ajaxRev:last-child").remove();	
+	  				$('#ajaxRev').prepend(rev);
+		  				
+		  			}
+	  		*/	
+	  			/*
+	  			var remv=$("#ajaxRev:eq(3)");
+	  			console.log("remv"+remv);
+	  			if("${fn:length(marketRev)}" >= 4){	
+	  			//	$('#ajaxRev').lastChild.remove();
+	  			//	$("#ajaxRev:eq(3)").remove();
+	  				$("#ajaxRev:last-child").remove();	
+	  				$('#ajaxRev').prepend(rev);
+	  				
+	  			}*/
+	  			//오류 댓글 4개쓰면 2페이지로 넘어가면서 댓글이 사라짐, 리로드 = 다시생김
+	  			
+	  			var ele = document.getElementById('ajaxRev');
+				var eleCount = ele.childElementCount;
+				console.log("eleCount__"+eleCount);
+				console.log("22eleCount__"+"${fn:length(marketRev)}");
+	  			if("${fn:length(marketRev)}" == 0){		
+  					//$('#ajaxRev').html(html);
+	  				location.reload();
+	  			}else if("${fn:length(marketRev)}" >= 3){
+	  				$("#ajaxRev:last-child").remove();	
+  					$('#ajaxRev').prepend(rev);
+	  			}else if("${fn:length(marketRev)}" > 0){
+	  				$('#ajaxRev').prepend(rev);
+	  			}
+	    			 /*			 
+	    			  $('#contentR').text(data[i].marketRev_cont);
+	    			  $('#starR').text(data[i].marketRev_star);
+	    			  $('#cor_mnameR').text(data[i].corporation.cor_name);
+	    			  $('#free_nameR').text(data[i].freelancer.free_name);
+	    			  $('#mem_emailR').text(data[i].mem_email);
+	    			  $('#rdateR').text(data[i].marketRev_rdate);
+	    			  $('#corfnameR').text(data[i].corporation.cor_fname);
+	    			  $('#freefnameR').text(data[i].freelancer.free_fname);
+	    	     
+	    			 $("#contentR").text(data[i].freelancer.free_fname);
+	    			 $("#starR").text(data[i].marketRev_star);
+	    			 $("#cor_mnameR").text(data[i].corporation.cor_name);
+	    			 $("#free_nameR").text(data[i].freelancer.free_name);
+	    			 $("#mem_emailR").text(data[i].mem_email);
+	    			 $("#rdateR").text(data[i].marketRev_rdate);  
+	    			 $("#corfnameR").text(data[i].corporation.cor_fname);
+	    			 $("#freefnameR").text(data[i].freelancer.free_fname);
+	    			 */
+	               // }
+	    	}
 	    });
 	});
+	
+	
+	function onError(){}
+		
+	function dateToYYYYMMDD(date){
+	    function pad(num) {
+	        num = num + '';
+	        return num.length < 2 ? '0' + num : num;
+	    }
+	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
+	}
+
+	
+
 </script>
+<script>
+	   function upfile(){
+	      var filename = document.getElementById("file").value;
+	      document.getElementById("cor_fname_label").innerHTML="파일 선택됨";
+	   }   
+	 
+</script>
+
 <!--
 <script>
 function formSubmit() {
