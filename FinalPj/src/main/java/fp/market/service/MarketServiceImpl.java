@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
+import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
 import fp.market.utils.MarketPagingVO;
@@ -76,11 +78,6 @@ public class MarketServiceImpl implements MarketService {
 		
 	}
 	
-	@Override
-	public MarketQA insertMarketQA(MarketQA marketQA) {
-		return mapper.insertMarketQA(marketQA);
-		
-	}
 
 	@Override
 	public void insertMarket(Market market) {
@@ -92,7 +89,14 @@ public class MarketServiceImpl implements MarketService {
 		mapper.insertMarketRev(mareketRev);
 		
 	}
-	
+	@Transactional
+	public void insertMarketQA(MarketQA marketQA) {
+		mapper.insertMarketQA(marketQA);
+		mapper.updateMarketQA(marketQA);
+	}
+	public void insertMarketQAFile(MarketQAFile marketQAFile) {
+		mapper.insertMarketQAFile(marketQAFile);
+	}
 
 
 }

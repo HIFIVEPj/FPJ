@@ -20,6 +20,7 @@
         <typeAlias alias="mFreelancerProfile" type="fp.market.domain.FreelancerProfile"/>
         <typeAlias alias="mCorporation" type="fp.market.domain.Corporation"/>
         <typeAlias alias="mMember" type="fp.market.domain.Member"/>
+        <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
 		
 		<!-- 별 -->
 		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>

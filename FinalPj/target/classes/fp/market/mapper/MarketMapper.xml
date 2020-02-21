@@ -155,26 +155,38 @@
 									where rnum >#{marketVOQAStart} and rnum <= #{marketVOQAEnd})where MARKET_NUM=#{market_num}
 									-->	
 <!-- 마켓문의 insert update 그냥 댓글 -->	
+	<!--
+ 	<update id="updateMarketQA"  parameterType="MarketQA">
+		<selectKey resultType="long" keyProperty="hashmap" order="BEFORE">
+			SELECT 'key1' as NVL(MAX(MARKETQA_PRNUM),0)+1 marketQA_prnum, 'key2' as marketQA_lev, 'key3' as marketQA_sun FROM MARKET_QA where market_num=#{market_num}
+		</selectKey>
+		update MARKET_QA set marketQA_sun=marketQA_sun+1 where MARKET_NUM=#{market_num} and marketQA_sun>#{marketQA_sun}
+	</update>
+ 	-->	
 	<insert id="insertMarketQA" parameterType="MarketQA">
-	<!-- 그마켓의 부모댓글 최고큰번호 다음번호 결과를 keyProperty에리턴-->
-	<!-- when에 prnum 이널일때 selectkey리턴값 1을 집어넣는다. 즉, 아무댓글이 없을시에 실행됨 () -->
-	<!--otherwise 댓글이 있을 때 selectkey리턴값을  prnum에 넣음 -->
+			<!-- 그마켓의 부모댓글 최고큰번호 다음번호 결과를 keyProperty에리턴-->
+			<!-- when에 prnum 이널일때 selectkey리턴값 1을 집어넣는다. 즉, 아무댓글이 없을시에 실행됨 가장위로 올라오니까 부모값최대+1, 깊이는 0 순서0 -->
+			<!--otherwise 댓글이 있을 때 selectkey리턴값을  prnum에 넣음 -->
 		<selectKey resultType="long" keyProperty="marketQA_prnum" order="BEFORE">
-		    SELECT NVL(MAX(MARKETQA_PRNUM),0)+1 FROM MARKET_QA where market_num=#{market_num}
+			SELECT  NVL(MAX(MARKETQA_PRNUM),0)+1 marketQA_prnum FROM MARKET_QA where market_num=#{market_num}
 		</selectKey>
 		insert into
 			MARKET_QA(MARKETQA_NUM, MARKET_NUM, MARKETQA_SUB, MARKETQA_CONT, MARKETQA_RDATE, MARKETQA_VCNT,
 					MARKETQA_PRNUM, MARKETQA_LEV, MARKETQA_SUN,MARKETQA_OX,MEM_EMAIL)
 		values
-			(#{marketQA_num}, #{market_num}, #{marketQA_sub}, #{marketQA_cont},SYSDATE, #{marketQA_vcnt},
+			(MARKETQA_NUM_SEQ.NEXTVAL, #{market_num}, #{marketQA_sub}, #{marketQA_cont},SYSDATE, #{marketQA_vcnt},
 		    <choose>
-		       <when test="marketQA_prnum==null">#{marketQA_prnum}, 0 ,#{marketQA_sun}</when>
-		       <otherwise>#{marketQA_prnum}, #{marketQA_lev},#{marketQA_sun}</otherwise>
+		       <when test="marketQA_prnum==null">#{marketQA_prnum}, 0 ,0</when>
+		       <otherwise>#{marketQA_prnum}, #{marketQA_lev}+1,#{marketQA_sun}+1</otherwise>
 		    </choose>
-			,#{marketQA_ox},#{mem_email}
-		 )
+			,#{marketQA_ox},#{mem_email})
 	</insert>
-
+	<insert id="insertMarketQAFile" parameterType="MarketQAFile">
+		insert into MARKET_QAFILE values(SYSDATE, #{marketQA_num}, #{marketQAFile_fname},#{marketQAFile_ofname},#{marketQAFile_size}, #{marketQAFile_ext})
+	</insert>
+	<update id="updateMarketQA"  parameterType="MarketQA">
+		UPDATE MARKET_QA SET marketQA_sun = #{marketQA_sun}+1 WHERE market_num=#{marketQA_num} AND marketQA_sun>#{marketQA_sun}
+	</update>
 <!-- 마켓문의 insert update -->	
 
 	

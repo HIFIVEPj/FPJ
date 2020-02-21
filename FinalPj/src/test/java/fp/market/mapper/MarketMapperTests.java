@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
-import fp.market.domain.MarketContent;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
 import fp.market.utils.MarketPagingVO;

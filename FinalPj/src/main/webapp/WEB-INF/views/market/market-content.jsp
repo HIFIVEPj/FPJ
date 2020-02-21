@@ -480,7 +480,7 @@
 			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
 			                                      </div>
 			                                      <div class="media-body"> 
-						                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.mem_name}
+						                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.mem_email}
 														 <span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
 													 </h5>
 													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
@@ -602,28 +602,28 @@
 						<br/><br/>
 						<!--/Comments-->
 						
-					<form name="mqInput" id="mqInput" action="marketQA-insert">
+					<form name="mqInput" id="mqInput" action="marketQA-insert"  method="post"  enctype="multipart/form-data" >
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">문의 남기기</h3>
 							</div>
 							<div class="card-body">
 								<div>
-									 <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
-								 	 <input type="hidden" id="marketQA_rdate" name="marketQA_rdate" value="${marketQA_rdate}">
-									 <input type="hidden" id="marketQA_vcnt" name="marketQA_vcnt" value=0>
-								     <input type="hidden" id="marketQA_prnum" name="marketQA_prnum" value="${marketQA_prnum}">
-								     <input type="hidden" id="marketQA_lev" name="marketQA_lev" value="${marketQA_lev}">
-								     <input type="hidden" id="marketQA_sun" name="marketQA_sun" value="${marketQA_sun}">
-								     <input type="hidden" id="mem_email" name="mem_email" value="${mem_email}">		
+									<input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
+								    <input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.mem_email}">		
 									<c:if test="${sessionScope.name !=null}" >
 										<div class="form-group">
-											<input type="text" class="form-control" id="marketQA_sub" name="marketQA_sub" placeholder="subject">
+											<input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
 										</div>
 										<div class="form-group">
-											<textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="Comment"></textarea>
-										</div>
-										<input type=button id="submitQA" class="btn btn-primary" value="Send Reply">
+											<textarea class="form-control" name="marketQA_cont" id="marketQA_contID" rows="6" placeholder="Comment"></textarea>
+										</div><br>
+										<div class="custom-file">
+											<input  type="file" multiple="multiple" class="custom-file-input" name="fname" id="file" onchange="upfile()">
+											<label class="custom-file-label" id="cor_fname_label">file upload</label>
+										</div><br>
+										
+										<button type="submit" class="btn btn-primary" >Send Reply</button> <!-- id="checkMQ()" -->
 										
 										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
 										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
@@ -634,7 +634,7 @@
 									
 									<c:if test="${sessionScope.email ==null}" >
 										<div class="form-group">
-											<textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+											<textarea class="form-control" name="marketQA_cont"  rows="6" placeholder="로그인 후 이용해주세요"></textarea>
 										</div>
 									</c:if>
 									
@@ -984,17 +984,12 @@
 
 <!--Comment Modal -->
 <!-- 문의 모달창 -->
-	<form name="mqIREnput" id="mqREInput" action="marketQA-insert">
+	<form name="mqIREnput" id="mqREInput" action="marketQARE-insert" method="post">
        <div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
 	        <div class="modal-dialog" role="document">
 	           <div class="modal-content">
 				 <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
-			 	 <input type="hidden" id="marketQA_rdate" name="marketQA_rdate" value="${marketQA_rdate}">
-				 <input type="hidden" id="marketQA_vcnt" name="marketQA_vcnt" value="${marketQA_rdate}">
-			     <input type="hidden" id="marketQA_prnum" name="marketQA_prnum" value="${marketQA_prnum}">
-			     <input type="hidden" id="marketQA_lev" name="marketQA_lev" value="${marketQA_lev}">
-			     <input type="hidden" id="marketQA_sun" name="marketQA_sun" value="${marketQA_sun}">
-			     <input type="hidden" id="mem_email" name="mem_email" value="${mem_email}">		
+			     <input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.mem_email}">		
 	              <div class="modal-header">
 	                 <h5 class="modal-title">댓글쓰기</h5>
 	                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1011,14 +1006,15 @@
 	                    <label class="custom-control custom-checkbox mb-0">
 		                    <input type="radio"  name="marketQA_ox" value="1" >비밀글
 							<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
-	        <!--	        <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
+	        <!--	     
+	        			  <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
 	                       <span class="custom-control-label" name="marketQA_ox"  value="1" checked="" >비밀글</span>
 	                  -->       
 	                    </label>
 	                 </div>   
 	                 <div class="col col-auto">
 	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-	                    <button type="button" id="submitQA" class="btn btn-primary">확인</button>
+	                    <button type="submit" id="submitQA" class="btn btn-primary">확인</button>
 	                 </div>
 	              </div>
 	           </div>
@@ -1162,6 +1158,20 @@
 	        },
 </script>-->
 <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	$("#checkMR").on('click', function(){
 		// alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
 		// alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
@@ -1329,6 +1339,13 @@
 
 	
 
+</script>
+<script>
+	   function upfile(){
+	      var filename = document.getElementById("file").value;
+	      document.getElementById("cor_fname_label").innerHTML="파일 선택됨";
+	   }   
+	 
 </script>
 
 <!--
