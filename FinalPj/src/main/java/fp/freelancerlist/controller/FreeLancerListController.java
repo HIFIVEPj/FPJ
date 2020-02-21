@@ -33,7 +33,7 @@ public class FreeLancerListController {
 	private FreeLancerListService service;
 	
 	@GetMapping("freelancerList")
-	public ModelAndView ProfileList(List_PagingVO vo, FreeLancerListVO listVo
+	public ModelAndView FreelnacerList(List_PagingVO vo, FreeLancerListVO listVo
 						, @RequestParam(value="nowPage", required=false)String nowPage
 						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
 
@@ -49,25 +49,25 @@ public class FreeLancerListController {
 		vo = new List_PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));	
 		   
 		List<List_FreeLancer> freelancerList = service.SelectList(vo);		
-		
-		ModelAndView mv = new ModelAndView("freelancerlist/freelancerList");
+		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();	
+		ModelAndView mv = new ModelAndView("freelancer/freelancerList");
 		mv.addObject("paging", vo);
 		mv.addObject("freelancerList", freelancerList);
-
+		mv.addObject("freelancerList2", freelancerList2);
 		return mv;
 	}
-	@PostMapping("freelancerList")
-	public ModelAndView ProfileList2(@RequestParam long free_code) {
+/*	@RequestMapping("freelancerList")
+	public ModelAndView ProfileList2() {
 		
-		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2 (free_code);
+		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2 ();
 		ModelAndView mv = new ModelAndView("freelancerlist/freelancerList");
 		mv.addObject("pjsubNtype", freelancerList2);
 		
 		return mv;
-	}
-	//프리랜서 리스트 컨텐츠//
+	}*/
+		//프리랜서 리스트 컨텐츠//
 	@GetMapping("freelancercontent") 
-	public ModelAndView ProFileContent(long free_code){
+	public ModelAndView FreelnacerContent(long free_code){
 		List<Freelancer_FreeLancerProfile> content = service.freelancercontent(free_code);
 		List<Freelancer_FreeLancerProfile> content2 = service.freelancercontent2(free_code);	
 		List<Freelancer_FreeLancerProfile> content3 = service.freelancercontent3(free_code);
@@ -75,13 +75,13 @@ public class FreeLancerListController {
 		List<Project> content5 = service.freelancercontent5(free_code);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("freelancerlist/freelancercontent");
+		mv.setViewName("freelancer/freelancercontent");
 		mv.addObject("content", content);
 		mv.addObject("content2", content2);
 		mv.addObject("content3", content3);
 		mv.addObject("content4", content4);	
 		mv.addObject("content5", content5);	
-		
+		 
 		return mv;
 	}
 	
@@ -89,4 +89,8 @@ public class FreeLancerListController {
 	public ModelAndView DeleteCont(long free_code){
 
 	}*/
+	@RequestMapping("mydash_free")	//회원정보
+	public String Mydash() { 
+		return "freelancer/mydash_free";
+	}
 }

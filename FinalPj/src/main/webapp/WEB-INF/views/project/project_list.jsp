@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="now" class ="java.util.Date" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -161,7 +162,7 @@
 						<!-- /구분 카테고리 -->
 						<!-- 등급 카테고리 -->
 							<div class="card-header border-top">
-								<h3 class="card-title">등급</h3>
+								<h3 class="card-title">경력</h3>
 							</div>
 									<div class="card-body">
 								<div class="filter-product-checkboxs">
@@ -473,7 +474,7 @@
 										</div>
 										
 									</div>
-									<div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									<div><a href="project_payments" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
 									
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab-11">
@@ -499,7 +500,13 @@
 															<a href="#" class="item-card9-icons wishlist" style="margin-right:40%"> <i class="fa fa fa-heart-o"></i></a>
 														</div>
 															<div class="item-card9">
-																${dto.pj_loc} /
+															<c:set var = "loc" value="${fn:split(dto.pj_loc,' ')}"/>
+															<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+															<c:if test="${g.count<3}" >
+															${pj_loc}
+															</c:if>
+															</c:forEach>
+																/
 																<c:forEach var="key" items="${keyname}">
 																	<c:if test="${key.pj_num eq dto.pj_num}">
 																		<c:choose>
@@ -526,13 +533,13 @@
 																/ ${dto.corporation.cor_name}<br/><br/>
 																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
 																<div style="width:85%">
-																<span style="width:10px">
+																<span id = "content" style="width:10px">
 														          <c:choose>
 														           <c:when test="${fn:length(dto.pj_cont) > 101}">
-														            <c:out value="${fn:substring(dto.pj_cont,0,100)}"/>....
+														            <c:out value='${fn:substring(dto.pj_cont.replaceAll("\\\<.*?\\\>",""),0, 100)}' escapeXml='false'/>....
 														           </c:when>
 														           <c:otherwise>
-														            <c:out value="${dto.pj_cont}"/>
+														            <c:out value='${dto.pj_cont.replaceAll("\\\<.*?\\\>","")}' escapeXml="false"/>
 														           </c:otherwise> 
 														          </c:choose>
 																</span>
@@ -670,7 +677,7 @@
 			</div>
 		</section>
 		<!--Add Listing-->
-		
+
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

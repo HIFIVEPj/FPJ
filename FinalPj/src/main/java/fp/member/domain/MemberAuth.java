@@ -1,3 +1,4 @@
+
 package fp.member.domain;
 
 
@@ -14,3 +15,4 @@ public class MemberAuth {
 	private String email;
 	private String auth;
 }
+

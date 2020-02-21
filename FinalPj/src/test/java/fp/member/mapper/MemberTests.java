@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import fp.member.dao.MemberDao;
 import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.mapper.MemberMapper;
@@ -27,15 +29,19 @@ import fp.member.mapper.MemberMapper;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml","file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class MemberTests {
+	/*
 	@Autowired
 	private MemberMapper memberMapper;
+	*/
+	@Autowired
+	private MemberDao dao;
 	
 	/*
 	@Autowired
 	private UserAuthDAO userAuthDAO; */
 	
 	@Setter(onMethod_ = @Autowired)
-	private BCryptPasswordEncoder pwcoder;
+	private BCrypt pwcoder;
 	
 	@Setter(onMethod_ = @Autowired)
 	private DataSource ds;
@@ -60,14 +66,15 @@ public class MemberTests {
 	@Test
 	public void insertMem() {
 		String sql ="update MEMBER set MEM_PWD=? where MEM_EMAIL=?";
-			
+			//dao.hashCode("pw");
 			Connection con =null;
 			PreparedStatement pstmt =null;
+			//BCrypt.hashpw(rawPassword.toString(), salt);
 			try {
 				con=ds.getConnection();
 				pstmt=con.prepareStatement(sql);
-				
-				pstmt.setString(1, pwcoder.encode("pw"));
+				//pstmt.setString(1, pwcoder.encode("pw"));
+				pstmt.setString(1, BCrypt.hashpw("pwd", BCrypt.gensalt(10)));
 				pstmt.setString(2,"hun@gmail.com");
 				pstmt.executeUpdate();
 			}catch(Exception e) {

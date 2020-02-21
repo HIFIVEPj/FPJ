@@ -36,8 +36,8 @@
 							<div class="card-body">
 							<form action="find_pwd.do" method="post">
 								<div class="form-group">
-									<label class="form-label text-dark" for="exampleInputEmail1">Email</label>
-									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="등록한 이메일을 입력하세요">
+									<label class="form-label text-dark" for="exampleInputEmail1" >Email</label>
+									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="등록한 이메일을 입력하세요" name="email">
 								</div>
 								<div class="form-footer">
 									<button type="submit" class="btn btn-primary btn-block">보내기</button>

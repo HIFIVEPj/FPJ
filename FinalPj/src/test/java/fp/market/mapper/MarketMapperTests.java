@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.mapper.MarketMapper;
 import fp.market.utils.MarketPagingVO;
 import lombok.extern.log4j.Log4j;
 

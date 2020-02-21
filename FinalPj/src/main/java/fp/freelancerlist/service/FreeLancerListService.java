@@ -18,7 +18,7 @@ public interface FreeLancerListService {
 	
 	public int countFreeLancer();
 	public List<List_FreeLancer> SelectList(List_PagingVO vo);
-	public List<List_FreeLancerProfile> SelectList2(long free_code);
+	public List<List_FreeLancerProfile> SelectList2();
 	public List<FreeLancerProfile> freelancercontent();
 	
 	public List<Freelancer_FreeLancerProfile> freelancercontent(long free_code);

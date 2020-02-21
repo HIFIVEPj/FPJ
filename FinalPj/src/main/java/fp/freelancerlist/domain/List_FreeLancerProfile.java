@@ -34,5 +34,5 @@ public class List_FreeLancerProfile {
 		private List<List_FreeLancerProfile> list_freelancerprofile;
 		private List_Type list_type;
 		private List<List_FreeLancerReview> list_freelancerreview;
-		private List<List_Project> list_projcet;
+		private List<List_Project> list_project;
 }

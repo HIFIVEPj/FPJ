@@ -42,7 +42,7 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">Robert McLean</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class=" doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
@@ -191,13 +191,13 @@
 											</tr>
 											</c:forEach>
 											</c:forEach>
-										
+											
 											<c:forEach  var="key" items="${content3}" varStatus="status">
-									
+											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">
 											<tr>
-												<td><strong>사용언어 : 	${content3}</strong></td>
+												<td><strong>사용언어 : </strong>${keyname.key_name}</td>
 											</tr>
-										
+											</c:forEach>
 											</c:forEach>
 										
 										</tbody>
@@ -252,7 +252,7 @@
 													<tr>
 													<c:forEach  var="content" items="${content2}" varStatus="status">
 													<c:forEach  var="name" items="${content.project}" varStatus="status">
-														<td><a href="store.html" class="text-inherit">${name.pj_sub}</a></td>
+														<tr><td><a href="store.html" class="text-inherit">${name.pj_sub}</a></td>
 													</c:forEach>
 													</c:forEach>
 													<c:forEach  var="profilecontent" items="${content}" varStatus="status">
@@ -262,7 +262,7 @@
 														<c:forEach  var="profilefile" items="${profilecontent.freeLancerProfileFile}" varStatus="status">	
 														<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td>
 														</c:forEach>
-													</tr>
+													</tr></tr>
 														</c:forEach>
 										<!--  			<tr>
 														<td><a href="store.html" class="text-inherit">Untrammelled prevents</a></td>

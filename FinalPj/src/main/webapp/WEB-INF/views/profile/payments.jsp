@@ -40,10 +40,10 @@
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name} </h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class=" doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
@@ -51,14 +51,16 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
 												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
+												<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
 												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+												</c:if>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>		
 												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
 											</ul>
 										</li>

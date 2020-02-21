@@ -124,5 +124,4 @@ $( document ).ready(function() {
 			cancelButtonText: 'Stay on the page'
 		});
 	});
-
 });

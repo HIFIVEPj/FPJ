@@ -29,4 +29,8 @@ public interface FreeLancerProfileMapper {
 	//페이징처리 게시글 조회
 	public List<FreeLancer> selectPageList(PagingVO vo);
 
+	public String listInsert(FreeLancerProfile freelancerprofile);
+	public String insertPjpkeyword(Map<String, Object> map);
+
+	public void checkdelete1();
 }

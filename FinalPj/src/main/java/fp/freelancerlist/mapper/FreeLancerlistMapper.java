@@ -21,7 +21,7 @@ public interface FreeLancerlistMapper {
 	public int countFreeLancer();
 	//페이징처리 게시글 조회
 	public List<List_FreeLancer> SelectList(List_PagingVO vo);
-	public List<List_FreeLancerProfile> SelectList2(long free_code);
+	public List<List_FreeLancerProfile> SelectList2();
 
 	public List<Freelancer_FreeLancerProfile> freelancercontent(long free_code);
 	public List<Freelancer_FreeLancerProfile> freelancercontent2(long free_code);

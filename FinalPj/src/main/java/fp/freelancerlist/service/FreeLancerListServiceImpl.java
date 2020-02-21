@@ -33,8 +33,8 @@ import fp.freelancerprofile.domain.Type;
 		return mapper.SelectList(vo);
 	}
 	@Override
-	public List<List_FreeLancerProfile> SelectList2(long free_code){
-		return mapper.SelectList2(free_code);
+	public List<List_FreeLancerProfile> SelectList2(){
+		return mapper.SelectList2();
 	}
 	@Override
 	public List<Freelancer_FreeLancerProfile> freelancercontent(long free_code){

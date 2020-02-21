@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fp.member.domain.Member;
 
@@ -13,19 +14,26 @@ public class MemberDao {
 
 	@Autowired
 	SqlSession sqlSession;
+	
+
 	private String ns = "fp.member.mapper.MemberMapper";
 	//로그인 체크
-	public boolean loginCheck(Member member) {
+	public Member loginCheck(Member member) {
 		System.out.println("===> Mybatis로 loginCheck() 기능 처리");
-		String name = sqlSession.selectOne(ns+".loginCheck",member);
+		Member member1= sqlSession.selectOne(ns+".loginCheck",member);
 		
-		// 검색이 안되면 0을 반환해주기 때문에 0과 비교해서 참이면 false, 틀리면 true를 반환
-		return (Integer.parseInt(name)==0)?false:true;
+		System.out.println("꺄아아아아앙아아아아아아아아앙아아아아아아아아:"+member1.getPwd());
+		return member1;
 	}
 	//로그 아웃
 	public void logout(HttpSession session) {
 		System.out.println("===> 로그아웃 기능 처리");
 		session.invalidate();
+	}
+	
+	@Transactional
+	public int update_pw(Member member) throws Exception{
+		return sqlSession.update(ns+".update_pw", member);
 	}
 
 }
