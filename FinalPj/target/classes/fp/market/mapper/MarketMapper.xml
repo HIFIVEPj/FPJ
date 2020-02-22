@@ -81,14 +81,14 @@
         <id property="marketQA_num" column ="marketQA_num" />
         <result property="market_num" column ="market_num" />	
         <result property="marketQA_sub" column ="marketQA_sub" />
-			<result property="marketQA_cont" column ="marketQA_cont" />
-			<result property="marketQA_rdate" column ="marketQA_rdate" />
-			<result property="marketQA_vcnt" column ="marketQA_vcnt" />
-			<result property="marketQA_prnum" column ="marketQA_prnum" />
-			<result property="marketQA_lev" column ="marketQA_lev" />
-			<result property="marketQA_sun" column ="marketQA_sun" />
-			<result property="marketQA_ox" column ="marketQA_ox" />   	
-			<result property="mem_email" column ="mem_email" /> 
+		<result property="marketQA_cont" column ="marketQA_cont" />
+		<result property="marketQA_rdate" column ="marketQA_rdate" />
+		<result property="marketQA_vcnt" column ="marketQA_vcnt" />
+		<result property="marketQA_prnum" column ="marketQA_prnum" />
+		<result property="marketQA_lev" column ="marketQA_lev" />
+		<result property="marketQA_sun" column ="marketQA_sun" />
+		<result property="marketQA_ox" column ="marketQA_ox" />   	
+		<result property="mem_email" column ="mem_email" /> 
 	   	<association property="freelancer" javaType="mFreelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="free_name" column ="free_name" />
@@ -102,7 +102,6 @@
     	</association>
 	</resultMap>
 	
-  
 	<!-- 마켓 총 게시글 갯수 출력 -->
 	<select id="getMarketCount" resultType="Integer">
 		SELECT COUNT(*) FROM MARKET where market_state=1
@@ -152,7 +151,7 @@
 									(select * from MARKET_QA order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) aa )
 									where rnum >#{marketVOQAStart} and rnum <= #{marketVOQAEnd})where MARKET_NUM=#{market_num}
 									-->	
-<!-- 마켓문의 insert update 그냥 댓글 -->	
+<!-- 마켓문의,파일 update&insert  -->	
 	<!-- insert 전에 업데이트 먼저 순서숫자 겹치는거 방지하려고-->
  	<!-- 받아온 값의 뒷순서들에 +1씩한 후에 insert하면 순서겹치지않음-->
  	<update id="updateMarketQA"  parameterType="MarketQA">
@@ -178,12 +177,17 @@
 			(MARKETQA_NUM_SEQ.NEXTVAL, #{market_num}, #{marketQA_sub}, #{marketQA_cont},SYSDATE, #{marketQA_vcnt},
 				#{marketQA_prnum}, #{marketQA_lev},#{marketQA_sun},#{marketQA_ox},#{mem_email})
 	</insert>
-	<insert id="insertMarketQAFile" parameterType="MarketQAFile">
-		insert into MARKET_QAFILE values(SYSDATE, #{marketQA_num}, #{marketQAFile_fname},#{marketQAFile_ofname},#{marketQAFile_size}, #{marketQAFile_ext})
+	<insert id="insertMarketQAFile" parameterType="hashmap">
+		<selectKey resultType="long" keyProperty="marketQA_num" order="BEFORE">
+			select max(MARKETQA_NUM) from market_QA where market_num=#{market_num}
+		</selectKey>
+		insert into MARKET_QAFILE values(MARKETQAFILE_NUM_SEQ.NEXTVAL, #{marketQA_num}, #{marketQAFile_fname},#{marketQAFile_ofname},#{marketQAFile_size},null,null,null)
 	</insert>
 	
-<!-- 마켓문의 insert update -->	
-
+<!-- 마켓문의 파일 보기 -->	
+	<select id="marketQAFile" parameterType="MarketQAFile" resultType="MarketQAFile">
+		select * from MARKET_QAFile where market_num=#{market_num} and marketQA_num=#{marketQA_num}
+	</select>	
 	
 <!-- 마켓리뷰 페이징보기 -->	
 	<select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">

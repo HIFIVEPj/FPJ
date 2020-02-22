@@ -95,8 +95,14 @@ public class MarketServiceImpl implements MarketService {
 		mapper.insertMarketQA(marketQA);
 		
 	}
-	public void insertMarketQAFile(MarketQAFile marketQAFile) {
-		mapper.insertMarketQAFile(marketQAFile);
+	@Override
+	public void insertMarketQAFile(HashMap<String, Object> map) {
+		mapper.insertMarketQAFile(map);
+	}
+	@Override
+	//마켓문의글 파일 보기
+	public MarketQAFile marketQAFile(long marketQA_num) {
+		return mapper.marketQAFile(marketQA_num);
 	}
 
 

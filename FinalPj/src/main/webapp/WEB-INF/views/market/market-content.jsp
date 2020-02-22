@@ -459,7 +459,7 @@
 			                                     	 <c:choose>
 				                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
 					                                        <p class="font-13  mb-2 mt-2">
-					                                          ${marketQA.marketQA_sub}<br>
+					                                       <a href="#" onclick="QAFile('${marketQA.marketQA_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
 				                                        	</p>
 				                                        </c:when>
 				                                         <c:when test="${marketQA.marketQA_ox == 1}">
@@ -469,14 +469,14 @@
 					                                        <p class="font-13  mb-2 mt-2">
 					                                       		 <비밀글 입니다.> <br>
 					                                          ${marketQA.marketQA_sub}<br>
-					                                          ${marketQA.marketQA_cont}
+					                                         
 				                                        	</p>
 				                                        </c:when>
 			                                        </c:choose> 
 			                                  <!-- 모달로 정보보내기
 			                                   <button type="button"  data-toggle="modal" data-target="#Comment" data-prnum="${marketQA.marketQA_prnum}" data-lev="${marketQA.marketQA_lev}" data-sun="${marketQA.marketQA_sun}" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></button>
 			                                   --> 
-			                                  		<a href="#" onclick="QAModal('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');"    data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+			                                  		<a href="#" onclick="QAModal('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
 													<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
 												 </div>                        
@@ -1037,7 +1037,38 @@
 	        </div>
 	    </div>
 	</form>
-<!-- 문의 모달창 -->			
+<!-- 문의 모달창 -->		
+
+<!--Scrolling Modal-->
+			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+					  <div class="modal-body">
+						<p> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+						<p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+						<p>These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. </p>
+						<p> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+						<p> No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					  </div>
+					</div>
+				</div>
+			</div>
+<!--  -->
+
+
+
+	
 		<div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -1289,7 +1320,24 @@
 	      var filename = document.getElementById("file").value;
 	      document.getElementById("cor_fname_label").innerHTML="파일 선택됨";
 	   }   
-	 
+	   
+//문의파일보는 ajax
+ㅊ
+		function(marketQAnum){
+		   $.ajax({
+			   type: 'get',
+		    	url: 'marketQAFile_show',
+		    	data: marketQAnum,
+		    	dataType: 'json',
+		    	async :true,
+		    	error:onError,
+		    	success:function onSuccess(marketQAFile){
+		    		
+		   });
+		}
+      	
+	        	
+	   }
 	   function QAModal(prnum,lev,sun){
 		   alert(prnum);
 		   $('#Comment').on('show.bs.modal', function (event) {
@@ -1300,7 +1348,7 @@
 			$(".modal-content #REmarketQA_sun").val( sun );
         	})     
 		}
-	   
+	/*   
 	    var PRNUM="";
 	    var LEV="";
 	    var SUN="";
@@ -1312,24 +1360,9 @@
 	        	SUN = $(event.relatedTarget).data('sun');
 	        });
 	    });
-	    
-	    function insertBlack()
-	    {
-	      //  var blackCount = $('#blackCount').val();
-	        location.href='$marketQA-insert?marketQA_prnum='+PRNUM+'&marketQA_lev='+LEV+'&marketQA_sun='+SUN;
-	    }
+	  */  
 	</script>
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-</script>
+
 
 <!--
 <script>

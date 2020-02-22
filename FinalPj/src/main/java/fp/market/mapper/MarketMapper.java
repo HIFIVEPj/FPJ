@@ -38,8 +38,10 @@ public interface MarketMapper {
 	public void insertMarketRev(MarketRev marketRev);	
 
 	public void insertMarketQA(MarketQA marketQA);
-	public void insertMarketQAFile(MarketQAFile marketQAFile);
+	public void insertMarketQAFile(HashMap<String, Object> map);
 	public void updateMarketQA(MarketQA marketQA);
+	
+	public MarketQAFile marketQAFile(long marketQA_num);
 	
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,17 +50,29 @@ public class MarketRestController {
 	public void marketQA_insert(MarketQA marketQA,MarketQAFile marketQAFile,MultipartHttpServletRequest mtfRequest ){
 		log.info( "1@@@marketQA"+ marketQA);
 		marketService.insertMarketQA(marketQA);
+
 		log.info( "3@@@marketQA"+ marketQA);
-		
 		ArrayList<Object[]> list =Fileupload(mtfRequest);
+		log.info("@@@@list"+list);
 		for (int i=0 ;i<list.size(); i++) {
 			String marketQAFile_fname= (String) list.get(i)[0];
 			String marketQAFile_ofname=(String) list.get(i)[1];
 			long marketQAFile_size=(long)list.get(i)[2];
-			marketQAFile.setMarketQAFile_fname(marketQAFile_fname);
+		
+			/*
+			 marketQAFile.setMarketQAFile_fname(marketQAFile_fname); 
 			marketQAFile.setMarketQAFile_ofname(marketQAFile_ofname);
 			marketQAFile.setMarketQAFile_size(marketQAFile_size);
-			marketService.insertMarketQAFile(marketQAFile);
+			*/
+			log.info("#######marketQAFile"+marketQAFile);
+			marketQAFile.setMarketQA_num(marketQA.getMarketQA_num());
+			
+			HashMap<String,Object> map=new HashMap<String,Object>();
+			map.put("market_num",marketQA.getMarket_num());
+			map.put("marketQAFile_fname",marketQAFile_fname);
+			map.put("marketQAFile_ofname",marketQAFile_ofname);
+			map.put("marketQAFile_size",marketQAFile_size);
+			marketService.insertMarketQAFile(map);
 		}
 	}
 	@RequestMapping(value = "marketQARE-insert", method= {RequestMethod.POST})
@@ -77,8 +90,11 @@ public class MarketRestController {
 	
 	public ArrayList<Object[]> Fileupload(MultipartHttpServletRequest mtfRequest){
 		ArrayList<Object[]> list = new ArrayList<Object[]> ();
-		String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
-		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+		//학원경로
+		//String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
+		//집경로
+		String path  = "C:\\Users\\DeskTop\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
+		List<MultipartFile> fileList = mtfRequest.getFiles("fname");
 		File Folder = new File(path);
 		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
 		if (!Folder.exists()) {
@@ -93,7 +109,7 @@ public class MarketRestController {
 			System.out.println("이미 폴더가 생성되어 있습니다.");
 		}
 		for (MultipartFile mf : fileList) {
-			
+			log.info("111111111111mf"+mf);
             String originFileName = mf.getOriginalFilename(); // 원본 파일 명
             String fileName =System.currentTimeMillis() + originFileName;
             long fileSize = mf.getSize(); // 파일 사이즈
@@ -115,13 +131,6 @@ public class MarketRestController {
         }
 		return list;
 	}
-	
-
-	
-	
-	
-	
-	
 	
 //마켓리뷰 글insert
 	@PostMapping("marketRev-insert")
@@ -145,9 +154,20 @@ public class MarketRestController {
 		List<MarketRev> mr = marketService.getMarketRev(map);
 		log.info("@!@@@@@mr:"+mr);
 
-		
 		return mr;
-
+	}
+	
+	@GetMapping("marketQAFile_show")
+	public List<MarketQAFile> marketQAFile_show(long marketQA_num){
+		
+		return null;
+		
 	}
 
+
+
 }
+
+
+
+	
