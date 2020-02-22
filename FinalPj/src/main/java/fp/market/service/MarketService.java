@@ -1,3 +1,4 @@
+
 package fp.market.service;
 
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
+import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
 import fp.market.utils.MarketPagingVO;
 
@@ -32,8 +34,10 @@ public interface MarketService {
 	 void updateMarket2(Market market);
 	 void insertMarket(Market market);
 	
-	 MarketQA insertMarketQA(MarketQA marketQA);
 	 void insertMarketRev(MarketRev mareketRev);
+	 
+	 void insertMarketQA(MarketQA marketQA);
+	 void insertMarketQAFile(MarketQAFile marketQAFile);
 	 
 	// List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);

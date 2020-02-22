@@ -1,3 +1,4 @@
+
 package fp.corporation.controller;
 
 import java.util.ArrayList;
@@ -19,7 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.Keyword;
+import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
+import fp.corporation.service.CorporationService;
+
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 import lombok.extern.log4j.Log4j;
@@ -29,6 +33,9 @@ import lombok.extern.log4j.Log4j;
 public class ProjectController {
 	@Autowired
 	private ProjectService service;
+	@Autowired
+	private CorporationService corService;
+
 	
 	@RequestMapping("project_list")
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
@@ -77,14 +84,18 @@ public class ProjectController {
 		
 	}
 	@PostMapping("project_update")
-	public String project_update(Project project, HttpServletRequest request) {
-		
+	public String project_update(Project project, HttpServletRequest request, PjPickKeyword pjpkeyword) {
 		String[] ListPjp_keynum = request.getParameterValues("pjp_keynum");
 		ArrayList<Long> arrayPjp_keynum = new ArrayList<Long>();
+		
+		
 		long[] ListIntPjp_keynum = Arrays.stream(ListPjp_keynum).mapToLong(Long::parseLong).toArray();
 		for(int i = 0; i<ListIntPjp_keynum.length; i++) {
 			arrayPjp_keynum.add(ListIntPjp_keynum[i]);
+			
 		}
+		pjpkeyword.setPjpkeynumList(arrayPjp_keynum);
+		log.info("@@@@@@@@@@pjpkeyword: "+pjpkeyword);
 		
 		String[] ListKeyNum = request.getParameterValues("key_num");
 		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
@@ -92,30 +103,29 @@ public class ProjectController {
 		for(int i = 0; i<ListIntKeyNum.length; i++) {
 			arraykeynum.add(ListIntKeyNum[i]);
 		}
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pjp_keynum", arrayPjp_keynum);
-		map.put("key_num", arraykeynum);
-		//map.put("pj_num",project.getPj_num());
-		log.info("@#!#@$  map: "+ map);
+
+		pjpkeyword.setKey_numList(arraykeynum);
 		service.updatePj(project);
-		service.updateKeyword(map);
-		//log.info("!@#$# arraykeynum: "+ arraykeynum);
-		//log.info("@#!#@$  project: " +project);
-		//log.info("@#!#@$  pj_num: "+project.getPj_num());
-		
-		return "redirect:project_list";
+		service.updateKeyword(pjpkeyword);
+		return "redirect:project_content?pj_num="+project.getPj_num();
+
 	}
 	
 	@GetMapping("project_write")
-	public String project_write() {
-		return "project/project_write";
+	public ModelAndView project_write(String mem_email) {
+		Corporation cor = corService.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("project/project_write");
+		mv.addObject("cor", cor);
+		return mv;
 	}
 	
 	@PostMapping("project_write")
 	public String project_write(Project project, HttpServletRequest request) {
 		//String type_num = request.getParameter("type_num");
-		
+		log.info("!@!#(@#*@&$(&*(@!#&&(*@#");
+		String mem_email = request.getParameter("mem_email");
+		log.info("!@*@#&(*#&(*&@# mem_email: "+mem_email);
+
 		String[] ListKeyNum = request.getParameterValues("key_num");
 		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
 		
@@ -132,7 +142,7 @@ public class ProjectController {
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
 		//log.info("@#!#@$  map: "+ map);
-		return "redirect:project_list";
+		return "managed_project";
 	}
 	
 	@RequestMapping("project_delete")
@@ -140,5 +150,9 @@ public class ProjectController {
 		service.deletePj(pj_num);
 		return "redirect:project_list";
 	}
-	
+
+	@RequestMapping("project_payments")
+	public String project_payment(){
+		return "project/project_payments";
+	}
 }

@@ -1,20 +1,26 @@
+
+
 package fp.market.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
 import java.util.Vector;
+
+
+import javax.servlet.http.HttpSession;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -26,12 +32,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import fp.corporation.domain.Corporation;
-import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
@@ -55,7 +59,6 @@ public class MarketController {
 	public ModelAndView market_list(MarketPagingVO marketVO
 			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
 			,@RequestParam(value="cntPerPage", required=false,defaultValue="9")String cntPerPage){
-		
 		int total = marketService.getMarketCount();
 	/*	if(nowPage ==null &&cntPerPage ==null) {
 			nowPage="1";
@@ -103,7 +106,7 @@ public class MarketController {
 		}else if(cntPerPageR == null) {
 			cntPerPageR = "4";
 		}
-		
+
 		HashMap<String,Object> mapr=new HashMap<String,Object>();
 		HashMap<String,Object> mapq=new HashMap<String,Object>();
 		MarketRev marketRev = new MarketRev();
@@ -165,36 +168,26 @@ public class MarketController {
 		marketFreelancer=marketService.getMarketFreelancer(market_num);
 		return marketFreelancer;
 	}
-
-	
-	@RequestMapping(value = "market-payments", method = RequestMethod.GET)
-	public String market_payments(Locale locale, Model model) {
-
-		return "market/market-payments";
-	}
-	@RequestMapping(value = "market-payments-done", method = RequestMethod.GET)
-	public String market_paymentsDone(Locale locale, Model model) {
-
-		return "market/market-payments-done";
-	}
-	
 	@RequestMapping(value = "market-posts", method = RequestMethod.GET)
 	public String market_post(Locale locale, Model model) {
 
 		return "market/market-posts";
 	}
+
 	@PostMapping("market-insert")
 	public String market_insert(Market market,MultipartHttpServletRequest mtfRequest) {
 	//	log.info("@##$market: "+market);
 		String originFileName=Fileupload(mtfRequest).get(0);
-		String safeFile=Fileupload(mtfRequest).get(1);
+		String fileName=Fileupload(mtfRequest).get(1);
 		
+	//	long fc=market.getFree_code();
+	//	log.info("%%%%%%fc:"+fc);
 		market.setMarket_ofname(originFileName);
-		market.setMarket_fname(safeFile);
+		market.setMarket_fname(fileName);
 		marketService.insertMarket(market);
 		return "redirect:market-list";
 	}	
-	
+
 	@PostMapping("market-update")
 	public ModelAndView market_update1(@RequestParam long market_num){
 		Market m=marketService.updateMarket1(market_num);
@@ -202,17 +195,20 @@ public class MarketController {
 		mv.setViewName("market/market-update");
 		mv.addObject("market", m);
 		return mv;		
+
 	}
+
 	
 	@PostMapping("market-update2")
 	public String market_update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
-
-		String originFileName=Fileupload(mtfRequest).get(0);
-		String safeFile=Fileupload(mtfRequest).get(1);
+		List<String> list=Fileupload(mtfRequest);
+		String originFileName=list.get(0);
+		log.info("!!!!!!!originFileName:"+originFileName);
+		String fileName=list.get(1);
 		market.setMarket_ofname(originFileName);
-		market.setMarket_fname(safeFile);
+		market.setMarket_fname(fileName);
 		market.setMarket_num(market_num);
-		
+		log.info("!!!!!!!market:"+market);
 		marketService.updateMarket2(market);		
 		return "redirect:market-list";
 	}
@@ -223,27 +219,28 @@ public class MarketController {
 		
 	}
 	public List<String> Fileupload(MultipartHttpServletRequest mtfRequest) {
-		String path  = "C:\\FinalPj\\MarketFiles\\";
+		String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
 		File Folder = new File(path);
 		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
 		if (!Folder.exists()) {
 			try{
 			    Folder.mkdirs(); //폴더 생성합니다.
 			    System.out.println("폴더가 생성되었습니다.");
-		        } 
-		        catch(Exception e){
+		    	} 
+		    catch(Exception e){
 			    e.getStackTrace();
-			}        
+		    	}        
 	    }else {
 			System.out.println("이미 폴더가 생성되어 있습니다.");
 		}
 		MultipartFile mf = mtfRequest.getFile("ofname");
 		String originFileName= mf.getOriginalFilename();
+		String fileName= System.currentTimeMillis()+originFileName;
 		String safeFile=path+System.currentTimeMillis()+originFileName;
 		long fileSize=mf.getSize();
-		
+		log.info("333@@@@safeFile:"+safeFile);
 		try {
-			mf.transferTo(new File(safeFile));
+			mf.transferTo(new File(safeFile));// 폴더에파일저장메소드
 		}catch(IllegalStateException  e) {
 			e.printStackTrace();
 		}catch(IOException e) {
@@ -251,10 +248,10 @@ public class MarketController {
 		}
 		List<String> list = new Vector<>();
 		list.add(originFileName);
-		list.add(safeFile);
+		list.add(fileName);
 		return list;
 	}
 
+
 	
 }
-

@@ -110,7 +110,7 @@
 
         <!-- Custom scroll bar Js-->
 		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
+		
 		<!-- sticky Js-->
 		<script src="../js/sticky.js"></script>
 
@@ -214,7 +214,13 @@
 		
 		<!-- popover js -->
         <script src="../js/popover.js"></script>
-
+        
+        <!-- Notifications js -->
+        <!--
+		<script src="../plugins/notify/js/rainbow.js"></script>
+		<script src="../plugins/notify/js/sample.js"></script>
+		<script src="../plugins/notify/js/jquery.growl.js"></script>
+		-->
 	</body>
 </html>
 <!--/footer-->

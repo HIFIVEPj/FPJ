@@ -7,7 +7,7 @@ public class MarketPagingVO {
 			// 현재페이지,  끝페이지(한블럭의 끝페이지), 게시글 총 갯수,마지막페이지(마지막블럭의 끝페이지), SQL쿼리에 쓸 start, end
 	private int startPage;//시작페이지,
 	private int cntPerPage;//페이지당 글 갯수,
-	private int nowPage,endPage, total,lastPage,start,end;// g
+	private int nowPage, endPage, total, lastPage, start, end;// g
 	private int cntPage = 5;//보여지는 페이지숫자들
 	
 	public MarketPagingVO() {

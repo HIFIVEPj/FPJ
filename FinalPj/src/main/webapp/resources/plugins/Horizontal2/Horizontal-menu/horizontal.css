@@ -1,3 +1,4 @@
+
 .horizontalMenu html, .horizontalMenu body, .horizontalMenu iframe, .horizontalMenu h1, .horizontalMenu h2, .horizontalMenu h3, .horizontalMenu h4, .horizontalMenu h5, .horizontalMenu h6 {
 	margin: 0;
 	padding: 0;
@@ -557,7 +558,7 @@
 .hometext {
 	display: none;
 }
-/*==============================================================================
+/*===============================================================
                               Start Mobile CSS
 ===============================================================================*/
 
@@ -1148,4 +1149,3 @@
 .horizontalMenu ul li a.btn{
 	font-size:14px !important;
 }
-

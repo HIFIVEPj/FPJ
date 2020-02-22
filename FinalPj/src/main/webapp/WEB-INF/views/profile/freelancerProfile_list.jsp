@@ -52,18 +52,22 @@
                            <div class="profile-pic-img">
                               <img src="../images/faces/male/25.jpg" class="brround" alt="user">
                            </div>
-                           <a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
+                           <a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
                         </div>
+
                      </div>
-                     <aside class="app-sidebar doc-sidebar my-dash">
+                     <aside class=" doc-sidebar my-dash">
                         <div class="app-sidebar__user clearfix">
                            <ul class="side-menu">
                               <li class="slide">
                                  <a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
                                  <ul class="slide-menu">
-                                    <li><a class="slide-item" href="mydash.html">회원정보</a></li>
-                                    <li><a class="slide-item " href="freelancerProfile_list">프로필</a></li>
-                                 
+                                    <li><a class="slide-item" href="mydash_free">회원정보</a></li>
+                                    <li><a class="slide-item " href="freelancerProfile_list">프로필</a></li>	
+								<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
+                                 	<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+								</c:if>
+                                
                                  </ul>
                               </li>
                               <li class="slide">
@@ -212,8 +216,8 @@
                            <table class="table table-bordered table-hover mb-0 text-nowrap">
                               <thead>
                                  <tr class="text-center">                                    
-                                       <th> <label class="custom-control custom-checkbox ">
-                                             <input type="checkbox" class="custom-control-input check-all" name="checkAll">
+                                       <th> <label class="custom-control custom-checkbox">
+                                             <input type="checkbox" class="custom-control-input check-all" name="check">
                                              <span class="custom-control-label check-all"></span>
                                           </label>  </th>                                 
                                        <th >프로필명</th>
@@ -223,14 +227,26 @@
                                  </tr>
                               </thead>
                               
-                                  <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status">
+
+<form id="del_list" method="get" action="freelancerProfile_cehck_delete" name="checkdelete1">
+
+      
+                   
+                               <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
                      
                                     <tr>
                                        <td scope="row">
+                                       <!--  <form>  -->
                                           <label class="custom-control custom-checkbox ">
-                                             <input type="checkbox" class="custom-control-input ab" name="checkbox" value="{profile_list_pro_num}">
+         
+                                             <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status"> 					
+                                             <input type="checkbox" class="custom-control-input ab" name="pro_num" value="${profile.pro_num}" >
+                                             </c:forEach>
+                                   
+                                             
                                              <span class="custom-control-label"> </span>
                                           </label>
+                                       <!--  </form>  -->
                                        </td>
                                        
                                        <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">   
@@ -247,21 +263,9 @@
                                        <td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td> 
                                        </c:forEach>
                                     </tr>
-                                 
-                                 </c:forEach>      
-                              <!--             <tr>
-                                       <td scope="row">
-                                          <label class="custom-control custom-checkbox">
-                                             <input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-                                             <span class="custom-control-label"></span>
-                                          </label>
-                              </td>                           
-                                       <td><a href="myprofilecontent" class="btn-link">Gavin Gibson</td>
-                                       <td>Account manager</td>
-                                       <td>$230,540</td>
-                                       <td><a href="#"><i class="fa fa-save"></i>개발.java</a></td>       
-                                    </tr>                        -->               
-                              
+
+                                 </c:forEach>
+
                            </table>
                         </div>
 
@@ -272,9 +276,13 @@
                      <div class="card">       
                         <div class="card-footer" align="right">
                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>   
-                        
-                        <a href='freelancerProfile_delete2?PRO_NUM=${delnum}' class="btn btn-secondary icons" >삭제</a>      
+
+      
+                        <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a>      
+                       
                         </div>
+ </form>                       
+          
                 <div class="center-block text-center">
                            <ul class="pagination mb-0">         
                         <div class="card-body" style="margin:0 auto; align:center;">
@@ -419,29 +427,64 @@
 		</section>
 		<!--Footer Section-->
 
+<script>
+function check(){
+	//alert(pro_num)
+      //var pro_num = $('.pro_num').attr('value');
+     // document.getElementById('pro_num').value = pro_num;
+     
+     
+      var pro_num = new Array();
+      var chk_cnt = 0;
+      //for(var i=0; i<key_num_size; i++){
+       $('input:checkbox[name="pro_num"]').each(function() {
+         if(this.checked){
+        	 pro_num[chk_cnt] = this.value;
+        	 chk_cnt++;
+        	
+        	}  
+        
+       });
+       alert("pro_num:"+pro_num);
     
-    <script language="javascript">
-    function fn_delRow(chkObjNm) { 
-    	﻿         if ($("input[name="+chkObjNm+"]").is(":checked")){ 
-    	﻿            if (confirm("삭제 하시겠습니까?")) { 
-    	﻿                for(var i=$("[name='"+chkObjNm+"']:checked").length-1; i>-1; i--){ 
-    	﻿                    $("[name='"+chkObjNm+"']:checked").eq(i).closest("tr").remove(); 
-    	                }﻿ 
-    	            }﻿ 
-    	         } else { 
-    	﻿            alert("선택된 데이터가 없습니다.");  
-    	         }﻿ 
-    	    }﻿ 
-    </script>
-	<script language="javascript">
+       if(pro_num == ""){
+        alert("1개이상 선택해 주세요.");
+         return;
+      }
+     
+     
+     //  alert("FREE_CODE: "+FREE_CODE.FREE_CODE.value);//+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
+      // alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
+       //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
+      // alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
+      // alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+      checkdelete1.submit();
+      }
+   //});
+</script>
 
-	function Delete()
+		<!-- Modal -->
+        <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                       <h5 class="modal-title" id="exampleModalLabel"> <span class=" btn btn-icon btn-primary btn-sm mb-1"><i class="fa fa-envelope"></i> </span> &nbsp; <b>이메일인증</b> </h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      				 <span aria-hidden="true">×</span>
+                           </button>
+                 					 </div>
+              							<div class="modal-body " style="margin:0 auto;">
+                                       <input type="text" id="email" name="email" placeholder="이메일을 입력하세요" class="form-control" style="width:250px; float:left;" />
+                                       <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button>
+                                    </div>
+                                    <div class="modal-footer">
 
-	{
-	$("#tbReworkProcess input[type='checkbox']:checked").parent().parent().remove();
-	}
-
-	</script>
+                                    <input type="hidden" path="random" id="random" value="${random}" />
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        <!--Modal 끝-->
 
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>

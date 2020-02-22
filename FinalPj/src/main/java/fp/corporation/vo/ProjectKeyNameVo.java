@@ -1,3 +1,4 @@
+
 package fp.corporation.vo;
 
 import fp.corporation.domain.Keyword;

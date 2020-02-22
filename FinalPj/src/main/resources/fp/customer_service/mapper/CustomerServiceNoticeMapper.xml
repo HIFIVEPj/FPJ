@@ -5,11 +5,15 @@
 <mapper namespace="fp.customer_service.mapper.CustomerServiceNoticeMapper">
 
 	<select id="notice_list" resultType="CustomerServiceNotice">
-		select * from notice
+		<!--select * from notice-->
+		select notice_num, notice_sub, notice_cont, notice_rdate, notice_vcnt, notice.mem_email, notice_cate, notice_recommnum, notice.option1, notice.option2, notice.option3, mem_name from notice, member where notice.mem_email=member.mem_email
 	</select>
 	
+	
+	
 	<select id="notice_content" resultType="CustomerServiceNotice" parameterType="long">
-		select * from notice where notice_num = #{notice_num}
+		<!--select * from notice where notice_num = #{notice_num}-->
+		select notice_num, notice_sub, notice_cont, notice_rdate, notice_vcnt, notice.mem_email, notice_cate, notice_recommnum, notice.option1, notice.option2, notice.option3, mem_name from notice, member where notice.mem_email=member.mem_email and notice_num=#{notice_num}
 	</select>
 	
 	<update id="notice_count" parameterType="long">
@@ -36,5 +40,5 @@
 		update notice set notice_cate=#{notice_cate}, notice_sub=#{notice_sub}, notice_cont=#{notice_cont} where notice_num=#{notice_num}
 	</update>
 	
-	
+
 </mapper>

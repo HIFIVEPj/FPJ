@@ -1,3 +1,4 @@
+
 package fp.corporation.domain;
 
 import java.sql.Date;
@@ -37,7 +38,8 @@ public class Project {
 	private int pj_fgrade;
 	private long cor_code;
 	private Date pj_ddate;
-	 
+	private int pj_paystatus;
+	
 	//추가 매핑 
 	private List<Keyword> keyword;
 	private List<Integer> keynums;
@@ -67,7 +69,5 @@ public class Project {
 		}
 		return keynames;
 	}
-	
-	
 	
 }
