@@ -291,7 +291,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/m
 	</dependency>
 	-->
 	
-		<!-- 메일 전송 -->
+	<!-- 메일 전송 -->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -306,14 +306,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/m
 		    <artifactId>javax.mail</artifactId>
 		    <version>1.6.2</version>
 		</dependency>
-		    
-		    
-		    <dependency>
-			    <groupId>javax.mail</groupId>
-			    <artifactId>mail</artifactId>
-			    <version>1.4</version>
-			</dependency>
-			
+	    <dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4</version>
+		</dependency>	
 			<!-- Spring security -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
@@ -363,11 +360,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/m
 		            <artifactId>httpclient</artifactId>
 		            <version>4.5.2</version>
 		        </dependency>
-		        
-
 	</dependencies>
-	
-
 	
     <build>
         <plugins>

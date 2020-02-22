@@ -8,5 +8,5 @@ public interface CorporationMapper {
 	void insert(Corporation corporation);
 	void mydash_cor_update(Corporation corporation);
 	//void update_cor_auth(String mem_email);
-	
+
 }

@@ -1,5 +1,5 @@
-package fp.member.service;
 
+package fp.member.service;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,11 +24,6 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private MemberDao dao;
 	
-	/*
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder; 
-	*/
-	
 	@Override
 	public boolean loginCheck(Member member,HttpSession session) {
 		
@@ -41,19 +36,16 @@ public class LoginServiceImpl implements LoginService {
 			//세션 변수 등록
 			session.setAttribute("name",dao.loginCheck(member).getName());
 			session.setAttribute("email",member.getEmail());
-			session.setAttribute("class_num",dao.loginCheck(member).getClass_num());
-
+			session.setAttribute("class_num",dao.loginCheck(member).getClass_num());			
 			return true;
 		}
 		return false;
-
 	}
 	
 	@Override
 	public void logout(HttpSession session) {
 		dao.logout(session);
 	}
-	
 	@Override
 	public int find_pw(Member member){
 		int i =0;
@@ -65,4 +57,5 @@ public class LoginServiceImpl implements LoginService {
 		System.out.print("i: "+i);
 			return i;
 	}
+
 }

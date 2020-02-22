@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.service;
 
 import java.util.*;
@@ -59,11 +60,25 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		   mapper.listDelete(PRO_NUM);
 		   mapper. listDelete2(PRO_NUM);
 	}
-	/*		
+
+			
 	@Override
-	public void listDeleteAll(PRO_NUM) {
-		mapper.listDelete(PRO_NUM);
+	public void checkdelete1() {
+		 mapper.checkdelete1();
+		 
 	}
-*/
+
+	
+
+	@Override
+	public String listInsert(FreeLancerProfile freelancerprofile){
+		return mapper.listInsert(freelancerprofile);
+	}
+	
+	@Override
+	public String insertPjpkeyword(Map<String, Object> map){
+		return mapper.insertPjpkeyword(map);
+	}
+
 
 }

@@ -451,5 +451,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 <!--/footer-->

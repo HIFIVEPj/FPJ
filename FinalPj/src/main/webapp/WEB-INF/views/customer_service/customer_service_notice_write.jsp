@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -57,9 +58,9 @@
 						
 						<form method="post" action="customer_service_notice_write" name="notice_write">
 						
-						<!-- 나중에 없앨 부분 -->
-						<input type="hidden" name="mem_email" value="관리자">
-						<!-- /나중에 없앨 부분 -->
+						
+						<input type="hidden" name="mem_email" value="${sessionScope.email}">
+						
 						
 						<script type="text/javascript">
 						   function check() {
@@ -290,6 +291,5 @@
 		
 			
 <!--footer-->
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
+<%@ include file="/WEB-INF/views/include/footer.jsp"%
 <!--/footer-->

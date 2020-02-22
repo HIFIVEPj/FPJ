@@ -20,6 +20,7 @@ public class IndexController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {	
 		return "index";
+
 	}
 
 }

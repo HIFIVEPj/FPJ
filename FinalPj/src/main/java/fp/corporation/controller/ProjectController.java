@@ -1,3 +1,4 @@
+
 package fp.corporation.controller;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import fp.corporation.domain.Keyword;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
 import fp.corporation.service.CorporationService;
+
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 import lombok.extern.log4j.Log4j;
@@ -33,6 +35,7 @@ public class ProjectController {
 	private ProjectService service;
 	@Autowired
 	private CorporationService corService;
+
 	
 	@RequestMapping("project_list")
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
@@ -105,6 +108,7 @@ public class ProjectController {
 		service.updatePj(project);
 		service.updateKeyword(pjpkeyword);
 		return "redirect:project_content?pj_num="+project.getPj_num();
+
 	}
 	
 	@GetMapping("project_write")
@@ -121,6 +125,7 @@ public class ProjectController {
 		log.info("!@!#(@#*@&$(&*(@!#&&(*@#");
 		String mem_email = request.getParameter("mem_email");
 		log.info("!@*@#&(*#&(*&@# mem_email: "+mem_email);
+
 		String[] ListKeyNum = request.getParameterValues("key_num");
 		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
 		
@@ -145,6 +150,7 @@ public class ProjectController {
 		service.deletePj(pj_num);
 		return "redirect:project_list";
 	}
+
 	@RequestMapping("project_payments")
 	public String project_payment(){
 		return "project/project_payments";
