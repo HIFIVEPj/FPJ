@@ -136,7 +136,8 @@
  		select avg(MARKETREV_STAR) marketRev_star
  		 from MARKET_REVIEW where MARKET_NUM=#{market_num}
 	</select>
-	<!-- 마켓문의페이징 -->	
+	
+<!-- 마켓문의페이징 -->	
 	<select id="getMarketQA" resultMap="resultMarketQA" parameterType="hashmap">
 		<![CDATA[
 		select * from 
@@ -191,6 +192,7 @@
 	<select id="marketQAcont" parameterType="hashmap" resultType="MarketQA">
 		select marketQA_cont from market_QA where market_num=#{market_num}  and marketQA_num=#{marketQA_num}
 	</select>	
+	
 <!-- 마켓리뷰 페이징보기 -->	
 	<select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">
 		<![CDATA[
@@ -231,7 +233,7 @@
 </insert>
 <!-- 마켓 프리랜서 정보뽑기 -->
 	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">
-		select f.FREE_NAME, fp.PRO_CV, f.FREE_RDATE rdate, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME
+		select f.MEM_EMAIL,f.FREE_NAME, fp.PRO_CV, f.FREE_RDATE rdate, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME
 		from FREELANCER f left outer join FREELANCER_PROFILE fp on fp.FREE_CODE=f.FREE_CODE join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
 	</select>
 <!-- 마켓상세보기 -->	

@@ -43,27 +43,21 @@ public class MarketRestController {
 	MarketService marketService;
 	
 //마켓문의 글insert
-	
-	//@PostMapping("marketQA-insert")
-	//@ResponseStatus(value=HttpStatus.OK)
-	@RequestMapping(value = "marketQA-insert", method= {RequestMethod.POST})
-	public void marketQA_insert(MarketQA marketQA,MarketQAFile marketQAFile,MultipartHttpServletRequest mtfRequest ){
+	@PostMapping("marketQA-insert")
+	//@RequestMapping(value = "marketQA-insert", method= {RequestMethod.POST})
+	public List<MarketQA> marketQA_insert(MarketQA marketQA,MarketQAFile marketQAFile,MultipartHttpServletRequest mtfRequest ){
 		log.info( "1@@@marketQA"+ marketQA);
 		marketService.insertMarketQA(marketQA);
 
 		log.info( "3@@@marketQA"+ marketQA);
 		ArrayList<Object[]> list =Fileupload(mtfRequest);
 		log.info("@@@@list"+list);
+	//다중파일 insert
 		for (int i=0 ;i<list.size(); i++) {
 			String marketQAFile_fname= (String) list.get(i)[0];
 			String marketQAFile_ofname=(String) list.get(i)[1];
 			long marketQAFile_size=(long)list.get(i)[2];
-		
-			/*
-			 marketQAFile.setMarketQAFile_fname(marketQAFile_fname); 
-			marketQAFile.setMarketQAFile_ofname(marketQAFile_ofname);
-			marketQAFile.setMarketQAFile_size(marketQAFile_size);
-			*/
+
 			log.info("#######marketQAFile"+marketQAFile);
 			marketQAFile.setMarketQA_num(marketQA.getMarketQA_num());
 			
@@ -74,18 +68,45 @@ public class MarketRestController {
 			map.put("marketQAFile_size",marketQAFile_size);
 			marketService.insertMarketQAFile(map);
 		}
+		List<MarketQA> listqa=marketList(marketQA);
+	/*
+	 * 1페이지 리스트다시전송	
+		HashMap<String,Object> mapList=new HashMap<String,Object>();
+		mapList.put("market_num", marketQA.getMarket_num());
+		mapList.put("marketVOQAStart",0);
+		mapList.put("marketVOQAEnd",4);
+		List<MarketQA> marketQAList=marketService.getMarketQA(mapList);
+		log.info("11111111#marketQAList"+marketQAList);
+		*/
+		
+		return listqa;
 	}
+
 	@RequestMapping(value = "marketQARE-insert", method= {RequestMethod.POST})
-	public void marketQARE_insert(MarketQA marketQA){
-		log.info( "1@@@marketQA"+ marketQA);
+	public List<MarketQA> marketQARE_insert(MarketQA marketQA){
+		log.info( "3333@@@marketQA"+ marketQA);
 		int lev=marketQA.getMarketQA_lev();
 		int sun=marketQA.getMarketQA_sun();
 		marketQA.setMarketQA_lev(lev+1);
 		marketQA.setMarketQA_sun(sun+1);
 		
-		log.info( "2@@@marketQA"+ marketQA);
+		log.info( "4444@@@marketQA"+ marketQA);
 		marketService.insertMarketQA(marketQA);
+		List<MarketQA> listqa=marketList(marketQA);
+		log.info("11111111111111"+listqa);
+		return listqa;
 		
+	}
+	public List<MarketQA> marketList(MarketQA marketQA){
+		//1페이지 리스트다시전송	
+			HashMap<String,Object> mapList=new HashMap<String,Object>();
+			mapList.put("market_num", marketQA.getMarket_num());
+			mapList.put("marketVOQAStart",0);
+			mapList.put("marketVOQAEnd",4);
+			List<MarketQA> marketQAList=marketService.getMarketQA(mapList);
+			log.info("11111111#marketQAList"+marketQAList);
+			
+			return marketQAList;
 	}
 	
 	public ArrayList<Object[]> Fileupload(MultipartHttpServletRequest mtfRequest){
@@ -170,11 +191,11 @@ public class MarketRestController {
 		List<MarketQAFile> marketQAFile=marketService.marketQAFile(map);
 		MarketQA marketQA=marketService.marketQAcont(map);
 		
-		HashMap<String,Object>map2 =new HashMap<String,Object>();
-		map2.put("marketQAFile",marketQAFile);
-		map2.put("marketQA",marketQA);
-log.info(map2);
-		return map2;
+		HashMap<String,Object>mapSubmit =new HashMap<String,Object>();
+		mapSubmit.put("marketQAFile",marketQAFile);
+		mapSubmit.put("marketQA",marketQA);
+log.info(mapSubmit);
+		return mapSubmit;
 	}
 
 

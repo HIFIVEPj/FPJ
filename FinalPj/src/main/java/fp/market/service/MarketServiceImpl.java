@@ -91,7 +91,8 @@ public class MarketServiceImpl implements MarketService {
 	@Transactional
 	public void insertMarketQA(MarketQA marketQA) {
 		mapper.updateMarketQA(marketQA);
-		
+	//	marketQA.setMarketQA_lev(marketQA.getMarketQA_lev()+1);
+	//	marketQA.setMarketQA_lev(marketQA.getMarketQA_sun()+1);
 		mapper.insertMarketQA(marketQA);
 		
 	}

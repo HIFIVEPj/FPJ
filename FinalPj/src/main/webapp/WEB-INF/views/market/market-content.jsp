@@ -480,9 +480,18 @@
 			                                  <!-- 모달로 정보보내기
 			                                   <button type="button"  data-toggle="modal" data-target="#Comment" data-prnum="${marketQA.marketQA_prnum}" data-lev="${marketQA.marketQA_lev}" data-sun="${marketQA.marketQA_sun}" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></button>
 			                                   --> 
-			                                  		<a href="#" onclick="QAModal('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
-													<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+			                                    <c:choose>
+			                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
+			                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+														<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
+														<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+													</c:when>
+													<c:when test="${empty sessionScope.name}">
+													</c:when>
+													<c:when test="${!sessionScope.email != marketQA.mem_email}">
+														<a href="#" onclick="QA('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+													</c:when>
+												  </c:choose>
 												 </div>                        
 		                                    </c:when>
 		                                    
@@ -514,9 +523,18 @@
 				                                        </c:when>
 				                                         
 			                                        </c:choose> 
-													<a href="#" onclick="QAModal('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');"    data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
-													<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+													 <c:choose>
+			                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
+			                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+														<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
+														<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+													</c:when>
+													<c:when test="${empty sessionScope.name}">
+													</c:when>
+													<c:when test="${!sessionScope.email != marketQA.mem_email}">
+														<a href="#" onclick="QA('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+													</c:when>
+												  </c:choose>
 												 </div>                         
 		                                    </c:when>
 		                                    
@@ -535,7 +553,7 @@
 					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
 				                                        	</p>
 				                                        </c:when>
-				                                         <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.name  == freeProfile.freelancer.free_fname}">
+				                                         <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.mail  == freeProfile.freelancer.mem_email}">
 					                                        <p class="font-13  mb-2 mt-2">
 					                                       		 <비밀글 입니다.> <br>
 					                                           <p class="font-13  mb-2 mt-2">
@@ -547,9 +565,18 @@
 					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
 			                                      	</c:choose> 
-													 <a href="#" onclick="QAModal('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
-													<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+													<c:choose>
+				                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
+				                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+															<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
+															<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
+														</c:when>
+														<c:when test="${empty sessionScope.name}">
+														</c:when>
+														<c:when test="${!sessionScope.email != marketQA.mem_email}">
+																<a href="#" onclick="QA('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+														</c:when>
+												  	</c:choose>
 												</div>
 		                                    </c:otherwise>
 		                                    
@@ -635,7 +662,7 @@
 											<label class="custom-file-label" id="cor_fname_label">file upload</label>
 										</div><br>
 										
-										<button type="submit" class="btn btn-primary" >Send Reply</button> <!-- id="checkMQ()" -->
+										<button type="button"  id="ididi" onclick="mqajax(0,0,0);" class="btn btn-primary" >Send Reply</button>
 										
 										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
 										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
@@ -1016,10 +1043,10 @@
 	              </div>
 	              <div class="modal-body">
 	               	 <div class="form-group mb-0">
-	                   <input type="text" class="form-control" name="marketQA_sub" id="marketQA_sub" rows="6" placeholder="제목 입력">
+	                   <input type="text" class="form-control" name="marketQA_sub" id="marketQA_subID" rows="6" placeholder="제목 입력">
 	                 </div>
 	                 <div class="form-group mb-0">
-	                  	<textarea class="form-control" name="marketQA_cont" id="marketQA_cont"  rows="6" placeholder="메세지 입력"></textarea>
+	                  	<textarea class="form-control" name="marketQA_cont" id="marketQA_contID"  rows="6" placeholder="메세지 입력"></textarea>
 	                 </div>
 	              </div>
 	              <div class="modal-footer">
@@ -1035,7 +1062,7 @@
 	                 </div>   
 	                 <div class="col col-auto">
 	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-	                    <button type="submit" id="submitQA" class="btn btn-primary">확인</button>
+	                    <button type="button" id="submitQARE" class="btn btn-primary">확인</button>
 	                 </div>
 	              </div>
 	           </div>
@@ -1213,21 +1240,21 @@
     			 revmem='';
     			 rev='';
 	 			revfree +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/freelancer/'+data[0].freelancer.free_fname+'"> </a></div>';
-	 			revfree +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name +'</h5>'; 
+	 			revfree +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name; 
    	   			revfree +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
    	   			revfree +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
    	   			revfree +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
    	   			revfree +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
    	   			
 	 			revcor +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/corporation/'+data[0].corporation.cor_fname+'"> </a></div>';
-	 			revcor +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].corporation.cor_mname +'</h5>';
+	 			revcor +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].corporation.cor_mname;
 	 			revcor +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
    	   			revcor +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
    	   			revcor +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
    	   			revcor +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
    	   			 
    	   			revmem +='<c:if  test="${marketRev[0].freelancer== null && marketRev[0].corporation==null }"> <a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a></div>';
-   	   			revmem +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">'+data[0].mem_email+'</h5></c:if>'
+   	   			revmem +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">'+data[0].mem_email+'</c:if>';
    	   			revmem +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
    	   			revmem +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
    	   			revmem +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
@@ -1306,7 +1333,9 @@
 	});
 	
 	
-	function onError(){}
+	function onError(request,status,error){
+	    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	}
 		
 	function dateToYYYYMMDD(date){
 	    function pad(num) {
@@ -1320,6 +1349,7 @@
 
 </script>
 <script>
+//파일선택시 글씨보이게하는 펑션
 	   function upfile(){
 	      var filename = document.getElementById("file").value;
 	      document.getElementById("cor_fname_label").innerHTML="파일 선택됨";
@@ -1331,7 +1361,7 @@
 			var market_num=MN;
 			var images='';
 		   $.ajax({
-			   type:'get',
+			   	type:'get',
 		    	url:'marketQAFile_show?marketQA_num='+marketQA_num+'&market_num='+market_num,
 		    	dataType:'json',
 		    	async :true,
@@ -1348,21 +1378,84 @@
 			    		$("#exampleModalLong .carousel-inner").html(images);
 		    		}
 		    		$(".modal-body #cont #mqcont").text(marketQA.marketQA.marketQA_cont); 
-		    		
-		    		
 		    	}	
 		   	}); 	    	
-	   }
-	   function QAModal(prnum,lev,sun){
+	   	}
+//문의글파일포함 insert후 Listing하는 AJAX
+	   function mqajax(prnum,lev,sun){
 		   alert(prnum);
-		   $('#Comment').on('show.bs.modal', function (event) {
-			//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
-			//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..  
-			$(".modal-content #REmarketQA_prnum").val( prnum );
-			$(".modal-content #REmarketQA_lev").val( lev );
-			$(".modal-content #REmarketQA_sun").val( sun );
-        	})     
+		   var url=$("#mqInput").attr("action");
+		   var formData = new FormData($("#mqInput")[0]);
+
+			$.ajax({
+			 	type:'POST',
+		    	url: url,
+		    	dataType:'json',
+		    	data: formData,
+		    	processData: false,
+		    	cache:false,
+		    	contentType: false,
+		    	async :false,
+		    	error:onError,
+		    	success:function onSuccess(marketQAList){
+		    		for(i=0; i<marketQAList.length; i++){//프리네임, 날짜 ,제목
+		    		//	console.log("11111marketQAList"+marketQAList);
+		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_cont);
+		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_rdate);
+		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_name);
+		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_fname);
+		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_mname);
+		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_fname);
+		    		}
+		    	}	
+		   	}); 
+			return false;
 		}
+		
+		//문의 리댓글 만따로빼려면이거씀
+	  function mqajaxRE(prnum,lev,sun){
+			alert(prnum);
+			alert(lev);
+			alert(sun);
+		    
+		   $('#Comment').on('show.bs.modal', function (event) {
+				//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
+				//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..    
+				$(".modal-content #REmarketQA_prnum").val( prnum );
+				$(".modal-content #REmarketQA_lev").val( lev );
+				$(".modal-content #REmarketQA_sun").val( sun );
+        	});           	
+		}
+	  $('#submitQARE').click(function(){   
+		  console.log("ddddddddd");
+		  var url=$("#mqModal").attr("action");
+		  var QAqueryString = $("#mqModal").serialize();
+		  
+		   $.ajax({
+			 	type:'POST',
+		    	url: url,
+		    	dataType:'json',
+		    	async :false,
+		    	data:QAqueryString,
+		    	error:onError,
+		    	success:function onSuccess(marketQAList){
+		    		console.log("11111marketQAList"+marketQAList);
+		    		for(i=0; i<marketQAList.length; i++){//프리네임, 날짜 ,제목
+			    		//	console.log("11111marketQAList"+marketQAList);
+			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_cont);
+			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_rdate);
+			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_name);
+			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_fname);
+			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_mname);
+			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_fname);
+			    	}
+		    	}	
+		   	}); 	    
+	   });
+	
+		
+
+		
 	/*   
 	    var PRNUM="";
 	    var LEV="";
