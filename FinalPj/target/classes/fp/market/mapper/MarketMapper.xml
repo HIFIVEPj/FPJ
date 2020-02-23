@@ -181,14 +181,16 @@
 		<selectKey resultType="long" keyProperty="marketQA_num" order="BEFORE">
 			select max(MARKETQA_NUM) from market_QA where market_num=#{market_num}
 		</selectKey>
-		insert into MARKET_QAFILE values(MARKETQAFILE_NUM_SEQ.NEXTVAL, #{marketQA_num}, #{marketQAFile_fname},#{marketQAFile_ofname},#{marketQAFile_size},null,null,null)
+		insert into MARKET_QAFILE values(MARKETQAFILE_NUM_SEQ.NEXTVAL, #{marketQA_num}, #{market_num}, #{marketQAFile_fname},#{marketQAFile_ofname},#{marketQAFile_size},null,null,null)
 	</insert>
 	
-<!-- 마켓문의 파일 보기 -->	
-	<select id="marketQAFile" parameterType="MarketQAFile" resultType="MarketQAFile">
+<!-- 마켓문의 파일,글 만 보기 -->	
+	<select id="marketQAFile" parameterType="hashmap" resultType="MarketQAFile">
 		select * from MARKET_QAFile where market_num=#{market_num} and marketQA_num=#{marketQA_num}
 	</select>	
-	
+	<select id="marketQAcont" parameterType="hashmap" resultType="MarketQA">
+		select marketQA_cont from market_QA where market_num=#{market_num}  and marketQA_num=#{marketQA_num}
+	</select>	
 <!-- 마켓리뷰 페이징보기 -->	
 	<select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">
 		<![CDATA[

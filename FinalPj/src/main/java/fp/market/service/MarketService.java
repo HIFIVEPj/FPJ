@@ -39,8 +39,8 @@ public interface MarketService {
 	 void insertMarketQA(MarketQA marketQA);
 	 void insertMarketQAFile(HashMap<String, Object> map);
 	 
-	 MarketQAFile marketQAFile(long marketQA_num);
-	 
+	 List<MarketQAFile> marketQAFile(HashMap<String, Object> map);
+	 MarketQA marketQAcont(HashMap<String, Object> map);
 	// List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 

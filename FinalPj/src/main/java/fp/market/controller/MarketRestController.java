@@ -158,10 +158,23 @@ public class MarketRestController {
 	}
 	
 	@GetMapping("marketQAFile_show")
-	public List<MarketQAFile> marketQAFile_show(long marketQA_num){
+	public HashMap<String, Object> marketQAFile_show(@RequestParam(value="marketQA_num") String marketQA_num,
+												@RequestParam(value="market_num") String market_num
+											){
+		log.info("11111111@@@@@@@@@@@@"+marketQA_num);
+		log.info("2222222222@@@@@@@@@@@@"+market_num);
 		
-		return null;
+		HashMap<String,Object>map =new HashMap<String,Object>();
+		map.put("marketQA_num", marketQA_num);
+		map.put("market_num", market_num);
+		List<MarketQAFile> marketQAFile=marketService.marketQAFile(map);
+		MarketQA marketQA=marketService.marketQAcont(map);
 		
+		HashMap<String,Object>map2 =new HashMap<String,Object>();
+		map2.put("marketQAFile",marketQAFile);
+		map2.put("marketQA",marketQA);
+log.info(map2);
+		return map2;
 	}
 
 

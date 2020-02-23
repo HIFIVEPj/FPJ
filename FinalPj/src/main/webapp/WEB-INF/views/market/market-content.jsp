@@ -456,23 +456,27 @@
 														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
 													 </h5>
 													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
+													 
 			                                     	 <c:choose>
 				                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
 					                                        <p class="font-13  mb-2 mt-2">
-					                                       <a href="#" onclick="QAFile('${marketQA.marketQA_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                        	</p>
+				                                        </c:when>
+				                                        <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.name  == freeProfile.freelancer.free_fname}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                       		 <비밀글 입니다.> <br>
+					                                            <p class="font-13  mb-2 mt-2">
+					                                      		 	<a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                        		</p>
 				                                        	</p>
 				                                        </c:when>
 				                                         <c:when test="${marketQA.marketQA_ox == 1}">
 					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
-				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
-					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.> <br>
-					                                          ${marketQA.marketQA_sub}<br>
-					                                         
-				                                        	</p>
-				                                        </c:when>
+				                                         
 			                                        </c:choose> 
+			                                        
 			                                  <!-- 모달로 정보보내기
 			                                   <button type="button"  data-toggle="modal" data-target="#Comment" data-prnum="${marketQA.marketQA_prnum}" data-lev="${marketQA.marketQA_lev}" data-sun="${marketQA.marketQA_sun}" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></button>
 			                                   --> 
@@ -493,20 +497,22 @@
 													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
 			                                     	 <c:choose>
 				                                     	<c:when test="${marketQA.marketQA_ox == 0}">
+					                                       <p class="font-13  mb-2 mt-2">
+					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                        	</p>
+				                                        </c:when>
+				                                        <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.name  == freeProfile.freelancer.free_fname}">
 					                                        <p class="font-13  mb-2 mt-2">
-					                                          ${marketQA.marketQA_sub}<br>
+					                                       		 <비밀글 입니다.> <br>
+					                                           <p class="font-13  mb-2 mt-2">
+					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                        	</p>
 				                                        	</p>
 				                                        </c:when>
 				                                         <c:when test="${marketQA.marketQA_ox == 1}">
 					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
-				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
-					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.> <br>
-					                                          ${marketQA.marketQA_sub}<br>
-					                                          ${marketQA.marketQA_cont}
-				                                        	</p>
-				                                        </c:when>
+				                                         
 			                                        </c:choose> 
 													<a href="#" onclick="QAModal('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');"    data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
@@ -526,20 +532,20 @@
 			                                     	<c:choose>
 				                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
 					                                        <p class="font-13  mb-2 mt-2">
-					                                          ${marketQA.marketQA_sub}<br>
+					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                        	</p>
+				                                        </c:when>
+				                                         <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.name  == freeProfile.freelancer.free_fname}">
+					                                        <p class="font-13  mb-2 mt-2">
+					                                       		 <비밀글 입니다.> <br>
+					                                           <p class="font-13  mb-2 mt-2">
+					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                        	</p>
 				                                        	</p>
 				                                        </c:when>
 				                                         <c:when test="${marketQA.marketQA_ox == 1}">
 					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
-				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
-					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.> <br>
-					                                          ${marketQA.marketQA_sub}<br>
-					                                          ${marketQA.marketQA_cont}
-				                                        	</p>
-				                                        </c:when>
-				                                        
 			                                      	</c:choose> 
 													 <a href="#" onclick="QAModal('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
@@ -1049,14 +1055,12 @@
 						  <span aria-hidden="true">&times;</span>
 						</button>
 					  </div>
-					  <div class="modal-body">
-						<p> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-						<p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
-						<p>These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. </p>
-						<p> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-						<p> No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-					  </div>
+					   <div class="modal-body">
+						<p id="cont"><text id="mqcont"></text></p>
+					   </div>
+					   <div class="carousel-inner">
+						<div class="carousel-item active"> <img src="../hifiveImages/market/marketQAFiles/" alt="이미지 없음"> </div>
+					   </div>				  
 					  <div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary">Save changes</button>
@@ -1322,21 +1326,32 @@
 	   }   
 	   
 //문의파일보는 ajax
-ㅊ
-		function(marketQAnum){
+		function QAFile(Qn,MN){
+			var marketQA_num=Qn;
+			var market_num=MN;
+			var images='';
 		   $.ajax({
-			   type: 'get',
-		    	url: 'marketQAFile_show',
-		    	data: marketQAnum,
-		    	dataType: 'json',
+			   type:'get',
+		    	url:'marketQAFile_show?marketQA_num='+marketQA_num+'&market_num='+market_num,
+		    	dataType:'json',
 		    	async :true,
 		    	error:onError,
-		    	success:function onSuccess(marketQAFile){
+		    	success:function onSuccess(marketQA){
+		    		console.log("0000"+marketQA.marketQA.marketQA_cont);
+		    		//console.log("111111"+marketQA.marketQAFile[1].marketQAFile_fname);
+		    		if(marketQA.marketQAFile.length>0){
+			    		for(i=0;i<marketQA.marketQAFile.length;i++){	    			
+			    			images +='<div class="carousel-inner">';
+			    			images +='<div class="carousel-item active"> <img src="../hifiveImages/market/marketQAFiles/'+marketQA.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+			    			images +='</div>';	
+			    		}
+			    		$("#exampleModalLong .carousel-inner").html(images);
+		    		}
+		    		$(".modal-body #cont #mqcont").text(marketQA.marketQA.marketQA_cont); 
 		    		
-		   });
-		}
-      	
-	        	
+		    		
+		    	}	
+		   	}); 	    	
 	   }
 	   function QAModal(prnum,lev,sun){
 		   alert(prnum);
@@ -1362,49 +1377,3 @@
 	    });
 	  */  
 	</script>
-
-
-<!--
-<script>
-function formSubmit() {
-    var params = jQuery("#mqInput").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
-    jQuery.ajax({
-        url: '샘플ajax.php',
-        type: 'POST',
-        data:params,
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-        dataType: 'html',
-        success: function (result) {
-            if (result){
-                // 데이타 성공일때 이벤트 작성
-            }
-        }
-    });
-}
-</script>
-   -->
-<!--
- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		    <script type="text/javascript">
-		        $(function () {
-		            $("#mqInput").click(function () {
-		                var formData = new FormData();
-		                formData.append("PersonId", $("#PersonId").val());
-		                formData.append("Name", $("#Name").val());
-		                formData.append("Gender", $("#Gender").val());
-		                formData.append("City", $("#City").val());
-		                $.ajax({
-		                    url: "/Home/Index",
-		                    type: 'POST',
-		                    cache: false,
-		                    contentType: false,
-		                    processData: false,
-		                    data: formData,
-		                    success: function (response) {
-		                        alert(response);
-		                    }
-		                });
-		            });
-		        });
-		    </script>
--->

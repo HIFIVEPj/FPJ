@@ -101,10 +101,12 @@ public class MarketServiceImpl implements MarketService {
 	}
 	@Override
 	//마켓문의글 파일 보기
-	public MarketQAFile marketQAFile(long marketQA_num) {
-		return mapper.marketQAFile(marketQA_num);
+	public List<MarketQAFile> marketQAFile(HashMap<String, Object> map) {
+		return mapper.marketQAFile(map);
 	}
-
+	public MarketQA marketQAcont(HashMap<String, Object> map) {
+		return mapper.marketQAcont(map);
+	}
 
 }
 
