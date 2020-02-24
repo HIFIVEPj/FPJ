@@ -1213,13 +1213,14 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label mb-0"><b>회사명</b></label>
-											<input type="text" class="form-control" name="cor_name" value="coporation에서 회사 이름가져오기"> <!--로그인 구현후에 readonly해야됨 -->
+											<input type="text" class="form-control" name="cor_name" value="${cor.cor_name}" readOnly>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>담당자명</b></label>
-											<input type="text" class="form-control" name="cor_mname" value="coporation에서 매니저 이름가져오기"> <!--로그인 구현후에 readonly해야됨 -->
+											<input type="text" class="form-control" name="cor_mname" value="${cor.cor_mname}">
+
 										</div>	
 									</div>
 								</div>
@@ -1227,13 +1228,13 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>이메일</b></label>
-											<input type="email" class="form-control" value="이메일 가져오기" name="mem_email"><!--로그인 구현후에 readonly해야됨 -->
+											<input type="email" class="form-control" value="${sessionScope.email}" name="mem_email">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>연락처</b></label>
-											<input type="text" class="form-control" value="corporation에서 연락처 가져오기" name="cor_tel">
+											<input type="text" class="form-control" value="${cor.cor_tel}" name="cor_tel">
 										</div>	
 									</div>
 								</div>	
@@ -1242,7 +1243,7 @@
 									<div class="col-sm-3 col-md-3">
 									<label class="form-label"><b>주소</b></label>
 										<div class="form-group">
-											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode" value="corporation에서 우편번호가져오기">
+											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode" value="${cor.cor_postcode}">
 										</div>
 									</div>
 									<div class="col-sm-4 col-md-4">
@@ -1256,20 +1257,20 @@
 									<div class="row">
 									<div class="col-sm-12 col-md-7">
 										<div class="form-group">
-											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc" value="corporation에서  주소가져오기"><br>
+											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc" value="${cor.cor_addr}"><br>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-5">
 										<div class="form-group">	
-											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pj_detailloc" value="corporation에서  상세주소가져오기">
+											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pj_detailloc" value="${cor.cor_detailaddr}">
 										</div>
 									</div>
 									</div>
 									<div id="map" style="width:100%;height:350px;"></div>
 									
 								<!-- 좌표 부분 1차 시작 , (좌표를 위한 추가)지도 쓸일 없으면 안해도 됨 -->
-									<input type="hidden" id="address_x"  class="form-control" placeholder="x좌표" name="pj_loc_x" value="corporation에서  x좌표 가져오기"> 
-									<input type="hidden" id="address_y"  class="form-control" placeholder="y좌표" name="pj_loc_y" value="corporation에서  y좌표 가져오기">
+									<input type="hidden" id="address_x"  class="form-control" placeholder="x좌표" name="pj_loc_x" value="${cor.cor_addr_x}"> 
+									<input type="hidden" id="address_y"  class="form-control" placeholder="y좌표" name="pj_loc_y" value="${cor.cor_addr_y}">
 								<!-- 좌표를 위한 카카오 key 추가,지도 쓸 일 없으면 지워도 됨 -->
 									<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=50e87f1e8bcbb6ac445c4b87fdbcf76e&libraries=services"></script>
 								<!-- 좌표부분 1차 끝 // -->
@@ -1363,7 +1364,7 @@
 									        }).open();
 									    }
 									</script>
-									<input type="hidden" value ="1" name ="cor_code"/>
+									<input type="hidden" value ="${cor.cor_code}" name ="cor_code"/>
 								<!-- 주소 api끝 -->
 								<div class="card-footer ">
 									<div class ="row">

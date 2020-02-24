@@ -31,6 +31,7 @@
 		<result property="pj_pcnt" column ="pj_pcnt" />
 		<result property="pj_vcnt" column ="pj_vcnt" />
 		<result property="pj_fgrade" column ="pj_fgrade" />
+		<result property="pj_paystatus" column ="pj_paystatus" />
 		
 
 		<association javaType="corType" property="type" column="type_num">
@@ -81,13 +82,29 @@
 		</collection>
 		
 	</resultMap>
-	
+	<!-- 프로젝트 리스트 -->
 	<select id="list" parameterType="ProjectVo" resultMap="projectMap"> 
 		 <![CDATA[
 			select * from (select ROWNUM rnum , aa.* from 
 			(select * from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code order by PJ_NUM desc)aa) where rnum>#{start} and rnum<=#{end}
 	    ]]>
+	</select>	
+	<select id="getTotalCount" resultType="long" >
+		select count(PJ_NUM) from PROJECT
 	</select>
+	<!--  -->
+	
+	<!-- mydash_cor에서 project 관리부분들  -->
+	<select id="listMydashCor" parameterType="map" resultMap="projectMap"> 
+		 <![CDATA[
+			select pj_sub, type_num, cor_code, pj_sub, pj_ddate, pj_pay, pj_cont, pj_term, pj_loc, pj_fgrade, pj_paystatus from (select ROWNUM rnum , aa.* from 
+			(select pj.* from PROJECT pj join CORPORATION cor on pj.cor_code = #{cor_code} order by PJ_NUM desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
+	    ]]>
+	</select>
+	<select id="getTotalCountCor" resultType="long" >
+		select count(PJ_NUM) from PROJECT where COR_CODE=#{cor_code}
+	</select>
+	<!--  -->
 	
 	<select id="pjKeywords" resultMap="projectMap">
 		<![CDATA[
@@ -108,12 +125,7 @@
 		   WHERE pj.PJ_NUM=#{pj_num}
 		  ]]>
 	</select>
-	
-	<select id="getTotalCount" resultType="long" >
-		select count(PJ_NUM) from PROJECT
-	</select>
-	
-	
+
 	<insert id="insertpj" parameterType="corProject" >
 	<selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
 		select pj_num_seq.nextval from dual

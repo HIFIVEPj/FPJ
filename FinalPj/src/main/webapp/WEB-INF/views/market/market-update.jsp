@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -32,8 +33,8 @@
 <!-- /////////////////////////서버로 보내는 폼 ///////////////////////////-->		
 					<form name="updateForm" method="post" action="market-update2?market_num=${market.market_num}" enctype="multipart/form-data">		
 						<div class="card mb-lg-0">
-							<div class="card-header ">
-								<h3 class="card-title">마켓등록</h3>
+							<div class="card-header">
+								<h3 class="card-title">마켓수정</h3>
 							</div>
 							<div class="card-body">
 								<div class="form-group">
@@ -58,52 +59,37 @@
 								</div>
 								셀렉트박스!!!!!!!!--> 	
 								<div class="form-group">
-									<label class="form-label text-dark">직종</label>
+									<label class="form-label text-dark">직종</label>				
 									<div class="d-md-flex ad-post-details">
 										<label class="custom-control custom-radio mb-2 mr-4">
-											<input type="radio" class="custom-control-input" name="cate_num" value="1">
+											<c:if test="${market.cate_num == 1}">
+												<input type="radio" class="custom-control-input" name="cate_num" value="1" checked="">
+											</c:if>
+											<c:if test="${market.cate_num != 1}">
+												<input type="radio" class="custom-control-input" name="cate_num" value="1">
+											</c:if>
 											<span class="custom-control-label text-muted">개발자 </span>
 										</label>
-								<!--		<div>
-										<label class="custom-control custom-radio  mb-2">
-											<input type="radio" class="custom-control-input" name="cate_num" value="2" >
-											<span class="custom-control-label text-muted">퍼블리싱</span>
-											&nbsp;&nbsp;&nbsp;
-										</label>
-										</div>
-									  -->	
+					
 										<div>
 										<label class="custom-control custom-radio  mb-2">
-											<input type="radio" class="custom-control-input" name="cate_num" value="2" >
+											<c:if test="${market.cate_num == 2}">
+												<input type="radio" class="custom-control-input" name="cate_num" value="2" checked="">
+											</c:if>
+											<c:if test="${market.cate_num != 2}">
+												<input type="radio" class="custom-control-input" name="cate_num" value="2" >
+											</c:if>
 											<span class="custom-control-label text-muted">디자이너</span>  
 											&nbsp;&nbsp;&nbsp;
 										</label>
 										</div>
-									<!--	
-										<div>
-										<label class="custom-control custom-radio  mb-2">
-											<input type="radio" class="custom-control-input" name="cate_num" value="4" >
-											<span class="custom-control-label text-muted">기획</span>
-											&nbsp;&nbsp;&nbsp;
-										</label>
-										</div>
-										<div>
-										<label class="custom-control custom-radio  mb-2">
-											<input type="radio" class="custom-control-input" name="cate_num" value="5" >
-											<span class="custom-control-label text-muted">기타</span>
-										</label>
-										</div>
+									<!--						
 										<input type="text" class="form-control" name="option3"  value="1111111">
 									  -->	
 									</div>
-								
-								</div>
-								<!--		
-								<div class="form-group">
-									<label class="form-label text-dark"></label>
-								    <div id="summernote"></div>
-								</div>
-								-->
+							
+								</div>		
+					
 							
 					<!-- 썸머노트 -->
 	                    <textarea name="market_cont" id="summernote" class="summernote" >${market.market_cont}</textarea>     
@@ -129,8 +115,8 @@
 						<br></br>
 						<div class="form-group">
 							<div class="custom-file">
-					 			<input multiple="multiple" type="file" class="custom-file-input" name="fnames" value="파이리다">
-								<label class="custom-file-label">썸네일</label>
+					 			<input type="file" class="custom-file-input" name="ofname" id="file" onchange="upfile()">
+								<label class="custom-file-label" id="cor_fname_label" value="">${market.market_fname}</label>
 							</div>
 						</div>
 					
@@ -175,7 +161,7 @@
 		                  <p>글을 정말 수정하시겠습니까?</p>
 		               </div>
 		               <div class="modal-footer">
-		                 <a class="btn btn-primary" style="color:white;" onclick="javascript:updateCheck()">네</a>
+		                 <a class="btn btn-primary" style="color:white;" onclick="javascript:updateCheck();">네</a>
 		                 <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
 		               </div>
 		            </div>
@@ -289,6 +275,13 @@
 		</section>
 		<!--/Add posts-section-->
 <script>
+	   function upfile(){
+	      var filename = document.getElementById("file").value;
+	      document.getElementById("cor_fname_label").innerHTML=filename;
+	   }   
+</script>		
+		
+<script>
 	   function updateCheck(){
 		   alert(" updateForm.cate_num."+updateForm.cate_num.value);
 		   if(updateForm.market_sub.value=="" ){
@@ -301,7 +294,7 @@
 				$('#smallModal1').modal("hide"); //닫기 
 				return false;
 			}
-			if(updateForm.cate_num.value==""  ){
+			if(updateForm.market_cont.value==""  ){
 				 alert("내용을 적어주세요");
 				 $('#smallModal1').modal("hide"); //닫기 
 				 return false;
@@ -311,7 +304,7 @@
 			   $('#smallModal1').modal("hide"); //닫기 
 			   return false;
 			}
-		  if(updateForm.fnames.value==""){		   
+		  if(updateForm.ofname.value==""){		   
 			   alert("썸네일파일을 선택해주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
 			   return false;

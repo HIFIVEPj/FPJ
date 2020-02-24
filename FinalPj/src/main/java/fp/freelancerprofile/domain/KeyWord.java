@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.domain;
 
 import java.util.Date;
@@ -15,7 +16,8 @@ public class KeyWord {
 	//사용언어//
 	private long key_num;
 	private String key_name;
-	
 	private List<FreeLancerProfile> freelancerprofile;
-	//private  List<Project> projcet;
+
+	private  List<KeyWord> frKeyWord;
+
 }

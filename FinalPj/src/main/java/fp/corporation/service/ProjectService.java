@@ -1,4 +1,3 @@
-
 package fp.corporation.service;
 
 import java.util.ArrayList;
@@ -24,5 +23,14 @@ public interface ProjectService {
 	void insertPjpkeyword(Map<String, Object> map);
 	
 	void updatePj(Project project);
-	void updateKeyword(PjPickKeyword pjpkeyword);
+
+	void updateKeyword(Map<String, Object> map);
+
+	void updateKeyword(PjPickKeyword pjpkeyword);	
+	//mydash_cor에서 project 관리부분들
+	List<Project> listMydashCor (Map<String, Object> map);
+	long getTotalCountCor(long cor_code);
+
+
 }
+

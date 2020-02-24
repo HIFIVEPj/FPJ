@@ -60,5 +60,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 6639d0921df9b65c8efd3090a1a3933ebc32d277
 <!--/footer-->

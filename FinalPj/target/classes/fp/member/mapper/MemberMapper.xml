@@ -16,14 +16,15 @@
 		<result property="option3" column="OPTION3"/>	
 		
 	</resultMap>
-	
+	<select id = "idCheck" parameterType = "String" resultType = "int">
+    	SELECT COUNT(*) FROM MEMBER WHERE MEM_EMAIL = #{email}
+	</select>
 	
 	<select id="loginCheck" resultType="Member" resultMap="MemberMap">
 		<![CDATA[
 			SELECT * FROM member WHERE MEM_EMAIL = #{email} 
 		]]>
 	</select>
-
 	<!--  시큐리티 적용해보기 
 	<select id="selectMemList" resultMap="MemberMap" resultType="Member"  parameterType="String">
   		SELECT m.*, a.MEM_AUTH FROM MEMBER m LEFT OUTER JOIN MEMBER_AUTH a on m.MEM_EMAIL=a.MEM_EMAIL WHERE m.MEM_EMAIL= #{email} 
@@ -44,5 +45,5 @@
 		delete from ADDRESS where SEQ=#{seq}
 	</delete>
 	-->
-	
+
 </mapper>

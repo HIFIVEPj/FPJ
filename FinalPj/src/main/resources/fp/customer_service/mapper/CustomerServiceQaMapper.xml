@@ -184,6 +184,4 @@
 		qa_num > 0
 		
 	</select>
-	
-	
 </mapper>

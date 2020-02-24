@@ -103,9 +103,7 @@
 										<div class="row">
 									<div class="col-xl-12 col-md-12">
 										<div class="table-responsive">
-										
-													
-													
+
 											<table class="table row table-borderless w-100 m-0 text-nowrap ">
 												<tbody class="col-lg-12 col-xl-6 p-0">
 													<tr>
@@ -136,6 +134,7 @@
 													<tr>
 														<td><span class="font-weight-bold">급여 :</span>
 															<fmt:formatNumber value="${projectCont.pj_pay}" pattern="#,###,###,###" />원
+
 															</td>
 													</tr>
 													<tr>
@@ -180,21 +179,23 @@
 													</p>
 												<hr style="margin-top:20px; margin-bottom:10px;">
 											</div>	
-								
+							
 								    <div class="card-header">
-                                 	<h4 class="mb-0 font-weight-semibold"><strong>내용</strong></h4>       
-  	                                  </div>
+                                 		<h4 class="mb-0 font-weight-semibold"><strong>내용</strong></h4>       
+  	                                </div>
 								  <div style="width:95%; margin:0 auto;"><P style="padding-top:15px;">${projectCont.pj_cont}</P></div>
 								
 							</div>
 							<span class="card-footer icons" >
 									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply"> 지원하기</a>
 									<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
+
 									<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
 							
 								<span style="float:right;" >
 										<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
 										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
+
 								</span>
 							</span>
 						</div>
@@ -441,6 +442,7 @@
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">회사정보</h3>
+
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
@@ -707,6 +709,7 @@
 		</div>
 <!-- small Modal -->   
       <div id="deleteModal" class="modal fade">
+
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -732,7 +735,7 @@
          </div>      
       </div>
       <!-- /small Modal -->
-      
+
     <!-- small Modal -->   
       <div id="" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">

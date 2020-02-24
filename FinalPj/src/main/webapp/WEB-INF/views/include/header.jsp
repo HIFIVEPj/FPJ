@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!--header-->
@@ -66,9 +67,8 @@
 		<link href="../plugins/owl-carousel/owl.carousel.css" rel="stylesheet" />
 
 		<!-- Custom scroll bar css-->
-		
 		<link href="../plugins/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet" />
-		
+
 		<!--Font icons-->
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet">
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet">
@@ -109,12 +109,7 @@
 		<link href="../plugins/fileuploads-test/fileup.css" rel="stylesheet" type="text/css">
 		
 		<!-- 카카오맵 -->
-		<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-		
-		<!-- Notifications  Css -->
-		<!--
-		<link href="..plugins/notify/css/jquery.growl.css" rel="stylesheet" />
-		-->
+		<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script> 
 
 	</head>
 	<body>
@@ -152,6 +147,7 @@
 						<div class="col-xl-4 col-lg-4 col-sm-8 col-5">
 							<div class="top-bar-right">
 								<ul class="custom">						
+
 								
 								<c:choose>
 									<c:when test="${empty sessionScope.name}">
@@ -161,11 +157,13 @@
 									
 									<li>
 									<!--<a href='<c:url value="/member/login"/>' class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a> -->	
+
 										<a href="login" class="text-dark"><i class="fa fa-sign-in mr-1" style="color:#1f719a;"></i> <span>로그인</span></a>
 									</li>
 									</c:when>
 									<c:otherwise>
 										<h>${sessionScope.name} 님 환영합니다. </h>														
+
 									<li class="dropdown">
 									
 										<a href="#" class="text-dark" data-toggle="dropdown">  &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
@@ -175,12 +173,12 @@
 												<i class="dropdown-icon si si-settings" style="color:#1f719a;"></i> 관리자
 											</a>
 											</c:if>
-											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
+											<c:if test="${sessionScope.class_num==4}">
 												<a href="mydash_cor?mem_email=${sessionScope.email}" class="dropdown-item" >
 													<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 												</a>
 											</c:if>
-											<c:if test="${empty sessionScope.class_num || sessionScope.class_num==4 || sessionScope.class_num==5}">
+											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
 											<a href="freelancerProfile_list" class="dropdown-item" >
 												<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 											</a>
