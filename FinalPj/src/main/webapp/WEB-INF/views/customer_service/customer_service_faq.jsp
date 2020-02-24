@@ -422,8 +422,4 @@
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
-<<<<<<< HEAD
-=======
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 		
->>>>>>> 66928d0945675f40d16aa344255e94d26080ed14

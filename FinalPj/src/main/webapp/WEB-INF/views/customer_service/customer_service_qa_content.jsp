@@ -305,8 +305,13 @@
 								<div class="row">
 									
 									<div class="col">
+										<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
-										<a href="customer_service_qa_write#" class="btn btn-danger">답글쓰기</a>
+										-->
+										<c:if test="${sessionScope.class_num > 0}">
+											<input id="addReplyBtn" type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
+											<a href="customer_service_qa_write#" class="btn btn-danger">답글쓰기</a>
+										</c:if>	
 									</div>
 									
 									<div class="col col-auto">
@@ -316,9 +321,10 @@
 										<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 										-->
-										<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-										<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_qa_modify?qa_num=${qa_content.qa_num}#';">
-		
+										<c:if test="${sessionScope.email == qa_content.mem_email}">
+											<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
+											<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_qa_modify?qa_num=${qa_content.qa_num}#';">
+										</c:if>
 										
 										
 										<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_qa';">
@@ -326,8 +332,10 @@
 										<!--
 										<a href="customer_service_qa?qa_num=${qa_list.qa_num}&pageNum=${pageMaker.cri.pageNum}&amount=5&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}" class="btn btn-primary waves-effect waves-light">이전</a>
 										-->
-										<a href="customer_service_qa_write#" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
-
+										<c:if test="${sessionScope.class_num > 0}">
+											<a href="customer_service_qa_write#" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
+										</c:if>
+										
 									</div>
 								</div>
 
@@ -848,14 +856,17 @@
 		</section>
 		<!--/Add listing-->
 
-		<!-- small Modal -->	
+		<!-- small Modal -->
+		<!--	
 		<div id="smallModal1" class="modal fade">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
+					-->
 						<!--
 						<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
 						-->
+						<!--
 						<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -874,9 +885,11 @@
 				</div>
 			</div>		
 		</div>
+		-->
 		<!-- /small Modal -->
 
 		<!-- Message Modal -->
+		<!--
 		<div class="modal fade" id="message" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -887,6 +900,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
+					-->
 						<!--
 						<div class="form-group">
 							<input type="text" class="form-control" id="commet-name" placeholder="Your Name">
@@ -895,6 +909,7 @@
 							<input type="email" class="form-control" id="commet-email" placeholder="Email Address">
 						</div>
 						-->
+						<!--
 						<div class="form-group mb-0">
 							<textarea class="form-control" name="example-textarea-input" rows="6" placeholder="메세지 입력"></textarea>
 						</div>
@@ -906,7 +921,7 @@
 				</div>
 			</div>
 		</div>
-
+		-->
 		<!-- Report Modal -->
 		<!--
 		<div class="modal fade" id="report" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -1009,7 +1024,7 @@
 		</div>
 		-->
 		<!-- small Modal -->
-		<!--	
+		<!--
 		<div id="smallModal1" class="modal fade">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
@@ -1018,20 +1033,19 @@
 						<!--
 						<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
 						-->
-						<!--
+					<!--	
 						<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>답변을 정말 삭제할까요?</p>
+						<p>댓글을 정말 삭제할까요?</p>
 					</div>
 					
 					<div class="modal-footer">
-					
 						<a href="customer_service_qa_delete?qa_num=${qa_content.qa_num}" class="btn btn-primary">네</a>
-						
+						<button id='modalRemoveBtn' type="button" class="btn btn-primary">네</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
 					</div>
 				</div>
@@ -1080,12 +1094,12 @@
       <!-- /.modal -->
 		
 		
-		<!--Comment Modal -->
+		<!--Comment Modal / ajax 적용 댓글 달기 테스트-->
 		<div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">댓글쓰기</h5>
+						<h5 class="modal-title">댓글</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						  <span aria-hidden="true">&times;</span>
 						</button>
@@ -1103,13 +1117,21 @@
 							<!--
 							<textarea class="form-control" name="example-textarea-input" rows="6" placeholder="메세지 입력"></textarea>
 							-->
-							<textarea class="form-control" name="reply" rows="6" placeholder="메세지 입력"></textarea>
+							<!--
+							<textarea class="form-control" name="qacomm_cont" rows="6" placeholder="메세지 입력"></textarea>
+							-->
+							
+							<textarea class="form-control" name="qacomm_cont" rows="6" value="qacomm_cont" placeholder="메세지 입력"></textarea>
+							
+							<!--
+							<input class="form-control" name="qacomm_cont" value="qacomm_cont" placeholder="메세지 입력">
+							-->
 						</div>
 						<div class="form-group">
-							<input type="hidden" name="mem_email" value="${sessionScope.email}">
+							<input class="form-control" type="hidden" name="mem_email" value="mem_email">
 						</div>
 						<div class="form-group">
-							<input type="hidden" name="replyDate" value="">
+							<input class="form-control" type="hidden" name="qacomm_rdate" value="qacomm_rdate">
 						</div>
 					</div>
 					<!--
@@ -1126,8 +1148,10 @@
 							</label>
 						</div>	
 						<div class="col col-auto">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-							<button id='modalRegisterBtn' type="button" class="btn btn-primary">확인</button>
+							<button id='modalCloseBtn'type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+							<button id='modalRemoveBtn' type="button" class="btn btn-primary">삭제</button>
+							<button id='modalModBtn' type="button" class="btn btn-primary">수정</button>
+							<button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
 						</div>
 					</div>
 					
@@ -1138,7 +1162,211 @@
 		
 		<!-- 댓글 js -->
 		<script type="text/javascript" src="../js/reply.js"></script>
+		
+		<script>
+		
+		$(document).ready(function () {
+			  
+			  var qa_numValue = '<c:out value="${qa_content.qa_num}"/>';
+			  var mem_emailValue = '<c:out value="${sessionScope.email}"/>';
+			  var replyUL = $(".chat");
+			  
+			    showList(1);
+			    
+			function showList(page){
+			    
+			    replyService.getList({qa_num:qa_numValue,page:page|| 1 }, function(list) {
 
+			     var str="";
+			     
+			     if(list == null || list.length == 0){
+			     	replyUL.html("");
+			     	
+			     	return;
+			     }
+
+			     for (var i = 0, len = list.length || 0; i < len; i++) {
+			       str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"'>";
+			       str +="	<div class='d-flex mr-3'>";
+			       str +="		<a href='#'> <img src='../images/faces/female/test5.png' alt='64x64' class='media-object brround'> </a>";
+			       str +="	</div>";
+			       str +="	<div class='media-body'>";
+			       str +="		<h5 class='mt-0 mb-1 font-weight-semibold'>"+list[i].mem_name;
+			       str +="			<span class='fs-14 ml-0' data-toggle='tooltip' data-placement='top' title='verified'><i class='fa fa-check-circle-o text-success'></i></span>&nbsp;&nbsp;&nbsp;";
+			       str +="			<small class='text-muted'><i class='fa fa-calendar'></i>&nbsp;"+replyService.displayTime(list[i].qacomm_rdate)+"</small>";
+			       str +="		</h5>";
+			       str +="		<p class='font-13  mb-2 mt-2'>"+list[i].qacomm_cont+"</p>";
+			       str +="		<a href='#' class='mr-2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#7fa5b8'>&nbsp;<i class='fa fa-thumbs-o-up'></i>&nbsp;21&nbsp;</span></a>";
+			       str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem;'><i class=' ml-1 fa fa-comment-o'></i>&nbsp;댓글</span></a>";
+				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
+				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#smallModal1'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-trash-o'></i>&nbsp;삭제</span></a>";
+				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#report'><span class='badge badge-danger' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 si si-ban'></i>&nbsp;신고</span></a>";
+				   str +="	</div>";
+				   str +="</li>";
+			     }
+			     
+			     replyUL.html(str);
+
+			   });
+			     
+			 }
+			
+			var modal = $(".modal");
+		    var modalInputQacomm_cont = modal.find("textarea[name='qacomm_cont']"); //textarea를 이용해서 입력하려면 "input[name='qacomm_cont']" 대신에 "textarea[name='qacomm_cont']"라고 써야함
+		    //var modalInputMem_email = modal.find("input[name='mem_email']");
+		    var modalInputQacomm_rdate = modal.find("input[name='qacomm_rdate']");
+		    
+		    var modalModBtn = $("#modalModBtn");
+		    var modalRemoveBtn = $("#modalRemoveBtn");
+		    var modalRegisterBtn = $("#modalRegisterBtn");
+		    
+		    $("#modalCloseBtn").on("click", function(e){
+		    	
+		    	modal.modal('hide');
+		    });
+		    
+		    $("#addReplyBtn").on("click", function(e){
+		      
+		      modal.find("input").val("");
+		      modalInputQacomm_rdate.closest("div").hide();
+		      modal.find("button[id !='modalCloseBtn']").hide();
+		      
+		      modalRegisterBtn.show();
+		      
+		      $(".modal").modal("show");
+		      
+		    });
+		    
+		
+		    modalRegisterBtn.on("click",function(e){
+		      
+		      var qacomm_cont = {
+		            qacomm_cont:modalInputQacomm_cont.val(),
+		            //mem_email:modalInputMem_email.val(), // 이메일을 입력하게 하지 말고 아래처럼 값을 넘기게 하자
+		            mem_email:mem_emailValue,
+		            qa_num:qa_numValue
+		          };
+		      replyService.add(qacomm_cont, function(result){
+		        
+		        alert(result);
+		        
+		        modal.find("input").val("");
+		        modal.modal("hide");
+		        
+		        showList(1);
+		        //showList(-1);
+		        
+		      });
+		      
+		    });
+		    
+		    
+		    // 특정 댓글 클릭 시 이벤트 처리 
+		    $(".chat").on("click", "li", function(e){
+		      
+		      var qacomm_num = $(this).data("qacomm_num");
+		      
+		      replyService.get(qacomm_num, function(qacomm_cont){
+		    	  modalInputQacomm_cont.val(qacomm_cont.qacomm_cont);
+		    	  //modalInputMem_email.val(qacomm_cont.mem_email);
+		    	  modalInputQacomm_rdate.val(replyService.displayTime(qacomm_cont.qacomm_rdate))
+		          .attr("readonly","readonly");
+		          modal.data("qacomm_num", qacomm_cont.qacomm_num);
+		          
+		          modal.find("button[id !='modalCloseBtn']").hide();
+		          modalModBtn.show();
+		          modalRemoveBtn.show();
+		          
+		          $(".modal").modal("show");
+
+		      });
+			
+		    });
+		    
+		    
+		    modalModBtn.on("click", function(e){
+		        
+		        var qacomm_cont = {qacomm_num:modal.data("qacomm_num"), qacomm_cont: modalInputQacomm_cont.val()};
+		        
+		        replyService.update(qacomm_cont, function(result){
+		              
+		          alert(result);
+		          modal.modal("hide");
+		          showList(1);
+		          
+		        });
+		        
+	      	});
+
+	      	modalRemoveBtn.on("click", function (e){
+	      	  
+	    	  var qacomm_num = modal.data("qacomm_num");
+	    	  
+	    	  replyService.remove(qacomm_num, function(result){
+	    	        
+	    	      alert(result);
+	    	      modal.modal("hide");
+	    	      showList(1);
+	    	      
+	    	  });
+	    	  
+	    	});
+		    
+		});
+		
+		//for replyService add test
+		/*
+		replyService.add(
+			{qacomm_cont:"JS Test", mem_email:"baramoss@cyworld.com", qa_num:qa_numValue}
+			,
+			function(result){
+				alert("RESULT : " + result);
+			}
+		);
+		*/
+		
+		//for reply list test
+		/*
+		replyService.getList({qa_num:qa_numValue, page:1}, function(list){
+			for(var i = 0, len = list.length||0; i < len; i++){
+				console.log(list[i]);
+			}
+		});
+		*/
+		
+		//for reply delete test
+		/*
+		replyService.remove(14, function(count) {
+			console.log(count);
+			
+			if (count == "success") {
+				alert("removed");
+			}
+		}, function(err) {
+			alert("error!!!");
+		});
+		*/
+		
+		//for reply update test
+		/*
+		replyService.update({
+			qacomm_num : 11,
+			qa_num : qa_numValue,
+			qacomm_cont : "### reply update test"
+		}, function(result){
+			alert("update done");
+		});
+		*/
+		
+		//for reply get test //수정 작업 할 때 이렇게 먼저 창을 띄우기 (글 내용 등도 같이 불러오자)
+		/*
+		replyService.get(11, function(data) {
+			console.log(data);
+		});
+		*/
+		
+		</script>
+<!--
 		<script>
 
 		$(document).ready(function () {
@@ -1149,37 +1377,17 @@
 		    showList(1);
 		    
 		function showList(page){
-			
-			  console.log("show list " + page);
 		    
-		    replyService.getList({qa_num:qa_numValue,page: page|| 1 }, function(replyCnt, list) {
-		      
-		    console.log("replyCnt: "+ replyCnt );
-		    console.log("list: " + list);
-		    console.log(list);
-		    
-		    if(page == -1){
-		      pageNum = Math.ceil(replyCnt/5.0);
-		      showList(pageNum);
-		      return;
-		    }
-		      
+		    replyService.getList({qa_num:qa_numValue,page:page|| 1 }, function(list) {
+
 		     var str="";
 		     
 		     if(list == null || list.length == 0){
-		       return;
+		     	replyUL.html("");
+		     	
+		     	return;
 		     }
-		     
-		     /*
-		     for (var i = 0, len = list.length || 0; i < len; i++) {
-		       //str +="<li class='left clearfix' data-qacomm_num='"+list[i].qacomm_num+"'>";
-		       str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"'>";
-		       str +="  <div><div class='header'><strong class='primary-font'>["+list[i].qacomm_num+"] "+list[i].replyer+"</strong>"; 
-		       str +="    <small class='pull-right text-muted'>"
-		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
-		       str +="    <p>"+list[i].reply+"</p></div></li>";
-		     }
-		     */
+
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
 		       str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"'>";
 		       str +="	<div class='d-flex mr-3'>";
@@ -1201,13 +1409,11 @@
 		     }
 		     
 		     replyUL.html(str);
+
+		   });
 		     
-		     showReplyPage(replyCnt);
-		
-		 
-		   });//end function
-		     
-		 }//end showList
+		 }
+		});
 		    
 		    var pageNum = 1;
 		    var replyPageFooter = $(".panel-footer");
@@ -1482,7 +1688,7 @@
 		 */
 		
 		</script>
-
+-->
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
