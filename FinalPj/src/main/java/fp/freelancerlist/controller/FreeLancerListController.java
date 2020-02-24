@@ -89,8 +89,8 @@ public class FreeLancerListController {
 	public ModelAndView DeleteCont(long free_code){
 
 	}*/
-	@RequestMapping("mydash_free")	//회원정보
-	public String Mydash() { 
-		return "freelancer/mydash_free";
-	}
+	//@RequestMapping("mydash_free")	//회원정보
+	//public String Mydash() { 
+	//	return "freelancer/mydash_free";
+	//}
 }

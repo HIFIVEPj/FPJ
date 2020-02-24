@@ -36,15 +36,20 @@ public class CorporationController {
 	@Autowired
 	private ProjectService pjService;
 	
+	@RequestMapping("payments_cor")
+	public String payments_cor(){
+		return "corporation/payments_cor";
+	}
+	
 	@RequestMapping("myfavorite_cor")
 	public String myfavorite_cor(){
-		return "myfavorite_cor";
+		return "corporation/myfavorite_cor";
 	}
 	@GetMapping("mydash_cor")
 	public ModelAndView write(String mem_email) {
 		Corporation corporation = service.mydash_cor_select(mem_email);
 		int ran = new Random().nextInt(900000)+100000;
-		ModelAndView mv = new ModelAndView("mydash_cor");
+		ModelAndView mv = new ModelAndView("corporation/mydash_cor");
 		mv.addObject("cor",corporation);
 		mv.addObject("random", ran);
 		return mv;
@@ -83,11 +88,11 @@ public class CorporationController {
 		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "4";
+			cntPerPage = "5";
 		}else if (nowPage == null) {
 			nowPage ="1";
 		}else if(cntPerPage == null) {
-			cntPerPage ="4";
+			cntPerPage ="5";
 		}
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
@@ -96,7 +101,7 @@ public class CorporationController {
 		map.put("cor_code",corporation.getCor_code());
 		
 		List<Project> listMydashCor = pjService.listMydashCor(map);
-		ModelAndView mv = new ModelAndView("managed_project");
+		ModelAndView mv = new ModelAndView("corporation/managed_project");
 		mv.addObject("cor",corporation);
 		mv.addObject("list", listMydashCor);
 		mv.addObject("pa",projectVo);
@@ -108,6 +113,7 @@ public class CorporationController {
 		mv.addObject("keyname", keyname);
 		return mv;
 	}
+	
 	
 	public String saveStore(MultipartFile fileName) {
 		String ofname = fileName.getOriginalFilename();

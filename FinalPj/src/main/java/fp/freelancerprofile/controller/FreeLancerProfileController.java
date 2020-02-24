@@ -147,7 +147,7 @@ public class FreeLancerProfileController {
 
 	
 	@RequestMapping("mydash_change")	//회원정보수정
-	public String Mydash_change() { 
+	public String Mydash_change(@RequestParam String mem_email) { 
 		return "profile/mydash_change";
 	}
 

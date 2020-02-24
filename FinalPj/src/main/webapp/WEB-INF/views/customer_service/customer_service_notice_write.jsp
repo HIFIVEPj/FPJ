@@ -291,5 +291,5 @@
 		
 			
 <!--footer-->
-<%@ include file="/WEB-INF/views/include/footer.jsp"%
+<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

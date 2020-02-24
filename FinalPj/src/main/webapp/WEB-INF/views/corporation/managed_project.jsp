@@ -138,6 +138,7 @@
 																<c:if test="${dto.type_num ==3}"><c:out value="디자인" /></c:if>
 																<c:if test="${dto.type_num ==4}"><c:out value="기획" /></c:if>
 																<c:if test="${dto.type_num ==5}"><c:out value="기타" /></c:if>/
+																
 																<c:if test="${dto.pj_fgrade==0}"><c:out value="초급" /></c:if>
 																<c:if test="${dto.pj_fgrade==1}"><c:out value="중급" /></c:if>
 																<c:if test="${dto.pj_fgrade==2}"><c:out value="고급" /></c:if>
@@ -169,19 +170,21 @@
 												<td>${cor.cor_name}</td>
 												<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</td>
 												<td>
-													<a href="#" class="badge badge-primary">
 													<c:if test="${dto.pj_paystatus==0}">
-														결제대기
+														<a href="#" class="badge badge-danger">
+															결제대기
+														</a>
 													</c:if>
 													<c:if test="${dto.pj_paystatus==1}">
-														결제완료
+														<a href="#" class="badge badge-primary">
+															결제완료
+														</a>
 													</c:if>
-													</a>
 												</td>
 												<td>
 													<a href="#" class="btn btn-info btn-sm text-white" data-target="#deleteModal" data-toggle="modal" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
 													<c:if test="${dto.pj_paystatus==0}"> 
-													<a href="#" class="btn btn-red btn-sm text-white" data-toggle="tooltip" data-original-title="결제하기"><i class="fa fa-credit-card"></i></a>
+													<a href="project_payments?pj_num=${dto.pj_num}" class="btn btn-red btn-sm text-white" data-toggle="tooltip" data-original-title="결제하기"><i class="fa fa-credit-card"></i></a>
 													</c:if>
 												</td>
 											</tr>
@@ -222,36 +225,131 @@
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
 											<tr>
+												<th></th>
 												<th><b>프로젝트</b></th>
 												<th><b>회사이름</b></th>
 												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>지원날짜</b></th>
+												<th><b>결제상태</b></th>
+												<th><b>버튼</b></th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
+										<c:if test="${empty list}">
+										<tr>
+											<td colspan="6"  id="center">
+												<b>등록된 프로젝트가 없습니다</b>
+											</td>
+										</tr>
+										</c:if>
+									<c:if test="${not empty list}">
+									<c:forEach var="dto" items="${list}">
+									<c:choose>				
+									<c:when test="${dto.pj_paystatus==0}">
+										<tr>
+												<td>
+													<label class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" name="checkbox" value="${dto.pj_num}">
+														<span class="custom-control-label"></span>
+													</label>
+												</td>
 												<td>
 													<div class="media mt-0 mb-0">
 														<div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>웹개발자 구합니다</b></h4></a>
-																<a href="#"><i class="fa fa-user mr-1"></i> 개발/초급</a>
+																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h4 class="font-weight-semibold"><b>${dto.pj_sub}</b></h4></a>
+																<i class="fa fa-user mr-1"></i> 
+																<c:if test="${dto.type_num ==1}"><c:out value="개발" /></c:if>
+																<c:if test="${dto.type_num ==2}"><c:out value="퍼블리셔" /></c:if>
+																<c:if test="${dto.type_num ==3}"><c:out value="디자인" /></c:if>
+																<c:if test="${dto.type_num ==4}"><c:out value="기획" /></c:if>
+																<c:if test="${dto.type_num ==5}"><c:out value="기타" /></c:if>/
+																<c:if test="${dto.pj_fgrade==0}"><c:out value="초급" /></c:if>
+																<c:if test="${dto.pj_fgrade==1}"><c:out value="중급" /></c:if>
+																<c:if test="${dto.pj_fgrade==2}"><c:out value="고급" /></c:if>
+																
 																&nbsp;|&nbsp;
-																<a href="#"><i class="fa fa-clock-o mr-1"></i> 3개월</a>
+																<i class="fa fa-clock-o mr-1"></i> ${dto.pj_term} 개월
 																&nbsp;|&nbsp;
-																<a href="#"><b style="text-align:right;">D-25</b></a>
+																<b style="text-align:right;">														
+																<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1em;"><strong>
+															<fmt:parseDate value="${dto.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+															<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+															
+															<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+															<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+															<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+															<c:choose>
+																<c:when test="${endDate > currentDate}">
+																	D -${endDate - currentDate}
+																</c:when>
+																<c:otherwise>
+																	마감
+																</c:otherwise>
+															</c:choose>
+															</strong></span></b>
 															</div>
 														</div>
 													</div>
 												</td>
-												<td>Restaurant</td>
-												<td class="font-weight-semibold fs-16">1,200,000원</td>
-												<td>
-													<a href="#" class="badge badge-primary">검토중</a>
+												<td>${cor.cor_name}</td>
+												<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</td>
+												<td>	
+													<c:if test="${dto.pj_paystatus==0}">
+														<a href="#" class="badge badge-danger">
+															결제대기
+														</a>
+													</c:if>
+													<c:if test="${dto.pj_paystatus==1}">
+														<a href="#" class="badge badge-primary">
+															결제완료
+														</a>
+													</c:if>
 												</td>
-												<td class="font-weight-semibold fs-16">2020-01-28</td>
+												<td>
+													<a href="#" class="btn btn-info btn-sm text-white" data-target="#deleteModal" data-toggle="modal" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<c:if test="${dto.pj_paystatus==0}"> 
+													<a href="project_payments?pj_num=${dto.pj_num}" class="btn btn-red btn-sm text-white" data-toggle="tooltip" data-original-title="결제하기"><i class="fa fa-credit-card"></i></a>
+													</c:if>
+												</td>
 											</tr>
+									</c:when>	
+									<c:when test="${dto.pj_paystatus ne 1}">
+										<tr>
+											<td colspan="6"  id="center">
+												<b>결제 대기 중인 프로젝트가 없습니다</b>
+											</td>
+										</tr>
+									</c:when>
+								</c:choose>
+								<!-- small Modal -->   
+							      <div id="deleteModal" class="modal fade">
+							         <div class="modal-dialog modal-sm" role="document">
+							            <div class="modal-content">
+							               <div class="modal-header">
+							                  <!--
+							                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+							                  -->
+							                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+							                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							                     <span aria-hidden="true">&times;</span>
+							                  </button>
+							               </div>
+							               <div class="modal-body">
+							                  <p>글을 정말 삭제할까요?</p>
+							               </div>
+							               
+							               <div class="modal-footer">
+							               
+							                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num=${dto.pj_num}">네</a> 
+							                  
+							                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+							               </div>
+							            </div>
+							         </div>      
+							      </div>
+							      <!-- /small Modal -->
+											</c:forEach>
+											</c:if>
 										</tbody>
 									</table>
 								</div>
