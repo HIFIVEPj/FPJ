@@ -452,22 +452,21 @@
 													 </h5>
 													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
 			                                     	 <c:choose>
-				                                     	 <c:when test="${marketQA.marketQA_ox != 0}">
+				                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
 					                                        <p class="font-13  mb-2 mt-2">
 					                                          ${marketQA.marketQA_sub}<br>
-					                                          ${marketQA.marketQA_cont}
 				                                        	</p>
+				                                        </c:when>
+				                                         <c:when test="${marketQA.marketQA_ox == 1}">
+					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
 				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
 					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.><br>
+					                                       		 <비밀글 입니다.> <br>
 					                                          ${marketQA.marketQA_sub}<br>
 					                                          ${marketQA.marketQA_cont}
 				                                        	</p>
 				                                        </c:when>
-				                                        <c:otherwise>
-					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-				                                        </c:otherwise>
 			                                        </c:choose> 
 			                                      	<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
@@ -485,22 +484,21 @@
 													 </h5>
 													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
 			                                     	 <c:choose>
-				                                     	 <c:when test="${marketQA.marketQA_ox != 0}">
+				                                     	<c:when test="${marketQA.marketQA_ox == 0}">
 					                                        <p class="font-13  mb-2 mt-2">
 					                                          ${marketQA.marketQA_sub}<br>
-					                                          ${marketQA.marketQA_cont}
 				                                        	</p>
+				                                        </c:when>
+				                                         <c:when test="${marketQA.mem_email == 1}">
+					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
 				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
 					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.><br>
+					                                       		 <비밀글 입니다.> <br>
 					                                          ${marketQA.marketQA_sub}<br>
 					                                          ${marketQA.marketQA_cont}
 				                                        	</p>
 				                                        </c:when>
-				                                        <c:otherwise>
-					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-				                                        </c:otherwise>
 			                                        </c:choose> 
 			                                      	<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
@@ -518,11 +516,13 @@
 												    </h5>
 													<small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
 			                                     	<c:choose>
-				                                     	 <c:when test="${marketQA.marketQA_ox != 0}">
+				                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
 					                                        <p class="font-13  mb-2 mt-2">
 					                                          ${marketQA.marketQA_sub}<br>
-					                                          ${marketQA.marketQA_cont}
 				                                        	</p>
+				                                        </c:when>
+				                                         <c:when test="${marketQA.mem_email == 1}">
+					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
 				                                         <c:when test="${marketQA.mem_email == sessionScope.email}">
 					                                        <p class="font-13  mb-2 mt-2">
@@ -531,9 +531,7 @@
 					                                          ${marketQA.marketQA_cont}
 				                                        	</p>
 				                                        </c:when>
-				                                        <c:otherwise>
-					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-				                                        </c:otherwise>
+				                                        
 			                                      	</c:choose> 
 			                                      	<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 													<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
@@ -609,9 +607,10 @@
 							</div>
 							<div class="card-body">
 								<div>
-									<input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
-								    <input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.mem_email}">		
+										
 									<c:if test="${sessionScope.name !=null}" >
+									<input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
+								    <input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.mem_email}">	
 										<div class="form-group">
 											<input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
 										</div>
@@ -989,22 +988,28 @@
 	        <div class="modal-dialog" role="document">
 	           <div class="modal-content">
 				 <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
-			     <input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.mem_email}">		
+			     <input type="hidden" id="mem_email" name="mem_email" value= "${sessionScope.email}">
 	              <div class="modal-header">
 	                 <h5 class="modal-title">댓글쓰기</h5>
 	                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	                   <span aria-hidden="true">&times;</span>
 	                 </button>
 	              </div>
+	              
+	          
+	         
 	              <div class="modal-body">
+	               	 <div class="form-group mb-0">
+	                   <input type="text" class="form-control" name="marketQA_sub" id="marketQA_sub" rows="6" placeholder="제목 입력">
+	                 </div>
 	                 <div class="form-group mb-0">
-	                    <textarea class="form-control" name="marketQA_cont" id="marketQA_cont" rows="6" placeholder="메세지 입력"></textarea>
+	                  	<textarea class="form-control" name="marketQA_cont" id="marketQA_cont"  rows="6" placeholder="메세지 입력"></textarea>
 	                 </div>
 	              </div>
 	              <div class="modal-footer">
 	                 <div class="col">
 	                    <label class="custom-control custom-checkbox mb-0">
-		                    <input type="radio"  name="marketQA_ox" value="1" >비밀글
+		                    <input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
 							<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
 	        <!--	     
 	        			  <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">

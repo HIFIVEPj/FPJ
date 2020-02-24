@@ -47,6 +47,7 @@ public class MarketRestController {
 	*/	
 		marketService.insertMarketQA(marketQA);
 		log.info( "@@@marketQA"+ marketQA);
+		log.info( "@@@@@@@@marketQA.getMem_email()"+marketQA.getMem_email());
 		ArrayList<Object[]> list =Fileupload(mtfRequest);
 		for (int i=0 ;i<list.size(); i++) {
 

@@ -240,7 +240,7 @@ public class MarketController {
 		String originFileName= mf.getOriginalFilename();
 		String fileName= System.currentTimeMillis()+originFileName;
 		String safeFile=path+System.currentTimeMillis()+originFileName;
-		long fileSize=mf.getSize();
+		//long fileSize=mf.getSize();
 		log.info("333@@@@safeFile:"+safeFile);
 		try {
 			mf.transferTo(new File(safeFile));// 폴더에파일저장메소드
