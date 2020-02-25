@@ -25,3 +25,4 @@ public class MarketRev {
 	private Corporation corporation;
 	private Member member;
 }
+

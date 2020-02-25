@@ -17,7 +17,8 @@
       event.preventDefault();
       event.stopPropagation();
       return $.growl.notice({
-        message: "You have 4 notification"
+        //message: "You have 4 notification"
+    	message: "쓰기 성공!"
       });
     });
     return $('.warning').click(function (event) {

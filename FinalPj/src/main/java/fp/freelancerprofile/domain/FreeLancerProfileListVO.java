@@ -20,7 +20,9 @@ public class FreeLancerProfileListVO {
 	private List<Type> type;
 	private List<KeyWord> keyword;
 	private List<Project> project;
-	//list에 freelancer클래스의 객체들이 담김.
 	private FreeLancerProfileListVO freeLancerProfileListVO;
-}
+	
 
+	private List<Freelancer_FreeLancerProfile> freelancer_freelancerprofile;
+	private List<List_FreeLancerReview> list_freeLancerreview;
+}

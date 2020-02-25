@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fp.corporation.domain.Corporation;
-
 import fp.corporation.domain.PjPickKeyword;
 
 import fp.corporation.domain.Project;
@@ -32,6 +31,17 @@ public class ProjectServiceImpl implements ProjectService {
 		return mapper.getTotalCount();
 	}
 
+	//mydash_cor에서 project 관리부분들
+	@Override
+	public List<Project> listMydashCor(Map<String, Object> map){
+		return mapper.listMydashCor(map);
+	}
+	@Override
+	public long getTotalCountCor(long cor_code) {
+		return mapper.getTotalCountCor(cor_code);
+	}
+	//------
+	
 	@Override
 	public List<Project> keywords(){
 		return mapper.pjKeywords();
@@ -66,7 +76,6 @@ public class ProjectServiceImpl implements ProjectService {
 		mapper.updatePj(project);
 	}
 	@Override
-
 	public void updateKeyword(Map<String, Object> map) {
 		mapper.updateKeyword(map);
 	}
@@ -78,4 +87,3 @@ public class ProjectServiceImpl implements ProjectService {
 		mapper.updateKeyword_In(pjpkeyword);
 	}
 }
-

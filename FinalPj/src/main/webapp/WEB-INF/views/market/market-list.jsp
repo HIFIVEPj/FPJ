@@ -103,21 +103,6 @@
 											<span class="custom-control-label" class="text-dark">디자이너<span class="label label-secondary float-right">22</span>
 											</span>
 										</label>
-									<!--<label for="디자인" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="디자인">
-											<span class="custom-control-label" class="text-dark">디자인<span class="label label-secondary float-right">22</span>
-											</span>
-										</label>
-										<label for="기획" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="기획">
-											<span class="custom-control-label" class="text-dark">기획<span class="label label-secondary float-right">22</span>
-											</span>
-										</label>
-										<label for="기타" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="기타">
-											<span class="custom-control-label" class="text-dark">기타<span class="label label-secondary float-right">22</span>
-											</span>
-										</label>  -->	
 									</div>
 								</div>
 							</div>
@@ -171,11 +156,10 @@
 									<div class="item2-gl-nav d-flex">
 										<h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6>
 										<ul class="nav item2-gl-menu ml-auto">
-											<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
+										<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
 											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>
 										</ul>
 										<div class="d-flex">
-											
 											<select name="item" class="form-control select-sm w-100">
 												<option value="1">최신순</option>
 												<option value="2">평점순</option>
@@ -186,13 +170,14 @@
 									<div class="tab-content">
 										<div class="tab-pane" id="tab-11">
 <!--///////////////////////////// 마켓리스팅1 -->					
+										<!-- 
 											<c:forEach items="${list}" var="list">	
 												<div class="card overflow-hidden">
 													<div class="d-md-flex">
 														<div class="item-card9-img">
 															<div class="item-card9-imgs">
 																<a href="market-content"></a>
-																<img src="../images/products/h4.png" alt="img" class="cover-image h-100">
+																<img src="../hifiveImages/market/marketThumbnails/${list.market_fname}" alt="img" class="cover-image h-100">
 															</div>
 															<div class="item-card9-icons">
 																<a href="" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
@@ -230,6 +215,7 @@
 													
 												</div>
 										</c:forEach>
+										-->
 <!--///////////////////////////// 마켓리스팅1 -->
 									<!-- 
 											
@@ -247,7 +233,7 @@
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    
 
-																<img src="../marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
+																<img src="../hifiveImages/market/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
 
 															</div>
 															<div class="item-card9-icons">
@@ -291,9 +277,6 @@
 													</div>
 												</div>
 											</c:forEach>
-									<!--			
-												
-										 -->		
 											</div>
 										</div>
 									</div>
@@ -334,9 +317,11 @@
 											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 										</li>
 										</c:if>
-										<c:if test="${sessionScope.class_num==5 }">
-											<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
-										</c:if>
+										<!-- 
+											<c:if test="${sessionScope.class_num==5 }">
+												<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+											</c:if>
+										 -->
 									</ul>
 							 	 </div>
 							</div>

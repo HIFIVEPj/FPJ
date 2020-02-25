@@ -69,17 +69,17 @@
 						
 						<script type="text/javascript">
 						   function check() {
-						       if(document.qa_write.qa_cate.value==''){
+						       if(document.qa_modify.qa_cate.value==''){
 						    	   alert('분류를 선택해 주세요.');
 						    	   document.qa_write.qa_cate.focus();
 						    	   return false;
 						       }
-						       if(document.qa_write.qa_sub.value==''){
+						       if(document.qa_modify.qa_sub.value==''){
 						    	   alert('제목을 입력해 주세요.');
 						    	   document.input.qa_sub.focus();
 						    	   return false;
 						       }
-						    	document.qa_write.submit();
+						    	document.qa_modify.submit();
 						          
 					       }
 						</script>
@@ -324,7 +324,7 @@
 												</label>
 											</div>
 											<div class="col col-auto">
-												<button type="button" class="btn btn-primary waves-effect waves-light" onclick="check(this.form)">등록</button>
+												<button type="button" class="btn btn-primary waves-effect waves-light" onclick="check(this.form)">수정</button>
 												<!-- 
 												<input type="button" class="btn btn-danger waves-effect waves-light" value='취소' id='click1'>
 												 -->
@@ -445,5 +445,4 @@
 			
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
 <!--/footer-->

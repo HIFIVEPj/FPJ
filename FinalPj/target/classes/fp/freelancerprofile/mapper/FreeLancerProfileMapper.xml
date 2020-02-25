@@ -95,7 +95,6 @@
          </collection>   
 
       </resultMap>
-	
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
  	<!-- 프리랜서 프로필 리스트 select -->
    <!--<select id="selectProfileList"  resultMap="FreeLancerResult">
@@ -114,33 +113,7 @@
     </select>
    <!-- 리스트 페이징 (페이징 처리 후 게시글 조회 ) -->
    <select id="selectPageList" parameterType="PagingVO" resultMap="FreeLancerResult">
-  <!--  	select * from 
-   			(select ROWNUM RN, PAGING.*
-   				from(select *
-			from FREELANCER f
-				inner join FREELANCER_PROFILE fp
-				on f.FREE_CODE = fp.FREE_CODE 
-					inner join FREELANCER_PROFILEFILE ffile
-					on f.FREE_CODE = ffile.FREE_CODE ) PAGING
-   				where ROWNUM between #{start} and #{end})-->
-   				
-      	<!-- Freelancer 테이블 조인필요없음				
-   		<![CDATA[		 	
-	select f.rnum, f.MEM_EMAIL, 
-   			   f.PROFILE_SUB, f.PROFILE_DATE, 
-   			   f.PROFILE_OFNAME, f.PRO_NUM from
-			(select rownum rnum, free.MEM_EMAIL, free.PROFILE_SUB, 
-			        free.PROFILE_DATE, free.PROFILE_OFNAME, free.PRO_NUM from
-				(select MEM_EMAIL, fp.PROFILE_SUB, fp.PROFILE_DATE, 
-				        ffile.PROFILE_OFNAME, fp.PRO_NUM 
-							from FREELANCER f
-								inner join FREELANCER_PROFILE fp
-								on f.FREE_CODE = fp.FREE_CODE 
-									inner join FREELANCER_PROFILEFILE ffile
-									on f.FREE_CODE = ffile.FREE_CODE) free
-										where rownum <= #{end}) f
-										where f.rnum>= #{start}	
-   				]]>-->
+
    	<![CDATA[	
    		select f.rnum, f.MEM_EMAIL, 
    			   f.PROFILE_SUB, f.PROFILE_DATE, 
@@ -211,24 +184,48 @@
 
 	<!-- 삭제1 (프로필파일 데이터 삭제) -->
    <delete id="listDelete" parameterType="long">
-    <!-- <![CDATA[
-	 	delete from FREELANCER_PROFILEFILE 
-			where FREE_CODE in (select FREE_CODE  from FREELANCER_PROFILE where FREE_CODE in 
-					(select FREE_CODE from FREELANCER where FREELANCER.FREE_CODE=FREELANCER_PROFILEFILE.FREE_CODE)
-				and FREELANCER_PROFILE.FREE_CODE=FREELANCER_PROFILE.FREE_CODE) and PRO_NUM=#{PRO_NUM}		
-   ]]> -->
-   <![CDATA[
-	 	delete from FREELANCER_PROFILEFILE where PRO_NUM=#{PRO_NUM}
-   ]]>
+	   <![CDATA[
+		 	delete from FREELANCER_PROFILEFILE where PRO_NUM=#{PRO_NUM}
+	   ]]>
 	</delete>
 	
 	<!-- 삭제2 (프로필파일 데이터 삭제) -->
-	
 	<delete id="listDelete2" parameterType="long">
-	<![CDATA[
-	 	delete from FREELANCER_PROFILE where PRO_NUM=#{PRO_NUM}
-   ]]>
+		<![CDATA[
+		 	delete from FREELANCER_PROFILE where PRO_NUM=#{PRO_NUM}
+	   ]]>
 	</delete>
+	
+	
+	<!-- 삭제1 (체크박스 데이터 삭제) -->
+   <delete id="checkdelete1" parameterType="long">
+	   <![CDATA[
+		 	delete from FREELANCER_PROFILE  where PRO_NUM=#{PRO_NUM}
+	   ]]>
+	</delete>
+
+	
+	<!-- 프로필 insert -->
+<!-- 	<insert id="listInsert" parameterType="freelancerprofile">
+	<![CDATA[
+		insert into freelancer_profile (FREE_CODE, PRO_NUM, TYPE_NUM, MEM_EMAIL, PRO_EXP, PRO_CV, PRO_ADDR, PRO_POSTCODE, PRO_DETAILLOC, PRO_EDU, PRO_START, PRO_OX, PRO_GRADE, PRO_VCNT, PRO_PCNT, PRO_PLACE, PRO_WORKPLACE, PROFILE_SUB, PROFILE_DATE)
+	values
+		(PRO_NUM_SEQ.NEXTVAL, #{PRO_NUM}, #{TYPE_NUM}, #{MEM_EMAIL}, #{PRO_EXP}, #{PRO_CV}, #{PRO_ADDR}, #{PRO_POSTCODE}, #{PRO_DETAILLOC},#{PRO_EDU}, #{PRO_START}, #{PRO_OX}, #{PRO_GRADE},#{PRO_VCNT}, #{PRO_PCNT}, #{PRO_PLACE}, #{PRO_WORKPLACE}, #{PROFILE_SUB}, SYSDATE)
+		   ]]>
+	</insert>
+ -->
+ 
+	 <insert id="listInsert" parameterType="FreeLancerProfile"> 
+	 <selectKey keyProperty="pro_num" order="BEFORE" resultType="long">
+	 	select PRO_NUM_SEQ.NEXTVAL from dual
+	 </selectKey>
+		<![CDATA[
+			insert into freelancer_profile (FREE_CODE, PRO_NUM, TYPE_NUM, TYPE_NAME, KEY_NUM, KEY_NAME, MEM_EMAIL, PRO_ADDR, PRO_OX)
+		values
+			(#{FREE_CODE}, #{PRO_NUM}, #{TYPE_NUM}, #{TYPE_NAME}, #{KEY_NUM}, #{KEY_NAME}, #{MEM_EMAIL}, #{PRO_ADDR}, #{PRO_OX})
+			   ]]>
+	</insert>
+
 
 
 </mapper>

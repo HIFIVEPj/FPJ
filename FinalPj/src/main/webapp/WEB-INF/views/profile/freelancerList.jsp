@@ -611,5 +611,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> b1c1c09c3d9f1dffa0a9b5aa66034261f9603eb9
 <!--/footer-->

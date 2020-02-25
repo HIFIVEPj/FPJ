@@ -1,3 +1,4 @@
+
 package fp.member.domain;
 
 
@@ -26,5 +27,3 @@ public class Member {
 	private String option3;	
 
 }
-
-

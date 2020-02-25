@@ -43,7 +43,7 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">Robert McLean</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class=" doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
@@ -253,7 +253,7 @@
 													<tr>
 													<c:forEach  var="content" items="${content2}" varStatus="status">
 													<c:forEach  var="name" items="${content.project}" varStatus="status">
-														<td><a href="store.html" class="text-inherit">${name.pj_sub}</a></td>
+														<tr><td><a href="store.html" class="text-inherit">${name.pj_sub}</a></td>
 													</c:forEach>
 													</c:forEach>
 													<c:forEach  var="profilecontent" items="${content}" varStatus="status">
@@ -263,7 +263,8 @@
 														<c:forEach  var="profilefile" items="${profilecontent.freeLancerProfileFile}" varStatus="status">	
 														<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td>
 														</c:forEach>
-													</tr>
+
+													</tr></tr>
 														</c:forEach>
 										<!--  			<tr>
 														<td><a href="store.html" class="text-inherit">Untrammelled prevents</a></td>
@@ -316,5 +317,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> b1c1c09c3d9f1dffa0a9b5aa66034261f9603eb9
+
 <!--/footer-->

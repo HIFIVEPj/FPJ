@@ -1,7 +1,7 @@
+
 package fp.login.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -196,11 +195,11 @@ public class LoginController {
     //Top레벨 단계 _response 파싱
     JSONObject response_obj = (JSONObject)jsonObj.get("response");
     //response의 nickname값 파싱
-    //String nickname = (String)response_obj.get("nickname");
+    String name = (String)response_obj.get("name");
     String email = (String)response_obj.get("email");
     System.out.println(email);
     //4.파싱 닉네임 세션으로 저장
-    session.setAttribute("email",email); //세션 생성
+    session.setAttribute("name",name); //세션 생성
     model.addAttribute("result", apiResult);
     log.info("여기오나나나나나ㅏㄴ로그이이니ㅣ니잉니ㅣ니 네이버네이버네이:"+ email);
     return "index";
@@ -216,7 +215,7 @@ public class LoginController {
 		JsonNode accessToken = node.get("access_token");	
 		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken); 
 		String kemail = null; 
-		String kname = null; 
+		String name = null; 
 		String kgender = null; 
 		String kbirthday = null; 
 		String kage = null; 
@@ -225,13 +224,13 @@ public class LoginController {
 		JsonNode properties = userInfo.path("properties"); 
 		JsonNode kakao_account = userInfo.path("kakao_account"); 
 		kemail = kakao_account.path("email").asText(); 
-		kname = properties.path("nickname").asText(); 
+		name = properties.path("nickname").asText(); 
 		kimage = properties.path("profile_image").asText(); 
 		kgender = kakao_account.path("gender").asText(); 
 		kbirthday = kakao_account.path("birthday").asText(); 
 		kage = kakao_account.path("age_range").asText(); 
 		session.setAttribute("email", kemail); 
-		session.setAttribute("kname", kname); 
+		session.setAttribute("name", name); 
 		session.setAttribute("kimage", kimage); 
 		session.setAttribute("kgender", kgender); 
 		session.setAttribute("kbirthday", kbirthday); 
@@ -266,7 +265,6 @@ public class LoginController {
   		
   		return mv;
   	}
-  	
 
 	//로그아웃 처리
 	@RequestMapping("logout.do")

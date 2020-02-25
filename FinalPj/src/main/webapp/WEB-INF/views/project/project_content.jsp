@@ -1,11 +1,8 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="now" class ="java.util.Date" />
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -66,7 +63,6 @@
 									<div class="d-flex">
 										<ul class="mb-0 d-flex">
 											<li class="mr-5"><i class="si si-briefcase text-muted mr-1"></i> ${corInfo.cor_name}</li>
-
 											<li class="mr-5"><i class="si si-location-pin text-muted mr-1"></i>
 											<c:set var = "loc" value="${fn:split(projectCont.pj_loc,' ')}"/>
 												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
@@ -75,7 +71,6 @@
 													</c:if>
 												</c:forEach>
 											</li>
-
 											<li class="mr-5"><i class="si si-calendar text-muted mr-1"></i> 
 												<fmt:parseDate value="${projectCont.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
 												<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
@@ -109,13 +104,9 @@
 									<div class="col-xl-12 col-md-12">
 										<div class="table-responsive">
 
-										
-													
-													
 											<table class="table row table-borderless w-100 m-0 text-nowrap ">
 												<tbody class="col-lg-12 col-xl-6 p-0">
 													<tr>
-
 														<td><span class="font-weight-bold">근무 형태 : </span> 
 															<c:if test="${projectCont.pj_place eq 0}">
 																 비상주
@@ -141,7 +132,6 @@
 												</tbody>
 												<tbody class="col-lg-12 col-xl-6 p-0">
 													<tr>
-
 														<td><span class="font-weight-bold">급여 :</span>
 															<fmt:formatNumber value="${projectCont.pj_pay}" pattern="#,###,###,###" />원
 
@@ -172,7 +162,6 @@
 									</div>
 								</div>
 								</div>
-
 									<div class="col-xl-12 col-md-12" >
 									<hr style="margin-top:20px; margin-bottom:15px;">											
 												<span class="font-weight-bold">필요기술 : </span>
@@ -190,24 +179,21 @@
 													</p>
 												<hr style="margin-top:20px; margin-bottom:10px;">
 											</div>	
-								
-
+							
 								    <div class="card-header">
-                                 	<h4 class="mb-0 font-weight-semibold"><strong>내용</strong></h4>       
-  	                                  </div>
+                                 		<h4 class="mb-0 font-weight-semibold"><strong>내용</strong></h4>       
+  	                                </div>
 								  <div style="width:95%; margin:0 auto;"><P style="padding-top:15px;">${projectCont.pj_cont}</P></div>
 								
 							</div>
 							<span class="card-footer icons" >
 									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply"> 지원하기</a>
-
 									<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
 
 									<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
 							
 								<span style="float:right;" >
 										<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
-
 										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
 
 								</span>
@@ -455,7 +441,6 @@
 					<div class="col-xl-4 col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-header">
-
 								<h3 class="card-title">회사정보</h3>
 
 							</div>
@@ -491,11 +476,9 @@
 									<a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
 								</div>
 							</div>
-
 						</div>
 						<div class="card">
 							<div class="card-header">
-
 								<h3 class="card-title">지도</h3>
 							</div>
 							<!-- 카카오 map 등록 -->
@@ -725,9 +708,8 @@
 			</div>
 		</div>
 <!-- small Modal -->   
-
       <div id="deleteModal" class="modal fade">
->>>>>>> b1c1c09c3d9f1dffa0a9b5aa66034261f9603eb9
+
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -753,7 +735,7 @@
          </div>      
       </div>
       <!-- /small Modal -->
- 
+
     <!-- small Modal -->   
       <div id="" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
@@ -850,7 +832,6 @@ obShareUrl.value=window.document.location.href;
   //]]>
 </script>
 <!-- 카카오 공유하기 -->
-
 
 <!-- 프린트 특정영역 인쇄  
 <script type="text/javascript">

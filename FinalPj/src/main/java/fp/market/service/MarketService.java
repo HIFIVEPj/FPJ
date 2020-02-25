@@ -13,12 +13,9 @@ import fp.market.domain.MarketRev;
 import fp.market.utils.MarketPagingVO;
 
 public interface MarketService {
-	 int getMarketCount();
-	 
+	 int getMarketCount(); 
 	 //리뷰 페이징에 필요한 총 리뷰 수	 
-
-	int getMarketRevCount(long market_num);
-	
+	 int getMarketRevCount(long market_num);
 	//문의 페이징에 필요한 총 문의 수 
 	 int getMarketQACount(long market_num);
 	 
@@ -38,9 +35,17 @@ public interface MarketService {
 	 void insertMarketRev(MarketRev mareketRev);
 	 
 	 void insertMarketQA(MarketQA marketQA);
-	 void insertMarketQAFile(MarketQAFile marketQAFile);
+	 void insertMarketQAFile(HashMap<String, Object> map);
 	 
-	// List<Freelancer> getMarketRevFree(long market_num);
+	 List<MarketQAFile> marketQAFile(HashMap<String, Object> map);
+	 MarketQA marketQAcont(HashMap<String, Object> map);
+	 
+	 void deleteMarketQA (HashMap<String, Object> map);
+	 void updateMarketQA2 (HashMap<String, Object> map);
+	
+	 void deleteMarketRev (HashMap<String, Object> map);
+	 void updateMarketRev (HashMap<String, Object> map);
+	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 
 }

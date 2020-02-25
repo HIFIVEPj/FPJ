@@ -20,6 +20,5 @@ public class Member {
 	private int mem_option1;
 	private int mem_option2;
 	private int mem_option3;
-
 	
 }

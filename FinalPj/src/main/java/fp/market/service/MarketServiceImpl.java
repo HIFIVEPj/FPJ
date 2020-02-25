@@ -78,7 +78,6 @@ public class MarketServiceImpl implements MarketService {
 		
 	}
 	
-
 	@Override
 	public void insertMarket(Market market) {
 		mapper.insertMarket(market);
@@ -89,15 +88,43 @@ public class MarketServiceImpl implements MarketService {
 		mapper.insertMarketRev(mareketRev);
 		
 	}
+//marketQA insert	
 	@Transactional
 	public void insertMarketQA(MarketQA marketQA) {
-		mapper.insertMarketQA(marketQA);
 		mapper.updateMarketQA(marketQA);
+		mapper.insertMarketQA(marketQA);
 	}
-	public void insertMarketQAFile(MarketQAFile marketQAFile) {
-		mapper.insertMarketQAFile(marketQAFile);
+	@Override
+	public void insertMarketQAFile(HashMap<String, Object> map) {
+		mapper.insertMarketQAFile(map);
 	}
-
-
+//마켓문의글 파일 보기
+	@Override
+	public List<MarketQAFile> marketQAFile(HashMap<String, Object> map) {
+		return mapper.marketQAFile(map);
+	}
+	public MarketQA marketQAcont(HashMap<String, Object> map) {
+		return mapper.marketQAcont(map);
+	}
+//marketQA댓글 수정 삭제	
+	@Override
+	public void deleteMarketQA(HashMap<String, Object> map) {
+		mapper.deleteMarketQA(map);
+	}
+	@Override
+	public void updateMarketQA2(HashMap<String, Object> map) {
+		mapper.updateMarketQA2(map);
+		
+	}
+//marketRev댓글 수정 삭제		
+	@Override
+	public void deleteMarketRev(HashMap<String, Object> map) {
+		mapper.deleteMarketRev(map);
+	}
+	@Override
+	public void updateMarketRev(HashMap<String, Object> map) {
+		mapper.updateMarketRev(map);
+		
+	}
 }
 

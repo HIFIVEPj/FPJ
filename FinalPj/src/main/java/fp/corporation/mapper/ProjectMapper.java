@@ -26,5 +26,9 @@ public interface ProjectMapper {
 	void updateKeyword(Map<String, Object> map);
 	void updateKeyword_Del(PjPickKeyword pjpkeyword);
 	void updateKeyword_In(PjPickKeyword pjpkeyword);
+	
+	//mydash_cor에서 project 관리부분들
+	List<Project> listMydashCor (Map<String, Object> map);
+	long getTotalCountCor(long cor_code);
 
 }

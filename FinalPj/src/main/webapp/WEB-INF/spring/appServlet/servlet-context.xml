@@ -3,9 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -21,8 +19,7 @@
       <resources mapping="/plugins/**" location="/resources/plugins/" />
       <resources mapping="/video/**" location="/resources/video/" />
       <resources mapping="/summernote/**" location="/WEB-INF/views/summernote/" />
-      <resources mapping="/marketThumbnails/**" location="/resources/marketThumbnails/" />
-      <resources mapping="/marketImages/**" location="/resources/marketImages/" />
+      <resources mapping="/hifiveImages/**" location="/resources/hifiveImages/" />
    
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -34,14 +31,14 @@
    <!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
    <beans:bean id="naverLoginController" class="fp.login.naver.NaverLoginController" />
    <beans:bean id="kakaoController" class="fp.login.naver.KakaoController" />
-   
-   	<!-- file Upload 세영 -->
+  <!-- file Upload 세영 -->
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- max upload size in bytes -->
         <beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
         <!-- max size of file in memory (in bytes) -->
         <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
     </beans:bean>
+   
 	
 	<!-- 승훈 -->
 	<context:component-scan base-package="fp.index.controller" />
@@ -53,17 +50,15 @@
 
 	<!-- 별 -->
 	<context:component-scan base-package="fp.freelancerprofile.controller" />
+	<context:component-scan base-package="fp.freelancerlist.controller" /> <!-- 0214추가 -->
 
 	<!-- 나영 -->
 	<context:component-scan base-package="fp.corporation.controller" />
 	<!-- 소담 -->
-	
 	<context:component-scan base-package="fp.index.controller" />
 	<context:component-scan base-package="fp.member.controller" />
 	<context:component-scan base-package="fp.community.controller" />
 	<context:component-scan base-package="fp.login.controller" />
 	<context:component-scan base-package="fp.login.naver" />
-
-
-   
 </beans:beans>
+

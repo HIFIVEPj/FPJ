@@ -17,10 +17,10 @@ public class IndexController {
 	public String construction() {
 		return "construction";
 	}
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {	
 		return "index";
+
 	}
 
 }

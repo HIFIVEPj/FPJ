@@ -75,13 +75,11 @@
     </session-config>
 
 
-	<!-- 에러 페이지-->
-
+	<!-- 에러 페이지
 	<error-page>
       <error-code>404</error-code>
       <location>/WEB-INF/views/404error.jsp</location>
  	</error-page>
- <!-- 
  	<error-page>
       <error-code>500</error-code>
       <location>/WEB-INF/views/500error_test.jsp</location>

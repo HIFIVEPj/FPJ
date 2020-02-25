@@ -66,10 +66,12 @@ public class MemberTests {
 	@Test
 	public void insertMem() {
 		String sql ="update MEMBER set MEM_PWD=? where MEM_EMAIL=?";
+
 			//dao.hashCode("pw");
 			Connection con =null;
 			PreparedStatement pstmt =null;
 			//BCrypt.hashpw(rawPassword.toString(), salt);
+
 			try {
 				con=ds.getConnection();
 				pstmt=con.prepareStatement(sql);

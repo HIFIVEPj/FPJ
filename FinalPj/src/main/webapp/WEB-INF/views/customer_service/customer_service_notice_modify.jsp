@@ -130,7 +130,7 @@
 									<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#smallModal" value='등록'>
 									-->	
-										<button type="button" class="btn btn-primary waves-effect waves-light" onclick="check(this.form)">등록</button>
+										<button type="button" class="btn btn-primary waves-effect waves-light" onclick="check(this.form)">수정</button>
 										<!-- 
 										<input type="button" class="btn btn-danger waves-effect waves-light" value='취소' id='click1'>
 										 -->
@@ -284,5 +284,4 @@
 			
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
 <!--/footer-->
