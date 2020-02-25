@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -60,6 +61,7 @@
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
+
 												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>		
 												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
 											</ul>

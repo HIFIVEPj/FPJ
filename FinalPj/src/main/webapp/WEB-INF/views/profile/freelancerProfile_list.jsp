@@ -48,11 +48,6 @@
                         <h3 class="card-title">회원정보</h3>
                      </div>
                      <div class="card-body text-center item-user">
-                     
-                     
-                     
-                     
-                     
                         <div class="profile-pic">
                            <div class="profile-pic-img">
                               <img src="../images/faces/male/25.jpg" class="brround" alt="user">
@@ -69,7 +64,7 @@
                                  <ul class="slide-menu">
                                     <li><a class="slide-item" href="mydash_free">회원정보</a></li>
                                     <li><a class="slide-item " href="freelancerProfile_list">프로필</a></li>	
-								<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
+								<c:if test="${sessionScope.class_num==4}">
                                  	<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
 								</c:if>
                                 
@@ -232,9 +227,11 @@
                                  </tr>
                               </thead>
                               
-        
-<form id="del_list" method="get" action="freelancerProfile_cehck_delete" name="checkdelete1">
-
+ <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
+  <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">   
+<form id="del_list" method="get" action="freelancerProfile_cehck_delete?pro_num=${profile.pro_num}" name="checkdelete1">
+</c:forEach>
+</c:forEach>
       
                    
                                <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
@@ -268,9 +265,9 @@
                                        <td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td> 
                                        </c:forEach>
                                     </tr>
-                                 
+
                                  </c:forEach>
- 
+
                            </table>
                         </div>
 
@@ -280,12 +277,11 @@
        
                      <div class="card">       
                         <div class="card-footer" align="right">
-                        <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>   
-      
-                        <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a>      
-                       
+                        <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a> 
+ </form>                                                    
+                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>   
                         </div>
- </form>                       
+                     
           
                 <div class="center-block text-center">
                            <ul class="pagination mb-0">         
@@ -431,7 +427,6 @@
 		</section>
 		<!--Footer Section-->
 
-
 <script>
 function check(){
 	//alert(pro_num)
@@ -490,7 +485,6 @@ function check(){
                               </div>
                            </div>
                         <!--Modal 끝-->
-                    
 
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>

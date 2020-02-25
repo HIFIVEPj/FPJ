@@ -9,6 +9,13 @@
 		<!-- 승훈 -->
 		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
 		<typeAlias alias="CustomerServiceQa" type="fp.customer_service.domain.CustomerServiceQa"/>
+		<typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
+	  	<typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
+	  	<typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
+		<!--
+		<typeAlias alias="CustomerServicePagingVO" type="fp.customer_service.domain.CustomerServicePagingVO"/>
+		-->
+		
 		
 		<!-- 세영 -->
 		<typeAlias alias="Market" type="fp.market.domain.Market"/>
@@ -19,9 +26,11 @@
         <typeAlias alias="MarketQA" type="fp.market.domain.MarketQA"/>
         <typeAlias alias="mFreelancerProfile" type="fp.market.domain.FreelancerProfile"/>
         <typeAlias alias="mCorporation" type="fp.market.domain.Corporation"/>
+        <typeAlias alias="mMember" type="fp.market.domain.Member"/>
+        <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
 		
 		<!-- 별 -->
-	<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
+		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
       	<typeAlias alias="frType" type="fp.freelancerprofile.domain.Type"/>
       	<typeAlias alias="FreePick" type="fp.freelancerprofile.domain.FreePickKeyWord"/>
       	<typeAlias alias="FreeLancerProfile" type="fp.freelancerprofile.domain.FreeLancerProfile"/>   
@@ -60,6 +69,7 @@
    	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
    	    <typeAlias alias="MemberAuth" type="fp.member.domain.MemberAuth"/>
    	    <!-- <typeAlias alias="CustomUserDetails" type="fp.password.security.CustomUserDetails"/> -->
+
 	</typeAliases>
 
 <!--
@@ -67,7 +77,4 @@
     	<mapper resource="fp/customer_service/mapper/CustomerServiceNotice.xml"/>
 	</mappers>
 --> 
-
-
-
 </configuration>

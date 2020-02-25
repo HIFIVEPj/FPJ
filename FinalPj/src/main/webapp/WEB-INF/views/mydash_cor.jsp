@@ -55,28 +55,11 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
-											</ul>
-										</li>
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
-											</ul>
-										</li>
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
-										</li>
-										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -102,9 +85,10 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">담당자 이메일</label>
-											<input type="email" class="form-control" value="${sessionScope.email}" name="mem_email" readonly>
+											<input type="email" id="mem_email" class="form-control" value="${sessionScope.email}" name="mem_email" readonly>
 										</div>
 									</div>
+									
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">비밀번호</label>
@@ -264,7 +248,7 @@
 										<div class="form-group mb-0">
 											<label class="form-label">기업이미지 등록</label>
 											<div class="custom-file">
-												<input type="file" class="custom-file-input" name="fileName" id="file" onchange="upfile()">
+												<input type="file" class="custom-file-input" name="fileName" id="file" onchange="upfile()" accept=".gif, .jpg, .png">
 												<label class="custom-file-label" id="fileName_label"></label>
 											</div>
 										</div>
@@ -341,28 +325,28 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_market">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="project_write?mem_email=${sessionScope.email}">프로젝트 작성하기</a></li>
+												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
 											</ul>
 										</li>
 										<li>
 											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -532,10 +516,26 @@
 										<div class="form-group">
 										<label class="form-label">직종</label>
 											<select class="form-control" name="cor_type" id="typeSelect">
-												<option selected> 직종 분류 선택 </option>
-												<option value="프로그램 개발">프로그램 개발</option>
-												<option value="웹개발">웹 개발</option>
-												<option value="솔루션 개발">솔루션개발</option>
+											 <c:choose>
+												<c:when test="${cor.cor_type=='프로그램 개발'}">
+													<option> 직종 분류 선택 </option>
+													<option value="프로그램 개발" selected>프로그램 개발</option>
+													<option value="웹개발">웹 개발</option>
+													<option value="솔루션 개발">솔루션개발</option>
+												</c:when>
+												<c:when test="${cor.cor_type=='웹개발'}">
+													<option> 직종 분류 선택 </option>
+													<option value="프로그램 개발" >프로그램 개발</option>
+													<option value="웹개발" selected>웹 개발</option>
+													<option value="솔루션 개발">솔루션개발</option>
+												 </c:when>
+												 <c:when test="${cor.cor_type=='솔루션 개발'}">
+													<option> 직종 분류 선택 </option>
+													<option value="프로그램 개발" >프로그램 개발</option>
+													<option value="웹개발">웹 개발</option>
+													<option value="솔루션 개발" selected>솔루션개발</option>
+												 </c:when>
+											  </c:choose>
 											</select>
 										
 										</div>
@@ -543,14 +543,14 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="form-label">회사소개</label>
-											<textarea rows="5" class="form-control" placeholder="회사를 소개해주세요" name="cor_profile"></textarea>
+											<textarea rows="5" class="form-control" placeholder="회사를 소개해주세요" name="cor_profile">${cor.cor_profile}</textarea>
 										</div>
 									</div>						
 									<div class="col-md-12">
 										<div class="form-group mb-0">
 											<label class="form-label">기업이미지 등록</label>
 											<div class="custom-file">
-												<input type="file" class="custom-file-input" name="fileName" id="file" onchange="upfile()" >
+												<input type="file" class="custom-file-input" name="fileName" id="file" onchange="upfile()" accept=".gif, .jpg, .png" value="${cor.cor_fname}">
 												<label class="custom-file-label" id="fileName_label">${cor.cor_fname}</label>
 											</div>
 										</div>

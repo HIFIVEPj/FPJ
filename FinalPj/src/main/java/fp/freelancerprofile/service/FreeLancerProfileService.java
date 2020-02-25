@@ -1,9 +1,12 @@
+
 package fp.freelancerprofile.service;
 
 import java.util.*;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
@@ -32,12 +35,15 @@ public interface FreeLancerProfileService {
 
 	//삭제//
 	public void listDelete(long PRO_NUM);
+
 	
 	//작성//
-	public String listInsert(FreeLancerProfile freelancerprofile);
-	public String insertPjpkeyword(Map<String, Object> map);
+	public void listInsert(FreeLancerProfile freelancerprofile);
+	public void insertPjpkeyword(Map<String, Object> map);
 
-	void checkdelete1();
+	
+	//체크박스 삭제//
+	void checkdelete1(long PRO_NUM);
 		   
 
 }

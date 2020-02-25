@@ -57,9 +57,9 @@
 						
 						<form method="post" action="customer_service_notice_write" name="notice_write">
 						
-						<!-- 나중에 없앨 부분 -->
-						<input type="hidden" name="mem_email" value="관리자">
-						<!-- /나중에 없앨 부분 -->
+						
+						<input type="hidden" name="mem_email" value="${sessionScope.email}">
+						
 						
 						<script type="text/javascript">
 						   function check() {
@@ -287,9 +287,7 @@
 		</section>			
 		<!--/공지 게시판 입력 폼-->
 		
-		
 			
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
-<!--/footer-->
+<!--/footer-->		

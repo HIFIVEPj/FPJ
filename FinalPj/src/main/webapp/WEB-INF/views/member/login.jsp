@@ -1,6 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+$(document).ready(function() {
+   $('form').on('submit',function(){
+      var inval_Arr = new Array(2).fill(false);
 
+      //비밀번호 입력여부
+      if (($('#email').val() == "")){
+            inval_Arr[0] = false;
+            alert('이메일을 입력해주세요.');
+            return false;
+         } else {
+            inval_Arr[0] = true;   
+         } 
+         
+      //비밀번호 입력여부
+      if (($('#pwd').val() == "")){
+            inval_Arr[1] = false;
+            alert('비밀번호를 입력해주세요.');
+            return false;
+         } else {
+            inval_Arr[1] = true;   
+         }    
+      //전체 유효성 검사
+      var validAll = true;
+      for(var i = 0; i < inval_Arr.length; i++){
+         if(inval_Arr[i] == false){         
+            validAll = false;      
+         }   
+      }
+      if(validAll == true){ // 유효성 모두 통과
+         alert('[HIFIVE] 환영합니다  [HIFIVE] .');
+      } else{
+         alert('정보를 다시 확인하세요.');
+      }
+   }); //form 끝
+});   
+</script>   
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -174,5 +210,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 6639d0921df9b65c8efd3090a1a3933ebc32d277
 <!--/footer-->

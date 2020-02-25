@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -14,7 +15,7 @@
 							<h1 class="">My Dashboard</h1>
 							<ol class="breadcrumb text-center">
 								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Dashboard</li>
+								<li class="breadcrumb-item  text-white" aria-current="page">My Dashboard</li>
 							</ol>
 						</div>
 					</div>
@@ -26,7 +27,8 @@
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
-<form  method='post' name='free_write' action="freelancerMyprofile_write">
+
+
 				<div class="row">
 					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
@@ -41,11 +43,12 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
 								</div>
 							</div>
+
 							<aside class="doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
-											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item " data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
 												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
@@ -134,32 +137,35 @@
 						</div>
 						-->
 					</div>
+					
+						
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
 								<h3 class="card-title">프로필 등록하기</h3>
 							</div>
-							
+<form  method='post' id='free_write' name='free_write' action="freelancerMyprofile_write?mem_email=${sessionScope.email}">						
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
+
 										<label class="form-label">직종</label>
-                                 			<select class="form-control">
+                                 			<select class="form-control"name="type_num">
                                     			<option selected> </option>
-                                    			<option>개발</option>
-                                    			<option>퍼블리싱</option>
-                                    			<option>디자인</option>
-                                   				 <option>기획</option>
-                                   				 <option>기타</option>
+                                    			<option value="1">개발</option>
+                                    			<option value="2">퍼블리싱</option>
+                                    			<option value="3">디자인</option>
+                                   				 <option value="4">기획</option>
+                                   				 <option value="5">기타</option>
                                 			 </select>
 
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">경력</label>
-											<input type="number" class="form-control" placeholder="경력">
+											<label class="form-label">경력</label> 
+											<input type="text" class="form-control" placeholder="경력" name="pro_ex">
 										</div>
 									</div>
 
@@ -169,7 +175,7 @@
 										</div>
 									</div>	
 									
-						
+					
 					
                      <div class="col-sm-6 col-md-12">
                         <div class="form-group ">                                                                     
@@ -177,13 +183,15 @@
                            <div class="tabs-menus">
                               <!-- Tabs -->
                               <ul class="nav panel-tabs">
-                                  <li><a href="#tab1" class ="active" value="1" data-toggle="tab" onclick="javascript:type_set();">개발</a>
-                                 <li><a href="#tab2"  name="type" value="2" data-toggle="tab"onclick="javascript:type_set();" >퍼블리셔</a></li>
-                                 <li><a href="#tab3"  name="type" value="3" data-toggle="tab" onclick="javascript:type_set();">디자인</a></li>
-                                 <li><a href="#tab4" name="type"  value="4" data-toggle="tab" onclick="javascript:type_set();">기획</a></li>
-                                 <li><a href="#tab5"  name="type" value="5" data-toggle="tab" onclick="javascript:type_set();">기타</a></li>                              
+                                  <li><a href="#tab1" class ="active" value="1" data-toggle="tab"  id="type_num"  >개발</a>
+                                 <li><a href="#tab2"  name="type" value="2" data-toggle="tab" id="type_num" >퍼블리셔</a></li>
+                                 <li><a href="#tab3"  name="type" value="3" data-toggle="tab" id="type_num" >디자인</a></li>
+                                 <li><a href="#tab4" name="type"  value="4" data-toggle="tab" id="type_num" >기획</a></li>
+                                 <li><a href="#tab5"  name="type" value="5" data-toggle="tab" id="type_num" >기타</a></li>                              
                               </ul>
-                              <input type="hidden" name="type_num" value="" id="type_num" />   
+                              <input type="hidden" name="type_num" class='type' value=""/>    
+                              <input type="hidden" name="free_code"  value="2"/>  
+                                <input type="hidden" name="free_keynum"  value=""/>  
                            </div>
                            <label class="form-label"><b>키워드</b></label>
                            
@@ -1220,7 +1228,7 @@
 									<div class="col-sm-3 col-md-3">
 									<label class="form-label"><b>주소</b></label>
 										<div class="form-group">
-											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode">
+											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pro_postcode">
 										</div>
 									</div>
 									<div class="col-sm-4 col-md-4">
@@ -1231,12 +1239,12 @@
 									<div class="row">
 									<div class="col-sm-12 col-md-7">
 										<div class="form-group">
-											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc"><br>
+											<input type="text" class="form-control" id="address" placeholder="주소" name="pro_addr"><br>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-5">
 										<div class="form-group">	
-											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pj_detailloc">
+											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pro_detailloc">
 										</div>
 									</div>
 									</div>
@@ -1356,7 +1364,7 @@
 										</div>
 										<div class="col-md-9">
 											<label class="custom-switch">
-												<input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input">
+												<input type="checkbox" name="pro_ox" class="custom-switch-input">
 												<span class="custom-switch-indicator"></span>
 												<span class="custom-switch-description">불가능/가능</span>
 											</label>
@@ -1377,7 +1385,7 @@
 														<div class="input-group-text">
 															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 														</div>
-													</div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text">
+													</div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="pro_start">
 												</div>
 											</div>
 										</div>
@@ -1391,23 +1399,38 @@
 												<label class="form-label">업무장소</label>
 											</div>
 											<div class="col-md-9">
-												  <select class="form-control">
+												  <select class="form-control" name="pro_place">
 	                                    			<option selected> </option>
-	                                    			<option value="0">상주</option>
-	                                    			<option value="1">반상주</option>
-	                                   				 <option value="2">자택</option>
-	                                   				 <option value="3">상관없음</option>
+	                                    			<option value=0>상주</option>
+	                                    			<option value=1>반상주</option>
+	                                   				 <option value=2>자택</option>
+	                                   				 <option value=3>상관없음</option>
 	                                			 </select>
 											</div>
-										</div>
-								
-										
+										</div>				
+											<br/>
+			
+										<div class="row">
+											<div class="col-md-3">
+												<label class="form-label">업무 가능 지역</label>
+											</div>
+											<div class="col-md-9">
+												  <select class="form-control" name="pro_workplace">
+	                                    			<option selected> </option>
+	                                    			<option value=0>서울</option>
+	                                    			<option value=1>경기</option>
+	                                   				 <option value=2>대전</option>
+	                                   				 <option value=3>강원</option>
+	                                			 </select>
+											</div>
+										</div>	
+	
 
  							 		<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
 												<label class="form-label">제목</label>
-												<input type="text" class="form-control" name="pj_sub">
+												<input type="text" class="form-control" name="profile_sub">
 											</div>
 										</div>
 									</div>
@@ -1415,10 +1438,21 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label class="form-label">자기소개</label>
-											<textarea rows="5" class="form-control" placeholder=""></textarea>
+											<textarea rows="5" class="form-control" placeholder="" name="pro_cv"></textarea>
 										</div>
 									</div>
 								</div>
+								
+								 <div class="row">
+										<div class="col-sm-12 col-md-12">
+							 				<div class="form-group">
+												<label class="form-label">학력</label>
+												<input type="text" class="form-control" name="pro_edu">
+											</div>
+										</div>
+									</div>
+								
+								
 
 											<div class="col-md-12">
 											<div class="form-group ">
@@ -1453,42 +1487,51 @@
 								</div>
 							</div>
 							<div class="card-footer" align="right">
-								<a href="freelancerProfile_list" class="btn btn-primary" onclick="javascript:check();">등록하기</a>	
-								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>						
-							</div>
-
 							
+								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>			
+</form>										
+								<a href="javascript:void(0)" class="btn btn-primary" onclick="javascript:check();">등록하기</a>	
+						
+										
+							</div>							
 						</div>
 					</div>
 				</div>
-</form>
+
 			</div>
 		</section>
 		<!--/User Dashboard-->
 		   
 <script>
 function check(){
-      var key_num = $('.active').attr('value');
-      document.getElementById('key_num').value = key_num;
+      var type_num = $('.active').attr('value');
+      document.getElementById('type_num').value = type_num;
+ 	
       var key_num = new Array();
       var key_cnt = 0;
+     
       //for(var i=0; i<key_num_size; i++){
-       $('input:checkbox[name="key_num"]').each(function() {
+   
+      $('input:checkbox[name="key_num"]').each(function() {	
          if(this.checked){
             key_num[key_cnt] = this.value;
             key_cnt++;
          }
        });
-      if(key_num == ""){
-         alert("키워드는 1개 이상 설정해야합니다.")
-         return;
-      }
-      // alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
+      
+       alert("type_num: " +type_num);
+      // alert("key_num : "+ key_num);
+    
+	      if(key_num == ""){
+	         alert("키워드는 1개 이상 설정해야합니다.")
+	         return ;
+	      }
+     // alert("free_code: "+free_write1.free_code.value+", pro_num: "+free_write1.pro_num.value+", type_num: "+free_write1.type_num.value+", pro_exp: "+free_write1.pro_exp.value);
       // alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
        //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
       // alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
       // alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
-      freelancerMyprofile_write.submit();
+      free_write.submit();
       }
    //});
 </script>

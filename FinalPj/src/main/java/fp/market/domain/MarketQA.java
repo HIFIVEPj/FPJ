@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MarketQA {
 	private long marketQA_num;//문의글번호
-	
 	private long market_num;//마켓번호
 	private String marketQA_sub;//제목
 	private String marketQA_cont;//내용

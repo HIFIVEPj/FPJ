@@ -1,19 +1,12 @@
+
 package fp.corporation.service;
-
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.transaction.annotation.Transactional;
 import fp.corporation.domain.Corporation;
 import fp.corporation.mapper.CorporationMapper;
-import fp.util.file.Path;
-import lombok.extern.log4j.Log4j;
-@Log4j
+
 @Service
 public class CorporationServiceImpl implements CorporationService {
 	@Autowired
@@ -24,10 +17,17 @@ public class CorporationServiceImpl implements CorporationService {
 		return mapper.mydash_cor_select(mem_email);
 	} 
 	
+	
+	//@Transactional
 	@Override
 	public void insert(Corporation corporation) {
 		mapper.insert(corporation);
+		//mapper.update_cor_auth(corporation.getMem_email());
+	}
+	
+	@Override
+	public void mydash_cor_update(Corporation corporation) {
+		mapper.mydash_cor_update(corporation);
 	}
 
 }
-

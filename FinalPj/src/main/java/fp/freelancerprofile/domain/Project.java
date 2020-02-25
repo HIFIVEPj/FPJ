@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.domain;
 
 import java.sql.Date;
@@ -37,10 +38,10 @@ public class Project {
 	private int pj_fgrade; //프리랜서등급int
 	private long pj_pcnt; //찜수long
 	private long pj_vcnt; // 조회수long
-	
+
 	private List<Pj_Pick_Keyword> Pj_Pick_Keyword;
 	private List<KeyWord> frKeyWord;
-	
+
 	
 
 }

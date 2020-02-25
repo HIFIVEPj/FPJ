@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -362,6 +362,8 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<<<<<<< HEAD
+=======
 =======
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -726,5 +728,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 6639d0921df9b65c8efd3090a1a3933ebc32d277
 <!--/footer-->

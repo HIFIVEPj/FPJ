@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -42,29 +42,27 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class="doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
-												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_temp">프로젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
 												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
 											</ul>
 										</li>
 										<li>
@@ -291,6 +289,9 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+<<<<<<< HEAD
+
+=======
 =======
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -584,5 +585,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 6639d0921df9b65c8efd3090a1a3933ebc32d277
 <!--/footer-->

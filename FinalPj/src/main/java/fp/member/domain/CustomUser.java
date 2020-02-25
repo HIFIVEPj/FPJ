@@ -1,0 +1,37 @@
+
+/*
+=======
+
+>>>>>>> b1c1c09c3d9f1dffa0a9b5aa66034261f9603eb9
+package fp.member.domain;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+
+import lombok.Getter;
+
+
+@Getter
+public class CustomUser extends User{
+
+	private	static final long serialVersionUID =1L;
+	private Member member;
+	
+	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+		super(username,password,authorities);
+	}
+	
+	public CustomUser(Member vo) {
+		super(vo.getEmail(),vo.getPwd(), vo.getAuthList().stream().map(auth -> new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
+		this.member=vo;
+	}
+	
+	
+}
+<<<<<<< HEAD
+*/

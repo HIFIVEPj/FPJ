@@ -89,7 +89,7 @@
 											<td class="text-center">${notice_list.notice_num}</td>
 											<td class="text-center">${notice_list.notice_cate}</td>
 											<td><a href='customer_service_notice_content?notice_num=${notice_list.notice_num}'>${notice_list.notice_sub}</a></td>
-											<td class="text-center">${notice_list.mem_email}</td>
+											<td class="text-center">${notice_list.mem_name}</td>
 											<td class="text-center"><fmt:formatDate value="${notice_list.notice_rdate}" pattern="yyyy.MM.dd"/></td>
 											<td class="text-center">${notice_list.notice_vcnt}</td>
 											<td class="text-center">${notice_list.notice_recommnum}</td>
@@ -99,10 +99,11 @@
 								</table>
 								
 								<br/>
+									<c:if test="${sessionScope.class_num==1}">
 									<div class="text-right">
 										<a href="customer_service_notice_write" class="btn btn-danger">　글쓰기　</a>
 									</div>
-								
+									</c:if>
 							</div>
 						</div>
 					</div>
@@ -114,5 +115,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 <!--/footer-->

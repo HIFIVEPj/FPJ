@@ -1,3 +1,4 @@
+
 package fp.customer_service.domain;
 
 import java.util.Date;
@@ -27,6 +28,7 @@ public class CustomerServiceQa {
 	private long option1;
 	private long option2;
 	private String option3;
+	private String mem_name;
 	
 	/*
 	@JsonFormat(pattern="yyyyy.MM.dd")

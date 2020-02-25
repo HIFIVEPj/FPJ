@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.mapper;
 
 import java.util.*;
@@ -29,8 +30,12 @@ public interface FreeLancerProfileMapper {
 	//페이징처리 게시글 조회
 	public List<FreeLancer> selectPageList(PagingVO vo);
 
-	public String listInsert(FreeLancerProfile freelancerprofile);
-	public String insertPjpkeyword(Map<String, Object> map);
+	//프로필 작성//
+	public void listInsert(FreeLancerProfile freelancerprofile);
+	
+	public void insertPjpkeyword(Map<String, Object> map);
 
-	public void checkdelete1();
+	//체크박스 삭제//
+	public void checkdelete1(long PRO_NUM);
+
 }

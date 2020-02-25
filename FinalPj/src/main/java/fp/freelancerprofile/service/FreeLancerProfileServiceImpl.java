@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.service;
 
 import java.util.*;
@@ -5,6 +6,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
@@ -59,24 +61,22 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		   mapper.listDelete(PRO_NUM);
 		   mapper. listDelete2(PRO_NUM);
 	}
-	
-			
+
+	//체크박스 삭제//
 	@Override
-	public void checkdelete1() {
-		 mapper.checkdelete1();
-		 
+	public void checkdelete1(long PRO_NUM) {
+		 mapper.checkdelete1(PRO_NUM);
 	}
-
 	
-
+	//프로필 작성//
 	@Override
-	public String listInsert(FreeLancerProfile freelancerprofile){
-		return mapper.listInsert(freelancerprofile);
+	public void listInsert(FreeLancerProfile freelancerprofile){
+		mapper.listInsert(freelancerprofile);
 	}
 	
 	@Override
-	public String insertPjpkeyword(Map<String, Object> map){
-		return mapper.insertPjpkeyword(map);
+	public void insertPjpkeyword(Map<String, Object> map){
+		 mapper.insertPjpkeyword(map);
 	}
 
 
