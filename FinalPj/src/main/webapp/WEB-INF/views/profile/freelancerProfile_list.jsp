@@ -70,13 +70,13 @@
                                 
                                  </ul>
                               </li>
-                              <li class="slide">
+                          <!--     <li class="slide">
                                  <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-diamond"></i><span class="side-menu__label"> My Ads</span><i class="angle fa fa-angle-right"></i></a>
                                  <ul class="slide-menu">
                                     <li><a class="slide-item" href="myads.html"> My Ads-1</a></li>
                                     <li><a class="slide-item" href="myads.html"> My Ads-2</a></li>
                                  </ul>
-                              </li>
+                              </li>--> 
                               <li class="slide">
                                  <a class="side-menu__item " data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
                                  <ul class="slide-menu">
@@ -107,13 +107,13 @@
                                     <li><a class="slide-item" href="orders.html">Orders-2</a></li>
                                  </ul>
                               </li>
-                              <li class="slide">
+                         <!--       <li class="slide">
                                  <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-game-controller"></i><span class="side-menu__label"> Safety Tips</span><i class="angle fa fa-angle-right"></i></a>
                                  <ul class="slide-menu">
                                     <li><a class="slide-item" href="tips.html">Safety Tips-1</a></li>
                                     <li><a class="slide-item" href="tips.html">Safety Tips-2</a></li>
                                  </ul>
-                              </li>
+                              </li>-->
                               <li class="slide">
                                  <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-settings"></i><span class="side-menu__label"> Settings </span><i class="angle fa fa-angle-right"></i></a>
                                  <ul class="slide-menu">
@@ -223,7 +223,7 @@
                                        <th >프로필명</th>
                                        <th>이메일</th>
                                        <th>등록일</th>
-                                       <th>첨부파일</th>
+                                       <th>첨부파일</th>${sessionScope}
                                  </tr>
                               </thead>
                               

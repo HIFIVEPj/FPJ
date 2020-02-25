@@ -246,7 +246,7 @@
 						, pro_exp 
 						, pro_addr
 						, pro_workplace
-						, pro_vcnt 
+						, pro_vcnt +1
 						, pro_edu 
 						, pro_start 
 						, pro_ox 

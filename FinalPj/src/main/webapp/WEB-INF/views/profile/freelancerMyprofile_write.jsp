@@ -1417,10 +1417,10 @@
 											<div class="col-md-9">
 												  <select class="form-control" name="pro_workplace">
 	                                    			<option selected> </option>
-	                                    			<option value=0>서울</option>
-	                                    			<option value=1>경기</option>
-	                                   				 <option value=2>대전</option>
-	                                   				 <option value=3>강원</option>
+	                                    			<option value="0">서울</option>
+	                                    			<option value="1">경기</option>
+	                                   				 <option value="2">대전</option>
+	                                   				 <option value="3">강원</option>
 	                                			 </select>
 											</div>
 										</div>	

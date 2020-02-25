@@ -40,7 +40,7 @@
 										<span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="" data-original-title="online"></span>
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">Robert McLean</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
 							<aside class=" doc-sidebar my-dash">

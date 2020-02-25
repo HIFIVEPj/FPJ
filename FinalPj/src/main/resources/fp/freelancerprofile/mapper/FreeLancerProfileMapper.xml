@@ -138,47 +138,47 @@
      <select id="selectProfileContent"  parameterType="long" resultMap="FreeLancerResult">
 
       <![CDATA[
-		select fp.PRO_NUM
-		         , FREE_NAME
-		         , PRO_WORKPLACE
-		         , fp.MEM_EMAIL
-		         , FREE_TEL
-		         , PRO_CV
-		         , PROFILE_DATE
-		         , PROFILE_OFNAME 
+		select fp.pro_num
+		         , free_name
+		         , fp.mem_email
+		         , pro_workplace
+		         , free_tel
+		         , pro_cv
+		         , profile_date
+		         , profile_ofname 
 			from FREELANCER_PROFILE fp
 				inner join FREELANCER f 
-					on fp.FREE_CODE = f.FREE_CODE
+					on fp.free_code = f.free_code
 						inner join FREELANCER_PROFILEFILE ffile
-						on f.FREE_CODE = ffile.FREE_CODE
-						where fp.PRO_NUM=#{PRO_NUM}
+						on f.free_code = ffile.free_code
+						where fp.pro_num=#{pro_num}
       ]]>
    </select>
    <!-- 프리랜서 프로필 컨텐츠 2-->
         <select id="selectProfileContent2"  parameterType="long" resultMap="find_pro_sub">
 
       <![CDATA[
-		select p.PJ_SUB
-			   , t.TYPE_NAME
-			   , fp.PRO_NUM
+		select p.pj_sub
+			   , t.type_name
+			   , fp.pro_num
 			from Type t
 				full outer join FREELANCER_PROFILE fp
-				on t.TYPE_NUM = fp.TYPE_NUM 
+				on t.type_num = fp.type_num 
 					full outer join PROJECT p
-					on t.TYPE_NUM = p.TYPE_NUM
-					where fp.PRO_NUM=#{PRO_NUM}
+					on t.type_num = p.type_num
+					where fp.pro_num=#{pro_num}
       ]]>
    </select>
     <!-- 프리랜서 프로필 컨텐츠 3-->
           <select id="selectProfileContent3"  parameterType="long" resultMap="FreeLancerResult">
 
       <![CDATA[
-		select k.KEY_NAME from FREE_PICK_KEYWORD fk
+		select k.key_name from FREE_PICK_KEYWORD fk
 			full outer join FREELANCER_PROFILE fp
-			on fk.PRO_NUM = fp.PRO_NUM 
+			on fk.pro_num = fp.pro_num 
 				full outer join KEYWORD k
-				on fk.KEY_NUM = k.KEY_NUM
-				where fp.PRO_NUM=#{PRO_NUM}
+				on fk.key_num = k.key_num
+				where fp.pro_num=#{pro_num}
       ]]>
    </select>
    
