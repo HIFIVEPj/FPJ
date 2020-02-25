@@ -494,19 +494,70 @@
 														</div>
 														
 													</div>
+													<input type="hidden" value="${dto.pj_num}" class="pj_nums"/>
+													<input type="hidden" value="${free.free_code}" class="free_codes"/>
 													<div class="card border-0 mb-0">
 														<div class="card-body" style="padding:30px;">
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons wishlist" style="margin-right:40%" id="wish"> <i class="fa fa fa-heart-o" style=""></i></a>
-														</div>
+														<c:if test="${empty free}">
+															<div class="item-card9-icons">
+																<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" id="wish" onclick="javascript:onlyFree()">
+																 <i class="fa fa fa-heart-o" style=""></i></a>
+															</div>
+														</c:if>
+														<c:if test="${free.free_profileox==0}">
+															<div class="item-card9-icons">
+																<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" id="wish" onclick="javascript:profilePlease()">
+																 <i class="fa fa fa-heart-o" style=""></i></a>
+															</div>
+														</c:if>
+														<c:if test="${free.free_profileox==1}">
+														<c:choose>
+															<c:when test ="${empty pjplist}">
+																<div class="item-card9-icons">
+																	<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" id="wish" onclick="javascript:wish()">
+																	 <i class="fa fa fa-heart-o" style=""></i></a>
+																</div>
+															</c:when>
+															<c:otherwise>
+																<c:forEach var = "pjp" items="${pjplist}">
+																	<c:if test="${pjp.pj_num != dto.pj_num}">
+																		<div class="item-card9-icons">
+																			<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" id="wish" onclick="javascript:wish()">
+																			 <i class="fa fa fa-heart-o" style=""></i></a>
+																		</div>
+																	</c:if>
+																	<c:if test = "${pjp.pj_num==dto.pj_num}">
+																		<div class="item-card9-icons"  style="" >
+																			<a href="javasript:void(0)" class="item-card9-icons " style="margin-right:40%; background-color:#e8564a" id="wish" onclick="javascript:del_wish()">
+																			 <i class="fa fa fa-heart" style="color:white"></i></a>
+																		</div>
+																	</c:if>
+																</c:forEach>
+															</c:otherwise>
+														</c:choose>
+														</c:if>
 														<script>
-															$(document).on("click","#wish",function(){
-																$.ajax({
-																	type: "get",
-																	url:"<c:url value='project_wish'/>"
-																	data: ""
-																});
-															})
+														function onlyFree(){
+															alert("프리랜서만 이용가능한 서비스 입니다.")
+														}
+														
+														function profilePlease(){
+															alert("프로필을 등록하셔야 이용할 수 있습니다.")
+														}
+														function wish(){	
+															$.ajax({
+																type:"get",  
+																url:"<c:url value='project_wish'/>",
+												    			data:"pj_num="+$(".pj_nums").val()+"&free_code="+$(".free_codes").val(),
+																success: function(data){
+																	alert("성공");
+																},
+															error: function(data){
+																alert("에러발생");
+															}
+															});
+														}
+														
 														</script>
 															<div class="item-card9">
 															<c:set var = "loc" value="${fn:split(dto.pj_loc,' ')}"/>

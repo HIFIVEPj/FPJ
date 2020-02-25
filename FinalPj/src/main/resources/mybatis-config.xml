@@ -60,7 +60,7 @@
         <typeAlias type="fp.corporation.domain.PjPickKeyword" alias="PjPickKeyword"/>
         <typeAlias type="fp.corporation.domain.Type" alias="corType"/>   
         <typeAlias type="fp.corporation.domain.Corporation" alias="Corporation"/>   
-
+		
         <typeAlias type="fp.corporation.vo.ProjectVo" alias="ProjectVo"/>
         <typeAlias type="fp.corporation.vo.ProjectKeyNameVo" alias="ProjectKeyNameVo"/>
 			   

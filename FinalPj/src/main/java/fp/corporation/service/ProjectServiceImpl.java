@@ -12,6 +12,7 @@ import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 
 import fp.corporation.domain.Project;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.mapper.ProjectMapper;
 import fp.corporation.vo.ProjectVo;
 import lombok.AllArgsConstructor;
@@ -93,4 +94,9 @@ public class ProjectServiceImpl implements ProjectService {
 		mapper.payStatusUpdate(payinfo);
 	}
 	
+	//프로젝트 찜
+	@Override
+	public List<ProjectPick>pjpick_list(long free_code){
+		return mapper.pjpick_list(free_code);
+	}
 }

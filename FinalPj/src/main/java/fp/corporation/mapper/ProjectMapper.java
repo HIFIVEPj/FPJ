@@ -8,6 +8,7 @@ import java.util.Map;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.vo.ProjectVo;
 
 public interface ProjectMapper {
@@ -35,4 +36,6 @@ public interface ProjectMapper {
 	void payinsert(Map<String, Object> payinfo);
 	void payStatusUpdate(Map<String, Object> payinfo);
 
+	//프로젝트 찜
+	List<ProjectPick>pjpick_list(long free_code);
 }

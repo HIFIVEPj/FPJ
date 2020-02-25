@@ -12,22 +12,28 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
 import fp.corporation.domain.ProjectPayment;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.service.CorporationService;
 
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
+import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.service.FreeLancerProfileService;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -37,7 +43,9 @@ public class ProjectController {
 	private ProjectService service;
 	@Autowired
 	private CorporationService corService;
-
+	
+	@Autowired
+	private FreeLancerProfileService freeService;
 	
 	@RequestMapping("project_list")
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
@@ -55,12 +63,23 @@ public class ProjectController {
 		
 		List<Project> list = service.list(projectVo);
 		
+		if(mem_email != null) {
+			FreeLancer free = freeService.mydash_free_select(mem_email);
+			List<ProjectPick> pjplist = service.pjpick_list(free.getFree_code());
+			ModelAndView mv = new ModelAndView("project/project_list");
+			mv.addObject("list", list);
+			mv.addObject("pa", projectVo);
+			List<Project> keyname = service.keywords();
+			mv.addObject("keyname", keyname);
+			mv.addObject("free", free);
+			mv.addObject("pjplist",pjplist);
+			return mv;
+		}
 		ModelAndView mv = new ModelAndView("project/project_list");
 		mv.addObject("list", list);
 		mv.addObject("pa", projectVo);
 		List<Project> keyname = service.keywords();
-		mv.addObject("keyname", keyname);
-		
+		mv.addObject("keyname", keyname);		
 		return mv;
 	}
 	
@@ -144,7 +163,7 @@ public class ProjectController {
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
 		//log.info("@#!#@$  map: "+ map);
-		return "corporation/managed_project?mem_email="+mem_email;
+		return "redirect:managed_project?mem_email="+mem_email;
 	}
 	
 	@RequestMapping("project_delete")
@@ -164,7 +183,7 @@ public class ProjectController {
 		return mv;
 	}
 	@RequestMapping(value="project_payments_end", method=RequestMethod.POST )
-	public String project_payments_end(@RequestBody HashMap<String, Object> data, @RequestParam long pj_num){
+	public void project_payments_end(@RequestBody HashMap<String, Object> data, @RequestParam long pj_num){
 		log.info("@!#*^@$ pj_num: "+pj_num);
 		//log.info("#($&#@*$ data: "+data.toString());
 		Map<String, Object> payinfo = new HashMap<String, Object>();
@@ -172,11 +191,15 @@ public class ProjectController {
 		payinfo.put("pj_num", pj_num);
 		log.info("#@$&*^#@&*$payinfo: "+payinfo);
 		service.payinsert(payinfo);
-		return "project/project_payments_end";
 		
 	}
-	@RequestMapping("project_wish")
-	public String project_wish() {
-		return "";
+	@GetMapping("project_pay_end")
+	public String pj_pay_end() {
+		return "project/project_payments_end"; 
+	}
+	@RequestMapping(value="/project_wish", method=RequestMethod.GET)
+	@ResponseBody
+	public void project_wish(@RequestParam long pj_num, @RequestParam long free_code) {
+		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
 	}
 }
