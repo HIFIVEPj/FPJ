@@ -3,7 +3,9 @@ package fp.freelancerprofile.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.freelancerprofile.domain.FreeLancer;
@@ -30,6 +33,7 @@ import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
+import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -144,13 +148,7 @@ public class FreeLancerProfileController {
 			      
 			   return "redirect:freelancerProfile_list";
 			 }
-
 	
-	@RequestMapping("mydash_change")	//회원정보수정
-	public String Mydash_change(@RequestParam String mem_email) { 
-		return "profile/mydash_change";
-	}
-
 	@RequestMapping("freelancerMyprofile_change")	//프로필수정
 	public String FreelancerMyprofile_change() { 
 		return "profile/freelancerMyprofile_change";
@@ -164,5 +162,110 @@ public class FreeLancerProfileController {
 	public String payments() { 
 		return "profile/payments";
 	}
+	
+	//나영 수정---------
+		@RequestMapping("mydash_free")	//회원정보수정
+		public ModelAndView Mydash_change(@RequestParam String mem_email) {
+			FreeLancer freelancer = service.mydash_free_select(mem_email);
+			ModelAndView mv = new ModelAndView("profile/mydash_change");
+			mv.addObject("mydash", freelancer);
+			return mv;
+		}
+		
+		@PostMapping("mydash_free_insert")
+		public String mydashFreeInsert(@RequestParam MultipartFile fileName, FreeLancer freelancer) {
+			if(fileName.getOriginalFilename() != "") {
+				freelancer.setFree_fname(saveStore(fileName));
+				freelancer.setFree_ofname(fileName.getOriginalFilename());
+				service.mydash_free_insert(freelancer);
+				return "redirect:mydash_free?mem_email="+freelancer.getMem_email();
+			}else {
+				service.mydash_free_insert(freelancer);
+				return "redirect:mydash_free?mem_email="+freelancer.getMem_email();
+			}
+		} 
+		@PostMapping("mydash_free_update")
+		public String update(@RequestParam MultipartFile fileName, FreeLancer freelancer) {
+			FreeLancer free = service.mydash_free_select(freelancer.getMem_email());
+			
+			if(free.getFree_fname() == null && fileName.getOriginalFilename() != "") {
+				freelancer.setFree_fname(saveStore(fileName));
+				freelancer.setFree_ofname(fileName.getOriginalFilename());
+				service.mydash_free_update(freelancer);
+				return "redirect:mydash_free?mem_email="+freelancer.getMem_email();
+			}else if(fileName.getOriginalFilename() != "" && free.getFree_fname() != null){
+				String str = free.getFree_fname();
+				delFile(str);
+				freelancer.setFree_fname(saveStore(fileName));
+				freelancer.setFree_ofname(fileName.getOriginalFilename());
+				service.mydash_free_update(freelancer);
+				return "redirect:mydash_free?mem_email="+freelancer.getMem_email();
+			}else if(fileName.getOriginalFilename() == "" && free.getFree_fname() != null){
+				freelancer.setFree_fname(free.getFree_fname());
+				freelancer.setFree_ofname(free.getFree_ofname());
+				service.mydash_free_update(freelancer);
+				return "redirect:mydash_free?mem_email="+freelancer.getMem_email();
+			}else{
+				service.mydash_free_update(freelancer);
+				return "redirect:mydash_free?mem_email="+freelancer.getMem_email();
+			}
+		}
+		//파일올리기
+		public String saveStore(MultipartFile fileName) {
+			String ofname = fileName.getOriginalFilename();
+			int idx = ofname.lastIndexOf(".");
+			String ofheader = ofname.substring(0,idx);
+			String ext = ofname.substring(idx);
+			long ms = System.currentTimeMillis();
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(ofheader);
+			sb.append("_");
+			sb.append(ms);
+			sb.append(ext);
+			
+			String saveFileName = sb.toString();
+			
+			log.info(" 물리경로: "+Path.FREE_THUMB+saveFileName);
+			writeFile(fileName , saveFileName);
+			
+			boolean flag = writeFile(fileName , saveFileName);
+			if(flag) {
+				log.info("성공");
+			}else {
+				log.info("실패");
+			}
+			return saveFileName;
+		}
+
+		public boolean writeFile(MultipartFile free_fname, String saveFileName) {
+			File rDir = new File(Path.FREE_THUMB);
+			if(!rDir.exists()) rDir.mkdir();
+			
+			FileOutputStream fos = null;
+			try {
+				byte data[]= free_fname.getBytes();
+				fos = new FileOutputStream(Path.FREE_THUMB+saveFileName);
+				fos.write(data);
+				fos.flush();
+				
+				return true;
+				
+			}catch(IOException ie) {
+				log.info("!@$#FILE ERROR: "+ie);
+				return false;
+			}finally {
+				try {
+					fos.close();
+				}catch(IOException ie) {}
+			}
+		}
+		public void delFile(String free_fname) {
+			File file = new File(Path.FREE_THUMB, free_fname);
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+	 //--------------
 	
 }

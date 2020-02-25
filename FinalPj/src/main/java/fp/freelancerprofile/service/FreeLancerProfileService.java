@@ -40,6 +40,10 @@ public interface FreeLancerProfileService {
 	public String insertPjpkeyword(Map<String, Object> map);
 
 	void checkdelete1();
-		   
-
+		
+	
+	//나영추가 + mydash_free
+	public FreeLancer mydash_free_select(String mem_email);
+	public void mydash_free_insert(FreeLancer freelancer);
+	public void mydash_free_update(FreeLancer freelancer);
 }

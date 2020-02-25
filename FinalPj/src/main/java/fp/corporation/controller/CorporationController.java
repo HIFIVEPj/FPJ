@@ -48,36 +48,49 @@ public class CorporationController {
 	@GetMapping("mydash_cor")
 	public ModelAndView write(String mem_email) {
 		Corporation corporation = service.mydash_cor_select(mem_email);
-		int ran = new Random().nextInt(900000)+100000;
 		ModelAndView mv = new ModelAndView("corporation/mydash_cor");
 		mv.addObject("cor",corporation);
-		mv.addObject("random", ran);
 		return mv;
 	}
 	@PostMapping("mydash_cor_insert")
 	public String write(@RequestParam MultipartFile fileName, Corporation corporation) {
 		log.info("!@#@$ insert:"+ corporation);
-		corporation.setCor_fname(saveStore(fileName));
-		corporation.setCor_ofname(fileName.getOriginalFilename());
-		service.insert(corporation);
-		return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		if(fileName.getOriginalFilename() != "") {
+			corporation.setCor_fname(saveStore(fileName));
+			corporation.setCor_ofname(fileName.getOriginalFilename());
+			service.insert(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		}else {
+			service.insert(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		}
 	}
 	@PostMapping("mydash_cor_update")
 	public String update(@RequestParam MultipartFile fileName, Corporation corporation) {
 		Corporation cor = service.mydash_cor_select(corporation.getMem_email());
 		log.info("@!#$#T$%#@$fileName:"+fileName.getOriginalFilename()+", ofname: "+cor.getCor_ofname());
-		if(fileName.getOriginalFilename() != "") {
+		if(cor.getCor_fname() == null && fileName.getOriginalFilename() != "") {
+			corporation.setCor_fname(saveStore(fileName));
+			corporation.setCor_ofname(fileName.getOriginalFilename());
+			service.mydash_cor_update(corporation);
+			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
+		}else if(fileName.getOriginalFilename() != "" && cor.getCor_fname() == null){
 			String str = cor.getCor_fname();
 			delFile(str);
 			corporation.setCor_fname(saveStore(fileName));
 			corporation.setCor_ofname(fileName.getOriginalFilename());
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
+		}else if(fileName.getOriginalFilename() == "" && cor.getCor_fname() != null){
+			corporation.setCor_fname(cor.getCor_fname());
+			corporation.setCor_ofname(cor.getCor_ofname());
+			service.mydash_cor_update(corporation);
+			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
+		}else{
+			service.mydash_cor_update(corporation);
+			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
 		}
-		corporation.setCor_fname(cor.getCor_fname());
-		corporation.setCor_ofname(cor.getCor_ofname());
-		 service.mydash_cor_update(corporation);
-		return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+	
 	}
 	
 	@RequestMapping("managed_project")

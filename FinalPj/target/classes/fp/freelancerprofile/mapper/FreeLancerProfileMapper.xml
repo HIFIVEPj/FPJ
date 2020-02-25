@@ -227,5 +227,19 @@
 	</insert>
 
 
-
+	<!-- 나영 추가 / mydash_free -->
+	<select id="mydash_free_select" parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancer">
+		select * from FREELANCER where mem_email=#{mem_email}
+	</select>
+	<insert id="mydash_free_insert" parameterType="fp.freelancerprofile.domain.FreeLancer">
+		insert into FREELANCER(free_code, mem_email, free_name, free_tel, free_fname, free_ofname)
+		 values(FREE_CODE_SEQ.nextval, #{mem_email}, #{free_name}, #{free_tel}, #{free_fname, jdbcType=VARCHAR}, #{free_ofname, jdbcType=VARCHAR})
+	</insert>
+	<update id="mydash_free_update" parameterType="fp.freelancerprofile.domain.FreeLancer">
+		update FREELANCER set free_tel=#{free_tel}, free_fname=#{free_fname, jdbcType=VARCHAR}, free_ofname=#{free_ofname, jdbcType=VARCHAR} where free_code=#{free_code}
+	</update>
+	<update id="mydash_update_classnum" parameterType="String">
+		update MEMBER set class_num =3 where mem_email=#{mem_email}
+	</update>
+	<!--/////////////////////////// -->
 </mapper>

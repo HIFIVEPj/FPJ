@@ -80,5 +80,19 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.insertPjpkeyword(map);
 	}
 
-
+	//나영추가 + mydash_free
+	@Override
+	public FreeLancer mydash_free_select(String mem_email) {
+		return mapper.mydash_free_select(mem_email);
+	}
+	@Override
+	@Transactional
+	public void mydash_free_insert(FreeLancer freelancer) {
+		mapper.mydash_free_insert(freelancer);
+		mapper.mydash_update_classnum(freelancer.getMem_email());
+	}
+	@Override
+	public void mydash_free_update(FreeLancer freelancer) {
+		mapper.mydash_free_update(freelancer);
+	}
 }
