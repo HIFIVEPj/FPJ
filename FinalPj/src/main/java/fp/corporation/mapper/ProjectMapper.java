@@ -30,7 +30,7 @@ public interface ProjectMapper {
 	//mydash_cor에서 project 관리부분들
 	List<Project> listMydashCor (Map<String, Object> map);
 	long getTotalCountCor(long cor_code);
-	
+
 	//결제
 	void payinsert(Map<String, Object> payinfo);
 	void payStatusUpdate(Map<String, Object> payinfo);

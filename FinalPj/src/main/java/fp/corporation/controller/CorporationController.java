@@ -35,7 +35,6 @@ public class CorporationController {
 	
 	@Autowired
 	private ProjectService pjService;
-	
 	@RequestMapping("payments_cor")
 	public String payments_cor(){
 		return "corporation/payments_cor";
@@ -90,7 +89,6 @@ public class CorporationController {
 			service.mydash_cor_update(corporation);
 			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
 		}
-	
 	}
 	
 	@RequestMapping("managed_project")

@@ -42,156 +42,118 @@
       <section class="sptb">
          <div class="container">
             <div class="row">
-               <div class="col-xl-3 col-lg-12 col-md-12">
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">회원정보</h3>
-                     </div>
-                     <div class="card-body text-center item-user">
-                        <div class="profile-pic">
-                           <div class="profile-pic-img">
-                              <img src="../images/faces/male/25.jpg" class="brround" alt="user">
-                           </div>
-                           <a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
-                        </div>
-
-                     </div>
-                     <aside class=" doc-sidebar my-dash">
-                        <div class="app-sidebar__user clearfix">
-                           <ul class="side-menu">
-                              <li class="slide">
-                                 <a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
-                                 <ul class="slide-menu">
-                                    <li><a class="slide-item" href="mydash_free">회원정보</a></li>
-                                    <li><a class="slide-item " href="freelancerProfile_list">프로필</a></li>	
-								<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
-                                 	<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+             					<div class="col-xl-3 col-lg-12 col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">회원정보</h3>
+							</div>
+							<div class="card-body text-center item-user">
+								<div class="profile-pic">
+								<c:if test="${mydash.free_fname eq null}">
+									<div class="profile-pic-img">
+										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+									</div>
 								</c:if>
-                                
-                                 </ul>
-                              </li>
-                              <li class="slide">
-                                 <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-diamond"></i><span class="side-menu__label"> My Ads</span><i class="angle fa fa-angle-right"></i></a>
-                                 <ul class="slide-menu">
-                                    <li><a class="slide-item" href="myads.html"> My Ads-1</a></li>
-                                    <li><a class="slide-item" href="myads.html"> My Ads-2</a></li>
-                                 </ul>
-                              </li>
-                              <li class="slide">
-                                 <a class="side-menu__item " data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
-                                 <ul class="slide-menu">
-                                    <li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
-                                    <li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
-                                 </ul>
-                              </li>
-                              <li class="slide">
-                                 <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
-                                 <ul class="slide-menu">
-                                    <li><a class="slide-item" href="manged-market.html">마켓관리</a></li>
-                                    <li class="sub-slide">
-                                       <a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>
-                                       <ul class="child-sub-menu ">
-                                          <li><a class="slide-item" href="manged.html">Managed Ads-3</a></li>
-                                          <li><a class="slide-item" href="manged.html">Managed Ads-4</a></li>
-                                       </ul>
-                                    </li>
-                                 </ul>
-                              </li>
-                              <li>
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
-                              </li>
-                              <li class="slide">
-                                 <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-basket"></i><span class="side-menu__label">Orders</span><i class="angle fa fa-angle-right"></i></a>
-                                 <ul class="slide-menu">
-                                    <li><a class="slide-item" href="orders.html">Orders-1</a></li>
-                                    <li><a class="slide-item" href="orders.html">Orders-2</a></li>
-                                 </ul>
-                              </li>
-                              <li class="slide">
-                                 <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-game-controller"></i><span class="side-menu__label"> Safety Tips</span><i class="angle fa fa-angle-right"></i></a>
-                                 <ul class="slide-menu">
-                                    <li><a class="slide-item" href="tips.html">Safety Tips-1</a></li>
-                                    <li><a class="slide-item" href="tips.html">Safety Tips-2</a></li>
-                                 </ul>
-                              </li>
-                              <li class="slide">
-                                 <a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-settings"></i><span class="side-menu__label"> Settings </span><i class="angle fa fa-angle-right"></i></a>
-                                 <ul class="slide-menu">
-                                    <li><a class="slide-item" href="settings.html">Settings-1</a></li>
-                                    <li><a class="slide-item" href="settings.html">Settings-2</a></li>
-                                 </ul>
-                              </li>
-                              <li>
-                                 <a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
-                              </li>
-                           </ul>
-                        </div>
-                     </aside>
-                  </div>
-                  <!--  
-                  <div class="card my-select">
-                     <div class="card-header">
-                        <h3 class="card-title">Search Ads</h3>
-                     </div>
-                     <div class="card-body">
-                        <div class="form-group">
-                           <input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-                        </div>
-                        <div class="form-group">
-                           <select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-                              <option value="1" selected="">All Categories</option>
-                              <option value="2">RealEstate</option>
-                              <option value="3">Restaurant</option>
-                              <option value="4">Beauty</option>
-                              <option value="5">Jobs</option>
-                              <option value="6">Services</option>
-                              <option value="7">Vehicle</option>
-                              <option value="8">Education</option>
-                              <option value="9">Electronics</option>
-                              <option value="10">Pets &amp; Animals</option>
-                              <option value="11">Computer</option>
-                              <option value="12">Mobile</option>
-                              <option value="13">Events</option>
-                              <option value="14">Travel</option>
-                              <option value="15">Clothing</option>
-                           </select>
-                        </div>
-                        <div class="">
-                           <a href="#" class="btn  btn-primary">Search</a>
-                        </div>
-                     </div>
-                  </div>
-                  
-                  <div class="card mb-xl-0">
-                     <div class="card-header">
-                        <h3 class="card-title">Safety Tips For Buyers</h3>
-                     </div>
-                     <div class="card-body">
-                        <ul class="list-unstyled widget-spec  mb-0">
-                           <li class="">
-                              <i class="fa fa- <form>
-      <p><input type="checkbox" name="all" class="check-all"> <label>Check ALL</label></p>
-      <hr>
-      <p><input type="checkbox" name="cb1" class="ab"> <label>Checkbox 1</label></p>
-      <p><input type="checkbox" name="cb2" class="ab"> <label>Checkbox 2</label></p>
-      <p><input type="checkbox" name="cb3" class="ab"> <label>Checkbox 3</label></p>
-      <p><input type="checkbox" name="cb4" class="ab"> <label>Checkbox 4</label></p>
-    </form> text-success" aria-hidden="true"></i> Meet Seller at public Place
-                           </li>
-                           <li class="">
-                              <i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-                           </li>
-                           <li class="">
-                              <i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-                           </li>
-                           <li class="ml-5 mb-0">
-                              <a href="tips.html"> View more..</a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  -->
-               </div>
+								<c:if test = "${mydash.free_fname ne null}">
+									<div class="profile-pic-img">
+										<img src="../images/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+									</div>
+								</c:if>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
+								</div>
+							</div>
+							<aside class="doc-sidebar my-dash">
+								<div class="app-sidebar__user clearfix">
+									<ul class="side-menu">
+										<li class="slide">
+											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
+											<ul class="slide-menu">
+												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
+												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
+											</ul>
+										</li>
+										<li class="slide">
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
+											<ul class="slide-menu">
+												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+											</ul>
+										</li>
+										<li class="slide">
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
+											<ul class="slide-menu">
+												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
+												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+											</ul>
+										</li>
+										<li>
+											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+										</li>
+										<li>
+											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+										</li>
+									</ul>
+								</div>
+							</aside>
+						</div>
+						<!--  
+						<div class="card my-select">
+							<div class="card-header">
+								<h3 class="card-title">Search Ads</h3>
+							</div>
+							<div class="card-body">
+								<div class="form-group">
+									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
+								</div>
+								<div class="form-group">
+									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
+										<option value="1" selected="">All Categories</option>
+										<option value="2">RealEstate</option>
+										<option value="3">Restaurant</option>
+										<option value="4">Beauty</option>
+										<option value="5">Jobs</option>
+										<option value="6">Services</option>
+										<option value="7">Vehicle</option>
+										<option value="8">Education</option>
+										<option value="9">Electronics</option>
+										<option value="10">Pets &amp; Animals</option>
+										<option value="11">Computer</option>
+										<option value="12">Mobile</option>
+										<option value="13">Events</option>
+										<option value="14">Travel</option>
+										<option value="15">Clothing</option>
+									</select>
+								</div>
+								<div class="">
+									<a href="#" class="btn  btn-primary">Search</a>
+								</div>
+							</div>
+						</div>
+						
+						<div class="card mb-xl-0">
+							<div class="card-header">
+								<h3 class="card-title">Safety Tips For Buyers</h3>
+							</div>
+							<div class="card-body">
+								<ul class="list-unstyled widget-spec  mb-0">
+									<li class="">
+										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
+									</li>
+									<li class="">
+										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
+									</li>
+									<li class="">
+										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
+									</li>
+									<li class="ml-5 mb-0">
+										<a href="tips.html"> View more..</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						-->
+					</div>
+					
                <div class="col-xl-9 col-lg-12 col-md-12">
                   <div class="card mb-0">
                      <div class="card-header">
@@ -228,8 +190,11 @@
                               </thead>
                               
 
-<form id="del_list" method="get" action="freelancerProfile_cehck_delete" name="checkdelete1">
-
+ <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
+  <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">   
+<form id="del_list" method="get" action="freelancerProfile_cehck_delete?pro_num=${profile.pro_num}" name="checkdelete1">
+</c:forEach>
+</c:forEach>
       
                    
                                <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
@@ -275,13 +240,11 @@
        
                      <div class="card">       
                         <div class="card-footer" align="right">
-                        <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>   
-
-      
-                        <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a>      
-                       
+                        <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a> 
+ </form>                                                    
+                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>   
                         </div>
- </form>                       
+                     
           
                 <div class="center-block text-center">
                            <ul class="pagination mb-0">         

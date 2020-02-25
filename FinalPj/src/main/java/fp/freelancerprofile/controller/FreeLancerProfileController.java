@@ -44,32 +44,47 @@ public class FreeLancerProfileController {
 	private FreeLancerProfileService service;
 
 
-	@GetMapping("freelancerMyprofile_write")
+	/*@GetMapping("freelancerMyprofile_write")
 	public String freelancerMyprofile_write() {
 		return "profile/freelancerMyprofile_write";
+	}*/
+	
+	@RequestMapping("freelancerMyprofile_write")	
+	public String ProFileWrite() { 
+		return "profile/freelancerMyprofile_write";
 	}
+	
 	
 	
 	@PostMapping("freelancerMyprofile_write")
 		public String freelancerMyprofile_write(FreeLancerProfile freelancerprofile, HttpServletRequest request) {
 		   //String type_num = request.getParameter("type_num");
-		      
+		//log.info("@@@@@@@@@@@@@@@@@@@");
+		//String mem_email = request.getParameter("mem_email");
+		//log.info("@@@@@@@@@@@@@@@@@@@ mem_email: "+mem_email);
+		log.info("@@@@@@@@@@@@@@@@@@@ freelancerprofile: "+freelancerprofile);
+		//String Sfree_code = request.getParameter("free_code");
+		//log.info("@@@@@@@@@@@@@@@@@@@ mem_email: "+Sfree_code);
+		//int free_code = Integer.parseInt(Sfree_code);
+		//log.info("@@@@@@@@@@@@@@@@@@@ mem_email: "+free_code);
+
+		
 		   String[] ListKeyNum = request.getParameterValues("key_num");
 		   ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
 		      
 		   int[] ListIntKeyNum = Arrays.stream(ListKeyNum).mapToInt(Integer::parseInt).toArray();
 		            
-		//   Map<String, Object> map = new HashMap<String, Object>();
-		//	   for(int i = 0; i<ListIntKeyNum.length; i++) {
-		//	      arraykeynum.add(ListIntKeyNum[i]);
-		//	   }
-		//	   map.put("key_num", arraykeynum);
-		      
+		   Map<String, Object> map = new HashMap<String, Object>();
+			   for(int i = 0; i<ListIntKeyNum.length; i++) {
+			      arraykeynum.add(ListIntKeyNum[i]);
+			   }
+			   map.put("key_num", arraykeynum);
+			   map.put("free_code", freelancerprofile.getFree_code());
 		   service.listInsert(freelancerprofile);
-	//	   service.insertPjpkeyword(map);
-		      log.info("@#!#@$  arraykeynum: "+ arraykeynum);
-		      log.info("@#!#@$  project: " +freelancerprofile);
-	//	      log.info("@#!#@$  map: "+ map);
+		   service.insertPjpkeyword(map);
+		      log.info("@@@@@@@@@@@@@@@  arraykeynum: "+ arraykeynum);
+		      log.info("@@@@@@@@@@@@@@@  project: " +freelancerprofile);
+		      log.info("@#!#@$  map: "+ map);
 		   return "redirect:freelancerProfile_list";
 		   }
 
@@ -125,9 +140,9 @@ public class FreeLancerProfileController {
 
 	
 	@GetMapping("freelancerProfile_cehck_delete")
-		public String List_checkbox_delete(HttpServletRequest request) {
+		public String List_checkbox_delete(HttpServletRequest request, long pro_num) {
 	      
-			   String[] ListCheckNum = request.getParameterValues("check_num"); 
+			   String[] ListCheckNum = request.getParameterValues("pro_num"); 
 //			   log.info("#ListCheckNum.length: "  + ListCheckNum.length );
 			   
 			   ArrayList<Integer> arrayChecknum = new ArrayList<Integer>();
@@ -141,9 +156,9 @@ public class FreeLancerProfileController {
 					   arrayChecknum.add(ListIntCheckNum[i]);
 				   }
 				   log.info("@#!#@$  arraykeynum: "+ arrayChecknum);
-				   map.put("check_num", arrayChecknum);
+				   map.put("pro_num", arrayChecknum);
 			      log.info("@#@@#@#map: "+map);
-			   service.checkdelete1();
+			   service.checkdelete1(pro_num);
 			   //service.checkdelete2(PRO_NUM);
 			      
 			   return "redirect:freelancerProfile_list";

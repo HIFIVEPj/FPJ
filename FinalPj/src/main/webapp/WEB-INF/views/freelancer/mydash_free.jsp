@@ -136,7 +136,7 @@
 						</div>
 						-->
 					</div>
-					
+		
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
@@ -147,7 +147,12 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">성명</label>
-											<input type="text" class="form-control" value="김소담" readonly >
+												
+										
+											<input type="text" class="form-control" value="asdf" readonly >
+								
+		
+											<tr>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">

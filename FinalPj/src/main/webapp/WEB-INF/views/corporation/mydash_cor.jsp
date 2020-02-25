@@ -560,6 +560,7 @@
 											<div class="custom-file">
 												<input type="file" class="custom-file-input" name="fileName" id="file" onchange="upfile()" accept=".gif, .jpg, .png" value="${cor.cor_fname}">
 												<label class="custom-file-label" id="fileName_label">${cor.cor_ofname}</label>
+
 											</div>
 										</div>
 									</div>

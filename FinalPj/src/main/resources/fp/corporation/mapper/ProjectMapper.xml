@@ -179,7 +179,7 @@
 	<select id="corInfo" parameterType="long" resultMap="corporationMap">
 		select * from CORPORATION cor join PROJECT pj on cor.COR_CODE=pj.COR_CODE where PJ_NUM=#{pj_num}
 	</select>
-	
+
 	<insert id="payinsert" parameterType="java.util.Map">
 		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME ) values
 		(PAYINFO_NUM_SEQ.nextval, #{data.imp_uid}, #{data.merchant_uid}, #{data.paid_amount}, #{data.apply_num, jdbcType=VARCHAR}, #{data.status}, #{data.card_name, jdbcType=VARCHAR}, #{data.pg_tid}, #{data.buyer_name})

@@ -30,7 +30,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-3 col-lg-12 col-md-12">
-												<div class="card">
+						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">회원정보</h3>
 							</div>
@@ -42,30 +42,27 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class="doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
-												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
-												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
+												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_temp">프로젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
 												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
 											</ul>
 										</li>
 										<li>
@@ -138,7 +135,7 @@
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
-								<h3 class="card-title"><b>관심있는 서비스</b></h3>
+								<h3 class="card-title"><b>관심있는 프리랜서</b></h3>
 							</div>
 							<div class="card-body">
 							<div class="ads-tabs">
@@ -146,9 +143,8 @@
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">전체보기</a></li>
-											<li><a href="#tab2" data-toggle="tab">구매한 서비스</a></li>
-											<li><a href="#tab3" data-toggle="tab">판매중인 서비스</a></li>
-											<li><a href="#tab4" data-toggle="tab">마감된 서비스</a></li>
+											<li><a href="#tab2" data-toggle="tab">모집중인 공고</a></li>
+											<li><a href="#tab3" data-toggle="tab">마감된 공고</a></li>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -157,9 +153,10 @@
 										<thead style="text-align:center;">
 											<tr>
 												<th></th>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
-												<th><b>상태</b></th>
+												<th><b>프로필</b></th>
+												<th><b>이름</b></th>
+												<th><b>경력</b></th>
+												<th><b>업무가능 여부</b></th>
 												<th><b>버튼</b></th>
 											</tr>
 										</thead>
@@ -171,38 +168,40 @@
 														<span class="custom-control-label"></span>
 													</label>
 												</td>
-												<td colspan="2">
+												<td>
 													<div class="media mt-0 mb-0">
 														<div class="card-aside-img">
 															<a href="#"></a>
-															<img src="../images/products/h1.png" alt="img">
+															<img src="../images/products/h2.png" alt="img">
 														</div>
 														<div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class=""><b>반응형 홈페이지 만들어 드립니다</b></h4></a>
-																<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>
-																<div style="padding-top:5px;">
+																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>열심히 할게요</b></h4></a>
+																<a href="#" ><i class="fa fa fa-user mr-1"></i> 개발자 / 초급 </a> | 
 																<span class="text-warning">
 																	<i class="fa fa-star"> </i>
 																	<i class="fa fa-star"> </i>
 																	<i class="fa fa-star"> </i>
 																	<i class="fa fa-star"> </i>
 																	</span>
-																	<i class="fa fa-star"> </i> | <i class="fa fa-eye"></i> 344<br>
-																</div>
+																	<i class="fa fa-star"> </i>
+																(4.0)<br>
+																<div class="tags" style="margin-top:3px;">
+																	<span class="tag tag-gray">JAVA</span><span class="tag tag-gray">SPRING</span>
+																	<span class="tag tag-gray">ORACLE</span><span class="tag tag-gray">HTML</span>
+																	<span class="tag tag-gray">CSS</span>
 															</div>
 														</div>
 													</div>
 												</td>
-												
-												<td class="font-weight-semibold fs-16">10,000,000원</td>
+												<td>한나영</td>
+												<td class="font-weight-semibold fs-16">1년</td>
 												<td>
-													<a href="#" class="badge badge-warning">판매중</a>
+													<a href="#" class="badge badge-primary">가능</a>
 												</td>
 												<td>
 													<a href="#" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-													<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
-					
+													<a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="연락하기"><i class="fa fa-envelope"></i></a>
 												</td>
 											</tr>
 										</tbody>
@@ -212,46 +211,15 @@
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
 											<tr>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
-												<th><b>상태</b></th>
-												<th><b>구매일</b></th>
+												<th></th>
+												<th><b>프로필</b></th>
+												<th><b>이름</b></th>
+												<th><b>경력</b></th>
+												<th><b>업무가능 여부</b></th>
+												<th><b>버튼</b></th>
 											</tr>
 										</thead>
 										<tbody>
-										<tr>
-											<td colspan="2">
-												<div class="media mt-0 mb-0">
-													<div class="card-aside-img">
-														<a href="#"></a>
-														<img src="../images/products/h1.png" alt="img">
-													</div>
-													<div class="media-body">
-														<div class="card-item-desc ml-4 p-0 mt-2">
-															<a href="#" class="text-dark"><h4 class=""><b>반응형 홈페이지 만들어 드립니다</b></h4></a>
-															<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>
-															<div style="padding-top:5px;">
-															<span class="text-warning">
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																</span>
-																<i class="fa fa-star"> </i> | <i class="fa fa-eye"></i> 344<br>
-															</div>
-														</div>
-													</div>
-												</div>
-											</td>
-											
-											<td class="font-weight-semibold fs-16">10,000,000원</td>
-											<td>
-												<a href="#" class="badge badge-secondary">제작중</a>
-											</td>
-											<td class="font-weight-semibold fs-16">
-												2020-01-29
-											</td>
-											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -260,24 +228,10 @@
 										<thead style="text-align:center;">
 											<tr>
 												<th></th>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
-												<th><b>상태</b></th>
+												<th><b>프로필</b></th>
+												<th><b>이름</b></th>
+												<th><b>경력</b></th>
+												<th><b>업무가능 여부</b></th>
 												<th><b>버튼</b></th>
 											</tr>
 										</thead>
@@ -327,9 +281,9 @@
 							<!-- section-wrapper -->
 						</div>
 					</div>
-					</div>
 				</div>
 			</div>
+	
 		</section>
 		<!--/User Dashboard-->
 

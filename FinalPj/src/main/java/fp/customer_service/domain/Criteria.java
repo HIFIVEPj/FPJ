@@ -1,3 +1,4 @@
+
 package fp.customer_service.domain;
 
 //import org.springframework.web.util.UriComponentsBuilder;
@@ -35,4 +36,5 @@ public class Criteria { // 페이징에 필요한 클래스 // 검색 기준
 		return builder.toUriString();
 	}
 	*/
+
 }

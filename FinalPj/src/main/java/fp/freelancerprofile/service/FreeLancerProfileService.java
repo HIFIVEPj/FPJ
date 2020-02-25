@@ -5,6 +5,8 @@ import java.util.*;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
@@ -36,14 +38,18 @@ public interface FreeLancerProfileService {
 
 	
 	//작성//
-	public String listInsert(FreeLancerProfile freelancerprofile);
-	public String insertPjpkeyword(Map<String, Object> map);
-
-	void checkdelete1();
+	public void listInsert(FreeLancerProfile freelancerprofile);
+	public void insertPjpkeyword(Map<String, Object> map);
+	
+	//체크박스 삭제//
+	void checkdelete1(long PRO_NUM);
 		
 	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
+	
+
+
 }

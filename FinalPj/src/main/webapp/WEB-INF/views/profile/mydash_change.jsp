@@ -171,7 +171,7 @@
 				input_free.submit();
 			}
 			function writeProfile(){
-				location.href=""
+				location.href="freelancerProfile_list"
 			}
 		</script>
 		<!--Breadcrumb-->
@@ -221,8 +221,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
-												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
+												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
+												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
 										<li class="slide">
