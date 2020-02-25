@@ -86,6 +86,7 @@
 								</div>
 							</div>
 						</div>
+					<form>
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">Categories</h3>
@@ -94,12 +95,12 @@
 								<div class="" id="">
 									<div class="filter-product-checkboxs">
 										<label for="개발" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1"  id="개발">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="1"  id="개발">
 											<span class="custom-control-label" class="text-dark">개발자<span class="label label-secondary float-right">14</span>
 											</span>
 										</label>
 										<label for="퍼블리싱" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="퍼블리싱">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="2" id="퍼블리싱">
 											<span class="custom-control-label" class="text-dark">디자이너<span class="label label-secondary float-right">22</span>
 											</span>
 										</label>
@@ -145,6 +146,9 @@
 								<a href="#" class="btn btn-secondary btn-block">Apply Filter</a>
 							</div>
 						</div>		
+					</form>
+						
+						
 					</div>
 					<!--/Left Side Content-->
 
@@ -232,8 +236,8 @@
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    
-
-																<img src="../hifiveImages/market/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
+																			
+																<img src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
 
 															</div>
 															<div class="item-card9-icons">
@@ -317,11 +321,11 @@
 											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 										</li>
 										</c:if>
-										<!-- 
-											<c:if test="${sessionScope.class_num==5 }">
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+											<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
 												<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 											</c:if>
-										 -->
+										 
 									</ul>
 							 	 </div>
 							</div>

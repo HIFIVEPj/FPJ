@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -175,13 +175,13 @@ public class MarketController {
 	}
 
 	@PostMapping("market-insert")
-	public String market_insert(Market market,MultipartHttpServletRequest mtfRequest) {
-	//	log.info("@##$market: "+market);
+	public String market_insert(Market market,MultipartHttpServletRequest mtfRequest,@SessionAttribute("email") String email) {
+
 		String originFileName=Fileupload(mtfRequest).get(0);
 		String fileName=Fileupload(mtfRequest).get(1);
+		long free_code=marketService.getFreecode(email);
 		
-	//	long fc=market.getFree_code();
-	//	log.info("%%%%%%fc:"+fc);
+		market.setFree_code(free_code);
 		market.setMarket_ofname(originFileName);
 		market.setMarket_fname(fileName);
 		marketService.insertMarket(market);
@@ -198,7 +198,6 @@ public class MarketController {
 
 	}
 
-	
 	@PostMapping("market-update2")
 	public String market_update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
 		List<String> list=Fileupload(mtfRequest);
@@ -219,7 +218,8 @@ public class MarketController {
 		
 	}
 	public List<String> Fileupload(MultipartHttpServletRequest mtfRequest) {
-		String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
+		//String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
+		String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
 		File Folder = new File(path);
 		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
 		if (!Folder.exists()) {

@@ -30,6 +30,8 @@ public interface MarketService {
 	 void deleteMarket(long market_num);
 	 Market updateMarket1(long market_num);
 	 void updateMarket2(Market market);
+	 
+	 long getFreecode(String mem_email);
 	 void insertMarket(Market market);
 	
 	 void insertMarketRev(MarketRev mareketRev);
@@ -45,6 +47,8 @@ public interface MarketService {
 	
 	 void deleteMarketRev (HashMap<String, Object> map);
 	 void updateMarketRev (HashMap<String, Object> map);
+	 
+
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 

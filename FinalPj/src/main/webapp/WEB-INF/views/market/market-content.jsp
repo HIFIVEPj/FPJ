@@ -97,7 +97,7 @@
 									<div id="carousel" class="carousel slide" data-ride="carousel">
 										<!--<div class="arrow-ribbon2 bg-primary">$539</div>-->
 										<div class="carousel-inner">
-											<div class="carousel-item active"> <img src="../hifiveImages/market/marketThumbnails/${market.market_fname}" alt="img"> </div>
+											<div class="carousel-item active"> <img src="../hifiveImages/marketThumbnails/${market.market_fname}" alt="img"> </div>
 										<!--
 											<div class="carousel-item"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
@@ -257,8 +257,7 @@
 
 					
 						<!-- 댓글 -->		
-						
-				
+																			
 					<c:if test="${fn:length(marketRev) > 0}">	
 						<c:forEach var="marketRev" items="${marketRev}">
 							<div class="card-body p-0" id="ajaxRev">
@@ -266,7 +265,7 @@
 	                                    	<c:when test="${marketRev.freelancer != null}">
 					                            <div class="media mt-0 p-5" >
 			                                    	<div class="d-flex mr-3">
-			                                      		  <a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/freelancer/${marketRev.freelancer.free_fname}"> </a>
+			                                      		  <a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
 			                                    	</div>
 			                                   		 <div class="media-body">
 				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">${marketRev.freelancer.free_name}
@@ -277,8 +276,8 @@
 			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>			
 													<c:choose>
 				                                     	<c:when test="${sessionScope.email == marketRev.mem_email}">
-															<a href="" class="mr-2" data-toggle="modal" data-target="MRUpdate"><span class="">수정</span></a>
-															<a href="" class="mr-2" data-toggle="modal" onclick="QRdelete('${marketRev.marketRev_num}','${marketRev.market_num}');" ><span class="">삭제</span></a>
+															<a href="" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate(${marketRev.marketRev_num},${marketRev.market_num},'${marketRev.marketRev_cont}',${marketRev.marketRev_star});" ><span class="">수정</span></a>
+															<a href="" class="mr-2" data-toggle="modal" onclick="Revdelete(${marketRev.marketRev_num},${marketRev.market_num});" ><span class="">삭제</span></a>
 														</c:when>
 														<c:when test="${empty sessionScope.name}">
 														</c:when>
@@ -476,7 +475,7 @@
 	                                   
 		                                    <c:when test="${marketQA.freelancer != null}">
 			                      	    		 <div class="d-flex mr-3">
-			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/freelancer/${marketQA.freelancer.free_fname}"> </a>
+			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
 			                                      </div>
 			                                      <div class="media-body"> 
 						                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.freelancer.free_name}
@@ -511,14 +510,14 @@
 			                                   --> 
 			                                    <c:choose>
 			                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
-			                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+			                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>
 														<a href="#" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
 														<a href="#" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}');"><span class="">삭제</span></a>
 													</c:when>
 													<c:when test="${empty sessionScope.name}">
 													</c:when>
 													<c:when test="${sessionScope.email != marketQA.mem_email}">
-														<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+														<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" ><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 													</c:when>
 												  </c:choose>
 												 </div>                        
@@ -738,7 +737,7 @@
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
-									<img src="../hifiveImages/freelancer/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
 										경력:
@@ -1058,6 +1057,64 @@
 		<!-- Message Modal -->
 
 <!--Comment Modal -->
+<!-- REVIEW UPDATE -->
+	<form name="revUPModal" id="revUPModal" action="marketRev-update" method="post">
+       <div class="modal fade" id="REVUpdate" tabindex="-1" role="dialog"  aria-hidden="true">
+	        <div class="modal-dialog" role="document">
+	           <div class="modal-content">
+			
+	              <div class="modal-header">
+	                 <h5 class="modal-title">리뷰수정</h5>
+	                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                   <span aria-hidden="true">&times;</span>
+	                 </button>
+	              </div>         
+	              <div class="modal-body">
+	               	 	 <div class="ml-auto">
+							<div class="rating-stars block">
+								<input id="Revupdate_star" type="number" readonly="readonly" class="rating-value star"  name="marketRev_star"  ><!-- name="rating-stars-value" value="${marketRev_star}"-->
+								<div class="rating-stars-container">
+									<div class="rating-star sm">
+										<i class="fa fa-star"></i>
+									</div>
+									<div class="rating-star sm">
+										<i class="fa fa-star"></i>
+									</div>
+									<div class="rating-star sm">
+										<i class="fa fa-star"></i>
+									</div>
+									<div class="rating-star sm">
+										<i class="fa fa-star"></i>
+									</div>
+									<div class="rating-star sm">
+										<i class="fa fa-star"></i>
+									</div>
+								</div>
+							</div>
+						</div>								
+	                 <div class="form-group mb-0">
+	                  	<textarea class="form-control" name="marketRev_cont" id="Revupdate_cont"  rows="6" placeholder="메세지 입력"></textarea>
+	                 </div>
+	              </div>
+	              <div class="modal-footer">
+	                 <div class="col">
+						<input type="hidden" id="Revupdate_num" name="marketRev_num" >
+			           	 <input type="hidden" id="Marketupdate_num" name="market_num"> 
+	                 </div>   
+	                 <div class="col col-auto">
+	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+	                    <button type="button" id="submitREVUPdate" class="btn btn-primary">확인</button>
+	                 </div>
+	              </div>
+	           </div>
+	           
+	        </div>
+	    </div>
+	</form>
+
+
+
+
 <!-- 문의 모달창 -->
 	 <form name="mqModal" id="mqModal" action="marketQARE-insert" method="post">
        <div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -1107,7 +1164,7 @@
 	        </div>
 	    </div>
 	</form>
-<!-- UPDATE -->
+<!-- QAUPDATE -->
 	<form name="mqUPModal" id="mqUPModalID" action="marketQA-update" method="post">
        <div class="modal fade" id="MQUpdate" tabindex="-1" role="dialog"  aria-hidden="true">
 	        <div class="modal-dialog" role="document">
@@ -1151,6 +1208,10 @@
 	</form>
 <!-- 문의 모달창 -->		
 
+
+
+
+
 <!--Scrolling Modal-->
 			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -1165,11 +1226,10 @@
 						<p id="cont"><text id="mqcont"></text></p>
 					   </div>
 					   <div class="carousel-inner">
-						<div class="carousel-item active"> <img src="../hifiveImages/market/marketQAFiles/" alt="이미지 없음"> </div>
+						<div class="carousel-item active"></div>
 					   </div>				  
 					  <div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
 					  </div>
 					</div>
 				</div>
@@ -1319,14 +1379,14 @@
     			 revcor ='';
     			 revmem='';
     			 rev='';
-	 			revfree +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/freelancer/'+data[0].freelancer.free_fname+'"> </a></div>';
+	 			revfree +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].freelancer.free_fname+'"> </a></div>';
 	 			revfree +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name; 
    	   			revfree +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
    	   			revfree +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
    	   			revfree +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
    	   			revfree +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
    	   			
-	 			revcor +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/corporation/'+data[0].corporation.cor_fname+'"> </a></div>';
+	 			revcor +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/cor_thumb/'+data[0].corporation.cor_fname+'"> </a></div>';
 	 			revcor +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].corporation.cor_mname;
 	 			revcor +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
    	   			revcor +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
@@ -1408,17 +1468,28 @@
 		    		if(marketQA.marketQAFile.length>0){
 			    		for(i=0;i<marketQA.marketQAFile.length;i++){	    			
 			    			images +='<div class="carousel-inner">';
-			    			images +='<div class="carousel-item active"> <img src="../hifiveImages/market/marketQAFiles/'+marketQA.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+			    			images +='<div class="carousel-item active"> <img src="../hifiveImages/marketQAFiles/'+marketQA.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
 			    			images +='</div>';	
 			    		}
 			    		$("#exampleModalLong .carousel-inner").html(images);
 		    		}
-		    		$(".modal-body #cont #mqcont").text(marketQA.marketQA.marketQA_cont); 
+		    		$("#exampleModalLong #mqcont").text(marketQA.marketQA.marketQA_cont); 
 		    	}	
 		   	}); 	    	
 	   	}
 //문의글파일포함 insert후 Listing하는 AJAX
 	   function mqajax(prnum,lev,sun){
+		   if ($.trim($("#marketQA_subID ").val()) == "") {
+		        alert("제목을 입력해주세요.");
+		        $("#marketQA_subID").focus();
+		        return;
+		   		 }
+		   if ($.trim($("#marketQA_contID ").val()) == "") {
+		        alert("내용을 입력해주세요.");
+		        $("#marketQA_contID").focus();
+		        return;
+		   		 }
+
 		   alert(prnum);
 		   var url=$("#mqInput").attr("action");
 		   var formData = new FormData($("#mqInput")[0]);
@@ -1460,7 +1531,10 @@
 				$(".modal-content #REmarketQA_lev").val( lev );
 				$(".modal-content #REmarketQA_sun").val( sun );
         	});           	
+		
 		}
+		
+		
 	  $('#submitQARE').click(function(){   
 		  console.log("ddddddddd");
 		  var url=$('#mqModal').attr('action');
@@ -1557,7 +1631,66 @@
 			 });
 
 </script> 
+<script>
+	function Revdelete(revNum,mNum){
+		alert("revNum"+revNum);
+		alert("mNum"+mNum);
+		$.ajax({
+			type:'GET',
+	    	url:'marketRev-delete?marketRev_num='+revNum+'&market_num='+mNum,
+	    	dataType:'json',
+	    	async :true,
+	    	error:onError,
+	    	success: function onSuccessss(marketRevList){
+	    		history.go(); 
+	    	}	
+		});
+		
+	}
 
+      function Revupdate(revNum,mNum,cont,star){
+   		 	alert("revNum"+revNum);
+   			alert("mNum"+mNum);
+   			alert("cont"+cont);
+   			alert("star"+star);
+
+   			$('#REVUpdate').on('show.bs.modal', function (event) {
+   				$("#REVUpdate .modal-content #Revupdate_star").val(star);
+   				$("#REVUpdate .modal-content #Revupdate_cont").val(cont);
+   				$("#REVUpdate .modal-content #Revupdate_num").val(revNum);
+   				$("#REVUpdate .modal-content #Marketupdate_num").val(mNum);
+
+   				var aa =$("#REVUpdate .modal-content #Revupdate_star").val();
+   				var ss =$("#REVUpdate .modal-content #Revupdate_cont").val();
+   				var dd =$("#REVUpdate .modal-content #Revupdate_num").val();
+   				var ff =$("#REVUpdate .modal-content #Marketupdate_num").val();
+   				
+   				alert("1="+aa);
+   				alert("2="+ss);
+   				alert("3="+dd);
+   				alert("4="+ff);
+
+   			});
+   		}
+      
+      $('#submitREVUPdate').click(function(){    
+			var revUPurl=$('#revUPModal').attr('action');
+	  		var queryString=$('#revUPModal').serialize();
+			jQuery.ajax({
+				type:'POST',
+		    	url:revUPurl,
+		    	dataType:'json',
+		    	data:queryString,
+		    	async :true,
+		    	error:onError,
+		    	success: function onSuccessss(marketRevList){
+		    		history.go(); 
+		    	}
+			});		
+		});
+           
+
+</script>
 
 <!-- 
 	    var PRNUM="";

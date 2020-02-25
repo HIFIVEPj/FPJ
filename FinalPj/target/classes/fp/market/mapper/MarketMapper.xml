@@ -241,7 +241,7 @@
 		delete MARKET_REVIEW where marketRev_num=#{marketRev_num} and market_num=#{market_num}
 	</delete>
 	<update id="updateMarketRev" parameterType="hashmap">
-		update MARKET_REVIEW set marketRev_cont=#{marketRev_cont}, marketRev_strar=#{marketRev_star} where MARKET_NUM=#{market_num} and MARKETREV_NUM=#{marketRev_num}
+		update MARKET_REVIEW set marketRev_cont=#{marketRev_cont}, marketRev_star=#{marketRev_star} where market_num=#{market_num} and MARKETREV_NUM=#{marketRev_num}
 	</update>
 
 <!-- 마켓 프리랜서 정보뽑기 -->
@@ -250,10 +250,14 @@
 		from FREELANCER f left outer join FREELANCER_PROFILE fp on fp.FREE_CODE=f.FREE_CODE join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
 	</select>
 <!-- 마켓상세보기 -->	
-<!-- 마켓 등록 -->
-<insert id="insertMarket" parameterType="Market">
-	insert into Market values(MARKET_NUM_SEQ.NEXTVAL,#{free_code},#{cate_num},#{market_price},#{market_sub},#{market_cont},0,#{market_fname},#{market_ofname},1,0,null,null,null)
-</insert>
+<!-- 마켓 등록 (전에프리코드필요)-->
+	<select id="getFreeCode" parameterType="String" resultType="long">
+		select free_code from FREELANCER where mem_email=#{mem_email}
+	</select>
+	<insert id="insertMarket" parameterType="Market">
+		insert into Market values(MARKET_NUM_SEQ.NEXTVAL,#{free_code},#{cate_num},#{market_price},#{market_sub},#{market_cont},0,#{market_fname},#{market_ofname},1,0,null,null,null)
+	</insert>
+
 <!-- 마켓 삭제 -->
 	<delete id="deleteMarket"  parameterType="long">
 		delete from MARKET where market_num=#{market_num}
@@ -264,5 +268,9 @@
 	</select>
 	<update id="updateMarket2"  parameterType="Market">
 		UPDATE MARKET SET MARKET_PRICE=#{market_price},MARKET_SUB=#{market_sub},MARKET_CONT=#{market_cont},MARKET_FNAME= #{market_fname},MARKET_OFNAME=#{market_ofname} WHERE MARKET_NUM = #{market_num}
+	</update>
+<!-- 마켓조회수+ -->
+	<update id="updateMarketVcnt" parameterType="long">
+		update market set market_vcnt=market_vcnt+1 where market_num=#{market_num}
 	</update>
 </mapper>	

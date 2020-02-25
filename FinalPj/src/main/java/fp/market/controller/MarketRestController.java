@@ -31,6 +31,29 @@ public class MarketRestController {
 	@Autowired
 	MarketService marketService;
 	
+//문의1페이지 리스트다시전송		
+	public List<MarketQA> marketQAList(long market_num){		
+		HashMap<String,Object> mapList=new HashMap<String,Object>();
+		mapList.put("market_num", market_num);
+		mapList.put("marketVOQAStart",0);
+		mapList.put("marketVOQAEnd",4);
+		List<MarketQA> marketQAList=marketService.getMarketQA(mapList);
+		log.info("11111111#marketQAList"+marketQAList);
+		
+		return marketQAList;
+	}
+//리뷰1페이지 리스트다시전송	
+	private List<MarketRev> marketRevList(long market_num) {
+		HashMap<String,Object> mapList=new HashMap<String,Object>();
+		mapList.put("market_num", market_num);
+		mapList.put("marketVORevStart",0);
+		mapList.put("marketVORevEnd",4);
+		List<MarketRev> marketrevList=marketService.getMarketRev(mapList);
+		log.info("11111111#marketRevList"+marketrevList);
+		
+		return marketrevList;
+	}
+	
 //마켓문의 글insert
 	@PostMapping("marketQA-insert")
 	//@RequestMapping(value = "marketQA-insert", method= {RequestMethod.POST})
@@ -48,18 +71,21 @@ public class MarketRestController {
 			String marketQAFile_fname= (String) list.get(i)[0];
 			String marketQAFile_ofname=(String) list.get(i)[1];
 			long marketQAFile_size=(long)list.get(i)[2];
-
-			log.info("#######marketQAFile"+marketQAFile);
-			marketQAFile.setMarketQA_num(marketQA.getMarketQA_num());
+			log.info("1111111111111111marketQAFile_ofname"+marketQAFile_ofname);
+			if(!marketQAFile_ofname.equals("")) {
+				log.info("#######marketQAFile"+marketQAFile);
+				marketQAFile.setMarketQA_num(marketQA.getMarketQA_num());
+				
+				HashMap<String,Object> map=new HashMap<String,Object>();
+				map.put("market_num",marketQA.getMarket_num());
+				map.put("marketQAFile_fname",marketQAFile_fname);
+				map.put("marketQAFile_ofname",marketQAFile_ofname);
+				map.put("marketQAFile_size",marketQAFile_size);
+				marketService.insertMarketQAFile(map);
+			}
 			
-			HashMap<String,Object> map=new HashMap<String,Object>();
-			map.put("market_num",marketQA.getMarket_num());
-			map.put("marketQAFile_fname",marketQAFile_fname);
-			map.put("marketQAFile_ofname",marketQAFile_ofname);
-			map.put("marketQAFile_size",marketQAFile_size);
-			marketService.insertMarketQAFile(map);
 		}
-		List<MarketQA> listqa=marketList(marketQA.getMarket_num());
+		List<MarketQA> listqa=marketQAList(marketQA.getMarket_num());
 		return listqa;
 	}
 
@@ -73,27 +99,17 @@ public class MarketRestController {
 		
 		log.info( "4444@@@marketQA"+ marketQA);
 		marketService.insertMarketQA(marketQA);
-		List<MarketQA> listqa=marketList(marketQA.getMarket_num());
+		List<MarketQA> listqa=marketQAList(marketQA.getMarket_num());
 		log.info("11111111111111"+listqa);
 		return listqa;
 		
 	}
-	public List<MarketQA> marketList(long market_num){
-		//1페이지 리스트다시전송	
-			HashMap<String,Object> mapList=new HashMap<String,Object>();
-			mapList.put("market_num", market_num);
-			mapList.put("marketVOQAStart",0);
-			mapList.put("marketVOQAEnd",4);
-			List<MarketQA> marketQAList=marketService.getMarketQA(mapList);
-			log.info("11111111#marketQAList"+marketQAList);
-			
-			return marketQAList;
-	}
-	
+
 	public ArrayList<Object[]> Fileupload(MultipartHttpServletRequest mtfRequest){
 		ArrayList<Object[]> list = new ArrayList<Object[]> ();
+		String path = "C:\\hifive\\hifiveImages\\marketQAFiles\\";
 		//학원경로
-		String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
+		//String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
 		//집경로
 		//String path  = "C:\\Users\\DeskTop\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
 		List<MultipartFile> fileList = mtfRequest.getFiles("fname");
@@ -192,7 +208,7 @@ log.info(mapSubmit);
 		map.put("market_num", market_num);
 		marketService.deleteMarketQA(map);
 		
-		List<MarketQA> list = marketList(market_num);
+		List<MarketQA> list = marketQAList(market_num);
 		return list;
 	}
 	
@@ -211,10 +227,53 @@ log.info(mapSubmit);
 		map.put("market_num", market_num);
 		map.put("marketQA_ox", marketQA_ox);
 		marketService.updateMarketQA2(map);
-		List<MarketQA> list = marketList(market_num);
+		List<MarketQA> list = marketQAList(market_num);
 		
 		return list;
 	}
+	
+	@PostMapping("marketRev-update")
+	public List<MarketRev> marketRev_update(MarketRev marketRev){
+		log.info("111111111111111110marketRev"+marketRev);
+
+		String marketRev_cont=marketRev.getMarketRev_cont();
+		long marketRev_num=marketRev.getMarketRev_num();
+		long market_num=marketRev.getMarket_num();
+		int marketRev_star=marketRev.getMarketRev_star();
+		log.info("22222222222222222222marketRev"+marketRev);
+		
+		HashMap<String,Object>map =new HashMap<String,Object>();
+
+		map.put("marketRev_cont", marketRev_cont);
+		map.put("marketRev_num", marketRev_num);
+		map.put("market_num", market_num);
+		map.put("marketRev_star", marketRev_star);
+		marketService.updateMarketRev(map);
+		
+		List<MarketRev> list = marketRevList(market_num);
+		
+		return list;
+	}
+	
+	@GetMapping("marketRev-delete")
+	public List<MarketRev> deleteMarketRev(@RequestParam(value="marketRev_num") String marketRev_numS,
+							   @RequestParam(value="market_num") String market_numS) 
+	{
+		HashMap<String,Object>map =new HashMap<String,Object>();
+		long marketRev_num=Long.parseLong(marketRev_numS);
+		long market_num=Long.parseLong(market_numS);
+		log.info("aaaaaaaaaaaaaaaaadelete"+marketRev_numS);
+		log.info("aaaaaaaaaaaaaaaaaadelete"+market_numS);
+		
+		map.put("marketRev_num", marketRev_num);
+		map.put("market_num", market_num);
+		marketService.deleteMarketRev(map);
+		
+		List<MarketRev> list = marketRevList(market_num);
+		return list;
+	}
+
+	
 
 }
 

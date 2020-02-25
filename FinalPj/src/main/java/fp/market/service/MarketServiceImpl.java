@@ -43,7 +43,9 @@ public class MarketServiceImpl implements MarketService {
 
 	@Override
 	public Market getMarket(long market_num) {
+		mapper.updateMarketVcnt(market_num);
 		return mapper.getMarket(market_num);
+
 	}
 
 	@Override
@@ -75,14 +77,17 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public void updateMarket2(Market market) {
 		mapper.updateMarket2(market);
-		
 	}
 	
 	@Override
 	public void insertMarket(Market market) {
 		mapper.insertMarket(market);
-		
 	}
+	@Override
+	public long getFreecode(String mem_email) {
+		return mapper.getFreeCode(mem_email);
+	}
+	
 	@Override
 	public void insertMarketRev(MarketRev mareketRev) {
 		mapper.insertMarketRev(mareketRev);
@@ -126,5 +131,6 @@ public class MarketServiceImpl implements MarketService {
 		mapper.updateMarketRev(map);
 		
 	}
+
 }
 
