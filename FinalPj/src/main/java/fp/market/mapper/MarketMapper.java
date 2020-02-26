@@ -7,6 +7,7 @@ import java.util.List;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 
@@ -25,7 +26,7 @@ public interface MarketMapper {
 	public List<Market> getMarketList(MarketPagingVO marketVO);
 //마켓 상세보기에 피요한것들	
 	public Market getMarket(long market_num);	
-	public int getMarketStar(long market_num);
+	public Integer getMarketStar(long market_num);
 	
 	public List<MarketRev> getMarketRev(HashMap<String, Object> map);//
 	public List<MarketQA> getMarketQA(HashMap<String, Object> map);//
@@ -53,8 +54,9 @@ public interface MarketMapper {
 	public List<MarketQAFile> marketQAFile(HashMap<String, Object> map);
 	public MarketQA marketQAcont(HashMap<String, Object> map);
 	
-
+	public String getFreeName(long market_num);
 	
+	public void insertMarketPayment(MarketPayment marketPayment);
 
 	
 

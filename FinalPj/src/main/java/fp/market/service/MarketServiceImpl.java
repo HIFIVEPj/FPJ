@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
@@ -49,7 +50,7 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public int getMarketStar(long market_num) {
+	public Integer getMarketStar(long market_num) {
 		return mapper.getMarketStar(market_num);
 	}
 
@@ -130,6 +131,15 @@ public class MarketServiceImpl implements MarketService {
 	public void updateMarketRev(HashMap<String, Object> map) {
 		mapper.updateMarketRev(map);
 		
+	}
+//마켓결제
+	@Override
+	public String getFreeName(long market_num) {
+		return mapper.getFreeName(market_num);
+	}
+	
+	public void insertMarketPayment(MarketPayment marketPayment) {
+		mapper.insertMarketPayment(marketPayment);
 	}
 
 }

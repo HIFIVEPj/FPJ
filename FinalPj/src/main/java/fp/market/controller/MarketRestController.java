@@ -72,6 +72,7 @@ public class MarketRestController {
 			String marketQAFile_ofname=(String) list.get(i)[1];
 			long marketQAFile_size=(long)list.get(i)[2];
 			log.info("1111111111111111marketQAFile_ofname"+marketQAFile_ofname);
+			
 			if(!marketQAFile_ofname.equals("")) {
 				log.info("#######marketQAFile"+marketQAFile);
 				marketQAFile.setMarketQA_num(marketQA.getMarketQA_num());

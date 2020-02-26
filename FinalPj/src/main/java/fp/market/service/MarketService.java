@@ -7,6 +7,7 @@ import java.util.List;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
@@ -22,7 +23,7 @@ public interface MarketService {
 	 List<Market> getMarketList(MarketPagingVO marketVO);
 //	 Market getMarketContent(long market_num);
 	 Market getMarket(long market_num);
-	 int getMarketStar(long market_num);
+	 Integer getMarketStar(long market_num);
 //	 MarketRev getMarketRev(MarketPagingVO marketVO,long market_num);
 	 List<MarketRev> getMarketRev(HashMap<String, Object> map);
 	 List<MarketQA> getMarketQA(HashMap<String, Object> map);
@@ -48,6 +49,9 @@ public interface MarketService {
 	 void deleteMarketRev (HashMap<String, Object> map);
 	 void updateMarketRev (HashMap<String, Object> map);
 	 
+	 String getFreeName(long market_num);
+	 
+	 void insertMarketPayment(MarketPayment marketPayment);
 
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);

@@ -772,11 +772,28 @@
 							  	
 							</div>
 						-->	
-							
+	<!--////////////////////// 결제넘기는 폼////////////////////////////////////// -->
+							<form id="paymentsForm" action="market-payments" method="post">
+								<input type="hidden" value="${market.market_sub}" name="marketPaym_pdName">
+								<input type="hidden" value="${market.market_num}" name="market_num">
+								<input type="hidden" value="${sessionScope.email}" name="mem_email">
+								<input type="hidden" value="${market.market_price}" name="marketPaym_price">
+								<c:choose>
+									<c:when test="${market.market_price<=500000}">
+										<input type="hidden" value=20 name="marketPaym_freeRate">
+									</c:when>
+									<c:when test="${market.market_price<=2000000}">
+										<input type="hidden" value=12 name="marketPaym_freeRate">
+									</c:when>
+									<c:otherwise>
+										<input type="hidden" value=6 name="marketPaym_freeRate">
+									</c:otherwise>
+								</c:choose>
+								
 								<div class="card-footer">
 									<div style="text-align: right; vertical-align:center;">
 										<span style="font-size:20px">결제금액</span></br>
-										<span style="font-size:30px">${market.market_price}</span>
+										<span style="font-size:30px" >${market.market_price}</span>
 									</div>
 								</div>
 								<div class="card-footer">	
@@ -784,10 +801,10 @@
 								
 								<!--	<a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
 										<a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-										<a href="market-payments" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</a>
+										<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
 									</div>
 								</div>
-						
+							</form>
 						</div>
 				<!--		
 						<div class="card">

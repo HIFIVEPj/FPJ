@@ -119,12 +119,12 @@
 	<!-- 페이징 처리 후 게시글 조회 -->
 	<select id="getMarketList" resultMap="resultMarket" parameterType="MarketVO">
 		<![CDATA[
-		select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-		(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
-		right outer join
-		(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
-		on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
-		where rnum>#{start} and rnum<=#{end}
+			select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+			(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+			right outer join
+			(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
+			on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
+			where rnum>#{start} and rnum<=#{end}
 		]]>
 	</select>
 	
@@ -272,5 +272,12 @@
 <!-- 마켓조회수+ -->
 	<update id="updateMarketVcnt" parameterType="long">
 		update market set market_vcnt=market_vcnt+1 where market_num=#{market_num}
-	</update>
+	</update>	
+<!-- 마켓결제에필요한 쿼리들 -->
+	<select id="getFreeName" parameterType="long" resultType="String">
+		select f.FREE_NAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
+	</select>
+	<insert id="insertMarketPayment" parameterType="MarketPayment">
+		 insert into MARKET_PAYMENT values(MARKETPAYM_NUM_SEQ.NEXTVAL,#{mem_email},#{market_num},#{marketPaym_freeRate},#{marketPaym_price},#{marketPaym_pdName},null,null,null)
+	</insert>
 </mapper>	
