@@ -38,4 +38,7 @@ public interface ProjectMapper {
 
 	//프로젝트 찜
 	List<ProjectPick>pjpick_list(long free_code);
+	void pjpick_insert(Map<String, Object>map);
+	void pjpick_del(Map<String, Object>map);
+	
 }

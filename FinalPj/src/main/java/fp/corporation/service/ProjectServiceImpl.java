@@ -99,4 +99,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectPick>pjpick_list(long free_code){
 		return mapper.pjpick_list(free_code);
 	}
+	@Override
+	public void pjpick_insert(Map<String, Object>map) {
+		mapper.pjpick_insert(map);
+	}
+	@Override
+	public void pjpick_del(Map<String, Object>map) {
+		mapper.pjpick_del(map);
+	}
 }

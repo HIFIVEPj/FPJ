@@ -193,4 +193,10 @@
 	<select id="pjpick_list" resultType="fp.corporation.domain.ProjectPick" parameterType="long">
 		select * from project_pick where free_code=#{free_code}
 	</select>
+	<insert id="pjpick_insert" parameterType="map">
+	 insert into project_pick(pjp_num, pj_num, free_code) values (PJP_NUM_SEQ.nextval, #{pj_num}, #{free_code})
+	</insert>
+	<delete id="pjpick_del" parameterType="map">
+	delete from project_pick where free_code=#{free_code} and pj_num=#{pj_num}
+	</delete>
 </mapper>

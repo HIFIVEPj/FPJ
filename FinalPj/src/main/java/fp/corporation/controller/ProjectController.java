@@ -63,16 +63,31 @@ public class ProjectController {
 		
 		List<Project> list = service.list(projectVo);
 		
+		
 		if(mem_email != null) {
+			
 			FreeLancer free = freeService.mydash_free_select(mem_email);
-			List<ProjectPick> pjplist = service.pjpick_list(free.getFree_code());
+			if(free != null) {
+				List<ProjectPick> pjplist = service.pjpick_list(free.getFree_code());
+				ArrayList<Long>pjnumList  = new ArrayList<Long>();
+				for(int j=0; j<pjplist.size(); j++) {
+					pjnumList.add(pjplist.get(j).getPj_num());
+				}
+				ModelAndView mv = new ModelAndView("project/project_list");
+				mv.addObject("list", list);
+				mv.addObject("pa", projectVo);
+				List<Project> keyname = service.keywords();
+				mv.addObject("keyname", keyname);
+				mv.addObject("free", free);
+				mv.addObject("pjplist",pjplist);
+				mv.addObject("pjnumList",pjnumList);
+				return mv;
+			}
 			ModelAndView mv = new ModelAndView("project/project_list");
 			mv.addObject("list", list);
 			mv.addObject("pa", projectVo);
 			List<Project> keyname = service.keywords();
-			mv.addObject("keyname", keyname);
-			mv.addObject("free", free);
-			mv.addObject("pjplist",pjplist);
+			mv.addObject("keyname", keyname);		
 			return mv;
 		}
 		ModelAndView mv = new ModelAndView("project/project_list");
@@ -201,5 +216,17 @@ public class ProjectController {
 	@ResponseBody
 	public void project_wish(@RequestParam long pj_num, @RequestParam long free_code) {
 		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("pj_num",pj_num);
+		map.put("free_code", free_code);
+		service.pjpick_insert(map);
+	}
+	@RequestMapping(value="/project_wish_del", method=RequestMethod.GET)
+	@ResponseBody
+	public void project_wish_del(@RequestParam long pj_num, @RequestParam long free_code) {
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("pj_num", pj_num);
+		map.put("free_code", free_code);
+		service.pjpick_del(map);
 	}
 }

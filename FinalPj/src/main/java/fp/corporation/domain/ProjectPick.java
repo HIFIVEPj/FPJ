@@ -1,5 +1,8 @@
 package fp.corporation.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,5 +14,7 @@ public class ProjectPick {
 	private long pjp_num;
 	private long pj_num;
 	private long free_code;
-	private int pjp_status;
+	private int pjp_status; // 지워도 될듯
+	
+	
 }
