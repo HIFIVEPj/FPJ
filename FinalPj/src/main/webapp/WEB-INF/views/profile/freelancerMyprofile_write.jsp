@@ -193,7 +193,7 @@
                                  <li><a href="#tab5"  name="type" value="5" data-toggle="tab" id="type_num" >기타</a></li>                              
                               </ul>
                               <input type="hidden" name="type_num" class='type' value=""/>    
-                              <input type="hidden" name="free_code"  value="2"/>  
+                              <input type="hidden" name="free_code"  value="${freelancer.free_code}"/>  
                                 <input type="hidden" name="free_keynum"  value=""/>  
                            </div>
                            <label class="form-label"><b>키워드</b></label>
@@ -1420,10 +1420,10 @@
 											<div class="col-md-9">
 												  <select class="form-control" name="pro_workplace">
 	                                    			<option selected> </option>
-	                                    			<option value=0>서울</option>
-	                                    			<option value=1>경기</option>
-	                                   				 <option value=2>대전</option>
-	                                   				 <option value=3>강원</option>
+	                                    			<option value="0">서울</option>
+	                                    			<option value="1">경기</option>
+	                                   				 <option value="2">대전</option>
+	                                   				 <option value="3">강원</option>
 	                                			 </select>
 											</div>
 										</div>	

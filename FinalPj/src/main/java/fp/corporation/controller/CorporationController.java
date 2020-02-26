@@ -98,6 +98,7 @@ public class CorporationController {
 	@RequestMapping("managed_project")
 	public ModelAndView managed_project(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+		
 		Corporation corporation = service.mydash_cor_select(mem_email);
 		long totalCount = pjService.getTotalCountCor(corporation.getCor_code());
 		

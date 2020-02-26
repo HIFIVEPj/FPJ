@@ -11,6 +11,7 @@ import fp.freelancerlist.domain.List_FreeLancerProfile;
 import fp.freelancerlist.domain.List_PagingVO;
 import fp.freelancerlist.domain.List_Type;
 import fp.freelancerlist.mapper.FreeLancerlistMapper;
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.Project;
@@ -60,5 +61,16 @@ import fp.freelancerprofile.domain.Type;
 	public List<FreeLancerProfile> freelancercontent() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public FreeLancer free_list_select(String mem_email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getTotalCountFree(long free_code) {
+		return getTotalCountFree(free_code);
 	}
 }

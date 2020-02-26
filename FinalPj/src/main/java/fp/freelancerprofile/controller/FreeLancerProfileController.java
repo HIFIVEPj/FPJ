@@ -33,6 +33,7 @@ import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
+
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -50,24 +51,18 @@ public class FreeLancerProfileController {
 	}*/
 	
 	@RequestMapping("freelancerMyprofile_write")	
-	public String ProFileWrite() { 
-		return "profile/freelancerMyprofile_write";
+	public ModelAndView ProFileWrite( @RequestParam String mem_email) { 
+		FreeLancer freelancer = service.mydash_free_select(mem_email);
+		ModelAndView mv = new ModelAndView("profile/freelancerMyprofile_write");
+		mv.addObject("freelancer", freelancer);
+		return mv;
 	}
 	
-	
-	
+	//프로필 작성//
 	@PostMapping("freelancerMyprofile_write")
-		public String freelancerMyprofile_write(FreeLancerProfile freelancerprofile, HttpServletRequest request) {
-		   //String type_num = request.getParameter("type_num");
-		//log.info("@@@@@@@@@@@@@@@@@@@");
-		//String mem_email = request.getParameter("mem_email");
-		//log.info("@@@@@@@@@@@@@@@@@@@ mem_email: "+mem_email);
+		public String freelancerMyprofile_write(FreeLancerProfile freelancerprofile, HttpServletRequest request, @RequestParam String mem_email) {
+		
 		log.info("@@@@@@@@@@@@@@@@@@@ freelancerprofile: "+freelancerprofile);
-		//String Sfree_code = request.getParameter("free_code");
-		//log.info("@@@@@@@@@@@@@@@@@@@ mem_email: "+Sfree_code);
-		//int free_code = Integer.parseInt(Sfree_code);
-		//log.info("@@@@@@@@@@@@@@@@@@@ mem_email: "+free_code);
-
 		
 		   String[] ListKeyNum = request.getParameterValues("key_num");
 		   ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
@@ -85,19 +80,26 @@ public class FreeLancerProfileController {
 		      log.info("@@@@@@@@@@@@@@@  arraykeynum: "+ arraykeynum);
 		      log.info("@@@@@@@@@@@@@@@  project: " +freelancerprofile);
 		      log.info("@#!#@$  map: "+ map);
-		   return "redirect:freelancerProfile_list";
+		   return "redirect:freelancerProfile_list?mem_email="+mem_email;
 		   }
-
-	@RequestMapping("freelancerProfile_content") //프로필내용
+	
+	//프로필 컨텐츠//
+	@RequestMapping("freelancerProfile_content")
 	public String Profile_content() { 
 		return "profile/freelancerProfile_content";
 	}
-	@GetMapping("freelancerProfile_list")
-	public ModelAndView ProfileList(PagingVO vo
+	
+	//프로필 리스트//
+	@RequestMapping("freelancerProfile_list")
+	public ModelAndView ProfileList(String mem_email, PagingVO vo
 						, @RequestParam(value="nowPage", required=false)String nowPage
 						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-		int total = service.countProfileList();
-			if(nowPage == null && cntPerPage == null) {
+
+		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
+		long total = service.countProfileList(freelancerprofile.getFree_code()); //글의 총 갯수
+		
+	
+		if(nowPage == null && cntPerPage == null) {
 				nowPage = "1";
 				cntPerPage = "4";
 			}else if(nowPage == null) {
@@ -105,10 +107,17 @@ public class FreeLancerProfileController {
 			}else if(cntPerPage ==null) {
 				cntPerPage="4";
 			}
-		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));	
-		   
-		List<FreeLancer> profile_list = service.selectPageList(vo);
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("PagingVo", vo);
+		map.put("free_code", freelancerprofile.getFree_code());
+		
+		List<FreeLancerProfile> profile_list = service.selectPageList(map);
+	
 		ModelAndView mv = new ModelAndView("profile/freelancerProfile_list");
+		log.info(")(#*$()#Q*$()map: "+map);
+		
 		mv.addObject("paging", vo);
 		mv.addObject("profile_list", profile_list);
 
@@ -135,7 +144,8 @@ public class FreeLancerProfileController {
 	public String ProfileListDelete(@RequestParam long PRO_NUM) {
 		service.listDelete(PRO_NUM);
 		
-		return "redirect:freelancerProfile_list";
+		//return "redirect:freelancerProfile_list?mem_email="+mem_email;
+		return "";
 	}
 
 	

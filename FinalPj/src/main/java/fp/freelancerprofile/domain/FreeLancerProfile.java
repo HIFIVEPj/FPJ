@@ -32,7 +32,7 @@ public class FreeLancerProfile {
 	private long pro_vcnt;//조회수
 	private long pro_pcnt;//찜수
 	private int pro_place;
-	private int pro_workplace; //업무장소
+	private String pro_workplace; //업무장소
 	private String profile_sub; //프로필명
 	private Date profile_date; //프로필 등록일
 
@@ -45,7 +45,11 @@ public class FreeLancerProfile {
 	
 	private List<Integer> pronum;
 	private List<Integer> pro_nums;
-	
+
+	private List<FreeLancerProfileFile> freeLancerProfileFile;
+	private List<KeyWord> keyword;
+
+
 /*	public List<Integer> pro_num() {
 		pronum = new ArrayList<Integer>();
 		for(int i = 0; i<pro_nums.size(); i++) {

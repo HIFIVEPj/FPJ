@@ -54,6 +54,7 @@
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
+									
 								<c:if test = "${mydash.free_fname ne null}">
 									<div class="profile-pic-img">
 										<img src="../images/free_thumb/${mydash.free_fname}" class="brround" alt="user">
@@ -71,6 +72,8 @@
 												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
 												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
+											
+											
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
@@ -153,7 +156,7 @@
 						</div>
 						-->
 					</div>
-					
+
                <div class="col-xl-9 col-lg-12 col-md-12">
                   <div class="card mb-0">
                      <div class="card-header">
@@ -183,50 +186,49 @@
                                              <span class="custom-control-label check-all"></span>
                                           </label>  </th>                                 
                                        <th >프로필명</th>
-                                       <th>이메일</th>
+                                    <!--   <th>이메일</th>-->  
                                        <th>등록일</th>
                                        <th>첨부파일</th>
                                  </tr>
                               </thead>
-                              
 
- <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
-  <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">   
-<form id="del_list" method="get" action="freelancerProfile_cehck_delete?pro_num=${profile.pro_num}" name="checkdelete1">
-</c:forEach>
-</c:forEach>
-      
-                   
-                               <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
-                     
+						 <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
+						  <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">   
+								<form id="del_list" method="get" action="freelancerProfile_cehck_delete?mem_email=${sessionScope.email}&pro_num=${profile.pro_num}" name="checkdelete1">
+							</c:forEach>
+						</c:forEach>
+                               
+                
+	
+                     <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
+
                                     <tr>
                                        <td scope="row">
-                                       <!--  <form>  -->
+                                   
                                           <label class="custom-control custom-checkbox ">
          
                                              <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status"> 					
                                              <input type="checkbox" class="custom-control-input ab" name="pro_num" value="${profile.pro_num}" >
                                              </c:forEach>
                                    
-                                             
+                                     
                                              <span class="custom-control-label"> </span>
                                           </label>
-                                       <!--  </form>  -->
+                                    
                                        </td>
                                        
                                        <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">   
                                           <td><a href='freelancerProfile_content?PRO_NUM=${profile.pro_num}'class="btn-link">${profile.profile_sub}</a></td>
                                        </c:forEach>
                                        
-                                       <td>${freeLancer.mem_email}</td>
+                                    <!--      <td>${freeLancer.mem_email}</td>-->
                                        
                                        <c:forEach  var="profile" items="${freeLancer.freelancerprofile}" varStatus="status">   
                                        <td class="text-center"><fmt:formatDate value="${profile.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
                                        </c:forEach>   
                                     
-                                       <c:forEach  var="profilefile" items="${freeLancer.freeLancerProfileFile}" varStatus="status">   
-                                       <td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td> 
-                                       </c:forEach>
+                                       <td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;파일제목수정수정</a></td> 
+                                    
                                     </tr>
 
                                  </c:forEach>
@@ -242,7 +244,7 @@
                         <div class="card-footer" align="right">
                         <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a> 
  </form>                                                    
-                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">등록</button></a>   
+                         <a href='freelancerMyprofile_write?mem_email=${sessionScope.email}'><button type="submit" class="btn btn-primary">등록</button></a>   
                         </div>
                      
           
@@ -255,12 +257,12 @@
                           
                            <!--이전 페이지 이동 -->
                             <li class="page-item">
-                        <a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
+                        <a aria-label="Last" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
                         <i class="fa fa-angle-double-left"></i></a>
                      
                      </li>   
                      <li class="page-item">
-                        <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
+                        <a aria-label="Next" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
                         <i class="fa fa-angle-left"></i></a>
                      </li>   
                               
@@ -274,17 +276,17 @@
                                     <li class='page-item active'><a class="page-link"  >${p}</a></li>
                                  </c:when>
                                  <c:when test = "${p != paging.nowPage }">
-                                    <li class="page-item"><a class="page-link"  href="freelancerProfile_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+                                    <li class="page-item"><a class="page-link"  href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
                                  </c:when>
                               </c:choose>
                            </c:forEach>
                            
                               <c:if test ="${paging.nowPage != paging.lastPage}">
                                  <li class="page-item">
-                           <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+                           <a aria-label="Next" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
                          </li>  
                         <li class="page-item">
-                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
                         </li>
                               </c:if>
                               

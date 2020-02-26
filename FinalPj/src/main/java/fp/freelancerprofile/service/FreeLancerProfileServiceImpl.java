@@ -33,12 +33,12 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	}
 	///리스트페이지 페이징///
 	@Override
-	public int countProfileList() {
-		return mapper.countProfileList();
+	public long countProfileList(long free_code) {
+		return mapper.countProfileList(free_code);
 	}
 	@Override
-	public List<FreeLancer> selectPageList(PagingVO vo){
-		return mapper.selectPageList(vo);
+	public List<FreeLancerProfile> selectPageList(Map<String, Object> map){
+		return mapper.selectPageList(map);
 	}
 	//프로필컨텐츠//
 	@Override
@@ -62,7 +62,6 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		   mapper. listDelete2(PRO_NUM);
 	}
 
-
 	//체크박스 삭제//
 	@Override
 	public void checkdelete1(long PRO_NUM) {
@@ -80,6 +79,21 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		 mapper.insertPjpkeyword(map);
 	}
 
+	@Override
+	public FreeLancerProfile profile_free_select(String mem_email){
+		return mapper.profile_free_select(mem_email);
+	}
+	@Override
+	public long getTotalCountFree(long free_code){
+		return mapper.getTotalCountFree(free_code);
+	}
+
+	
+	
+	
+	
+	
+	
 	//나영추가 + mydash_free
 	@Override
 	public FreeLancer mydash_free_select(String mem_email) {
@@ -95,4 +109,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void mydash_free_update(FreeLancer freelancer) {
 		mapper.mydash_free_update(freelancer);
 	}
+
+
+
 }
