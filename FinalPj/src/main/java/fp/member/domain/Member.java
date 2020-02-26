@@ -19,7 +19,7 @@ public class Member {
 	private String email;
 	private String name;
 	private String pwd;
-	private int class_num;
+	private String class_num;
 	private int status;	
 	private Date rdate;
 	private int option1;

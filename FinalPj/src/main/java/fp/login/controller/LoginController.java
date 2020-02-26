@@ -105,59 +105,7 @@ public class LoginController {
 		return "member/login";
 
 	}
-    /*
-    @RequestMapping(value = "find_pwd.do", method = RequestMethod.POST)
-    public void find_pw(@ModelAttribute Member member, HttpServletRequest request,HttpServletResponse response) throws Exception{
-    	String repwd = "";
-		for (int i = 0; i < 12; i++) {
-			repwd += (char) ((Math.random() * 26) + 97);
-		}
-
-      
-        String setfrom = "dam7319@gamil.com";
-        String tomail = request.getParameter("email"); // 받는 사람 이메일
-        String title = "[HIFIVE]임시 비밀번호입니다"; // 제목
-        String content =
-        
-        System.getProperty("line.separator")+ //한줄씩 줄간격을 두기위해 작성
-        
-        System.getProperty("line.separator")+
-                
-        "안녕하세요.[HIFIVE]입니다."
-        
-        +System.getProperty("line.separator")+
-        
-        System.getProperty("line.separator")+
-
-        " 임시 비밀번호는 " +repwd+ " 입니다. "
-        
-        +System.getProperty("line.separator")+
-        
-        System.getProperty("line.separator")+
-        
-        "보안을 위해 사이트에 접속하셔서 비밀번호를 꼭 변경해주세요"; // 내용            
-        
-     
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-
-            messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
-            messageHelper.setTo(tomail); // 받는사람 이메일
-            messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-            messageHelper.setText(content); // 메일 내용
-            
-            mailSender.send(message);
-        } catch (Exception e) {
-            System.out.println(e);
-        }       
-       // ModelAndView mv = new ModelAndView();    //ModelAndView로 보낼 페이지를 지정하고, 보낼 값을 지정한다.
-       // mv.setViewName("member/join_confirm");  //뷰의이름                   
-       // mv.addObject("pwd",repwd);
-                
-        member.setPwd(repwd);
-    	loginService.find_pw(member);
-	}*/
+  
     
     
   //로그인 첫 화면 요청 메소드
@@ -244,22 +192,20 @@ public class LoginController {
   	@RequestMapping(value="/login_check")
   	public ModelAndView loginCheck(@ModelAttribute Member member,HttpSession session,HttpServletResponse response_equals)throws IOException {
   		boolean result = loginService.loginCheck(member, session);
-  		ModelAndView mv = new ModelAndView();
-  		mv.setViewName("index");
-  		
-  		log.warn("*******************************member: "+ member.getPwd());
-  		log.warn("*********************result" + result);
+  		ModelAndView mv = new ModelAndView();  		
+  		mv.setViewName("index");  		
   		if(result == true) { 
   			session.getAttribute("name");
-  			session.getAttribute("email");
-  			//String email =(String)session.getAttribute("email");
-  			//log.info("###################$$$$$$$$$$$$$$$$$$$$#"+email);
+  			session.getAttribute("email");  			
+  			
   			mv.addObject("msg","성공");
   		}else {
-  			//response_equals.setContentType("text/html; charset=UTF-8");
-  			 //PrintWriter out_equals = response_equals.getWriter();
-             //out_equals.println("<script>alert('아이디와 비밀번호를 확인해주세요.'); history.go(-1);</script>");  			
-  			mv.addObject("msg","실패");
+  			mv.setViewName("member/login");  			
+  			//response_equals.setContentType("text/html; charset=UTF-8");  			 
+  			//PrintWriter out = response_equals.getWriter();  			 
+  			//out.println("<script>alert('아이디 또는 비밀먼호를 확인하세요'); location.href='member/login';</script>");  			 
+  			//out.flush();
+  			mv.addObject("msg","아이디 또는 비밀번호를 확인하세요.");
   			
   		} 
   		
