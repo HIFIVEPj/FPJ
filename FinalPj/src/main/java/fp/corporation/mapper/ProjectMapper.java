@@ -40,5 +40,7 @@ public interface ProjectMapper {
 	List<ProjectPick>pjpick_list(long free_code);
 	void pjpick_insert(Map<String, Object>map);
 	void pjpick_del(Map<String, Object>map);
+	void pjpick_pj_update_in(Map<String, Object>map);
+	void pjpick_pj_update_del(Map<String, Object>map);
 	
 }

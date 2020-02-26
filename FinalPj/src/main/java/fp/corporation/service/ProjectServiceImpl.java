@@ -100,11 +100,14 @@ public class ProjectServiceImpl implements ProjectService {
 		return mapper.pjpick_list(free_code);
 	}
 	@Override
+	@Transactional
 	public void pjpick_insert(Map<String, Object>map) {
 		mapper.pjpick_insert(map);
+		mapper.pjpick_pj_update_in(map);
 	}
 	@Override
 	public void pjpick_del(Map<String, Object>map) {
 		mapper.pjpick_del(map);
+		mapper.pjpick_pj_update_del(map);
 	}
 }

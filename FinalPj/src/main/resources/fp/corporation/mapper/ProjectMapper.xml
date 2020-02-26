@@ -199,4 +199,10 @@
 	<delete id="pjpick_del" parameterType="map">
 	delete from project_pick where free_code=#{free_code} and pj_num=#{pj_num}
 	</delete>
+	<update id="pjpick_pj_update_in" parameterType="map">
+	update PROJECT set pj_pcnt= pj_pcnt+1 where pj_num=#{pj_num}
+	</update>
+		<update id="pjpick_pj_update_del" parameterType="map">
+	update PROJECT set pj_pcnt= pj_pcnt-1 where pj_num=#{pj_num}
+	</update>
 </mapper>
