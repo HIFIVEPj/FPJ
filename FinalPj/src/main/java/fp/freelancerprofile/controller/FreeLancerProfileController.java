@@ -180,8 +180,11 @@ public class FreeLancerProfileController {
 	}
 
 	@RequestMapping("myfavorite")	//관심있는프로젝트
-	public String Myfavorite() { 
-		return "profile/myfavorite";
+	public ModelAndView Myfavorite(@RequestParam String mem_email) {
+		FreeLancer freelancer = service.mydash_free_select(mem_email);
+		ModelAndView mv = new ModelAndView("profile/myfavorite");
+		mv.addObject("free", freelancer);
+		return mv;
 	}
 	@RequestMapping("payments")	//
 	public String payments() { 
