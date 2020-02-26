@@ -1,3 +1,4 @@
+
 package fp.customer_service.mapper;
 
 import org.junit.Test;
@@ -26,3 +27,4 @@ public class ReplyMapperTests {
 	}
 
 }
+

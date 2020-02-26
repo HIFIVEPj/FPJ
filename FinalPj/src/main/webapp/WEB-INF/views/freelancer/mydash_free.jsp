@@ -203,6 +203,7 @@
 											<input type="text" class="form-control" value="X" readonly>
 										</div>
 									</div>
+									
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">가입일</label>

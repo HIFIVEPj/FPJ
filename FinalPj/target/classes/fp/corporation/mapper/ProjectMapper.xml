@@ -86,19 +86,19 @@
 	<select id="list" parameterType="ProjectVo" resultMap="projectMap"> 
 		 <![CDATA[
 			select * from (select ROWNUM rnum , aa.* from 
-			(select * from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code order by PJ_NUM desc)aa) where rnum>#{start} and rnum<=#{end}
+			(select * from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code where pj.pj_paystatus=1 order by PJ_NUM desc)aa) where rnum>#{start} and rnum<=#{end}
 	    ]]>
 	</select>	
 	<select id="getTotalCount" resultType="long" >
-		select count(PJ_NUM) from PROJECT
+		select count(PJ_NUM) from PROJECT where pj_paystatus=1
 	</select>
 	<!--  -->
 	
 	<!-- mydash_cor에서 project 관리부분들  -->
 	<select id="listMydashCor" parameterType="map" resultMap="projectMap"> 
 		 <![CDATA[
-			select pj_sub, type_num, cor_code, pj_sub, pj_ddate, pj_pay, pj_cont, pj_term, pj_loc, pj_fgrade, pj_paystatus from (select ROWNUM rnum , aa.* from 
-			(select pj.* from PROJECT pj join CORPORATION cor on pj.cor_code = #{cor_code} order by PJ_NUM desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
+			select * from (select ROWNUM rnum , aa.* from 
+			(select pj.* from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code where pj.cor_code=#{cor_code} order by PJ_NUM desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
 	    ]]>
 	</select>
 	<select id="getTotalCountCor" resultType="long" >
@@ -168,29 +168,23 @@
 			 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num) values(PJP_KEYNUM_SEQ.nextval, #{key_num},  #{pj_num})
 			 </foreach>
 	 </insert>
-<!-- 
-	<update id="updateKeyword" parameterType="PjPickKeyword">
-	   <foreach collection= "PjPickKeyword" item="value" separator=" " >
-		   Update PJ_PICK_KEYWORD set
-		   key_num = #{value.key_numList, jdbcType=INTEGER} where pjp_keynum = #{value.pjpkeynumList, jdbcType=NUMERIC}
-		</foreach>
-	</update>
- -->	 
+	 
 	<delete id="deletePj" parameterType="long">
 		delete from PROJECT where PJ_NUM=#{pj_num}
 	</delete>
 	<delete id="deleteKeyword" parameterType="long">
 	 	delete from PJ_PICK_KEYWORD where PJ_NUM=#{pj_num}
 	 </delete>
-	<!-- 
-	<update id="update" parameterType="Board" >
-		update BOARD set email=#{email}, subject=#{subject}, content=#{content} where seq=#{seq}
-	</update>
-	-->
-
-	
 	<!-- 기업정보 뽑기 -->
 	<select id="corInfo" parameterType="long" resultMap="corporationMap">
 		select * from CORPORATION cor join PROJECT pj on cor.COR_CODE=pj.COR_CODE where PJ_NUM=#{pj_num}
 	</select>
+
+	<insert id="payinsert" parameterType="java.util.Map">
+		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME ) values
+		(PAYINFO_NUM_SEQ.nextval, #{data.imp_uid}, #{data.merchant_uid}, #{data.paid_amount}, #{data.apply_num, jdbcType=VARCHAR}, #{data.status}, #{data.card_name, jdbcType=VARCHAR}, #{data.pg_tid}, #{data.buyer_name})
+	</insert>
+	<update id="payStatusUpdate" parameterType="java.util.Map">
+		update PROJECT set pj_paystatus=1 where pj_num = #{pj_num}
+	</update>
 </mapper>

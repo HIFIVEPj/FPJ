@@ -79,11 +79,18 @@ public class ProjectServiceImpl implements ProjectService {
 	public void updateKeyword(Map<String, Object> map) {
 		mapper.updateKeyword(map);
 	}
-
-
+	@Override
 	@Transactional
 	public void updateKeyword(PjPickKeyword pjpkeyword) {
 		mapper.updateKeyword_Del(pjpkeyword);
 		mapper.updateKeyword_In(pjpkeyword);
 	}
+	
+	@Override
+	@Transactional
+	public void payinsert(Map<String, Object> payinfo) {
+		mapper.payinsert(payinfo);
+		mapper.payStatusUpdate(payinfo);
+	}
+	
 }

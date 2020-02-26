@@ -7,7 +7,7 @@
 		insert into CORPORATION
 		(cor_code, mem_email, cor_reg, cor_name, cor_mname, cor_tel, cor_rdate, cor_postcode, cor_addr, cor_detailaddr, cor_addr_x, cor_addr_y, cor_profile, cor_type, cor_fname, cor_ofname)
 		values
-		(cor_code_seq.nextval, #{mem_email}, #{cor_reg}, #{cor_name}, #{cor_mname}, #{cor_tel}, sysdate, #{cor_postcode}, #{cor_addr}, #{cor_detailaddr}, #{cor_addr_x}, #{cor_addr_y}, #{cor_profile},#{cor_type}, #{cor_fname}, #{cor_ofname})
+		(cor_code_seq.nextval, #{mem_email}, #{cor_reg}, #{cor_name}, #{cor_mname}, #{cor_tel}, sysdate, #{cor_postcode}, #{cor_addr}, #{cor_detailaddr}, #{cor_addr_x}, #{cor_addr_y}, #{cor_profile},#{cor_type}, #{cor_fname, jdbcType=VARCHAR}, #{cor_ofname, jdbcType=VARCHAR})
 	</insert>
 	<!-- 
 	<update id= 'update_cor_auth' parameterType="String">
@@ -20,5 +20,7 @@
 	<update id='mydash_cor_update' parameterType="Corporation">
 		update CORPORATION set 
 		cor_reg = #{cor_reg}, cor_name=#{cor_name}, cor_addr=#{cor_addr}, cor_postcode=#{cor_postcode}, cor_detailaddr=#{cor_detailaddr}, cor_addr_x=#{cor_addr_x}, cor_addr_y=#{cor_addr_y}, cor_profile=#{cor_profile}, cor_type=#{cor_type}, cor_fname=#{cor_fname}, cor_ofname=#{cor_ofname} 
+		where cor_code= #{cor_code}
+
 	</update>
 </mapper>

@@ -1,12 +1,13 @@
 
 package fp.corporation.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,14 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import fp.corporation.domain.Corporation;
-import fp.corporation.domain.Keyword;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
+import fp.corporation.domain.ProjectPayment;
 import fp.corporation.service.CorporationService;
 
 import fp.corporation.service.ProjectService;
@@ -39,7 +41,7 @@ public class ProjectController {
 	
 	@RequestMapping("project_list")
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email) {
 		long totalCount = service.getTotalCount();
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
@@ -142,7 +144,7 @@ public class ProjectController {
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
 		//log.info("@#!#@$  map: "+ map);
-		return "managed_project";
+		return "corporation/managed_project?mem_email="+mem_email;
 	}
 	
 	@RequestMapping("project_delete")
@@ -152,7 +154,29 @@ public class ProjectController {
 	}
 
 	@RequestMapping("project_payments")
-	public String project_payment(){
-		return "project/project_payments";
+	public ModelAndView project_payment(@RequestParam long pj_num){
+		Project project = service.showContent(pj_num);
+		Corporation corInfo = service.corInfo(pj_num);
+		ModelAndView mv = new ModelAndView("project/project_payments");
+		mv.addObject("projectCont", project);
+		mv.addObject("corInfo", corInfo);
+		mv.addObject("pjpaym", new ProjectPayment());
+		return mv;
+	}
+	@RequestMapping(value="project_payments_end", method=RequestMethod.POST )
+	public String project_payments_end(@RequestBody HashMap<String, Object> data, @RequestParam long pj_num){
+		log.info("@!#*^@$ pj_num: "+pj_num);
+		//log.info("#($&#@*$ data: "+data.toString());
+		Map<String, Object> payinfo = new HashMap<String, Object>();
+		payinfo.put("data", data);
+		payinfo.put("pj_num", pj_num);
+		log.info("#@$&*^#@&*$payinfo: "+payinfo);
+		service.payinsert(payinfo);
+		return "project/project_payments_end";
+		
+	}
+	@RequestMapping("project_wish")
+	public String project_wish() {
+		return "";
 	}
 }

@@ -474,8 +474,8 @@
 										</div>
 										
 									</div>
-									<div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
-									
+									<!--  <div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									-->
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab-11">
 									
@@ -497,8 +497,17 @@
 													<div class="card border-0 mb-0">
 														<div class="card-body" style="padding:30px;">
 														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons wishlist" style="margin-right:40%"> <i class="fa fa fa-heart-o"></i></a>
+															<a href="#" class="item-card9-icons wishlist" style="margin-right:40%" id="wish"> <i class="fa fa fa-heart-o" style=""></i></a>
 														</div>
+														<script>
+															$(document).on("click","#wish",function(){
+																$.ajax({
+																	type: "get",
+																	url:"<c:url value='project_wish'/>"
+																	data: ""
+																});
+															})
+														</script>
 															<div class="item-card9">
 															<c:set var = "loc" value="${fn:split(dto.pj_loc,' ')}"/>
 															<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >

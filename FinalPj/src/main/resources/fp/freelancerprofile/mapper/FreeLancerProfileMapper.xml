@@ -95,7 +95,27 @@
          </collection>   
 
       </resultMap>
-  
+
+
+        <resultMap type="freelancerprofile" id="free_profile">
+
+            <id property="free_code" column="free_code"/>
+           <result property="pro_num" column="pro_num"/>
+           <result property="type_num" column="type_num"/>
+           <result property="pro_exp" column="pro_exp"/>
+           <result property="pro_cv" column="pro_cv"/>
+           <result property="pro_addr" column="pro_addr"/>
+           <result property="pro_edu" column="pro_edu"/>
+           <result property="pro_start" column="pro_start"/>
+           <result property="pro_ox" column="pro_ox"/>
+           <result property="pro_grade" column="pro_grade"/>
+           <result property="profile_vcnt" column="profile_vcnt"/>
+           <result property="profile_pcnt" column="profile_pcnt"/>
+           <result property="pro_workplace" column="pro_workplace"/>
+          <result property="profile_sub" column="profile_sub"/>
+           <result property="profile_date" column="profile_date"/>
+
+      </resultMap>
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
  	<!-- 프리랜서 프로필 리스트 select -->
    <!--<select id="selectProfileList"  resultMap="FreeLancerResult">
@@ -109,13 +129,19 @@
       ]]>
    </select>-->
    <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
-    <select id="countProfileList" resultType="int">
-   		select count(*) from FreeLancer_Profile
+    <select id="countProfileList" resultType="long">
+   		 select count(profile_sub) from freelancer_profile where free_code=#{free_code}
     </select>
+  
+  
+	<select id='profile_free_select' parameterType="String" resultMap="free_profile">
+		select * from FREELANCER_PROFILE where mem_email=#{mem_email}
+	</select>
+  
    <!-- 리스트 페이징 (페이징 처리 후 게시글 조회 ) -->
-   <select id="selectPageList" parameterType="PagingVO" resultMap="FreeLancerResult">
+   <select id="selectPageList" parameterType="map" resultMap="FreeLancerResult">
 
-   	<![CDATA[	
+   	<!-- <![CDATA[	
    		select f.rnum, f.MEM_EMAIL, 
    			   f.PROFILE_SUB, f.PROFILE_DATE, 
    			   f.PROFILE_OFNAME, f.PRO_NUM from
@@ -131,7 +157,15 @@
 							on fp.PRO_NUM = ffile.PRO_NUM ) free
 								where rownum <=  #{end}) f
 								 where f.rnum>= #{start}	
-	 ]]>
+	 ]]>-->
+	
+	 <![CDATA[
+		select * from 
+			(select ROWNUM rnum , aa.* from 
+				(select PROFILE_SUB, PROFILE_DATE, FREE_CODE, PRO_NUM from FREELANCER_PROFILE fp
+					 where FREE_CODE=#{free_code} order by PROFILE_DATE desc)aa) 
+						where rnum>=#{PagingVo.start} and rnum<=#{PagingVo.end}
+	]]>
    </select>
    
      <!-- 프리랜서 프로필 컨텐츠 1-->
@@ -236,5 +270,19 @@
 
 
 
-
+	<!-- 나영 추가 / mydash_free -->
+	<select id="mydash_free_select" parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancer">
+		select * from FREELANCER where mem_email=#{mem_email}
+	</select>
+	<insert id="mydash_free_insert" parameterType="fp.freelancerprofile.domain.FreeLancer">
+		insert into FREELANCER(free_code, mem_email, free_name, free_tel, free_fname, free_ofname)
+		 values(FREE_CODE_SEQ.nextval, #{mem_email}, #{free_name}, #{free_tel}, #{free_fname, jdbcType=VARCHAR}, #{free_ofname, jdbcType=VARCHAR})
+	</insert>
+	<update id="mydash_free_update" parameterType="fp.freelancerprofile.domain.FreeLancer">
+		update FREELANCER set free_tel=#{free_tel}, free_fname=#{free_fname, jdbcType=VARCHAR}, free_ofname=#{free_ofname, jdbcType=VARCHAR} where free_code=#{free_code}
+	</update>
+	<update id="mydash_update_classnum" parameterType="String">
+		update MEMBER set class_num =3 where mem_email=#{mem_email}
+	</update>
+	<!--/////////////////////////// -->
 </mapper>

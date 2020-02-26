@@ -45,7 +45,11 @@ public class FreeLancerProfile {
 	
 	private List<Integer> pronum;
 	private List<Integer> pro_nums;
-	
+
+	private List<FreeLancerProfileFile> freeLancerProfileFile;
+	private List<KeyWord> keyword;
+
+
 /*	public List<Integer> pro_num() {
 		pronum = new ArrayList<Integer>();
 		for(int i = 0; i<pro_nums.size(); i++) {

@@ -217,13 +217,13 @@
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label class="form-label">기업활동점수</label>
-											<input type="text" class="form-control" value="1" readonly>
+											<input type="text" class="form-control" value="0" readonly>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label class="form-label">기업활동등급</label>
-											<input type="text" class="form-control" value="1" readonly>
+											<input type="text" class="form-control" value="새싹" readonly>
 										</div>
 									</div>
 									<div class = "col-sm-6 col-md-6">
@@ -312,9 +312,16 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
+								<c:if test="${cor.cor_fname eq ''}">
+									<div class="profile-pic-img">
+										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+									</div>
+								</c:if>
+								<c:if test = "${cor.cor_fname ne '' }">
 									<div class="profile-pic-img">
 										<img src="../images/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
 									</div>
+								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
@@ -343,7 +350,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments_cor"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
 											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
@@ -363,6 +370,7 @@
 							<form name="input_cor" method="post" action="mydash_cor_update" enctype="multiPART/form-data">
 							<div class="card-body">
 								<div class="row">
+								
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">담당자 성명</label>
@@ -551,13 +559,15 @@
 											<label class="form-label">기업이미지 등록</label>
 											<div class="custom-file">
 												<input type="file" class="custom-file-input" name="fileName" id="file" onchange="upfile()" accept=".gif, .jpg, .png" value="${cor.cor_fname}">
-												<label class="custom-file-label" id="fileName_label">${cor.cor_fname}</label>
+												<label class="custom-file-label" id="fileName_label">${cor.cor_ofname}</label>
+
 											</div>
 										</div>
 									</div>
 								
 								</div>
 							</div>
+							<input type="hidden" class="form-control" value="${cor.cor_code}"  name="cor_code">
 							<div class="col-md-12">
 							<div class="card-footer" style="text-align:center;">
 								<input type="button" class="btn btn-primary" id="edit_ok" value="수정완료" onclick="check();">
