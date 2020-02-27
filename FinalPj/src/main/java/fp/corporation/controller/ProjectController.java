@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
@@ -62,10 +64,8 @@ public class ProjectController {
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		List<Project> list = service.list(projectVo);
-		
-		
+
 		if(mem_email != null) {
-			
 			FreeLancer free = freeService.mydash_free_select(mem_email);
 			if(free != null) {
 				List<ProjectPick> pjplist = service.pjpick_list(free.getFree_code());
@@ -99,14 +99,34 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("project_content")
-	public ModelAndView project_content(@RequestParam long pj_num) {
-		Project project = service.showContent(pj_num);
-		Corporation corInfo = service.corInfo(pj_num);
-		ModelAndView mv = new ModelAndView("project/project_content");
-		mv.addObject("projectCont", project);
-		mv.addObject("corInfo", corInfo);
-		
-		return mv;
+	public ModelAndView project_content(@RequestParam long pj_num, @RequestParam(value="mem_email", required=false)String mem_email) {
+		if(mem_email != null) {
+			Project project = service.showContent(pj_num);
+			Corporation corInfo = service.corInfo(pj_num);
+			FreeLancer free = freeService.mydash_free_select(mem_email);
+			
+			Map<String, Object>map = new HashMap<String, Object>();
+			map.put("pj_num", pj_num);
+			map.put("free_code", free.getFree_code());
+			
+			AppliedProject appp = service.select_applied_pj(map);
+			ModelAndView mv = new ModelAndView("project/project_content");
+			
+			mv.addObject("appp", appp);
+			mv.addObject("free", free);
+			mv.addObject("projectCont", project);
+			mv.addObject("corInfo", corInfo);
+			
+			return mv;
+		}else {
+			Project project = service.showContent(pj_num);
+			Corporation corInfo = service.corInfo(pj_num);
+			ModelAndView mv = new ModelAndView("project/project_content");
+			mv.addObject("projectCont", project);
+			mv.addObject("corInfo", corInfo);
+			
+			return mv;
+		}
 	}
 	
 	@GetMapping("project_update")
@@ -215,7 +235,7 @@ public class ProjectController {
 	@RequestMapping(value="/project_wish", method=RequestMethod.GET)
 	@ResponseBody
 	public void project_wish(@RequestParam long pj_num, @RequestParam long free_code) {
-		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+		//log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
 		Map<String,Object>map = new HashMap<String, Object>();
 		map.put("pj_num",pj_num);
 		map.put("free_code", free_code);
@@ -229,4 +249,15 @@ public class ProjectController {
 		map.put("free_code", free_code);
 		service.pjpick_del(map);
 	}
+	
+	@RequestMapping(value="/apply", method=RequestMethod.GET)
+	@ResponseBody
+	public void applied_pj(@RequestParam long pj_num, @RequestParam long free_code) {
+		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("pj_num", pj_num);
+		map.put("free_code", free_code);
+		service.applied_pj(map);
+	}
+	
 }

@@ -3,6 +3,8 @@ package fp.freelancerprofile.domain;
 
 import java.sql.Date;
 import java.util.List;
+
+import fp.market.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +33,6 @@ public class FreeLancer {
 	private Type type;
 	private List<KeyWord> keyword;
 	private List<Project> projcet;
-	
-	
+	private Member member;
+	private List<Applied_Project> applied_project;
 }

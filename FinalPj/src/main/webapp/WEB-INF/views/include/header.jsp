@@ -1,5 +1,4 @@
-
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!--header-->
@@ -100,6 +99,7 @@
         -->
         <link rel="stylesheet" href="../plugins/fileuploads/css/dropify-multiple.min.css">
         <link rel="stylesheet" href="../plugins/fileuploads/css/dropify-multiple.css">
+         
         <!--
         <link rel="stylesheet" href="../plugins/fileuploads/fonts/*">
         -->
@@ -169,7 +169,7 @@
 										<a href="#" class="text-dark" data-toggle="dropdown">  &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 											<c:if test="${sessionScope.class_num==1}">
-											<a href="construction" class="dropdown-item" >
+											<a href="admin" class="dropdown-item" >
 												<i class="dropdown-icon si si-settings" style="color:#1f719a;"></i> 관리자
 											</a>
 											</c:if>

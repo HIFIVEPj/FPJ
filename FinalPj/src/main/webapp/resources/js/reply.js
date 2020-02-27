@@ -1,17 +1,16 @@
-console.log("Reply Module........");
+console.log("### Reply Module");
 
-var replyService = (function() {
-
-	function add(reply, callback, error) {
-		console.log("add reply...............");
-
+var replyService = (function(){
+	function add(qacomm_cont, callback, error){
+		console.log("### add reply");
+		
 		$.ajax({
 			type : 'post',
 			url : '/replies/new',
-			data : JSON.stringify(reply),
+			data : JSON.stringify(qacomm_cont),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
-				if (callback) {
+				if (callback){
 					callback(result);
 				}
 			},
@@ -22,45 +21,22 @@ var replyService = (function() {
 			}
 		})
 	}
-
-//	function getList(param, callback, error) {
-//
-//		var bno = param.bno;
-//		var page = param.page || 1;
-//
-//		$.getJSON("/replies/pages/" + bno + "/" + page + ".json",
-//				function(data) {
-//					if (callback) {
-//						callback(data);
-//					}
-//				}).fail(function(xhr, status, err) {
-//			if (error) {
-//				error();
-//			}
-//		});
-//	}
 	
-	
-
 	function getList(param, callback, error) {
-
-	    var qa_num = param.qa_num;
-	    var page = param.page || 1;
-	    
-	    $.getJSON("/replies/pages/" + qa_num + "/" + page + ".json",
-	        function(data) {
-	    	
-	          if (callback) {
-	            //callback(data); // 댓글 목록만 가져오는 경우 
-	            callback(data.replyCnt, data.list); //댓글 숫자와 목록을 가져오는 경우 
-	          }
-	        }).fail(function(xhr, status, err) {
-	      if (error) {
-	        error();
-	      }
-	    });
-	  }
-
+		var qa_num = param.qa_num;
+		var page = param.page || 1;
+		
+		$.getJSON("/replies/pages/" + qa_num + "/" + page + ".json",
+			function(data) {
+				if (callback) {
+					callback(data);
+				}
+			}).fail(function(xhr, status, err) {
+				if (error) {
+					error();
+				}		
+			});
+	}	
 	
 	function remove(qacomm_num, callback, error) {
 		$.ajax({
@@ -78,15 +54,14 @@ var replyService = (function() {
 			}
 		});
 	}
-
-	function update(reply, callback, error) {
-
-		console.log("qacomm_num: " + reply.qacomm_num);
-
+	
+	function update(qacomm_cont, callback, error) {
+		console.log("qacomm_num : " + qacomm_cont.qacomm_num);
+		
 		$.ajax({
 			type : 'put',
-			url : '/replies/' + reply.qacomm_num,
-			data : JSON.stringify(reply),
+			url : '/replies/' + qacomm_cont.qacomm_num,
+			data : JSON.stringify(qacomm_cont),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
 				if (callback) {
@@ -100,22 +75,21 @@ var replyService = (function() {
 			}
 		});
 	}
-
+	
 	function get(qacomm_num, callback, error) {
-
 		$.get("/replies/" + qacomm_num + ".json", function(result) {
-
 			if (callback) {
 				callback(result);
 			}
-
 		}).fail(function(xhr, status, err) {
 			if (error) {
 				error();
 			}
 		});
 	}
-
+	
+	// 이전 시간 표현 방법 (작성한지 24시간이 지난 것은 날짜만 표기)
+	/*
 	function displayTime(timeValue) {
 
 		var today = new Date();
@@ -142,16 +116,36 @@ var replyService = (function() {
 			return [ yy, '/', (mm > 9 ? '' : '0') + mm, '/',
 					(dd > 9 ? '' : '0') + dd ].join('');
 		}
-	}
-	;
+	};
+	*/
+	
+	//날짜, 시간 모두 표기 방법
+	function displayTime(timeValue) {
 
+		var today = new Date();
+		var dateObj = new Date(timeValue);
+		var str = "";
+
+		if (true) {
+
+			var yy = dateObj.getFullYear();
+			var mm = dateObj.getMonth() + 1; // getMonth() is zero-based
+			var dd = dateObj.getDate();
+			var hh = dateObj.getHours();
+			var mi = dateObj.getMinutes();
+			var ss = dateObj.getSeconds();
+
+			return [ yy, '-', (mm > 9 ? '' : '0') + mm, '-', (dd > 9 ? '' : '0') + dd, ' ', (hh > 9 ? '' : '0') + hh, ':', (mi > 9 ? '' : '0') + mi, ':', (ss > 9 ? '' : '0') + ss ].join('');
+
+		}
+	};
+	
 	return {
 		add : add,
-		get : get,
 		getList : getList,
 		remove : remove,
 		update : update,
+		get : get,
 		displayTime : displayTime
 	};
-
 })();

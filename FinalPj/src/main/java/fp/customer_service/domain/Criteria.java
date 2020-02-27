@@ -1,5 +1,6 @@
-
 package fp.customer_service.domain;
+
+import org.springframework.web.util.UriComponentsBuilder;
 
 //import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,11 +31,12 @@ public class Criteria { // 페이징에 필요한 클래스 // 검색 기준
 		return type == null ? new String[] {} : type.split("");
 	}
 	
-	/*
 	public String getListLink() {
-		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("").queryParam("pageNum", this.pageNum).queryParam("amount", this.amount).queryParam("type", this.type).queryParam("keyword", this.keyword);
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+			.queryParam("pageNum", this.pageNum)
+			.queryParam("amount", this.amount)
+			.queryParam("type", this.type)
+			.queryParam("keyword", this.keyword);
 		return builder.toUriString();
 	}
-	*/
-
 }

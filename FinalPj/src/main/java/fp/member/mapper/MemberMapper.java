@@ -10,14 +10,17 @@ import org.springframework.stereotype.Repository;
 
 import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
+import fp.member.domain.MemberVo;
 
 @Repository
 public interface MemberMapper {
-	
-	
 	int idCheck(String email);
-	void insertMem(Member member);		
-	void insertAuth(Map map);
-	void delete(long seq);
+	void insertMem(Member member);	
+	//List<Member> list(Map map);
+	List<Member> getList(Map<String, Object> map);
+	long getTotalCount(String class_num);
+	long getTotalCountCor();
+	long getTotalCountFree();
+
 }
 

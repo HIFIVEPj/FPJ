@@ -73,7 +73,7 @@
 									<label class="form-label text-dark"><b>경력</b></label>
 									<div class="d-md-flex ad-post-details">
 										<label class="custom-control custom-radio mb-2 mr-4">
-											<input type="radio" class="custom-control-input" name="pj_fgrade" value="0" 
+											<input type="radio" class="custom-control-input" name="pj_fgrade" value="1" 
 											<c:if test="${projectCont.pj_fgrade eq 1}">
 														checked
 													</c:if>>
@@ -81,7 +81,7 @@
 										</label>
 										<div>
 											<label class="custom-control custom-radio  mb-2  mr-4"> 
-												<input type="radio" class="custom-control-input" name="pj_fgrade" value="1" 
+												<input type="radio" class="custom-control-input" name="pj_fgrade" value="2" 
 												<c:if test="${projectCont.pj_fgrade eq 2}">
 															checked
 														</c:if>>
@@ -91,7 +91,7 @@
 										</div>
 										<div>
 											<label class="custom-control custom-radio  mb-2  mr-4">
-												<input type="radio" class="custom-control-input" name="pj_fgrade" value="2"
+												<input type="radio" class="custom-control-input" name="pj_fgrade" value="3"
 												<c:if test="${projectCont.pj_fgrade eq 3}">
 															checked
 														</c:if>>
