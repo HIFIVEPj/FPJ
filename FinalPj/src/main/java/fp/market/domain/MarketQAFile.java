@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class MarketQAFile {
 	private  long marketQAFile_num;
 	private long marketQA_num;
+	private long market_num;
 	private String marketQAFile_fname;
 	private String marketQAFile_ofname;
 	private long marketQAFile_size;

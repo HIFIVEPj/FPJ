@@ -1,4 +1,4 @@
-
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -59,7 +59,8 @@
 								</div>
 								셀렉트박스!!!!!!!!--> 	
 								<div class="form-group">
-									<label class="form-label text-dark">직종</label>				
+									<label class="form-label text-dark">직종</label>
+									
 									<div class="d-md-flex ad-post-details">
 										<label class="custom-control custom-radio mb-2 mr-4">
 											<c:if test="${market.cate_num == 1}">
@@ -87,7 +88,7 @@
 										<input type="text" class="form-control" name="option3"  value="1111111">
 									  -->	
 									</div>
-							
+								
 								</div>		
 					
 							
@@ -315,4 +316,5 @@
 </script>
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+
 <!--/footer-->

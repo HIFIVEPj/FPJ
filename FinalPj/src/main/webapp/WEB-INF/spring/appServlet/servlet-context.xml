@@ -20,7 +20,6 @@
       <resources mapping="/video/**" location="/resources/video/" />
       <resources mapping="/summernote/**" location="/WEB-INF/views/summernote/" />
       <resources mapping="/marketThumbnails/**" location="/resources/marketThumbnails/" />
-      <resources mapping="/marketImages/**" location="/resources/marketImages/" />
       <resources mapping="/hifiveImages/**" location="file:///C:/hifive/hifiveImages/" />
    
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

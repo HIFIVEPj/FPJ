@@ -221,7 +221,6 @@
 	<select id="getTotalCountPickPj" resultType="long" >
 		select count(pj.PJ_NUM) from PROJECT pj join project_pick pjp on pj.pj_num=pjp.pj_num where free_code=#{free_code}  
 	</select>
-	
 	<!-- 프로젝트 지원 -->
 	<insert id="applied_pj" parameterType="map">
 		insert into APPLIED_PROJECT(free_code, pj_num, appp_date) values(#{free_code},#{pj_num}, sysdate)

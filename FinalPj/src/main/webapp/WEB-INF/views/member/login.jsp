@@ -41,6 +41,10 @@ $(document).ready(function() {
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
+<<<<<<< HEAD
+
+=======
+>>>>>>> ab69a0cfca73456017efd7a5eabaff337ef3c1cc
 <script>
 $(document).ready(function() {
    $('form').on('submit',function(){
@@ -78,6 +82,11 @@ $(document).ready(function() {
    }); //form 끝
 });   
 </script>   
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> ab69a0cfca73456017efd7a5eabaff337ef3c1cc
 		<!--Sliders Section-->
 		<section>
 			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
