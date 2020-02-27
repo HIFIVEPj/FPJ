@@ -240,7 +240,7 @@
 																<a href="market-content?market_num=${list.market_num}"></a>    	
 																<img src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
 															</div>
-															<div class="item-card9-icons" >
+															<div class="item-card9-icons" id="heartDivID${list.market_num}">
 																<c:if test="${fn:length(marketNumList) > 0}">	
 																	<c:choose>
 																		<c:when test="${marketNumList.contains(list.market_num)}">
@@ -254,7 +254,7 @@
 																<c:choose>
 																	<c:when test="${sessionScope.email != null}">
 																		<c:if test="${fn:length(marketNumList) == 0}">	
-																			<a href="" class="item-card9-icons1 wishlist" > <i class="fa fa fa-heart-o"></i></a>
+																			<a href="" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"> <i class="fa fa fa-heart-o"></i></a>
 																		</c:if>
 																	</c:when>
 																	<c:otherwise>
@@ -367,7 +367,7 @@
 			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
 			success: function(){
 				$('#emptyHeart'+market_num).remove();
-				
+				$('#heartDivID'+market_num).append('<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick"'+market_num +'" id="fullHeart"' +market_num+'style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>');
 			},
 			error: function(request,status,error){
 				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -381,8 +381,8 @@
 			type:"get",  
 			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',
 			success: function(){
-			//	$('#fullHeart').remove();
-				
+				$('#fullHeart'+market_num).remove();
+				$('#heartDivID'+market_num).append('<a href="#" class="item-card9-icons1 wishlist" onclick="addPick('+market_num +')" id="emptyHeart'+market_num +'"> <i class="fa fa fa-heart-o" ></i></a>');
 			},
 			error: function(request,status,error){
 				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
