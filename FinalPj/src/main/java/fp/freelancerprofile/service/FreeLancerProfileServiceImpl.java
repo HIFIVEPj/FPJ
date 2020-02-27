@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
@@ -40,6 +41,11 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<FreeLancerProfile> selectPageList(Map<String, Object> map){
 		return mapper.selectPageList(map);
 	}
+	@Override
+	public List<FreeLancerProfileFile> selectFilename(){
+		return mapper.selectFilename();
+	}
+	
 	//프로필컨텐츠//
 	@Override
 	public List<FreeLancer> selectProfileContent(long PRO_NUM){
@@ -53,7 +59,10 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<KeyWord> selectProfileContent3(long PRO_NUM){
 		return mapper.selectProfileContent3(PRO_NUM);
 	}
-
+	@Override
+	public List<FreeLancer> selectProfileContent4(long PRO_NUM){
+		return mapper.selectProfileContent4(PRO_NUM);
+	}	
 	//삭제//
 	@Transactional
 	@Override

@@ -4,6 +4,7 @@ package fp.freelancerprofile.domain;
 import java.sql.Date;
 import java.util.List;
 
+import fp.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,4 +26,5 @@ public class FreeLancerProfileListVO {
 
 	private List<Freelancer_FreeLancerProfile> freelancer_freelancerprofile;
 	private List<List_FreeLancerReview> list_freeLancerreview;
+	private Member member;
 }

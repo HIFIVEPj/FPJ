@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
@@ -23,6 +24,7 @@ public interface FreeLancerProfileMapper {
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
+	List<FreeLancer> selectProfileContent4(long PRO_NUM);
 	
 	void listDelete(long PRO_NUM);
 	void listDelete2(long PRO_NUM);
@@ -31,6 +33,7 @@ public interface FreeLancerProfileMapper {
 	public long countProfileList(long free_code);
 	//페이징처리 게시글 조회
 	public List<FreeLancerProfile> selectPageList(Map<String, Object> map);
+	public List<FreeLancerProfileFile> selectFilename();
 
 	//프로필 작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
