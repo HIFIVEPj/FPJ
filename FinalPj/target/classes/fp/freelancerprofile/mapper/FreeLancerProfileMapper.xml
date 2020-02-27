@@ -247,7 +247,7 @@
 		 select free_code
 		 		, appp_status
 		 		, p.pj_num
-		 		, pj_sub 
+		 		, p.pj_sub 
 		 		, free_code
 			from applied_project ap
 				inner join project p 
