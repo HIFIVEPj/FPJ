@@ -27,13 +27,13 @@ public interface FreeLancerProfileService {
 
 	//페이징처리 게시글 조회
 	public  List<FreeLancerProfile> selectPageList(Map<String, Object> map);
-	//////
+	public List<FreeLancerProfileFile> selectFilename();
 	
 	///프로필 컨텐츠//
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
-
+	List<FreeLancer> selectProfileContent4(long PRO_NUM);
 	//삭제//
 	public void listDelete(long PRO_NUM);
 
@@ -60,6 +60,8 @@ public interface FreeLancerProfileService {
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
+
+
 
 
 

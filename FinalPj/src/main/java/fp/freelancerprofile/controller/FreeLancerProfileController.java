@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.mail.iap.Response;
+
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
@@ -97,7 +99,7 @@ public class FreeLancerProfileController {
 
 		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
 		long total = service.countProfileList(freelancerprofile.getFree_code()); //글의 총 갯수
-		
+
 	
 		if(nowPage == null && cntPerPage == null) {
 				nowPage = "1";
@@ -114,13 +116,13 @@ public class FreeLancerProfileController {
 		map.put("free_code", freelancerprofile.getFree_code());
 		
 		List<FreeLancerProfile> profile_list = service.selectPageList(map);
-	
+		List<FreeLancerProfileFile> file_name = service.selectFilename();
 		ModelAndView mv = new ModelAndView("profile/freelancerProfile_list");
 		log.info(")(#*$()#Q*$()map: "+map);
 		
 		mv.addObject("paging", vo);
 		mv.addObject("profile_list", profile_list);
-
+		mv.addObject("file_name", file_name);
 		return mv;
 	}
 
@@ -131,12 +133,17 @@ public class FreeLancerProfileController {
 		List<FreeLancer> content = service.selectProfileContent(PRO_NUM);
 		List<FreeLancerProfile> content2 = service.selectProfileContent2(PRO_NUM);	
 		List<KeyWord> content3 = service.selectProfileContent3(PRO_NUM);
-
+		List<FreeLancerProfileFile> file_name = service.selectFilename();
+		List<FreeLancer> content4 = service.selectProfileContent4(PRO_NUM);
+		
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile/freelancerProfile_content");
 		mv.addObject("content", content);
 		mv.addObject("content2", content2);
 		mv.addObject("content3", content3);
+		mv.addObject("file_name", file_name);
+		mv.addObject("content4", content4);
 		return mv;
 	}
 	//삭제//
@@ -144,7 +151,7 @@ public class FreeLancerProfileController {
 	public String ProfileListDelete(@RequestParam long PRO_NUM) {
 		service.listDelete(PRO_NUM);
 		
-		return "redirect:freelancerProfile_list?mem_email="+mem_email;
+		return  "redirect:freelancerProfile_list?";
 	}
 
 	

@@ -22,8 +22,7 @@
       <id property="type_num" column="type_num"/>
         <result property="type_name" column="type_name"/>
       </association>   
-      
-
+     
       <collection property="freelancerprofile" javaType="java.util.ArrayList" ofType="FreelancerProfile">   
          <id property="free_code" column="free_code"/>
         <result property="pro_num" column="pro_num"/>
@@ -52,12 +51,23 @@
         <result property="profile_ext" column="profile_ext"/>
       </collection>   
       
-
+ 
 
       <collection property="keyword" javaType="java.util.ArrayList" ofType="frKeyWord" >
       <id property="key_num" column="key_num"/>
         <result property="key_name" column="key_name"/>
-      </collection>   
+      </collection>  
+      
+         <collection property="applied_project" javaType="java.util.ArrayList" ofType="Applied_Project" >
+		      <id property="free_code" column="fr_free_code"/>
+		        <result property="pro_num" column="fr_pro_num"/>
+		        <result property="pj_num" column="fr_pj_num"/>
+		        <result property="appp_status" column="appp_status"/>
+		        <result property="appp_date" column="appp_date"/>
+      </collection>  
+
+      
+       
       </resultMap>
       
 
@@ -115,6 +125,17 @@
           <result property="profile_sub" column="profile_sub"/>
            <result property="profile_date" column="profile_date"/>
 
+      <collection property="freeLancerProfileFile" javaType="java.util.ArrayList" ofType="FreeLancerProfilefile" >
+      <id property="free_code" column="free_code"/>
+        <id property="profile_num" column="profile_num"/>
+        <result property="pro_num" column="pro_num"/>
+        <result property="profile_fname" column="profile_fname"/>
+        <result property="profile_ofname" column="profile_ofname"/>
+        <result property="profile_size" column="profile_size"/>
+        <result property="profile_ext" column="profile_ext"/>
+      </collection>   
+
+
       </resultMap>
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
  	<!-- 프리랜서 프로필 리스트 select -->
@@ -139,33 +160,36 @@
 	</select>
   
    <!-- 리스트 페이징 (페이징 처리 후 게시글 조회 ) -->
-   <select id="selectPageList" parameterType="map" resultMap="FreeLancerResult">
+   <select id="selectPageList" parameterType="map" resultType="freelancerprofile">
 
-   	<!-- <![CDATA[	
-   		select f.rnum, f.MEM_EMAIL, 
-   			   f.PROFILE_SUB, f.PROFILE_DATE, 
-   			   f.PROFILE_OFNAME, f.PRO_NUM from
-			(select rownum rnum, free.MEM_EMAIL, free.PROFILE_SUB, 
-			        free.PROFILE_DATE, free.PROFILE_OFNAME, free.PRO_NUM from
-				(select fp.MEM_EMAIL
-					, fp.PROFILE_SUB
-					, fp.PROFILE_DATE
-					, ffile.PROFILE_OFNAME
-					, fp.PRO_NUM 
-					from FREELANCER_PROFILE fp
-						inner join FREELANCER_PROFILEFILE ffile
-							on fp.PRO_NUM = ffile.PRO_NUM ) free
-								where rownum <=  #{end}) f
-								 where f.rnum>= #{start}	
-	 ]]>-->
-	
-	 <![CDATA[
+  <![CDATA[
 		select * from 
 			(select ROWNUM rnum , aa.* from 
-				(select PROFILE_SUB, PROFILE_DATE, FREE_CODE, PRO_NUM from FREELANCER_PROFILE fp
+				(select PROFILE_SUB, PROFILE_DATE, FREE_CODE, PRO_NUM from FREELANCER_PROFILE
 					 where FREE_CODE=#{free_code} order by PROFILE_DATE desc)aa) 
 						where rnum>=#{PagingVo.start} and rnum<=#{PagingVo.end}
-	]]>
+	]]> 
+	
+		
+<!-- <![CDATA[
+		select * from 
+			(select rownum rnum , aa.* from 
+				(select profile_sub, profile_date, fp.free_code, fp.pro_num, profile_ofname
+					from freelancer_profile fp
+						full outer join freelancer_profilefile ff
+						on fp.pro_num=ff.pro_num
+							 where fp.free_code=#{free_code} order by profile_date desc)aa) 
+								where rnum>=#{PagingVo.start} and rnum<=#{PagingVo.end}
+	]]>-->
+
+   </select>
+   
+   
+   
+    <select id="selectFilename" parameterType="long" resultType="FreeLancerProfilefile">
+     <![CDATA[
+    select profile_num, profile_ofname, pro_num, free_code from freelancer_profilefile
+    	]]>
    </select>
    
      <!-- 프리랜서 프로필 컨텐츠 1-->
@@ -173,25 +197,22 @@
 
       <![CDATA[
 		select fp.pro_num
-		         , free_name
+				 , free_name
 		         , fp.mem_email
 		         , pro_workplace
 		         , free_tel
 		         , pro_cv
 		         , profile_date
-		         , profile_ofname 
 			from FREELANCER_PROFILE fp
 				inner join FREELANCER f 
 					on fp.free_code = f.free_code
-						inner join FREELANCER_PROFILEFILE ffile
-						on f.free_code = ffile.free_code
-						where fp.pro_num=#{pro_num}
+							where fp.pro_num=#{pro_num}
       ]]>
    </select>
    <!-- 프리랜서 프로필 컨텐츠 2-->
         <select id="selectProfileContent2"  parameterType="long" resultMap="find_pro_sub">
 
-      <![CDATA[
+     <![CDATA[
 		select p.pj_sub
 			   , t.type_name
 			   , fp.pro_num
@@ -202,18 +223,40 @@
 					on t.type_num = p.type_num
 					where fp.pro_num=#{pro_num}
       ]]>
+   
+      
    </select>
     <!-- 프리랜서 프로필 컨텐츠 3-->
           <select id="selectProfileContent3"  parameterType="long" resultMap="FreeLancerResult">
 
-      <![CDATA[
+       <![CDATA[
 		select k.key_name from FREE_PICK_KEYWORD fk
 			full outer join FREELANCER_PROFILE fp
 			on fk.pro_num = fp.pro_num 
 				full outer join KEYWORD k
 				on fk.key_num = k.key_num
 				where fp.pro_num=#{pro_num}
-      ]]>
+      ]]> 
+ 
+      
+   </select>
+   
+       <!-- 프리랜서 프로필 컨텐츠 4-->
+          <select id="selectProfileContent4"  parameterType="long" resultMap="FreeLancerResult">
+         <![CDATA[
+		 select free_code
+		 		, appp_status
+		 		, p.pj_num
+		 		, pj_sub 
+		 		, free_code
+			from applied_project ap
+				inner join project p 
+				on ap.pj_num=p.pj_num
+					where free_code=#{free_code}
+					and appp_status=1
+     	]]>
+      
+      
    </select>
    
 
