@@ -37,7 +37,7 @@ public class AdminController {
 	, @RequestParam(value="cntPerPage", required = false)String cntPerPage){
 		System.out.println("!@#!@$!@#!#!@#!@#!@#!@#!@#@!#!@#!@:"+class_num);
 		
-		long totalCount =service.getTotalCount(class_num);
+	long totalCount =service.getTotalCount(class_num);
 		//System.out.println("1111111111111111111111111111@:"+totalCount);
 	
 	if(nowPage == null && cntPerPage == null) {
@@ -62,9 +62,10 @@ public class AdminController {
 	ModelAndView mv = new ModelAndView("admin/admin_member");
 	//mv.addObject("list", list);
 	mv.addObject("pa", mvo);
-		
+	
 	System.out.println("6666666666666666666666666666:"+mvo);		
 		return mv;
 	}
 	
+
 }

@@ -364,98 +364,81 @@
 							</div>
 						</div>
 <!--  -->
-<!-- 시작 -->
-		<div class="row">
-			<div class="col-lg-12">
-			<!-- 	<div class="app-content  my-3 my-md-5"> -->
-				<!-- 	<div class="side-app"> -->
-						<div class="page-header">
-							<h1 class="page-title">HIFIVE 회원관리</h1>
-						
-						</div>
-						<div class="row ">
-							<div class="col-lg-12">
-								<div class="panel panel-primary">
-									<div class=" ">
-										<div class="user-tabs mb-4">
-											<!-- Tabs -->
-											<ul class="nav panel-tabs">
-												<li class=""><a href="#tab1" class="active" data-toggle="tab" >전체 (1,737)</a></li>
-												<li><a href="#tab2" data-toggle="tab" value="4" >기업 (1,734)</a></li>
-												<li><a href="#tab3" data-toggle="tab" value="2">개인 (1,243)</a></li>												
-											</ul>
-										</div>
+<!-- User-All-->
+		<section class="sptb">
+			<div class="container">
+				<div class="section-title center-block text-center">
+					<h1>Users List</h1>
+					<p>Mauris ut cursus nunc. Morbi eleifend, ligula at consectetur vehicula</p>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 users-list">
+						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border">
+							<select class="form-control page-select">
+								<option value="0">SelectOptions</option>
+								<option value="1">Active</option>
+								<option value="2">New</option>
+								<option value="3">Blocked</option>
+								<option value="4">Suspended</option>
+								<option value="4">A-Z</option>
+							</select>
+							<div class="page-options d-flex">
+								<div class="input-group">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search">
+									<div class="input-group-append ">
+										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</button>
 									</div>
 								</div>
-				
-			<!--  -->		<div class="card">
-								<div class="card-body">
-								<select class="form-control page-select">
-									<option value="0">SelectOptions</option>
-									<option value="1">Active</option>
-									<option value="2">New</option>
-									<option value="3">Blocked</option>
-									<option value="4">Suspended</option>
-									<option value="4">A-Z</option>
-								</select>
-						  	<div class="col-lg-3 users-list" style="float: right; margin-bottom: 15px;"  >							  	
-								<div class="page-options d-flex">
-									<div class="input-group">
-										<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search">
-										<div class="input-group-append ">
-											<button type="button" class="btn btn-primary br-tr-7 br-br-7">
-												<i class="fa fa-search" aria-hidden="true"></i>
-											</button>
-										</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-body">
+								<div class="user-tabel table-responsive border-top">
+								<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
+									<tbody>
+										<tr>
+											<th class="w-1"></th>	
+											<th>이름</th>
+											<th>이메일</th>
+											<th>소속</th>
+											<th>Membership Status</th>
+											<th>Member Since</th>
+											<th></th>
+										</tr>
+										<c:forEach var="dto" items="${pa.list}">
+										<tr>	
+										<th>
+												<label class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+													<span class="custom-control-label"></span>
+												</label>
+											</th>
+											<td>${dto.name}</td>
+											<td>${dto.email}</td>
+											<td>
+												<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3 }">개인</c:if>
+												<c:if test="${dto.class_num eq 4}">기업</c:if>
+											</td>
+											<td>
+												<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
+												<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
+												<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
+											</td>
+											<td>${dto.rdate}</td>
+											<td>
+												<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+											</td>
+										</tr>
+										</c:forEach>												
+									</tbody>
+								</table>
 								</div>
 							</div>
-							</div>						
-													
-						
-<!-- tab content -->		<div class="tab-content">
-									<div class="tab-pane active " id="tab1"  >																
-										<div class="user-tabel table-responsive border-top">
-											<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
-												<tbody>
-													<tr>
-														<th class="w-1"></th>	
-														<th>이름</th>
-														<th>이메일</th>
-														<th>소속</th>
-														<th>Membership Status</th>
-														<th>Member Since</th>
-														<th></th>
-													</tr>
-													<c:forEach var="dto" items="${pa.list}">
-													<tr>	
-													<th>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</th>
-														<td>${dto.name}</td>
-														<td>${dto.email}</td>
-														<td>
-															<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3 }">개인</c:if>
-															<c:if test="${dto.class_num eq 4}">기업</c:if>
-														</td>
-														<td>
-															<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
-															<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
-															<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
-														</td>
-														<td>${dto.rdate}</td>
-														<td>
-															<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													</c:forEach>												
-												</tbody>
-											</table>
-										</div>
+						</div>
 					<ul class="pagination mb-5">
-					<!-- 이전페이지 -->
+							<!--  이전페이지 -->
 					<c:if test="${pa.nowPage != 1}">
 						<li class="page-item page-prev">
 							<a class="page-link" href="admin_member?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}" tabindex="-1">Prev</a>
@@ -467,7 +450,7 @@
 									<li class='page-item active'><a class="page-link">${p}</a></li>
 								</c:when>
 								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}&tab=1">${p}</a></li>
+									<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
 								</c:when>
 							</c:choose>
 					</c:forEach>
@@ -477,181 +460,11 @@
 								</li>
 						</c:if>
 					</ul>  
-									
-									</div>
-									<div class="tab-pane " id="tab2">
-										<a href="admin_member?class_num=4"></a>>
-										<div class="user-tabel table-responsive border-top">
-												<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
-													<tbody>
-														<tr>
-															<th class="w-1"></th>	
-															<th>이름</th>
-															<th>이메일</th>
-															<th>소속</th>
-															<th>Membership Status</th>
-															<th>Member Since</th>
-															<th></th>
-														</tr>
-														
-														<c:forEach var="dto" items="${pa.list}">
-															<c:if test="${dto.class_num eq 4}">	
-															<tr>	
-																<th>
-																	<label class="custom-control custom-checkbox">
-																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																		<span class="custom-control-label"></span>
-																	</label>
-																</th>
-																<td>${dto.name}</td>
-																<td>${dto.email }</td>
-																<td>
-																	<c:if test="${dto.class_num eq 4}">기업</c:if>
-																</td>
-																<td>
-																	<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
-																	<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
-																	<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
-																</td>
-																<td>${dto.rdate}</td>
-																<td>
-																	<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																</td>
-															</tr>		
-														</c:if>
-													</c:forEach>									
-													</tbody>
-												</table>
-											</div>
-									
-								<div class="center-block text-center" id="test">
-									<ul class="pagination mb-0">
-															
-									<c:if test="${pa.nowPage != 1}">
-														<!--이전 페이지 이동 -->
-										<li class="page-item page-prev">
-											<a class="page-link" href="admin_member?&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}">prev</a>
-										</li>
-									</c:if>
-									<!--페이지번호 -->
-									<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
-										<c:choose>
-											<c:when test="${p == pa.nowPage}">
-												<li class='page-item active'><a class="page-link">${p}</a></li>
-											</c:when>
-											<c:when test = "${p != pa.nowPage }">
-												<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
-											</c:when>
-										</c:choose>
-										</c:forEach>
-										<c:if test ="${pa.nowPage != pa.lastPage}">
-											<li class="page-item page-next">
-												<a class="page-link" href="admin_member?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
-											</li>
-										</c:if>												
-									</ul>					
-							
-								</div>
-												
-										</div>
-										<div class="tab-pane " id="tab3" onclick="location.href ='admin_member?class_num=2'" style="cursor:pointer;">	
-											<div class="user-tabel table-responsive border-top">
-												<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
-													<tbody>
-														<tr>
-															<th class="w-1"></th>	
-															<th>이름</th>
-															<th>이메일</th>
-															<th>소속</th>
-															<th>Membership Status</th>
-															<th>Member Since</th>
-															<th></th>
-														</tr>
-														<c:forEach var="dto" items="${pa.list}">
-														<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3}">
-															<tr>		
-																<th>
-																	<label class="custom-control custom-checkbox">
-																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																		<span class="custom-control-label"></span>
-																	</label>
-																</th>
-																<td>${dto.name}</td>
-																<td>${dto.email }</td>
-																<td>
-																	<c:if test="${dto.class_num eq 2||dto.class_num eq 3}">개인</c:if>
-																</td>
-																<td>
-																	<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
-																	<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
-																	<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
-																</td>
-																<td>${dto.rdate}</td>
-																<td>
-																	<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																</td>
-															</tr>
-														</c:if>
-														</c:forEach>												
-													</tbody>
-												</table>
-											</div>
-				<ul class="pagination mb-5">
-					<!-- 이전페이지 -->
-					<c:if test="${pa.nowPage != 1}">
-						<li class="page-item page-prev">
-							<a class="page-link" href="admin_member?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&" tabindex="-1">Prev</a>
-						</li>
-					</c:if>
-					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
-							<c:choose>
-								<c:when test="${p == pa.nowPage}">
-									<li class='page-item active'><a class="page-link">${p}</a></li>
-								</c:when>
-								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
-								</c:when>
-							</c:choose>
-					</c:forEach>
-							<c:if test ="${pa.nowPage != pa.lastPage}">
-								<li class="page-item page-next">
-									<a class="page-link" href="admin_member?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
-								</li>
-						</c:if>
-					</ul>  			
-										</div>
-	<!-- tab content -->		</div>
-							</div>
-	<!--  -->			</div>
-				
-	<!-- 				<ul class="pagination mb-5">
-					 이전페이지
-					<c:if test="${pa.nowPage != 1}">
-						<li class="page-item page-prev">
-							<a class="page-link" href="admin_member?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}" tabindex="-1">Prev</a>
-						</li>
-					</c:if>
-					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
-							<c:choose>
-								<c:when test="${p == pa.nowPage}">
-									<li class='page-item active'><a class="page-link">${p}</a></li>
-								</c:when>
-								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
-								</c:when>
-							</c:choose>
-					</c:forEach>
-							<c:if test ="${pa.nowPage != pa.lastPage}">
-								<li class="page-item page-next">
-									<a class="page-link" href="admin_member?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
-								</li>
-						</c:if>
-					</ul>    -->
 					</div>
 				</div>
 			</div>
-	</div> 	
-		<!-- users 끝 -->					
+		</section>
+	<!-- User end -->				
 					</div> 
 				</div>
 			</div>
@@ -724,17 +537,11 @@
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script>
 <script type="text/javascript">
-/* 
- $('a[data-toggle="tab"]').on('show.bs.tab', function(e){	
-	var activeTab = $(e.target).text();
-	var class_num= $('.active').attr('value');
-	alert(activeTab);
-	alert(class_num);
-}) 
-var target = window.location.hash;
+/*
 $('a[href="#tab2"]').on('show.bs.tab', function(e){	
 	var activeTab = $(e.target).text();
 	var class_num= '4';
+	var test='0';
 	//alert(activeTab);
 	//alert(class_num);
 	$.ajax({
@@ -743,12 +550,17 @@ $('a[href="#tab2"]').on('show.bs.tab', function(e){
 		 data:{
 				"class_num": class_num
 		 },	
-		 dataType:"html",
-		 success:function(response){	//data : checkSignup에서 넘겨준 결과값
+		 
+		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
 			 //$("#data").empty().append(data);
-			 //var item=response.mvo
-			 alert(item);
-		}, error: function(data){
+			if(data.length>0){ 
+		 		for(var i in data){
+		 			var $class_num =data[i].class_num; 		 			
+		 			var $mem_email=data[i].mem_email;
+		 		} 
+			 	alert("성공"+class_num);
+			}
+		 },error: function(data){
             alert("에러발생");
         }
 	}) //ajax
@@ -765,7 +577,9 @@ $('a[href="#tab3"]').on('show.bs.tab', function(e){
 				"class_num": class_num
 		 },
 		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
-			 window.location.reload("admin_member");
+			 //window.location.reload("admin_member");
+		 	var item =data.mem_email;
+		 	alter(item);
 		},error: function(data){
             alert("에러발생");
         }

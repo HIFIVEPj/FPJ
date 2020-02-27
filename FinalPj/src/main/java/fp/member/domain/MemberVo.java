@@ -118,7 +118,7 @@ public class MemberVo {
 	public String toString() {
 		return "MemberVo [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
 				+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-				+ ", cntPage=" + cntPage + "]";
+				+ ", cntPage=" + cntPage + ", list=" + list + "]";
 	}
 
 }
