@@ -1,9 +1,7 @@
-
 package fp.customer_service.domain;
 
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,13 +23,11 @@ public class CustomerServiceQa {
 	private int qa_ox;
 	private String qa_cate;
 	private long qa_recommnum;
-	private long option1;
+	private int replyCnt; // 댓글 개수
 	private long option2;
 	private String option3;
-	private String mem_name;
+	private String mem_name; // 멤버 이름 가져오기
 	
-	/*
-	@JsonFormat(pattern="yyyyy.MM.dd")
-	private Date notice_rdate;
-	*/
+	
+	private List<BoardAttachVO> attachList;
 }

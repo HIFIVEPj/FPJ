@@ -1,7 +1,8 @@
-
 package fp.customer_service.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import fp.customer_service.domain.Criteria;
 import fp.customer_service.domain.CustomerServicePagingVO;
@@ -16,15 +17,14 @@ public interface CustomerServiceQaMapper {
 	long qa_write(CustomerServiceQa customerServiceQa);
 	boolean qa_delete(long qa_num);
 	boolean qa_modify(CustomerServiceQa customerServiceQa);
+		
+	//int qa_count(); // 페이징 게시물 총 개수
 	
-	// 페이징 게시물 총 개수
-	//int qa_count();
+	//List<CustomerServiceQa> qa_list(CustomerServicePagingVO customerServicePagingVO); // 페이징 처리 게시글 조회
 
-	// 페이징 처리 게시글 조회
-	//List<CustomerServiceQa> qa_list(CustomerServicePagingVO customerServicePagingVO);
+	int qa_cate_count_project(); // 카테고리 sorting
 	
-	// 카테고리 sorting
-	int qa_cate_count_project();
+	public void updateReplyCnt(@Param("qa_num") Long qa_num, @Param("amount") int amount); // 댓글 개수, amount : 증감 의미
 	
 	//List<CustomerServiceQa> qa_list(CustomerServicePagingVO customerServicePagingVO);
 	
