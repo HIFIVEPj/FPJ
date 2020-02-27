@@ -35,59 +35,80 @@ public class CorporationController {
 	
 	@Autowired
 	private ProjectService pjService;
+	@RequestMapping("payments_cor")
+	public String payments_cor(){
+		return "corporation/payments_cor";
+	}
 	
 	@RequestMapping("myfavorite_cor")
 	public String myfavorite_cor(){
-		return "myfavorite_cor";
+		return "corporation/myfavorite_cor";
 	}
 	@GetMapping("mydash_cor")
 	public ModelAndView write(String mem_email) {
 		Corporation corporation = service.mydash_cor_select(mem_email);
-		int ran = new Random().nextInt(900000)+100000;
-		ModelAndView mv = new ModelAndView("mydash_cor");
+		ModelAndView mv = new ModelAndView("corporation/mydash_cor");
 		mv.addObject("cor",corporation);
-		mv.addObject("random", ran);
 		return mv;
 	}
 	@PostMapping("mydash_cor_insert")
 	public String write(@RequestParam MultipartFile fileName, Corporation corporation) {
 		log.info("!@#@$ insert:"+ corporation);
-		corporation.setCor_fname(saveStore(fileName));
-		corporation.setCor_ofname(fileName.getOriginalFilename());
-		service.insert(corporation);
-		return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		if(fileName.getOriginalFilename() != "") {
+			corporation.setCor_fname(saveStore(fileName));
+			corporation.setCor_ofname(fileName.getOriginalFilename());
+			service.insert(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		}else {
+			service.insert(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		}
 	}
 	@PostMapping("mydash_cor_update")
 	public String update(@RequestParam MultipartFile fileName, Corporation corporation) {
 		Corporation cor = service.mydash_cor_select(corporation.getMem_email());
 		log.info("@!#$#T$%#@$fileName:"+fileName.getOriginalFilename()+", ofname: "+cor.getCor_ofname());
-		if(fileName.getOriginalFilename() != "") {
+		
+		if(cor.getCor_fname() == null && fileName.getOriginalFilename() != "") {
+			corporation.setCor_fname(saveStore(fileName));
+			corporation.setCor_ofname(fileName.getOriginalFilename());
+			service.mydash_cor_update(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		
+		}else if(fileName.getOriginalFilename() != "" && cor.getCor_fname() != null){
 			String str = cor.getCor_fname();
 			delFile(str);
 			corporation.setCor_fname(saveStore(fileName));
 			corporation.setCor_ofname(fileName.getOriginalFilename());
 			service.mydash_cor_update(corporation);
 			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		
+	}else if(fileName.getOriginalFilename() == "" && cor.getCor_fname() != null){
+			corporation.setCor_fname(cor.getCor_fname());
+			corporation.setCor_ofname(cor.getCor_ofname());
+			service.mydash_cor_update(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		
+		}else{
+			service.mydash_cor_update(corporation);
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
 		}
-		corporation.setCor_fname(cor.getCor_fname());
-		corporation.setCor_ofname(cor.getCor_ofname());
-		 service.mydash_cor_update(corporation);
-		return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
 	}
 	
 	@RequestMapping("managed_project")
 	public ModelAndView managed_project(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+		
 		Corporation corporation = service.mydash_cor_select(mem_email);
 		long totalCount = pjService.getTotalCountCor(corporation.getCor_code());
 		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "4";
+			cntPerPage = "5";
 		}else if (nowPage == null) {
 			nowPage ="1";
 		}else if(cntPerPage == null) {
-			cntPerPage ="4";
+			cntPerPage ="5";
 		}
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
@@ -95,8 +116,9 @@ public class CorporationController {
 		map.put("ProjectVo", projectVo);
 		map.put("cor_code",corporation.getCor_code());
 		
+		
+		ModelAndView mv = new ModelAndView("corporation/managed_project");
 		List<Project> listMydashCor = pjService.listMydashCor(map);
-		ModelAndView mv = new ModelAndView("managed_project");
 		mv.addObject("cor",corporation);
 		mv.addObject("list", listMydashCor);
 		mv.addObject("pa",projectVo);
@@ -108,6 +130,7 @@ public class CorporationController {
 		mv.addObject("keyname", keyname);
 		return mv;
 	}
+	
 	
 	public String saveStore(MultipartFile fileName) {
 		String ofname = fileName.getOriginalFilename();
@@ -138,8 +161,11 @@ public class CorporationController {
 
 	public boolean writeFile(MultipartFile cor_fname, String saveFileName) {
 		File rDir = new File(Path.COR_THUMB);
-		if(!rDir.exists()) rDir.mkdir();
-		
+		if(!rDir.exists()){
+			rDir.mkdir();
+			}
+		log.info("#@&$@(#&$폴더 존재여부: "+rDir.exists());
+		log.info("#@*&($#(@ rDir: "+rDir);
 		FileOutputStream fos = null;
 		try {
 			byte data[]= cor_fname.getBytes();

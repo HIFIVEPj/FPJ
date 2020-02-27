@@ -1,5 +1,10 @@
 package fp.market.mapper;
 
+<<<<<<< HEAD
+
+import java.util.HashMap;
+=======
+>>>>>>> d5a4fd8a409cca9880896702bac2091491a73563
 import java.util.List;
 
 import org.junit.Test;
@@ -7,12 +12,27 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+<<<<<<< HEAD
+import org.springframework.web.bind.annotation.RequestParam;
 
+import fp.market.domain.Freelancer;
+import fp.market.domain.Market;
+import fp.market.domain.MarketQA;
+import fp.market.domain.MarketRev;
+
+
+=======
+
+>>>>>>> d5a4fd8a409cca9880896702bac2091491a73563
 
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.mapper.MarketMapper;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> d5a4fd8a409cca9880896702bac2091491a73563
 import fp.market.utils.MarketPagingVO;
 import lombok.extern.log4j.Log4j;
 
@@ -24,15 +44,13 @@ public class MarketMapperTests {
 
 	@Autowired
 	private MarketMapper marketMapper;
-
 	private Freelancer freelancer;
 
 /*	@Test
-=======
-//	private Freelancer freelancer;
+	private Freelancer freelancer;
 
 	@Test
->>>>>>> 66928d0945675f40d16aa344255e94d26080ed14
+
 	public void testMarketList() {
 		//log.info("#boardMapper: " + boardMapper);
 		MarketPagingVO marketVO = new MarketPagingVO(10,1,20);
@@ -47,7 +65,7 @@ public class MarketMapperTests {
 					+", 마켓승인상태: " +market.getMarket_state()+", 마켓 찜카운드: " +market.getMarket_pcnt()
 					+", 마켓프리랜서이름: ");// +//market.freelancer.getFree_name());
 		}
-<<<<<<< HEAD
+
 	}*/
 /*	@Test
 	public void testMarketRev() {
@@ -106,8 +124,6 @@ public class MarketMapperTests {
 		
 		log.info("#testMarketList()"+marketMapper.getClass().getName());
 		
-
 	}			
 
-	
 }

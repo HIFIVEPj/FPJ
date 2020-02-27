@@ -214,8 +214,9 @@
 									inner join FREELANCER_REVIEW fr
 										on f.FREE_CODE= fr.FREE_CODE) free
 										where rownum <= #{end}) f
-										 where f.rnum>= #{start}
+											 where f.rnum>= #{start}
 		]]>
+
 	</select>
 		<!-- 리스트페이지 프로젝트, 타입 select -->
 	<select id="SelectList2" resultMap="TypeNpjSub" parameterType="long">
@@ -246,7 +247,7 @@
 						, pro_exp 
 						, pro_addr
 						, pro_workplace
-						, pro_vcnt 
+						, pro_vcnt +1
 						, pro_edu 
 						, pro_start 
 						, pro_ox 
@@ -322,5 +323,6 @@
 								where pk.PJ_NUM=#{PJ_NUM}			
 			]]>		
 	</select> 
+	
 	
 </mapper>

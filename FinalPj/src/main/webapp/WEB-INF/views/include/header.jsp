@@ -1,5 +1,4 @@
-
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!--header-->
@@ -100,6 +99,7 @@
         -->
         <link rel="stylesheet" href="../plugins/fileuploads/css/dropify-multiple.min.css">
         <link rel="stylesheet" href="../plugins/fileuploads/css/dropify-multiple.css">
+         
         <!--
         <link rel="stylesheet" href="../plugins/fileuploads/fonts/*">
         -->
@@ -179,7 +179,7 @@
 												</a>
 											</c:if>
 											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
-											<a href="freelancerProfile_list" class="dropdown-item" >
+											<a href="mydash_free?mem_email=${sessionScope.email}" class="dropdown-item" >
 												<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 											</a>
 											</c:if>
@@ -232,8 +232,14 @@
 						<!--Nav-->
 						<nav class="horizontalMenu clearfix d-md-flex">
 							<ul class="horizontalMenu-list">
-								<li aria-haspopup="true"><a href="project_list">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
-								<!--
+								<c:choose>
+									<c:when test="${empty sessionScope.email}">
+									<li aria-haspopup="true"><a href="project_list">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
+									</c:when>
+									<c:otherwise>
+									<li aria-haspopup="true"><a href="project_list?mem_email=${sessionScope.email}">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
+									</c:otherwise>
+								</c:choose>								<!--
 								<li aria-haspopup="true"><a href="./" class="active">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
 								-->
 									<ul class="sub-menu">
@@ -268,7 +274,14 @@
 											<div class="megamenu-content">
 												<div class="row">
 													<ul class="col link-list">
-														<li class="title"><a href="project_list">프로젝트</a></li>
+														<c:choose>
+															<c:when test="${empty sessionScope.email}">
+																<li class="title"><a href="project_list">프로젝트</a></li>
+															</c:when>
+															<c:otherwise>
+																<li class="title"><a href="project_list?mem_email=${sessionScope.email}">프로젝트</a></li>
+															</c:otherwise>
+														</c:choose>
 														<li>
 															<a href="#">개발</a>
 														</li>

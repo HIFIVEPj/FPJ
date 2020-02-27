@@ -1,16 +1,25 @@
 package fp.customer_service.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fp.customer_service.domain.BoardAttachVO;
 import fp.customer_service.domain.Criteria;
 import fp.customer_service.domain.CustomerServicePagingVO;
 import fp.customer_service.domain.CustomerServiceQa;
@@ -73,18 +82,85 @@ public class CustomerServiceQaController {
 	public String customer_service_qa_write() {
 		return "customer_service/customer_service_qa_write";
 	}
-
+	
+	/*
 	@PostMapping("customer_service_qa_write")
 	public String customer_service_qa_write(CustomerServiceQa customerServiceQa) {
 		customerServiceQaService.qa_writeS(customerServiceQa);
 		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num();
 	}
+	*/
+	@PostMapping("customer_service_qa_write")
+	public String customer_service_qa_write(CustomerServiceQa customerServiceQa) {
+		log.info("-------------------------------------------------");
+		log.info("###write : " + customerServiceQa);
+		if(customerServiceQa.getAttachList() != null) {
+			customerServiceQa.getAttachList().forEach(attach -> log.info(attach));
+		}
+		log.info("-------------------------------------------------");
+		customerServiceQaService.qa_writeS(customerServiceQa);
+		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num();
+	}
 	
+	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long qa_num) {
+		return new ResponseEntity<>(customerServiceQaService.getAttachList(qa_num), HttpStatus.OK);
+	}
+	
+	/*
 	@GetMapping("customer_service_qa_delete")
 	public String customer_service_qa_delete(@RequestParam("qa_num") long qa_num) {
 		customerServiceQaService.qa_deleteS(qa_num);
 		return "redirect:customer_service_qa";
 	}
+	*/
+	
+	@GetMapping("customer_service_qa_delete")
+	public String customer_service_qa_delete(@RequestParam("qa_num") Long qa_num, Criteria cri, RedirectAttributes rttr) {
+		List<BoardAttachVO> attachList = customerServiceQaService.getAttachList(qa_num);
+		if(customerServiceQaService.qa_deleteS(qa_num)) {
+			// delete Attach Files
+			deleteFiles(attachList);
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:customer_service_qa" + cri.getListLink();
+		
+		
+	}
+	
+	private void deleteFiles(List<BoardAttachVO> attachList) {
+	    
+	    if(attachList == null || attachList.size() == 0) {
+	      return;
+	    }
+	    
+	    log.info("$$$$$$delete attach files");
+	    log.info(attachList);
+	    
+	    attachList.forEach(attach -> {
+	      try {
+	    	String file_path_else = "C:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName();
+	    	file_path_else = file_path_else.replace(" ", "");
+	        Path file  = Paths.get(file_path_else);
+	        log.info("*****file : " + file);
+	        Files.deleteIfExists(file);
+	        
+	        if(Files.probeContentType(file).startsWith("image")) {
+	          String file_path_image = "C:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName();
+	          file_path_image = file_path_image.replace(" ", "");
+	          Path thumbNail = Paths.get(file_path_image);
+	          log.info("*****thumbNail" + thumbNail);
+	          Files.delete(thumbNail);
+	        }
+	
+	      }catch(Exception e) {
+	        log.error("delete file error" + e.getMessage());
+	      }
+	    });
+	}
+	
+	
 	
 	@GetMapping("customer_service_qa_modify")
 	public String customer_service_qa_modify(Model model, @RequestParam("qa_num") long qa_num) {

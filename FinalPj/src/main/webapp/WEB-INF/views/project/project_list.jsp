@@ -474,8 +474,8 @@
 										</div>
 										
 									</div>
-									<div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
-									
+									<!--  <div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
+									-->
 									<div class="tab-content">
 										<div class="tab-pane active" id="tab-11">
 									
@@ -494,11 +494,74 @@
 														</div>
 														
 													</div>
+													<input type="hidden" value="${free.free_code}" class="free_codes"/>
 													<div class="card border-0 mb-0">
 														<div class="card-body" style="padding:30px;">
-														<div class="item-card9-icons">
-															<a href="#" class="item-card9-icons wishlist" style="margin-right:40%"> <i class="fa fa fa-heart-o"></i></a>
+														<c:if test="${empty free}">
+															<div class="item-card9-icons zzim">
+																<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" onclick="javascript:onlyFree()">
+																 <i class="fa fa fa-heart-o" style=""></i></a>
+															</div>
+														</c:if>
+														<c:if test="${free.free_profileox==0}">
+															<div class="item-card9-icons zzim">
+																<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" onclick="javascript:profilePlease()">
+																 <i class="fa fa fa-heart-o" style=""></i></a>
+															</div>
+														</c:if>
+														<c:if test="${free.free_profileox==1}">
+														<c:choose>
+															<c:when test="${pjnumList.contains(dto.pj_num)}">
+																<div class="item-card9-icons"  id="zzim${dto.pj_num}" >
+																	<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${dto.pj_num})">
+																	 <i class="fa fa fa-heart" style="color:white"></i></a>
+																</div>
+															</c:when>
+															<c:otherwise>
+																<div class="item-card9-icons">
+																	<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${dto.pj_num}"style="margin-right:40%" onclick="javascript:wish(${dto.pj_num})">
+																	 <i class="fa fa fa-heart-o" style=""></i></a>
+																</div>
+															</c:otherwise>	
+														</c:choose>
+														<div class="item-card9-icons"  id="zzim${dto.pj_num}">
+														
 														</div>
+														</c:if>
+														<script>
+														function onlyFree(){
+															alert("프리랜서 회원만 이용가능한 서비스 입니다.")
+														}
+														
+														function profilePlease(){
+															alert("프로필을 등록하셔야 이용할 수 있습니다.")
+														}
+														function wish(pj_num){	
+															$.ajax({
+																type:"get",  
+																url:"<c:url value='project_wish'/>",
+												    			data:"pj_num="+pj_num+"&free_code="+$(".free_codes").val(),
+																success: function(data){
+																	$('#insertwish'+pj_num).remove();
+																	$('#zzim'+pj_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pj_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pj_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
+																},
+																error: function(data){
+																alert("에러발생");
+																}
+															});
+														}
+														function del_wish(pj_num){
+															$.ajax({
+																type:"get",
+																url:"<c:url value='project_wish_del'/>",
+																data: "pj_num="+pj_num+"&free_code="+$(".free_codes").val(),
+																success:function(data){
+																	$('#delwish'+pj_num).remove();
+																	$('#zzim'+pj_num).append("<a href='javasript:void(0)' class='item-card9-icons wishlist' id='insertwish"+pj_num+"' style='margin-right:40%' onclick='javascript:wish("+pj_num+")'><i class='fa fa fa-heart-o'></i></a>");
+																}
+															})
+														}
+														</script>
 															<div class="item-card9">
 															<c:set var = "loc" value="${fn:split(dto.pj_loc,' ')}"/>
 															<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
@@ -531,7 +594,12 @@
 																	</c:if>
 																</c:forEach>
 																/ ${dto.corporation.cor_name}<br/><br/>
+																<c:if test="${!empty sessionScope.email }">
+																<a href="project_content?pj_num=${dto.pj_num}&mem_email=${sessionScope.email}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
+																</c:if>
+																<c:if test="${empty sessionScope.email }">
 																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
+																</c:if>
 																<div style="width:85%">
 																<span id = "content" style="width:10px">
 														          <c:choose>
@@ -642,7 +710,38 @@
 										</div>
 									</div>
 								</div>
+								<c:choose>
+								<c:when test="${!empty sessionScope.email}">
 								<div class="center-block text-center">
+									<ul class="pagination mb-0">
+									<c:if test="${pa.nowPage != 1}">
+														<!--이전 페이지 이동 -->
+										<li class="page-item page-prev">
+											<a class="page-link" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">prev</a>
+										</li>
+									</c:if>
+									<!--페이지번호 -->
+									<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
+										<c:choose>
+											<c:when test="${p == pa.nowPage}">
+												<li class='page-item active'><a class="page-link">${p}</a></li>
+											</c:when>
+											<c:when test = "${p != pa.nowPage }">
+												<li class="page-item"><a class="page-link" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">${p}</a></li>
+											</c:when>
+										</c:choose>
+										</c:forEach>
+										<c:if test ="${pa.nowPage != pa.lastPage}">
+											<li class="page-item page-next">
+												<a class="page-link" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">Next</a>
+											</li>
+										</c:if>
+										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
+									</ul>
+								</div>
+								</c:when>
+								<c:otherwise>
+									<div class="center-block text-center">
 									<ul class="pagination mb-0">
 									<c:if test="${pa.nowPage != 1}">
 														<!--이전 페이지 이동 -->
@@ -669,6 +768,8 @@
 										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
 									</ul>
 								</div>
+								</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 						<!--Add lists-->

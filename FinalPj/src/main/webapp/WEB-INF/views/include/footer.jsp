@@ -154,6 +154,7 @@
         <script src="../plugins/fileuploads/js/dropify.min.js"></script>
         <script src="../plugins/fileuploads/js/dropify-multiple.min.js"></script>
         <script src="../plugins/fileuploads/js/dropify-multiple.js"></script>
+        
         <!--
         <script type="text/javascript">
             $(document).ready(function(){

@@ -6,9 +6,11 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
 
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
@@ -32,13 +34,18 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	}
 	///리스트페이지 페이징///
 	@Override
-	public int countProfileList() {
-		return mapper.countProfileList();
+	public long countProfileList(long free_code) {
+		return mapper.countProfileList(free_code);
 	}
 	@Override
-	public List<FreeLancer> selectPageList(PagingVO vo){
-		return mapper.selectPageList(vo);
+	public List<FreeLancerProfile> selectPageList(Map<String, Object> map){
+		return mapper.selectPageList(map);
 	}
+	@Override
+	public List<FreeLancerProfileFile> selectFilename(){
+		return mapper.selectFilename();
+	}
+	
 	//프로필컨텐츠//
 	@Override
 	public List<FreeLancer> selectProfileContent(long PRO_NUM){
@@ -52,7 +59,10 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<KeyWord> selectProfileContent3(long PRO_NUM){
 		return mapper.selectProfileContent3(PRO_NUM);
 	}
-
+	@Override
+	public List<FreeLancer> selectProfileContent4(long PRO_NUM){
+		return mapper.selectProfileContent4(PRO_NUM);
+	}	
 	//삭제//
 	@Transactional
 	@Override
@@ -61,24 +71,54 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		   mapper. listDelete2(PRO_NUM);
 	}
 
-			
+	//체크박스 삭제//
 	@Override
-	public void checkdelete1() {
-		 mapper.checkdelete1();
-		 
+	public void checkdelete1(long PRO_NUM) {
+		 mapper.checkdelete1(PRO_NUM);
 	}
-
 	
-
+	//프로필 작성//
 	@Override
-	public String listInsert(FreeLancerProfile freelancerprofile){
-		return mapper.listInsert(freelancerprofile);
+	public void listInsert(FreeLancerProfile freelancerprofile){
+		mapper.listInsert(freelancerprofile);
 	}
 	
 	@Override
-	public String insertPjpkeyword(Map<String, Object> map){
-		return mapper.insertPjpkeyword(map);
+	public void insertPjpkeyword(Map<String, Object> map){
+		 mapper.insertPjpkeyword(map);
 	}
+
+	@Override
+	public FreeLancerProfile profile_free_select(String mem_email){
+		return mapper.profile_free_select(mem_email);
+	}
+	@Override
+	public long getTotalCountFree(long free_code){
+		return mapper.getTotalCountFree(free_code);
+	}
+
+	
+	
+	
+	
+	
+	
+	//나영추가 + mydash_free
+	@Override
+	public FreeLancer mydash_free_select(String mem_email) {
+		return mapper.mydash_free_select(mem_email);
+	}
+	@Override
+	@Transactional
+	public void mydash_free_insert(FreeLancer freelancer) {
+		mapper.mydash_free_insert(freelancer);
+		mapper.mydash_update_classnum(freelancer.getMem_email());
+	}
+	@Override
+	public void mydash_free_update(FreeLancer freelancer) {
+		mapper.mydash_free_update(freelancer);
+	}
+
 
 
 }

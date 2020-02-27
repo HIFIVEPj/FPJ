@@ -1,3 +1,4 @@
+
 package fp.customer_service.domain;
 
 import java.util.Date;
@@ -19,7 +20,9 @@ public class ReplyVO {
 	private int qacomm_sun;
 	private Date qacomm_rdate;
 	private int qacomm_ox;
-	private long option1;
+	private long replyCnt;
 	private long option2;
 	private String option3;
+	private String mem_name;
+
 }

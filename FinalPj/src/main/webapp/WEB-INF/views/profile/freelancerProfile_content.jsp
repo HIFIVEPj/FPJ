@@ -40,7 +40,7 @@
 										<span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="" data-original-title="online"></span>
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">Robert McLean</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
 							<aside class=" doc-sidebar my-dash">
@@ -193,20 +193,24 @@
 											</c:forEach>
 											</c:forEach>
 											
-											<c:forEach  var="key" items="${content3}" varStatus="status">
-											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">
+											
+											
 											<tr>
-												<td><strong>사용언어 : </strong>${keyname.key_name}</td>
-											</tr>
+												<td><strong>사용기술 : </strong>
+											<c:forEach  var="key" items="${content3}" varStatus="status" begin="0" end="2">	
+											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">	
+												 ${keyname.key_name} /
 											</c:forEach>
 											</c:forEach>
-										
+										</td></tr>
 										</tbody>
 										<tbody class="col-lg-12 col-xl-6 p-0">
 											
-											<c:forEach  var="typenum" items="${content2}" varStatus="status">
-											<tr>
-												<td><strong>직종 : </strong>${typenum.type_name}</td>
+										
+											<tr><td><strong>직종 : </strong>
+												
+											<c:forEach  var="typenum" items="${content2}" varStatus="status" begin="0" end="0">	
+												${typenum.type_name}
 											</tr>
 											</c:forEach>
 											
@@ -296,7 +300,7 @@
 							
 								<a href="freelancerMyprofile_change" class="btn btn-secondary icons">수정하기</a>
 								
-								<a href='freelancerProfile_delete?PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
+								<a href='freelancerProfile_delete?mem_email=${sessionScope.email}&PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								
 								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>				
 									

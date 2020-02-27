@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PagingVO {
 	//total:게시글총개수, cntPerPage:페이지당글개수  start, end : 쿼리용
-	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
+	long total;
+	private int nowPage, startPage, endPage,  cntPerPage, lastPage, start, end;
 	private int cntPage=4;
 
-	public PagingVO(int total, int nowPage, int cntPerPage) {
+	public PagingVO(long total, int nowPage, int cntPerPage) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
 		setTotal(total);
@@ -31,7 +32,7 @@ public class PagingVO {
 	}
 
 	//제일 마지막페이지 계산
-	private void calcLastPage(int total, int cntPerPage) {
+	private void calcLastPage(long total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 	}
 	//마지막페이지 계산

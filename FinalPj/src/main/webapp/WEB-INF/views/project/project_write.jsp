@@ -34,7 +34,7 @@
 							</div>
 							<div class="card-body">
 							
-														<div class="col-md-12">
+								<div class="col-md-12">
 								<div class="row">									
 									<div class="form-group col-md-6">		
 									<label class="form-label text-dark"><b>근무형태</b></label>
@@ -64,19 +64,19 @@
 									<label class="form-label text-dark"><b>경력</b></label>
 									<div class="d-md-flex ad-post-details">
 										<label class="custom-control custom-radio mb-2 mr-4">
-											<input type="radio" class="custom-control-input" name="pj_fgrade" value="0" checked>
+											<input type="radio" class="custom-control-input" name="pj_fgrade" value="1" checked>
 											<span class="custom-control-label text-muted">초급</span>
 										</label>
 										<div>
 											<label class="custom-control custom-radio  mb-2  mr-4"> 
-												<input type="radio" class="custom-control-input" name="pj_fgrade" value="1">
+												<input type="radio" class="custom-control-input" name="pj_fgrade" value="2">
 												<span class="custom-control-label text-muted">중급</span>
 											
 											</label>	
 										</div>
 										<div>
 											<label class="custom-control custom-radio  mb-2  mr-4">
-												<input type="radio" class="custom-control-input" name="pj_fgrade" value="2">
+												<input type="radio" class="custom-control-input" name="pj_fgrade" value="3">
 												<span class="custom-control-label text-muted">고급</span>
 											</label>					
 										</div>
@@ -1397,6 +1397,7 @@
 		
 	function check(){
 		var type_num = $('.active').attr('value');
+		//alert(type_num);
 		document.getElementById('type_num').value = type_num;
 		var key_num = new Array();
 		var key_cnt = 0;
