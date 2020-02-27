@@ -511,33 +511,25 @@
 														</c:if>
 														<c:if test="${free.free_profileox==1}">
 														<c:choose>
-															<c:when test ="${empty pjplist}">
-																<div class="item-card9-icons" id="zzim${dto.pj_num}">
-																	<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${dto.pj_num}" style="margin-right:40%"  onclick="javascript:wish(${dto.pj_num})">
-																	 <i class="fa fa fa-heart-o" style=""></i></a>
+															<c:when test="${pjnumList.contains(dto.pj_num)}">
+																<div class="item-card9-icons"  id="zzim${dto.pj_num}" >
+																	<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${dto.pj_num})">
+																	 <i class="fa fa fa-heart" style="color:white"></i></a>
 																</div>
 															</c:when>
 															<c:otherwise>
-																<c:choose>
-																	<c:when test="${pjnumList.contains(dto.pj_num)}">
-																		<div class="item-card9-icons"  id="zzim${dto.pj_num}" >
-																			<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color:#e8564a" onclick="javascript:del_wish(${dto.pj_num})">
-																			 <i class="fa fa fa-heart" style="color:white"></i></a>
-																		</div>
-																	</c:when>
-																	<c:otherwise>
-																		<div class="item-card9-icons">
-																			<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${dto.pj_num}"style="margin-right:40%" onclick="javascript:wish(${dto.pj_num})">
-																			 <i class="fa fa fa-heart-o" style=""></i></a>
-																		</div>
-																	</c:otherwise>	
-																</c:choose>
-															</c:otherwise>
+																<div class="item-card9-icons">
+																	<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${dto.pj_num}"style="margin-right:40%" onclick="javascript:wish(${dto.pj_num})">
+																	 <i class="fa fa fa-heart-o" style=""></i></a>
+																</div>
+															</c:otherwise>	
 														</c:choose>
+														<div class="item-card9-icons"  id="zzim${dto.pj_num}" >
+														</div>
 														</c:if>
 														<script>
 														function onlyFree(){
-															alert("프리랜서만 이용가능한 서비스 입니다.")
+															alert("프리랜서 회원만 이용가능한 서비스 입니다.")
 														}
 														
 														function profilePlease(){

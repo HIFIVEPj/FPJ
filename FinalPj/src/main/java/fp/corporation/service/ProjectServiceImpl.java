@@ -110,4 +110,15 @@ public class ProjectServiceImpl implements ProjectService {
 		mapper.pjpick_del(map);
 		mapper.pjpick_pj_update_del(map);
 	}
+	
+	//프리랜서 마이페이지에서 찜한프로젝트리스트 뽑기
+	@Override
+	public List<Project>pjpick_free(Map<String, Object>map){
+		return mapper.pjpick_free(map);
+	}
+	
+	@Override
+	public long getTotalCountPickPj(long free_code) {
+		return mapper.getTotalCountPickPj(free_code);
+	}
 }
