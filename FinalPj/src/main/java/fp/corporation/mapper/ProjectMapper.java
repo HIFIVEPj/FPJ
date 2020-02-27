@@ -43,4 +43,7 @@ public interface ProjectMapper {
 	void pjpick_pj_update_in(Map<String, Object>map);
 	void pjpick_pj_update_del(Map<String, Object>map);
 	
+	//프리랜서 마이페이지에서 찜한프로젝트리스트 뽑기
+	List<Project>pjpick_free(Map<String, Object>map);
+	long getTotalCountPickPj(long free_code);
 }

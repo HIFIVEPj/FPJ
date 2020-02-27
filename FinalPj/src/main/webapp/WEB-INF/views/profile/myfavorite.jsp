@@ -1,6 +1,8 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean id="now" class ="java.util.Date" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -171,6 +173,16 @@
 											</tr>
 										</thead>
 										<tbody>
+											<c:choose>
+											<c:when test="${empty pjp}">
+												<tr>
+													<td colspan="6" id="center">
+														찜한 프로젝트가 없습니다.
+													</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+											<c:forEach var="dto" items="${pjp}">
 											<tr>
 												<td>
 													<label class="custom-control custom-checkbox">
@@ -182,57 +194,55 @@
 													<div class="media mt-0 mb-0">
 														<div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>웹개발자 구합니다</b></h4></a>
-																<a href="#"><i class="fa fa-user mr-1"></i> 개발/초급</a>
+																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h4 class="font-weight-semibold"><b>${dto.pj_sub}</b></h4></a>
+																<i class="fa fa-user mr-1"></i> 
+																<c:if test="${dto.type_num ==1}"><c:out value="개발" /></c:if>
+																<c:if test="${dto.type_num ==2}"><c:out value="퍼블리셔" /></c:if>
+																<c:if test="${dto.type_num ==3}"><c:out value="디자인" /></c:if>
+																<c:if test="${dto.type_num ==4}"><c:out value="기획" /></c:if>
+																<c:if test="${dto.type_num ==5}"><c:out value="기타" /></c:if>/
+																
+																<c:if test="${dto.pj_fgrade==0}"><c:out value="초급" /></c:if>
+																<c:if test="${dto.pj_fgrade==1}"><c:out value="중급" /></c:if>
+																<c:if test="${dto.pj_fgrade==2}"><c:out value="고급" /></c:if>
+																
 																&nbsp;|&nbsp;
-																<a href="#"><i class="fa fa-clock-o mr-1"></i> 3개월</a>
+																<i class="fa fa-clock-o mr-1"></i> ${dto.pj_term} 개월
 																&nbsp;|&nbsp;
-																<a href="#"><b style="text-align:right;">D-25</b></a>
+																<b style="text-align:right;">														
+																<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1em;"><strong>
+															<fmt:parseDate value="${dto.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+															<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+															
+															<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+															<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+															<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+															<c:choose>
+																<c:when test="${endDate > currentDate}">
+																	D -${endDate - currentDate}
+																</c:when>
+																<c:otherwise>
+																	마감
+																</c:otherwise>
+															</c:choose>
+															</strong></span></b>
 															</div>
 														</div>
 													</div>
 												</td>
-												<td>Restaurant</td>
-												<td class="font-weight-semibold fs-16">1,200,000원</td>
+												<td>${dto.corporation.cor_name}</td>
+												<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</td>
 												<td>
 													<a href="#" class="badge badge-primary">모집중</a>
 												</td>
 												<td>
-													<a href="#" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<a href="myfavorite_del?pj_num=${dto.pj_num}&free_code=${free.free_code}&mem_email=${sessionScope.email}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
 													<a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="지원하기"><i class="fa fa-send"></i></a>
 												</td>
 											</tr>
-											<tr>
-												<td>
-													<label class="custom-control custom-checkbox">
-														<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-														<span class="custom-control-label"></span>
-													</label>
-												</td>
-												<td>
-													<div class="media mt-0 mb-0">
-														<div class="media-body">
-															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>웹개발자 구합니다</b></h4></a>
-																<a href="#"><i class="fa fa-user mr-1"></i> 개발/초급</a>
-																&nbsp;|&nbsp;
-																<a href="#"><i class="fa fa-clock-o mr-1"></i> 3개월</a>
-																&nbsp;|&nbsp;
-																<a href="#"><b style="text-align:right;">마감</b></a>
-															</div>
-														</div>
-													</div>
-												</td>
-												<td>Restaurant</td>
-												<td class="font-weight-semibold fs-16" id="center">3,800,000원</td>
-												<td>
-													<a href="#" class="badge badge-danger">마감</a>
-												</td>
-												<td>
-													<a href="#" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-													<a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="지원하기"><i class="fa fa-send"></i></a>
-												</td>
-											</tr>
+											</c:forEach>
+											</c:otherwise>
+										</c:choose>
 										</tbody>
 									</table>
 								</div>

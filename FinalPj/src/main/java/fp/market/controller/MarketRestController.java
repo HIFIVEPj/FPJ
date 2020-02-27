@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -274,7 +275,24 @@ log.info(mapSubmit);
 		return list;
 	}
 
-	
+	@GetMapping("marketPick-add")
+	public void addPick(@RequestParam(value="market_num") String market_num,
+			   @RequestParam(value="mem_email") String mem_email) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		log.info("11111111111111111111"+market_num);log.info("22222222222222"+mem_email);
+		map.put("market_num",market_num);
+		map.put("mem_email",mem_email);
+		marketService.insertMarketPick(map);
+	}
+	@GetMapping("marketPick-del")
+	public void delPick(@RequestParam(value="market_num") String market_num,
+			   @RequestParam(value="mem_email") String mem_email) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		log.info("11111111111111111111"+market_num);log.info("22222222222222"+mem_email);
+		map.put("market_num",market_num);
+		map.put("mem_email",mem_email);
+		marketService.deleteMarketPick(map);
+	}
 
 }
 

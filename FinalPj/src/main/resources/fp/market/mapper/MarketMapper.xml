@@ -282,14 +282,16 @@
 		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name})
 	</insert>
 <!-- 마켓찜 -->
-	<insert id="marketState" parameterType="MarketPick">
-	 <!-- 
-	 	<selectKey resultType="String" keyProperty="mem_email" order="BEFORE" >
-		 	 select * from market_pick where mem_email=#{mem_email};
-	 	</selectKey>
-	 -->
-	 	insert into MARKET_PICK(MARKETP_NUM, MARKET_NUM, MEM_EMAIL)values(#{marketP_num}, #{market_num}, #{mem_email}) 
+	<select id="pickState" resultType="MarketPick" parameterType="String" >
+		<!-- select * from market_pick where mem_email=#{mem_email}
+		SELECT * FROM market_pick WHERE EXISTS(select * from market_pick where mem_email=#{mem_email}) -->
+		select market_num from market_pick where mem_email=#{mem_email}
+	</select>
+	<insert id="insertMarketPick" parameterType="hashmap">
+	 	insert into MARKET_PICK(MARKETP_NUM, MARKET_NUM, MEM_EMAIL)values(MARKETP_NUM_SEQ.NEXTVAL, #{market_num}, #{mem_email}) 
 	</insert>
-	
+	<delete  id="deleteMarketPick" parameterType="hashmap">
+		 delete MARKET_PICK where market_num=#{market_num} and mem_email=#{mem_email}
+	</delete>
 	
 </mapper>	

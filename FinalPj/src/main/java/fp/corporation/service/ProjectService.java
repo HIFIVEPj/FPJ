@@ -38,5 +38,9 @@ public interface ProjectService {
 	List<ProjectPick>pjpick_list(long free_code);
 	void pjpick_insert(Map<String, Object>map);
 	void pjpick_del(Map<String, Object>map);
+	
+	//프리랜서 마이페이지에서 찜한프로젝트리스트 뽑기
+	List<Project>pjpick_free(Map<String, Object>map);
+	long getTotalCountPickPj(long free_code);
 }
 

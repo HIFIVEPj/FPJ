@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!--header-->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -230,19 +231,36 @@
 										<div class="tab-pane active" id="tab-12">
 											<div class="row">
 											
-											<c:forEach items="${list}" var="list">	
+											<c:forEach items="${list}" var="list"  varStatus="status">	
 												<div class="col-lg-6 col-md-12 col-xl-4">
 													<div class="card overflow-hidden">
 														<div class="item-card9-img">
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
-																<a href="market-content?market_num=${list.market_num}"></a>    
-																			
+																<a href="market-content?market_num=${list.market_num}"></a>    	
 																<img src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
-
 															</div>
-															<div class="item-card9-icons">
-																<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
+															<div class="item-card9-icons" >
+																<c:if test="${fn:length(marketNumList) > 0}">	
+																	<c:choose>
+																		<c:when test="${marketNumList.contains(list.market_num)}">
+																			<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick(${list.market_num})" id="fullHeart${list.market_num}" style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>
+																		</c:when>
+																		<c:otherwise>
+																			<a href="#" class="item-card9-icons1 wishlist" onclick="addPick(${list.market_num})" id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o" ></i></a>
+																		</c:otherwise>
+																	</c:choose>
+																</c:if>
+																<c:choose>
+																	<c:when test="${sessionScope.email != null}">
+																		<c:if test="${fn:length(marketNumList) == 0}">	
+																			<a href="" class="item-card9-icons1 wishlist" > <i class="fa fa fa-heart-o"></i></a>
+																		</c:if>
+																	</c:when>
+																	<c:otherwise>
+																		<a href="#" class="item-card9-icons1 wishlist" onclick="loginCheck()"> <i class="fa fa fa-heart-o"></i></a>
+																	</c:otherwise>
+																</c:choose>
 															</div>
 														</div>
 														<div class="card-body">
@@ -337,7 +355,41 @@
 			</div>
 		</section>
 		<!--/Add Listing-->
-
+<script>
+	function loginCheck(){
+		alert("로그인 후 이용해주세요");
+	}
+	
+	function addPick(market_num){
+		alert("marketnum"+market_num);
+		$.ajax({
+			type:"get",  
+			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
+			success: function(){
+				$('#emptyHeart'+market_num).remove();
+				
+			},
+			error: function(request,status,error){
+				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+	
+	function delPick(market_num){
+		alert("marketnum"+market_num);
+		$.ajax({
+			type:"get",  
+			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',
+			success: function(){
+			//	$('#fullHeart').remove();
+				
+			},
+			error: function(request,status,error){
+				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+</script>
 
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>

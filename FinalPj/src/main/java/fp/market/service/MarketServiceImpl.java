@@ -12,6 +12,7 @@ import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketPayment;
+import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
@@ -141,6 +142,21 @@ public class MarketServiceImpl implements MarketService {
 
 	public void insertPaymentMarket(Map<String,Object> map) {
 		mapper.insertPaymentMarket(map);
+	}
+//마켓리스팅시 하트색깔 여부를위해서
+	public List<MarketPick> pickState(String mem_email) {
+		return mapper.pickState(mem_email);
+		
+	}
+	@Override
+	public void insertMarketPick(HashMap<String,Object> map) {
+		mapper.insertMarketPick(map);
+		
+	}
+	@Override
+	public void deleteMarketPick(HashMap<String, Object> map) {
+		mapper.deleteMarketPick(map);
+		
 	}
 
 }

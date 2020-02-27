@@ -9,6 +9,7 @@ import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketPayment;
+import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
@@ -54,6 +55,9 @@ public interface MarketService {
 	 
 	 void insertPaymentMarket(Map<String, Object> payinfoMarket);
 
+	 List<MarketPick> pickState(String mem_email);
+	 void insertMarketPick(HashMap<String,Object> map);
+	 void deleteMarketPick(HashMap<String,Object> map);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 

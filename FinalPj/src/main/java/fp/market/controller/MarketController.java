@@ -2,41 +2,29 @@
 
 package fp.market.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import java.util.Vector;
-
-
 import javax.servlet.http.HttpSession;
-
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import fp.market.domain.Market;
+import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
 import fp.market.service.MarketService;
@@ -58,7 +46,7 @@ public class MarketController {
 	@GetMapping("market-list")
 	public ModelAndView market_list(MarketPagingVO marketVO
 			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
-			,@RequestParam(value="cntPerPage", required=false,defaultValue="9")String cntPerPage){
+			,@RequestParam(value="cntPerPage", required=false,defaultValue="9")String cntPerPage,HttpSession session){
 		int total = marketService.getMarketCount();
 	/*	if(nowPage ==null &&cntPerPage ==null) {
 			nowPage="1";
@@ -68,16 +56,38 @@ public class MarketController {
 		}else if(cntPerPage == null) {
 			cntPerPage = "9";
 		}*/
+		String mem_email=(String) session.getAttribute("email");
+		log.info("1@#@!#!#@!mem_mail"+mem_email);
 	    marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		 ModelAndView mv = new ModelAndView("market/market-list");
 		 List<Market> list = marketService.getMarketList(marketVO);
 		 
+		 List<MarketPick> pickState=new ArrayList<MarketPick>();
+		 ArrayList<Long> marketNumList = new ArrayList<Long>();
+		 //세션이메일이 존재할때
+		 if(mem_email != null) {
+			 if(marketService.pickState(mem_email).size() != 0) {
+				 pickState = marketService.pickState(mem_email);
+				 for(int i=0;i<pickState.size();i++) {
+					long marketNum=pickState.get(i).getMarket_num();
+					marketNumList.add(marketNum);
+				 }
+			 }
+		 }else {
+			//세션이메일이 존재하지 않을 때	 
+		 }
+		 log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
 		 mv.addObject("list", list);
 	     mv.addObject("paging", marketVO);  
-	/*     //모델로하는방법 
+	     mv.addObject("marketNumList", marketNumList); 
+
+
+	/*    
+	 *  //모델로하는방법 
 		marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		model.addAttribute("paging", marketVO);
 		model.addAttribute("market", marketService.getMarketList(marketVO));*/
+	     
 		return mv;
 	}
 	
