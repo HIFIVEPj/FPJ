@@ -2,6 +2,7 @@ package fp.customer_service.service;
 
 import java.util.List;
 
+import fp.customer_service.domain.BoardAttachVO;
 import fp.customer_service.domain.Criteria;
 import fp.customer_service.domain.CustomerServicePagingVO;
 import fp.customer_service.domain.CustomerServiceQa;
@@ -28,4 +29,7 @@ public interface CustomerServiceQaService {
 	
 	// 카테고리 sorting
 	int qa_cate_count_projectS();
+	
+	// 파일
+	public List<BoardAttachVO> getAttachList(Long qa_num);
 }

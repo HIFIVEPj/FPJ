@@ -4,18 +4,29 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import fp.customer_service.domain.BoardAttachVO;
 import fp.customer_service.domain.Criteria;
-import fp.customer_service.domain.CustomerServiceNotice;
-import fp.customer_service.domain.CustomerServicePagingVO;
 import fp.customer_service.domain.CustomerServiceQa;
+import fp.customer_service.mapper.BoardAttachMapper;
 import fp.customer_service.mapper.CustomerServiceQaMapper;
+import fp.customer_service.mapper.ReplyMapper;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Service
 public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 
-	@Autowired
+	@Setter(onMethod_= @Autowired)
 	private CustomerServiceQaMapper customerServiceQaMapper;
+
+	@Setter(onMethod_= @Autowired)
+	private BoardAttachMapper attachMapper;
+	
+	@Setter(onMethod_= @Autowired)
+	private ReplyMapper replymapper;
 	
 	/*
 	@Override
@@ -33,20 +44,44 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 	public boolean qa_vcntS(long notice_num) {
 		return customerServiceQaMapper.qa_vcnt(notice_num);
 	}
-
+	
+	@Transactional
 	@Override
 	public long qa_writeS(CustomerServiceQa customerServiceQa) {
-		return customerServiceQaMapper.qa_write(customerServiceQa);
+		log.info("&&&&&write : " + customerServiceQa);
+		customerServiceQaMapper.qa_write(customerServiceQa);
+		if(customerServiceQa.getAttachList() == null || customerServiceQa.getAttachList().size() <= 0) {
+			//return customerServiceQaMapper.qa_write(customerServiceQa);
+			return -1;
+		}
+		customerServiceQa.getAttachList().forEach(attach ->{
+			attach.setQa_num(customerServiceQa.getQa_num());
+			attachMapper.insert(attach);
+		});
+		//return customerServiceQaMapper.qa_write(customerServiceQa);
+		return -1;
 	}
 	
+	@Transactional
 	@Override
 	public boolean qa_deleteS(long qa_num) {
+		attachMapper.deleteAll(qa_num);
 		return customerServiceQaMapper.qa_delete(qa_num);
 	}
 	
+	@Transactional
 	@Override
 	public boolean qa_modifyS(CustomerServiceQa customerServiceQa) {
-		return customerServiceQaMapper.qa_modify(customerServiceQa);
+		attachMapper.deleteAll(customerServiceQa.getQa_num());
+		boolean modifyResult = customerServiceQaMapper.qa_modify(customerServiceQa) == true;
+		if(modifyResult == true && customerServiceQa.getAttachList() != null && customerServiceQa.getAttachList().size() > 0) {
+			customerServiceQa.getAttachList().forEach(attach -> {
+				attach.setQa_num(customerServiceQa.getQa_num());
+				attachMapper.insert(attach);				
+			});			
+		}
+		//return customerServiceQaMapper.qa_modify(customerServiceQa);
+		return modifyResult;
 	}
 	
 	/*
@@ -60,7 +95,7 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 	public int qa_cate_count_projectS() {
 		return customerServiceQaMapper.qa_cate_count_project();
 	}
-
+	
 	/*
 	@Override
 	public List<CustomerServiceQa> qa_listS(CustomerServicePagingVO customerServicePagingVO) {
@@ -74,7 +109,12 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 	
 	@Override
 	public int qa_countS(Criteria cri) {
-		return customerServiceQaMapper.qa_count(cri);
+		return customerServiceQaMapper.qa_count(cri);		
+	}
+	
+	@Override
+	public List<BoardAttachVO> getAttachList(Long qa_num) {
+		return attachMapper.findByQa_num(qa_num);
 	}
 	
 }

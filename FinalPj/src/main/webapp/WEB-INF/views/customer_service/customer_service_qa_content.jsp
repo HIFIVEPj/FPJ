@@ -83,9 +83,80 @@
 								
 							</div>
 							<div class="card-header">
+								<!--
 								<div class="item7-card-desc d-flex mb-2 mt-2">
 									<a href="#"><i class="fa fa-paperclip text-muted mr-2"></i>abc.txt</a>	
 								</div>
+								-->
+								
+								
+								<div class='bigPictureWrapper'>
+								  <div class='bigPicture'>
+								  </div>
+								</div>
+								
+								<style>
+								.uploadResult {
+									width: 100%;
+									background-color: white; /* #e9ecf0; */
+								}
+								
+								.uploadResult ul {
+									display: flex;
+									flex-flow: row;
+									justify-content: center;
+									align-items: center;
+								}
+								
+								.uploadResult ul li {
+									list-style: none;
+									padding: 10px;
+									align-content: center;
+									text-align: center;
+								}
+								
+								.uploadResult ul li img {
+									width: 40px;
+								}
+								
+								.uploadResult ul li span {
+									color:white;
+								}
+								
+								.bigPictureWrapper {
+								  position: absolute;
+								  display: none;
+								  justify-content: center;
+								  align-items: center;
+								  top:0%;
+								  width:100%;
+								  height:100%;
+								  background-color: gray; 
+								  z-index: 100;
+								  background:rgba(255,255,255,0.5);
+								}
+								
+								.bigPicture {
+								  position: relative;
+								  display:flex;
+								  justify-content: center;
+								  align-items: center;
+								}
+								
+								.bigPicture img {
+									width:600px;
+								}
+								
+								</style>
+								
+								
+								<div class="uploadResult">
+									<ul>
+									
+									</ul>
+								</div>
+								
+
 							</div>
 
 							<div class="card-body text-justify">	
@@ -857,16 +928,16 @@
 		<!--/Add listing-->
 
 		<!-- small Modal -->
-		<!--	
+			
 		<div id="smallModal1" class="modal fade">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-					-->
+					
 						<!--
 						<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
 						-->
-						<!--
+						
 						<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -885,7 +956,7 @@
 				</div>
 			</div>		
 		</div>
-		-->
+		
 		<!-- /small Modal -->
 
 		<!-- Message Modal -->
@@ -1366,329 +1437,78 @@
 		*/
 		
 		</script>
-<!--
+
 		<script>
+			$(document).ready(function(){
+			  
+			  (function(){
+			  
+			    var qa_num = '<c:out value="${qa_content.qa_num}"/>';
+			    
+			    $.getJSON("/getAttachList", {qa_num:qa_num}, function(arr){
+			    
+			      console.log(arr);
+			      
+			      var str = "";
+			      
+			      $(arr).each(function(i, attach){
+			    	  
+			    	  if(attach.fileType){
+			              var fileCallPath = encodeURIComponent(attach.uploadPath+"/s_"+attach.uuid+"_"+attach.fileName);
+			              
+			              str += "<li data-path='"+attach.uploadPath+"'data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div><img src='/display?fileName="+fileCallPath+"'>" + " " + "<b>"+attach.fileName+"</b></div></li>";
+			          }else{
+			              str += "<li data-path='"+attach.uploadPath+"'data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div><img src='../images/attach.png'>" + " " + "<b>"+attach.fileName+"</b></div></li>";
+			          }
+			    	  
+			      });
+			          
+			          $(".uploadResult ul").html(str);
+			      
+      
+			    }); //end getjson
+			  })(); //end function
+			  
+			  		$(".uploadResult").on("click","li", function(e){
+			      
+				    console.log("view image");
+				    
+				    var liObj = $(this);
+				    
+				    var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" + liObj.data("filename"));
+				    
+				    if(liObj.data("type")){
+				      showImage(path.replace(new RegExp(/\\/g),"/"));
+				    }else {
+				      //download 
+				      self.location ="/download?fileName="+path
+				    }
+				    
+				    
+				  });
+				  
+				  function showImage(fileCallPath){
+					    
+				    //alert(fileCallPath);
+				    
+				    $(".bigPictureWrapper").css("display","flex").show();
+				    
+				    $(".bigPicture")
+				    .html("<img src='/display?fileName="+fileCallPath+"'>")
+				    .animate({width:'100%', height: '100%'}, 1000);
+				    
+				  }
 
-		$(document).ready(function () {
-		  
-		  var qa_numValue = '<c:out value="${qa_content.qa_num}"/>';
-		  var replyUL = $(".chat");
-		  
-		    showList(1);
-		    
-		function showList(page){
-		    
-		    replyService.getList({qa_num:qa_numValue,page:page|| 1 }, function(list) {
+				  $(".bigPictureWrapper").on("click", function(e){
+				    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+				    setTimeout(function(){
+				      $('.bigPictureWrapper').hide();
+				    }, 1000);
+				  });
 
-		     var str="";
-		     
-		     if(list == null || list.length == 0){
-		     	replyUL.html("");
-		     	
-		     	return;
-		     }
-
-		     for (var i = 0, len = list.length || 0; i < len; i++) {
-		       str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"'>";
-		       str +="	<div class='d-flex mr-3'>";
-		       str +="		<a href='#'> <img src='../images/faces/female/test5.png' alt='64x64' class='media-object brround'> </a>";
-		       str +="	</div>";
-		       str +="	<div class='media-body'>";
-		       str +="		<h5 class='mt-0 mb-1 font-weight-semibold'>"+list[i].mem_email;
-		       str +="			<span class='fs-14 ml-0' data-toggle='tooltip' data-placement='top' title='verified'><i class='fa fa-check-circle-o text-success'></i></span>&nbsp;&nbsp;&nbsp;";
-		       str +="			<small class='text-muted'><i class='fa fa-calendar'></i>&nbsp;<fmt:formatDate value='${qa_content.qa_rdate}' pattern='yyyy-MM-dd HH:mm:ss'/></small>";
-		       str +="		</h5>";
-		       str +="		<p class='font-13  mb-2 mt-2'>"+list[i].qacomm_cont+"</p>";
-		       str +="		<a href='#' class='mr-2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#7fa5b8'>&nbsp;<i class='fa fa-thumbs-o-up'></i>&nbsp;21&nbsp;</span></a>";
-		       str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem;'><i class=' ml-1 fa fa-comment-o'></i>&nbsp;댓글</span></a>";
-			   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
-			   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#smallModal1'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-trash-o'></i>&nbsp;삭제</span></a>";
-			   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#report'><span class='badge badge-danger' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 si si-ban'></i>&nbsp;신고</span></a>";
-			   str +="	</div>";
-			   str +="</li>";
-		     }
-		     
-		     replyUL.html(str);
-
-		   });
-		     
-		 }
-		});
-		    
-		    var pageNum = 1;
-		    var replyPageFooter = $(".panel-footer");
-		    
-		    function showReplyPage(replyCnt){
-		      
-		      var endNum = Math.ceil(pageNum / 10.0) * 10;  
-		      var startNum = endNum - 9; 
-		      
-		      var prev = startNum != 1;
-		      var next = false;
-		      
-		      if(endNum * 10 >= replyCnt){
-		        endNum = Math.ceil(replyCnt/10.0);
-		      }
-		      
-		      if(endNum * 10 < replyCnt){
-		        next = true;
-		      }
-		      
-		      var str = "<ul class='pagination pull-right'>";
-		      
-		      if(prev){
-		        str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
-		      }
-		      
-		      for(var i = startNum ; i <= endNum; i++){
-		        
-		        var active = pageNum == i? "active":"";
-		        
-		        str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
-		      }
-		      
-		      if(next){
-		        str+= "<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>Next</a></li>";
-		      }
-		      
-		      str += "</ul></div>";
-		      
-		      console.log(str);
-		      
-		      replyPageFooter.html(str);
-		    }
-		     
-		    replyPageFooter.on("click","li a", function(e){
-		       e.preventDefault();
-		       console.log("page click");
-		       
-		       var targetPageNum = $(this).attr("href");
-		       
-		       console.log("targetPageNum: " + targetPageNum);
-		       
-		       pageNum = targetPageNum;
-		       
-		       showList(pageNum);
-		     });     
-		
-		    
-		/*     function showList(page){
-		      
-		      replyService.getList({qa_num:qa_numValue,page: page|| 1 }, function(list) {
-		        
-		        var str="";
-		       if(list == null || list.length == 0){
-		        
-		        replyUL.html("");
-		        
-		        return;
-		      }
-		       for (var i = 0, len = list.length || 0; i < len; i++) {
-		           str +="<li class='left clearfix' data-qacomm_num='"+list[i].qacomm_num+"'>";
-		           str +="  <div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>"; 
-		           str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
-		           str +="    <p>"+list[i].reply+"</p></div></li>";
-		         }
-		
-		
-		    replyUL.html(str);
-		
-		      });//end function
-		      
-		   }//end showList */
-		   
-		    var modal = $(".modal");
-		    var modalInputReply = modal.find("input[name='reply']");
-		    var modalInputReplyer = modal.find("input[name='replyer']");
-		    var modalInputReplyDate = modal.find("input[name='replyDate']");
-		    
-		    var modalModBtn = $("#modalModBtn");
-		    var modalRemoveBtn = $("#modalRemoveBtn");
-		    var modalRegisterBtn = $("#modalRegisterBtn");
-		    
-		    $("#modalCloseBtn").on("click", function(e){
-		    	
-		    	modal.modal('hide');
-		    });
-		    
-		    $("#addReplyBtn").on("click", function(e){
-		      
-		      modal.find("input").val("");
-		      modalInputReplyDate.closest("div").hide();
-		      modal.find("button[id !='modalCloseBtn']").hide();
-		      
-		      modalRegisterBtn.show();
-		      
-		      $(".modal").modal("show");
-		      
-		    });
-		    
-		
-		    modalRegisterBtn.on("click",function(e){
-		      
-		      var reply = {
-		            reply: modalInputReply.val(),
-		            replyer:modalInputReplyer.val(),
-		            qa_num:qa_numValue
-		          };
-		      replyService.add(reply, function(result){
-		        
-		        alert(result);
-		        
-		        modal.find("input").val("");
-		        modal.modal("hide");
-		        
-		        //showList(1);
-		        showList(-1);
-		        
-		      });
-		      
-		    });
-		
-		
-		  //댓글 조회 클릭 이벤트 처리 
-		    $(".chat").on("click", "li", function(e){
-		      
-		      var qacomm_num = $(this).data("qacomm_num");
-		      
-		      replyService.get(qacomm_num, function(reply){
-		      
-		        modalInputReply.val(reply.reply);
-		        modalInputReplyer.val(reply.replyer);
-		        modalInputReplyDate.val(replyService.displayTime( reply.replyDate))
-		        .attr("readonly","readonly");
-		        modal.data("qacomm_num", reply.qacomm_num);
-		        
-		        modal.find("button[id !='modalCloseBtn']").hide();
-		        modalModBtn.show();
-		        modalRemoveBtn.show();
-		        
-		        $(".modal").modal("show");
-		            
-		      });
-		    });
-		  
-		    
-		/*     modalModBtn.on("click", function(e){
-		      
-		      var reply = {qacomm_num:modal.data("qacomm_num"), reply: modalInputReply.val()};
-		      
-		      replyService.update(reply, function(result){
-		            
-		        alert(result);
-		        modal.modal("hide");
-		        showList(1);
-		        
-		      });
-		      
-		    });
-		
-		    modalRemoveBtn.on("click", function (e){
-		    	  
-		  	  var qacomm_num = modal.data("qacomm_num");
-		  	  
-		  	  replyService.remove(qacomm_num, function(result){
-		  	        
-		  	      alert(result);
-		  	      modal.modal("hide");
-		  	      showList(1);
-		  	      
-		  	  });
-		  	  
-		  	}); */
-		
-		    modalModBtn.on("click", function(e){
-		    	  
-		   	  var reply = {qacomm_num:modal.data("qacomm_num"), reply: modalInputReply.val()};
-		   	  
-		   	  replyService.update(reply, function(result){
-		   	        
-		   	    alert(result);
-		   	    modal.modal("hide");
-		   	    showList(pageNum);
-		   	    
-		   	  });
-		   	  
-		   	});
-		
-		
-		   	modalRemoveBtn.on("click", function (e){
-		   	  
-		   	  var qacomm_num = modal.data("qacomm_num");
-		   	  
-		   	  replyService.remove(qacomm_num, function(result){
-		   	        
-		   	      alert(result);
-		   	      modal.modal("hide");
-		   	      showList(pageNum);
-		   	      
-		   	  });
-		   	  
-		   	});
-		
-		 
-		});
-		
+			});
 		</script>
-		
-		
-		
-		<script>
-		
-		/* console.log("===============");
-		console.log("JS TEST");
-		
-		var qa_numValue = '<c:out value="${qa_content.qa_num}"/>'; */
-		
-		//for replyService add test
-		/* replyService.add(
-		    
-		    {reply:"JS Test", replyer:"tester", qa_num:qa_numValue}
-		    ,
-		    function(result){ 
-		      alert("RESULT: " + result);
-		    }
-		); */
-		
-		
-		//reply List Test
-		/* replyService.getList({qa_num:qa_numValue, page:1}, function(list){
-		    
-			  for(var i = 0,  len = list.length||0; i < len; i++ ){
-			    console.log(list[i]);
-			  }
-		});
-		 */
-		
-		 
-		/*  //17번 댓글 삭제 테스트 
-		 replyService.remove(17, function(count) {
-		
-		   console.log(count);
-		
-		   if (count === "success") {
-		     alert("REMOVED");
-		   }
-		 }, function(err) {
-		   alert('ERROR...');
-		 });
-		 */
-		 
-		
-		//12번 댓글 수정 
-		/* replyService.update({
-		  qacomm_num : 12,
-		  qa_num : qa_numValue,
-		  reply : "Modified Reply...."
-		}, function(result) {
-		
-		  alert("수정 완료...");
-		
-		});  
-		 */
-		
-		</script>
--->
+
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
