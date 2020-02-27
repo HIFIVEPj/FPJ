@@ -310,11 +310,11 @@
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
-						<!-- <h4 class="page-title">관리자페이지</h4>
+						 <h4 class="page-title">회원관리</h4>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
-							</ol> -->
+							</ol> 
 						</div>
 
 						<div class="row">
@@ -364,16 +364,11 @@
 							</div>
 						</div>
 <!--  -->
-<!-- User-All-->
-		<section class="sptb">
-			<div class="container">
-				<div class="section-title center-block text-center">
-					<h1>Users List</h1>
-					<p>Mauris ut cursus nunc. Morbi eleifend, ligula at consectetur vehicula</p>
-				</div>
+<!-- User-All-->	
+			<div class="">
 				<div class="row">
 					<div class="col-lg-12 users-list">
-						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border">
+						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
 							<select class="form-control page-select">
 								<option value="0">SelectOptions</option>
 								<option value="1">Active</option>
@@ -463,7 +458,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+	
 	<!-- User end -->				
 					</div> 
 				</div>
