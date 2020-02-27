@@ -524,7 +524,8 @@
 																</div>
 															</c:otherwise>	
 														</c:choose>
-														<div class="item-card9-icons"  id="zzim${dto.pj_num}" >
+														<div class="item-card9-icons"  id="zzim${dto.pj_num}">
+														
 														</div>
 														</c:if>
 														<script>
@@ -593,7 +594,12 @@
 																	</c:if>
 																</c:forEach>
 																/ ${dto.corporation.cor_name}<br/><br/>
+																<c:if test="${!empty sessionScope.email }">
+																<a href="project_content?pj_num=${dto.pj_num}&mem_email=${sessionScope.email}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
+																</c:if>
+																<c:if test="${empty sessionScope.email }">
 																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
+																</c:if>
 																<div style="width:85%">
 																<span id = "content" style="width:10px">
 														          <c:choose>

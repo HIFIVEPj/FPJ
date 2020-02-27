@@ -211,6 +211,7 @@ public class FreeLancerProfileController {
 			List<fp.corporation.domain.Project>pjpickList = pjservice.pjpick_free(map);
 			mv.addObject("free", freelancer);
 			mv.addObject("pjp", pjpickList);
+			mv.addObject("pa", projectVo);
 			return mv;
 		}
 		@RequestMapping("myfavorite_del")

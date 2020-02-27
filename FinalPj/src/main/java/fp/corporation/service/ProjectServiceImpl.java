@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 
@@ -120,5 +121,13 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public long getTotalCountPickPj(long free_code) {
 		return mapper.getTotalCountPickPj(free_code);
+	}
+	
+	//프로젝트지원
+	public void applied_pj(Map<String, Object>map) {
+		mapper.applied_pj(map);
+	}
+	public AppliedProject select_applied_pj(Map<String, Object>map) {
+		return mapper.select_applied_pj(map);
 	}
 }

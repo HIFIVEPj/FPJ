@@ -320,37 +320,33 @@
 							
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
-									<ul class="pagination mg-b-0 page-0 ">
-										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
+									<div class="center-block text-center">
+									<ul class="pagination mb-0">
+									<c:if test="${pa.nowPage != 1}">
+														<!--이전 페이지 이동 -->
+										<li class="page-item page-prev">
+											<a class="page-link" href="managed_project?mem_email=${sessionScope.email}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}">prev</a>
 										</li>
-										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-										</li>
-				
-										<li class="page-item active">
-											<a class="page-link" href="#">1</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#">2</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link hidden-xs-down" href="#">3</a>
-										</li>
-										<li class="page-item ">
-											<a class="page-link" href="#">4</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link hidden-xs-down" href="#">5</a>
-										</li>
-								
-										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-										</li>
-										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-										</li>
+									</c:if>
+									<!--페이지번호 -->
+									<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
+										<c:choose>
+											<c:when test="${p == pa.nowPage}">
+												<li class='page-item active'><a class="page-link">${p}</a></li>
+											</c:when>
+											<c:when test = "${p != pa.nowPage }">
+												<li class="page-item"><a class="page-link" href="managed_project?mem_email=${sessionScope.email}&nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
+											</c:when>
+										</c:choose>
+										</c:forEach>
+										<c:if test ="${pa.nowPage != pa.lastPage}">
+											<li class="page-item page-next">
+												<a class="page-link" href="managed_project?mem_email=${sessionScope.email}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+											</li>
+										</c:if>
+										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
 									</ul>
+								</div>
 								</div>
 								<!-- pagination-wrapper -->
 							</div>

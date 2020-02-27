@@ -6,6 +6,7 @@
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+<jsp:include page="../member/login_check.jsp"/>
 
 <!--/header-->
 		<!--Sliders Section-->
@@ -106,6 +107,19 @@
 
 											<table class="table row table-borderless w-100 m-0 text-nowrap ">
 												<tbody class="col-lg-12 col-xl-6 p-0">
+												<tr>
+													<td><span class="font-weight-bold">경력 :</span>
+														<c:if test="${projectCont.pj_fgrade eq 1}">
+																 초급
+															</c:if>
+															<c:if test="${projectCont.pj_fgrade eq 2}">
+																 중급
+															</c:if>
+															<c:if test="${projectCont.pj_fgrade eq 3}">
+															 	고급
+															</c:if>
+														</td>
+													</tr>
 													<tr>
 														<td><span class="font-weight-bold">근무 형태 : </span> 
 															<c:if test="${projectCont.pj_place eq 0}">
@@ -119,16 +133,16 @@
 															</c:if>
 														</td>
 													</tr>
+													
 													<tr>
-														<td><span class="font-weight-bold">근무지 :</span> ${projectCont.pj_loc}</td>
-													</tr>
-													<tr>
-														<td><span class="font-weight-bold">프로젝트 기간 :</span>${projectCont.pj_term}</td>
+														<td><span class="font-weight-bold">프로젝트 기간 :</span>${projectCont.pj_term} 개월</td>
 													</tr>
 													<tr>
 														<td><span class="font-weight-bold">담당 업무 :</span> ${projectCont.type.type_name}</td>
 													</tr>
-												
+													<tr>
+														<td style="width:363px;"><span class="font-weight-bold">근무지 :</span> ${projectCont.pj_loc}</td>
+													</tr>
 												</tbody>
 												<tbody class="col-lg-12 col-xl-6 p-0">
 													<tr>
@@ -137,19 +151,7 @@
 
 															</td>
 													</tr>
-													<tr>
-														<td><span class="font-weight-bold">경력 :</span>
-														<c:if test="${projectCont.pj_fgrade eq 1}">
-																 초급
-															</c:if>
-															<c:if test="${projectCont.pj_fgrade eq 2}">
-																 중급
-															</c:if>
-															<c:if test="${projectCont.pj_fgrade eq 3}">
-															 	고급
-															</c:if>
-														</td>
-													</tr>
+													
 													<tr>
 														<td><span class="font-weight-bold">필요 인력 :</span>${projectCont.pj_recnum} 명 </td>
 													</tr>
@@ -187,16 +189,21 @@
 								
 							</div>
 							<span class="card-footer icons" >
-									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply"> 지원하기</a>
-									<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
+								<c:if test="${empty appp}">
+									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply" id="app_btn"> 지원하기</a>
+								</c:if>
+								<c:if test="${!empty appp}">
+									<a href="javascript:apply_done();" class="btn btn-info icons" > 지원하기</a>
+								</c:if>
+								<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
 
-									<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
-							
+								<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
+							<c:if test="${sessionScope.email eq corInfo.mem_email}">
 								<span style="float:right;" >
-										<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
-										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
-
+									<a href="project_update?pj_num=${projectCont.pj_num}" class="btn btn-secondary icons" >수정</a>
+									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
 								</span>
+							</c:if>
 							</span>
 						</div>
 			<!--Jobs Description-->
@@ -469,12 +476,6 @@
 									<h6><span class="font-weight-semibold"><i class="fa fa-link mr-2 "></i></span>
 												<a href="http://bitcamp.co.kr/" class="text-primary"> ${projectCont.pj_homepage} </a></h6>
 								</div>
-								<div class=" item-user-icons mt-4">
-									<a href="#" class="facebook-bg mt-0"><i class="fa fa-facebook"></i></a>
-									<a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-									<a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-									<a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
-								</div>
 							</div>
 						</div>
 						<div class="card">
@@ -655,7 +656,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Apply Jobs</h5>
+						<h5 class="modal-title" id="exampleModalLongTitle">지원하기</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						  <span aria-hidden="true">&times;</span>
 						</button>
@@ -664,49 +665,60 @@
 						<div class="row">
 							<div class="col-sm-6 col-md-6">
 								<div class="form-group">
-									<label class="form-label">Name</label>
-									<input type="text" class="form-control" placeholder="Name">
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-6">
-								<div class="form-group">
-									<label class="form-label">Phone number</label>
-									<input type="number" class="form-control" placeholder="Number">
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-6">
-								<div class="form-group">
-									<label class="form-label">Email</label>
-									<input type="email" class="form-control" placeholder="Email address">
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-6">
-								<label class="form-label">Choose Location</label>
-								<select name="country" id="select-countries3" class="form-control custom-select">
-									<option >Search</option>
-									<option value="2">USA</option>
-									<option value="3">UK</option>
-									<option value="4">India</option>
-								</select>
-							</div>
-							<div class="col-sm-12">
-								<div class="form-group mb-0">
-									<label class="form-label">File Attachment</label>
-									<div class="custom-file">
-										<input type="file" class="custom-file-input" name="example-file-input-custom">
-										<label class="custom-file-label">Attach file</label>
-									</div>
+									<label class="form-label">지원하시겠습니까?</label>
+									
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-success">Submit</button>
+					<div class="modal-footer" id="app_footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+						<c:choose>
+							<c:when test="${empty free}">
+								<button type="button" class="btn btn-success" onclick="freeolny()">지원하기</button>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${free.free_profileox==0}">
+									<button type="button" class="btn btn-success" onclick="profilePlease()">지원하기</button>
+								</c:if>
+								<c:if test="${free.free_profileox==1}">
+									<button type="button" class="btn btn-success" onclick="apply()">지원하기</button>
+								</c:if>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>
 		</div>
+			<script>
+			function freeolny(){
+				alert("프리랜서 회원만 이용할 수 있습니다.")
+				$("#apply").modal('hide');
+			}
+			function profilePlease(){
+				alert("프로필을 등록하셔야 이용할 수 있습니다.")
+				$("#apply").modal('hide');
+			}
+			function apply(){	
+				$.ajax({
+					type:"get",  
+					url:"<c:url value='apply'/>",
+	    			data:"pj_num=${projectCont.pj_num}+&free_code=${free.free_code}",
+					success: function(data){
+						alert("성공");
+						$('#app_btn').attr('onclick','apply_done()')
+						$("#apply").modal('hide');
+					},
+					error: function(data){
+					alert("에러발생");
+					}
+				});
+			}
+			function apply_done(){
+				alert("이미 지원한 프로젝트 입니다");
+				$("#apply").modal('hide');
+			}
+			</script>
 <!-- small Modal -->   
       <div id="deleteModal" class="modal fade">
 
@@ -808,7 +820,7 @@ obShareUrl.value=window.document.location.href;
         content: {
           title: '프로젝트 & 서비스 & IT 프리랜서 플랫폼 - 하이파이브',
           description: '${projectCont.pj_sub}',
-          imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          imageUrl: '../images/brand/logo1.png',
           link: {
             mobileWebUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}',
             webUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}'

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
@@ -46,4 +47,8 @@ public interface ProjectMapper {
 	//프리랜서 마이페이지에서 찜한프로젝트리스트 뽑기
 	List<Project>pjpick_free(Map<String, Object>map);
 	long getTotalCountPickPj(long free_code);
+	
+	//프로젝트지원
+	void applied_pj(Map<String, Object>map);
+	AppliedProject select_applied_pj(Map<String, Object>map);
 }
