@@ -3,6 +3,7 @@ package fp.market.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -137,9 +138,9 @@ public class MarketServiceImpl implements MarketService {
 	public String getFreeName(long market_num) {
 		return mapper.getFreeName(market_num);
 	}
-	
-	public void insertMarketPayment(MarketPayment marketPayment) {
-		mapper.insertMarketPayment(marketPayment);
+
+	public void insertPaymentMarket(Map<String,Object> map) {
+		mapper.insertPaymentMarket(map);
 	}
 
 }

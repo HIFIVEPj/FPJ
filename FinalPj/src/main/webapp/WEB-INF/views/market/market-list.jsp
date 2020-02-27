@@ -222,7 +222,8 @@
 										-->
 <!--///////////////////////////// 마켓리스팅1 -->
 									<!-- 
-											
+											<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;">
+                                                    <i class="fa fa fa-heart" style="color:white"></i></a>
 									-->		
 										</div>
 <!-- ///////////////////////////////////////2list -->										
@@ -341,7 +342,5 @@
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
-	
 
->>>>>>> 0548d3f85aa071ccf233551fbbc900acc8e9ea70
 </html>

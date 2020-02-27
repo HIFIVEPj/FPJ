@@ -3,6 +3,7 @@ package fp.market.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
@@ -51,7 +52,7 @@ public interface MarketService {
 	 
 	 String getFreeName(long market_num);
 	 
-	 void insertMarketPayment(MarketPayment marketPayment);
+	 void insertPaymentMarket(Map<String, Object> payinfoMarket);
 
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);

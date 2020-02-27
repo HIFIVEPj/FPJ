@@ -1,7 +1,9 @@
 package fp.market.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,16 +62,16 @@ public class MarketPaymentsController {
 		return mv;	
 	} 
 	@ResponseBody 
-	@RequestMapping(value = "market-payments-insert", method = RequestMethod.GET)
-	public String insertMarketPayment(MarketPayment marketPayment) {
-		marketService.insertMarketPayment(marketPayment);
-		long m=marketPayment.getMarket_num();
-		log.info("@@@@@@@@@@@@@@@@@@@m"+m);
-		return "market/market-payments-done";
+	@RequestMapping(value = "market-payments-insert", method = RequestMethod.POST)
+	public String insertMarketPayment(@RequestBody HashMap<String,Object> map) {
+		Map<String, Object> payinfoMarket = new HashMap<String, Object>();
+		payinfoMarket.put("map", map);
+		marketService.insertPaymentMarket(payinfoMarket);
+	//	marketService.insertPaymentMarket(map);바로 맵으로 받아버리면 오류남1111오류
+		return "map";
 	}
 	@RequestMapping(value = "market-paymentsDone", method = RequestMethod.GET)
 	public String marketpaymentsDone(MarketPayment marketPayment) {
-		marketService.insertMarketPayment(marketPayment);
 		return "market/market-payments-done";
 	}
 }

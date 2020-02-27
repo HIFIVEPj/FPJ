@@ -95,6 +95,27 @@
          </collection>   
 
       </resultMap>
+
+
+        <resultMap type="freelancerprofile" id="free_profile">
+
+            <id property="free_code" column="free_code"/>
+           <result property="pro_num" column="pro_num"/>
+           <result property="type_num" column="type_num"/>
+           <result property="pro_exp" column="pro_exp"/>
+           <result property="pro_cv" column="pro_cv"/>
+           <result property="pro_addr" column="pro_addr"/>
+           <result property="pro_edu" column="pro_edu"/>
+           <result property="pro_start" column="pro_start"/>
+           <result property="pro_ox" column="pro_ox"/>
+           <result property="pro_grade" column="pro_grade"/>
+           <result property="profile_vcnt" column="profile_vcnt"/>
+           <result property="profile_pcnt" column="profile_pcnt"/>
+           <result property="pro_workplace" column="pro_workplace"/>
+          <result property="profile_sub" column="profile_sub"/>
+           <result property="profile_date" column="profile_date"/>
+
+      </resultMap>
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
  	<!-- 프리랜서 프로필 리스트 select -->
    <!--<select id="selectProfileList"  resultMap="FreeLancerResult">
@@ -108,13 +129,19 @@
       ]]>
    </select>-->
    <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
-    <select id="countProfileList" resultType="int">
-   		select count(*) from FreeLancer_Profile
+    <select id="countProfileList" resultType="long">
+   		 select count(profile_sub) from freelancer_profile where free_code=#{free_code}
     </select>
+  
+  
+	<select id='profile_free_select' parameterType="String" resultMap="free_profile">
+		select * from FREELANCER_PROFILE where mem_email=#{mem_email}
+	</select>
+  
    <!-- 리스트 페이징 (페이징 처리 후 게시글 조회 ) -->
-   <select id="selectPageList" parameterType="PagingVO" resultMap="FreeLancerResult">
+   <select id="selectPageList" parameterType="map" resultMap="FreeLancerResult">
 
-   	<![CDATA[	
+   	<!-- <![CDATA[	
    		select f.rnum, f.MEM_EMAIL, 
    			   f.PROFILE_SUB, f.PROFILE_DATE, 
    			   f.PROFILE_OFNAME, f.PRO_NUM from
@@ -130,54 +157,62 @@
 							on fp.PRO_NUM = ffile.PRO_NUM ) free
 								where rownum <=  #{end}) f
 								 where f.rnum>= #{start}	
-	 ]]>
+	 ]]>-->
+	
+	 <![CDATA[
+		select * from 
+			(select ROWNUM rnum , aa.* from 
+				(select PROFILE_SUB, PROFILE_DATE, FREE_CODE, PRO_NUM from FREELANCER_PROFILE fp
+					 where FREE_CODE=#{free_code} order by PROFILE_DATE desc)aa) 
+						where rnum>=#{PagingVo.start} and rnum<=#{PagingVo.end}
+	]]>
    </select>
    
      <!-- 프리랜서 프로필 컨텐츠 1-->
      <select id="selectProfileContent"  parameterType="long" resultMap="FreeLancerResult">
 
       <![CDATA[
-		select fp.PRO_NUM
-		         , FREE_NAME
-		         , PRO_WORKPLACE
-		         , fp.MEM_EMAIL
-		         , FREE_TEL
-		         , PRO_CV
-		         , PROFILE_DATE
-		         , PROFILE_OFNAME 
+		select fp.pro_num
+		         , free_name
+		         , fp.mem_email
+		         , pro_workplace
+		         , free_tel
+		         , pro_cv
+		         , profile_date
+		         , profile_ofname 
 			from FREELANCER_PROFILE fp
 				inner join FREELANCER f 
-					on fp.FREE_CODE = f.FREE_CODE
+					on fp.free_code = f.free_code
 						inner join FREELANCER_PROFILEFILE ffile
-						on f.FREE_CODE = ffile.FREE_CODE
-						where fp.PRO_NUM=#{PRO_NUM}
+						on f.free_code = ffile.free_code
+						where fp.pro_num=#{pro_num}
       ]]>
    </select>
    <!-- 프리랜서 프로필 컨텐츠 2-->
         <select id="selectProfileContent2"  parameterType="long" resultMap="find_pro_sub">
 
       <![CDATA[
-		select p.PJ_SUB
-			   , t.TYPE_NAME
-			   , fp.PRO_NUM
+		select p.pj_sub
+			   , t.type_name
+			   , fp.pro_num
 			from Type t
 				full outer join FREELANCER_PROFILE fp
-				on t.TYPE_NUM = fp.TYPE_NUM 
+				on t.type_num = fp.type_num 
 					full outer join PROJECT p
-					on t.TYPE_NUM = p.TYPE_NUM
-					where fp.PRO_NUM=#{PRO_NUM}
+					on t.type_num = p.type_num
+					where fp.pro_num=#{pro_num}
       ]]>
    </select>
     <!-- 프리랜서 프로필 컨텐츠 3-->
           <select id="selectProfileContent3"  parameterType="long" resultMap="FreeLancerResult">
 
       <![CDATA[
-		select k.KEY_NAME from FREE_PICK_KEYWORD fk
+		select k.key_name from FREE_PICK_KEYWORD fk
 			full outer join FREELANCER_PROFILE fp
-			on fk.PRO_NUM = fp.PRO_NUM 
+			on fk.pro_num = fp.pro_num 
 				full outer join KEYWORD k
-				on fk.KEY_NUM = k.KEY_NUM
-				where fp.PRO_NUM=#{PRO_NUM}
+				on fk.key_num = k.key_num
+				where fp.pro_num=#{pro_num}
       ]]>
    </select>
    
@@ -200,32 +235,54 @@
 	<!-- 삭제1 (체크박스 데이터 삭제) -->
    <delete id="checkdelete1" parameterType="long">
 	   <![CDATA[
-		 	delete from FREELANCER_PROFILE  where PRO_NUM=#{PRO_NUM}
+		 	delete from FREELANCER_PROFILE  where PRO_NUM in(#{PRO_NUM})
 	   ]]>
 	</delete>
 
 	
 	<!-- 프로필 insert -->
-<!-- 	<insert id="listInsert" parameterType="freelancerprofile">
-	<![CDATA[
-		insert into freelancer_profile (FREE_CODE, PRO_NUM, TYPE_NUM, MEM_EMAIL, PRO_EXP, PRO_CV, PRO_ADDR, PRO_POSTCODE, PRO_DETAILLOC, PRO_EDU, PRO_START, PRO_OX, PRO_GRADE, PRO_VCNT, PRO_PCNT, PRO_PLACE, PRO_WORKPLACE, PROFILE_SUB, PROFILE_DATE)
-	values
-		(PRO_NUM_SEQ.NEXTVAL, #{PRO_NUM}, #{TYPE_NUM}, #{MEM_EMAIL}, #{PRO_EXP}, #{PRO_CV}, #{PRO_ADDR}, #{PRO_POSTCODE}, #{PRO_DETAILLOC},#{PRO_EDU}, #{PRO_START}, #{PRO_OX}, #{PRO_GRADE},#{PRO_VCNT}, #{PRO_PCNT}, #{PRO_PLACE}, #{PRO_WORKPLACE}, #{PROFILE_SUB}, SYSDATE)
-		   ]]>
-	</insert>
- -->
- 
-	 <insert id="listInsert" parameterType="FreeLancerProfile"> 
-	 <selectKey keyProperty="pro_num" order="BEFORE" resultType="long">
-	 	select PRO_NUM_SEQ.NEXTVAL from dual
+ 	<insert id="listInsert" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
+  	<selectKey keyProperty="pro_num" order="BEFORE" resultType="long">
+		select PRO_NUM_SEQ.NEXTVAL from dual
 	 </selectKey>
-		<![CDATA[
-			insert into freelancer_profile (FREE_CODE, PRO_NUM, TYPE_NUM, TYPE_NAME, KEY_NUM, KEY_NAME, MEM_EMAIL, PRO_ADDR, PRO_OX)
-		values
-			(#{FREE_CODE}, #{PRO_NUM}, #{TYPE_NUM}, #{TYPE_NAME}, #{KEY_NUM}, #{KEY_NAME}, #{MEM_EMAIL}, #{PRO_ADDR}, #{PRO_OX})
-			   ]]>
+
+	<![CDATA[
+		insert into freelancer_profile (pro_num, free_code, type_num, mem_email, pro_exp, pro_cv, pro_addr, pro_postcode, pro_detailloc, pro_edu, pro_start, pro_ox, pro_grade, pro_place, pro_workplace, profile_sub, profile_date)
+	values
+		(#{pro_num}, #{free_code}, #{type_num}, #{mem_email} , #{pro_exp}, #{pro_cv}, #{pro_addr}, #{pro_postcode}, #{pro_detailloc},#{pro_edu}, #{pro_start}, #{pro_ox}, #{pro_grade}, #{pro_place}, #{pro_workplace}, #{profile_sub}, sysdate)
+		   ]]>
+	</insert> 
+
+	<!-- 프로필 선택 키워드 insert -->
+	 <insert id="insertPjpkeyword" parameterType="map">
+		 <selectKey keyProperty="pro_num" order="BEFORE" resultType="long">
+			 select PRO_NUM_SEQ.CURRVAL from dual
+		 </selectKey>
+		 
+		 <if test="key_num != null">
+		 	insert into FREE_PICK_KEYWORD(free_keynum, key_num, free_code, pro_num)
+		 	select  free_keynum_seq.nextval, A.* from(
+		  <foreach collection ="key_num" item="key_num" separator="UNION ALL "> 
+			 select  #{key_num}, #{free_code}, #{pro_num} from dual
+		 </foreach>) A
+		 </if>
+	 </insert>
+
+
+
+	<!-- 나영 추가 / mydash_free -->
+	<select id="mydash_free_select" parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancer">
+		select * from FREELANCER where mem_email=#{mem_email}
+	</select>
+	<insert id="mydash_free_insert" parameterType="fp.freelancerprofile.domain.FreeLancer">
+		insert into FREELANCER(free_code, mem_email, free_name, free_tel, free_fname, free_ofname)
+		 values(FREE_CODE_SEQ.nextval, #{mem_email}, #{free_name}, #{free_tel}, #{free_fname, jdbcType=VARCHAR}, #{free_ofname, jdbcType=VARCHAR})
 	</insert>
-
-
-
+	<update id="mydash_free_update" parameterType="fp.freelancerprofile.domain.FreeLancer">
+		update FREELANCER set free_tel=#{free_tel}, free_fname=#{free_fname, jdbcType=VARCHAR}, free_ofname=#{free_ofname, jdbcType=VARCHAR} where free_code=#{free_code}
+	</update>
+	<update id="mydash_update_classnum" parameterType="String">
+		update MEMBER set class_num =3 where mem_email=#{mem_email}
+	</update>
+	<!--/////////////////////////// -->
 </mapper>

@@ -288,7 +288,6 @@
 		</section>			
 		<!--/공지 게시판 입력 폼-->
 		
-		
 			
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

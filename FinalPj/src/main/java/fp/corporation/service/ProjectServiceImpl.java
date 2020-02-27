@@ -12,6 +12,7 @@ import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 
 import fp.corporation.domain.Project;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.mapper.ProjectMapper;
 import fp.corporation.vo.ProjectVo;
 import lombok.AllArgsConstructor;
@@ -79,11 +80,34 @@ public class ProjectServiceImpl implements ProjectService {
 	public void updateKeyword(Map<String, Object> map) {
 		mapper.updateKeyword(map);
 	}
-
-
+	@Override
 	@Transactional
 	public void updateKeyword(PjPickKeyword pjpkeyword) {
 		mapper.updateKeyword_Del(pjpkeyword);
 		mapper.updateKeyword_In(pjpkeyword);
+	}
+	
+	@Override
+	@Transactional
+	public void payinsert(Map<String, Object> payinfo) {
+		mapper.payinsert(payinfo);
+		mapper.payStatusUpdate(payinfo);
+	}
+	
+	//프로젝트 찜
+	@Override
+	public List<ProjectPick>pjpick_list(long free_code){
+		return mapper.pjpick_list(free_code);
+	}
+	@Override
+	@Transactional
+	public void pjpick_insert(Map<String, Object>map) {
+		mapper.pjpick_insert(map);
+		mapper.pjpick_pj_update_in(map);
+	}
+	@Override
+	public void pjpick_del(Map<String, Object>map) {
+		mapper.pjpick_del(map);
+		mapper.pjpick_pj_update_del(map);
 	}
 }

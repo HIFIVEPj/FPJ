@@ -10,7 +10,7 @@
 	function requestPay() {
 		alert("ssssssss");
 		var IMP = window.IMP; // 생략가능
-		IMP.init('imp07566805');
+		IMP.init('imp60448504');
 		IMP.request_pay({
 			pg: 'inicis', // version 1.1.0부터 지원.
 			pay_method: 'card',	
@@ -23,17 +23,16 @@
 			m_redirect_url: 'market-paymentsDone'
 		}, 
 		function (rsp) {
-			var payData=$('paymentID').serialize();
-			var url=$('paymentID').attr('action');
 			console.log(rsp);
 			if (rsp.success) {
 				$.ajax({
-				   url:url,
+				   url:'market-payments-insert',
 				   async:false,
 				   type: 'POST',
 				   contentType: 'application/json',
-				   data: payData,
+				   data: JSON.stringify(rsp),
 				   success: function(data){
+					   console.log("data"+data);
 				      if(data != null ){
 				         location.href="market-paymentsDone";
 				 		}
@@ -163,8 +162,7 @@
 										<div class="card-body">
 										<div class="item-card7-desc">
 										<!--auction Description-->
-										
-										<form id="paymentID" action="market-payments-insert" method="post">
+
 											<div class="single-productslide">
 												<div class="row no-gutter">
 													<div class="col-lg-6 border-right">
@@ -174,11 +172,7 @@
 															</div>
 														</div>
 													</div>
-													<input type="hidden" name="mem_email" value="${sessionScope.email}">
-													<input type="hidden" name="market_num" value="${market.market_num}">
-													<input type="hidden" name="marketPaym_freeRate" value="${mPayment.marketPaym_freeRate}">
-													<input type="hidden" name="marketPaym_price" value="${mPayment.marketPaym_price}">
-													<input type="hidden" name="marketPaym_pdName" value="${mPayment.marketPaym_pdName}">
+
 													<div class="col-lg-6">
 														<div class="product-gallery-data mb-0">
 															<h3 class="mb-3 font-weight-semibold">${market.market_sub}</h3>
@@ -225,7 +219,7 @@
 													</div>
 												</div>
 											</div>
-										</form>		
+
 										</div>
 											</ul><br/>	
 									<div class="item-card7-desc"> 

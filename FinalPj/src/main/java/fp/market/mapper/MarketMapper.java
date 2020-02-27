@@ -3,6 +3,7 @@ package fp.market.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
@@ -56,7 +57,7 @@ public interface MarketMapper {
 	
 	public String getFreeName(long market_num);
 	
-	public void insertMarketPayment(MarketPayment marketPayment);
+	public void insertPaymentMarket(Map<String,Object> map);
 
 	
 

@@ -26,5 +26,5 @@
 	<select id="getListWithPaging" resultType="ReplyVO">
 		select * from qa_comment where qa_num=#{qa_num} order by qacomm_num asc
 	</select>
-	
+
 </mapper>

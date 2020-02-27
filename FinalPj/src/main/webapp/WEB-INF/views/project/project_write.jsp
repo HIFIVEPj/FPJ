@@ -1397,6 +1397,7 @@
 		
 	function check(){
 		var type_num = $('.active').attr('value');
+		//alert(type_num);
 		document.getElementById('type_num').value = type_num;
 		var key_num = new Array();
 		var key_cnt = 0;

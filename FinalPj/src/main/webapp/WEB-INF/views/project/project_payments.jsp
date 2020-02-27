@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="fp.corporation.domain.ProjectPayment"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -33,152 +33,49 @@
 					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">My Dashboard</h3>
+								<h3 class="card-title">회원정보</h3>
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
 									<div class="profile-pic-img">
-										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+										<img src="../hifiveImages/cor_thumb/${corInfo.cor_fname}" class="brround" alt="${corInfo.cor_fname}">
 									</div>
-									<br/>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">회사이름</h4></a>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
+							<aside class="doc-sidebar my-dash">
+							<!--<aside class="app-sidebar doc-sidebar my-dash">-->
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">프로필 수정</span></a>
-										<!--	
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">내정보 수정</span><i class="angle fa fa-angle-right"></i></a>						 
+											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">Edit Profile-1</a></li>
-												<li><a class="slide-item" href="mydash.html">Edit Profile-2</a></li>
+												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
 											</ul>
-										 -->
 										</li>
-									<!--
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-diamond"></i><span class="side-menu__label"> My Ads</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myads.html"> My Ads-1</a></li>
-												<li><a class="slide-item" href="myads.html"> My Ads-2</a></li>
+												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_market">마켓 찜</a></li>
 											</ul>
 										</li>
-									-->
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label"> 찜한 프로젝트</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html"> My Favorite-1</a></li>
-												<li><a class="slide-item" href="myfavorite.html"> My Favorite-2</a></li>
+												<li><a class="slide-item" href="project_write?mem_email=${sessionScope.email}">프로젝트 작성하기</a></li>
+												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
 											</ul>
 										</li>
-									<!--
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">Managed Ads</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="manged.html">Managed Ads-1</a></li>
-												<li class="sub-slide">
-													<a class="side-menu__item border-top-0  slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>
-													<ul class="child-sub-menu ">
-														<li><a class="slide-item" href="manged.html">Managed Ads-3</a></li>
-														<li><a class="slide-item" href="manged.html">Managed Ads-4</a></li>
-													</ul>
-												</li>
-											</ul>
+										<li>
+											<a class="side-menu__item" href="payments_cor"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
-									-->
-										
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-basket"></i><span class="side-menu__label">주문내역</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="orders.html">Orders-1</a></li>
-												<li><a class="slide-item" href="orders.html">Orders-2</a></li>
-											</ul>
+										<li>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
-										<!-- 
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-game-controller"></i><span class="side-menu__label"> Safety Tips</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="tips.html">Safety Tips-1</a></li>
-												<li><a class="slide-item" href="tips.html">Safety Tips-2</a></li>
-											</ul>
-										</li>
-										 -->
-										 <li>
-											<a class="side-menu__item active" href="#"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">결제</span></a>
-										</li>
-									<!--
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-settings"></i><span class="side-menu__label"> 설정 </span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="settings.html">Settings-1</a></li>
-												<li><a class="slide-item" href="settings.html">Settings-2</a></li>
-											</ul>
-										</li>
-									-->
-									<!-- <li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">로그아웃</span></a>
-										</li>	 -->
 									</ul>
 								</div>
 							</aside>
-						</div>
-						<!--
-						<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-							
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						-->
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">결제시 주의사항</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
 						</div>
 					</div>
 					<div class="col-xl-9 col-lg-12 col-md-12">
@@ -201,62 +98,86 @@
 										<div class="item-card7-desc">
 											
 											<div style="margin-top:-18px;">
-											<span class="fa fa-briefcase" style="margin-right:50px"><strong>&nbsp;&nbsp;프로젝트 번호</strong></span>
-											<span style="margin-left:5px;">112233</span>
+											<span class="fa fa-briefcase" style="margin-right:5px"><strong>&nbsp;&nbsp;프로젝트 번호</strong></span>
+											<span style="margin-left:5px;">${projectCont.pj_num}</span>
 											</div>
 											
 											<div style="margin-top: -21px; margin-left:400px;">
 											<span><i class="si si-user text-muted mr-1" ></i><strong> 담당자 이름</strong></span>
-											<span style="margin-left:20px;">김당당</span><br/>
+											<span style="margin-left:20px;">${corInfo.cor_mname}</span><br/>
 											</div>
 											<br/>
 											
 											<div style="margin-top:10px;">						
 											<span class="fa fa-briefcase font-weight-semibold"><strong>&nbsp;&nbsp;프로젝트이름</strong></span>
-											<span style="margin-left:20px;">프로젝트이름프로젝트프로젝트</span>
+											<span style="margin-left:20px;">${projectCont.pj_sub}</span>
 											</div>	
 											
 											<div style="margin-top:-22px; margin-left:400px;">	
-											<span style='text-align:right;'><i class="si si-phone mr-2 text-muted mr-1" ></i><strong>담당자 연락처</strong></span>
-											<span style="margin-left:20px;">010-2222-3333</span>
+											<span style='text-align:right;'><i class="si si-phone mr-2 text-muted mr-1" ></i><strong>연락처</strong></span>
+											<span style="margin-left:20px;">${corInfo.cor_tel}</span>
 											</div>
 											
 											<div style="margin-top:28px;">			
 											<span><i class="fa fa-building text-muted mr-1"></i><strong>&nbsp;기업 이름</strong></span>
 											
-											<span style="margin-left:20px;">기업 이름이름</span>
+											<span style="margin-left:20px;">${corInfo.cor_name}</span>
 											</div>
 											
 											<div style="margin-top:-22px; margin-left:400px;">	
 											<span style='text-align:right;'><i class="fa fa-envelope-o text-muted mr-1" ></i><strong>&nbsp;이메일</strong></span>
-											<span style="margin-left:20px;">TEST@TEST.com</span>
+											<span style="margin-left:20px;">${corInfo.mem_email}</span>
 											</div>
-											
-											<div style="margin-top:29px;">	
-											<span><i class="fa fa-phone text-muted mr-1"></i><strong>&nbsp;연락처</strong></span>
-											<span style="margin-left:20px;">02-1234-1234</span>
-											</div>
-											</ul><br/><br/><br/>	
+											<br/><br/><br/>	
 											
 										<div class="item-card7-desc"> 
 											<h4 class="card-header"><strong>등급할인</strong></h4>
 											<br/>
-											<span class="text-dark"><strong>등급</strong></span>
-											<span>&nbsp;&nbsp;&nbsp;새싹</span><br/><br/>
-											<span class="text-dark"><strong>프로젝트 등록금액</strong></span>
-											&nbsp;&nbsp;&nbsp;
-											<span><strong>&nbsp;&nbsp;&nbsp;32,000 원</strong></span>
-											<br/><br/>
-											<span class="text-dark"><span><strong>등급할인</strong></span>
-											<span><strong>&nbsp;&nbsp;&nbsp;- 2,000 원</strong></span>
-											<div class="card-header"></div>
-											<br/><br/>
-								
+											<span class="text-dark" style="margin-right:10px;"><strong>등급</strong></span>
+											<span>${corInfo.cor_level}</span><br/><br/>
+											<span class="text-dark" style="margin-right:10px;"><strong>프로젝트 등록금액</strong></span>
+											<span><strong><fmt:formatNumber value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)}" pattern="#,###,###,###" />원</strong></span>
 											
-											<div class="form-group" style=text-align:right; >
-												<span  style="font-size: 20pt"><strong>결제금액</span></h3>
+											<br/><br/>
+												<span class="text-dark" style="margin-right:10px;"><strong>등급할인</strong></span>
+												<span><strong>
+												<c:choose>
+													<c:when test="${corInfo.cor_level==0}">
+													- 0원
+													</c:when>
+													<c:when test="${corInfo.cor_level==1}">
+														- ${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)*0.05} 원
+														<c:set var="discount1" value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)*0.05}"/>
+													</c:when>
+													<c:when test="${corInfo.cor_level==2}">
+														- ${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)*0.10} 원
+														<c:set var="discount2"  value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)*0.10}"/>
+													</c:when>
+												</c:choose> </strong></span>
+												<div class="card-header"></div>
+												<br/><br/>
+											
+											<div class="form-group" style="text-align:right;" >
+												<span  style="font-size: 20pt"><strong>결제금액</strong></span>
 												&nbsp;&nbsp;&nbsp;&nbsp;
-												<span style="font-size: 20pt;"><strong> 30,000 원</strong></span>
+												<span style="font-size: 20pt;">
+												<strong>
+													<c:if test="${corInfo.cor_level==0}">
+														<fmt:formatNumber value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)}" pattern="#,###,###,###" />
+														<c:set target="${pjpaym}" property="pjpaym_fprice" value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)}"/>
+													</c:if>
+													<c:if test="${corInfo.cor_level==1}">
+														<fmt:formatNumber value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)-discount1}" pattern="#,###,###,###" />
+														<c:set target="${pjpaym}" property="pjpaym_fprice"  value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)-discount1}"/>
+													</c:if>
+													<c:if test="${corInfo.cor_level==2}">
+														<fmt:formatNumber value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)-discount2}" pattern="#,###,###,###" />
+														<c:set target="${pjpaym}" property="pjpaym_fprice"  value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)-discount2}"/>
+													</c:if>
+													
+												</strong>
+												원
+												</span>
 											</div>				
 										</div>	
 										<div class="card-header">
@@ -312,7 +233,7 @@ pay_method: 'card',
 'vbank':가상계좌,
 'phone':휴대폰소액결제
 */
-merchant_uid: 'merchant_' + new Date().getTime(),
+merchant_uid: 'project_' + new Date().getTime(),
 /*
 merchant_uid에 경우
 https://docs.iamport.kr/implementation/payment
@@ -320,16 +241,17 @@ https://docs.iamport.kr/implementation/payment
 참고하세요.
 나중에 포스팅 해볼게요.
 */
-name: '글쓰기:project',
+name: '프로젝트 등록 결제',
 //결제창에서 보여질 이름
-amount: 1000,
+amount:'${pjpaym.pjpaym_fprice}', 
+	//${pjpaym.pjpaym_fprice},
 //가격
-buyer_email: 'iamport@siot.do',
-buyer_name: '구매자이름',
-buyer_tel: '010-1234-5678',
-buyer_addr: '서울특별시 강남구 삼성동',
-buyer_postcode: '123-456',
-m_redirect_url: 'https://www.yourdomain.com/payments/complete'
+buyer_email: '${corInfo.mem_email}',
+buyer_name: '${corInfo.cor_name}',
+buyer_tel: '${corInfo.cor_tel}',
+buyer_addr: '${corInfo.cor_addr}',
+buyer_postcode: '${corInfo.cor_postcode}',
+m_redirect_url: 'project_payments_end'
 /*
 모바일 결제시,
 결제가 끝나고 랜딩되는 URL을 지정
@@ -338,6 +260,23 @@ m_redirect_url: 'https://www.yourdomain.com/payments/complete'
 }, function (rsp) {
 console.log(rsp);
 if (rsp.success) {
+	
+$.ajax({
+	url:'project_payments_end?pj_num=${projectCont.pj_num}',
+	async:false,
+	type: 'POST',
+	contentType: 'application/json',
+	data: JSON.stringify(rsp),
+	success: function(data){
+		if(data != null ){
+			location.href="project_pay_end";
+		}
+	},
+	error: function(errorThrown){
+		alert(errorThrown.statusText);
+	}
+});
+	
 var msg = '결제가 완료되었습니다.';
 msg += '고유ID : ' + rsp.imp_uid;
 msg += '상점 거래ID : ' + rsp.merchant_uid;
@@ -347,7 +286,7 @@ msg += '카드 승인번호 : ' + rsp.apply_num;
 var msg = '결제에 실패하였습니다.';
 msg += '에러내용 : ' + rsp.error_msg;
 }
-alert(msg);
+//alert(msg);
 });
 };
 </script>
