@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,9 +46,10 @@
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet" />
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet" />
 
-
-
 	</head>
+
+	
+	
 		<body class="app sidebar-mini">
 		<div id="global-loader"><img src="../images/other/loader.svg" class="loader-img floating" alt=""></div>
 		<div class="page">
@@ -57,7 +58,7 @@
 					<div class="container-fluid">
 						<div class="d-flex">
 							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
-							<a class="header-brand" href="index.html">
+							<a class="header-brand" href="/">
 								<img src="../images/brand/logo1.png" class="header-brand-img" alt="Pinlist logo">
 							</a>
 				<!--<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a> -->
@@ -363,370 +364,107 @@
 							</div>
 						</div>
 <!--  -->
-<!-- 시작 -->
-		<div class="row">
-			<div class="col-lg-12">
-			<!-- 	<div class="app-content  my-3 my-md-5"> -->
-				<!-- 	<div class="side-app"> -->
-						<div class="page-header">
-							<h1 class="page-title">HIFIVE 회원관리</h1>
-						
-						</div>
-						<div class="row ">
-							<div class="col-lg-12">
-								<div class="panel panel-primary">
-									<div class=" ">
-										<div class="user-tabs mb-4">
-											<!-- Tabs -->
-											<ul class="nav panel-tabs">
-												<li class=""><a href="#tab1" class="active" data-toggle="tab">전체 (1,737)</a></li>
-												<li><a href="#tab2" data-toggle="tab">기업 (1,734)</a></li>
-												<li><a href="#tab3" data-toggle="tab">개인 (1,243)</a></li>
-											</ul>
-										</div>
+<!-- User-All-->
+		<section class="sptb">
+			<div class="container">
+				<div class="section-title center-block text-center">
+					<h1>Users List</h1>
+					<p>Mauris ut cursus nunc. Morbi eleifend, ligula at consectetur vehicula</p>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 users-list">
+						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border">
+							<select class="form-control page-select">
+								<option value="0">SelectOptions</option>
+								<option value="1">Active</option>
+								<option value="2">New</option>
+								<option value="3">Blocked</option>
+								<option value="4">Suspended</option>
+								<option value="4">A-Z</option>
+							</select>
+							<div class="page-options d-flex">
+								<div class="input-group">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search">
+									<div class="input-group-append ">
+										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</button>
 									</div>
 								</div>
-
-								<div class="card">
-									<div class="card-body">
-										<div class="tab-content">
-											<div class="tab-pane active " id="tab1">
-												<div class="mail-option">
-													<div class="chk-all">
-														<div class="btn-group">
-															<a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
-																Bulk Actions
-																<i class="fa fa-angle-down "></i>
-															</a>
-															<ul class="dropdown-menu">
-																<li><a href="#">Bulk Actions</a></li>
-																<li><a href="#">Delete</a></li>
-																<li><a href="#">Activate</a></li>
-																<li><a href="#">Deactivate</a></li>
-															</ul>
-														</div>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Apply
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Bulk Check Sploggers
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Bulk Report Sploggers
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
-															Change role to
-															<i class="fa fa-angle-down "></i>
-														</a>
-														<ul class="dropdown-menu">
-															<li><a href="#">Contributor</a></li>
-															<li><a href="#">Register</a></li>
-														</ul>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn mini blue">
-															Change
-														</a>
-													</div>
-													<ul class="unstyled inbox-pagination">
-														<li><span>1-20 of 1,737 items</span></li>
-														<li>
-															<a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
-														</li>
-													</ul>
-												</div>
-												<div class="table-responsive border-top">
-													<table class="table card-table table-bordered table-hover table-vcenter mb-0 text-nowrap">
-														<tbody>
-															<tr>
-																<th class="w-1"></th>	
-																<th>Email</th>
-																<th>이름</th>
-																<th>개인/기업</th>
-																<th>인증</th>																
-																<th>최종 접속일</th>
-																<th>가입일</th>
-															</tr>
-															<tr>
-																<th>
-																	<label class="custom-control custom-checkbox">
-																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																		<span class="custom-control-label"></span>
-																	</label>
-																</th>	
-																<td>jakespeson@gmail.com</td>
-																<td>박민하</td>
-																<td>개인</td>
-																<td class="text-danger">N</td>																
-																<td class="w-100">Jan 17,2019 11.30pm</td>
-																<td>Apr 02,2015 09.30pm</td>
-															</tr>
-															<tr>
-																<th>
-																	<label class="custom-control custom-checkbox">
-																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																		<span class="custom-control-label"></span>
-																	</label>
-																</th>	
-																<td>kim@gmail.com</td>
-																<td>김민정</td>
-																<td>기업</td>
-																<td class="text-success">Y</td>																
-																<td class="w-100">Jan 17,2019 11.30pm</td>
-																<td>Apr 02,2015 09.30pm</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-											<div class="tab-pane " id="tab2">
-												<div class="mail-option">
-													<div class="chk-all">
-														<div class="btn-group">
-															<a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
-																Bulk Actions
-																<i class="fa fa-angle-down "></i>
-															</a>
-															<ul class="dropdown-menu">
-																<li><a href="#">Bulk Actions</a></li>
-																<li><a href="#">Delete</a></li>
-																<li><a href="#">Activate</a></li>
-																<li><a href="#">Deactivate</a></li>
-															</ul>
-														</div>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Apply
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Bulk Check Sploggers
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Bulk Report Sploggers
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
-															Change role to
-															<i class="fa fa-angle-down "></i>
-														</a>
-														<ul class="dropdown-menu">
-															<li><a href="#">Contributor</a></li>
-															<li><a href="#">Register</a></li>
-														</ul>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn mini blue">
-															Change
-														</a>
-													</div>
-													<ul class="unstyled inbox-pagination">
-														<li><span>1-20 of 1,734 items</span></li>
-														<li>
-															<a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
-														</li>
-													</ul>
-												</div>
-												<div class="table-responsive border-top">
-													<table class="table card-table table-bordered table-hover table-vcenter mb-0 text-nowrap">
-														<tbody>
-															<tr>
-																<th class="w-1"></th>	
-																<th>Email</th>
-																<th>이름/닉네임</th>
-																<th>개인/기업</th>
-																<th>인증</th>
-																<th>최종 접속일</th>
-																<th>가입일</th>
-															</tr>
-															<tr>
-																<th>
-																<label class="custom-control custom-checkbox">
-																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																		<span class="custom-control-label"></span>
-																	</label>
-																</th>	
-																<td>kim@gmail.com</td>
-																<td>김민정</td>
-																<td>기업</td>
-																<td class="text-success">Y</td>																
-																<td class="w-100">Jan 17,2019 11.30pm</td>
-																<td>Apr 02,2015 09.30pm</td>
-
-														</tbody>
-													</table>
-												</div>
-
-											</div>
-											<div class="tab-pane " id="tab3">
-												<div class="mail-option">
-													<div class="chk-all">
-														<div class="btn-group">
-															<a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
-																Bulk Actions
-																<i class="fa fa-angle-down "></i>
-															</a>
-															<ul class="dropdown-menu">
-																<li><a href="#">Bulk Actions</a></li>
-																<li><a href="#">Delete</a></li>
-																<li><a href="#">Activate</a></li>
-																<li><a href="#">Deactivate</a></li>
-															</ul>
-														</div>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Apply
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Bulk Check Sploggers
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn" aria-expanded="false">
-															Bulk Report Sploggers
-														</a>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
-															Change role to
-															<i class="fa fa-angle-down "></i>
-														</a>
-														<ul class="dropdown-menu">
-															<li><a href="#">Contributor</a></li>
-															<li><a href="#">Register</a></li>
-														</ul>
-													</div>
-													<div class="btn-group hidden-phone">
-														<a  href="#" class="btn mini blue">
-															Change
-														</a>
-													</div>
-													<ul class="unstyled inbox-pagination">
-														<li><span>1-3 of 3 items</span></li>
-														<li>
-															<a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
-														</li>
-													</ul>
-												</div>
-												<div class="table-responsive border-top">
-													<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
-														<tbody>
-															<tr>
-																<th class="w-1"></th>																																
-																<th>Email</th>
-																<th>이름/닉네임</th>
-																<th>기업/개인</th>
-																<th>인증</th>
-																<th>최종 접속일</th>
-																<th>가입일</th>
-															</tr>
-															<tr>
-																<th>
-																<label class="custom-control custom-checkbox">
-																		<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																		<span class="custom-control-label"></span>
-																</label>
-																</th>	
-																<td>part@gmail.com</td>
-																<td>박민하</td>
-																<td>개인</td>
-																<td class="text-danger">N</td>																
-																<td class="w-100">Jan 17,2019 11.30pm</td>
-																<td>Apr 02,2015 09.30pm</td>
-															</tr>
-
-														</tbody>
-													</table>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<ul class="pagination mb-5">
-									<li class="page-item page-prev disabled">
-										<a class="page-link" href="#" tabindex="-1">Prev</a>
-									</li>
-									<li class="page-item active"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item page-next">
-										<a class="page-link" href="#">Next</a>
-									</li>
-								</ul>
 							</div>
 						</div>
+						<div class="card">
+							<div class="card-body">
+								<div class="user-tabel table-responsive border-top">
+								<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
+									<tbody>
+										<tr>
+											<th class="w-1"></th>	
+											<th>이름</th>
+											<th>이메일</th>
+											<th>소속</th>
+											<th>Membership Status</th>
+											<th>Member Since</th>
+											<th></th>
+										</tr>
+										<c:forEach var="dto" items="${pa.list}">
+										<tr>	
+										<th>
+												<label class="custom-control custom-checkbox">
+													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+													<span class="custom-control-label"></span>
+												</label>
+											</th>
+											<td>${dto.name}</td>
+											<td>${dto.email}</td>
+											<td>
+												<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3 }">개인</c:if>
+												<c:if test="${dto.class_num eq 4}">기업</c:if>
+											</td>
+											<td>
+												<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
+												<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
+												<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
+											</td>
+											<td>${dto.rdate}</td>
+											<td>
+												<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+											</td>
+										</tr>
+										</c:forEach>												
+									</tbody>
+								</table>
+								</div>
+							</div>
+						</div>
+					<ul class="pagination mb-5">
+							<!--  이전페이지 -->
+					<c:if test="${pa.nowPage != 1}">
+						<li class="page-item page-prev">
+							<a class="page-link" href="admin_member?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}" tabindex="-1">Prev</a>
+						</li>
+					</c:if>
+					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
+							<c:choose>
+								<c:when test="${p == pa.nowPage}">
+									<li class='page-item active'><a class="page-link">${p}</a></li>
+								</c:when>
+								<c:when test = "${p != pa.nowPage }">
+									<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
+								</c:when>
+							</c:choose>
+					</c:forEach>
+							<c:if test ="${pa.nowPage != pa.lastPage}">
+								<li class="page-item page-next">
+									<a class="page-link" href="admin_member?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+								</li>
+						</c:if>
+					</ul>  
 					</div>
-			</div> 	
-		<!-- users 끝 -->					
-<!--  
-					<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">HIFIVE MEMBER LIST</h3>
-									</div>
-									<div class="card-body">
-										<div class="table-responsive border-top">
-											<table class="table table-bordered table-hover mb-0">
-												<thead>
-													<tr>
-														<th>Email</th>
-														<th>이름</th>
-														<th>기업/개인</th>
-														<th>??</th>
-														<th>가입일</th>
-														<th>인증여부</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>#INV-348</td>
-														<td>Resturant</td>
-														<td>07-12-2018</td>
-														<td class="font-weight-semibold fs-16">$89</td>
-														<td>17-12-2018</td>
-														<td>
-															<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-															<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-														</td>
-													</tr>																	
-													<tr>
-														<td>#INV-986</td>
-														<td>Pet &amp; Animals</td>
-														<td>18-11-2018</td>
-														<td class="font-weight-semibold fs-16">$378</td>
-														<td>07-12-2018</td>
-														<td>
-															<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-															<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-			 		</div>
-	 -->
+				</div>
+			</div>
+		</section>
+	<!-- User end -->				
 					</div> 
 				</div>
 			</div>
@@ -798,6 +536,56 @@
 		<!-- Custom Js-->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script>
+<script type="text/javascript">
+/*
+$('a[href="#tab2"]').on('show.bs.tab', function(e){	
+	var activeTab = $(e.target).text();
+	var class_num= '4';
+	var test='0';
+	//alert(activeTab);
+	//alert(class_num);
+	$.ajax({
+		 type:"GET",
+		 url:"admin_member",
+		 data:{
+				"class_num": class_num
+		 },	
+		 
+		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			 //$("#data").empty().append(data);
+			if(data.length>0){ 
+		 		for(var i in data){
+		 			var $class_num =data[i].class_num; 		 			
+		 			var $mem_email=data[i].mem_email;
+		 		} 
+			 	alert("성공"+class_num);
+			}
+		 },error: function(data){
+            alert("에러발생");
+        }
+	}) //ajax
+})
+$('a[href="#tab3"]').on('show.bs.tab', function(e){	
+	var activeTab = $(e.target).text();
+	var class_num= '2';
+	alert(activeTab);
+	alert(class_num);
+	$.ajax({
+		 type:"GET",
+		 url:"admin_member",
+		 data:{
+				"class_num": class_num
+		 },
+		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			 //window.location.reload("admin_member");
+		 	var item =data.mem_email;
+		 	alter(item);
+		},error: function(data){
+            alert("에러발생");
+        }
+		}) //ajax
+})*/
+</script>
 
 	</body>
 </html>

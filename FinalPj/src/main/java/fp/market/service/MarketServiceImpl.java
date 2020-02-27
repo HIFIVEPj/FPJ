@@ -3,6 +3,7 @@ package fp.market.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketPayment;
+import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
@@ -43,11 +46,13 @@ public class MarketServiceImpl implements MarketService {
 
 	@Override
 	public Market getMarket(long market_num) {
+		mapper.updateMarketVcnt(market_num);
 		return mapper.getMarket(market_num);
+
 	}
 
 	@Override
-	public int getMarketStar(long market_num) {
+	public Integer getMarketStar(long market_num) {
 		return mapper.getMarketStar(market_num);
 	}
 
@@ -75,28 +80,84 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public void updateMarket2(Market market) {
 		mapper.updateMarket2(market);
-		
 	}
 	
 	@Override
 	public void insertMarket(Market market) {
 		mapper.insertMarket(market);
-		
 	}
+	@Override
+	public long getFreecode(String mem_email) {
+		return mapper.getFreeCode(mem_email);
+	}
+	
 	@Override
 	public void insertMarketRev(MarketRev mareketRev) {
 		mapper.insertMarketRev(mareketRev);
 		
 	}
+//marketQA insert	
 	@Transactional
 	public void insertMarketQA(MarketQA marketQA) {
-		mapper.insertMarketQA(marketQA);
 		mapper.updateMarketQA(marketQA);
+		mapper.insertMarketQA(marketQA);
 	}
-	public void insertMarketQAFile(MarketQAFile marketQAFile) {
-		mapper.insertMarketQAFile(marketQAFile);
+	@Override
+	public void insertMarketQAFile(HashMap<String, Object> map) {
+		mapper.insertMarketQAFile(map);
+	}
+//마켓문의글 파일 보기
+	@Override
+	public List<MarketQAFile> marketQAFile(HashMap<String, Object> map) {
+		return mapper.marketQAFile(map);
+	}
+	public MarketQA marketQAcont(HashMap<String, Object> map) {
+		return mapper.marketQAcont(map);
+	}
+//marketQA댓글 수정 삭제	
+	@Override
+	public void deleteMarketQA(HashMap<String, Object> map) {
+		mapper.deleteMarketQA(map);
+	}
+	@Override
+	public void updateMarketQA2(HashMap<String, Object> map) {
+		mapper.updateMarketQA2(map);
+		
+	}
+//marketRev댓글 수정 삭제		
+	@Override
+	public void deleteMarketRev(HashMap<String, Object> map) {
+		mapper.deleteMarketRev(map);
+	}
+	@Override
+	public void updateMarketRev(HashMap<String, Object> map) {
+		mapper.updateMarketRev(map);
+		
+	}
+//마켓결제
+	@Override
+	public String getFreeName(long market_num) {
+		return mapper.getFreeName(market_num);
 	}
 
+	public void insertPaymentMarket(Map<String,Object> map) {
+		mapper.insertPaymentMarket(map);
+	}
+//마켓리스팅시 하트색깔 여부를위해서
+	public List<MarketPick> pickState(String mem_email) {
+		return mapper.pickState(mem_email);
+		
+	}
+	@Override
+	public void insertMarketPick(HashMap<String,Object> map) {
+		mapper.insertMarketPick(map);
+		
+	}
+	@Override
+	public void deleteMarketPick(HashMap<String, Object> map) {
+		mapper.deleteMarketPick(map);
+		
+	}
 
 }
 

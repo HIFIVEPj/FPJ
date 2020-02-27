@@ -38,7 +38,7 @@
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
 									<div class="profile-pic-img">
-										<img src="../images/cor_thumb/${corInfo.cor_fname}" class="brround" alt="${corInfo.cor_fname}">
+										<img src="../hifiveImages/cor_thumb/${corInfo.cor_fname}" class="brround" alt="${corInfo.cor_fname}">
 									</div>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
@@ -134,7 +134,7 @@
 											<h4 class="card-header"><strong>등급할인</strong></h4>
 											<br/>
 											<span class="text-dark" style="margin-right:10px;"><strong>등급</strong></span>
-											<span>새싹</span><br/><br/>
+											<span>${corInfo.cor_level}</span><br/><br/>
 											<span class="text-dark" style="margin-right:10px;"><strong>프로젝트 등록금액</strong></span>
 											<span><strong><fmt:formatNumber value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)}" pattern="#,###,###,###" />원</strong></span>
 											
@@ -243,7 +243,7 @@ https://docs.iamport.kr/implementation/payment
 */
 name: '프로젝트 등록 결제',
 //결제창에서 보여질 이름
-amount:100, 
+amount:'${pjpaym.pjpaym_fprice}', 
 	//${pjpaym.pjpaym_fprice},
 //가격
 buyer_email: '${corInfo.mem_email}',
@@ -286,7 +286,7 @@ msg += '카드 승인번호 : ' + rsp.apply_num;
 var msg = '결제에 실패하였습니다.';
 msg += '에러내용 : ' + rsp.error_msg;
 }
-alert(msg);
+//alert(msg);
 });
 };
 </script>

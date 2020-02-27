@@ -12,22 +12,30 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
 import fp.corporation.domain.ProjectPayment;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.service.CorporationService;
 
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
+import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.service.FreeLancerProfileService;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -37,7 +45,9 @@ public class ProjectController {
 	private ProjectService service;
 	@Autowired
 	private CorporationService corService;
-
+	
+	@Autowired
+	private FreeLancerProfileService freeService;
 	
 	@RequestMapping("project_list")
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
@@ -54,25 +64,69 @@ public class ProjectController {
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		List<Project> list = service.list(projectVo);
-		
+
+		if(mem_email != null) {
+			FreeLancer free = freeService.mydash_free_select(mem_email);
+			if(free != null) {
+				List<ProjectPick> pjplist = service.pjpick_list(free.getFree_code());
+				ArrayList<Long>pjnumList  = new ArrayList<Long>();
+				for(int j=0; j<pjplist.size(); j++) {
+					pjnumList.add(pjplist.get(j).getPj_num());
+				}
+				ModelAndView mv = new ModelAndView("project/project_list");
+				mv.addObject("list", list);
+				mv.addObject("pa", projectVo);
+				List<Project> keyname = service.keywords();
+				mv.addObject("keyname", keyname);
+				mv.addObject("free", free);
+				mv.addObject("pjplist",pjplist);
+				mv.addObject("pjnumList",pjnumList);
+				return mv;
+			}
+			ModelAndView mv = new ModelAndView("project/project_list");
+			mv.addObject("list", list);
+			mv.addObject("pa", projectVo);
+			List<Project> keyname = service.keywords();
+			mv.addObject("keyname", keyname);		
+			return mv;
+		}
 		ModelAndView mv = new ModelAndView("project/project_list");
 		mv.addObject("list", list);
 		mv.addObject("pa", projectVo);
 		List<Project> keyname = service.keywords();
-		mv.addObject("keyname", keyname);
-		
+		mv.addObject("keyname", keyname);		
 		return mv;
 	}
 	
 	@RequestMapping("project_content")
-	public ModelAndView project_content(@RequestParam long pj_num) {
-		Project project = service.showContent(pj_num);
-		Corporation corInfo = service.corInfo(pj_num);
-		ModelAndView mv = new ModelAndView("project/project_content");
-		mv.addObject("projectCont", project);
-		mv.addObject("corInfo", corInfo);
-		
-		return mv;
+	public ModelAndView project_content(@RequestParam long pj_num, @RequestParam(value="mem_email", required=false)String mem_email) {
+		if(mem_email != null) {
+			Project project = service.showContent(pj_num);
+			Corporation corInfo = service.corInfo(pj_num);
+			FreeLancer free = freeService.mydash_free_select(mem_email);
+			
+			Map<String, Object>map = new HashMap<String, Object>();
+			map.put("pj_num", pj_num);
+			map.put("free_code", free.getFree_code());
+			
+			AppliedProject appp = service.select_applied_pj(map);
+			ModelAndView mv = new ModelAndView("project/project_content");
+			
+			mv.addObject("appp", appp);
+			mv.addObject("free", free);
+			mv.addObject("projectCont", project);
+			mv.addObject("corInfo", corInfo);
+			
+			return mv;
+		}else {
+			Project project = service.showContent(pj_num);
+			Corporation corInfo = service.corInfo(pj_num);
+			ModelAndView mv = new ModelAndView("project/project_content");
+			mv.addObject("projectCont", project);
+			mv.addObject("corInfo", corInfo);
+			
+			return mv;
+		}
 	}
 	
 	@GetMapping("project_update")
@@ -144,7 +198,7 @@ public class ProjectController {
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
 		//log.info("@#!#@$  map: "+ map);
-		return "corporation/managed_project?mem_email="+mem_email;
+		return "redirect:managed_project?mem_email="+mem_email;
 	}
 	
 	@RequestMapping("project_delete")
@@ -164,7 +218,7 @@ public class ProjectController {
 		return mv;
 	}
 	@RequestMapping(value="project_payments_end", method=RequestMethod.POST )
-	public String project_payments_end(@RequestBody HashMap<String, Object> data, @RequestParam long pj_num){
+	public void project_payments_end(@RequestBody HashMap<String, Object> data, @RequestParam long pj_num){
 		log.info("@!#*^@$ pj_num: "+pj_num);
 		//log.info("#($&#@*$ data: "+data.toString());
 		Map<String, Object> payinfo = new HashMap<String, Object>();
@@ -172,11 +226,38 @@ public class ProjectController {
 		payinfo.put("pj_num", pj_num);
 		log.info("#@$&*^#@&*$payinfo: "+payinfo);
 		service.payinsert(payinfo);
-		return "project/project_payments_end";
 		
 	}
-	@RequestMapping("project_wish")
-	public String project_wish() {
-		return "";
+	@GetMapping("project_pay_end")
+	public String pj_pay_end() {
+		return "project/project_payments_end"; 
 	}
+	@RequestMapping(value="/project_wish", method=RequestMethod.GET)
+	@ResponseBody
+	public void project_wish(@RequestParam long pj_num, @RequestParam long free_code) {
+		//log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("pj_num",pj_num);
+		map.put("free_code", free_code);
+		service.pjpick_insert(map);
+	}
+	@RequestMapping(value="/project_wish_del", method=RequestMethod.GET)
+	@ResponseBody
+	public void project_wish_del(@RequestParam long pj_num, @RequestParam long free_code) {
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("pj_num", pj_num);
+		map.put("free_code", free_code);
+		service.pjpick_del(map);
+	}
+	
+	@RequestMapping(value="/apply", method=RequestMethod.GET)
+	@ResponseBody
+	public void applied_pj(@RequestParam long pj_num, @RequestParam long free_code) {
+		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("pj_num", pj_num);
+		map.put("free_code", free_code);
+		service.applied_pj(map);
+	}
+	
 }

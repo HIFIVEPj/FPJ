@@ -57,7 +57,7 @@
 					<div class="container-fluid">
 						<div class="d-flex">
 							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
-							<a class="header-brand" href="index.html">
+							<a class="header-brand" href="/">
 								<img src="../images/brand/logo1.png" class="header-brand-img" alt="Pinlist logo">
 							</a>
 				<!--<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a> -->

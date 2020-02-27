@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.Corporation;
+import fp.corporation.service.ProjectService;
+import fp.corporation.vo.ProjectVo;
 import com.sun.mail.iap.Response;
 
 import fp.freelancerprofile.domain.FreeLancer;
@@ -42,7 +45,8 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class FreeLancerProfileController {
-	
+	@Autowired
+	private ProjectService pjservice;
 	@Autowired
 	private FreeLancerProfileService service;
 
@@ -151,8 +155,9 @@ public class FreeLancerProfileController {
 	@RequestMapping("freelancerProfile_delete")
 	public String ProfileListDelete(@RequestParam long PRO_NUM) {
 		service.listDelete(PRO_NUM);
-		
+	
 		return  "redirect:freelancerProfile_list?";
+
 	}
 
 	
@@ -185,17 +190,48 @@ public class FreeLancerProfileController {
 	public String FreelancerMyprofile_change() { 
 		return "profile/freelancerMyprofile_change";
 	}
-
-	@RequestMapping("myfavorite")	//관심있는프로젝트
-	public String Myfavorite() { 
-		return "profile/myfavorite";
-	}
 	@RequestMapping("payments")	//
 	public String payments() { 
 		return "profile/payments";
 	}
 	
 	//나영 수정---------
+	
+		@RequestMapping("myfavorite")	//관심있는프로젝트
+		public ModelAndView Myfavorite(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
+				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			FreeLancer freelancer = service.mydash_free_select(mem_email);
+			ModelAndView mv = new ModelAndView("profile/myfavorite");
+			long totalCountPjpick = pjservice.getTotalCountPickPj(freelancer.getFree_code());
+			if(nowPage == null && cntPerPage == null) {
+				nowPage = "1";
+				cntPerPage = "5";
+			}else if (nowPage == null) {
+				nowPage ="1";
+			}else if(cntPerPage == null) {
+				cntPerPage ="5";
+			}
+			
+			projectVo = new ProjectVo(totalCountPjpick, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			Map<String, Object>map = new HashMap<String, Object>();
+			map.put("ProjectVo", projectVo);
+			map.put("free_code",freelancer.getFree_code());
+			List<fp.corporation.domain.Project>pjpickList = pjservice.pjpick_free(map);
+			mv.addObject("free", freelancer);
+			mv.addObject("pjp", pjpickList);
+			mv.addObject("pa", projectVo);
+			return mv;
+		}
+		@RequestMapping("myfavorite_del")
+		public String myfavorite_del(@RequestParam long pj_num, @RequestParam long free_code, @RequestParam String mem_email) {
+			//log.info("@#^$&*@$# pj_num: "+pj_num+", free_code: "+free_code);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("pj_num", pj_num);
+			map.put("free_code", free_code);
+			pjservice.pjpick_del(map);
+			return "redirect:myfavorite?mem_email="+mem_email;
+		}
+	
 		@RequestMapping("mydash_free")	//회원정보수정
 		public ModelAndView Mydash_change(@RequestParam String mem_email) {
 			FreeLancer freelancer = service.mydash_free_select(mem_email);

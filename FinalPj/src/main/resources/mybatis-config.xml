@@ -12,6 +12,7 @@
 		<typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
 	  	<typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
 	  	<typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
+	  	<typeAlias alias="BoardAttachVO" type="fp.customer_service.domain.BoardAttachVO"/>
 		<!--
 		<typeAlias alias="CustomerServicePagingVO" type="fp.customer_service.domain.CustomerServicePagingVO"/>
 		-->
@@ -28,6 +29,8 @@
         <typeAlias alias="mCorporation" type="fp.market.domain.Corporation"/>
         <typeAlias alias="mMember" type="fp.market.domain.Member"/>
         <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
+        <typeAlias alias="MarketPayment" type="fp.market.domain.MarketPayment"/>
+     	<typeAlias alias="MarketPick" type="fp.market.domain.MarketPick"/>
 		
 		<!-- 별 -->
 		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
@@ -41,17 +44,17 @@
 		<!--<typeAlias alias="frType" type="fp.freelancerprofile.domain.Type"/> -->
         <typeAlias alias="frKeyWord" type="fp.freelancerprofile.domain.KeyWord"/>
        	<typeAlias alias="frProject" type="fp.freelancerprofile.domain.Project"/>
-       	 	 <!-- 프리랜서 리스트 페이지 -->
- 	   <typeAlias alias="FreeLancerListVO" type="fp.freelancerlist.domain.FreeLancerListVO"/>
-	   <typeAlias alias="List_FreeLancer" type="fp.freelancerlist.domain.List_FreeLancer"/>
-	   <typeAlias alias="List_FreeLancerProfile" type="fp.freelancerlist.domain.List_FreeLancerProfile"/>
-	   <typeAlias alias="List_FreeLancerReview" type="fp.freelancerlist.domain.List_FreeLancerReview"/>
-	   <typeAlias alias="List_PagingVO" type="fp.freelancerlist.domain.List_PagingVO"/>
-	   <typeAlias alias="List_Project" type="fp.freelancerlist.domain.List_Project"/>
-	   <typeAlias alias="List_Type" type="fp.freelancerlist.domain.List_Type"/>  
-	   <typeAlias alias="Freelancer_FreeLancerProfile" type="fp.freelancerprofile.domain.Freelancer_FreeLancerProfile"/>  
-       <typeAlias alias="Applied_Project" type="fp.freelancerprofile.domain.Applied_Project"/> 
-   	   <typeAlias alias="Pj_Pick_Keyword" type="fp.freelancerprofile.domain.Pj_Pick_Keyword"/> 
+       	<!-- 프리랜서 리스트 페이지 -->
+ 	    <typeAlias alias="FreeLancerListVO" type="fp.freelancerlist.domain.FreeLancerListVO"/>
+	    <typeAlias alias="List_FreeLancer" type="fp.freelancerlist.domain.List_FreeLancer"/>
+	    <typeAlias alias="List_FreeLancerProfile" type="fp.freelancerlist.domain.List_FreeLancerProfile"/>
+	    <typeAlias alias="List_FreeLancerReview" type="fp.freelancerlist.domain.List_FreeLancerReview"/>
+	    <typeAlias alias="List_PagingVO" type="fp.freelancerlist.domain.List_PagingVO"/>
+	    <typeAlias alias="List_Project" type="fp.freelancerlist.domain.List_Project"/>
+	    <typeAlias alias="List_Type" type="fp.freelancerlist.domain.List_Type"/>  
+	    <typeAlias alias="Freelancer_FreeLancerProfile" type="fp.freelancerprofile.domain.Freelancer_FreeLancerProfile"/>  
+        <typeAlias alias="Applied_Project" type="fp.freelancerprofile.domain.Applied_Project"/> 
+   	    <typeAlias alias="Pj_Pick_Keyword" type="fp.freelancerprofile.domain.Pj_Pick_Keyword"/> 
 	   
 		
 		<!-- 나영 -->
@@ -60,14 +63,14 @@
         <typeAlias type="fp.corporation.domain.PjPickKeyword" alias="PjPickKeyword"/>
         <typeAlias type="fp.corporation.domain.Type" alias="corType"/>   
         <typeAlias type="fp.corporation.domain.Corporation" alias="Corporation"/>   
-
+		
         <typeAlias type="fp.corporation.vo.ProjectVo" alias="ProjectVo"/>
         <typeAlias type="fp.corporation.vo.ProjectKeyNameVo" alias="ProjectKeyNameVo"/>
 			   
 		<!-- 소담 -->
    	   <typeAlias alias="Member" type="fp.member.domain.Member"/>
    	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
-   	    <typeAlias alias="MemberAuth" type="fp.member.domain.MemberAuth"/>
+   	    <typeAlias alias="MemberVo" type="fp.member.domain.MemberVo"/>
    	    <!-- <typeAlias alias="CustomUserDetails" type="fp.password.security.CustomUserDetails"/> -->
 
 	</typeAliases>

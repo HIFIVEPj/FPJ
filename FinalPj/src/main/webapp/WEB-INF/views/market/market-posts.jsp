@@ -32,7 +32,7 @@
 					<div class="col-lg-8 col-md-12 col-md-12">
 <!-- ▼▽▼▽▼▽▼▽▼▽▼▽서버로 보내는 폼 ▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽▼▽-->		
 					<form name="insertForm" method="post" action="market-insert" enctype="multipart/form-data">	
-						<input type="hidden" name="free_code" value="1">
+					
 						<div class="card mb-lg-0">
 							<div class="card-header ">
 								<h3 class="card-title">마켓등록</h3>
@@ -233,6 +233,7 @@
 			</div>
 		</section>
 		<!--/Add posts-section-->
+		
 <script>
 	   function upfile(){
 	      var filename = document.getElementById("file").value;
@@ -274,4 +275,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+
 <!--/footer-->

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!--header-->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -86,6 +87,7 @@
 								</div>
 							</div>
 						</div>
+					<form>
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">Categories</h3>
@@ -94,31 +96,15 @@
 								<div class="" id="">
 									<div class="filter-product-checkboxs">
 										<label for="개발" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1"  id="개발">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="1"  id="개발">
 											<span class="custom-control-label" class="text-dark">개발자<span class="label label-secondary float-right">14</span>
-
 											</span>
 										</label>
 										<label for="퍼블리싱" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="퍼블리싱">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="2" id="퍼블리싱">
 											<span class="custom-control-label" class="text-dark">디자이너<span class="label label-secondary float-right">22</span>
 											</span>
 										</label>
-									<!--<label for="디자인" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="디자인">
-											<span class="custom-control-label" class="text-dark">디자인<span class="label label-secondary float-right">22</span>
-											</span>
-										</label>
-										<label for="기획" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="기획">
-											<span class="custom-control-label" class="text-dark">기획<span class="label label-secondary float-right">22</span>
-											</span>
-										</label>
-										<label for="기타" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2" id="기타">
-											<span class="custom-control-label" class="text-dark">기타<span class="label label-secondary float-right">22</span>
-											</span>
-										</label>  -->	
 									</div>
 								</div>
 							</div>
@@ -161,6 +147,9 @@
 								<a href="#" class="btn btn-secondary btn-block">Apply Filter</a>
 							</div>
 						</div>		
+					</form>
+						
+						
 					</div>
 					<!--/Left Side Content-->
 
@@ -172,11 +161,10 @@
 									<div class="item2-gl-nav d-flex">
 										<h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6>
 										<ul class="nav item2-gl-menu ml-auto">
-											<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
+										<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
 											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>
 										</ul>
 										<div class="d-flex">
-											
 											<select name="item" class="form-control select-sm w-100">
 												<option value="1">최신순</option>
 												<option value="2">평점순</option>
@@ -187,13 +175,14 @@
 									<div class="tab-content">
 										<div class="tab-pane" id="tab-11">
 <!--///////////////////////////// 마켓리스팅1 -->					
+										<!-- 
 											<c:forEach items="${list}" var="list">	
 												<div class="card overflow-hidden">
 													<div class="d-md-flex">
 														<div class="item-card9-img">
 															<div class="item-card9-imgs">
 																<a href="market-content"></a>
-																<img src="../images/products/h4.png" alt="img" class="cover-image h-100">
+																<img src="../hifiveImages/market/marketThumbnails/${list.market_fname}" alt="img" class="cover-image h-100">
 															</div>
 															<div class="item-card9-icons">
 																<a href="" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
@@ -231,33 +220,54 @@
 													
 												</div>
 										</c:forEach>
+										-->
 <!--///////////////////////////// 마켓리스팅1 -->
 									<!-- 
-											
+											<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;">
+                                                    <i class="fa fa fa-heart" style="color:white"></i></a>
 									-->		
 										</div>
 <!-- ///////////////////////////////////////2list -->										
 										<div class="tab-pane active" id="tab-12">
 											<div class="row">
 											
-											<c:forEach items="${list}" var="list">	
+											<c:forEach items="${list}" var="list"  varStatus="status">	
 												<div class="col-lg-6 col-md-12 col-xl-4">
 													<div class="card overflow-hidden">
 														<div class="item-card9-img">
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
-																<a href="market-content?market_num=${list.market_num}"></a>    
-																<img src="../marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
-
+																<a href="market-content?market_num=${list.market_num}"></a>    	
+																<img src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
 															</div>
-															<div class="item-card9-icons">
-																<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
+															<div class="item-card9-icons" >
+																<c:if test="${fn:length(marketNumList) > 0}">	
+																	<c:choose>
+																		<c:when test="${marketNumList.contains(list.market_num)}">
+																			<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick(${list.market_num})" id="fullHeart${list.market_num}" style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>
+																		</c:when>
+																		<c:otherwise>
+																			<a href="#" class="item-card9-icons1 wishlist" onclick="addPick(${list.market_num})" id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o" ></i></a>
+																		</c:otherwise>
+																	</c:choose>
+																</c:if>
+																<c:choose>
+																	<c:when test="${sessionScope.email != null}">
+																		<c:if test="${fn:length(marketNumList) == 0}">	
+																			<a href="" class="item-card9-icons1 wishlist" > <i class="fa fa fa-heart-o"></i></a>
+																		</c:if>
+																	</c:when>
+																	<c:otherwise>
+																		<a href="#" class="item-card9-icons1 wishlist" onclick="loginCheck()"> <i class="fa fa fa-heart-o"></i></a>
+																	</c:otherwise>
+																</c:choose>
 															</div>
 														</div>
 														<div class="card-body">
 															<div class="item-card9">
 																<a href="market-content?market_num=${list.market_num}">${list.freelancer.free_name}</a>
 																<a href="market-content?market_num=${list.market_num}" class="text-dark mt-2"><h4 class="font-weight-semibold mt-1">${list.market_sub}</h4></a>
+
 															<!--<p>${list.market_cont}</p>  -->
 																<div class="item-card9-desc">
 																	<h2>${list.market_price}<span class="fs-16">원</span></h2>
@@ -276,6 +286,7 @@
 																				</c:forEach>	
 																			</c:if>
 																		</span>&nbsp;${list.marketRev.marketRev_star}&nbsp;&nbsp;&nbsp;
+
 																		<div>
 																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> ${list.marketRev.marketRev_num}</span></a>
 																		   <a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i>${list.market_vcnt}</span></a>
@@ -289,9 +300,6 @@
 													</div>
 												</div>
 											</c:forEach>
-									<!--			
-												
-										 -->		
 											</div>
 										</div>
 									</div>
@@ -332,10 +340,11 @@
 											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 										</li>
 										</c:if>
-										<c:if test="${sessionScope.class_num==5 }">
-											<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
-										</c:if>
-
+									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+											<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
+												<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+											</c:if>
+										 
 									</ul>
 							 	 </div>
 							</div>
@@ -346,9 +355,44 @@
 			</div>
 		</section>
 		<!--/Add Listing-->
-
+<script>
+	function loginCheck(){
+		alert("로그인 후 이용해주세요");
+	}
+	
+	function addPick(market_num){
+		alert("marketnum"+market_num);
+		$.ajax({
+			type:"get",  
+			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
+			success: function(){
+				$('#emptyHeart'+market_num).remove();
+				
+			},
+			error: function(request,status,error){
+				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+	
+	function delPick(market_num){
+		alert("marketnum"+market_num);
+		$.ajax({
+			type:"get",  
+			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',
+			success: function(){
+			//	$('#fullHeart').remove();
+				
+			},
+			error: function(request,status,error){
+				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+</script>
 
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
+
 </html>

@@ -20,7 +20,7 @@
       <resources mapping="/video/**" location="/resources/video/" />
       <resources mapping="/summernote/**" location="/WEB-INF/views/summernote/" />
       <resources mapping="/marketThumbnails/**" location="/resources/marketThumbnails/" />
-      <resources mapping="/marketImages/**" location="/resources/marketImages/" />
+      <resources mapping="/hifiveImages/**" location="file:///C:/hifive/hifiveImages/" />
    
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -32,7 +32,7 @@
    <!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
    <beans:bean id="naverLoginController" class="fp.login.naver.NaverLoginController" />
    <beans:bean id="kakaoController" class="fp.login.naver.KakaoController" />
-  <!-- file Upload 세영 -->
+  	<!-- file Upload 세영 -->
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- max upload size in bytes -->
         <beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
@@ -57,6 +57,7 @@
 	<context:component-scan base-package="fp.corporation.controller" />
 	<!-- 소담 -->
 	<context:component-scan base-package="fp.index.controller" />
+	<context:component-scan base-package="fp.admin.controller" />
 	<context:component-scan base-package="fp.member.controller" />
 	<context:component-scan base-package="fp.community.controller" />
 	<context:component-scan base-package="fp.login.controller" />

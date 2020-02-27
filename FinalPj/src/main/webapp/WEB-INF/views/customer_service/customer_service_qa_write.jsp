@@ -46,19 +46,19 @@
 		</div>
 		<!--/Breadcrumb-->
 
-		<!--공지 게시판 입력 폼-->
+		<!--문의 게시판 입력 폼-->
 		<section class="sptb">
 			<div class="row row-cards">
 				<div class="col-md-6 mx-auto">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">문의 글쓰기</div>
+							<div class="card-title"><b>문의 글쓰기</b></div>
 						</div>
 						
 						<!--
 						<form method="post" action="customer_service_qa_write" name="qa_write" enctype="multipart/form-data">
 						-->
-						<form method="post" action="customer_service_qa_write" name="qa_write">
+						<form role="form" method="post" action="customer_service_qa_write" name="qa_write">
 						
 						
 						<input type="hidden" name="mem_email" value="${sessionScope.email}">
@@ -69,6 +69,7 @@
 						<!-- /나중에 수정해야 할 부분 -->
 						
 						<script type="text/javascript">
+						   /*
 						   function check() {
 						       if(document.qa_write.qa_cate.value==''){
 						    	   alert('분류를 선택해 주세요.');
@@ -80,16 +81,236 @@
 						    	   document.input.qa_sub.focus();
 						    	   return false;
 						       }
-						    	document.qa_write.submit();
-						          
+						    	document.qa_write.submit();						          
 					       }
+						   */
+						   
+						   $(document).ready(function(e){
+				   
+							   var formObj = $("form[role='form']");
+								  
+							   $("button[type='submit']").on("click", function(e){
+								    
+								   
+								   if(document.qa_write.qa_cate.value==''){
+							    	   alert('분류를 선택해 주세요.');
+							    	   document.qa_write.qa_cate.focus();
+							    	   return false;
+							       }
+							       if(document.qa_write.qa_sub.value==''){
+							    	   alert('제목을 입력해 주세요.');
+							    	   document.qa_write.qa_sub.focus();
+							    	   return false;
+							       }
+								   
+								   
+								   e.preventDefault();
+									    
+								   console.log("submit clicked");
+								   var str = "";
+								    
+								    $(".uploadResult ul li").each(function(i, obj){
+								      
+								      var jobj = $(obj);
+								      
+								      console.dir(jobj);
+								      //console.log("-------------------------");
+								      //console.log(jobj.data("filename"));								      
+								      
+								      str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+								      str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+								      str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+								      str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
+								      
+								    });
+								    
+								    console.log(str);
+								    
+								    formObj.append(str).submit(); 
+							   });
+							   
+							   
+							   
+							   var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+							   var maxSize = 5242880; //5MB
+							   
+							   function checkExtension(fileName, fileSize){
+							     
+							     if(fileSize >= maxSize){
+							       alert("파일 사이즈 초과");
+							       return false;
+							     }
+							     
+							     if(regex.test(fileName)){
+							       alert("해당 종류의 파일은 업로드할 수 없습니다.");
+							       return false;
+							     }
+							     return true;
+							   }
+							   
+							   $("input[type='file']").change(function(e){
+
+							     var formData = new FormData();
+							     
+							     var inputFile = $("input[name='uploadFile']");
+							     
+							     var files = inputFile[0].files;
+							     
+							     for(var i = 0; i < files.length; i++){
+
+							       if(!checkExtension(files[i].name, files[i].size) ){
+							         return false;
+							       }
+							       formData.append("uploadFile", files[i]);
+							       
+							     }
+							     
+							     $.ajax({
+							       url: '/uploadAjaxAction',
+							       processData: false, 
+							       contentType: false,data: 
+							       formData,type: 'POST',
+							       dataType:'json',
+							         success: function(result){
+							           	console.log(result); 
+							 		  	showUploadResult(result); //업로드 결과 처리 함수 
+
+							       }
+							     }); //$.ajax
+							     
+							   });
+							   
+							   
+							   function showUploadResult(uploadResultArr){
+								    
+								    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+								    
+								    var uploadUL = $(".uploadResult ul");
+								    
+								    var str ="";
+								    
+								    $(uploadResultArr).each(function(i, obj){
+								    
+								        
+								        /*
+								        if(obj.image){
+								          var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+								          str += "<li><div>";
+								          str += "<span> "+ obj.fileName+"</span>";
+								          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-danger waves-effect waves-light'><i class='fa fa-times'></i></button><br>";
+								          str += "<img src='/display?fileName="+fileCallPath+"'>";
+								          str += "</div>";
+								          str +"</li>";
+								        }else{
+								          var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);            
+								            var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+								              
+								          str += "<li><div>";
+								          str += "<span> "+ obj.fileName+"</span>";
+								          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-danger waves-effect waves-light'><i class='fa fa-times'></i></button><br>";
+								          str += "<img src='../images/attach.png'></a>";
+								          str += "</div>";
+								          str +"</li>";
+								        }
+								        
+								        if(!obj.image){
+									          
+								          var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
+								          
+								          var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+								          
+								          str += "<li><div><a href='/download?fileName="+fileCallPath+"'>"+"<img src='../images/attach.png'>" + " " + obj.fileName+"</a>"
+								        		  +"<span data-file=\'"+fileCallPath+"\' data-type='file'> x </span>"+"</div></li>"
+								        }else{
+								          
+								          var fileCallPath = encodeURIComponent(obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+								          
+								          var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
+								          originPath = originPath.replace(new RegExp(/\\/g),"/");
+								          
+								          str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'>" + " " + obj.fileName + "</a>"
+								        		  +"<span data-file=\'"+fileCallPath+"\' data-type='image'> x </span>"+"</li>";
+								        }
+								        */
+								        
+								      	/*
+								    	if(!obj.image){
+									          
+								          var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
+								          
+								          var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+								          
+								          str += "<li data-path='"+obj.uploadPath+" 'data-uuid='"+obj.uuid+" 'data-filename='"+obj.fileName+" 'data-type='"+obj.image+"'><div><a href='/download?fileName="+fileCallPath+"'>"+"<img src='../images/attach.png'>" + " " + "<b>"+obj.fileName+"</b></a>&nbsp;"
+								        		  +"<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-danger waves-effect waves-light btn-xs'><i class='fa fa-times'></i></button>"+"</div></li>"
+								        }else{
+								          
+								          var fileCallPath = encodeURIComponent(obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+								          
+								          var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
+								          originPath = originPath.replace(new RegExp(/\\/g),"/");
+								          
+								          str += "<li data-path='"+obj.uploadPath+" 'data-uuid='"+obj.uuid+" 'data-filename='"+obj.fileName+" 'data-type='"+obj.image+"'><div><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'>" + " " + "<b>"+obj.fileName+"</b></a>&nbsp;"
+								        		  +"<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-danger waves-effect waves-light btn-xs'><i class='fa fa-times'></i></button>"+"</div></li>";
+								        }
+								        */
+								        
+								    	if(obj.image){
+									       
+								    	  var fileCallPath = encodeURIComponent(obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+									       
+								    	  /*
+								          var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
+								          originPath = originPath.replace(new RegExp(/\\/g),"/");
+								          */
+								          /*
+								          str += "<li data-path='"+obj.uploadPath+" 'data-uuid='"+obj.uuid+" 'data-filename='"+obj.fileName+" 'data-type='"+obj.image+"'><div><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'>" + " " + "<b>"+obj.fileName+"</b></a>&nbsp;"
+								        		  +"<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-danger waves-effect waves-light btn-xs'><i class='fa fa-times'></i></button>"+"</div></li>";	
+								    	  */	
+								    	  str += "<li data-path='"+obj.uploadPath+" 'data-uuid='"+obj.uuid+" 'data-filename='"+obj.fileName+" 'data-type='"+obj.image+"'><div><img src='/display?fileName="+fileCallPath+"'>" + " " + "<b>"+obj.fileName+"</b>&nbsp;"
+						        		  			+"<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-danger waves-effect waves-light btn-xs'><i class='fa fa-times'></i></button>"+"</div></li>";
+								          
+								        }else{
+								          
+								          var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
+								          
+								          str += "<li data-path='"+obj.uploadPath+" 'data-uuid='"+obj.uuid+" 'data-filename='"+obj.fileName+" 'data-type='"+obj.image+"'><div><img src='../images/attach.png'>" + " " + "<b>"+obj.fileName+"</b>&nbsp;"
+								        		  +"<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-danger waves-effect waves-light btn-xs'><i class='fa fa-times'></i></button></div></li>";
+								        }
+								        
+						   			});
+								    uploadUL.append(str);
+							   }
+							   
+							   $(".uploadResult").on("click", "button", function(e){
+								    
+								    console.log("delete file");
+								    var targetFile = $(this).data("file");
+								    var type = $(this).data("type");
+								    
+								    var targetLi = $(this).closest("li");
+								    
+								    $.ajax({
+								      url: '/deleteFile',
+								      data: {fileName: targetFile, type:type},
+								      dataType:'text',
+								      type: 'POST',
+								        success: function(result){
+								           alert(result);
+								           
+								           targetLi.remove();
+								         }
+								    }); //$.ajax
+							   });
+						   
+						   });
+						   
 						</script>
 						
 						
 						
 						<div class="card-body">
 							<div class="form-group">
-								<label class="form-label">분류</label>
+								<label class="form-label"><b>분류</b></label>
 								<!--
 								<select class="form-control select2" data-placeholder="분류를 선택해 주세요." multiple>
 								-->
@@ -106,7 +327,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label class="form-label">제목</label>
+								<label class="form-label"><b>제목</b></label>
 								<input type="text" class="form-control w-100" value="" placeholder="제목을 입력해 주세요." name="qa_sub">
 							</div>
 							
@@ -120,8 +341,56 @@
 							</div>
 							-->
 							
+							
+							<!-- 파일업로드 css -->
+							<style>
+							.uploadResult {
+								width: 100%;
+								background-color: #f5f5f5; /*#e9ecf0*/
+							}
+							
+							.uploadResult ul {
+								display: flex;
+								flex-flow: row;
+								justify-content: center;
+								align-items: center;
+							}
+							
+							.uploadResult ul li {
+								list-style: none;
+								padding: 10px;
+							}
+							
+							.uploadResult ul li img {
+								width: 60px;
+							}
+							</style>
+							
+							<style>
+							.bigPictureWrapper {
+							  position: absolute;
+							  display: none;
+							  justify-content: center;
+							  align-items: center;
+							  top:0%;
+							  width:100%;
+							  height:100%;
+							  background-color: gray; 
+							  z-index: 100;
+							}
+							
+							.bigPicture {
+							  position: relative;
+							  display:flex;
+							  justify-content: center;
+							  align-items: center;
+							}
+							</style>
+							
+							
+							
 							<div class="form-group">
-								<label class="form-label">파일 업로드</label>
+								<label class="form-label"><b>파일 업로드</b></label>
 								<div class="col-lg-12 col-sm-12">
 									<!--
 									<input type="file" class="dropify" data-height="80">
@@ -129,18 +398,33 @@
 									<!--
 									<input type="file" class="dropify" id="dropify" data-height="100" multiple accept="image/*"/>
 									-->
+									<!--
 									<input type="file" class="dropify" id="dropify" data-height="100" multiple/>
+									-->
+									
+									<div class="uploadDiv">
+										<input type="file" class="dropify" id="dropify" name="uploadFile" data-height="100" multiple/>
+									</div>
+																		
+									<div class="uploadResult">
+										<ul>
+										
+										</ul>
+									</div>
+									
+									
 								</div>
 							</div>
 							
 							
 					
 							
-							<!-- 테스트 -->
+							<!-- 파일 업로드 테스트 -->
+							<!--
 							<div class="form-group">
 								<label class="form-label">파일 업로드</label>
 								<div class="col-lg-12 col-sm-12">
-								
+							-->	
 									<!--
 									<div class="jquery-script-ads" style="margin-top:20px;">
 										<script type="text/javascript">
@@ -158,7 +442,7 @@
 										</script>
 									</div>
 									-->
-											
+									<!--
 									<style>
 										.dropzone {
 									        background-color: #ccc;
@@ -299,21 +583,16 @@
 									  })();
 									
 									</script>
-								
-								
-								
-									
+							
 								</div>
 							</div>
-							
-							
-							
+							-->	
 							<!-- /테스트 -->
 							
 							
 							
 							<div class="form-group">
-								<label class="form-label">내용</label>
+								<label class="form-label"><b>내용</b></label>
 								
 									<textarea name="qa_cont" id="summernote" class="summernote"></textarea>
 							
@@ -326,7 +605,10 @@
 												</label>
 											</div>
 											<div class="col col-auto">
+												<!--
 												<button type="button" class="btn btn-primary waves-effect waves-light" onclick="check(this.form)">등록</button>
+												-->
+												<button type="submit" class="btn btn-primary waves-effect waves-light">등록</button>
 												<!-- 
 												<input type="button" class="btn btn-danger waves-effect waves-light" value='취소' id='click1'>
 												 -->
@@ -402,44 +684,14 @@
 				
 			</div>
 		<!-- /small Modal -->
-		
-		<!-- 글쓰기 예외처리 -->
-		<!--
-		<script>
-		function goWrite(frm) {
-			var notice_cate = frm.notice_cate.value;
-			var writer = frm.writer.value;
-			var content = frm.content.value;
-			
-			if (notice_cate.trim() == ''){
-				alert("분류를 선택해 주세요.");
-				return false;
-			}
-			if (notice_sub.trim() == ''){
-				alert("제목을 입력해 주세요.");
-				return false;
-			}			
-			if (content.trim() == ''){
-				alert("내용을 입력해주세요");
-				return false;
-			}
-			frm.submit();
-		}
-		</script>
-		-->
-		
-		<!-- /글쓰기 예외처리 -->
-						
-						
-						
-						
+				
 						
 						
 					</div>
 				</div>
 			</div>
 		</section>			
-		<!--/공지 게시판 입력 폼-->
+		<!--/문의 게시판 입력 폼-->
 		
 		
 			

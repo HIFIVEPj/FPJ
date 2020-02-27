@@ -14,7 +14,7 @@
 	-->
 	<select id="qa_content" resultType="CustomerServiceQa" parameterType="long">
 		<!--select * from qa where qa_num = #{qa_num}-->
-		select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, qa.option1, qa.option2, qa.option3, mem_name from qa, member where qa.mem_email=member.mem_email and qa_num=#{qa_num}
+		select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, replyCnt, qa.option2, qa.option3, mem_name from qa, member where qa.mem_email=member.mem_email and qa_num=#{qa_num}
 	</select>
 	
 	<update id="qa_vcnt" parameterType="long">
@@ -52,7 +52,7 @@
 	<select id="qa_cate_count_project" resultType="int" parameterType="CustomerServiceQa">
 		select count(qa_num) from qa where qa_cate='프로젝트'
 	</select>
-	
+		
 	<!-- 페이징 처리 후 게시글 조회 -->
 	<!--
 	<select id="qa_list" resultType="CustomerServiceQa">
@@ -163,7 +163,7 @@
   ]]>
   -->
   <![CDATA[ 
-  select * from (select rownum rn, aa.* from (select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, qa.option1, qa.option2, qa.option3, mem_name from qa, member where qa.mem_email=member.mem_email order by qa_num desc) aa
+  select * from (select rownum rn, aa.* from (select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, replycnt, qa.option2, qa.option3, mem_name from qa, member where qa.mem_email=member.mem_email order by qa_num desc) aa
       where
   ]]>
   
@@ -184,4 +184,10 @@
 		qa_num > 0
 		
 	</select>
+	
+	
+	<update id="updateReplyCnt">
+		update qa set replycnt = replycnt + #{amount} where qa_num = #{qa_num}
+	</update>
+	
 </mapper>

@@ -1,14 +1,13 @@
 package fp.corporation.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
-import fp.corporation.domain.Keyword;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
-import fp.corporation.vo.ProjectKeyNameVo;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.vo.ProjectVo;
 
 public interface ProjectService {
@@ -33,6 +32,17 @@ public interface ProjectService {
 
 	//결제
 	void payinsert(Map<String, Object> payinfo);
-
+	//프로젝트 찜
+	List<ProjectPick>pjpick_list(long free_code);
+	void pjpick_insert(Map<String, Object>map);
+	void pjpick_del(Map<String, Object>map);
+	
+	//프리랜서 마이페이지에서 찜한프로젝트리스트 뽑기
+	List<Project>pjpick_free(Map<String, Object>map);
+	long getTotalCountPickPj(long free_code);
+	
+	//프로젝트지원
+	void applied_pj(Map<String, Object>map);
+	AppliedProject select_applied_pj(Map<String, Object>map);
 }
 

@@ -175,6 +175,7 @@
 	<delete id="deleteKeyword" parameterType="long">
 	 	delete from PJ_PICK_KEYWORD where PJ_NUM=#{pj_num}
 	 </delete>
+	 
 	<!-- 기업정보 뽑기 -->
 	<select id="corInfo" parameterType="long" resultMap="corporationMap">
 		select * from CORPORATION cor join PROJECT pj on cor.COR_CODE=pj.COR_CODE where PJ_NUM=#{pj_num}
@@ -187,4 +188,44 @@
 	<update id="payStatusUpdate" parameterType="java.util.Map">
 		update PROJECT set pj_paystatus=1 where pj_num = #{pj_num}
 	</update>
+	
+	<!-- 프로젝트 찜 -->
+	<select id="pjpick_list" resultType="fp.corporation.domain.ProjectPick" parameterType="long">
+		select * from project_pick where free_code=#{free_code}
+	</select>
+	<insert id="pjpick_insert" parameterType="map">
+	 insert into project_pick(pjp_num, pj_num, free_code) values (PJP_NUM_SEQ.nextval, #{pj_num}, #{free_code})
+	</insert>
+	<delete id="pjpick_del" parameterType="map">
+	delete from project_pick where free_code=#{free_code} and pj_num=#{pj_num}
+	</delete>
+	<update id="pjpick_pj_update_in" parameterType="map">
+	update PROJECT set pj_pcnt= pj_pcnt+1 where pj_num=#{pj_num}
+	</update>
+	<update id="pjpick_pj_update_del" parameterType="map">
+	update PROJECT set pj_pcnt= pj_pcnt-1 where pj_num=#{pj_num}
+	</update>
+	
+	<!--   프로젝트 찜 프리랜서 mypage 조회 -->
+	<select id ="pjpick_free" parameterType="map" resultMap="projectMap">
+	 <![CDATA[
+		 select * from (select ROWNUM rnum , aa.* from 
+		(select pj.*, cor.cor_name from project pj join
+		Corporation cor on
+		pj.cor_code = cor.cor_code 
+		join project_pick pjp 
+		on pj.pj_num=pjp.pj_num 
+		where free_code=#{free_code} order by pj.pj_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
+	 ]]>
+	</select>
+	<select id="getTotalCountPickPj" resultType="long" >
+		select count(pj.PJ_NUM) from PROJECT pj join project_pick pjp on pj.pj_num=pjp.pj_num where free_code=#{free_code}  
+	</select>
+	<!-- 프로젝트 지원 -->
+	<insert id="applied_pj" parameterType="map">
+		insert into APPLIED_PROJECT(free_code, pj_num, appp_date) values(#{free_code},#{pj_num}, sysdate)
+	</insert>
+	<select id="select_applied_pj" parameterType="map" resultType="fp.corporation.domain.AppliedProject">
+		select * from  APPLIED_PROJECT where free_code=#{free_code} and pj_num=#{pj_num}
+	</select>
 </mapper>

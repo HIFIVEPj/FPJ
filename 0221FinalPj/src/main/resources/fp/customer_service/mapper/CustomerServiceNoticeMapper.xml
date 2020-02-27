@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fp.customer_service.mapper.CustomerServiceNoticeMapper">
+
+	<select id="notice_list" resultType="CustomerServiceNotice">
+		select * from notice
+	</select>
+	
+	<select id="notice_content" resultType="CustomerServiceNotice" parameterType="long">
+		select * from notice where notice_num = #{notice_num}
+	</select>
+	
+	<update id="notice_count" parameterType="long">
+		update notice set notice_vcnt = notice_vcnt + 1 where notice_num = #{notice_num}
+	</update>
+	
+	<!--
+	<insert id="notice_write" parameterType="CustomerServiceNotice">
+		insert into notice values(NOTICE_NUM_SEQ.nextval, #{notice_sub}, #{notice_cont}, SYSDATE, 0, #{mem_email}, #{notice_cate}, 0, 0, 0, null)
+	</insert>
+	-->
+	<insert id="notice_write" parameterType="CustomerServiceNotice">
+		<selectKey keyProperty="notice_num" order="BEFORE" resultType="long">
+			select NOTICE_NUM_SEQ.nextval from dual
+		</selectKey>
+			insert into notice values(#{notice_num}, #{notice_sub}, #{notice_cont}, SYSDATE, 0, #{mem_email}, #{notice_cate}, 0, 0, 0, null)
+	</insert>
+	
+	<delete id="notice_delete" parameterType="long">
+		delete from notice where notice_num = #{notice_num}
+	</delete>
+	
+	<update id="notice_modify" parameterType="CustomerServiceNotice">
+		update notice set notice_cate=#{notice_cate}, notice_sub=#{notice_sub}, notice_cont=#{notice_cont} where notice_num=#{notice_num}
+	</update>
+	
+</mapper>

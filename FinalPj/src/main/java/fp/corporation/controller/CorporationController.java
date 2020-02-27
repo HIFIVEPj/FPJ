@@ -68,26 +68,30 @@ public class CorporationController {
 	public String update(@RequestParam MultipartFile fileName, Corporation corporation) {
 		Corporation cor = service.mydash_cor_select(corporation.getMem_email());
 		log.info("@!#$#T$%#@$fileName:"+fileName.getOriginalFilename()+", ofname: "+cor.getCor_ofname());
+		
 		if(cor.getCor_fname() == null && fileName.getOriginalFilename() != "") {
 			corporation.setCor_fname(saveStore(fileName));
 			corporation.setCor_ofname(fileName.getOriginalFilename());
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
-		}else if(fileName.getOriginalFilename() != "" && cor.getCor_fname() == null){
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		
+		}else if(fileName.getOriginalFilename() != "" && cor.getCor_fname() != null){
 			String str = cor.getCor_fname();
 			delFile(str);
 			corporation.setCor_fname(saveStore(fileName));
 			corporation.setCor_ofname(fileName.getOriginalFilename());
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
-		}else if(fileName.getOriginalFilename() == "" && cor.getCor_fname() != null){
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		
+	}else if(fileName.getOriginalFilename() == "" && cor.getCor_fname() != null){
 			corporation.setCor_fname(cor.getCor_fname());
 			corporation.setCor_ofname(cor.getCor_ofname());
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+		
 		}else{
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_change?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
 		}
 	}
 	
@@ -112,9 +116,9 @@ public class CorporationController {
 		map.put("ProjectVo", projectVo);
 		map.put("cor_code",corporation.getCor_code());
 		
-		List<Project> listMydashCor = pjService.listMydashCor(map);
-		ModelAndView mv = new ModelAndView("corporation/managed_project");
 		
+		ModelAndView mv = new ModelAndView("corporation/managed_project");
+		List<Project> listMydashCor = pjService.listMydashCor(map);
 		mv.addObject("cor",corporation);
 		mv.addObject("list", listMydashCor);
 		mv.addObject("pa",projectVo);
@@ -157,8 +161,11 @@ public class CorporationController {
 
 	public boolean writeFile(MultipartFile cor_fname, String saveFileName) {
 		File rDir = new File(Path.COR_THUMB);
-		if(!rDir.exists()) rDir.mkdir();
-		
+		if(!rDir.exists()){
+			rDir.mkdir();
+			}
+		log.info("#@&$@(#&$폴더 존재여부: "+rDir.exists());
+		log.info("#@*&($#(@ rDir: "+rDir);
 		FileOutputStream fos = null;
 		try {
 			byte data[]= cor_fname.getBytes();

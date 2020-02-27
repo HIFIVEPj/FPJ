@@ -30,8 +30,6 @@
   		SELECT m.*, a.MEM_AUTH FROM MEMBER m LEFT OUTER JOIN MEMBER_AUTH a on m.MEM_EMAIL=a.MEM_EMAIL WHERE m.MEM_EMAIL= #{email} 
 	</select>-->	
 	
-
-
 	<insert id="insertMem" parameterType="Member">
 		insert into MEMBER(MEM_EMAIL, MEM_NAME, MEM_PWD, CLASS_NUM, MEM_RDATE) values(#{email},#{name}, #{pwd}, #{class_num} ,SYSDATE)
 	</insert>
@@ -40,10 +38,28 @@
 	<update id="update_pw"  parameterType="Member">
 		UPDATE MEMBER SET MEM_PWD=#{pwd} WHERE MEM_EMAIL=#{email} 
 	</update>
-	<!--  
-	<delete id="delete" parameterType="long">
-		delete from ADDRESS where SEQ=#{seq}
-	</delete>
-	-->
+	
+	<!-- 관리자 멤버리스트  -->
+	<select id="getList" parameterType="Map" resultMap="MemberMap">
+	 	<![CDATA[
+			 select * from (select ROWNUM rnum , aa.* from (select * from Member ]]>
+			 <choose> 
+			 	<when test="class_num != null"> WHERE CLASS_NUM =#{class_num}</when>
+			 	<otherwise> where CLASS_NUM>1 </otherwise>			 
+			 </choose>
+			 <![CDATA[
+			 order by MEM_RDATE desc) aa)
+				 where rnum>#{MemberVo.start} and rnum<=#{MemberVo.end}
+	    ]]>
+	</select>
+	
+	<select id="getTotalCount" parameterType="String" resultType="long" >
+		select count(MEM_EMAIL) from MEMBER 
+		<choose>
+		<when test="value != null"> WHERE CLASS_NUM =#{class_num}</when>
+		<otherwise>WHERE CLASS_NUM >1</otherwise>
+		</choose>		
+	</select>
+	
 
 </mapper>

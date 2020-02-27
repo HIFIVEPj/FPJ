@@ -39,7 +39,7 @@
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
 									<div class="profile-pic-img">
-										<img src="../images/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
 									</div>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
