@@ -48,6 +48,7 @@ public class Project {
 	private List<PjPickKeyword> pjpickKeyword;
 	private List<Keyword> pjKeywords;
 	private Type type;
+	private AppliedProject appliedproject;
 	
 	private Corporation corporation;
 	//예비컬럼

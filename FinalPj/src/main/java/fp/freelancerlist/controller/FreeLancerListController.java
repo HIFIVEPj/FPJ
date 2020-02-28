@@ -34,7 +34,7 @@ public class FreeLancerListController {
 	private FreeLancerListService service;
 	
 	@GetMapping("freelancerList")
-	public ModelAndView FreelnacerList( List_PagingVO vo, FreeLancerListVO listVo
+	public ModelAndView FreelnacerList(List_PagingVO vo, FreeLancerListVO listVo
 						, @RequestParam(value="nowPage", required=false)String nowPage
 						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
 

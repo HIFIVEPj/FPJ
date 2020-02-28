@@ -90,7 +90,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	}
 
 	@Override
-	public FreeLancerProfile profile_free_select(String mem_email){
+	public List<FreeLancerProfile> profile_free_select(String mem_email){
 		return mapper.profile_free_select(mem_email);
 	}
 	@Override

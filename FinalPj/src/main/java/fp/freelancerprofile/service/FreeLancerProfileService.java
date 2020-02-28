@@ -48,7 +48,7 @@ public interface FreeLancerProfileService {
 		
 	long getTotalCountFree(long free_code);
 
-	FreeLancerProfile profile_free_select(String mem_email);
+	List<FreeLancerProfile> profile_free_select(String mem_email);
 
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
