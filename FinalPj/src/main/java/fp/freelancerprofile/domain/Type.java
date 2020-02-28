@@ -22,5 +22,5 @@ public class Type {
 	private List<Type> type;
 	private List<Project> project;
 	private List<Freelancer_FreeLancerProfile> Freelancer_FreeLancerProfile;
-
+	private List<Applied_Project> applied_project;
 }

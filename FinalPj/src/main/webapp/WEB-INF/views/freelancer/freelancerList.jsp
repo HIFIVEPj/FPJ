@@ -419,10 +419,11 @@
 										<a href="freelancercontent?free_code=${list.free_code}" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;${list.free_name}</a><br>
 									
 									<c:forEach var="exp" items="${list.list_freelancerprofile}" varStatus="status">
-										<a href="employer"><small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small></a>&nbsp;|	</c:forEach>
+										<small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small>&nbsp;|	
+									</c:forEach>
 					
-									
-										<a href="employer.html"><small>&nbsp;&nbsp;</small>수정수정${freelancerList2[0].list_type.type_name}</a>						
+							
+									<small>&nbsp;&nbsp;</small>수정수정${freelancerList2[0].list_type.type_name}				
 							 
 									</div>
 								
@@ -431,14 +432,17 @@
 									<a href="" class="item-card9-icons1 wishlist active"><i  class="fa fa fa-heart-o"></i></a>
 								</div>
 							</div>
-							
-							
+
 						<div class="card-body pb-2 hide-details">
 								<ul class="usertab-list mb-0">
-									<h4>수행한 프로젝트</h4>								
-						
-									<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold"></span>수행프로젝트 수정수정<br/>									
-								
+									<h4>수행한 프로젝트</h4>				
+									
+									<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold"></span>${freelancerList3[0].pj_sub}<br/>		
+
+
+
+
+
 								</ul>								
 							</div> 
 					
@@ -470,7 +474,7 @@
 								</div>
 							</div>		
 							</div>		
-							</c:forEach>
+					 	</c:forEach>
 						</div>
 					
 						<!--Add lists-->

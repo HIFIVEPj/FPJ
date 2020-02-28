@@ -38,6 +38,9 @@ public class FreeLancerListController {
 						, @RequestParam(value="nowPage", required=false)String nowPage
 						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
 
+	//	FreeLancer freelancer = service.free_list_select(mem_email);
+	//	long totalFreeCount = service.getTotalCountFree(freelancer.getFree_code());
+
 		int total = service.countFreeLancer();
 			if(nowPage == null && cntPerPage == null) {
 				nowPage = "1";
@@ -50,11 +53,13 @@ public class FreeLancerListController {
 		vo = new List_PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));	
 		   
 		List<List_FreeLancer> freelancerList = service.SelectList(vo);		
-		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();	
+		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();
+		List<Project> freelancerList3 = service.SelectList3();
 		ModelAndView mv = new ModelAndView("freelancer/freelancerList");
 		mv.addObject("paging", vo);
 		mv.addObject("freelancerList", freelancerList);
 		mv.addObject("freelancerList2", freelancerList2);
+		mv.addObject("freelancerList3", freelancerList3);
 		return mv;
 	}
 /*	@RequestMapping("freelancerList")

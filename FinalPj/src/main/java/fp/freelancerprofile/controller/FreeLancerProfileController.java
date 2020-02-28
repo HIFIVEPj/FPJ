@@ -134,12 +134,13 @@ public class FreeLancerProfileController {
 	
 	//프로필 컨텐츠//
 	@GetMapping("freelancerProfile_content") 
-	public ModelAndView ProFileContent(@RequestParam long PRO_NUM) {
+	public ModelAndView ProFileContent(@RequestParam long PRO_NUM ,@RequestParam String mem_email) {
+		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
 		List<FreeLancer> content = service.selectProfileContent(PRO_NUM);
 		List<FreeLancerProfile> content2 = service.selectProfileContent2(PRO_NUM);	
 		List<KeyWord> content3 = service.selectProfileContent3(PRO_NUM);
 		List<FreeLancerProfileFile> file_name = service.selectFilename();
-		List<FreeLancer> content4 = service.selectProfileContent4(PRO_NUM);
+		List<FreeLancer> content4 = service.selectProfileContent4(freelancerprofile.getFree_code());
 		
 		
 		ModelAndView mv = new ModelAndView();

@@ -34,7 +34,7 @@ public interface FreeLancerProfileService {
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
-	List<FreeLancer> selectProfileContent4(long PRO_NUM);
+	List<FreeLancer> selectProfileContent4(long free_code);
 	//삭제//
 	public void listDelete(long PRO_NUM);
 

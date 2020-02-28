@@ -37,7 +37,7 @@
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
 									<div class="profile-pic-img">
-										<span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="" data-original-title="online"></span>
+										<!-- <span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="" data-original-title="online"></span> -->
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -199,7 +199,7 @@
 												<td><strong>사용기술 : </strong>
 											<c:forEach  var="key" items="${content3}" varStatus="status" begin="0" end="2">	
 											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">	
-												 ${keyname.key_name} /
+												 ${keyname.key_name} / 
 											</c:forEach>
 											</c:forEach>
 										</td></tr>
@@ -253,23 +253,50 @@
 												<tbody>
 												
 												
-											
+									
 													<tr>
-													<c:forEach  var="content" items="${content2}" varStatus="status">
+													<c:forEach  var="content" items="${content4}" varStatus="status">
 													<c:forEach  var="name" items="${content.project}" varStatus="status">
-														<tr><td><a href="store.html" class="text-inherit">${name.pj_sub}</a></td>
+														<tr><td><a href="store.html" class="text-inherit">${name.pj_sub}</a></td><td>
+														<fmt:formatDate value="${name.pj_rdate}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
 													</c:forEach>
 													</c:forEach>
-													<c:forEach  var="profilecontent" items="${content}" varStatus="status">
-														<c:forEach  var="profile" items="${profilecontent.freelancerprofile}" varStatus="status">	
-														<td><fmt:formatDate value="${profile.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
-														</c:forEach>
-														<c:forEach  var="profilefile" items="${profilecontent.freeLancerProfileFile}" varStatus="status">	
-														<td><a href="#"><i class="fa fa-save"></i>&nbsp;&nbsp;${profilefile.profile_ofname}</a></td>
-														</c:forEach>
 
-													</tr></tr>
-														</c:forEach>
+
+
+													   				
+                           
+                                   	<c:set var="doneLoop" value="true" />					
+                                   	<c:choose>
+                                   	   <c:when test="${empty file_name}">
+									   </c:when>
+											
+										<c:otherwise>
+											<c:forEach var="file" items="${file_name}">
+													<c:if test="${file.pro_num eq freelancer.pro_num && doneLoop}">	
+														<c:set var="doneLoop" value="false" />		
+													</c:if>	
+																				
+											</c:forEach>   
+											 	
+										</c:otherwise>
+									</c:choose>
+									
+									<c:choose>
+									    <c:when test="${!doneLoop}">
+									   
+									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
+									     
+									    </c:when>
+									       
+									    
+									    <c:otherwise>
+									         <td><i class="fa fa-save"></i>&nbsp;등록된 파일이 없습니다.</td>
+									    </c:otherwise>
+									</c:choose>
+									
+										</tr></tr>
+													
 										<!--  			<tr>
 														<td><a href="store.html" class="text-inherit">Untrammelled prevents</a></td>
 														<td>12 June 2019</td>
@@ -298,11 +325,11 @@
 							</div>
 							<div class="card-footer" align="right">
 							
-								<a href="freelancerMyprofile_change" class="btn btn-secondary icons">수정하기</a>
+								<a href="freelancerMyprofile_change?mem_email=${sessionScope.email}" class="btn btn-secondary icons">수정하기</a>
 								
 								<a href='freelancerProfile_delete?mem_email=${sessionScope.email}&PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								
-								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>				
+								<a href="freelancerProfile_list?mem_email=${sessionScope.email}" class="btn btn-secondary icons">목록</a>				
 									
 							</div>
 						
