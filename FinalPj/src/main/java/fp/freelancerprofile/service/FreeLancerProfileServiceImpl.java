@@ -17,6 +17,7 @@ import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.mapper.FreeLancerProfileMapper;
+import fp.market.domain.MarketPick;
 
 
 
@@ -118,6 +119,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void mydash_free_update(FreeLancer freelancer) {
 		mapper.mydash_free_update(freelancer);
 	}
+	
 
 
 

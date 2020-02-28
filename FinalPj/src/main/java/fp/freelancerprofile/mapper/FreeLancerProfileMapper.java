@@ -8,11 +8,9 @@ import org.springframework.context.annotation.Profile;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
-import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+
 import fp.freelancerprofile.domain.KeyWord;
-import fp.freelancerprofile.domain.PagingVO;
-import fp.freelancerprofile.domain.Project;
-import fp.freelancerprofile.domain.Type;
+
 
 
 public interface FreeLancerProfileMapper {
@@ -52,6 +50,7 @@ public interface FreeLancerProfileMapper {
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
 	public void mydash_update_classnum(String mem_email);
+
 
 	
 	

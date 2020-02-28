@@ -1,6 +1,5 @@
 package fp.market.mapper;
 
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +15,10 @@ import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
 
+import fp.market.domain.Freelancer;
+import fp.market.domain.Market;
 import fp.market.mapper.MarketMapper;
+
 import fp.market.utils.MarketPagingVO;
 import lombok.extern.log4j.Log4j;
 
