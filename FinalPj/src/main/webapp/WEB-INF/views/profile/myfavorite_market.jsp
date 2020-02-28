@@ -95,9 +95,8 @@
 									<div class="tabs-menus">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
-											<li class=""><a href="#tab1" class="active" data-toggle="tab">전체보기</a></li>
-											<li><a href="#tab2" data-toggle="tab">찜 목록</a></li>
-											<li><a href="#tab3" data-toggle="tab">구매한 마켓</a></li>
+											<li class=""><a href="#tab1" class="active" data-toggle="tab">찜 목록</a></li>
+											<li><a href="#tab2" data-toggle="tab">구매한 마켓</a></li>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -121,6 +120,10 @@
 													</label>
 												</td>
 												<td colspan="2">
+												
+												
+												
+												
 													<div class="media mt-0 mb-0">
 														<div class="card-aside-img">
 															<a href="#"></a>
@@ -141,7 +144,7 @@
 																</div>
 															</div>
 														</div>
-													</div>
+													</div>			
 												</td>
 												
 												<td class="font-weight-semibold fs-16">10,000,000원</td>
