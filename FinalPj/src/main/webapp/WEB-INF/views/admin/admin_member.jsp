@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% String classN = request.getParameter("classN");// %>
+
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -369,14 +371,21 @@
 				<div class="row">
 					<div class="col-lg-12 users-list">
 						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
-							<select class="form-control page-select">
-								<option value="0">SelectOptions</option>
-								<option value="1">Active</option>
-								<option value="2">New</option>
-								<option value="3">Blocked</option>
-								<option value="4">Suspended</option>
-								<option value="4">A-Z</option>
+							<select class="form-control page-select" name="class_num" onchange="f(this)">
+								<option value="">선택해주세요.</option>							
+								<option value="1">전체</option>
+								<option value="4">기업</option>
+								<option value="2">개인</option>
 							</select>
+							<script type="text/javascript">
+							  function f(select){
+						           //var el = document.getElementById("psId");
+						           var class_num = select.value;
+						           location.href="admin_member?class_num="+class_num;	
+						           //alert("ps : " + ps);
+						           					           
+						       }
+							</script>
 							<div class="page-options d-flex">
 								<div class="input-group">
 									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search">
@@ -426,17 +435,19 @@
 												<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
 											</td>
 										</tr>
-										</c:forEach>												
+										</c:forEach>																					
 									</tbody>
 								</table>
 								</div>
 							</div>
 						</div>
+					
+					
 					<ul class="pagination mb-5">
 							<!--  이전페이지 -->
 					<c:if test="${pa.nowPage != 1}">
-						<li class="page-item page-prev">
-							<a class="page-link" href="admin_member?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}" tabindex="-1">Prev</a>
+						<li class="page-item page-prev">							
+							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}" tabindex="-1">Prev</a>
 						</li>
 					</c:if>
 					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
@@ -445,13 +456,14 @@
 									<li class='page-item active'><a class="page-link">${p}</a></li>
 								</c:when>
 								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
+									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
 								</c:when>
 							</c:choose>
 					</c:forEach>
 							<c:if test ="${pa.nowPage != pa.lastPage}">
 								<li class="page-item page-next">
-									<a class="page-link" href="admin_member?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+									
+									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
 								</li>
 						</c:if>
 					</ul>  
