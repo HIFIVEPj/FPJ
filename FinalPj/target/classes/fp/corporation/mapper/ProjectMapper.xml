@@ -33,6 +33,10 @@
 		<result property="pj_fgrade" column ="pj_fgrade" />
 		<result property="pj_paystatus" column ="pj_paystatus" />
 		
+		<association javaType="fp.corporation.domain.AppliedProject" property="appliedproject">
+			<result property="appp_date" column="appp_date" />
+			<result property="appp_status" column="appp_status" />
+		</association>
 
 		<association javaType="corType" property="type" column="type_num">
 			<id property="type_num" column ="type_num" />
@@ -228,4 +232,16 @@
 	<select id="select_applied_pj" parameterType="map" resultType="fp.corporation.domain.AppliedProject">
 		select * from  APPLIED_PROJECT where free_code=#{free_code} and pj_num=#{pj_num}
 	</select>
+	<select id="select_appp_pj_free" resultMap="projectMap" parameterType="map">
+	 <![CDATA[
+		select * from (select ROWNUM rnum , aa.* from 
+		(select pj.*, cor.cor_name, appp.appp_date, appp.appp_status from project pj join
+		Corporation cor on
+		pj.cor_code = cor.cor_code 
+		join APPLIED_PROJECT appp
+		on pj.pj_num=appp.pj_num 
+		where free_code=#{free_code} order by pj.pj_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
+		 ]]>
+	</select>
+	
 </mapper>

@@ -44,7 +44,7 @@ public interface FreeLancerProfileMapper {
 	public void checkdelete1(long PRO_NUM);
 	public void checkdelete1();
 	
-	public FreeLancerProfile profile_free_select(String mem_email);
+	public List<FreeLancerProfile> profile_free_select(String mem_email);
 	public long getTotalCountFree(long free_code);
 	
 	//나영추가 + mydash_free

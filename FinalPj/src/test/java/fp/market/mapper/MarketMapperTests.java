@@ -1,10 +1,6 @@
 package fp.market.mapper;
 
-<<<<<<< HEAD
-
 import java.util.HashMap;
-=======
->>>>>>> d5a4fd8a409cca9880896702bac2091491a73563
 import java.util.List;
 
 import org.junit.Test;
@@ -12,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fp.market.domain.Freelancer;
@@ -21,18 +16,10 @@ import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
 
 
-=======
-
->>>>>>> d5a4fd8a409cca9880896702bac2091491a73563
 
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.mapper.MarketMapper;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> d5a4fd8a409cca9880896702bac2091491a73563
 import fp.market.utils.MarketPagingVO;
 import lombok.extern.log4j.Log4j;
 

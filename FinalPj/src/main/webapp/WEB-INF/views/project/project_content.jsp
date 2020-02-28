@@ -188,7 +188,7 @@
 								  <div style="width:95%; margin:0 auto;"><P style="padding-top:15px;">${projectCont.pj_cont}</P></div>
 								
 							</div>
-							<span class="card-footer icons" >
+							<span class="card-footer icons" id="btns">
 								<c:if test="${empty appp}">
 									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply" id="app_btn"> 지원하기</a>
 								</c:if>
@@ -665,8 +665,12 @@
 						<div class="row">
 							<div class="col-sm-6 col-md-6">
 								<div class="form-group">
-									<label class="form-label">지원하시겠습니까?</label>
 									
+									<label class="form-label">지원하시겠습니까?</label>
+									<c:forEach var="profile_dto" items="${profile_select}">
+										<input type="radio" class="custom-control-input" name="example-radios" value="${profile_dto.pro_num}" checked>
+										<span>${profile_dto.profile_sub}</span>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -678,10 +682,10 @@
 								<button type="button" class="btn btn-success" onclick="freeolny()">지원하기</button>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${free.free_profileox==0}">
+								<c:if test="${empty profile_select}">
 									<button type="button" class="btn btn-success" onclick="profilePlease()">지원하기</button>
 								</c:if>
-								<c:if test="${free.free_profileox==1}">
+								<c:if test="${!empty profile_select}">
 									<button type="button" class="btn btn-success" onclick="apply()">지원하기</button>
 								</c:if>
 							</c:otherwise>
@@ -706,7 +710,8 @@
 	    			data:"pj_num=${projectCont.pj_num}+&free_code=${free.free_code}",
 					success: function(data){
 						alert("성공");
-						$('#app_btn').attr('onclick','apply_done()')
+						$('#app_btn').remove();
+						$('#btns').prepend("<a href='javascript:apply_done();' class='btn btn-info icons' > 지원하기</a>")
 						$("#apply").modal('hide');
 					},
 					error: function(data){
