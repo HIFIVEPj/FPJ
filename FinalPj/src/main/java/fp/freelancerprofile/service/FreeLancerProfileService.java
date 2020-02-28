@@ -17,6 +17,7 @@ import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.market.domain.FreelancerProfile;
+import fp.market.domain.MarketPick;
 
 public interface FreeLancerProfileService {
 	
@@ -47,20 +48,12 @@ public interface FreeLancerProfileService {
 		
 	long getTotalCountFree(long free_code);
 
-	FreeLancerProfile profile_free_select(String mem_email);
+	List<FreeLancerProfile> profile_free_select(String mem_email);
 
-	
-	
-	
-	
-	
-	
-	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
-
 
 
 

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.service.ProjectService;
@@ -242,15 +243,18 @@ public class FreeLancerProfileController {
 			}else if(cntPerPage == null) {
 				cntPerPage ="5";
 			}
-			
+
 			projectVo = new ProjectVo(totalCountPjpick, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 			Map<String, Object>map = new HashMap<String, Object>();
 			map.put("ProjectVo", projectVo);
 			map.put("free_code",freelancer.getFree_code());
+			
+			List<fp.corporation.domain.Project>apppList = pjservice.select_appp_pj_free(map);
 			List<fp.corporation.domain.Project>pjpickList = pjservice.pjpick_free(map);
 			mv.addObject("free", freelancer);
 			mv.addObject("pjp", pjpickList);
 			mv.addObject("pa", projectVo);
+			mv.addObject("apppList",apppList);
 			return mv;
 		}
 		@RequestMapping("myfavorite_del")
@@ -366,5 +370,6 @@ public class FreeLancerProfileController {
 			}
 		}
 	 //--------------
-	
+
+		
 }

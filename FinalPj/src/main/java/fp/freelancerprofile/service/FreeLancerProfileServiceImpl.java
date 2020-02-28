@@ -17,6 +17,7 @@ import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.mapper.FreeLancerProfileMapper;
+import fp.market.domain.MarketPick;
 
 
 
@@ -89,7 +90,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	}
 
 	@Override
-	public FreeLancerProfile profile_free_select(String mem_email){
+	public List<FreeLancerProfile> profile_free_select(String mem_email){
 		return mapper.profile_free_select(mem_email);
 	}
 	@Override
@@ -118,6 +119,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void mydash_free_update(FreeLancer freelancer) {
 		mapper.mydash_free_update(freelancer);
 	}
+	
 
 
 

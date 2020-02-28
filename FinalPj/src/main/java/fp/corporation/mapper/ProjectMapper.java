@@ -51,4 +51,5 @@ public interface ProjectMapper {
 	//프로젝트지원
 	void applied_pj(Map<String, Object>map);
 	AppliedProject select_applied_pj(Map<String, Object>map);
+	List<Project>select_appp_pj_free(Map<String, Object>map);
 }

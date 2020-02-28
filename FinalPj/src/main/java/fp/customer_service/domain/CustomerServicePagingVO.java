@@ -1,3 +1,4 @@
+/*
 package fp.customer_service.domain;
 
 import lombok.AllArgsConstructor;
@@ -54,3 +55,4 @@ public class CustomerServicePagingVO {
 			setStart(getEnd() - cntPerPage + 1);
 		}
 }
+*/

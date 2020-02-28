@@ -276,17 +276,22 @@ log.info(mapSubmit);
 	}
 
 	@GetMapping("marketPick-add")
-	public void addPick(@RequestParam(value="market_num") String market_num,
+	public void addPick(@RequestParam(value="market_num") String market_numS,
 			   @RequestParam(value="mem_email") String mem_email) {
+		Long market_num=Long.parseLong(market_numS);
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		log.info("11111111111111111111"+market_num);log.info("22222222222222"+mem_email);
+		
 		map.put("market_num",market_num);
 		map.put("mem_email",mem_email);
+		log.info("111111111mapmapmap"+map);
 		marketService.insertMarketPick(map);
+
 	}
 	@GetMapping("marketPick-del")
-	public void delPick(@RequestParam(value="market_num") String market_num,
+	public void delPick(@RequestParam(value="market_num") String market_numS,
 			   @RequestParam(value="mem_email") String mem_email) {
+		Long market_num=Long.parseLong(market_numS);
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		log.info("11111111111111111111"+market_num);log.info("22222222222222"+mem_email);
 		map.put("market_num",market_num);

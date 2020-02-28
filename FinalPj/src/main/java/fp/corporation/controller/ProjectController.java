@@ -35,6 +35,7 @@ import fp.corporation.service.CorporationService;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import lombok.extern.log4j.Log4j;
 
@@ -105,19 +106,37 @@ public class ProjectController {
 			Corporation corInfo = service.corInfo(pj_num);
 			FreeLancer free = freeService.mydash_free_select(mem_email);
 			
-			Map<String, Object>map = new HashMap<String, Object>();
-			map.put("pj_num", pj_num);
-			map.put("free_code", free.getFree_code());
 			
-			AppliedProject appp = service.select_applied_pj(map);
-			ModelAndView mv = new ModelAndView("project/project_content");
-			
-			mv.addObject("appp", appp);
-			mv.addObject("free", free);
-			mv.addObject("projectCont", project);
-			mv.addObject("corInfo", corInfo);
-			
-			return mv;
+			if(free != null) {
+				List<FreeLancerProfile>profile_select = freeService.profile_free_select(mem_email);
+					Map<String, Object>map = new HashMap<String, Object>();
+					map.put("pj_num", pj_num);
+					map.put("free_code", free.getFree_code());
+					
+					AppliedProject appp = service.select_applied_pj(map);
+					ModelAndView mv = new ModelAndView("project/project_content");
+				if(profile_select !=null) {
+					mv.addObject("appp", appp);
+					mv.addObject("free", free);
+					mv.addObject("projectCont", project);
+					mv.addObject("corInfo", corInfo);
+					mv.addObject("profile_select", profile_select);
+					return mv;
+				}else {				
+					mv.addObject("appp", appp);
+					mv.addObject("free", free);
+					mv.addObject("projectCont", project);
+					mv.addObject("corInfo", corInfo);
+		
+					return mv;
+				}
+			}else {
+				ModelAndView mv = new ModelAndView("project/project_content");
+				mv.addObject("projectCont", project);
+				mv.addObject("corInfo", corInfo);
+				
+				return mv;
+			}
 		}else {
 			Project project = service.showContent(pj_num);
 			Corporation corInfo = service.corInfo(pj_num);

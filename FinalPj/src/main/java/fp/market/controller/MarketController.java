@@ -44,8 +44,8 @@ public class MarketController {
 
 
 	@GetMapping("market-list")
-	public ModelAndView market_list(MarketPagingVO marketVO
-			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+	public ModelAndView market_list(
+			@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
 			,@RequestParam(value="cntPerPage", required=false,defaultValue="9")String cntPerPage,HttpSession session){
 		int total = marketService.getMarketCount();
 	/*	if(nowPage ==null &&cntPerPage ==null) {
@@ -58,7 +58,7 @@ public class MarketController {
 		}*/
 		String mem_email=(String) session.getAttribute("email");
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
-	    marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		MarketPagingVO marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		 ModelAndView mv = new ModelAndView("market/market-list");
 		 List<Market> list = marketService.getMarketList(marketVO);
 		 
