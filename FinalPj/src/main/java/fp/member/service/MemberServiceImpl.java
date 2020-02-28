@@ -36,8 +36,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.list(map);
 	} */
 	@Override
-	public long getTotalCount(String class_num) {
-		return memberMapper.getTotalCount(class_num);
+	public long getTotalCount(Map<String,Object> map) {
+		return memberMapper.getTotalCount(map);
 	}
 	
 	@Override

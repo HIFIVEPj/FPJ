@@ -6,6 +6,44 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
+<!-- 
+<script>
+$(document).ready(function() { 
+ $.ajax({
+	 type:"POST",
+	 url:"id_ck.do",
+	 data:{
+			"email":$('#emailCk').val()
+	 },
+	 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			if($.trim(data)=="YES"){
+			   if($('#emailCk').val()!=''){ 
+				   $('#email_check').text('없는 이메일 입니다.');
+				   $('#email_check').css('font-size', '11px');
+				   $('#email_check').css('color', 'blue');
+					$("#emailBtn").attr("disabled", true);
+				 
+			   }else if($('emailCk').val()==''){
+					$('#email_check').text('이메일을 입력해주세요.');
+					$('#email_check').css('color', 'red');
+					$("#emailBtn").attr("disabled", true);
+				}
+			}else{
+			   if($('#emailCk').val()!=''){		                 
+					$('#email_check').text('중복된 아이디입니다.');
+					$('#email_check').css('font-size', '11px');
+					$('#email_check').css('color', 'red');
+					$("#emailBtn").attr("disabled", false);						
+					
+			   }
+			}
+		 }
+	}) //ajax
+	function fwd_ck(){
+		find_pwd.do.submit();								
+	}
+});
+</script> -->
 		<!--Sliders Section-->
 		<section>
 			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
@@ -38,14 +76,16 @@
 							<form action="find_pwd.do" method="post">
 								<div class="form-group">
 									<label class="form-label text-dark" for="exampleInputEmail1" >Email</label>
-									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="등록한 이메일을 입력하세요" name="email">
+									<input type="email" class="form-control" id="emailMD" placeholder="등록한 이메일을 입력하세요" name="email">
+									<div class="emailAuth_div" id="email_check" ></div>
 								</div>
 								<div class="form-footer">
-									<button type="submit" class="btn btn-primary btn-block">보내기</button>
+									<button type="submit" class="btn btn-primary btn-block" id="emailBtn">보내기</button>
 								</div>
 							</form>	
+
 								<div class="text-center text-dark mt-3 ">
-								다시  <a href="login.html">로그인</a> 하러가기
+								다시  <a href="login">로그인</a> 하러가기
 								</div>
 							</div>
 						</div>

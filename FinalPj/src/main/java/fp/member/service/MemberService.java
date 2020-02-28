@@ -10,7 +10,7 @@ import fp.member.domain.MemberVo;
 public interface MemberService {
 	//List<Member> list(Map<String,Object> map);
 	MemberVo getMemberVo(Map<String,Object> map);
-	long getTotalCount(String class_num);
+	long getTotalCount(Map<String,Object> map);
 	long getTotalCountCor();
 	long getTotalCountFree();
 	int idCheck(String email);
