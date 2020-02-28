@@ -219,7 +219,7 @@ public class LoginController {
 		loginService.logout(session);
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("member/index");
+		mav.setViewName("index");
 
 		mav.addObject("msg", "logout");
 		

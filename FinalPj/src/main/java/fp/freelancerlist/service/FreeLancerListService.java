@@ -21,6 +21,7 @@ public interface FreeLancerListService {
 	public int countFreeLancer();
 	public List<List_FreeLancer> SelectList(List_PagingVO vo);
 	public List<List_FreeLancerProfile> SelectList2();
+	public List<Project> SelectList3();
 	public List<FreeLancerProfile> freelancercontent();
 	
 	//리스트 컨텐츠//
