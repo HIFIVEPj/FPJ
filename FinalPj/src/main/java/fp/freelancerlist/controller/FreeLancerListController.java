@@ -34,14 +34,10 @@ public class FreeLancerListController {
 	private FreeLancerListService service;
 	
 	@GetMapping("freelancerList")
-	public ModelAndView FreelnacerList(String mem_email, List_PagingVO vo, FreeLancerListVO listVo
+	public ModelAndView FreelnacerList( List_PagingVO vo, FreeLancerListVO listVo
 						, @RequestParam(value="nowPage", required=false)String nowPage
 						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-		FreeLancer freelancer = service.free_list_select(mem_email);
-		long totalFreeCount = service.getTotalCountFree(freelancer.getFree_code());
-		
-		
-		
+
 		int total = service.countFreeLancer();
 			if(nowPage == null && cntPerPage == null) {
 				nowPage = "1";

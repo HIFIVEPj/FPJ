@@ -247,14 +247,14 @@
 																			<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick(${list.market_num})" id="fullHeart${list.market_num}" style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>
 																		</c:when>
 																		<c:otherwise>
-																			<a href="#" class="item-card9-icons1 wishlist" onclick="addPick(${list.market_num})" id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o" ></i></a>
+																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist" onclick="addPick(${list.market_num})" id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o" ></i></a>
 																		</c:otherwise>
 																	</c:choose>
 																</c:if>
 																<c:choose>
 																	<c:when test="${sessionScope.email != null}">
 																		<c:if test="${fn:length(marketNumList) == 0}">	
-																			<a href="" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"> <i class="fa fa fa-heart-o"></i></a>
+																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"> <i class="fa fa fa-heart-o"></i></a>
 																		</c:if>
 																	</c:when>
 																	<c:otherwise>
@@ -270,7 +270,7 @@
 
 															<!--<p>${list.market_cont}</p>  -->
 																<div class="item-card9-desc">
-																	<h2>${list.market_price}<span class="fs-16">원</span></h2>
+																	<h2><fmt:formatNumber value="${list.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span></h2>
 
 																	<div class="item-card2-rating mb-0">
 																	 <div class="rating-stars d-inline-flex">
@@ -306,8 +306,8 @@
 								</div>
 								<div class="center-block text-center">
 									<ul class="pagination mg-b-0 page-0 ">
+								<!--이전 페이지 이동 -->
 									<c:if test="${paging.nowPage != 1}">
-				 				 <!--이전 페이지 이동 -->
 										<li class="page-item">
 											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
 										</li>
@@ -317,28 +317,28 @@
 									</c:if>
 								 <!--페이지번호 -->
 								 <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}">
-								  <c:choose>
-								   <c:when test="${p == paging.nowPage}">
-										<li class="page-item active">
-											<a class="page-link">${p}</a>
-										</li>
-									</c:when>
-									 <c:when test = "${p != paging.nowPage }">
-										<li class="page-item">
-											<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-										</li>
+								  	<c:choose>
+								  		<c:when test="${p == paging.nowPage}">
+											<li class="page-item active">
+												<a class="page-link">${p}</a>
+											</li>
+										</c:when>
+										 <c:when test = "${p != paging.nowPage }">
+											<li class="page-item">
+												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+											</li>
 										</c:when>
 									</c:choose>
-	 								 </c:forEach>
+	 							 </c:forEach>
 	 								<!--다음페이지이동 --> 
-	 								  <c:if test ="${paging.nowPage != paging.lastPage}">
-										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
-										</li>
+	 								   <c:if test ="${paging.nowPage != paging.lastPage}">
+											<li class="page-item">
+												<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+											</li>
 										
-										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
-										</li>
+											<li class="page-item">
+												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
+											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 											<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
@@ -367,14 +367,13 @@
 			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
 			success: function(){
 				$('#emptyHeart'+market_num).remove();
-				$('#heartDivID'+market_num).append('<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick"'+market_num +'" id="fullHeart"' +market_num+'style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>');
+				$('#heartDivID'+market_num).append('<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick('+market_num+')" id="fullHeart'+market_num+'" style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>');
 			},
 			error: function(request,status,error){
-				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
 	}
-	
 	function delPick(market_num){
 		alert("marketnum"+market_num);
 		$.ajax({
@@ -382,7 +381,7 @@
 			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',
 			success: function(){
 				$('#fullHeart'+market_num).remove();
-				$('#heartDivID'+market_num).append('<a href="#" class="item-card9-icons1 wishlist" onclick="addPick('+market_num +')" id="emptyHeart'+market_num +'"> <i class="fa fa fa-heart-o" ></i></a>');
+				$('#heartDivID'+market_num).append('<a href="javasript:void(0)" class="item-card9-icons1 wishlist" onclick="addPick('+market_num+')" id="emptyHeart'+market_num+'"> <i class="fa fa fa-heart-o" ></i></a>');
 			},
 			error: function(request,status,error){
 				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

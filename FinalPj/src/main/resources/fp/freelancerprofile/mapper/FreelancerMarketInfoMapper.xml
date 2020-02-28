@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  												
+<mapper namespace="fp.freelancerprofile.mapper.FreelancerMarketInfoMapper">
+
+	<select id="marketPickList" parameterType="hashmap" resultType="MarketPick" >
+	<![CDATA[
+		select * from (select rownum rnum , aa.* from (select * from market_pick where mem_email=#{mem_email} order by marketp_num desc ) aa )where rnum>#{start} and rnum<=#{end}
+		]]>
+	</select>
+	<select id="getTotalMarketPick" parameterType="String" resultType="int">
+		select count(*) from market_pick where mem_email=#{mem_email}
+	</select>
+</mapper>
