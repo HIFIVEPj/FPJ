@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.Corporation;
+import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 import com.sun.mail.iap.Response;
@@ -33,6 +34,7 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
@@ -93,6 +95,35 @@ public class FreeLancerProfileController {
 	@RequestMapping("freelancerProfile_content")
 	public String Profile_content() { 
 		return "profile/freelancerProfile_content";
+	}
+	
+	//프로필 수정//
+	@PostMapping("freelancerProfile_update")
+	public String freelancerProfile_update(FreeLancerProfile freelancerprofile, HttpServletRequest request, FreePickKeyWord freepickkeyword) {
+		String[] ListPjp_keynum = request.getParameterValues("pjp_keynum");
+		ArrayList<Long> arrayPjp_keynum = new ArrayList<Long>();
+		
+		
+		long[] ListIntPjp_keynum = Arrays.stream(ListPjp_keynum).mapToLong(Long::parseLong).toArray();
+		for(int i = 0; i<ListIntPjp_keynum.length; i++) {
+			arrayPjp_keynum.add(ListIntPjp_keynum[i]);
+			
+		}
+		pjpkeyword.setPjpkeynumList(arrayPjp_keynum);
+		log.info("@@@@@@@@@@pjpkeyword: "+pjpkeyword);
+		
+		String[] ListKeyNum = request.getParameterValues("key_num");
+		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
+		int[] ListIntKeyNum = Arrays.stream(ListKeyNum).mapToInt(Integer::parseInt).toArray();
+		for(int i = 0; i<ListIntKeyNum.length; i++) {
+			arraykeynum.add(ListIntKeyNum[i]);
+		}
+
+		pjpkeyword.setKey_numList(arraykeynum);
+		service.updatePj(project);
+		service.updateKeyword(pjpkeyword);
+		return "redirect:project_content?pj_num="+project.getPj_num();
+
 	}
 	
 	//프로필 리스트//

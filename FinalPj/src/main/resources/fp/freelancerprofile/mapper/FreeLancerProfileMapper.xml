@@ -321,12 +321,14 @@
 	<!-- 프로필 update -->
  	<update id="listUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
 
-	<![CDATA[
+		<![CDATA[
 		update freelancer_profile set 
-		pro_num=#{pro_num}, free_code=#{free_code}, type_num=#{type_num}, mem_email=#{mem_email}, pro_exp=#{pro_exp}, pro_cv=#{pro_cv}
-		,pro_addr=#{pro_addr}, pro_postcode=#{pro_postcode}, pro_detailloc=#{pro_detailloc}, pro_edu=#{pro_edu}, pro_start=#{pro_start}
-		, pro_ox=#{pro_ox}, pro_grade=#{pro_grade}, pro_place=#{pro_place}, pro_workplace=#{pro_workplace}, profile_sub=#{profile_sub}, sysdate
-		   ]]>
+		 type_num=#{type_num}, mem_email=#{mem_email}, pro_exp=#{pro_exp}, pro_cv=#{pro_cv}
+		,pro_addr=#{pro_addr}, pro_postcode=#{pro_postcode}, pro_detailloc=#{pro_detailloc}
+		, pro_edu=#{pro_edu}, pro_start=#{pro_start}, pro_ox=#{pro_ox}, pro_grade=#{pro_grade}
+		, pro_place=#{pro_place}, pro_workplace=#{pro_workplace}, profile_sub=#{profile_sub}, profile_date=sysdate
+		 where pro_num=#{pro_num} and free_code=#{free_code}
+		  ]]>
 	</update> 
 	
 	
