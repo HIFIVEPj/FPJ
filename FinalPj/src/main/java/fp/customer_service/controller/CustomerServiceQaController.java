@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fp.customer_service.domain.BoardAttachVO;
 import fp.customer_service.domain.Criteria;
-import fp.customer_service.domain.CustomerServicePagingVO;
 import fp.customer_service.domain.CustomerServiceQa;
 import fp.customer_service.domain.PagingInfo;
 import fp.customer_service.service.CustomerServiceQaService;
@@ -65,8 +64,16 @@ public class CustomerServiceQaController {
 	
 	@GetMapping("customer_service_qa") // 게시판 호출(게시판글 리스트와 페이징정보)
 	public String customer_service_qa(Criteria cri, Model model) {
+		int qa_cate_count_project = customerServiceQaService.qa_cate_count_projectS();
+		int qa_cate_count_freemarket = customerServiceQaService.qa_cate_count_freemarketS();
+		int qa_cate_count_freelancer = customerServiceQaService.qa_cate_count_freelancerS();
+		int qa_cate_count_sign = customerServiceQaService.qa_cate_count_signS();
+		int qa_cate_count_meminfo = customerServiceQaService.qa_cate_count_meminfoS();
+		int qa_cate_count_payment = customerServiceQaService.qa_cate_count_paymentS();
+		int qa_cate_count_discount = customerServiceQaService.qa_cate_count_discountS();
+		int qa_cate_count_etc = customerServiceQaService.qa_cate_count_etcS();
 		model.addAttribute("qa_list", customerServiceQaService.qa_listS(cri));
-		model.addAttribute("pageMaker", new PagingInfo(cri, customerServiceQaService.qa_countS(cri)));
+		model.addAttribute("pageMaker", new PagingInfo(cri, customerServiceQaService.qa_countS(cri), qa_cate_count_project, qa_cate_count_freemarket, qa_cate_count_freelancer, qa_cate_count_sign, qa_cate_count_meminfo, qa_cate_count_payment, qa_cate_count_discount, qa_cate_count_etc));
 		return "customer_service/customer_service_qa";
 	}
 

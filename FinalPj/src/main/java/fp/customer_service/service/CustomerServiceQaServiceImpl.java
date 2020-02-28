@@ -91,11 +91,6 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 	}
 	*/
 	
-	@Override
-	public int qa_cate_count_projectS() {
-		return customerServiceQaMapper.qa_cate_count_project();
-	}
-	
 	/*
 	@Override
 	public List<CustomerServiceQa> qa_listS(CustomerServicePagingVO customerServicePagingVO) {
@@ -115,6 +110,39 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 	@Override
 	public List<BoardAttachVO> getAttachList(Long qa_num) {
 		return attachMapper.findByQa_num(qa_num);
+	}
+	
+	@Override
+	public int qa_cate_count_projectS() {
+		return customerServiceQaMapper.qa_cate_count_project();
+	}
+	@Override
+	public int qa_cate_count_freemarketS() {
+		return customerServiceQaMapper.qa_cate_count_freemarket();
+	}
+	@Override
+	public int qa_cate_count_freelancerS() {
+		return customerServiceQaMapper.qa_cate_count_freelancer();
+	}
+	@Override
+	public int qa_cate_count_signS() {
+		return customerServiceQaMapper.qa_cate_count_sign();
+	}
+	@Override
+	public int qa_cate_count_meminfoS() {
+		return customerServiceQaMapper.qa_cate_count_meminfo();
+	}
+	@Override
+	public int qa_cate_count_paymentS() {
+		return customerServiceQaMapper.qa_cate_count_payment();
+	}
+	@Override
+	public int qa_cate_count_discountS() {
+		return customerServiceQaMapper.qa_cate_count_discount();
+	}
+	@Override
+	public int qa_cate_count_etcS() {
+		return customerServiceQaMapper.qa_cate_count_etc();
 	}
 	
 }
