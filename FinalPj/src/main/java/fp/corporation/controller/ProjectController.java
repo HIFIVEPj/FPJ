@@ -271,11 +271,12 @@ public class ProjectController {
 	
 	@RequestMapping(value="/apply", method=RequestMethod.GET)
 	@ResponseBody
-	public void applied_pj(@RequestParam long pj_num, @RequestParam long free_code) {
-		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+	public void applied_pj(@RequestParam long pj_num, @RequestParam long free_code, @RequestParam long pro_num) {
+		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code+", pro_num: "+pro_num);
 		Map<String, Object>map = new HashMap<String, Object>();
 		map.put("pj_num", pj_num);
 		map.put("free_code", free_code);
+		map.put("pro_num", pro_num);
 		service.applied_pj(map);
 	}
 	

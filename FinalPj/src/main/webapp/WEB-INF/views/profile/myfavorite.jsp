@@ -233,7 +233,7 @@
 												<td>${dto.corporation.cor_name}</td>
 												<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</td>
 												<td>
-													<a href="#" class="badge badge-primary">모집중</a>
+													<a href="#" class="badge badge-primary">${dto.pj_status}</a>
 												</td>
 												<td>
 													<a href="myfavorite_del?pj_num=${dto.pj_num}&free_code=${free.free_code}&mem_email=${sessionScope.email}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>

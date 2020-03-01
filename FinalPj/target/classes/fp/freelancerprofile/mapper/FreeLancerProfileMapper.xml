@@ -155,7 +155,7 @@
     </select>
   
   
-	<select id='profile_free_select' parameterType="String" resultMap="free_profile">
+	<select id='profile_free_select' parameterType="String" resultType="FreeLancerProfile">
 		select * from FREELANCER_PROFILE where mem_email=#{mem_email}
 	</select>
   

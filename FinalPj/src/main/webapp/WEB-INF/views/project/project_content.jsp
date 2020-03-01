@@ -666,10 +666,14 @@
 							<div class="col-sm-6 col-md-6">
 								<div class="form-group">
 									
-									<label class="form-label">지원하시겠습니까?</label>
+									<label class="form-label">지원할 프로필 선택</label>
 									<c:forEach var="profile_dto" items="${profile_select}">
-										<input type="radio" class="custom-control-input" name="example-radios" value="${profile_dto.pro_num}" checked>
-										<span>${profile_dto.profile_sub}</span>
+										<div class="custom-controls-stacked">
+											<label class="custom-control custom-radio">
+												<input type="radio" class="custom-control-input" name="pro_num" value="${profile_dto.pro_num}" checked>
+												<span class="custom-control-label">${profile_dto.profile_sub}</span>
+											</label>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -703,11 +707,13 @@
 				alert("프로필을 등록하셔야 이용할 수 있습니다.")
 				$("#apply").modal('hide');
 			}
-			function apply(){	
+			function apply(){
+				var pro_num = $('input:radio[name="pro_num"]:checked').val();
+				
 				$.ajax({
 					type:"get",  
 					url:"<c:url value='apply'/>",
-	    			data:"pj_num=${projectCont.pj_num}+&free_code=${free.free_code}",
+	    			data:"pj_num=${projectCont.pj_num}&free_code=${free.free_code}&pro_num="+pro_num,
 					success: function(data){
 						alert("성공");
 						$('#app_btn').remove();
@@ -761,7 +767,7 @@
                   <!--
                   <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
                   -->
-                 
+                 	<label class="custom-control custom-radio">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                   </button>
