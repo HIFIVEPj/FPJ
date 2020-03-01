@@ -44,7 +44,8 @@
 	 	<![CDATA[
 			 select * from (select ROWNUM rnum , aa.* from (select * from Member ]]>
 			 <choose> 
-			 	<when test="class_num != null"> WHERE CLASS_NUM =#{class_num}</when>
+			 	<when test="class_num == 4"> WHERE CLASS_NUM =#{class_num}</when>
+			 	<when test="class_num == 2"> WHERE CLASS_NUM=2 OR CLASS_NUM=3 </when>
 			 	<otherwise> where CLASS_NUM>1 </otherwise>			 
 			 </choose>
 			 <![CDATA[
@@ -53,11 +54,12 @@
 	    ]]>
 	</select>
 	
-	<select id="getTotalCount" parameterType="String" resultType="long" >
+	<select id="getTotalCount" parameterType="Map" resultType="long" >
 		select count(MEM_EMAIL) from MEMBER 
 		<choose>
-		<when test="value != null"> WHERE CLASS_NUM =#{class_num}</when>
-		<otherwise>WHERE CLASS_NUM >1</otherwise>
+				<when test="class_num == 4"> WHERE CLASS_NUM =#{class_num}</when>
+			 	<when test="class_num == 2"> WHERE CLASS_NUM=2 OR CLASS_NUM=3 </when>
+			 	<otherwise> where CLASS_NUM>1 </otherwise>	
 		</choose>		
 	</select>
 	

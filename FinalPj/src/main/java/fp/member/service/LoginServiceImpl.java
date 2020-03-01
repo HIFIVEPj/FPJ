@@ -25,19 +25,19 @@ public class LoginServiceImpl implements LoginService {
 	private MemberDao dao;
 	
 	@Override
-	public boolean loginCheck(Member member,HttpSession session) {
+	public boolean loginCheck(Member member,HttpSession session) {	
 		
-		boolean result=BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd());	
-		log.info("(1)"+result);
-		log.info("(2)"+member.getPwd());
-		log.info("(3)"+dao.loginCheck(member).getPwd());
-		
-		if (BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd()) == true) {	//true 일경우 세션 등록
-			//세션 변수 등록
-			session.setAttribute("name",dao.loginCheck(member).getName());
-			session.setAttribute("email",member.getEmail());
-			session.setAttribute("class_num",dao.loginCheck(member).getClass_num());			
-			return true;
+		if(dao.loginCheck(member)==null) {
+			return false;
+		}else {
+			boolean result=BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd());				
+			if (BCrypt.checkpw(member.getPwd(), dao.loginCheck(member).getPwd()) == true) {	//true 일경우 세션 등록
+				//세션 변수 등록
+				session.setAttribute("name",dao.loginCheck(member).getName());
+				session.setAttribute("email",member.getEmail());
+				session.setAttribute("class_num",dao.loginCheck(member).getClass_num());			
+				return true;
+			}
 		}
 		return false;
 	}

@@ -41,7 +41,7 @@ public class Project {
 
 	private List<Pj_Pick_Keyword> Pj_Pick_Keyword;
 	private List<KeyWord> frKeyWord;
-
+	private List<Applied_Project> Applied_Project;
 	
 
 }

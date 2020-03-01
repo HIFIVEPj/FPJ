@@ -1,10 +1,13 @@
 package fp.admin.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,11 +37,16 @@ public class AdminController {
 	public @ResponseBody ModelAndView member_list(
 			@RequestParam (required = false)String class_num ,
 			@RequestParam(value="nowPage", required = false)String nowPage
-	, @RequestParam(value="cntPerPage", required = false)String cntPerPage){
-		System.out.println("!@#!@$!@#!#!@#!@#!@#!@#!@#@!#!@#!@:"+class_num);
+	, @RequestParam(value="cntPerPage", required = false)String cntPerPage,HttpServletRequest request){
 		
-	long totalCount =service.getTotalCount(class_num);
-		//System.out.println("1111111111111111111111111111@:"+totalCount);
+	
+	Map<String,Object> map = new HashMap<String, Object>();	
+	map.put("class_num",class_num);	
+	HttpSession session=request.getSession();
+	session.setAttribute("classN", class_num);
+	
+	long totalCount =service.getTotalCount(map);
+	
 	
 	if(nowPage == null && cntPerPage == null) {
 		nowPage="1";
@@ -48,22 +56,12 @@ public class AdminController {
 	}else if(cntPerPage == null) {
 		cntPerPage="10"; //리스트목록
 	}
-	MemberVo memberVo = new MemberVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), null);
-	
-	Map<String,Object> map = new HashMap<String, Object>();
-	map.put("class_num",class_num);
-	System.out.println("22222222222222222@:"+map);
-	map.put("MemberVo", memberVo);
-	System.out.println("33333333333333333333333333:"+map);
-	
-	MemberVo mvo =service.getMemberVo(map);	
-	System.out.println("list.size(): "+ mvo.getList().size());	
-	
+	MemberVo memberVo = new MemberVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), null);	
+	map.put("MemberVo", memberVo);		
+	MemberVo mvo =service.getMemberVo(map);		
 	ModelAndView mv = new ModelAndView("admin/admin_member");
-	//mv.addObject("list", list);
 	mv.addObject("pa", mvo);
-	
-	System.out.println("6666666666666666666666666666:"+mvo);		
+		
 		return mv;
 	}
 	

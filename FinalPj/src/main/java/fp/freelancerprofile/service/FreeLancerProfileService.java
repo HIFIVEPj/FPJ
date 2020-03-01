@@ -17,6 +17,7 @@ import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.market.domain.FreelancerProfile;
+import fp.market.domain.MarketPick;
 
 public interface FreeLancerProfileService {
 	
@@ -33,7 +34,7 @@ public interface FreeLancerProfileService {
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
-	List<FreeLancer> selectProfileContent4(long PRO_NUM);
+	List<FreeLancer> selectProfileContent4(long free_code);
 	//삭제//
 	public void listDelete(long PRO_NUM);
 
@@ -49,18 +50,10 @@ public interface FreeLancerProfileService {
 
 	List<FreeLancerProfile> profile_free_select(String mem_email);
 
-	
-	
-	
-	
-	
-	
-	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
-
 
 
 

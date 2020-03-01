@@ -150,13 +150,17 @@ public class MarketServiceImpl implements MarketService {
 	}
 	@Override
 	public void insertMarketPick(HashMap<String,Object> map) {
-		mapper.insertMarketPick(map);
-		
+		mapper.insertMarketPick(map);	
+		Long market_num=(Long) map.get("market_num");
+
+		mapper.updatePlusMarketPick(market_num);
 	}
 	@Override
 	public void deleteMarketPick(HashMap<String, Object> map) {
+		Long market_num=(Long) map.get("market_num");
+
 		mapper.deleteMarketPick(map);
-		
+		mapper.updateMinusMarketPick(market_num);
 	}
 
 }

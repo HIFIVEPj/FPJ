@@ -18,7 +18,7 @@ public interface MemberMapper {
 	void insertMem(Member member);	
 	//List<Member> list(Map map);
 	List<Member> getList(Map<String, Object> map);
-	long getTotalCount(String class_num);
+	long getTotalCount(Map<String, Object> map);
 	long getTotalCountCor();
 	long getTotalCountFree();
 

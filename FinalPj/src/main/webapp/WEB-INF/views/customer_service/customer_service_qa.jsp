@@ -206,11 +206,8 @@
 							
 							<div class="panel panel-primary">
 								<div class="tab_wrapper first_tab">
-									<ul class="tab_list">
+									<ul class="tab_list">	
 										<!--
-										<li class="">전체(${paging.total})</li>
-										<li>프로젝트(${paging.qa_cate_count_project})</li>
-										-->
 										<li class="">전체()</li>
 										<li>프로젝트()</li>
 										<li>프리마켓(20)</li>
@@ -220,6 +217,30 @@
 										<li>결제/환불(10)</li>
 										<li>할인(10)</li>
 										<li>기타(10)</li>
+										-->								
+										
+										<c:if test="${empty pageMaker.cri.keyword}">
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=TWCG&keyword="><li class="">전체(${pageMaker.total})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프로젝트"><li>프로젝트(${pageMaker.qa_cate_count_project})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프리마켓"><li>프리마켓(${pageMaker.qa_cate_count_freemarket})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프리랜서"><li>프리랜서(${pageMaker.qa_cate_count_freelancer})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=가입/탈퇴"><li>가입/탈퇴(${pageMaker.qa_cate_count_sign})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=회원정보"><li>회원정보(${pageMaker.qa_cate_count_meminfo})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=결제/환불"><li>결제/환불(${pageMaker.qa_cate_count_payment})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=할인"><li>할인(${pageMaker.qa_cate_count_discount})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=기타"><li>기타(${pageMaker.qa_cate_count_etc})</li></a>
+										</c:if>
+										<c:if test="${!empty pageMaker.cri.keyword}">
+										<li class="">전체(${pageMaker.total})</li>
+										<li>프로젝트</li>
+										<li>프리마켓</li>
+										<li>프리랜서</li>
+										<li>가입/탈퇴</li>
+										<li>회원정보</li>
+										<li>결제/환불</li>
+										<li>할인</li>
+										<li>기타</li>
+										</c:if>
 									</ul>
 								</div>
 							</div>						
@@ -249,7 +270,7 @@
 													<td class="text-center">${qa_list.qa_num}</td>
 													<td class="text-center">${qa_list.qa_cate}</td>
 													<!--<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}">${qa_list.qa_sub}</a>&nbsp;<span style="color:red">+${qa_comment_count.qa_comment_count}</span></td>-->
-													<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}">${qa_list.qa_sub}</a>&nbsp;<c:if test="${qa_list.replyCnt > 0}"><span style="color:red"><b>[ <c:out value="${qa_list.replyCnt}"/> ]</b></span></c:if></td>
+													<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}">${qa_list.qa_sub}</a>&nbsp;<c:if test="${qa_list.replyCnt > 0}"><span style="color:red"><b>[<c:out value="${qa_list.replyCnt}"/>]</b></span></c:if></td>
 													<!--<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}&pageNum=${pageMaker.cri.pageNum}&amount='+sel+'&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${qa_list.qa_sub}</a></td>-->
 													<td class="text-center">${qa_list.mem_name}</td>
 													<td class="text-center"><fmt:formatDate value="${qa_list.qa_rdate}" pattern="yyyy.MM.dd"/></td>
@@ -623,7 +644,7 @@
 										<tr class="border-bottom">
 											<td class="text-center">13</td>
 											<td class="text-center">결제</td>
-											<td><a href="customer_service_qa_content">마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다.</a>&nbsp;<span style="color:red">+5</span></td>
+											<td><a href="customer_service_qa_content">마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다.</a>&nbsp;<span style="color:red"><b>+5</b></span></td>
 											<td class="text-center">한나영</td>
 											<td class="text-center">2020.01.27</td>
 											<td class="text-center">213</td>
@@ -632,7 +653,7 @@
 										<tr class="border-bottom">
 											<td class="text-center">12</td>
 											<td class="text-center">결제</td>
-											<td><a href="customer_service_qa_content"><i class="fa fa-lock"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a></td>
+											<td><a href="customer_service_qa_content"><i class="fa fa-lock"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a>&nbsp;<span style="color:red"><b>[5]</b></span></td>
 											<td class="text-center">한나영</td>
 											<td class="text-center">2020.01.27</td>
 											<td class="text-center">213</td>
@@ -641,7 +662,7 @@
 										<tr class="border-bottom">
 											<td class="text-center">11</td>
 											<td class="text-center">결제</td>
-											<td><a href="customer_service_qa_content"><i class="fa fa-expeditedssl"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a></td>
+											<td><a href="customer_service_qa_content"><i class="fa fa-expeditedssl"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a>&nbsp;<span style="color:red"><b>[ 5 ]</b></span></td>
 											<td class="text-center">한나영</td>
 											<td class="text-center">2020.01.27</td>
 											<td class="text-center">213</td>
@@ -650,7 +671,7 @@
 										<tr class="border-bottom">
 											<td class="text-center">14</td>
 											<td class="text-center">결제</td>
-											<td><a href="customer_service_qa_content">&nbsp;&nbsp;<i class="fe fe-corner-down-right"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a></td>
+											<td><a href="customer_service_qa_content">&nbsp;&nbsp;<i class="fe fe-corner-down-right"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a>&nbsp;<span style="color:red"><b>(5)</b></span></td>
 											<td class="text-center">한나영</td>
 											<td class="text-center">2020.01.27</td>
 											<td class="text-center">213</td>
@@ -659,7 +680,7 @@
 										<tr class="border-bottom">
 											<td class="text-center">15</td>
 											<td class="text-center">결제</td>
-											<td><a href="customer_service_qa_content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fe fe-corner-down-right"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a></td>
+											<td><a href="customer_service_qa_content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fe fe-corner-down-right"></i>&nbsp;&nbsp;마켓 서비스가 마음에 들지 않아 중도 취소하려고 합니다...</a>&nbsp;<span style="color:red"><b>( 5 )</b></span></td>
 											<td class="text-center">한나영</td>
 											<td class="text-center">2020.01.27</td>
 											<td class="text-center">213</td>
@@ -668,7 +689,7 @@
 										<tr class="border-bottom">
 											<td class="text-center">10</td>
 											<td class="text-center">결제</td>
-											<td><a href="customer_service_qa_content">환불 관련 문의 드립니다.</a></td>
+											<td><a href="customer_service_qa_content">환불 관련 문의 드립니다.</a>&nbsp;<span style="color:red"><b>+ 5</b></span></td>
 											<td class="text-center">김세영</td>
 											<td class="text-center">2020.01.27</td>
 											<td class="text-center">213</td>
