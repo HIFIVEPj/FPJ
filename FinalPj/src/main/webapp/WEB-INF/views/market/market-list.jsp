@@ -254,7 +254,7 @@
 																<c:choose>
 																	<c:when test="${sessionScope.email != null}">
 																		<c:if test="${fn:length(marketNumList) == 0}">	
-																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"> <i class="fa fa fa-heart-o"></i></a>
+																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"  id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o"></i></a>
 																		</c:if>
 																	</c:when>
 																	<c:otherwise>

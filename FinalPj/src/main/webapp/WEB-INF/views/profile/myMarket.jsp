@@ -88,23 +88,24 @@
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
-								<h3 class="card-title"><b>관심있는 마켓</b></h3>
+								<h3 class="card-title"><b>등록한 마켓</b></h3>
 							</div>
 							<div class="card-body">
 							<div class="ads-tabs">
 									<div class="tabs-menus">
 										<!-- Tabs -->
-										<ul class="nav panel-tabs">
+									<!--	<ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">찜 목록</a></li>
 											<li><a href="#tab2" data-toggle="tab">구매한 마켓</a></li>
 										</ul>
+										-->
 									</div>
 								<div class="tab-content">
 								
 								
 								
 								<!-- 탭1 -->
-									<c:if test="${fn:length(mPickList)>0 }">
+									<c:if test="${fn:length(myMarket)>0 }">
 										<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
 											<table class="table table-bordered table-hover mb-0 text-nowrap">
 												<thead style="text-align:center;">
@@ -118,7 +119,7 @@
 												</thead>
 												
 												
-											<c:forEach items="${mPickList }" var="pickList">	
+											<c:forEach items="${myMarket }" var="myMarket">	
 												<tbody>
 													<tr>
 														<td>
@@ -131,11 +132,11 @@
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
 																	<a href="#"></a>
-																	<img src="../hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
+																	<img src="../hifiveImages/marketThumbnails/${myMarket.market_fname}" alt="img">
 																</div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class=""><b>${pickList.market.market_sub }</b></h4></a>
+																		<a href="#" class="text-dark"><h4 class=""><b>${myMarket.market_sub }</b></h4></a>
 															<!-- 		<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>-->
 																 	<div style="padding-top:5px;">
 																	<!--	<span class="text-warning">
@@ -144,8 +145,8 @@
 																			<i class="fa fa-star"> </i>
 																			<i class="fa fa-star"> </i>
 																			</span>-->
-																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${pickList.market.market_vcnt}		
-																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${pickList.market.market_pcnt}
+																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${myMarket.market_vcnt }
+																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${myMarket.market_pcnt }
 																		</div> 
 																	
 																	</div>
@@ -153,14 +154,19 @@
 															</div>			
 														</td>
 														
-														<td class="font-weight-semibold fs-16">${pickList.market.market_price}</td>
-														<c:if test="${pickList.market.market_state==1}">
+														<td class="font-weight-semibold fs-16">${myMarket.market_price}</td>
+														<c:if test="${myMarket.market_state==1}">
 															<td>
 																<a href="#" class="badge badge-warning">판매중</a>
 															</td>
 														</c:if>
+														<c:if test="${myMarket.market_state==0}">
+															<td>
+																<a href="#" class="badge badge-warning">컴토중</a>
+															</td>
+														</c:if>
 														<td>
-															<a href="deleteMarketPick?marketP_num=${pickList.marketP_num}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+															<a href="" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
 															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
 							
 														</td>
@@ -172,7 +178,7 @@
 											</table>
 										</div>
 									</c:if>
-									<c:if test="${fn:length(mPickList)==0 }">
+									<c:if test="${fn:length(myMarket)==0 }">
 										<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
 										</div>
 									</c:if>
@@ -182,7 +188,6 @@
 								
 								
 							<!-- 탭2 -->			
-							<c:if test="${fn:length(mPayList)>0 }">
 								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
@@ -193,47 +198,44 @@
 												<th><b>구매일</b></th>
 											</tr>
 										</thead>
-										
-										<c:forEach var="mPayList" items="${mPayList}">
-											<tbody>
-											<tr>
-												<td colspan="2">
-													<div class="media mt-0 mb-0">
-													<!-- 	<div class="card-aside-img">
-															<a href="#"></a>
-															<img src="../images/products/h1.png" alt="img">
-														</div>
-													-->													
-														 <div class="media-body">
-															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class=""><b>${mPayList.marketPaym_pdName }</b></h4></a>
-																
-																<div style="padding-top:5px;">
-																
-																	
-																</div>
+										<tbody>
+										<tr>
+											<td colspan="2">
+												<div class="media mt-0 mb-0">
+												<!-- 	<div class="card-aside-img">
+														<a href="#"></a>
+														<img src="../images/products/h1.png" alt="img">
+													</div>
+												-->													
+													 <div class="media-body">
+														<div class="card-item-desc ml-4 p-0 mt-2">
+															<a href="#" class="text-dark"><h4 class=""><b>반응형 홈페이지 만들어 드립니다</b></h4></a>
+															<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>
+															<div style="padding-top:5px;">
+															<span class="text-warning">
+																<i class="fa fa-star"> </i>
+																<i class="fa fa-star"> </i>
+																<i class="fa fa-star"> </i>
+																<i class="fa fa-star"> </i>
+																</span>
+																<i class="fa fa-star"> </i> | <i class="fa fa-eye"></i> 344<br>
 															</div>
 														</div>
 													</div>
-												</td>
-												
-												<td class="font-weight-semibold fs-16">${mPayList.marketPaym_price}원</td>
-												<td>
-													<a href="#" class="badge badge-secondary">제작중</a>
-												</td>
-												<td class="font-weight-semibold fs-16">
-													${mPayList.marketPaym_rdate}
-												</td>
-												</tr>
-											</tbody>
-										</c:forEach>
+												</div>
+											</td>
+											
+											<td class="font-weight-semibold fs-16">10,000,000원</td>
+											<td>
+												<a href="#" class="badge badge-secondary">제작중</a>
+											</td>
+											<td class="font-weight-semibold fs-16">
+												2020-01-29
+											</td>
+											</tr>
+										</tbody>
 									</table>
 								</div>
-							</c:if>
-								<c:if test="${fn:length(mPayList)==0 }">
-									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
-									</div>
-								</c:if>
 							<!-- 탭2 -->		
 								
 <!-- 		
@@ -273,7 +275,7 @@
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
-									<c:if test="${fn:length(mPickList)>0 }">
+									<c:if test="${fn:length(myMarket)>0 }">
 										<c:if test="${paging.nowPage !=1}">
 											<li class="page-item">
 												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
@@ -292,12 +294,12 @@
 												</c:when>	
 												<c:otherwise>
 													<li class="page-item">
-														<a class="page-link hidden-xs-down" href="myfavoriteMarket?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+														<a class="page-link hidden-xs-down" href="myMarket?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
-									<c:if test="${fn:length(mPickList)>0 }">
+									<c:if test="${fn:length(myMarket)>0 }">
 										<c:if test="${ paging.nowPage!=paging.lastPage }">
 											<li class="page-item">
 												<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>

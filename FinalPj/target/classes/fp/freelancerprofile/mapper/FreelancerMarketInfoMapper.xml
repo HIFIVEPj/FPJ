@@ -7,9 +7,10 @@
 
 	<resultMap type="MarketPick" id="resultMarketPick">
 		<id property="marketP_num" column="marketP_num" />
-			<result property="market_num" column="market_num" />
+			<result property="market_num" column="market_nump" />
 			<result property="mem_email" column="mem_email" />
 		<association property="market" javaType="Market" column ="market_num" >
+			<result property="market_num" column="market_num" />
 			<result property="free_code" column="free_code" />
 			<result property="cate_num" column="cate_num" />
 			<result property="market_price" column="market_price" />
@@ -20,18 +21,55 @@
 			<result property="market_ofname" column="market_ofname" />
 			<result property="market_state" column="market_state" />
 			<result property="market_pcnt" column="market_pcnt" />
-			<result property="option3" column="option3" />
+		</association>
+	</resultMap>
+	<resultMap type="Market" id="resultMyMarket">
+		<id property="market_num" column="market_num" />
+		<result property="free_code" column="free_code" />
+		<result property="cate_num" column="cate_num" />
+		<result property="market_price" column="market_price" />
+		<result property="market_sub" column="market_sub" />
+		<result property="market_cont" column="market_cont" />
+		<result property="market_vcnt" column="market_vcnt" />
+		<result property="market_fname" column="market_fname" />
+		<result property="market_ofname" column="market_ofname" />
+		<result property="market_state" column="market_state" />
+		<result property="market_pcnt" column="market_pcnt" />
+		<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+	       <id property="free_code" column ="free_code" />
+	       <result property="mem_email" column ="mem_email" />  
 		</association>
 	</resultMap>
 
 	<select id="marketPickList" parameterType="hashmap" resultMap="resultMarketPick" >
 	<![CDATA[
-		select * from (select rownum rnum , aa.* from ( select * from (select * from market_pick where mem_email=#{mem_email})mp left outer join(select * from market) m on mp.market_num = m.market_num order by m.market_num desc ) aa )where rnum>#{start} and rnum<=#{end} 
+		select * from (select rownum rnum , aa.* from ( select * from (select marketP_num,market_num market_nump,mem_email from market_pick where mem_email=#{mem_email})mp left outer join(select market_price, market_fname ,market_state, market_sub, cate_num, market_num, market_pcnt, market_vcnt from market) m on mp.market_nump = m.market_num order by m.market_num desc ) aa )where rnum>#{start} and rnum<=#{end} 
 	]]>
 <!-- select * from (select rownum rnum , aa.* from (select * from market_pick where mem_email=#{mem_email} order by marketp_num desc ) aa )where rnum>#{start} and rnum<=#{end} -->
 	</select>
 	<select id="getTotalMarketPick" parameterType="String" resultType="int">
 		select count(*) from market_pick where mem_email=#{mem_email}
+	</select>
+	<delete id="deleteMarketPick" parameterType="hashmap">
+		delete market_pick where marketp_num=#{marketP_num} and mem_email=#{mem_email}
+	</delete>
+	<select id="paymentDetails" parameterType="String" resultType="MarketPayment">
+		select * from market_payment where mem_email=#{mem_email}
+	</select>
+<!-- 내가등록한마켓 정보-->	
+	<select id="getTotalMyMarket" parameterType="String" resultType="int">
+		select count(*) from market m join freelancer f on m.free_code=f.free_code where mem_email=#{mem_email}
+	</select>
+	<select id="getMyMarket" parameterType="hashmap" resultMap="resultMyMarket">
+	<![CDATA[	
+		select * from (select rownum rnum , aa.* from 
+		( select m.MARKET_NUM,f.FREE_CODE,m.MARKET_PRICE,m.MARKET_SUB,m.MARKET_VCNT,m.MARKET_FNAME,m.MARKET_PCNT,m.MARKET_STATE,f.MEM_EMAIL 
+		from market m join freelancer f on f.free_code=m.free_code 
+		where f.mem_email=#{mem_email} order by m.market_num desc ) aa )where rnum>#{start} and rnum<=#{end} 
+	]]>
+	</select>
+	<select id="getFreefname" parameterType="String" resultType="mFreelancer">
+		select free_fname from freelancer where mem_email=#{mem_email}
 	</select>
 	
 </mapper>

@@ -15,7 +15,7 @@
 			pg: 'inicis', // version 1.1.0부터 지원.
 			pay_method: 'card',	
 			merchant_uid: 'market_' + new Date().getTime(),
-			name: '마켓 결제:${market.market_sub}',
+			name: '${market.market_sub}',
 //			amount:'${market.market_price}', 
 			amount:'10', 
 			buyer_email: '${sessionScope.email}',
@@ -188,11 +188,11 @@
 																<dt>마켓 번호</dt>
 																<dd>${market.market_num}</dd>
 															</dl>
-															<dl class="product-gallery-data1">
+														<!-- <dl class="product-gallery-data1">
 																<dt>수수료율</dt>
-																<dd>${mPayment.marketPaym_freeRate}%</dd>
+																
 															</dl>
-															
+														 -->		
 															<div class="product-gallery-rats">
 																<ul class="product-gallery-rating">
 																	<li>

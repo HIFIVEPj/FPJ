@@ -22,7 +22,7 @@ public interface MarketService {
 	//문의 페이징에 필요한 총 문의 수 
 	 int getMarketQACount(long market_num);
 	 
-	 List<Market> getMarketList(MarketPagingVO marketVO);
+	 List<Market> getMarketList(HashMap<String, Object> pagingmap);
 //	 Market getMarketContent(long market_num);
 	 Market getMarket(long market_num);
 	 Integer getMarketStar(long market_num);
@@ -54,7 +54,8 @@ public interface MarketService {
 	 String getFreeName(long market_num);
 	 
 	 void insertPaymentMarket(Map<String, Object> payinfoMarket);
-
+	 void insertPaymentMarket2(Map<String,Object> map);
+	 
 	 List<MarketPick> pickState(String mem_email);
 	 void insertMarketPick(HashMap<String,Object> map);
 	 void deleteMarketPick(HashMap<String,Object> map);

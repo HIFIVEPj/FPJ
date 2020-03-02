@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,10 +64,16 @@ public class MarketPaymentsController {
 	} 
 	@ResponseBody 
 	@RequestMapping(value = "market-payments-insert", method = RequestMethod.POST)
-	public String insertMarketPayment(@RequestBody HashMap<String,Object> map) {
+	public String insertMarketPayment(@RequestBody HashMap<String,Object> map,HttpSession session) {
+		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+map);
+		String mem_email=(String)session.getAttribute("email");
 		Map<String, Object> payinfoMarket = new HashMap<String, Object>();
 		payinfoMarket.put("map", map);
+
 		marketService.insertPaymentMarket(payinfoMarket);
+		
+		payinfoMarket.put("mem_email", mem_email);
+		marketService.insertPaymentMarket2(payinfoMarket);
 	//	marketService.insertPaymentMarket(map);바로 맵으로 받아버리면 오류남1111오류
 		return "map";
 	}

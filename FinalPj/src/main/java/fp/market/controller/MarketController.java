@@ -60,7 +60,12 @@ public class MarketController {
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
 		MarketPagingVO marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		 ModelAndView mv = new ModelAndView("market/market-list");
-		 List<Market> list = marketService.getMarketList(marketVO);
+		 
+		 
+		 HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();
+		 Pagingmap.put("start",marketVO.getStart());
+		 Pagingmap.put("end",marketVO.getEnd());
+		 List<Market> list = marketService.getMarketList(Pagingmap);
 		 
 		 List<MarketPick> pickState=new ArrayList<MarketPick>();
 		 ArrayList<Long> marketNumList = new ArrayList<Long>();

@@ -25,7 +25,7 @@ public interface MarketMapper {
 	public int getMarketQACount(long market_num);
 	
 	
-	public List<Market> getMarketList(MarketPagingVO marketVO);
+	public List<Market> getMarketList(HashMap<String, Object> pagingmap);
 //마켓 상세보기에 피요한것들	
 	public Market getMarket(long market_num);	
 	public Integer getMarketStar(long market_num);
@@ -59,6 +59,7 @@ public interface MarketMapper {
 	public String getFreeName(long market_num);
 	
 	public void insertPaymentMarket(Map<String,Object> map);
+	public void insertPaymentMarket2(Map<String,Object> map);
 	
 	public List<MarketPick> pickState(String mem_email);
 	public void insertMarketPick(HashMap<String,Object> map);

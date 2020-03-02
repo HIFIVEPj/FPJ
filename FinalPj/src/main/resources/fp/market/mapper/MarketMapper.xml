@@ -117,10 +117,10 @@
 	</select>
 	
 	<!-- 페이징 처리 후 게시글 조회 -->
-	<select id="getMarketList" resultMap="resultMarket" parameterType="MarketVO">
+	<select id="getMarketList" resultMap="resultMarket" parameterType="hashmap">
 		<![CDATA[
 			select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-			(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+			(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
 			right outer join
 			(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
 			on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
@@ -280,6 +280,9 @@
 	<insert id="insertPaymentMarket" parameterType="java.util.Map">
 		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME ) values
 		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name})
+	</insert>
+	<insert id="insertPaymentMarket2" parameterType="java.util.Map">
+		insert into MARKET_PAYMENT(marketPaym_num,mem_email,marketPaym_price,marketPaym_pdName,marketPaym_rdate) values(MARKETPAYM_NUM_SEQ.NEXTVAL, #{mem_email}, #{map.paid_amount},#{map.name},SYSDATE)
 	</insert>
 <!-- 마켓찜 -->
 	<select id="pickState" resultType="MarketPick" parameterType="String" >
