@@ -239,8 +239,9 @@
 									    <c:when test="${!doneLoop}">
 									   
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
-									        
+									     
 									    </c:when>
+									       
 									    
 									    <c:otherwise>
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>

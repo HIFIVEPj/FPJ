@@ -18,5 +18,8 @@ public class PayInformation {
 	private String payinfo_cardname;//카드이름
 	private String payinfo_pgtid;//결제구분번호?
 	private String payinfo_buyername;//구매자
+	private int option1;
+	private int option2;
+	private String option3;	
 
 }

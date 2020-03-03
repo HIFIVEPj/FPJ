@@ -65,9 +65,6 @@
 		        <result property="appp_status" column="appp_status"/>
 		        <result property="appp_date" column="appp_date"/>
       </collection>  
-
-      
-       
       </resultMap>
       
 
@@ -102,7 +99,16 @@
            <result property="pj_ddate" column="pj_ddate"/>
            <result property="pj_place" column="pj_place"/>
            <result property="pj_name" column="pj_name"/>   
+            <result property="pj_rdate" column="pj_rdate"/>   
          </collection>   
+         
+                  <collection property="applied_project" javaType="java.util.ArrayList" ofType="Applied_Project" >
+		      <id property="free_code" column="fr_free_code"/>
+		        <result property="pro_num" column="fr_pro_num"/>
+		        <result property="pj_num" column="fr_pj_num"/>
+		        <result property="appp_status" column="appp_status"/>
+		        <result property="appp_date" column="appp_date"/>
+      </collection>  
 
       </resultMap>
 
@@ -135,8 +141,8 @@
         <result property="profile_ext" column="profile_ext"/>
       </collection>   
 
-
       </resultMap>
+
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
  	<!-- 프리랜서 프로필 리스트 select -->
    <!--<select id="selectProfileList"  resultMap="FreeLancerResult">
@@ -242,12 +248,13 @@
    </select>
    
        <!-- 프리랜서 프로필 컨텐츠 4-->
-          <select id="selectProfileContent4"  parameterType="long" resultMap="FreeLancerResult">
+          <select id="selectProfileContent4"  parameterType="long" resultMap="find_pro_sub">
          <![CDATA[
 		 select free_code
 		 		, appp_status
 		 		, p.pj_num
-		 		, pj_sub 
+		 		, p.pj_sub 
+		 		, p.pj_rdate
 		 		, free_code
 			from applied_project ap
 				inner join project p 
@@ -311,7 +318,19 @@
 		 </if>
 	 </insert>
 
+	<!-- 프로필 update -->
+ 	<update id="listUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
 
+	<![CDATA[
+		update freelancer_profile set 
+		pro_num=#{pro_num}, free_code=#{free_code}, type_num=#{type_num}, mem_email=#{mem_email}, pro_exp=#{pro_exp}, pro_cv=#{pro_cv}
+		,pro_addr=#{pro_addr}, pro_postcode=#{pro_postcode}, pro_detailloc=#{pro_detailloc}, pro_edu=#{pro_edu}, pro_start=#{pro_start}
+		, pro_ox=#{pro_ox}, pro_grade=#{pro_grade}, pro_place=#{pro_place}, pro_workplace=#{pro_workplace}, profile_sub=#{profile_sub}, sysdate
+		   ]]>
+	</update> 
+	
+	
+	
 
 	<!-- 나영 추가 / mydash_free -->
 	<select id="mydash_free_select" parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancer">

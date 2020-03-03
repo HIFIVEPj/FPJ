@@ -272,17 +272,7 @@
                              <li>	
                                  <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
                             </li>
-                            
-                             <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">2</span></a>
-                            </li>
-                            
-                             <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">3</span></a>
-                            </li>
-                            
-				
-
+                  
 					</ul>
 					
 
@@ -308,60 +298,14 @@
 
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
-						<div class="page-header">
-						<!-- <h4 class="page-title">관리자페이지</h4>
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
-							</ol> -->
-						</div>
+							<div class="page-header">
+							 <h4 class="page-title">프로젝트관리</h4>
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+									<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
+								</ol> 
+							</div>			
 
-						<div class="row">
-							<div class="col-lg-3 col-md-12">
-								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-users fs-40 text-primary"></i>
-										</div>
-										<h5>Total Users</h5>
-										<h2 class="counter mb-0">5,768</h2>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-12">
-								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-refresh-2 fs-40 text-primary"></i>
-										</div>
-										<h5>Total Updates</h5>
-										<h2 class="counter mb-0">7,682</h2>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-12">
-								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-mail fs-40 text-primary"></i>
-										</div>
-										<h5>Total E-mail</h5>
-										<h2 class="counter mb-0">276</h2>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-12">
-								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-photo-gallery fs-40 text-primary"></i>
-										</div>
-										<h5>Total Posts</h5>
-										<h2 class="counter mb-0">9,035</h2>
-									</div>
-								</div>
-							</div>
-						</div>
 
 						<div class="row">
 							<div class="col-md-6">
@@ -390,239 +334,56 @@
 							</div>
 						</div>
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">Product List</h3>
-									</div>
-									<div class="card-body">
-										<div class="table-responsive border-top userprof-tab">
-											<table class="table table-bordered table-hover mb-0">
-												<thead>
-													<tr>
-														<th></th>
-														<th>Item</th>
-														<th>Category</th>
-														<th>Price</th>
-														<th>Ad Status</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Camera 2d33</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>sale</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$54</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring IT Developers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Oct-23-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$156</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">2Bk Delux Rooms</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-15-2018 , 12:45</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Rent</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>RealEstate</td>
-														<td class="font-weight-semibold fs-16">$22,765</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/f1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Chiness Food</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Restaurant</td>
-														<td class="font-weight-semibold fs-16">$89</td>
-														<td>
-															<a href="#" class="badge badge-success">Active</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/l1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Lenova laptop</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>used</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$25</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring Civil Engineers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-22-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$14,000</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
+<!--  -->				<div class="input-group">
+							<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="">
+							<div class="input-group-append ">
+								<button type="button" class="btn btn-white br-tr-7 br-br-7">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
 							</div>
-
 						</div>
+						<div class="card mt-5  ">
+							<div class="table-responsive">
+								<table class="table card-table ">
+									<thead class="bg-primary text-white">
+										<tr class="border-bottom text-white">
+											<th class="text-white font-weight-normal">num</th>
+											<th class="text-white font-weight-normal">payid</th>
+											<th class="text-white font-weight-normal">price</th>
+											<th class="text-white font-weight-normal">uid</th>
+											<th class="text-white font-weight-normal">cardnum</th>
+											<th class="text-white font-weight-normal">status</th>
+											<th class="text-white font-weight-normal">cardname</th>
+											<th class="text-white font-weight-normal">pgtid</th>
+											<th class="text-white font-weight-normal">buyername</th>
+										</tr>
+									</thead>
+									<tbody>
+									<c:if test="${empty list}">
+										<tr align="center" noshade>
+										   <td colspan="9">데이터가 하나도 없음</td>
+										</tr>
+									</c:if>
+									<c:forEach var="dto" items="${list}">
+											<tr class="border-bottom">
+											<td>${dto.payinfo_num}</td>
+											<td>${dto.payinfo_payid}</td>
+											<td>${dto.payinfo_price}</td>
+											<td class="text-red">${dto.payinfo_uid}</td>
+											<td class="">${dto.payinfo_cardnum}</td>
+											<td>${dto.payinfo_status}</td>
+											<td class="">${dto.payinfo_cardname}</td>
+											<td>${dto.payinfo_pgtid}</td>
+											<td class="text-right">${dto.payinfo_buyername}</td>
+										</tr>	
+										</c:forEach>											
+									</tbody>
+								</table>
+							</div>
+<!--  -->				</div>
+						
+						
+						
 					</div>
 				</div>
 			</div>

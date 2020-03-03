@@ -52,6 +52,27 @@
 	<select id="qa_cate_count_project" resultType="int" parameterType="CustomerServiceQa">
 		select count(qa_num) from qa where qa_cate='프로젝트'
 	</select>
+	<select id="qa_cate_count_freemarket" resultType="int" parameterType="CustomerServiceQa">
+		select count(qa_num) from qa where qa_cate='프리마켓'
+	</select>
+	<select id="qa_cate_count_freelancer" resultType="int" parameterType="CustomerServiceQa">
+		select count(qa_num) from qa where qa_cate='프리랜서'
+	</select>
+	<select id="qa_cate_count_sign" resultType="int" parameterType="CustomerServiceQa">
+		select count(qa_num) from qa where qa_cate='가입/탈퇴'
+	</select>
+	<select id="qa_cate_count_meminfo" resultType="int" parameterType="CustomerServiceQa">
+		select count(qa_num) from qa where qa_cate='회원정보'
+	</select>
+	<select id="qa_cate_count_payment" resultType="int" parameterType="CustomerServiceQa">
+		select count(qa_num) from qa where qa_cate='결제/환불'
+	</select>
+	<select id="qa_cate_count_discount" resultType="int" parameterType="CustomerServiceQa">
+		select count(qa_num) from qa where qa_cate='할인'
+	</select>
+	<select id="qa_cate_count_etc" resultType="int" parameterType="CustomerServiceQa">
+		select count(qa_num) from qa where qa_cate='기타'
+	</select>
 		
 	<!-- 페이징 처리 후 게시글 조회 -->
 	<!--
