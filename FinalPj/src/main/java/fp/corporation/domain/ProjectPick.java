@@ -1,7 +1,5 @@
 package fp.corporation.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

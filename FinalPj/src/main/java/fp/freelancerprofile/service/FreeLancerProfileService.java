@@ -54,10 +54,9 @@ public interface FreeLancerProfileService {
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
-
-
-
-
+	public List<FreeLancer>select_pj_applied_free();
+	public List<FreeLancer>select_pj_applied_free_paging(long pj_num);
+	//public long totalCount_pj_applied_free(long pj_num);
 
 
 

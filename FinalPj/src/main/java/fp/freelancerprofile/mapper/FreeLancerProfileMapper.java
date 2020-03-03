@@ -5,6 +5,7 @@ import java.util.*;
 
 import org.springframework.context.annotation.Profile;
 
+import fp.corporation.domain.Project;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
@@ -50,7 +51,9 @@ public interface FreeLancerProfileMapper {
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
 	public void mydash_update_classnum(String mem_email);
-
+	public List<FreeLancer>select_pj_applied_free();
+	List<FreeLancer>select_pj_applied_free_paging(long pj_num);
+	//public long totalCount_pj_applied_free(long pj_num);
 
 	
 	

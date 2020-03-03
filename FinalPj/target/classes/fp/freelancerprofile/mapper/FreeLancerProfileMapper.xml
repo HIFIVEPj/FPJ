@@ -64,7 +64,7 @@
 		        <result property="pj_num" column="fr_pj_num"/>
 		        <result property="appp_status" column="appp_status"/>
 		        <result property="appp_date" column="appp_date"/>
-      </collection>  
+      </collection> 
       </resultMap>
       
 
@@ -346,5 +346,28 @@
 	<update id="mydash_update_classnum" parameterType="String">
 		update MEMBER set class_num =3 where mem_email=#{mem_email}
 	</update>
+	<!-- 기업마이페이지에서 지원한 프리랜서 프로필 띄우기-->
+	<select id="select_pj_applied_free" resultMap="FreeLancerResult">
+	 <![CDATA[
+		select free.*, appp.appp_date, appp.appp_status, pj.pj_num as fr_pj_num from freelancer_profile free join
+		APPLIED_PROJECT appp
+		on free.pro_num=appp.pro_num join project pj
+		on pj.pj_num = appp.pj_num
+		 order by appp.appp_date
+		 ]]>
+	</select>
+		<select id="select_pj_applied_free_paging" resultMap="FreeLancerResult" parameterType="long">
+	 <![CDATA[
+	select free.*, appp.appp_date, appp.appp_status, pj.pj_num as fr_pj_num from freelancer_profile free join
+		APPLIED_PROJECT appp
+		on free.pro_num=appp.pro_num join project pj
+		on pj.pj_num = appp.pj_num where
+		pj.pj_num=#{pj_num}
+		 order by appp.appp_date
+		 ]]>
+	</select>
+	<select id="totalCount_pj_applied_free" resultType="long" >
+		select count(free_code) from applied_project where pj_num=#{pj_num}
+	</select>
 	<!--/////////////////////////// -->
 </mapper>

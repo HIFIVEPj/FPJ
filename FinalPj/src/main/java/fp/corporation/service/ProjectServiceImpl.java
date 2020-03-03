@@ -125,8 +125,10 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	//프로젝트지원
 	@Override
+	@Transactional
 	public void applied_pj(Map<String, Object>map) {
 		mapper.applied_pj(map);
+		pjpick_del(map);
 	}
 	@Override
 	public AppliedProject select_applied_pj(Map<String, Object>map) {

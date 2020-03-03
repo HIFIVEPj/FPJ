@@ -715,10 +715,10 @@
 					url:"<c:url value='apply'/>",
 	    			data:"pj_num=${projectCont.pj_num}&free_code=${free.free_code}&pro_num="+pro_num,
 					success: function(data){
-						alert("성공");
 						$('#app_btn').remove();
 						$('#btns').prepend("<a href='javascript:apply_done();' class='btn btn-info icons' > 지원하기</a>")
 						$("#apply").modal('hide');
+						$("#apply_done").modal();
 					},
 					error: function(data){
 					alert("에러발생");
@@ -760,20 +760,23 @@
       <!-- /small Modal -->
 
     <!-- small Modal -->   
-      <div id="" class="modal fade">
+      <div id="apply_done" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-               <div class="modal-header">
+  			 <div class="modal-header">
                   <!--
                   <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
                   -->
-                 	<label class="custom-control custom-radio">
+                  <div class="float-right btn btn-icon btn-info btn-sm mt-3"><i class="fa fa-send"></i></div>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                   </button>
                </div>
-               <div class="modal-body">
-               
+               <div class="modal-body" class="center" style="margin:0 auto; text-align:center;">
+               		<h4>지원이 완료되었습니다.</h4>
+               	<a href="myfavorite?mem_email=${sessionScope.email}#tab2" class="btn btn-primary" style="margin-top:10px;">
+					지원한 프로젝트 목록 바로가기
+				</a>
                </div>
             </div>
          </div>      

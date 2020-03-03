@@ -4,18 +4,23 @@ package fp.corporation.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +29,9 @@ import fp.corporation.domain.Project;
 import fp.corporation.service.CorporationService;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
+import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -32,9 +40,11 @@ import lombok.extern.log4j.Log4j;
 public class CorporationController {
 	@Autowired
 	private CorporationService service;
-	
 	@Autowired
 	private ProjectService pjService;
+	@Autowired
+	private FreeLancerProfileService freeProService;
+	
 	@RequestMapping("payments_cor")
 	public String payments_cor(){
 		return "corporation/payments_cor";
@@ -119,16 +129,39 @@ public class CorporationController {
 		
 		ModelAndView mv = new ModelAndView("corporation/managed_project");
 		List<Project> listMydashCor = pjService.listMydashCor(map);
+		List<FreeLancer> freeList = freeProService.select_pj_applied_free();
+		List<Object> freeList_pjnum = new ArrayList<Object>();
+		if(freeList.size()!=0) {
+			for(int i =0; i<freeList.size(); i++) {
+				for(int j =0; j<freeList.get(i).getApplied_project().size(); j++)
+					freeList_pjnum.add(freeList.get(i).getApplied_project().get(j).getPj_num());
+			}
+		}
+		log.info("#&*$#@&*$( 프리랜서 수1 "+freeList_pjnum);
 		mv.addObject("cor",corporation);
 		mv.addObject("list", listMydashCor);
 		mv.addObject("pa",projectVo);
-		
-		log.info("#@#^#$%^#$ projectVO: "+ projectVo);
-		log.info("#@#^#$%^#$ map: "+ corporation);
-		log.info("#@#^#$%^#$ map: "+ map);
+		mv.addObject("freeList_pjnum",freeList_pjnum);
+		//log.info("#@#^#$%^#$ projectVO: "+ projectVo);
+		//log.info("#@#^#$%^#$ map: "+ corporation);
+		//log.info("#@#^#$%^#$ map: "+ map);
 		List<Project> keyname = pjService.keywords();
 		mv.addObject("keyname", keyname);
 		return mv;
+	}
+	@RequestMapping(value="/appp_pj_freeList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<FreeLancer> apply_free(@RequestParam long pj_num) {
+		//ResponseEntity<Map<String,Object>> entity = null;
+		//long totalCount= freeProService.totalCount_pj_applied_free(pj_num);
+		List<FreeLancer> listAll =  freeProService.select_pj_applied_free_paging(pj_num);
+		
+		List<FreeLancer> listProfile = new ArrayList<FreeLancer>();
+		for(int i=0; i<listAll.size(); i++) {
+			listProfile.add(listAll.get(i));
+		}
+		log.info("@#*&$^@#&*$list: "+listProfile);
+		return listProfile;
 	}
 	
 	
