@@ -65,15 +65,29 @@ public class MarketPaymentsController {
 	@ResponseBody 
 	@RequestMapping(value = "market-payments-insert", method = RequestMethod.POST)
 	public String insertMarketPayment(@RequestBody HashMap<String,Object> map,HttpSession session) {
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+map);
-		String mem_email=(String)session.getAttribute("email");
-		Map<String, Object> payinfoMarket = new HashMap<String, Object>();
-		payinfoMarket.put("map", map);
-
-		marketService.insertPaymentMarket(payinfoMarket);
+	//	log.info("!!!!!!!!!!!!!!!map!!!!!!!!!!!!!"+map);
+	//	log.info("!!!!!!!!!!!!!!!rsp!!!!!!!!!!!!!"+map.get("rsp"));
+		String mem_emailSession=(String)session.getAttribute("email");
+		String market_numS= (String) map.get("market_num");
+		long market_num=Long.parseLong(market_numS);
+		Market market =marketService.getMarketFreelancer(market_num);
+		String mem_emailFree=market.getFreelancer().getMem_email();
+	//	log.info("!!!!!!!!!!!!!!market!!!!!!!!!!!!!!"+market);
 		
-		payinfoMarket.put("mem_email", mem_email);
+		Map<String, Object> payinfoMarket = new HashMap<String, Object>();
+	//곻통결제정보insert
+		payinfoMarket.put("map", map.get("rsp"));
+		marketService.insertPaymentMarket(payinfoMarket);
+	//판매자기준내역리스트insert
+		payinfoMarket.put("mem_email", mem_emailFree);
+		payinfoMarket.put("market_num", market_num);
 		marketService.insertPaymentMarket2(payinfoMarket);
+	//구매자기준마켓구매내역insert	
+		HashMap<String, Object> buyinfoMarket = new HashMap<String, Object>();
+		buyinfoMarket.put("mem_email",mem_emailSession);
+		buyinfoMarket.put("market_num",market_num);
+		marketService.insertMarketBuy(buyinfoMarket);
+		
 	//	marketService.insertPaymentMarket(map);바로 맵으로 받아버리면 오류남1111오류
 		return "map";
 	}

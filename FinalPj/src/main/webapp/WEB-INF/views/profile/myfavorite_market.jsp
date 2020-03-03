@@ -95,8 +95,16 @@
 									<div class="tabs-menus">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
-											<li class=""><a href="#tab1" class="active" data-toggle="tab">찜 목록</a></li>
-											<li><a href="#tab2" data-toggle="tab">구매한 마켓</a></li>
+										<c:choose>
+											<c:when test="${selectTab == 'tab1'}">
+												<li class=""><a href="#tab1" class="active" data-toggle="tab">찜 목록</a></li>
+												<li><a href="#tab2" data-toggle="tab">구매한 마켓</a></li>
+											</c:when>
+											<c:when test="${selectTab =='tab2'}">
+												<li class=""><a href="#tab1" data-toggle="tab">찜 목록</a></li>
+												<li><a href="#tab2"  class="active" data-toggle="tab">구매한 마켓</a></li>
+											</c:when>
+										</c:choose>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -130,12 +138,12 @@
 														<td colspan="2">
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
-																	<a href="#"></a>
+																	<a href="market-content?market_num=${pickList.market_num }"></a>
 																	<img src="../hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
 																</div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class=""><b>${pickList.market.market_sub }</b></h4></a>
+																		<a href="market-content?market_num=${pickList.market_num }" class="text-dark"><h4 class=""><b>${pickList.market.market_sub }</b></h4></a>
 															<!-- 		<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>-->
 																 	<div style="padding-top:5px;">
 																	<!--	<span class="text-warning">
@@ -167,9 +175,46 @@
 													</tr>
 												</tbody>
 											</c:forEach>	
-												
-												
 											</table>
+										 <!-- 페이징 -->
+											<div class="card">
+												<div class="card-body" style="margin:0 auto; align:center;">
+													<ul class="pagination mg-b-0 page-0 ">
+														<c:if test="${paging.nowPage !=1}">
+															<li class="page-item">
+																<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
+															</li>
+															<li class="page-item">
+																<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+															</li>
+														</c:if>
+													
+														<c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
+															<c:choose>
+																<c:when test="${paging.nowPage == p }">
+																	<li class="page-item active">
+																		<a class="page-link" href="#">${p}</a>
+																	</li>
+																</c:when>	
+																<c:otherwise>
+																	<li class="page-item">
+																		<a class="page-link hidden-xs-down" href="myfavoriteMarket?nowPageP=${p}&cntPerPageP=${paging.cntPerPage}">${p}</a>
+																	</li>
+																</c:otherwise>
+															</c:choose>
+														</c:forEach>
+														<c:if test="${ paging.nowPage!=paging.lastPage }">
+															<li class="page-item">
+																<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+															</li>
+															<li class="page-item">
+																<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
+															</li>
+														</c:if>
+													</ul>
+												</div>
+											</div>
+									<!-- 페이징 -->	
 										</div>
 									</c:if>
 									<c:if test="${fn:length(mPickList)==0 }">
@@ -182,7 +227,7 @@
 								
 								
 							<!-- 탭2 -->			
-							<c:if test="${fn:length(mPayList)>0 }">
+							<c:if test="${fn:length(mBuyList)>0 }">
 								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
@@ -194,19 +239,19 @@
 											</tr>
 										</thead>
 										
-										<c:forEach var="mPayList" items="${mPayList}">
+										<c:forEach var="mBuyList" items="${mBuyList}">
 											<tbody>
 											<tr>
 												<td colspan="2">
 													<div class="media mt-0 mb-0">
-													<!-- 	<div class="card-aside-img">
-															<a href="#"></a>
-															<img src="../images/products/h1.png" alt="img">
+													 	<div class="card-aside-img">
+															<a href="market-content?market_num=${mBuyList.market_num }"></a>
+															<img src="../hifiveImages/marketThumbnails/${mBuyList.market.market_fname}" alt="img">
 														</div>
-													-->													
+																										
 														 <div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class=""><b>${mPayList.marketPaym_pdName }</b></h4></a>
+																<a href="market-content?market_num=${mBuyList.market_num }" class="text-dark"><h4 class=""><b>${mBuyList.market.market_sub}</b></h4></a>
 																
 																<div style="padding-top:5px;">
 																
@@ -217,59 +262,80 @@
 													</div>
 												</td>
 												
-												<td class="font-weight-semibold fs-16">${mPayList.marketPaym_price}원</td>
+												<td class="font-weight-semibold fs-16">${mBuyList.market.market_price}원</td>
 												<td>
-													<a href="#" class="badge badge-secondary">제작중</a>
+													<c:if test="${mBuyList.mbuysell_state==0 }">
+														<a href="#" class="badge badge-secondary">거래중</a>
+													</c:if>
+													<c:if test="${mBuyList.mbuysell_state==1}">
+														<a href="#" class="badge badge-secondary">거래완료</a>
+													</c:if>
+													<c:if test="${mBuyList.mbuysell_state==2 }">
+														<a href="#" class="badge badge-secondary">거래취소</a>
+													</c:if>
 												</td>
 												<td class="font-weight-semibold fs-16">
-													${mPayList.marketPaym_rdate}
+													${mBuyList.mbuysell_date}
 												</td>
 												</tr>
 											</tbody>
 										</c:forEach>
 									</table>
+									
+								 <!-- 페이징 -->		
+										<div class="card">
+											<div class="card-body" style="margin:0 auto; align:center;">
+												<ul class="pagination mg-b-0 page-0 ">
+													<c:if test="${paging2.nowPage !=1}">
+														<li class="page-item">
+															<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
+														</li>
+														<li class="page-item">
+															<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+														</li>
+													</c:if>
+												
+													<c:forEach var="p" begin="${paging2.startPage}" end="${paging2.endPage}">
+														<c:choose>
+															<c:when test="${paging2.nowPage == p }">
+																<li class="page-item active">
+																	<a class="page-link" href="#">${p}</a>
+																</li>
+															</c:when>	
+															<c:otherwise>
+																<li class="page-item">
+																	<a class="page-link hidden-xs-down" href="myfavoriteMarket?nowPageB=${p}&cntPerPageB=${paging2.cntPerPage}">${p}</a>
+																</li>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+													<c:if test="${ paging2.nowPage!=paging2.lastPage }">
+														<li class="page-item">
+															<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+														</li>
+														<li class="page-item">
+															<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
+														</li>
+													</c:if>
+												</ul>
+											</div>
+										</div>		
+								<!-- 페이징 -->	
+									
+									
+									
+									
 								</div>
 							</c:if>
-								<c:if test="${fn:length(mPayList)==0 }">
+								<c:if test="${fn:length(mBuyList)==0 }">
 									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
 									</div>
 								</c:if>
 							<!-- 탭2 -->		
 								
-<!-- 		
-		<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
-			<table class="table table-bordered table-hover mb-0 text-nowrap">
-				<thead style="text-align:center;">
-					<tr>
-						<th></th>
-						<th colspan="2"><b>제목</b></th>
-						<th><b>가격</b></th>
-						<th><b>상태</b></th>
-						<th><b>버튼</b></th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
-		<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
-			<table class="table table-bordered table-hover mb-0 text-nowrap">
-				<thead style="text-align:center;">
-					<tr>
-						<th></th>
-						<th colspan="2"><b>제목</b></th>
-						<th><b>가격</b></th>
-						<th><b>상태</b></th>
-						<th><b>버튼</b></th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	</div>
-	 -->
+
+	 <!-- 페이징 -->
+	 <!-- 
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
@@ -309,8 +375,10 @@
 									</c:if>	
 									</ul>
 								</div>
-								<!-- pagination-wrapper -->
+								<!-- pagination-wrapper 
 							</div>
+							-->
+	<!-- 페이징 -->	
 							<!-- section-wrapper -->
 						</div>
 					</div>
@@ -320,7 +388,29 @@
 		</section>
 		<!--/User Dashboard-->
 		
+<script type="text/javascript">
+    $(function() {
+        var hijax = function(panel) {
+            $('a.pagination', panel).click(function(){
+                $(panel).load(this.href, {}, function() {
+                    hijax(this);
+                });
+                return false;
+            });
+        };
+        $("#tabs").tabs({
+            ajaxOptions: {
+                error: function(xhr, status, index, anchor) {
+                    $(anchor.hash).html("Couldn't load this tab.");
+                },
+            },
+            load: function(event, ui) {
+                hijax(ui.panel);
 
+            }
+        });
+    });
+</script>
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

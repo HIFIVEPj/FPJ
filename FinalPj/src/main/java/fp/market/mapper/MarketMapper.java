@@ -66,6 +66,8 @@ public interface MarketMapper {
 	public void deleteMarketPick(HashMap<String,Object> map);
 	public void updatePlusMarketPick(long market_num);
 	public void updateMinusMarketPick(long market_num);
+	
+	public void insertMarketBuy(HashMap<String,Object> map);
 
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);

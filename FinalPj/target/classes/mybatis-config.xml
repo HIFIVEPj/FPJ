@@ -30,6 +30,7 @@
         <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
         <typeAlias alias="MarketPayment" type="fp.market.domain.MarketPayment"/>
      	<typeAlias alias="MarketPick" type="fp.market.domain.MarketPick"/>
+     	<typeAlias alias="MarketBuysellList" type="fp.market.domain.MarketBuysellList"/>
 
 		
 		<!-- 별 -->

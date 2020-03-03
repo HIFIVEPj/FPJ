@@ -59,6 +59,8 @@ public interface MarketService {
 	 List<MarketPick> pickState(String mem_email);
 	 void insertMarketPick(HashMap<String,Object> map);
 	 void deleteMarketPick(HashMap<String,Object> map);
+	 
+	 void insertMarketBuy(HashMap<String,Object> map);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 

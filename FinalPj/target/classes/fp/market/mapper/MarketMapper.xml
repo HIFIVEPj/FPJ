@@ -273,7 +273,7 @@
 	<update id="updateMarketVcnt" parameterType="long">
 		update market set market_vcnt=market_vcnt+1 where market_num=#{market_num}
 	</update>	
-<!-- 마켓결제에필요한 쿼리들 -->
+<!-- 마켓판매결제에필요한 쿼리들 -->
 	<select id="getFreeName" parameterType="long" resultType="String">
 		select f.FREE_NAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
 	</select>
@@ -282,8 +282,13 @@
 		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name})
 	</insert>
 	<insert id="insertPaymentMarket2" parameterType="java.util.Map">
-		insert into MARKET_PAYMENT(marketPaym_num,mem_email,marketPaym_price,marketPaym_pdName,marketPaym_rdate) values(MARKETPAYM_NUM_SEQ.NEXTVAL, #{mem_email}, #{map.paid_amount},#{map.name},SYSDATE)
+		insert into MARKET_PAYMENT(marketPaym_num,mem_email,market_num,marketPaym_price,marketPaym_pdName,marketPaym_rdate) values(MARKETPAYM_NUM_SEQ.NEXTVAL, #{mem_email},#{market_num}, #{map.paid_amount},#{map.name},SYSDATE)
 	</insert>
+<!-- 구매한마켓 세션이메일로 -->	
+	<insert id="insertMarketBuy" parameterType="hashmap">
+		insert into MARKET_BUYSELLLIST values(MBUYSELL_NUM_SEQ.nextval,#{market_num},#{mem_email},0,SYSDATE,null,null,null)
+	</insert>
+	
 <!-- 마켓찜 -->
 	<select id="pickState" resultType="MarketPick" parameterType="String" >
 		<!-- select * from market_pick where mem_email=#{mem_email}

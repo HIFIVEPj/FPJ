@@ -150,8 +150,7 @@ public class MarketServiceImpl implements MarketService {
 	
 //마켓리스팅시 하트색깔 여부를위해서
 	public List<MarketPick> pickState(String mem_email) {
-		return mapper.pickState(mem_email);
-		
+		return mapper.pickState(mem_email);	
 	}
 	@Override
 	public void insertMarketPick(HashMap<String,Object> map) {
@@ -166,6 +165,12 @@ public class MarketServiceImpl implements MarketService {
 
 		mapper.deleteMarketPick(map);
 		mapper.updateMinusMarketPick(market_num);
+	}
+//마켓구매내역insert
+	@Override
+	public void insertMarketBuy(HashMap<String, Object> map) {
+		mapper.insertMarketBuy(map);
+		
 	}
 	
 

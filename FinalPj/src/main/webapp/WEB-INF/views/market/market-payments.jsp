@@ -8,6 +8,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 	function requestPay() {
+		
 		alert("ssssssss");
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp60448504');
@@ -20,9 +21,13 @@
 			amount:'10', 
 			buyer_email: '${sessionScope.email}',
 			buyer_name: '${sessionScope.name}',
+			market_num: '${market.market_num}',
 			m_redirect_url: 'market-paymentsDone'
 		}, 
+		
+	
 		function (rsp) {
+			var data = JSON.stringify({market_num:"${market.market_num}" ,rsp:rsp});
 			console.log(rsp);
 			if (rsp.success) {
 				$.ajax({
@@ -30,7 +35,7 @@
 				   async:false,
 				   type: 'POST',
 				   contentType: 'application/json',
-				   data: JSON.stringify(rsp),
+				   data: data,
 				   success: function(data){
 					   console.log("data"+data);
 				      if(data != null ){
