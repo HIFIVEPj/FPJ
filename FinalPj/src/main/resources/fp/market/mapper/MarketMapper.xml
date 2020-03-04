@@ -75,6 +75,11 @@
 	        <result property="cor_fname" column ="cor_fname" /><!-- result안쓰는 컬럼은 unread 로 나옴 -->
 	        <result property="cor_ofname" column ="cor_ofname" />    
     	</association>
+    	<association property="member" javaType="mMember" column ="mem_email" >
+	       	<id property="mem_email" column ="mem_email" />
+	        <result property="mem_name" column ="mem_name" />
+	        <result property="class_num" column ="class_num" />     
+    	</association>
 	</resultMap>
 	
 	<resultMap id="resultMarketQA" type="MarketQA">
@@ -99,6 +104,11 @@
 	       	<id property="cor_code" column ="cor_code" />
 	     	<result property="mem_email" column ="mem_email" /> <!-- 빼면 기업의 이메일이 unread로됨 -->
 	        <result property="cor_mname" column ="cor_mname" />    
+    	</association>
+    	<association property="member" javaType="mMember" column ="mem_email" >
+	       	<id property="mem_email" column ="mem_email" />
+	        <result property="mem_name" column ="mem_name" />
+	        <result property="class_num" column ="class_num" />     
     	</association>
 	</resultMap>
 	
@@ -141,17 +151,31 @@
 	<select id="getMarketQA" resultMap="resultMarketQA" parameterType="hashmap">
 		<![CDATA[
 		select * from 
-	    (select rownum rnum , aa.* from
-	        (select COR_MNAME,MARKETQA_NUM,MARKET_NUM,MARKETQA_SUB,MARKETQA_CONT,MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX,mq.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_QA mq 
-	        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
-	    aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
+			(select rownum rnum , aa.* from
+		        (select mem_name, class_num,MARKETQA_NUM, MARKET_NUM, MARKETQA_SUB, MARKETQA_CONT,
+	            MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX
+	            ,mq.MEM_EMAIL,FREE_FNAME, COR_FNAME
+	            from MARKET_QA mq 
+		        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL 
+	            left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL 
+	            left outer join MEMBER m on mq.MEM_EMAIL =m.MEM_EMAIL 
+	            where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
+			aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
 		]]>
 	</select>
-								<!--	select * from (select * from 
+								<!--	
+								select * from 
+								    (select rownum rnum , aa.* from
+								        (select COR_MNAME,MARKETQA_NUM,MARKET_NUM,MARKETQA_SUB,MARKETQA_CONT,MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX,mq.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_QA mq 
+								        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
+								    aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
+									]]>
+								
+								select * from (select * from 
 									(select rownum rnum , aa.* from
 									(select * from MARKET_QA order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) aa )
 									where rnum >#{marketVOQAStart} and rnum <= #{marketVOQAEnd})where MARKET_NUM=#{market_num}
-									-->	
+							-->	
 <!-- 마켓문의,파일 update&insert  -->	
 	<!-- insert 전에 업데이트 먼저 순서숫자 겹치는거 방지하려고-->
  	<!-- 받아온 값의 뒷순서들에 +1씩한 후에 insert하면 순서겹치지않음-->
@@ -202,26 +226,22 @@
 <!-- 마켓리뷰 페이징보기 -->	
 	<select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">
 		<![CDATA[
+			select * from (select rownum rnum , aa.* from 
+		    	(select mem_name,class_num,COR_FNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,
+			    FREE_FNAME from MARKET_REVIEW mr 
+				left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL 
+	            left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL 
+	            left outer join MEMBER m on mr.MEM_EMAIL =m.MEM_EMAIL 
+	            where MARKET_NUM=#{market_num}  order by MARKETREV_NUM desc)
+	        aa )where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd}
+	            
+            ]]>
+           <!-- mem_name 조인안한쿼리 위에로조인함 
+            <![CDATA[
 			select * from (select rownum rnum , aa.* from (select COR_MNAME,COR_FNAME,COR_OFNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
 			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETREV_NUM desc) aa )where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd}
-		]]>
-		
-		<!--이상하게봅히는 전쿼리
-			<![CDATA[
-			select * from (select * from 
-			(select rownum rnum ,aa.* from
-			(select COR_MNAME,MARKETREV_NUM,MARKETREV_CONT,MARKETREV_STAR,MARKETREV_RDATE,MARKET_NUM,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
-			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL 
-			JOIN CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL order by MARKETREV_NUM desc) aa )
-			where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
 			]]>
-		-->
-		<!--	프리이름이안뽑히는쿼리
-			select * from (select * from 
-			(select rownum rnum , aa.* from
-			(select * from MARKET_REVIEW order by MARKETREV_NUM desc) aa )
-			where rnum >#{marketVORevStart}  and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
-		-->	
+			 -->
 	</select>
 	<!-- 마켓리뷰 프리이름									
 	<select id="getMarketRevFree" resultType="Freelancer" parameterType="long">
