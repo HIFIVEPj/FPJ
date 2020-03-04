@@ -98,7 +98,7 @@ public class FreeLancerProfileController {
 		return "profile/freelancerProfile_content";
 	}
 	
-	//프로필 수정//
+	//프로필 수정..//
 	
 	@GetMapping("freelancerMyprofile_change")
 	public ModelAndView freelancerMyprofile_change(@RequestParam long pro_num) {
