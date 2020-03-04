@@ -82,13 +82,14 @@
 								</div>
 								
 							</div>
+							
+
 							<div class="card-header">
 								<!--
 								<div class="item7-card-desc d-flex mb-2 mt-2">
 									<a href="#"><i class="fa fa-paperclip text-muted mr-2"></i>abc.txt</a>	
 								</div>
-								-->
-								
+								-->								
 								
 								<div class='bigPictureWrapper'>
 								  <div class='bigPicture'>
@@ -147,63 +148,144 @@
 									width:600px;
 								}
 								
-								</style>
-								
+								</style>							
 								
 								<div class="uploadResult">
 									<ul>
 									
 									</ul>
 								</div>
-								
 
 							</div>
 
 							<div class="card-body text-justify">	
 								<p>${qa_content.qa_cont}</p>
 							</div>
+							<!--
 							<div class="card-footer mx-auto" style="border-top: #fff;">	
 								<a class="btn btn-app">
 									<span class="badge badge-pill bg-blue">5</span>
 									<i class="fa fa-thumbs-o-up"></i>
 								</a>
-								
-								<!--
-								<div class="icons">
-									<a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a>
-								</div>
-								
-								<div class="product-tags clearfix">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a></li>
-									</ul>
-								</div>
-								-->
-							</div>
-							<!--
-							<div class="card-body product-filter-desc">
-								<div class="product-tags clearfix">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#">좋아요 버튼 이걸로 할까?</a></li>
-									</ul>
-								</div>
 							</div>
 							-->
+							
+							<!-- 좋아요 테스트 -->
+							<div class="card-footer mx-auto" style="border-top: #fff;">
+							
+							<input type="hidden" value="${sessionScope.email}" class="mem_email"/>
 							<!--
-							<div class="card-body item-user">
-								<div class="row">
-									<div class="profile-pic mb-0">
-										<img src="../images/faces/male/25.jpg" class="brround avatar-xxl" alt="user">
-									</div>
-									<div>
-										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">&nbsp;한나영</h4></a>
-										<span class="text-gray">&nbsp;개발자</span>
-										<span class="text-gray">&nbsp;|</span>
-										<span class="text-muted">&nbsp;경력 3년</span>
-									</div>
-								</div>
-							</div>
+							<input type="hidden" value="${qa_content.qa_recommnum}" class="qa_recommnum"/>
 							-->
+							<c:if test="${empty sessionScope.email}">
+								<a class="btn btn-app" href="javasript:void(0)" onclick="javascript:needtoLogin()">
+									<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+									<i class="fa fa-thumbs-o-up"></i>
+								</a>
+							</c:if>
+							
+							
+							<c:if test="${!empty sessionScope.email}">
+								<c:choose>
+									<c:when test="${qa_recommend_num_list.contains(qa_content.qa_num)}">
+										<!--										
+										<a class="btn btn-app" onclick="javascript:del_recomm(${qa_content.qa_num})" id="del_recomm${qa_content.qa_num}">
+										-->
+										<div id="recomm${qa_content.qa_num}">
+											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num}, ${qa_content.qa_recommnum})" id="del_recomm${qa_content.qa_num}">
+												<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+												<i class="fa fa-thumbs-up"></i>
+											</a>
+										</div>									
+									</c:when>
+									<c:otherwise>
+										<!--
+										<a class="btn btn-app" onclick="javascript:add_recomm(${qa_content.qa_num})" id="insert_recomm${qa_content.qa_num}">
+										-->
+										<div id="recomm${qa_content.qa_num}">
+											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num}, ${qa_content.qa_recommnum})" id="insert_recomm${qa_content.qa_num}">
+												<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+												<i class="fa fa-thumbs-o-up"></i>
+											</a>
+										</div>									
+									</c:otherwise>	
+								</c:choose>
+								
+								<div id="recomm${qa_content.qa_num}">
+								
+								</div>
+					
+							</c:if>
+							
+							
+							<script>
+							function needtoLogin(){
+								alert("로그인 후 사용 가능한 서비스 입니다.")
+							}
+							function add_recomm(qa_num, qa_recommnum){
+								//alert("mem_email : " + mem_email)
+								//alert("qa_num : " + qa_num)
+								alert("qa_recommnum add before: " + qa_recommnum)
+								$.ajax({
+									url:"qa_recommend_insert",
+									type:"GET",
+									//async: true,
+									cache: false,
+								    //dataType: "json",
+								    //contentType:"application/json;charset=UTF-8",
+					    			//data:"qa_num="+qa_num+"&mem_email="+$(".mem_email").val()+"&qa_recommnum="+$(".qa_recommnum").val(),
+					    			data:"qa_num="+qa_num+"&qa_recommnum="+qa_recommnum+"&mem_email="+$(".mem_email").val(),
+									success: function(data){
+										$('#insert_recomm'+qa_num).remove();
+										//add_recomm(qa_num, qa_recommnum);
+										//$('#insert_recomm'+qa_num);
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
+										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+", "+qa_recommnum+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
+										alert("qa_recommnum add after: " + qa_recommnum);
+									},
+									error: function(data){
+										alert("실패1");
+									}
+								});
+								alert("qa_recommnum add last: " + qa_recommnum);
+							}
+							function del_recomm(qa_num, qa_recommnum){
+								alert("qa_recommnum del before: " + qa_recommnum)
+								$.ajax({
+									url:"qa_recommend_del",
+									type:"GET",
+									//async: true,
+									cache: false,
+								    //dataType: "json",
+								    //contentType:"application/json;charset=UTF-8",
+									data: "qa_num="+qa_num+"&qa_recommnum="+qa_recommnum+"&mem_email="+$(".mem_email").val(),
+									success:function(data){
+										$('#del_recomm'+qa_num).remove();
+										//del_recomm(qa_num, qa_recommnum);
+										//$('#del_recomm'+qa_num);
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
+										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+", "+qa_recommnum+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+										alert("qa_recommnum del after: " + qa_recommnum);
+									},
+									error: function(data){
+										alert("실패2");
+									}
+								});
+								alert("qa_recommnum del last: " + qa_recommnum);
+							}
+							</script>
+								
+							
+							
+							
+								
+							</div>
+							<!-- /좋아요 테스트 -->
+							
 							
 							<div class="card-footer" style="padding: 0rem 0rem;">
 							<div class="card" style="margin-bottom: 0rem; border:0;">
