@@ -195,7 +195,7 @@
 
 						 <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
 						  
-								<form id="del_list" method="get" action="freelancerProfile_cehck_delete?mem_email=${sessionScope.email}&pro_num=${freeLancer.pro_num}" name="checkdelete1">
+								<form id="del_list" method="get" action="freelancerProfile_cehck_delete?mem_email=${sessionScope.email}&pro_num=${freeLancer.pro_num}&pro_num=${freeLancer.pro_num}&pro_num=${freeLancer.pro_num}&pro_num=${freeLancer.pro_num}" name="checkdelete1">
 							</c:forEach>
 						
                                
@@ -246,12 +246,7 @@
 									    <c:otherwise>
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>
 									    </c:otherwise>
-									</c:choose>
-                                   
-												
-								   				
-									
-									
+									</c:choose>				
                                    	
                               </tr>
                   </c:forEach>  	

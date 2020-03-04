@@ -42,6 +42,7 @@ import fp.login.naver.KakaoController;
 import fp.login.naver.NaverLoginController;
 import fp.member.domain.Member;
 import fp.member.service.LoginService;
+import fp.member.service.MailService;
 import lombok.extern.log4j.Log4j;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -49,6 +50,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 @Controller
 @Log4j
 public class LoginController {
+    @Autowired
+    @org.springframework.beans.factory.annotation.Qualifier("mailService")
+    private MailService mailservice;
 
 	/* NaverLoginBO */
 	private NaverLoginController naverLoginController;
@@ -74,16 +78,21 @@ public class LoginController {
 
     @RequestMapping(value="find_pwd.do", method = RequestMethod.POST)
 	public String updatePwd(Member member, Model model) {
-		
+    	String userEmail= member.getEmail();
 		String repwd="";
 		String st[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 		Random r = new Random();
 		for(int i=1; i<=6; i++) {
-			repwd+=st[r.nextInt(26)];
-			
+			repwd+=st[r.nextInt(26)];			
 		}
 		log.info("!!!!!!!!!!!!!!!!!!!!******************8"+member.getEmail()+"!@#@!##@#!#!@"+repwd);
-		member.setEmail(member.getEmail());
+		 String subject = "회원가입 인증 코드 발급 안내 입니다.";
+	     StringBuilder sb = new StringBuilder();
+	     sb.append("임시비밀번호는 " + repwd + "입니다.");
+	     sb.append(" 로그인 후 비밀번호 변경 부탁드립니다.");
+	     mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
+	       
+		member.setEmail(userEmail);
 		member.setPwd(BCrypt.hashpw(repwd, BCrypt.gensalt(10)));
 		//member.setPwd(repwd);
 		
@@ -193,23 +202,22 @@ public class LoginController {
   	public ModelAndView loginCheck(@ModelAttribute Member member,HttpSession session,HttpServletResponse response_equals)throws IOException {
   		boolean result = loginService.loginCheck(member, session);
   		ModelAndView mv = new ModelAndView();  		
-  		mv.setViewName("index");  		
+  		 		
   		if(result == true) { 
   			session.getAttribute("name");
   			session.getAttribute("email");  			
+  			mv.setViewName("index"); 
   			
-  			mv.addObject("msg","성공");
   		}else {
   			mv.setViewName("member/login");  			
-  			//response_equals.setContentType("text/html; charset=UTF-8");  			 
-  			//PrintWriter out = response_equals.getWriter();  			 
-  			//out.println("<script>alert('아이디 또는 비밀먼호를 확인하세요'); location.href='member/login';</script>");  			 
-  			//out.flush();
-  			mv.addObject("msg","아이디 또는 비밀번호를 확인하세요.");
-  			
+  			response_equals.setContentType("text/html; charset=UTF-8");  			 
+  			PrintWriter out = response_equals.getWriter();  			 
+  			out.println("<script>alert('아이디 또는 비밀먼호를 확인하세요');</script>");  			 
+  			out.flush();
+  				
   		} 
-  		
   		return mv;
+  		
   	}
 
 	//로그아웃 처리

@@ -12,13 +12,16 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.market.domain.FreelancerProfile;
+import fp.market.domain.MarketPick;
 
 public interface FreeLancerProfileService {
+	
 	
 	List<FreeLancer> selectProfileList();
 	
@@ -42,26 +45,38 @@ public interface FreeLancerProfileService {
 	public void listInsert(FreeLancerProfile freelancerprofile);
 	public void insertPjpkeyword(Map<String, Object> map);
 	
+	//수정//
+	public void listUpdate(FreeLancerProfile freelancerprofile);
+	public void keyUpdate(Map<String, Object> map);
+	//public void keyDelete(Map<String, Object> map);
+
+
 	//체크박스 삭제//
 	void checkdelete1(long PRO_NUM);
-		
+
 	long getTotalCountFree(long free_code);
 
-	FreeLancerProfile profile_free_select(String mem_email);
+	//프로필 수정//
+	public FreeLancerProfile showContent(long pro_num);
+	List<FreeLancerProfile> profile_free_select(String mem_email);
 
-	
-	
-	
-	
-	
-	
-	
+
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
 
 
+
+
+
+	
+	
+
+	
+	
+
+	
 
 
 

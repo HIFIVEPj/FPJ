@@ -290,8 +290,15 @@
 	<insert id="insertMarketPick" parameterType="hashmap">
 	 	insert into MARKET_PICK(MARKETP_NUM, MARKET_NUM, MEM_EMAIL)values(MARKETP_NUM_SEQ.NEXTVAL, #{market_num}, #{mem_email}) 
 	</insert>
-	<delete  id="deleteMarketPick" parameterType="hashmap">
+	<delete id="deleteMarketPick" parameterType="hashmap">
 		 delete MARKET_PICK where market_num=#{market_num} and mem_email=#{mem_email}
 	</delete>
-	
+	<update id="updatePlusMarketPick" parameterType="long">
+		update market set MARKET_PCNT=market_pcnt+1 where market_num=#{market_num}
+	</update>
+	<update id="updateMinusMarketPick" parameterType="long">
+		update market set MARKET_PCNT=market_pcnt-1 where market_num=#{market_num}
+	</update>
+
+
 </mapper>	

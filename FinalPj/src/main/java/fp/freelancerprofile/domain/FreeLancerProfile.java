@@ -35,6 +35,8 @@ public class FreeLancerProfile {
 	private String pro_workplace; //업무장소
 	private String profile_sub; //프로필명
 	private Date profile_date; //프로필 등록일
+	
+
 
 	private List<FreeLancerProfile> freelancerprofile;
 	private List<FreeLancerProfileFile> freelancerprofilefile;
@@ -48,8 +50,10 @@ public class FreeLancerProfile {
 
 	private List<FreeLancerProfileFile> freeLancerProfileFile;
 	private List<KeyWord> keyword;
+	
+	private List<Applied_Project> applied_project;
 
-
+	private List<FreePickKeyWord> freePickKeyWord;
 /*	public List<Integer> pro_num() {
 		pronum = new ArrayList<Integer>();
 		for(int i = 0; i<pro_nums.size(); i++) {

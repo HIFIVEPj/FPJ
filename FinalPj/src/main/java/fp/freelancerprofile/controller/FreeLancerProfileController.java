@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.service.ProjectService;
@@ -40,7 +41,7 @@ import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
-
+import fp.freelancerprofile.service.FreeLancerProfileServiceImpl;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -51,7 +52,7 @@ public class FreeLancerProfileController {
 	private ProjectService pjservice;
 	@Autowired
 	private FreeLancerProfileService service;
-
+	private FreeLancerProfileServiceImpl serviceimple;
 
 	/*@GetMapping("freelancerMyprofile_write")
 	public String freelancerMyprofile_write() {
@@ -98,34 +99,53 @@ public class FreeLancerProfileController {
 	}
 	
 	//프로필 수정//
-	@PostMapping("freelancerProfile_update")
+	
+	@GetMapping("freelancerMyprofile_change")
+	public ModelAndView freelancerMyprofile_change(@RequestParam long pro_num) {
+	
+		FreeLancerProfile freelancerprofile = service.showContent(pro_num);
+	
+		ModelAndView mv = new ModelAndView ("profile/freelancerMyprofile_change");
+		mv.addObject("freelancerprofile", freelancerprofile);
+		log.info("get:" + freelancerprofile.getClass());
+		return mv;
+		
+	}
+	
+	
+	@PostMapping("freelancerMyprofile_change")
 	public String freelancerProfile_update(FreeLancerProfile freelancerprofile, HttpServletRequest request, FreePickKeyWord freepickkeyword) {
-		String[] ListPjp_keynum = request.getParameterValues("pjp_keynum");
-		ArrayList<Long> arrayPjp_keynum = new ArrayList<Long>();
-		
-		
-		long[] ListIntPjp_keynum = Arrays.stream(ListPjp_keynum).mapToLong(Long::parseLong).toArray();
-		for(int i = 0; i<ListIntPjp_keynum.length; i++) {
-			arrayPjp_keynum.add(ListIntPjp_keynum[i]);
-			
-		}
-		pjpkeyword.setPjpkeynumList(arrayPjp_keynum);
-		log.info("@@@@@@@@@@pjpkeyword: "+pjpkeyword);
-		
-		String[] ListKeyNum = request.getParameterValues("key_num");
-		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
-		int[] ListIntKeyNum = Arrays.stream(ListKeyNum).mapToInt(Integer::parseInt).toArray();
-		for(int i = 0; i<ListIntKeyNum.length; i++) {
-			arraykeynum.add(ListIntKeyNum[i]);
-		}
+	
+		log.info("@@@@@@@@@@@@@@@@@@@ freelancerprofile: "+freelancerprofile);
 
-		pjpkeyword.setKey_numList(arraykeynum);
-		service.updatePj(project);
-		service.updateKeyword(pjpkeyword);
-		return "redirect:project_content?pj_num="+project.getPj_num();
+		String[] listKeyNum = request.getParameterValues("key_num");
+		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
+		int[] listIntKeyNum = Arrays.stream(listKeyNum).mapToInt(Integer::parseInt).toArray();
+		
+		 Map<String, Object> map = new HashMap<String, Object>();
+		  for(int i = 0; i<listIntKeyNum.length; i++) {
+		      arraykeynum.add(listIntKeyNum[i]);
+		  }
+		   map.put("key_num", arraykeynum);
+		   map.put("free_code", freelancerprofile.getFree_code());
+		   map.put("pro_num", freelancerprofile.getPro_num());
+		log.info("@@@@@@@@@@arraykeynum: "+arraykeynum);
+		
+		String type = request.getParameter("type_name"); //type을 받아옴
+		int type_num = Integer.parseInt(type);
+	//	log.info("###type_num: "+type_num);
+		
+		freepickkeyword.setKey_numList(arraykeynum);
+		freelancerprofile.setType_num(type_num);
+		
+		service.listUpdate(freelancerprofile);
+		service.keyUpdate(map);
+		//service.keyDelete(map);
+		return "redirect:freelancerProfile_list?mem_email="+freelancerprofile.getMem_email(); 
 
 	}
 	
+
 	//프로필 리스트//
 	@RequestMapping("freelancerProfile_list")
 	public ModelAndView ProfileList(String mem_email, PagingVO vo
@@ -184,16 +204,15 @@ public class FreeLancerProfileController {
 	}
 	//삭제//
 	@RequestMapping("freelancerProfile_delete")
-	public String ProfileListDelete(@RequestParam long PRO_NUM) {
+	public String ProfileListDelete(@RequestParam long PRO_NUM, @RequestParam String mem_email) {
 		service.listDelete(PRO_NUM);
 	
-		return  "redirect:freelancerProfile_list?";
-
+		return "redirect:freelancerProfile_list?mem_email="+mem_email;
 	}
 
 	
 	@GetMapping("freelancerProfile_cehck_delete")
-		public String List_checkbox_delete(HttpServletRequest request, long pro_num) {
+		public String List_checkbox_delete(HttpServletRequest request, long pro_num, @RequestParam String mem_email) {
 	      
 			   String[] ListCheckNum = request.getParameterValues("pro_num"); 
 //			   log.info("#ListCheckNum.length: "  + ListCheckNum.length );
@@ -208,19 +227,16 @@ public class FreeLancerProfileController {
 				   for(int i = 0; i<ListIntCheckNum.length; i++) {
 					   arrayChecknum.add(ListIntCheckNum[i]);
 				   }
-				   log.info("@#!#@$  arraykeynum: "+ arrayChecknum);
+			    log.info("@#!#@$  arraykeynum: "+ arrayChecknum);
 				   map.put("pro_num", arrayChecknum);
-			      log.info("@#@@#@#map: "+map);
+			    log.info("@#@@#@#map: "+map);
 			   service.checkdelete1(pro_num);
 			   //service.checkdelete2(PRO_NUM);
 			      
-			   return "redirect:freelancerProfile_list";
+			   return "redirect:freelancerProfile_list?mem_email="+mem_email+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num;
 			 }
 	
-	@RequestMapping("freelancerMyprofile_change")	//프로필수정
-	public String FreelancerMyprofile_change() { 
-		return "profile/freelancerMyprofile_change";
-	}
+
 	@RequestMapping("payments")	//
 	public String payments() { 
 		return "profile/payments";
@@ -242,15 +258,18 @@ public class FreeLancerProfileController {
 			}else if(cntPerPage == null) {
 				cntPerPage ="5";
 			}
-			
+
 			projectVo = new ProjectVo(totalCountPjpick, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 			Map<String, Object>map = new HashMap<String, Object>();
 			map.put("ProjectVo", projectVo);
 			map.put("free_code",freelancer.getFree_code());
+			
+			List<fp.corporation.domain.Project>apppList = pjservice.select_appp_pj_free(map);
 			List<fp.corporation.domain.Project>pjpickList = pjservice.pjpick_free(map);
 			mv.addObject("free", freelancer);
 			mv.addObject("pjp", pjpickList);
 			mv.addObject("pa", projectVo);
+			mv.addObject("apppList",apppList);
 			return mv;
 		}
 		@RequestMapping("myfavorite_del")
@@ -366,5 +385,6 @@ public class FreeLancerProfileController {
 			}
 		}
 	 //--------------
-	
+
+		
 }

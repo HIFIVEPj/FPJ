@@ -12,11 +12,13 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.mapper.FreeLancerProfileMapper;
+import fp.market.domain.MarketPick;
 
 
 
@@ -82,14 +84,34 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void listInsert(FreeLancerProfile freelancerprofile){
 		mapper.listInsert(freelancerprofile);
 	}
-	
+
 	@Override
 	public void insertPjpkeyword(Map<String, Object> map){
 		 mapper.insertPjpkeyword(map);
 	}
+	//프로필 작성페이지 수정//
+	@Override
+	@Transactional
+	public void listUpdate(FreeLancerProfile freelancerprofile){
+		mapper.listUpdate(freelancerprofile);
+		mapper.typeUpdate(freelancerprofile.getType_num());
+	  //  mapper.keyUpdate(map);
+	}
 
 	@Override
-	public FreeLancerProfile profile_free_select(String mem_email){
+	@Transactional
+	public void keyUpdate(Map<String, Object> map) {
+		 mapper.keyDelete(map);
+		 mapper.keyUpdate(map);
+		
+	}
+/*	@Override
+	public void keyDelete(Map<String, Object> map) {
+		 mapper.keyDelete(map);
+	}*/
+
+	@Override
+	public List<FreeLancerProfile> profile_free_select(String mem_email){
 		return mapper.profile_free_select(mem_email);
 	}
 	@Override
@@ -97,10 +119,11 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.getTotalCountFree(free_code);
 	}
 
-	
-	
-	
-	
+	//프로필 수정//
+	@Override
+	public FreeLancerProfile showContent(long pro_num) {
+		return mapper.showContent(pro_num);
+	}
 	
 	
 	//나영추가 + mydash_free
@@ -118,6 +141,8 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void mydash_free_update(FreeLancer freelancer) {
 		mapper.mydash_free_update(freelancer);
 	}
+
+	
 
 
 

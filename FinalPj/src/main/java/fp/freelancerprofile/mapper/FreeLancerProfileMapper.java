@@ -8,11 +8,9 @@ import org.springframework.context.annotation.Profile;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
-import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.KeyWord;
-import fp.freelancerprofile.domain.PagingVO;
-import fp.freelancerprofile.domain.Project;
-import fp.freelancerprofile.domain.Type;
+
 
 
 public interface FreeLancerProfileMapper {
@@ -37,21 +35,33 @@ public interface FreeLancerProfileMapper {
 
 	//프로필 작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
-	
-	public void insertPjpkeyword(Map<String, Object> map);
+	//프로필 작성페이지 수정//
+	public void listUpdate(FreeLancerProfile freelancerprofile);
+	public void typeUpdate(int type_num);
+	public void keyUpdate(Map<String, Object> map);
+	public void keyDelete(Map<String, Object> map);
 
 	//체크박스 삭제//
 	public void checkdelete1(long PRO_NUM);
 	public void checkdelete1();
 	
-	public FreeLancerProfile profile_free_select(String mem_email);
+	public List<FreeLancerProfile> profile_free_select(String mem_email);
 	public long getTotalCountFree(long free_code);
+	
+	//프로필 수정//
+	public FreeLancerProfile showContent(long pro_num);
+
 	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
 	public void mydash_update_classnum(String mem_email);
+	
+	public void insertPjpkeyword(Map<String, Object> map);
+
+
+
 
 	
 	

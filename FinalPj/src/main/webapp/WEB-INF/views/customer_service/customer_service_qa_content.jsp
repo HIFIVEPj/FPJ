@@ -70,7 +70,7 @@
 										<a href="#"><i class="fa fa-user text-muted mr-2"></i>${qa_content.mem_name}</a>&nbsp;&nbsp;&nbsp;
 										<span><i class="fa fa-tags text-muted mr-2"></i>${qa_content.qa_cate}</span>&nbsp;&nbsp;&nbsp;
 										<span style="color:#ff382b;">
-											<i class="fa fa-comment-o text-muted mr-2"></i>6&nbsp;&nbsp;&nbsp;
+											<i class="fa fa-comment-o text-muted mr-2"></i><c:out value="${qa_content.replyCnt}"/>&nbsp;&nbsp;&nbsp;
 										</span>
 										<span><i class="fa fa-eye text-muted mr-2"></i>${qa_content.qa_vcnt}</span>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
