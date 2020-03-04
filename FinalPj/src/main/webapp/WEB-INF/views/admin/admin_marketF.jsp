@@ -273,10 +273,7 @@
                             
                              <li>	
                                  <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
-                            </li>                       
-                          
-				
-
+                            </li>    
 					</ul>
 					
 
@@ -337,59 +334,72 @@
 						</div>
 
 <!--  -->				
-					<div class=" col-lg-12 bg-white mb-4 p-4 border" >	
-							<h3 class="card-title">검색</h3>
-						
+	<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default active">
+			<div class="panel-heading " role="tab" id="headingOne">
+				<h4 class="panel-title">
+					<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#Search" aria-expanded="true" aria-controls="collapseOne">
+						<b>검색하기</b><i class="fa fa-search"></i>
+					</a>
+				</h4>
+			</div>				
+					
+		<div id="Search" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+		<!-- 원래있던거 --> <div class=" col-lg-12 bg-white mb-4 p-4 border" >
 						<div class="form-group ">
-							<div class="row">
-					<!--  		<div class="col-md-3">
-									<label class="form-label">검색</label>
-								</div> -->
+								<div class="row">
 								<div class="col-md-2">
-									<select class="form-control">
-										<option selected="">선택해주세요.</option>
-										<option>payid</option>
-										<option>uid</option>
-										<option>가격</option>
-										<option>결제상태</option>
-										<option>pgtid</option>
-										<option>구매자</option>
-									</select>
-								</div>
-								<div class="col-md-10 input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색하기">
-								</div>
-							</div>
-						</div>						
-						<div class="form-group ">
-							<div class="row">
-								<label class="form-label col-md-2"><b>기간선택</b></label>
-								<div class="col-md-10 form-group">							
-									<div class="input-group-prepend">									
-										<div class="input-group-text">
-											<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-										</div>
-										<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
-										<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
-										<div class="input-group-text">
-											<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-										</div>
-										<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
+										<label class="form-label"><b>조건선택</b></label>
 									</div>
+									<div class="col-md-3">
+										<select class="form-control">
+											<option selected="">선택해주세요.</option>
+											<option>payid</option>
+											<option>uid</option>
+											<option>가격</option>
+											<option>결제상태</option>
+											<option>pgtid</option>
+											<option>구매자</option>
+										</select>
+									</div>
+									<div class="col-md-7 input-group">
+										<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색해주세요.">
+									</div>
+								</div>
+							</div>						
+							<div class="form-group ">
+								<div class="row">
+									<label class="form-label col-md-2"><b>기간선택</b></label>
+									<div class="col-md-10 form-group">							
+										<div class="input-group-prepend">									
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
+											<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
+										</div>
+					
+									</div>									
+								</div>
+							</div>
+							<div class="row" style="margin-left:250px">
+								<div class="col-md-4 mb-0">
+									<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</a>
+								</div>
+								<div class="col-md-4 mb-0">
+									<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a>
+								</div>
+							</div>				
+		<!-- 원래있던거 -->	</div> 				
+			</div>
+		</div>
+	</div>
 				
-								</div>									
-							</div>
-						</div>
-						<div class="row" style="margin-left:250px">
-							<div class="col-md-4 mb-0">
-								<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</a>
-							</div>
-							<div class="col-md-4 mb-0">
-								<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a>
-							</div>
-						</div>
-						
-					</div>
+				
 				
 						<div class="card mt-5  ">
 							<div class="table-responsive">
@@ -530,6 +540,11 @@
 		
 		<!--InputMask Js-->
 		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+		
+		<!---Accordion Js-->
+		<script src="../plugins/accordion/accordion.min.js"></script>
+		<script src="../js/accor.js"></script>
+		
 		
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
