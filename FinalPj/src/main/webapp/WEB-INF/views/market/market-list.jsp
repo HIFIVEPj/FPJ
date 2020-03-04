@@ -309,7 +309,7 @@
 								<!--이전 페이지 이동 -->
 									<c:if test="${paging.nowPage != 1}">
 										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
+											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
 										</li>
 										<li class="page-item">
 											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
@@ -337,12 +337,12 @@
 											</li>
 										
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
+												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 											<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
-												<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+												<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 											</c:if>
 										 
 									</ul>

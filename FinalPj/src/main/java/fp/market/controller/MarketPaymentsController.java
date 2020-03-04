@@ -67,9 +67,13 @@ public class MarketPaymentsController {
 	public String insertMarketPayment(@RequestBody HashMap<String,Object> map,HttpSession session) {
 	//	log.info("!!!!!!!!!!!!!!!map!!!!!!!!!!!!!"+map);
 	//	log.info("!!!!!!!!!!!!!!!rsp!!!!!!!!!!!!!"+map.get("rsp"));
+	//스트링형변환	
 		String mem_emailSession=(String)session.getAttribute("email");
 		String market_numS= (String) map.get("market_num");
 		long market_num=Long.parseLong(market_numS);
+		String marketPaym_feeRateS= (String) map.get("marketPaym_feeRate");
+		float marketPaym_feeRate = Float.parseFloat(marketPaym_feeRateS);
+		
 		Market market =marketService.getMarketFreelancer(market_num);
 		String mem_emailFree=market.getFreelancer().getMem_email();
 	//	log.info("!!!!!!!!!!!!!!market!!!!!!!!!!!!!!"+market);
@@ -81,6 +85,7 @@ public class MarketPaymentsController {
 	//판매자기준내역리스트insert
 		payinfoMarket.put("mem_email", mem_emailFree);
 		payinfoMarket.put("market_num", market_num);
+		payinfoMarket.put("marketPaym_feeRate",  marketPaym_feeRate);
 		marketService.insertPaymentMarket2(payinfoMarket);
 	//구매자기준마켓구매내역insert	
 		HashMap<String, Object> buyinfoMarket = new HashMap<String, Object>();

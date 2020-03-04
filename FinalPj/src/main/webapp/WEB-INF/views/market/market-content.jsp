@@ -780,13 +780,13 @@
 								<input type="hidden" value="${market.market_price}" name="marketPaym_price">
 								<c:choose>
 									<c:when test="${market.market_price<=500000}">
-										<input type="hidden" value=20 name="marketPaym_freeRate">
+										<input type="hidden" value=20 name="marketPaym_feeRate">
 									</c:when>
 									<c:when test="${market.market_price<=2000000}">
-										<input type="hidden" value=12 name="marketPaym_freeRate">
+										<input type="hidden" value=12 name="marketPaym_feeRate">
 									</c:when>
 									<c:otherwise>
-										<input type="hidden" value=6 name="marketPaym_freeRate">
+										<input type="hidden" value=6 name="marketPaym_feeRate">
 									</c:otherwise>
 								</c:choose>
 								

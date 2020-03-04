@@ -27,7 +27,7 @@
 		
 	
 		function (rsp) {
-			var data = JSON.stringify({market_num:"${market.market_num}" ,rsp:rsp});
+			var data = JSON.stringify({market_num:"${market.market_num}" ,rsp:rsp, marketPaym_feeRate:"${mPayment.marketPaym_feeRate}"});
 			console.log(rsp);
 			if (rsp.success) {
 				$.ajax({

@@ -2,8 +2,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+
+<script>
+$(document).ready(function() {
+	  var v = "#" + window.location.hash.substr(1);
+	  $("#mytab1 li").each(function() {
+	    var href = $(this).children().first().attr("href");
+	    if (href == v) $(this).addClass("active");
+	    else $(this).removeClass("active");
+	  });
+	});
+
+	//Whenever we click on a li, remove all "active" classes and finally add "active" to the one we clicked.
+	$("#mytab1 li").on("click", function() {
+	  $("#mytab1 li").each(function() {
+	    $(this).removeClass("active");
+	  });
+	  $(this).addClass("active");
+	});
+</script>
 <!--/header-->
 
 		<!--Breadcrumb-->
@@ -94,8 +114,8 @@
 							<div class="ads-tabs">
 									<div class="tabs-menus">
 										<!-- Tabs -->
-										<ul class="nav panel-tabs">
-											<li class=""><a href="#tab1" class="active" data-toggle="tab">나의 마켓</a></li>
+										<ul class="nav panel-tabs" id="mytab1">
+											<li><a href="#tab1" class="active" data-toggle="tab">나의 마켓</a></li>
 											<li><a href="#tab2" data-toggle="tab">팔린마켓</a></li>
 										</ul>
 										
@@ -154,7 +174,13 @@
 															</div>			
 														</td>
 														
-														<td class="font-weight-semibold fs-16">${myMarket.market_price}</td>
+														<td class="font-weight-semibold fs-16">
+															<fmt:formatNumber value="${myMarket.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
+														</td> 
+														
+														
+														
+														
 														<c:if test="${myMarket.market_state==1}">
 															<td>
 																<a href="#" class="badge badge-warning">판매중</a>
@@ -162,7 +188,7 @@
 														</c:if>
 														<c:if test="${myMarket.market_state==0}">
 															<td>
-																<a href="#" class="badge badge-warning">컴토중</a>
+																<a href="#" class="badge badge-warning">검토중</a>
 															</td>
 														</c:if>
 														<td>
@@ -174,49 +200,7 @@
 												</tbody>
 											</c:forEach>					
 											</table>
-											<!-- 페이징 -->
-											<div class="card">
-												<div class="card-body" style="margin:0 auto; align:center;">
-													<ul class="pagination mg-b-0 page-0 ">
-													
-														<c:if test="${paging.nowPage !=1}">
-															<li class="page-item">
-																<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-															</li>
-															<li class="page-item">
-																<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-															</li>
-														</c:if>
-													
-														<c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
-															<c:choose>
-																<c:when test="${paging.nowPage == p }">
-																	<li class="page-item active">
-																		<a class="page-link" href="#">${p}</a>
-																	</li>
-																</c:when>	
-																<c:otherwise>
-																	<li class="page-item">
-																		<a class="page-link hidden-xs-down" href="myMarket?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
-																	</li>
-																</c:otherwise>
-															</c:choose>
-														</c:forEach>
-													
-														<c:if test="${ paging.nowPage!=paging.lastPage }">
-															<li class="page-item">
-																<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-															</li>
-															<li class="page-item">
-																<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-															</li>
-														</c:if>
-						
-													</ul>
-												</div>
-												<!-- pagination-wrapper -->
-											</div>
-										<!-- 페이징 -->	
+										
 										</div>
 									</c:if>
 									<c:if test="${fn:length(myMarket)==0 }">
@@ -230,7 +214,7 @@
 								
 							<!-- 탭2 -->			
 							<c:if test="${fn:length(mySellMarket)>0 }">
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
+								<div class="tab-pane table-responsive border-top userprof-tab" id="tab2">
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
 											<tr>
@@ -270,7 +254,11 @@
 												</div>
 											</td>
 											
-											<td class="font-weight-semibold fs-16">${mySellMarket.marketPaym_price}원</td>
+											<td class="font-weight-semibold fs-16">
+												<fmt:formatNumber value="${mySellMarket.marketPaym_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
+											</td> 
+											
+											
 											<td>
 												<a href="#" class="badge badge-secondary">진행중</a>
 											</td>
@@ -286,59 +274,17 @@
 									</c:forEach>
 										
 									</table>
-									<!-- 페이징 -->
-									<div class="card">
-										<div class="card-body" style="margin:0 auto; align:center;">
-											<ul class="pagination mg-b-0 page-0 ">
-											
-												<c:if test="${paging2.nowPage !=1}">
-													<li class="page-item">
-														<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-													</li>
-													<li class="page-item">
-														<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-													</li>
-												</c:if>
-										
-												<c:forEach var="p" begin="${paging2.startPage}" end="${paging2.endPage}">
-													<c:choose>
-														<c:when test="${paging2.nowPage == p }">
-															<li class="page-item active">
-																<a class="page-link" href="#">${p}</a>
-															</li>
-														</c:when>	
-														<c:otherwise>
-															<li class="page-item">
-																<a class="page-link hidden-xs-down" href="myMarket?nowPage=${p}&cntPerPage=${paging2.cntPerPage}">${p}</a>
-															</li>
-														</c:otherwise>
-													</c:choose>
-												</c:forEach>
-											
-												<c:if test="${ paging2.nowPage!=paging2.lastPage }">
-													<li class="page-item">
-														<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-													</li>
-													<li class="page-item">
-														<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-													</li>
-												</c:if>
-										
-											</ul>
-										</div>
-										<!-- pagination-wrapper -->
-									</div>
-								<!-- 페이징 -->	
+							
 								</div>
 							</c:if>
 							<c:if test="${fn:length(mySellMarket)==0 }">
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
+								<div class="tab-pane table-responsive border-top userprof-tab" id="tab2">
 								</div>
 							</c:if>
 							<!-- 탭2 -->		
 								
 
-	 <!-- 
+
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
@@ -361,7 +307,7 @@
 												</c:when>	
 												<c:otherwise>
 													<li class="page-item">
-														<a class="page-link hidden-xs-down" href="myMarket?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+														<a class="page-link hidden-xs-down" href="myMarket?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
@@ -378,9 +324,9 @@
 									</c:if>	
 									</ul>
 								</div>
-								<!-- pagination-wrapper 
+								<!-- pagination-wrapper -->
 							</div>
-		-->
+		
 							<!-- section-wrapper -->
 						</div>
 					</div>

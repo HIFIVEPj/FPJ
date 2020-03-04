@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -102,7 +103,7 @@
 											</c:when>
 											<c:when test="${selectTab =='tab2'}">
 												<li class=""><a href="#tab1" data-toggle="tab">찜 목록</a></li>
-												<li><a href="#tab2"  class="active" data-toggle="tab">구매한 마켓</a></li>
+												<li><a href="#tab2" class="active" data-toggle="tab">구매한 마켓</a></li>
 											</c:when>
 										</c:choose>
 										</ul>
@@ -113,7 +114,12 @@
 								
 								<!-- 탭1 -->
 									<c:if test="${fn:length(mPickList)>0 }">
+									 <c:if test="${selectTab == 'tab1'}">
 										<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
+										</c:if>
+										<c:if test="${selectTab =='tab2'}">
+										<div class="tab-pane table-responsive border-top userprof-tab" id="tab1">
+										</c:if>
 											<table class="table table-bordered table-hover mb-0 text-nowrap">
 												<thead style="text-align:center;">
 													<tr>
@@ -161,7 +167,12 @@
 															</div>			
 														</td>
 														
-														<td class="font-weight-semibold fs-16">${pickList.market.market_price}</td>
+														<td class="font-weight-semibold fs-16">
+															<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
+														</td> 
+														
+														
+														
 														<c:if test="${pickList.market.market_state==1}">
 															<td>
 																<a href="#" class="badge badge-warning">판매중</a>
@@ -228,7 +239,14 @@
 								
 							<!-- 탭2 -->			
 							<c:if test="${fn:length(mBuyList)>0 }">
+							
+							<c:if test="${selectTab == 'tab1'}">
 								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
+							</c:if>
+							<c:if test="${selectTab == 'tab2'}">
+							<div class="tab-pane active table-responsive border-top userprof-tab" id="tab2">
+							</c:if>
+							
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
 											<tr>
@@ -262,7 +280,9 @@
 													</div>
 												</td>
 												
-												<td class="font-weight-semibold fs-16">${mBuyList.market.market_price}원</td>
+												<td class="font-weight-semibold fs-16">
+													<fmt:formatNumber value="${mBuyList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
+												</td> 
 												<td>
 													<c:if test="${mBuyList.mbuysell_state==0 }">
 														<a href="#" class="badge badge-secondary">거래중</a>
@@ -321,10 +341,7 @@
 											</div>
 										</div>		
 								<!-- 페이징 -->	
-									
-									
-									
-									
+
 								</div>
 							</c:if>
 								<c:if test="${fn:length(mBuyList)==0 }">

@@ -42,7 +42,7 @@ public class FreelancerMarketInfoController {
 		int nowPageBI=Integer.parseInt(nowPageB);
 		int cntPerPageBI= Integer.parseInt(cntPerPageB);
 		String selectTab="";
-		if(nowPageBI>1) {
+		if(nowPageBI>1) {//durlt
 			selectTab="tab2";
 		}else {
 			selectTab="tab1";
@@ -116,32 +116,32 @@ public class FreelancerMarketInfoController {
 	{
 		ModelAndView mv = new ModelAndView();
 		String mem_email=(String)session.getAttribute("email");
-		int total=service.getTotalMyMarket(mem_email);
-		int total2=service.getTotalPaymentDetails(mem_email);
+		int totalMymarket=service.getTotalMyMarket(mem_email);
+		int totalSell=service.getTotalPaymentDetails(mem_email);
 		
-		MarketPagingVO myMarketListVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		MarketPagingVO myMarketSellVO = new MarketPagingVO(total2, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		MarketPagingVO myMarketListVO = new MarketPagingVO(totalMymarket, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		//MarketPagingVO myMarketSellVO = new MarketPagingVO(total2, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		HashMap<String,Object> map2 = new HashMap<String,Object>();
+		//HashMap<String,Object> map2 = new HashMap<String,Object>();
 		
 		map.put("mem_email",mem_email);
 		map.put("start",myMarketListVO.getStart());
 		map.put("end",myMarketListVO.getEnd());
 		
-		map2.put("mem_email",mem_email);
-		map2.put("start",myMarketSellVO.getStart());
-		map2.put("end",myMarketSellVO.getEnd());
+		//map2.put("mem_email",mem_email);
+		//map2.put("start",myMarketSellVO.getStart());
+		//map2.put("end",myMarketSellVO.getEnd());
 		
 		List<Market> myMarket=service.getMyMarket(map);
-		List<MarketPayment> mySellMarket=service.paymentDetails(map2);
+		List<MarketPayment> mySellMarket=service.paymentDetails(map);
 		
 		Freelancer free = getFreefname(mem_email);
 		mv.setViewName("profile/myMarket");
 		mv.addObject("myMarket",myMarket);
 		mv.addObject("mySellMarket",mySellMarket);
 		mv.addObject("paging",myMarketListVO);
-		mv.addObject("paging2",myMarketSellVO);
+		//mv.addObject("paging2",myMarketSellVO);
 		mv.addObject("free",free);
 		return mv;
 		
