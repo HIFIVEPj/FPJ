@@ -52,7 +52,7 @@ public interface FreeLancerProfileService {
 
 
 	//체크박스 삭제//
-	void checkdelete1(long PRO_NUM);
+	void checkdelete1(Map<String, Object> map);
 
 	long getTotalCountFree(long free_code);
 

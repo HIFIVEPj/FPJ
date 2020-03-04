@@ -74,6 +74,7 @@
             <id property="free_code" column="free_code"/>
            <result property="pro_num" column="pro_num"/>
            <result property="type_num" column="type_num"/>
+           <result property="mem_email" column="mem_email"/>
            <result property="pro_exp" column="pro_exp"/>
            <result property="pro_cv" column="pro_cv"/>
            <result property="pro_addr" column="pro_addr"/>
@@ -184,7 +185,7 @@
 	  <![CDATA[
 		select * from 
 			(select ROWNUM rnum , aa.* from 
-				(select PROFILE_SUB, PROFILE_DATE, FREE_CODE, PRO_NUM from FREELANCER_PROFILE
+				(select PROFILE_SUB, PROFILE_DATE, FREE_CODE, PRO_NUM, mem_email from FREELANCER_PROFILE
 					 where FREE_CODE=#{free_code} order by PROFILE_DATE desc)aa) 
 						where rnum>=#{PagingVo.start} and rnum<=#{PagingVo.end}
 	  ]]> 
@@ -274,10 +275,14 @@
 	
 	
 	<!-- 삭제1 (체크박스 데이터 삭제) -->
-   <delete id="checkdelete1" parameterType="long">
-	   <![CDATA[
-		 	delete from FREELANCER_PROFILE  where PRO_NUM in(#{PRO_NUM})
-	   ]]>
+   <delete id="checkdelete1" parameterType="fp.freelancerprofile.domain.FreeLancerProfile">
+
+	   	 <if test="pro_num != null">
+		 	delete from FREELANCER_PROFILE  where
+		  <foreach collection ="pro_num" item="pro_num" separator="or"> 
+			 pro_num=#{pro_num}
+		 </foreach>
+		 </if>
 	</delete>
 
 	

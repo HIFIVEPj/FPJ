@@ -42,8 +42,8 @@ public interface FreeLancerProfileMapper {
 	public void keyDelete(Map<String, Object> map);
 
 	//체크박스 삭제//
-	public void checkdelete1(long PRO_NUM);
-	public void checkdelete1();
+	public void checkdelete1(Map<String, Object> map);
+	
 	
 	public List<FreeLancerProfile> profile_free_select(String mem_email);
 	public long getTotalCountFree(long free_code);

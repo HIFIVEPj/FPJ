@@ -218,19 +218,18 @@ public class FreeLancerProfileController {
 //			   log.info("#ListCheckNum.length: "  + ListCheckNum.length );
 			   
 			   ArrayList<Integer> arrayChecknum = new ArrayList<Integer>();
-			   
-			      
+
 		   int[] ListIntCheckNum = Arrays.stream(ListCheckNum).mapToInt(Integer::parseInt).toArray();
-		   
-			
+
 			   Map<String, Object> map = new HashMap<String, Object>();
 				   for(int i = 0; i<ListIntCheckNum.length; i++) {
 					   arrayChecknum.add(ListIntCheckNum[i]);
 				   }
 			    log.info("@#!#@$  arraykeynum: "+ arrayChecknum);
 				   map.put("pro_num", arrayChecknum);
+				   map.put("mem_email", mem_email);
 			    log.info("@#@@#@#map: "+map);
-			   service.checkdelete1(pro_num);
+			   service.checkdelete1(map);
 			   //service.checkdelete2(PRO_NUM);
 			      
 			   return "redirect:freelancerProfile_list?mem_email="+mem_email+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num;

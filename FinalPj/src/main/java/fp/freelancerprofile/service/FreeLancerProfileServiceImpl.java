@@ -75,8 +75,8 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 
 	//체크박스 삭제//
 	@Override
-	public void checkdelete1(long PRO_NUM) {
-		 mapper.checkdelete1(PRO_NUM);
+	public void checkdelete1(Map<String, Object> map) {
+		 mapper.checkdelete1(map);
 	}
 	
 	//프로필 작성//
