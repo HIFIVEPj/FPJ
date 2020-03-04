@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% String classN = request.getParameter("classN");// %>
-<% String keyword = request.getParameter("keyword");// %>
 
 	<head>
 		<meta charset="UTF-8">
@@ -262,21 +261,34 @@
 					</div> -->
 					<ul class="side-menu">
 						    <li>	
-                                <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
+                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
+                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
                             </li>
-                    </ul>
+                            
+                             <li>	
+                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">2</span></a>
+                            </li>
+                            
+                             <li>	
+                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">3</span></a>
+                            </li>
+                            
+				
+
+					</ul>
+					
+
 <!--  본문 시작 -->	
 					<div class="app-sidebar-footer">
 						<a href="emailservices.html">
@@ -354,31 +366,35 @@
 							</div>
 						</div>
 <!--  -->
-	
 <!-- User-All-->	
 			<div class="">
 				<div class="row">
 					<div class="col-lg-12 users-list">
 					<form action="admin_member" method="Get"> 					
 						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
-							<select class="form-control page-select" name="class_num" id="class_num" >
-								<option value="" selected="selected">선택해주세요.</option>							
+							<select class="form-control page-select" name="class_num" onchange="f(this)">
+								<option value="">선택해주세요.</option>							
 								<option value="1">전체</option>
 								<option value="4">기업</option>
 								<option value="2">개인</option>
-							</select>							
+							</select>
+							<script type="text/javascript" >
+							  function f(select){						        
+						           var class_num = select.value;
+						           location.href="admin_member?class_num="+class_num;	
+						       }
+							</script>
+							
 							<div class="page-options d-flex">
 								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search" id="keyword" name="keyword">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search" name="keyword">
 									<div class="input-group-append ">
-										<button type="button" class="btn btn-primary br-tr-7 br-br-7" id="searchBtn" >
+										<button type="submit" class="btn btn-primary br-tr-7 br-br-7" id="searchBtn">
 											<i class="fa fa-search" aria-hidden="true"></i>
 										</button>
 									</div>
 								</div>
-							</div>
-
-						
+							</div>							
 						</div>		
 					</form>
 				<div class="card">
@@ -395,7 +411,7 @@
 									<th>Member Since</th>
 									<th></th>
 								</tr>
-								<c:forEach var="dto" items="${pa.list}">								
+								<c:forEach var="dto" items="${pa.list}">
 								<tr>	
 								<th>
 										<label class="custom-control custom-checkbox">
@@ -418,36 +434,27 @@
 									<td>
 										<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
 									</td>
-								</tr>						
+								</tr>
 								</c:forEach>																					
 							</tbody>
 						</table>
 						</div>
 					</div>
-				</div>
-					
+				</div>					
 					<ul class="pagination mb-5">
 							<!--  이전페이지 -->
-					<c:if test="${pa.nowPage != 1}">
+					<c:if test="${pageMaker.prev}">
 						<li class="page-item page-prev">							
-							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}" tabindex="-1">Prev</a>
+							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pageMaker.startPage-1}" tabindex="-1">Prev</a>
 						</li>
 					</c:if>
-					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
-							<c:choose>
-								<c:when test="${p == pa.nowPage}">
-									<li class='page-item active'><a class="page-link">${p}</a></li>
-								</c:when>
-								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">${p}</a></li>
-								</c:when>
-							</c:choose>
+					<c:forEach var='num' begin="${pageMaker.startPage}" end="${pageMaker.endPage}">	
+							<li class='page-item active'><a class="page-link">${num}</a></li>							
 					</c:forEach>
-						<c:if test ="${pa.nowPage != pa.lastPage}">
-								<li class="page-item page-next">
-									
-									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">Next</a>
-								</li>
+						<c:if test ="${pageMaker.next}">
+							<li class="page-item page-next">									
+								<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+							</li>
 						</c:if>
 					</ul>  
 				</div>
@@ -479,50 +486,42 @@
 		<!-- Dashboard Core -->
 		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
 		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
-		
 		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 		<script src="../js/vendors/jquery.sparkline.min.js"></script>
 		<script src="../js/vendors/selectize.min.js"></script>
 		<script src="../js/vendors/jquery.tablesorter.min.js"></script>
 		<script src="../js/vendors/circle-progress.min.js"></script>
 		<script src="../plugins/rating/jquery.rating-stars.js"></script>		
-		
-		<script src="../js/flot.js"></script> 
 		<script src="../plugins/flot/jquery.flot.js"></script>
 		<script src="../plugins/flot/jquery.flot.fillbetween.js"></script>
-		<script src="../plugins/flot/jquery.flot.pie.js"></script> 
+		<script src="../plugins/flot/jquery.flot.pie.js"></script>
 		
+	
 		<!-- Fullside-menu Js-->
 		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
-	
-		<!-- Datepicker js 날짜입력 -->
-		<script src="../plugins/date-picker/spectrum.js"></script>
-		<script src="../plugins/date-picker/jquery-ui.js"></script>
-		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
 
-		<!--InputMask Js-->
-		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
-		
+
 		<!-- Charts Plugin -->
 		<script src="../plugins/chart/Chart.bundle.js"></script>
 		<script src="../plugins/chart/utils.js"></script>
 
-		<!-- 원래 여기 Morris.js Charts Plugin   
-		<script src="../plugins/morris/morris.js"></script>		
-		<script src="../plugins/morris/raphael-min.js"></script>  -->
-		
-		<!-- Input Mask Plugin
+		<!--Morris.js Charts Plugin -->
+		<script src="../plugins/morris/raphael-min.js"></script>
+		<script src="../plugins/morris/morris.js"></script>
+
+		<!-- Input Mask Plugin -->
 		<script src="../plugins/input-mask/jquery.mask.min.js"></script>
-		<script src="../js/index5.js"></script>  -->
+		<script src="../js/index5.js"></script>
+
+  		<!-- Index Scripts  그래프 -->
+		<script src="../js/flot.js"></script> 
+		<script src="../js/charts.js"></script>
 		
-  		<!-- c3.js Charts Plugin 도넛 Index Scripts  그래프 보다 먼저 -->
-  		<script src="../plugins/charts-c3/d3.v5.min.js"></script>
+		<!-- c3.js Charts Plugin 도넛-->
+		<script src="../plugins/charts-c3/d3.v5.min.js"></script>
 		<script src="../plugins/charts-c3/c3-chart.js"></script>
 		
-		<!-- Index Scripts  그래프 -->
-		
-		<script src="../js/charts.js"></script> 
-		
+
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
 		<script src="../plugins/counters/waypoints.min.js"></script>
@@ -530,19 +529,59 @@
 		<!-- Custom scroll bar Js-->
 		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-		<!-- Custom Js -->
-		<script src="../js/admin-custom.js"></script>
-		<script src="../js/custom.js"></script> 
 
-<script type="text/javascript" >
-$(document).ready(function(){
-	$("#searchBtn").click(function(){						        
-          var class_num = $("#class_num option:selected").val();
-          var keyword = $("#keyword").val();
-          alert(class_num+","+keyword);
-          window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
-      })
+		<!-- Custom Js-->
+		<script src="../js/admin-custom.js"></script>
+		<script src="../js/custom.js"></script>
+<script type="text/javascript">
+/*
+$('a[href="#tab2"]').on('show.bs.tab', function(e){	
+	var activeTab = $(e.target).text();
+	var class_num= '4';
+	var test='0';
+	//alert(activeTab);
+	//alert(class_num);
+	$.ajax({
+		 type:"GET",
+		 url:"admin_member",
+		 data:{
+				"class_num": class_num
+		 },	
+		 
+		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			 //$("#data").empty().append(data);
+			if(data.length>0){ 
+		 		for(var i in data){
+		 			var $class_num =data[i].class_num; 		 			
+		 			var $mem_email=data[i].mem_email;
+		 		} 
+			 	alert("성공"+class_num);
+			}
+		 },error: function(data){
+            alert("에러발생");
+        }
+	}) //ajax
 })
+$('a[href="#tab3"]').on('show.bs.tab', function(e){	
+	var activeTab = $(e.target).text();
+	var class_num= '2';
+	alert(activeTab);
+	alert(class_num);
+	$.ajax({
+		 type:"GET",
+		 url:"admin_member",
+		 data:{
+				"class_num": class_num
+		 },
+		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			 //window.location.reload("admin_member");
+		 	var item =data.mem_email;
+		 	alter(item);
+		},error: function(data){
+            alert("에러발생");
+        }
+		}) //ajax
+})*/
 </script>
 
 	</body>

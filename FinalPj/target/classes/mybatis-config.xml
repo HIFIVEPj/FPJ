@@ -5,7 +5,6 @@
   
 <configuration>
 	<typeAliases>
-
 		<!-- 승훈 -->
 		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
 		<typeAlias alias="CustomerServiceQa" type="fp.customer_service.domain.CustomerServiceQa"/>
@@ -71,6 +70,7 @@
    	   <typeAlias alias="Member" type="fp.member.domain.Member"/>
    	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
    	    <typeAlias alias="MemberVo" type="fp.member.domain.MemberVo"/>
+   	      <typeAlias alias="PayInformation" type="fp.member.domain.PayInformation"/>
    	    <!-- <typeAlias alias="CustomUserDetails" type="fp.password.security.CustomUserDetails"/> -->
 
 	</typeAliases>

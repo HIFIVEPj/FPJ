@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% String classN = request.getParameter("classN");// %>
-<% String keyword = request.getParameter("keyword");// %>
 
 	<head>
 		<meta charset="UTF-8">
@@ -25,9 +22,9 @@
 		<title>Pinlist â Clean & Modern Admin Dashboard Bootstrap 4  HTML Template</title>
 		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
 
+			
 		<!-- Sidemenu Css -->
 		<link href="../plugins/toggle-sidebar/sidemenu.css" rel="stylesheet" />
-
 
 		<!-- Bootstrap Css -->
 		<link href="../plugins/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet" />
@@ -35,7 +32,9 @@
 		<!-- Dashboard Css -->
 		<link href="../css/dashboard.css" rel="stylesheet" />
 		<link href="../css/admin-custom.css" rel="stylesheet" />
-
+		<!-- Date Picker Plugin -->
+		<link href="../plugins/date-picker/spectrum.css" rel="stylesheet" />
+		
 		<!-- c3.js Charts Plugin -->
 		<link href="../plugins/charts-c3/c3-chart.css" rel="stylesheet" />
 
@@ -49,10 +48,9 @@
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet" />
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet" />
 
-	</head>
 
-	
-	
+
+	</head>
 		<body class="app sidebar-mini">
 		<div id="global-loader"><img src="../images/other/loader.svg" class="loader-img floating" alt=""></div>
 		<div class="page">
@@ -262,7 +260,7 @@
 					</div> -->
 					<ul class="side-menu">
 						    <li>	
-                                <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
@@ -274,10 +272,15 @@
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
-                            </li>
-                    </ul>
-<!--  본문 시작 -->	
+                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
+                            </li>                       
+                          
+				
+
+					</ul>
+					
+
+	
 					<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
@@ -300,162 +303,160 @@
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
-						 <h4 class="page-title">회원관리</h4>
+						 <h4 class="page-title">마켓관리</h4>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
 							</ol> 
 						</div>
-
 						<div class="row">
-							<div class="col-lg-3 col-md-12">
+							<div class="col-md-6">
 								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-users fs-40 text-primary"></i>
-										</div>
-										<h5>Total Users</h5>
-										<h2 class="counter mb-0">5,768</h2>
+									<div class="card-header">
+										<h3 class="card-title">Profits Analysis</h3>
+									</div>
+								<!-- 	<div class="card-body">
+										<div id="morrisBar3" class="chart-visitors overflow-hidden"></div>
+									</div> -->
+									<div class="card-body">
+										<div id="placeholder2" class="chartsh"></div>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-3 col-md-12">
+							<div class="col-md-6">
 								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-refresh-2 fs-40 text-primary"></i>
-										</div>
-										<h5>Total Updates</h5>
-										<h2 class="counter mb-0">7,682</h2>
+									<div class="card-header">
+										<h3 class="card-title">Ratings</h3>
 									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-12">
-								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-mail fs-40 text-primary"></i>
-										</div>
-										<h5>Total E-mail</h5>
-										<h2 class="counter mb-0">276</h2>
+									<div class="card-body">
+										<div id="chart-donut3" class="chartsh"></div>
 									</div>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-12">
-								<div class="card">
-									<div class="card-body text-center">
-										<div class="mb-3">
-											<i class="pe-7s-photo-gallery fs-40 text-primary"></i>
-										</div>
-										<h5>Total Posts</h5>
-										<h2 class="counter mb-0">9,035</h2>
-									</div>
-								</div>
-							</div>
-						</div>
-<!--  -->
-	
-<!-- User-All-->	
-			<div class="">
-				<div class="row">
-					<div class="col-lg-12 users-list">
-					<form action="admin_member" method="Get"> 					
-						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
-							<select class="form-control page-select" name="class_num" id="class_num" >
-								<option value="" selected="selected">선택해주세요.</option>							
-								<option value="1">전체</option>
-								<option value="4">기업</option>
-								<option value="2">개인</option>
-							</select>							
-							<div class="page-options d-flex">
-								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search" id="keyword" name="keyword">
-									<div class="input-group-append ">
-										<button type="button" class="btn btn-primary br-tr-7 br-br-7" id="searchBtn" >
-											<i class="fa fa-search" aria-hidden="true"></i>
-										</button>
-									</div>
-								</div>
-							</div>
 
-						
-						</div>		
-					</form>
-				<div class="card">
-					<div class="card-body">
-						<div class="user-tabel table-responsive border-top">
-						<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
-							<tbody>
-								<tr>
-									<th class="w-1"></th>	
-									<th>이름</th>
-									<th>이메일</th>
-									<th>소속</th>
-									<th>Membership Status</th>
-									<th>Member Since</th>
-									<th></th>
-								</tr>
-								<c:forEach var="dto" items="${pa.list}">								
-								<tr>	
-								<th>
-										<label class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-											<span class="custom-control-label"></span>
-										</label>
-									</th>
-									<td>${dto.name}</td>
-									<td>${dto.email}</td>
-									<td>
-										<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3 }">개인</c:if>
-										<c:if test="${dto.class_num eq 4}">기업</c:if>
-									</td>
-									<td>
-										<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
-										<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
-										<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
-									</td>
-									<td>${dto.rdate}</td>
-									<td>
-										<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-									</td>
-								</tr>						
-								</c:forEach>																					
-							</tbody>
-						</table>
+								</div>
+							</div>
 						</div>
+
+<!--  -->				
+					<div class=" col-lg-12 bg-white mb-4 p-4 border" >	
+							<h3 class="card-title">검색</h3>
+						
+						<div class="form-group ">
+							<div class="row">
+					<!--  		<div class="col-md-3">
+									<label class="form-label">검색</label>
+								</div> -->
+								<div class="col-md-2">
+									<select class="form-control">
+										<option selected="">선택해주세요.</option>
+										<option>payid</option>
+										<option>uid</option>
+										<option>가격</option>
+										<option>결제상태</option>
+										<option>pgtid</option>
+										<option>구매자</option>
+									</select>
+								</div>
+								<div class="col-md-10 input-group">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색하기">
+								</div>
+							</div>
+						</div>						
+						<div class="form-group ">
+							<div class="row">
+								<label class="form-label col-md-2"><b>기간선택</b></label>
+								<div class="col-md-10 form-group">							
+									<div class="input-group-prepend">									
+										<div class="input-group-text">
+											<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+										</div>
+										<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
+										<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
+										<div class="input-group-text">
+											<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+										</div>
+										<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
+									</div>
+				
+								</div>									
+							</div>
+						</div>
+						<div class="row" style="margin-left:250px">
+							<div class="col-md-4 mb-0">
+								<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</a>
+							</div>
+							<div class="col-md-4 mb-0">
+								<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a>
+							</div>
+						</div>
+						
 					</div>
-				</div>
-					
+				
+						<div class="card mt-5  ">
+							<div class="table-responsive">
+								<table class="table card-table ">
+									<thead class="bg-primary text-white">
+										<tr class="border-bottom text-white">
+											
+											<th class="text-white font-weight-normal">payid</th>
+											<th class="text-white font-weight-normal">가격</th>
+											<th class="text-white font-weight-normal">uid</th>
+											<th class="text-white font-weight-normal">카드번호</th>
+											<th class="text-white font-weight-normal">status</th>
+											<th class="text-white font-weight-normal">카드이름</th>
+											<th class="text-white font-weight-normal">pgtid</th>
+											<th class="text-white font-weight-normal">결제자</th>
+											<th class="text-white font-weight-normal">결제일</th>
+										</tr>
+									</thead>
+									<tbody>
+									<c:if test="${empty list}">
+										<tr align="center" noshade>
+										   <td colspan="9">데이터가 하나도 없음</td>
+										</tr>
+									</c:if>
+									<c:forEach var="dto" items="${list}">
+											<tr class="border-bottom">											
+											<td>${dto.payinfo_payid}</td>
+											<td>${dto.payinfo_price}</td>
+											<td class="text-red">${dto.payinfo_uid}</td>
+											<td class="">${dto.payinfo_cardnum}</td>
+											<td>${dto.payinfo_status}</td>
+											<td class="">${dto.payinfo_cardname}</td>
+											<td>${dto.payinfo_pgtid}</td>
+											<td class="text-right">${dto.payinfo_buyername}</td>
+											<td>${dto.payinfo_rdate}</td>
+										</tr>	
+										</c:forEach>											
+									</tbody>
+								</table>
+							</div>
+<!--  -->				</div>
 					<ul class="pagination mb-5">
 							<!--  이전페이지 -->
-					<c:if test="${pa.nowPage != 1}">
-						<li class="page-item page-prev">							
-							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}" tabindex="-1">Prev</a>
-						</li>
-					</c:if>
-					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
-							<c:choose>
-								<c:when test="${p == pa.nowPage}">
-									<li class='page-item active'><a class="page-link">${p}</a></li>
-								</c:when>
-								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">${p}</a></li>
-								</c:when>
-							</c:choose>
-					</c:forEach>
-						<c:if test ="${pa.nowPage != pa.lastPage}">
-								<li class="page-item page-next">
-									
-									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">Next</a>
-								</li>
+						<c:if test="${paf.nowPage != 1}">
+							<li class="page-item page-prev">							
+								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage-1}&cntPerPage=${paf.cntPerPage}" tabindex="-1">Prev</a>
+							</li>
 						</c:if>
-					</ul>  
-				</div>
-				</div>
-			</div>
-	
-	<!-- User end -->				
-					</div> 
+						<c:forEach var='p' begin="${paf.startPage}" end="${paf.endPage}">
+								<c:choose>
+									<c:when test="${p == paf.nowPage}">
+										<li class='page-item active'><a class="page-link">${p}</a></li>
+									</c:when>
+									<c:when test = "${p != paf.nowPage }">
+										<li class="page-item"><a class="page-link" href="admin_marketF?nowPage=${p}&cntPerPage=${paf.cntPerPage}">${p}</a></li>
+									</c:when>
+								</c:choose>
+						</c:forEach>
+						<c:if test ="${paf.nowPage != paf.lastPage}">
+							<li class="page-item page-next">
+								
+								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage+1}&cntPerPage=${paf.cntPerPage}">Next</a>
+							</li>
+						</c:if>
+					</ul> 
+								
+					</div>
 				</div>
 			</div>
 
@@ -477,7 +478,8 @@
 
 
 		<!-- Dashboard Core -->
-		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
+		
+		<script src="../js/vendors/jquery-3.2.1.min.js"></script>	
 		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
 		
 		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
@@ -495,21 +497,16 @@
 		<!-- Fullside-menu Js-->
 		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
 	
-		<!-- Datepicker js 날짜입력 -->
-		<script src="../plugins/date-picker/spectrum.js"></script>
-		<script src="../plugins/date-picker/jquery-ui.js"></script>
-		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
 
-		<!--InputMask Js-->
-		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
 		
 		<!-- Charts Plugin -->
 		<script src="../plugins/chart/Chart.bundle.js"></script>
 		<script src="../plugins/chart/utils.js"></script>
 
-		<!-- 원래 여기 Morris.js Charts Plugin   
+		<!-- 원래 여기 Morris.js Charts Plugin  -->
+		<script src="../plugins/morris/raphael-min.js"></script>  
 		<script src="../plugins/morris/morris.js"></script>		
-		<script src="../plugins/morris/raphael-min.js"></script>  -->
+		 
 		
 		<!-- Input Mask Plugin
 		<script src="../plugins/input-mask/jquery.mask.min.js"></script>
@@ -519,9 +516,20 @@
   		<script src="../plugins/charts-c3/d3.v5.min.js"></script>
 		<script src="../plugins/charts-c3/c3-chart.js"></script>
 		
-		<!-- Index Scripts  그래프 -->
-		
+		<!-- Index Scripts  그래프 -->		
 		<script src="../js/charts.js"></script> 
+		
+		<!-- Datepicker js 날짜입력 -->
+		<script src="../plugins/date-picker/spectrum.js"></script>
+		<script src="../plugins/date-picker/jquery-ui.js"></script>
+		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
+
+		<!-- Inline js -->
+		<script src="../js/select2.js"></script>
+		<script src="../js/formelements.js"></script>
+		
+		<!--InputMask Js-->
+		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
 		
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
@@ -533,17 +541,6 @@
 		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
-
-<script type="text/javascript" >
-$(document).ready(function(){
-	$("#searchBtn").click(function(){						        
-          var class_num = $("#class_num option:selected").val();
-          var keyword = $("#keyword").val();
-          alert(class_num+","+keyword);
-          window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
-      })
-})
-</script>
 
 	</body>
 </html>
