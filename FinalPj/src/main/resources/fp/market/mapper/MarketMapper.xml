@@ -298,8 +298,8 @@
 		select f.FREE_NAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
 	</select>
 	<insert id="insertPaymentMarket" parameterType="java.util.Map">
-		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME ) values
-		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name})
+		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME,PAYINFO_RDATE ) values
+		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name},SYSDATE)
 	</insert>
 	<insert id="insertPaymentMarket2" parameterType="java.util.Map">
 		insert into MARKET_PAYMENT(marketPaym_num,mem_email,market_num,marketPaym_feeRate,marketPaym_price,marketPaym_pdName,marketPaym_rdate) values(MARKETPAYM_NUM_SEQ.NEXTVAL, #{mem_email}, #{market_num}, #{marketPaym_feeRate}, #{map.paid_amount}, #{map.name}, SYSDATE)
