@@ -25,7 +25,7 @@ public interface MarketMapper {
 	public int getMarketQACount(long market_num);
 	
 	
-	public List<Market> getMarketList(MarketPagingVO marketVO);
+	public List<Market> getMarketList(HashMap<String, Object> pagingmap);
 //마켓 상세보기에 피요한것들	
 	public Market getMarket(long market_num);	
 	public Integer getMarketStar(long market_num);
@@ -59,12 +59,15 @@ public interface MarketMapper {
 	public String getFreeName(long market_num);
 	
 	public void insertPaymentMarket(Map<String,Object> map);
+	public void insertPaymentMarket2(Map<String,Object> map);
 	
 	public List<MarketPick> pickState(String mem_email);
 	public void insertMarketPick(HashMap<String,Object> map);
 	public void deleteMarketPick(HashMap<String,Object> map);
 	public void updatePlusMarketPick(long market_num);
 	public void updateMinusMarketPick(long market_num);
+	
+	public void insertMarketBuy(HashMap<String,Object> map);
 
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);

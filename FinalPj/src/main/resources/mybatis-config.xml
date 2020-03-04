@@ -19,7 +19,6 @@
 		
 		<!-- 세영 -->
 		<typeAlias alias="Market" type="fp.market.domain.Market"/>
-        <typeAlias alias="MarketVO" type="fp.market.utils.MarketPagingVO"/>
         <typeAlias alias="mFreelancer" type="fp.market.domain.Freelancer"/>
         <typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
         <typeAlias alias="MarketRevComm" type="fp.market.domain.MarketRevComm"/>
@@ -30,6 +29,8 @@
         <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
         <typeAlias alias="MarketPayment" type="fp.market.domain.MarketPayment"/>
      	<typeAlias alias="MarketPick" type="fp.market.domain.MarketPick"/>
+     	<typeAlias alias="MarketBuysellList" type="fp.market.domain.MarketBuysellList"/>
+
 		
 		<!-- 별 -->
 		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>

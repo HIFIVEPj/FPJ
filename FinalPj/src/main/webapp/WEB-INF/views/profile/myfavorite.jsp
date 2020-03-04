@@ -71,8 +71,8 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket">마켓관리</a></li>
+												<li><a class="slide-item" href="myMarket">구매관리</a></li>
 											</ul>
 										</li>
 										<li>
