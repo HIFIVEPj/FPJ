@@ -14,7 +14,20 @@
 		<result property="option1" column="OPTION1"/>
 		<result property="option2" column="OPTION2"/>
 		<result property="option3" column="OPTION3"/>	
-		
+	</resultMap>
+	 <resultMap id="PayInformationMap" type="PayInformation">	 	
+	 	<id property="payinfo_num" column="PAYINFO_NUM"/>
+	 	<result property="payinfo_payid" column="PAYINFO_PAYID"/>		
+		<result property="payinfo_uid" column="PAYINFO_UID"/>
+		<result property="payinfo_price" column="PAYINFO_PRICE"/>
+		<result property="payinfo_cardnum" column="PAYINFO_CARDNUM"/>
+		<result property="payinfo_status" column="PAYINFO_STATUS"/>
+		<result property="payinfo_cardname" column="PAYINFO_CARDNAME"/>
+		<result property="payinfo_pgtid" column="PAYINFO_PGTID"/>
+		<result property="payinfo_buyername" column="PAYINFO_BUYERNAME"/>	
+		<result property="option1" column="OPTION1"/>
+		<result property="option2" column="OPTION2"/>
+		<result property="option3" column="OPTION3"/>	
 	</resultMap>
 	<select id = "idCheck" parameterType = "String" resultType = "int">
     	SELECT COUNT(*) FROM MEMBER WHERE MEM_EMAIL = #{email}
@@ -43,23 +56,48 @@
 	<select id="getList" parameterType="Map" resultMap="MemberMap">
 	 	<![CDATA[
 			 select * from (select ROWNUM rnum , aa.* from (select * from Member ]]>
-			 <choose> 
-			 	<when test="class_num != null"> WHERE CLASS_NUM =#{class_num}</when>
+			 <include refid="paging" />	
+			 <include refid="search" />
+			 <![CDATA[
+			 	) aa)
+				 where rnum>#{MemberVo.start} and rnum<=#{MemberVo.end}
+	  		  ]]>
+	</select>
+	
+	<select id="getTotalCount" parameterType="Map" resultType="long" >
+		select count(MEM_EMAIL) from MEMBER 
+		<include refid="paging" />
+		<include refid="search" />	
+	</select>
+	
+	<sql id="paging">
+			<choose> 
+			 	<when test="class_num == 4"> WHERE CLASS_NUM =#{class_num}</when>
+			 	<when test="class_num == 2"> WHERE CLASS_NUM=2 OR CLASS_NUM=3 </when>
 			 	<otherwise> where CLASS_NUM>1 </otherwise>			 
 			 </choose>
-			 <![CDATA[
-			 order by MEM_RDATE desc) aa)
-				 where rnum>#{MemberVo.start} and rnum<=#{MemberVo.end}
-	    ]]>
-	</select>
 	
-	<select id="getTotalCount" parameterType="String" resultType="long" >
-		select count(MEM_EMAIL) from MEMBER 
+	</sql>
+	<sql id="search">
 		<choose>
-		<when test="value != null"> WHERE CLASS_NUM =#{class_num}</when>
-		<otherwise>WHERE CLASS_NUM >1</otherwise>
-		</choose>		
+			<when test="keyword != null and keyword != ''">
+				AND MEM_NAME LIKE '%'||#{keyword}||'%' 
+				OR MEM_EMAIL LIKE '%'||#{keyword}||'%'  
+				OR MEM_RDATE LIKE '%'||#{keyword}||'%' 
+			</when>			
+		</choose>
+	</sql>
+	
+	<select id="marketListCor" parameterType="MemberVo" resultMap="PayInformationMap" >
+	 	<![CDATA[
+			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION) aa)
+				 where rnum>#{start} and rnum<=#{end}
+	  	]]>
 	</select>
 	
+	<select id="getTotalCountMC"  resultType="long" >
+		select count(PAYINFO_NUM) from PAY_INFORMATION 
+		
+	</select>
 
 </mapper>

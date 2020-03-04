@@ -1,8 +1,6 @@
 package fp.customer_service.domain;
 
-//import lombok.Data;
 import lombok.Getter;
-//import lombok.Setter;
 import lombok.ToString;
 
 @Getter
@@ -15,7 +13,21 @@ public class PagingInfo {
 	private int lastPage;
 	private int total; // 전체 게시글 수
 	private Criteria cri; // 요청이 온 페이지의 페이지번호와 몇개씩 보고 싶은지
-	public PagingInfo(Criteria cri, int total) {
+	
+	private int qa_cate_count_project;
+	private int qa_cate_count_freemarket;
+	private int qa_cate_count_freelancer;
+	private int qa_cate_count_sign;
+	private int qa_cate_count_meminfo;
+	private int qa_cate_count_payment;
+	private int qa_cate_count_discount;
+	private int qa_cate_count_etc;
+	
+	public PagingInfo(Criteria cri, int total, 
+			int qa_cate_count_project, int qa_cate_count_freemarket, int qa_cate_count_freelancer, 
+			int qa_cate_count_sign, int qa_cate_count_meminfo, int qa_cate_count_payment, 
+			int qa_cate_count_discount, int qa_cate_count_etc) {
+		
 		this.cri = cri; // 요청 정보
 		this.total = total; // 전체 게시글 수
 		//this.endPage = (int) (Math.ceil(cri.getPageNum() / 10.0))*10;
@@ -30,6 +42,15 @@ public class PagingInfo {
 		
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEnd;
+		
+		this.qa_cate_count_project = qa_cate_count_project;
+		this.qa_cate_count_freemarket = qa_cate_count_freemarket;
+		this.qa_cate_count_freelancer = qa_cate_count_freelancer;
+		this.qa_cate_count_sign = qa_cate_count_sign;
+		this.qa_cate_count_meminfo = qa_cate_count_meminfo;
+		this.qa_cate_count_payment = qa_cate_count_payment;
+		this.qa_cate_count_discount = qa_cate_count_discount;
+		this.qa_cate_count_etc = qa_cate_count_etc;
 	}
 }
 

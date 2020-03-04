@@ -61,8 +61,8 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.selectProfileContent3(PRO_NUM);
 	}
 	@Override
-	public List<FreeLancer> selectProfileContent4(long PRO_NUM){
-		return mapper.selectProfileContent4(PRO_NUM);
+	public List<FreeLancer> selectProfileContent4(long free_code){
+		return mapper.selectProfileContent4(free_code);
 	}	
 	//삭제//
 	@Transactional
@@ -90,7 +90,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	}
 
 	@Override
-	public FreeLancerProfile profile_free_select(String mem_email){
+	public List<FreeLancerProfile> profile_free_select(String mem_email){
 		return mapper.profile_free_select(mem_email);
 	}
 	@Override

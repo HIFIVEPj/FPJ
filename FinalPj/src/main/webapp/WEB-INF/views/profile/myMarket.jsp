@@ -115,13 +115,25 @@ $(document).ready(function() {
 									<div class="tabs-menus">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs" id="mytab1">
-											<li><a href="#tab1" class="active" data-toggle="tab">나의 마켓</a></li>
-											<li><a href="#tab2" data-toggle="tab">팔린마켓</a></li>
+											<li><a href="#tab1" class="active" data-toggle="tab" value="mymakret">나의 마켓</a></li>
+											<li><a href="#tab2" data-toggle="tab" value="sellmakret">팔린마켓</a></li>
 										</ul>
 										
 									</div>
 								<div class="tab-content">
-								
+<script type="text/javascript" >
+	$(document).ready(function(){
+		
+		$("#mytab1").click(function(){						        
+	          var list = $("#mytab1 li" a).val();
+	          alert("list:::::::"+list);
+	          
+	          
+	          
+	        //  window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
+	      })
+	})
+</script>							
 								
 								
 								<!-- 탭1 -->

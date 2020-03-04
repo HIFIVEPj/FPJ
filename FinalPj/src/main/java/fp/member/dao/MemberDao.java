@@ -22,8 +22,9 @@ public class MemberDao {
 	public Member loginCheck(Member member) {
 		System.out.println("===> Mybatis로 loginCheck() 기능 처리");
 		Member member1= sqlSession.selectOne(ns+".loginCheck",member);
-		
-		System.out.println("꺄아아아아앙아아아아아아아아앙아아아아아아아아:"+member1.getPwd());
+		if(member1 ==null) {
+			return null;
+		}		
 		return member1;
 	}
 	//로그 아웃

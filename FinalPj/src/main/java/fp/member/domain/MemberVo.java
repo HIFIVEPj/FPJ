@@ -2,6 +2,9 @@ package fp.member.domain;
 
 import java.util.List;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import lombok.ToString;
 
 @ToString
@@ -15,19 +18,47 @@ public class MemberVo {
 	private String type;
 	private String keyword;
 	
-	public String[] getTypeAtrr() {
-		return type == null? new String[] {}: type.split("");
-	}
 	
 	public MemberVo() {
 	}
-	public MemberVo(long total, int nowPage, int cntPerPage, List<Member> list) {
+	//여기 추가해봄
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
+	public String[] getTypeAtrr() {
+		return type == null? new String[] {}: type.split("");
+	}
+	public String getListLink() {
+		UriComponentsBuilder buildrer = UriComponentsBuilder.fromPath("")
+				.queryParam("nowPage", this.nowPage)
+				.queryParam("cntPerPage", this.getCntPerPage())
+				.queryParam("keyword",this.getKeyword());
+		return buildrer.toUriString();
+	}
+	
+	//여기까지 추가해봄
+	
+	public MemberVo(long total, int nowPage, int cntPerPage, List<Member> list ,String keyword) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
 		setTotal(total);
 		calcLastPage(getTotal(), getCntPerPage());
 		calcStartEndPage(getNowPage(), cntPage);
 		this.list=list;
+		this.keyword=keyword;
+		calcStartEnd(getNowPage(), getCntPerPage());
+	}
+	public MemberVo(long total, int nowPage, int cntPerPage) {
+		setNowPage(nowPage);
+		setCntPerPage(cntPerPage);
+		setTotal(total);
+		calcLastPage(getTotal(), getCntPerPage());
+		calcStartEndPage(getNowPage(), cntPage);
 		calcStartEnd(getNowPage(), getCntPerPage());
 	}
 	// 제일 마지막 페이지 계산
@@ -118,7 +149,7 @@ public class MemberVo {
 	public String toString() {
 		return "MemberVo [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
 				+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-				+ ", cntPage=" + cntPage + ", list=" + list + "]";
+				+ ", cntPage=" + cntPage + ", list=" + list + ", keyword=" + keyword + "]" ;
 	}
 
 }

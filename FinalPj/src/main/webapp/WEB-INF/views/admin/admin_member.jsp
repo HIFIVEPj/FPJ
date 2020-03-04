@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% String classN = request.getParameter("classN");// %>
+<% String keyword = request.getParameter("keyword");// %>
+
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -259,30 +262,22 @@
 					</div> -->
 					<ul class="side-menu">
 						    <li>	
-                                <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
+                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
                             </li>
                             
-                             <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">2</span></a>
-                            </li>
-                            
-                             <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">3</span></a>
-                            </li>
-                            
-				
+                           			
 
 					</ul>
 					
@@ -310,11 +305,11 @@
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
-						<!-- <h4 class="page-title">관리자페이지</h4>
+						 <h4 class="page-title">회원관리</h4>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
-							</ol> -->
+							</ol> 
 						</div>
 
 						<div class="row">
@@ -364,84 +359,83 @@
 							</div>
 						</div>
 <!--  -->
-<!-- User-All-->
-		<section class="sptb">
-			<div class="container">
-				<div class="section-title center-block text-center">
-					<h1>Users List</h1>
-					<p>Mauris ut cursus nunc. Morbi eleifend, ligula at consectetur vehicula</p>
-				</div>
+	
+<!-- User-All-->	
+			<div class="">
 				<div class="row">
 					<div class="col-lg-12 users-list">
-						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border">
-							<select class="form-control page-select">
-								<option value="0">SelectOptions</option>
-								<option value="1">Active</option>
-								<option value="2">New</option>
-								<option value="3">Blocked</option>
-								<option value="4">Suspended</option>
-								<option value="4">A-Z</option>
-							</select>
+					<form action="admin_member" method="Get"> 					
+						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
+							<select class="form-control page-select" name="class_num" id="class_num" >
+								<option value="" selected="selected">선택해주세요.</option>							
+								<option value="1">전체</option>
+								<option value="4">기업</option>
+								<option value="2">개인</option>
+							</select>							
 							<div class="page-options d-flex">
 								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search" id="keyword" name="keyword">
 									<div class="input-group-append ">
-										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
+										<button type="button" class="btn btn-primary br-tr-7 br-br-7" id="searchBtn" >
 											<i class="fa fa-search" aria-hidden="true"></i>
 										</button>
 									</div>
 								</div>
 							</div>
+
+						
+						</div>		
+					</form>
+				<div class="card">
+					<div class="card-body">
+						<div class="user-tabel table-responsive border-top">
+						<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
+							<tbody>
+								<tr>
+									<th class="w-1"></th>	
+									<th>이름</th>
+									<th>이메일</th>
+									<th>소속</th>
+									<th>Membership Status</th>
+									<th>Member Since</th>
+									<th></th>
+								</tr>
+								<c:forEach var="dto" items="${pa.list}">								
+								<tr>	
+								<th>
+										<label class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+											<span class="custom-control-label"></span>
+										</label>
+									</th>
+									<td>${dto.name}</td>
+									<td>${dto.email}</td>
+									<td>
+										<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3 }">개인</c:if>
+										<c:if test="${dto.class_num eq 4}">기업</c:if>
+									</td>
+									<td>
+										<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
+										<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
+										<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
+									</td>
+									<td>${dto.rdate}</td>
+									<td>
+										<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+									</td>
+								</tr>						
+								</c:forEach>																					
+							</tbody>
+						</table>
 						</div>
-						<div class="card">
-							<div class="card-body">
-								<div class="user-tabel table-responsive border-top">
-								<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
-									<tbody>
-										<tr>
-											<th class="w-1"></th>	
-											<th>이름</th>
-											<th>이메일</th>
-											<th>소속</th>
-											<th>Membership Status</th>
-											<th>Member Since</th>
-											<th></th>
-										</tr>
-										<c:forEach var="dto" items="${pa.list}">
-										<tr>	
-										<th>
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label"></span>
-												</label>
-											</th>
-											<td>${dto.name}</td>
-											<td>${dto.email}</td>
-											<td>
-												<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3 }">개인</c:if>
-												<c:if test="${dto.class_num eq 4}">기업</c:if>
-											</td>
-											<td>
-												<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
-												<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
-												<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
-											</td>
-											<td>${dto.rdate}</td>
-											<td>
-												<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-											</td>
-										</tr>
-										</c:forEach>												
-									</tbody>
-								</table>
-								</div>
-							</div>
-						</div>
+					</div>
+				</div>
+					
 					<ul class="pagination mb-5">
 							<!--  이전페이지 -->
 					<c:if test="${pa.nowPage != 1}">
-						<li class="page-item page-prev">
-							<a class="page-link" href="admin_member?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}" tabindex="-1">Prev</a>
+						<li class="page-item page-prev">							
+							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}" tabindex="-1">Prev</a>
 						</li>
 					</c:if>
 					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
@@ -450,20 +444,21 @@
 									<li class='page-item active'><a class="page-link">${p}</a></li>
 								</c:when>
 								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
+									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">${p}</a></li>
 								</c:when>
 							</c:choose>
 					</c:forEach>
-							<c:if test ="${pa.nowPage != pa.lastPage}">
+						<c:if test ="${pa.nowPage != pa.lastPage}">
 								<li class="page-item page-next">
-									<a class="page-link" href="admin_member?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+									
+									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">Next</a>
 								</li>
 						</c:if>
 					</ul>  
-					</div>
+				</div>
 				</div>
 			</div>
-		</section>
+	
 	<!-- User end -->				
 					</div> 
 				</div>
@@ -536,55 +531,16 @@
 		<!-- Custom Js-->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script>
-<script type="text/javascript">
-/*
-$('a[href="#tab2"]').on('show.bs.tab', function(e){	
-	var activeTab = $(e.target).text();
-	var class_num= '4';
-	var test='0';
-	//alert(activeTab);
-	//alert(class_num);
-	$.ajax({
-		 type:"GET",
-		 url:"admin_member",
-		 data:{
-				"class_num": class_num
-		 },	
-		 
-		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
-			 //$("#data").empty().append(data);
-			if(data.length>0){ 
-		 		for(var i in data){
-		 			var $class_num =data[i].class_num; 		 			
-		 			var $mem_email=data[i].mem_email;
-		 		} 
-			 	alert("성공"+class_num);
-			}
-		 },error: function(data){
-            alert("에러발생");
-        }
-	}) //ajax
+
+<script type="text/javascript" >
+$(document).ready(function(){
+	$("#searchBtn").click(function(){						        
+          var class_num = $("#class_num option:selected").val();
+          var keyword = $("#keyword").val();
+          alert(class_num+","+keyword);
+          window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
+      })
 })
-$('a[href="#tab3"]').on('show.bs.tab', function(e){	
-	var activeTab = $(e.target).text();
-	var class_num= '2';
-	alert(activeTab);
-	alert(class_num);
-	$.ajax({
-		 type:"GET",
-		 url:"admin_member",
-		 data:{
-				"class_num": class_num
-		 },
-		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
-			 //window.location.reload("admin_member");
-		 	var item =data.mem_email;
-		 	alter(item);
-		},error: function(data){
-            alert("에러발생");
-        }
-		}) //ajax
-})*/
 </script>
 
 	</body>

@@ -22,7 +22,7 @@ public interface FreeLancerProfileMapper {
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
-	List<FreeLancer> selectProfileContent4(long PRO_NUM);
+	List<FreeLancer> selectProfileContent4(long free_code);
 	
 	void listDelete(long PRO_NUM);
 	void listDelete2(long PRO_NUM);
@@ -42,7 +42,7 @@ public interface FreeLancerProfileMapper {
 	public void checkdelete1(long PRO_NUM);
 	public void checkdelete1();
 	
-	public FreeLancerProfile profile_free_select(String mem_email);
+	public List<FreeLancerProfile> profile_free_select(String mem_email);
 	public long getTotalCountFree(long free_code);
 	
 	//나영추가 + mydash_free

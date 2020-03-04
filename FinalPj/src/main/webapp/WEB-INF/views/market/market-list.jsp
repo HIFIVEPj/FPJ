@@ -161,8 +161,8 @@
 									<div class="item2-gl-nav d-flex">
 										<h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6>
 										<ul class="nav item2-gl-menu ml-auto">
-										<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
-											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>
+										<!-- <li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li> 
+											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>-->	
 										</ul>
 										<div class="d-flex">
 											<select name="item" class="form-control select-sm w-100">

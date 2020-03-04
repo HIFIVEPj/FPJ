@@ -71,6 +71,8 @@
 			</collection>	
 		
 		</resultMap>
+
+		
 		
 		<!-- 프로젝트 컨텐츠 1 -->
 		<resultMap type="Freelancer_FreeLancerProfile" id="freelancerContent">
@@ -133,6 +135,7 @@
 				  <result property="free_code" column="free_code"/>
 				  <result property="pro_num" column="pro_num"/>
 				  <result property="pj_num" column="pj_num"/>
+				  <result property="appp_status" column="appp_status"/>
 				</collection>	
 
 			</resultMap>
@@ -188,6 +191,36 @@
 			</collection>	
 
 			</resultMap>
+			
+		<!-- 프로젝트 제목 select -->
+			<resultMap type="frProject" id="subSelect">
+				<id property="pj_num" column="pj_num"/>
+				  <result property="type_num" column="type_num"/>
+				  <result property="cate_num" column="cate_num"/>
+				  <result property="cor_code" column="cor_code"/>
+				    <result property="pj_sub" column="pj_sub"/>
+				    <result property="pj_ddate" column="pj_ddate"/>
+				    <result property="pj_place" column="pj_place"/>
+				    <result property="pj_name" column="pj_name"/>	
+
+			<collection property="Applied_Project" javaType="java.util.ArrayList" ofType="Applied_Project" >
+			 	<id property="pj_num" column="pj_num"/>
+			  	<result property="free_code" column="free_code"/>
+				  <result property="pro_num" column="pro_num"/>
+				 
+				  <result property="appp_status" column="appp_status"/> 	
+				</collection>	
+
+			</resultMap>
+					
+			
+			
+			
+			
+			
+			
+			
+
 
    <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
     <select id="countFreeLancer" resultType="int">
@@ -196,18 +229,23 @@
 	<!-- 리스트 select -->
 	<select id="SelectList" resultMap="List_FreeLancerResult" parameterType="List_PagingVO">
 	    <![CDATA[
-		select f.rnum, f.FREE_NAME , f.free_code
+		select f.rnum, f.FREE_NAME 
+			    , f.PRO_NUM
+			    , f.free_code
 			    , f.PRO_EXP 
 			    , f.PRO_VCNT 
 			    , f.FREEREV_STAR from
-					(select rownum rnum, free.FREE_NAME , free.free_code
+					(select rownum rnum, free.FREE_NAME 
+							  , free.PRO_NUM
+							  , free.free_code
 							  , free.PRO_EXP 
 							  , free.PRO_VCNT
 							  , free.FREEREV_STAR from
 						(select FREE_NAME , f.free_code
-      							  , PRO_EXP 
-    							    , PRO_VCNT 
-    							    , FREEREV_STAR 
+							 			  , fp.PRO_NUM
+      									  , PRO_EXP 
+    									  , PRO_VCNT
+    							 		  , FREEREV_STAR 
 								from FREELANCER f 
 								inner join FREELANCER_PROFILE fp
 									on f.FREE_CODE = fp.FREE_CODE
@@ -237,6 +275,22 @@
 		]]>						
 	</select> 
 	
+			<!-- 리스트페이지 프로젝트 select -->
+	<select id="SelectList3" resultMap="subSelect" >
+	    <![CDATA[
+		select ap.pj_num
+				,appp_status
+				,pj_sub
+				  from APPLIED_PROJECT ap 
+				  	inner join PROJECT p
+					on ap.pj_num=p.pj_num
+						where appp_status=1
+		]]>						
+	</select> 
+	
+	
+	
+	
 	<!-- 컨텐츠 -->
 	<select id="freelancercontent" resultMap="freelancerContent" parameterType="long">
 	  <![CDATA[
@@ -247,7 +301,7 @@
 						, pro_exp 
 						, pro_addr
 						, pro_workplace
-						, pro_vcnt +1
+						, pro_vcnt
 						, pro_edu 
 						, pro_start 
 						, pro_ox 

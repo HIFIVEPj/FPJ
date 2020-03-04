@@ -18,33 +18,7 @@
 								<div class="text-center text-white ">
 									<h1 class=""><span class="font-weight-bold">60,85,965</span> Ads Available in Pinlist</h1>
 								</div>
-								<div class=" search-background">
-									<div class="form row no-gutters">
-										<div class="form-group  col-xl-6 col-lg-5 col-md-12 mb-0">
-											<input type="text" class="form-control input-lg border-right-0" id="text" placeholder="Search Products">
-										</div>
-										<div class="form-group col-xl-4 col-lg-4 select2-lg  col-md-12 mb-0">
-											<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
-												<optgroup label="Categories">
-													<option>Select</option>
-													<option value="1">Vehicle</option>
-													<option value="2">Real Estate</option>
-													<option value="3">Computer</option>
-													<option value="4">Clothing</option>
-													<option value="5">Job</option>
-													<option value="6">Services</option>
-													<option value="7">Electronics</option>
-													<option value="8">Mobile</option>
-													<option value="9">Events</option>
-													<option value="10">Constructions</option>
-												</optgroup>
-											</select>
-										</div>
-										<div class="col-xl-2 col-lg-3 col-md-12 mb-0">
-											<a href="#" class="btn btn-lg btn-block btn-secondary">Search</a>
-										</div>
-									</div>
-								</div>
+
 							</div>
 						</div>
 					</div>

@@ -124,10 +124,17 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	//프로젝트지원
+	@Override
 	public void applied_pj(Map<String, Object>map) {
 		mapper.applied_pj(map);
 	}
+	@Override
 	public AppliedProject select_applied_pj(Map<String, Object>map) {
 		return mapper.select_applied_pj(map);
 	}
+	@Override
+	public List<Project>select_appp_pj_free(Map<String, Object>map){
+		return mapper.select_appp_pj_free(map);
+	}
+	
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% String classN = request.getParameter("classN");// %>
 
 	<head>
 		<meta charset="UTF-8">
@@ -46,9 +48,10 @@
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet" />
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet" />
 
-
-
 	</head>
+
+	
+	
 		<body class="app sidebar-mini">
 		<div id="global-loader"><img src="../images/other/loader.svg" class="loader-img floating" alt=""></div>
 		<div class="page">
@@ -258,15 +261,15 @@
 					</div> -->
 					<ul class="side-menu">
 						    <li>	
-                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
+                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
                             
                              <li>	
@@ -286,7 +289,7 @@
 					</ul>
 					
 
-	
+<!--  본문 시작 -->	
 					<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
@@ -309,11 +312,11 @@
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
-						<!-- <h4 class="page-title">관리자페이지</h4>
+						 <h4 class="page-title">회원관리</h4>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
-							</ol> -->
+							</ol> 
 						</div>
 
 						<div class="row">
@@ -362,268 +365,104 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">Profits Analysis</h3>
-									</div>
-								<!-- 	<div class="card-body">
-										<div id="morrisBar3" class="chart-visitors overflow-hidden"></div>
-									</div> -->
-									<div class="card-body">
-										<div id="placeholder2" class="chartsh"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">Ratings</h3>
-									</div>
-									<div class="card-body">
-										<div id="chart-donut3" class="chartsh"></div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="card">
-									<div class="card-header">
-										<h3 class="card-title">Product List</h3>
-									</div>
-									<div class="card-body">
-										<div class="table-responsive border-top userprof-tab">
-											<table class="table table-bordered table-hover mb-0">
-												<thead>
-													<tr>
-														<th></th>
-														<th>Item</th>
-														<th>Category</th>
-														<th>Price</th>
-														<th>Ad Status</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Camera 2d33</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>sale</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$54</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring IT Developers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Oct-23-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$156</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">2Bk Delux Rooms</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-15-2018 , 12:45</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Rent</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>RealEstate</td>
-														<td class="font-weight-semibold fs-16">$22,765</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/f1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Chiness Food</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Restaurant</td>
-														<td class="font-weight-semibold fs-16">$89</td>
-														<td>
-															<a href="#" class="badge badge-success">Active</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/l1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Lenova laptop</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>used</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$25</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring Civil Engineers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-22-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$14,000</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
+<!--  -->
+<!-- User-All-->	
+			<div class="">
+				<div class="row">
+					<div class="col-lg-12 users-list">
+					<form action="admin_member" method="Get"> 					
+						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
+							<select class="form-control page-select" name="class_num" onchange="f(this)">
+								<option value="">선택해주세요.</option>							
+								<option value="1">전체</option>
+								<option value="4">기업</option>
+								<option value="2">개인</option>
+							</select>
+							<script type="text/javascript" >
+							  function f(select){						        
+						           var class_num = select.value;
+						           location.href="admin_member?class_num="+class_num;	
+						       }
+							</script>
+							
+							<div class="page-options d-flex">
+								<div class="input-group">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="search" name="keyword">
+									<div class="input-group-append ">
+										<button type="submit" class="btn btn-primary br-tr-7 br-br-7" id="searchBtn">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</button>
 									</div>
 								</div>
-							</div>
-
+							</div>							
+						</div>		
+					</form>
+				<div class="card">
+					<div class="card-body">
+						<div class="user-tabel table-responsive border-top">
+						<table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
+							<tbody>
+								<tr>
+									<th class="w-1"></th>	
+									<th>이름</th>
+									<th>이메일</th>
+									<th>소속</th>
+									<th>Membership Status</th>
+									<th>Member Since</th>
+									<th></th>
+								</tr>
+								<c:forEach var="dto" items="${pa.list}">
+								<tr>	
+								<th>
+										<label class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+											<span class="custom-control-label"></span>
+										</label>
+									</th>
+									<td>${dto.name}</td>
+									<td>${dto.email}</td>
+									<td>
+										<c:if test="${dto.class_num eq 2 ||dto.class_num eq 3 }">개인</c:if>
+										<c:if test="${dto.class_num eq 4}">기업</c:if>
+									</td>
+									<td>
+										<c:if test="${dto.status eq 0}"><a href="javascript:void(0)" class="badge badge-success">가입</a></c:if>
+										<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
+										<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
+									</td>
+									<td>${dto.rdate}</td>
+									<td>
+										<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+									</td>
+								</tr>
+								</c:forEach>																					
+							</tbody>
+						</table>
 						</div>
 					</div>
+				</div>					
+					<ul class="pagination mb-5">
+							<!--  이전페이지 -->
+					<c:if test="${pageMaker.prev}">
+						<li class="page-item page-prev">							
+							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pageMaker.startPage-1}" tabindex="-1">Prev</a>
+						</li>
+					</c:if>
+					<c:forEach var='num' begin="${pageMaker.startPage}" end="${pageMaker.endPage}">	
+							<li class='page-item active'><a class="page-link">${num}</a></li>							
+					</c:forEach>
+						<c:if test ="${pageMaker.next}">
+							<li class="page-item page-next">									
+								<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+							</li>
+						</c:if>
+					</ul>  
+				</div>
+				</div>
+			</div>
+	
+	<!-- User end -->				
+					</div> 
 				</div>
 			</div>
 
@@ -694,6 +533,56 @@
 		<!-- Custom Js-->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script>
+<script type="text/javascript">
+/*
+$('a[href="#tab2"]').on('show.bs.tab', function(e){	
+	var activeTab = $(e.target).text();
+	var class_num= '4';
+	var test='0';
+	//alert(activeTab);
+	//alert(class_num);
+	$.ajax({
+		 type:"GET",
+		 url:"admin_member",
+		 data:{
+				"class_num": class_num
+		 },	
+		 
+		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			 //$("#data").empty().append(data);
+			if(data.length>0){ 
+		 		for(var i in data){
+		 			var $class_num =data[i].class_num; 		 			
+		 			var $mem_email=data[i].mem_email;
+		 		} 
+			 	alert("성공"+class_num);
+			}
+		 },error: function(data){
+            alert("에러발생");
+        }
+	}) //ajax
+})
+$('a[href="#tab3"]').on('show.bs.tab', function(e){	
+	var activeTab = $(e.target).text();
+	var class_num= '2';
+	alert(activeTab);
+	alert(class_num);
+	$.ajax({
+		 type:"GET",
+		 url:"admin_member",
+		 data:{
+				"class_num": class_num
+		 },
+		 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+			 //window.location.reload("admin_member");
+		 	var item =data.mem_email;
+		 	alter(item);
+		},error: function(data){
+            alert("에러발생");
+        }
+		}) //ajax
+})*/
+</script>
 
 	</body>
 </html>

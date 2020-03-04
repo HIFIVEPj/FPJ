@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import fp.customer_service.domain.Criteria;
-import fp.customer_service.domain.CustomerServicePagingVO;
 import fp.customer_service.domain.CustomerServiceQa;
 
 public interface CustomerServiceQaMapper {
@@ -23,6 +22,13 @@ public interface CustomerServiceQaMapper {
 	//List<CustomerServiceQa> qa_list(CustomerServicePagingVO customerServicePagingVO); // 페이징 처리 게시글 조회
 
 	int qa_cate_count_project(); // 카테고리 sorting
+	int qa_cate_count_freemarket();
+	int qa_cate_count_freelancer();
+	int qa_cate_count_sign();
+	int qa_cate_count_meminfo();
+	int qa_cate_count_payment();
+	int qa_cate_count_discount();
+	int qa_cate_count_etc();
 	
 	public void updateReplyCnt(@Param("qa_num") Long qa_num, @Param("amount") int amount); // 댓글 개수, amount : 증감 의미
 	

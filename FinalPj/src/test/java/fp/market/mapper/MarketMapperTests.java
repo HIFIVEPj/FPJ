@@ -1,24 +1,18 @@
 package fp.market.mapper;
 
-
-
 import java.util.HashMap;
-
 import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
-
 
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;

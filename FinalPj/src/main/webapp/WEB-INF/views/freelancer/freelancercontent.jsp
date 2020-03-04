@@ -71,25 +71,27 @@
 											</c:forEach>
 													<span class="text-gray">${list.pro_addr}</span>&nbsp;
 													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i> ${list.pro_vcnt} Views</a><br>
+																
+													
 													<div class="rating-stars d-inline-flex mb-2 mr-3">
 													<c:forEach items="${list.list_freeLancerreview}" var="star"  varStatus="status">
 														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="${star.freerev_star}">
 										
 														<div class="rating-stars-container mr-2">
 															<div class="rating-star sm">
-																<i class="fa fa-star"></i>
+																<i class="fa fa-star text-warning is--active"> </i>
 															</div>
 															<div class="rating-star sm">
-																<i class="fa fa-star"></i>
+																<i class="fa fa-star text-warning is--active"> </i>
 															</div>
 															<div class="rating-star sm">
-																<i class="fa fa-star"></i>
+																<i class="fa fa-star text-warning is--active"> </i>
 															</div>
 															<div class="rating-star sm">
-																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o text-warning is--active"> </i>
 															</div>
 															<div class="rating-star sm">
-																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o text-warning is--active"> </i>
 															</div>
 					<!-- 별점표시 텍스트 위치 -->				</div> 
 														${star.freerev_star}

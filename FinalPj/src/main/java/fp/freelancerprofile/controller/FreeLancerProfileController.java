@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
@@ -133,12 +134,13 @@ public class FreeLancerProfileController {
 	
 	//프로필 컨텐츠//
 	@GetMapping("freelancerProfile_content") 
-	public ModelAndView ProFileContent(@RequestParam long PRO_NUM) {
+	public ModelAndView ProFileContent(@RequestParam long PRO_NUM ,@RequestParam String mem_email) {
+		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
 		List<FreeLancer> content = service.selectProfileContent(PRO_NUM);
 		List<FreeLancerProfile> content2 = service.selectProfileContent2(PRO_NUM);	
 		List<KeyWord> content3 = service.selectProfileContent3(PRO_NUM);
 		List<FreeLancerProfileFile> file_name = service.selectFilename();
-		List<FreeLancer> content4 = service.selectProfileContent4(PRO_NUM);
+		List<FreeLancer> content4 = service.selectProfileContent4(freelancerprofile.getFree_code());
 		
 		
 		ModelAndView mv = new ModelAndView();
@@ -210,15 +212,18 @@ public class FreeLancerProfileController {
 			}else if(cntPerPage == null) {
 				cntPerPage ="5";
 			}
-			
+
 			projectVo = new ProjectVo(totalCountPjpick, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 			Map<String, Object>map = new HashMap<String, Object>();
 			map.put("ProjectVo", projectVo);
 			map.put("free_code",freelancer.getFree_code());
+			
+			List<fp.corporation.domain.Project>apppList = pjservice.select_appp_pj_free(map);
 			List<fp.corporation.domain.Project>pjpickList = pjservice.pjpick_free(map);
 			mv.addObject("free", freelancer);
 			mv.addObject("pjp", pjpickList);
 			mv.addObject("pa", projectVo);
+			mv.addObject("apppList",apppList);
 			return mv;
 		}
 		@RequestMapping("myfavorite_del")
