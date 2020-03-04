@@ -1,6 +1,7 @@
 package fp.member.domain;
 
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class PayInformation {
 	private String payinfo_cardname;//카드이름
 	private String payinfo_pgtid;//결제구분번호?
 	private String payinfo_buyername;//구매자
+	private Date payinfo_rdate;//결제일
 	private int option1;
 	private int option2;
 	private String option3;	

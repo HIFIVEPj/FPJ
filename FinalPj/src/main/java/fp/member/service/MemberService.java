@@ -15,9 +15,13 @@ public interface MemberService {
 	long getTotalCount(Map<String,Object> map);
 	int idCheck(String email);
 	void insertM(Member member);		
-
+	
+	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
 	long getTotalCountMC();
+	//개인
+	List<PayInformation> marketListFree(MemberVo memberVO);
+	long getTotalCountMF();
 	/*
 	public boolean loginCheck(Member member,HttpSession session);
 	public void logout(HttpSession session); */

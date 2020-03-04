@@ -95,8 +95,32 @@ public class AdminController {
 	}
 	
 	@RequestMapping("admin_marketF")
-	public String admin_marketF() {
-		return "admin/admin_marketF";
+	public ModelAndView admin_marketF(@RequestParam(value="nowPage", required = false)String nowPage
+			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
+		
+		long totalCount =service.getTotalCountMF();	
+		log.info("프리랜서 마켓카운트트트트ㅡ트틑"+totalCount);
+		if(nowPage == null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10"; //페이지당 글 갯수리스트목록
+		}else if(nowPage ==null) {
+			nowPage="1";
+		}else if(cntPerPage == null) {
+			cntPerPage="10"; //리스트목록
+		}			
+		MemberVo memberVo = new MemberVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+	
+		List<PayInformation> list =service.marketListFree(memberVo);		
+		ModelAndView mv = new ModelAndView("admin/admin_marketF");	
+		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:"+list);
+		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!memberVo:"+memberVo);
+		mv.addObject("list", list);
+		mv.addObject("paf", memberVo);
+			
+			return mv;
 	}
-
+	
+	
 }
+
+

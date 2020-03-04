@@ -346,27 +346,26 @@
 							<div class="table-responsive">
 								<table class="table card-table ">
 									<thead class="bg-primary text-white">
-										<tr class="border-bottom text-white">
-											<th class="text-white font-weight-normal">num</th>
+										<tr class="border-bottom text-white">											
 											<th class="text-white font-weight-normal">payid</th>
-											<th class="text-white font-weight-normal">price</th>
+											<th class="text-white font-weight-normal">가격</th>
 											<th class="text-white font-weight-normal">uid</th>
-											<th class="text-white font-weight-normal">cardnum</th>
+											<th class="text-white font-weight-normal">카드번호</th>
 											<th class="text-white font-weight-normal">status</th>
-											<th class="text-white font-weight-normal">cardname</th>
+											<th class="text-white font-weight-normal">카드이름</th>
 											<th class="text-white font-weight-normal">pgtid</th>
-											<th class="text-white font-weight-normal">buyername</th>
+											<th class="text-white font-weight-normal">결제자</th>
+											<th class="text-white font-weight-normal">결제일</th>
 										</tr>
 									</thead>
 									<tbody>
 									<c:if test="${empty list}">
 										<tr align="center" noshade>
-										   <td colspan="9">데이터가 하나도 없음</td>
+										   <td colspan="9">정보가 없습니다.</td>
 										</tr>
 									</c:if>
 									<c:forEach var="dto" items="${list}">
-											<tr class="border-bottom">
-											<td>${dto.payinfo_num}</td>
+											<tr class="border-bottom">											
 											<td>${dto.payinfo_payid}</td>
 											<td>${dto.payinfo_price}</td>
 											<td class="text-red">${dto.payinfo_uid}</td>
@@ -375,13 +374,37 @@
 											<td class="">${dto.payinfo_cardname}</td>
 											<td>${dto.payinfo_pgtid}</td>
 											<td class="text-right">${dto.payinfo_buyername}</td>
+											<td>${dto.payinfo_rdate}</td>
 										</tr>	
 										</c:forEach>											
 									</tbody>
 								</table>
 							</div>
 <!--  -->				</div>
-						
+					<ul class="pagination mb-5">
+							<!--  이전페이지 -->
+						<c:if test="${pac.nowPage != 1}">
+							<li class="page-item page-prev">							
+								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage-1}&cntPerPage=${pac.cntPerPage}" tabindex="-1">Prev</a>
+							</li>
+						</c:if>
+						<c:forEach var='p' begin="${pac.startPage}" end="${pac.endPage}">
+								<c:choose>
+									<c:when test="${p == pac.nowPage}">
+										<li class='page-item active'><a class="page-link">${p}</a></li>
+									</c:when>
+									<c:when test = "${p != pac.nowPage }">
+										<li class="page-item"><a class="page-link" href="admin_marketC?nowPage=${p}&cntPerPage=${pac.cntPerPage}">${p}</a></li>
+									</c:when>
+								</c:choose>
+						</c:forEach>
+						<c:if test ="${pac.nowPage != pac.lastPage}">
+							<li class="page-item page-next">
+								
+								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage+1}&cntPerPage=${pac.cntPerPage}">Next</a>
+							</li>
+						</c:if>
+					</ul> 
 						
 						
 					</div>

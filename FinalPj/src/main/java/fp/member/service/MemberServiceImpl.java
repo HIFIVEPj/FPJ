@@ -66,5 +66,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public List<PayInformation> marketListFree(MemberVo memberVO) {
+		return memberMapper.marketListFree(memberVO);
+	}
+	@Override
+	public long getTotalCountMF() {
+		return memberMapper.getTotalCountMF();
+	}
 
 }

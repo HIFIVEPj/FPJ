@@ -25,6 +25,7 @@
 		<result property="payinfo_cardname" column="PAYINFO_CARDNAME"/>
 		<result property="payinfo_pgtid" column="PAYINFO_PGTID"/>
 		<result property="payinfo_buyername" column="PAYINFO_BUYERNAME"/>	
+		<result property="payinfo_rdate" column="PAYINFO_RDATE"/>	
 		<result property="option1" column="OPTION1"/>
 		<result property="option2" column="OPTION2"/>
 		<result property="option3" column="OPTION3"/>	
@@ -90,14 +91,26 @@
 	
 	<select id="marketListCor" parameterType="MemberVo" resultMap="PayInformationMap" >
 	 	<![CDATA[
-			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION) aa)
-				 where rnum>#{start} and rnum<=#{end}
+			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'project_%') aa)
+				 where rnum>#{start} and rnum<=#{end} 
 	  	]]>
 	</select>
 	
 	<select id="getTotalCountMC"  resultType="long" >
-		select count(PAYINFO_NUM) from PAY_INFORMATION 
-		
+	<![CDATA[
+		select count(PAYINFO_NUM) from PAY_INFORMATION where PAYINFO_UID like 'project_%'
+	]]>	
 	</select>
-
+	<select id="marketListFree" parameterType="MemberVo" resultMap="PayInformationMap" >
+	 	<![CDATA[
+			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'market_%') aa)
+				 where rnum>#{start} and rnum<=#{end} 
+	  	]]>
+	</select>
+	
+	<select id="getTotalCountMF"  resultType="long" >
+	<![CDATA[
+		select count(PAYINFO_PAYID) from PAY_INFORMATION where PAYINFO_UID like 'market_%'
+	]]>	
+	</select>
 </mapper>
