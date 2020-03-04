@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PayInformation {
-	private long payinfo_num;//시퀀스
+	private long payinfo_num;//g시퀀스
 	private String payinfo_payid;//아임포트구분번호
 	private String  payinfo_uid;//구분번호
 	private long  payinfo_price;//가격

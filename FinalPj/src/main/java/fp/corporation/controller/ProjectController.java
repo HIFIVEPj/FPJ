@@ -1,8 +1,6 @@
 
 package fp.corporation.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,9 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,8 +41,7 @@ public class ProjectController {
 	@Autowired
 	private ProjectService service;
 	@Autowired
-	private CorporationService corService;
-	
+	private CorporationService corService;	
 	@Autowired
 	private FreeLancerProfileService freeService;
 	
@@ -105,8 +100,7 @@ public class ProjectController {
 			Project project = service.showContent(pj_num);
 			Corporation corInfo = service.corInfo(pj_num);
 			FreeLancer free = freeService.mydash_free_select(mem_email);
-			
-			
+				
 			if(free != null) {
 				List<FreeLancerProfile>profile_select = freeService.profile_free_select(mem_email);
 					Map<String, Object>map = new HashMap<String, Object>();
@@ -237,7 +231,7 @@ public class ProjectController {
 		return mv;
 	}
 	@RequestMapping(value="project_payments_end", method=RequestMethod.POST )
-	public void project_payments_end(@RequestBody HashMap<String, Object> data, @RequestParam long pj_num){
+	public String project_payments_end(@RequestBody HashMap<String, Object> data, @RequestParam long pj_num){
 		log.info("@!#*^@$ pj_num: "+pj_num);
 		//log.info("#($&#@*$ data: "+data.toString());
 		Map<String, Object> payinfo = new HashMap<String, Object>();
@@ -245,6 +239,7 @@ public class ProjectController {
 		payinfo.put("pj_num", pj_num);
 		log.info("#@$&*^#@&*$payinfo: "+payinfo);
 		service.payinsert(payinfo);
+		return "project/project_payments_end"; 
 		
 	}
 	@GetMapping("project_pay_end")
@@ -271,11 +266,12 @@ public class ProjectController {
 	
 	@RequestMapping(value="/apply", method=RequestMethod.GET)
 	@ResponseBody
-	public void applied_pj(@RequestParam long pj_num, @RequestParam long free_code) {
-		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+	public void applied_pj(@RequestParam long pj_num, @RequestParam long free_code, @RequestParam long pro_num) {
+		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code+", pro_num: "+pro_num);
 		Map<String, Object>map = new HashMap<String, Object>();
 		map.put("pj_num", pj_num);
 		map.put("free_code", free_code);
+		map.put("pro_num", pro_num);
 		service.applied_pj(map);
 	}
 	

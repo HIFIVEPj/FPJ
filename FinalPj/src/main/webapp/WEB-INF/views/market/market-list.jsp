@@ -161,8 +161,8 @@
 									<div class="item2-gl-nav d-flex">
 										<h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6>
 										<ul class="nav item2-gl-menu ml-auto">
-										<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
-											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>
+										<!-- <li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li> 
+											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>-->	
 										</ul>
 										<div class="d-flex">
 											<select name="item" class="form-control select-sm w-100">
@@ -254,7 +254,7 @@
 																<c:choose>
 																	<c:when test="${sessionScope.email != null}">
 																		<c:if test="${fn:length(marketNumList) == 0}">	
-																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"> <i class="fa fa fa-heart-o"></i></a>
+																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"  id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o"></i></a>
 																		</c:if>
 																	</c:when>
 																	<c:otherwise>
@@ -309,7 +309,7 @@
 								<!--이전 페이지 이동 -->
 									<c:if test="${paging.nowPage != 1}">
 										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
+											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
 										</li>
 										<li class="page-item">
 											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
@@ -337,12 +337,12 @@
 											</li>
 										
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
+												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 											<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
-												<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+												<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 											</c:if>
 										 
 									</ul>

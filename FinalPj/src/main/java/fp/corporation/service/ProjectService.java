@@ -45,5 +45,8 @@ public interface ProjectService {
 	void applied_pj(Map<String, Object>map);
 	AppliedProject select_applied_pj(Map<String, Object>map);
 	List<Project>select_appp_pj_free(Map<String, Object>map);
+	void appp_status_update(Map<String, Object>map);
+	int appp_count(long pj_num);
+	void pj_status_update(long pj_num);
 }
 

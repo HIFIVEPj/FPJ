@@ -31,7 +31,7 @@
 					<br/><br/>
 						<h1 class="h2  mb-3">마켓이 결제 되었습니다.</h1>
 						<p class="h4 font-weight-normal mb-7 leading-normal "></p>
-						<a class="btn btn-primary" href="list.do">
+						<a class="btn btn-primary" href="myfavoriteMarket">
 							주문내역보기
 						</a>
 					</div>

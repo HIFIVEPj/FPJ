@@ -84,8 +84,8 @@
 		<collection ofType="corProject" property="project" column="pj_num" javaType="ArrayList">
 			<id property="pj_num" column ="pj_num" />
 		</collection>
-		
 	</resultMap>
+	
 	<!-- 프로젝트 리스트 -->
 	<select id="list" parameterType="ProjectVo" resultMap="projectMap"> 
 		 <![CDATA[
@@ -186,8 +186,8 @@
 	</select>
 
 	<insert id="payinsert" parameterType="java.util.Map">
-		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME ) values
-		(PAYINFO_NUM_SEQ.nextval, #{data.imp_uid}, #{data.merchant_uid}, #{data.paid_amount}, #{data.apply_num, jdbcType=VARCHAR}, #{data.status}, #{data.card_name, jdbcType=VARCHAR}, #{data.pg_tid}, #{data.buyer_name})
+		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME, PAYINFO_RDATE ) values
+		(PAYINFO_NUM_SEQ.nextval, #{data.imp_uid}, #{data.merchant_uid}, #{data.paid_amount}, #{data.apply_num, jdbcType=VARCHAR}, #{data.status}, #{data.card_name, jdbcType=VARCHAR}, #{data.pg_tid}, #{data.buyer_name}, sysdate)
 	</insert>
 	<update id="payStatusUpdate" parameterType="java.util.Map">
 		update PROJECT set pj_paystatus=1 where pj_num = #{pj_num}
@@ -210,7 +210,7 @@
 	update PROJECT set pj_pcnt= pj_pcnt-1 where pj_num=#{pj_num}
 	</update>
 	
-	<!--   프로젝트 찜 프리랜서 mypage 조회 -->
+	<!--  프리랜서 mypage에서 프로젝트 찜  조회 -->
 	<select id ="pjpick_free" parameterType="map" resultMap="projectMap">
 	 <![CDATA[
 		 select * from (select ROWNUM rnum , aa.* from 
@@ -225,9 +225,10 @@
 	<select id="getTotalCountPickPj" resultType="long" >
 		select count(pj.PJ_NUM) from PROJECT pj join project_pick pjp on pj.pj_num=pjp.pj_num where free_code=#{free_code}  
 	</select>
+	
 	<!-- 프로젝트 지원 -->
 	<insert id="applied_pj" parameterType="map">
-		insert into APPLIED_PROJECT(free_code, pj_num, appp_date) values(#{free_code},#{pj_num}, sysdate)
+		insert into APPLIED_PROJECT(free_code, pro_num,pj_num, appp_date) values(#{free_code},#{pro_num},#{pj_num}, sysdate)
 	</insert>
 	<select id="select_applied_pj" parameterType="map" resultType="fp.corporation.domain.AppliedProject">
 		select * from  APPLIED_PROJECT where free_code=#{free_code} and pj_num=#{pj_num}
@@ -243,5 +244,13 @@
 		where free_code=#{free_code} order by pj.pj_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
 		 ]]>
 	</select>
-	
+	<update id ="appp_status_update" parameterType="map">
+		update applied_project set appp_status=1 where pro_num=#{pro_num} and pj_num=#{pj_num}
+	</update>
+	<select id="appp_count" resultType="int" parameterType="long">
+		select count(pro_num) from applied_project where pj_num=#{pj_num} and appp_status=1
+	</select>
+	<update id ="pj_status_update" parameterType="long">
+		update project set pj_status=1 where pj_num=#{pj_num}
+	</update>
 </mapper>
