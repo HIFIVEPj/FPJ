@@ -366,8 +366,5 @@
 		 order by appp.appp_date
 		 ]]>
 	</select>
-	<select id="totalCount_pj_applied_free" resultType="long" >
-		select count(free_code) from applied_project where pj_num=#{pj_num}
-	</select>
 	<!--/////////////////////////// -->
 </mapper>

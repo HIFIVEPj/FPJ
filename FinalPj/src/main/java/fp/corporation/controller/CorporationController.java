@@ -160,11 +160,25 @@ public class CorporationController {
 		for(int i=0; i<listAll.size(); i++) {
 			listProfile.add(listAll.get(i));
 		}
-		log.info("@#*&$^@#&*$list: "+listProfile);
+		//log.info("@#*&$^@#&*$list: "+listProfile);
 		return listProfile;
 	}
-	
-	
+	@RequestMapping(value="/select_free_project", method=RequestMethod.GET)
+	@ResponseBody
+	public int select_free_project(@RequestParam long pj_num, @RequestParam long pro_num) {
+		log.info("@#&$(@#&pj_num: "+pj_num+", pro_num: "+pro_num);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("pro_num",pro_num);
+		map.put("pj_num",pj_num);
+		pjService.appp_status_update(map);
+		Project pj = pjService.showContent(pj_num);
+		int appp_count = pjService.appp_count(pj_num);
+		if(appp_count>=pj.getPj_recnum()) {
+			pjService.pj_status_update(pj_num);
+		}
+		int pj_status = pjService.showContent(pj_num).getPj_status();
+		return pj_status;
+	}
 	public String saveStore(MultipartFile fileName) {
 		String ofname = fileName.getOriginalFilename();
 		int idx = ofname.lastIndexOf(".");

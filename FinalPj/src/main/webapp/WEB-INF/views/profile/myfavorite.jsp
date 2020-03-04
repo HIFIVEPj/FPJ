@@ -233,7 +233,8 @@
 												<td>${dto.corporation.cor_name}</td>
 												<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</td>
 												<td>
-													<a href="#" class="badge badge-primary">${dto.pj_status}</a>
+													<c:if test="${dto.pj_status==0 && endDate > currentDate}"><a href="javascript:void(0)" class="badge badge-success">모집중</a></c:if>
+													<c:if test="${dto.pj_status==1 || endDate <= currentDate}"><a href="javascript:void(0)" class="badge badge-secondary">마감</a></c:if>
 												</td>
 												<td>
 													<a href="myfavorite_del?pj_num=${dto.pj_num}&free_code=${free.free_code}&mem_email=${sessionScope.email}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
@@ -317,9 +318,6 @@
 												</c:if>
 												<c:if test="${dto.appliedproject.appp_status==1}">
 													<a href="#" class="badge badge-primary">승인</a>
-												</c:if>
-												<c:if test="${dto.appliedproject.appp_status==2}">
-													<a href="#" class="badge badge-danger">진행완료</a>
 												</c:if>
 												</td>
 												<td>

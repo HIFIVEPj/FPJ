@@ -127,11 +127,5 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<FreeLancer>select_pj_applied_free_paging(long pj_num){
 		return mapper.select_pj_applied_free_paging(pj_num);
 	}
-
-	/*
-	@Override
-	public long totalCount_pj_applied_free(long pj_num) {
-		return mapper.totalCount_pj_applied_free(pj_num);
-	}*/
 	
 }

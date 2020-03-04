@@ -626,14 +626,14 @@
 															<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 															<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
 															<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
-															<c:choose>
-																<c:when test="${endDate > currentDate}">
+															
+																<c:if test="${dto.pj_status==0 && endDate > currentDate}">
 																	D -${endDate - currentDate}
-																</c:when>
-																<c:otherwise>
+																</c:if>
+																<c:if test="${dto.pj_status==1 || endDate <= currentDate}">
 																	마감
-																</c:otherwise>
-															</c:choose>
+																</c:if>
+															
 															</strong></span>
 														&nbsp;&nbsp;&nbsp;
 														<span> (${dto.pj_ddate})</span>
