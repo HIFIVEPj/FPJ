@@ -126,16 +126,42 @@
 		SELECT COUNT(*) FROM MARKET_QA where market_num=#{market_num}
 	</select>
 	
-	<!-- 페이징 처리 후 게시글 조회 -->
+	<!-- 페이징 처리 후 게시글 조회 최신순 평점순 조회순-->
+	
 	<select id="getMarketList" resultMap="resultMarket" parameterType="hashmap">
-		<![CDATA[
-			select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-			(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
-			right outer join
-			(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
-			on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
-			where rnum>#{start} and rnum<=#{end}
-		]]>
+		<if test="selectedKey==1">
+			<![CDATA[
+				select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+				(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+				right outer join
+				(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
+				on A.MARKET_NUM=B.마켓넘 
+				ORDER BY A.MARKET_NUM desc ) aa)
+				where rnum>#{start} and rnum<=#{end}
+			]]>
+		</if>	
+		<if test="selectedKey==2">
+			<![CDATA[
+				select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+				(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+				right outer join
+				(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
+				on A.MARKET_NUM=B.마켓넘 
+				ORDER BY B.marketRev_star desc nulls last) aa)
+				where rnum>#{start} and rnum<=#{end}
+			]]>
+		</if>		
+		<if test="selectedKey==3">
+			<![CDATA[
+				select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+				(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+				right outer join
+				(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
+				on A.MARKET_NUM=B.마켓넘 
+				ORDER BY A.MARKET_VCNT desc) aa)
+				where rnum>#{start} and rnum<=#{end}
+			]]>
+		</if>						
 	</select>
 	
 <!-- 마켓상세보기 -->
@@ -263,7 +289,10 @@
 	<update id="updateMarketRev" parameterType="hashmap">
 		update MARKET_REVIEW set marketRev_cont=#{marketRev_cont}, marketRev_star=#{marketRev_star} where market_num=#{market_num} and MARKETREV_NUM=#{marketRev_num}
 	</update>
-
+	<!-- 리뷰글쓰기조건주기 -->
+	<select id="writeReview" parameterType="hashmap" resultType="MarketBuysellList">
+		select * from market_buyselllist where mem_email=#{mem_email} and market_num=#{market_num}
+	</select>
 <!-- 마켓 프리랜서 정보뽑기 -->
 	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">
 		select f.MEM_EMAIL,f.FREE_NAME, fp.PRO_CV, f.FREE_RDATE rdate, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME
@@ -302,7 +331,7 @@
 		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name},SYSDATE)
 	</insert>
 	<insert id="insertPaymentMarket2" parameterType="java.util.Map">
-		insert into MARKET_PAYMENT(marketPaym_num,mem_email,market_num,marketPaym_feeRate,marketPaym_price,marketPaym_pdName,marketPaym_rdate) values(MARKETPAYM_NUM_SEQ.NEXTVAL, #{mem_email}, #{market_num}, #{marketPaym_feeRate}, #{map.paid_amount}, #{map.name}, SYSDATE)
+		insert into MARKET_PAYMENT(marketPaym_num,mem_email,mem_emailBuy,market_num,marketPaym_feeRate,marketPaym_price,marketPaym_pdName,marketPaym_rdate) values(MARKETPAYM_NUM_SEQ.NEXTVAL, #{mem_email},#{mem_emailBuy}, #{market_num}, #{marketPaym_feeRate}, #{map.paid_amount}, #{map.name}, SYSDATE)
 	</insert>
 <!-- 구매한마켓 세션이메일로 -->	
 	<insert id="insertMarketBuy" parameterType="hashmap">

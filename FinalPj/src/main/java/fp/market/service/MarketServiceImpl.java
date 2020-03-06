@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
@@ -172,7 +173,9 @@ public class MarketServiceImpl implements MarketService {
 		mapper.insertMarketBuy(map);
 		
 	}
-	
+	public List<MarketBuysellList> writeReview(HashMap<String,Object> map){
+		return mapper.writeReview(map);	
+	}
 
 }
 

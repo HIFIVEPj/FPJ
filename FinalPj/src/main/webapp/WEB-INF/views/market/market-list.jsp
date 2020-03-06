@@ -152,6 +152,7 @@
 						
 					</div>
 					<!--/Left Side Content-->
+					
 
 					<!--Add Lists-->
 					<div class="col-xl-9 col-lg-8 col-md-12">
@@ -164,11 +165,25 @@
 										<!-- <li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li> 
 											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>-->	
 										</ul>
-										<div class="d-flex">
-											<select name="item" class="form-control select-sm w-100">
-												<option value="1">최신순</option>
-												<option value="2">평점순</option>
-												<option value="3">조회높은순</option>
+										<div class="d-flex"id="marketOrderDiv">
+											<select name="item" class="form-control select-sm w-100" id="marketOrder">
+											<c:choose>
+												<c:when test="${selectedKey==1}">
+													<option value="1" id="select1" selected="selected">최신순</option>
+													<option value="2" id="select2">평점순</option>
+													<option value="3" id="select3">조회높은순</option>
+												</c:when>
+												<c:when test="${selectedKey==2}">
+													<option value="1" id="select1">최신순</option>
+													<option value="2" id="select2" selected="selected">평점순</option>
+													<option value="3" id="select3">조회높은순</option>
+												</c:when>
+												<c:when test="${selectedKey==3}">
+													<option value="1" id="select1">최신순</option>
+													<option value="2" id="select2">평점순</option>
+													<option value="3" id="select3" selected="selected">조회높은순</option>
+												</c:when>	
+											</c:choose>
 											</select>
 										</div>
 									</div>
@@ -309,10 +324,10 @@
 								<!--이전 페이지 이동 -->
 									<c:if test="${paging.nowPage != 1}">
 										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
+											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-left"></i></a>
 										</li>
 										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
+											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-left"></i></a>
 										</li>
 									</c:if>
 								 <!--페이지번호 -->
@@ -325,7 +340,7 @@
 										</c:when>
 										 <c:when test = "${p != paging.nowPage }">
 											<li class="page-item">
-												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}">${p}</a>
 											</li>
 										</c:when>
 									</c:choose>
@@ -333,11 +348,11 @@
 	 								<!--다음페이지이동 --> 
 	 								   <c:if test ="${paging.nowPage != paging.lastPage}">
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+												<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-right"></i></a>
 											</li>
 										
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
+												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -389,7 +404,38 @@
 		});
 	}
 </script>
-
+<script>
+	/*
+	 $(document).ready(function(){
+		$("#marketOrder").click(function(){						        
+	         var orderKeyword = $("#marketOrder option:selected").val();
+	          alert("order::"+orderKeyword);
+	          window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
+	      })
+	})
+	*/
+	$('#marketOrder').change( function(){
+	    alert($(this).val());
+	    var selectedKey= $(this).val();
+	    alert("selectedKeyword"+selectedKey);
+	    window.location.href="market-list?selectedKey="+selectedKey;	
+	});
+	/*
+	$("#select1").click(function (){ 
+		  var orderKeyword = $("#marketOrder option:selected").val();
+		alert('orderKeyword');
+	});
+	*/
+	
+	/* 
+	 <select class="form-control page-select" name="class_num" id="class_num" >
+		<option value="" selected="selected">선택해주세요.</option>							
+		<option value="1">전체</option>
+		<option value="4">기업</option>
+		<option value="2">개인</option>
+	</select>		
+	 */
+</script>
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

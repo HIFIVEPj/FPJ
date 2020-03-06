@@ -8,6 +8,7 @@ import java.util.Map;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
@@ -61,6 +62,8 @@ public interface MarketService {
 	 void deleteMarketPick(HashMap<String,Object> map);
 	 
 	 void insertMarketBuy(HashMap<String,Object> map);
+	 
+	 List<MarketBuysellList> writeReview(HashMap<String,Object> map);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 

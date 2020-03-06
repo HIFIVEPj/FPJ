@@ -372,17 +372,30 @@
 										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
 									</div>
 									  -->
-									 <c:if test="${sessionScope.email !=null}" >
-										<div class="form-group">
-											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="Comment">${marketRev_cont}</textarea>
-										</div>	
-										<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
-									</c:if>		
-									<c:if test="${sessionScope.email ==null}" >
+									 <c:if test="${sessionScope.email ==null}" >
 										<div class="form-group">
 											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
 										</div>	
 									</c:if>		
+									<c:if test="${fn:length(mbs)>0}" >
+										<c:if test="${sessionScope.email!=null||market.market_num ==mbs.market_num}" >
+											<div class="form-group">
+												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="이용 후기를 남겨주세요">${marketRev_cont}</textarea>
+											</div>	
+											<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
+										</c:if>		
+									</c:if>		
+									<c:if test="${fn:length(mbs)==0}" >
+										<c:if test="${sessionScope.email!=null}" >
+											<div class="form-group">
+												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="마켓 구매 후 이용하실 수 있습니다"></textarea>
+											</div>	
+										</c:if>		
+									</c:if>		
+									
+									
+									
+									
 									
 								</div>
 							</div>
