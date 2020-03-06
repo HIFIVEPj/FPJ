@@ -163,10 +163,10 @@
 									<a href="#" class="btn btn-primary icons"><i class="si si-heart  mr-1"></i> 678</a>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<!-- 세션일치시에만보이는거 --> 
-									<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
-									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
-								<!--// 세션일치시에만보이는거 -->
+									<c:if test="${sessionScope.email== freeProfile.freelancer.mem_email}">
+										<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
+										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
+									</c:if>
 								</div>
 							</div>
 						</div>
