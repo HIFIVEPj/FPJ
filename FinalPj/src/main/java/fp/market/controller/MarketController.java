@@ -98,6 +98,33 @@ if(nowPage ==null &&cntPerPage ==null) {
 
 		return mv;
 	}
+
+//searchBox 검색 리스팅 
+	@GetMapping("market-searchBoxlist")
+	public ModelAndView market_searchBoxlist(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
+									,HttpSession session
+									,@RequestParam(value="checkedCate[]",required=false)List<String> checkedCate
+									,@RequestParam(value="checkedExp[]",required=false)List<String> checkedExp
+									,@RequestParam(value="marketPrice",required=false)String marketPrice){
+
+		log.info("1111111checkedCate[]"+checkedCate);
+		log.info("22222222checkedExp[]"+checkedExp);
+		log.info("3333333333marketPrice"+marketPrice);
+	
+
+
+		 ModelAndView mv = new ModelAndView("market/market-list");
+
+
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@GetMapping("market-content")

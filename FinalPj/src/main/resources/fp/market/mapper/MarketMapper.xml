@@ -39,7 +39,6 @@
 			<id property="pro_num" column="pro_num" />
 			<id property="free_code" column="free_code" />
 			<id property="Type_num" column="Type_num" />
-			<id property="pro_num" column="pro_num" />
 			<id property="pro_exp" column="pro_exp" />
 			<id property="pro_cv" column="pro_cv" />
 			<id property="pro_addr" column="pro_addr" />
@@ -53,6 +52,26 @@
 		</association> 
 	</resultMap>
 	
+<resultMap id="resultMarketSearchBox" type="Market">
+	<id property="market_num" column="market_num" />
+	<result property="free_code" column="free_code" />
+	<result property="cate_num" column="cate_num" />
+	<result property="market_price" column="market_price" />
+	<result property="market_sub" column="market_sub" />
+	<result property="market_cont" column="market_cont" />
+	<result property="market_vcnt" column="market_vcnt" />
+	<result property="market_fname" column="market_fname" />
+	<result property="market_ofname" column="market_ofname" />
+	<result property="market_state" column="market_state" />
+	<result property="market_pcnt" column="market_pcnt" />
+	<result property="option3" column="option3" />
+   	<association property="freelancerProfile" javaType="mFreelancerProfile" column ="pro_num" ><!--프리랜서정보를뽑는데 따로 원하는정보들만!있는 클래스를 모아서 맵으로써야하는지 몰라서 일단 적어놓음, 일단 resultMarket에 같이 프리프로필을 넣어버림-->	
+		<id property="pro_num" column="pro_num" />
+		<id property="free_code" column="free_code" />
+		<id property="pro_exp" column="pro_exp" />
+	</association> 
+</resultMap>
+
 	<resultMap id="resultMarketRev" type="MarketRev">
         <id property="marketRev_num" column ="marketRev_num" />
          <result property="marketRev_cont" column ="marketRev_cont" />
@@ -126,43 +145,37 @@
 		SELECT COUNT(*) FROM MARKET_QA where market_num=#{market_num}
 	</select>
 	
-	<!-- 페이징 처리 후 게시글 조회 최신순 평점순 조회순-->
-	
+<!-- 페이징 처리 후 게시글 조회 최신순 평점순 조회순-->
 	<select id="getMarketList" resultMap="resultMarket" parameterType="hashmap">
+		select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+			(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+			right outer join
+			(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
+			on A.MARKET_NUM=B.마켓넘 
 		<if test="selectedKey==1">
-			<![CDATA[
-				select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-				(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
-				right outer join
-				(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
-				on A.MARKET_NUM=B.마켓넘 
-				ORDER BY A.MARKET_NUM desc ) aa)
-				where rnum>#{start} and rnum<=#{end}
-			]]>
+			ORDER BY A.MARKET_NUM desc ) aa)
 		</if>	
 		<if test="selectedKey==2">
-			<![CDATA[
-				select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-				(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
-				right outer join
-				(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
-				on A.MARKET_NUM=B.마켓넘 
-				ORDER BY B.marketRev_star desc nulls last) aa)
-				where rnum>#{start} and rnum<=#{end}
-			]]>
+			ORDER BY B.marketRev_star desc nulls last) aa)
 		</if>		
 		<if test="selectedKey==3">
-			<![CDATA[
-				select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-				(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
-				right outer join
-				(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
-				on A.MARKET_NUM=B.마켓넘 
-				ORDER BY A.MARKET_VCNT desc) aa)
-				where rnum>#{start} and rnum<=#{end}
-			]]>
-		</if>						
+			ORDER BY A.MARKET_VCNT desc) aa)
+		</if>		
+		<![CDATA[where rnum>#{start} and rnum<=#{end}]]>				
 	</select>
+<!-- 페이징 처리 후 마켓 searchBox orderLists
+<select id="searchBoxMarketList" resultMap="resultMarketSearchBox">
+	<![CDATA[
+		select * from (select ROWNUM rnum , aa.* from 
+	    (select * from market m left outer join FREELANCER_PROFILE fp on fp.free_code=m.free_code 
+	    where cate_num=1 
+	    and market_price between 1000 and 80000
+	    and fp.pro_exp between 1 and 4 
+	    order by market_num desc)aa) 
+	    where rnum>#{start} and rnum<=#{end}
+	    ]]>
+</select>	
+-->		
 	
 <!-- 마켓상세보기 -->
 	<select id="getMarket" resultType="Market" parameterType="long">
