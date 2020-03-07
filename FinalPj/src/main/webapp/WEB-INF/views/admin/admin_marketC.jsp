@@ -559,17 +559,6 @@
 	</body>
 	
 <script type="text/javascript">
-/*var searchForm =$("#searchForm");
-var type = $("#type option:selected").val();
-var keyword = $("#keyword").val();
-var startDate=  $("#startDate").val();
-var endDate = $("#endDate").val();
-$("#searchForm button").on("click", function(e){
-	
-    alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate.length+",종료일 :"+endDate);         
-   
-})*/
-
 $(document).ready(function(){
 	$("#searchBtn").click(function(){						        
           var type = $("#type option:selected").val();

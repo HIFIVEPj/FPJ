@@ -350,7 +350,7 @@
 										<label class="form-label"><b>조건선택</b></label>
 									</div>
 									<div class="col-md-3">
-										<select class="form-control" name="type">
+										<select class="form-control" name="type" id="type">
 											<option value="" <c:out value="${paf.type == null?'selected':'' }" />>선택</option>
 											<option value="PI" <c:out value="${paf.type eq 'PI'?'selected':'' }" />>payid</option>
 											<option value="P" <c:out value="${paf.type eq 'P'?'selected':'' }" />>가격</option>
@@ -360,7 +360,7 @@
 										</select>
 									</div>
 									<div class="col-md-7 input-group">
-										<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색해주세요." name="keyword" value="${paf.keyword}">
+										<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색해주세요." id="keyword" name="keyword" value="${paf.keyword}">
 									</div>
 								</div>
 							</div>						
@@ -554,22 +554,21 @@
 		<script src="../js/custom.js"></script> 
 				
 	</body>
-<script>
-	$(document).ready(function(){
-	$("#searchBtn").click(function(){						        
-          var type = $("#type option:selected").val();
-          var keyword = $("#keyword").val();
-          var startDate=  $("#startDate").val();
-          var endDate = $("#endDate").val();
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#searchBtn").click(function(){
+	    var type = $("#type option:selected").val();
+	    var keyword = $("#keyword").val();
+	    var startDate=  $("#startDate").val();
+	    var endDate = $("#endDate").val();
           if(startDate.length ==0 ||endDate .length == 0 ){
         	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
         	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword;
           }else{
         	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
         	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword+"&startDate="+startDate+"&endDate="+endDate;
-          }
-         
-     })
+          }            
+     })  
 })
 </script>
 
