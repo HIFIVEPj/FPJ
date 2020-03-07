@@ -333,54 +333,114 @@
 								</div>
 							</div>
 						</div>
+<!--  -->				
+			<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-default active">
+					<div class="panel-heading " role="tab" id="headingOne">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#SearchC" aria-expanded="true" aria-controls="collapseOne">
+								<b>검색하기</b><i class="fa fa-search"></i>
+							</a>
+						</h4>
+					</div>				
+							
+				<div id="SearchC" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			<!--  <form id="searchForm" action="searchCor.do" method="get"> -->
+	<!-- 원래있던거 --> <div class=" col-lg-12 bg-white mb-4 p-4 border" >
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-md-2">
+										<label class="form-label"><b>조건선택</b></label>
+									</div>
+									<div class="col-md-3">
+										<select class="form-control" name="type" id="type">
+											<option value="" <c:out value="${pac.type == null?'selected':'' }" />>선택</option>
+											<option value="PI" <c:out value="${pac.type eq 'PI'?'selected':'' }" />>payid</option>
+											<option value="P" <c:out value="${pac.type eq 'P'?'selected':'' }" />>가격</option>
+											<option value="S" <c:out value="${pac.type eq 'S'?'selected':'' }" />>결제상태</option>
+											<option value="PGI" <c:out value="${pac.type eq 'PGI'?'selected':'' }" />>pgtid</option>
+											<option value="N" <c:out value="${pac.type eq 'N'?'selected':'' }" />>구매자</option>
+										</select>
+									</div>
+									<div class="col-md-7 input-group">
+										<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색해주세요." id="keyword" name="keyword" value="${pac.keyword}">
+									</div>
+								</div>
+							</div>						
+			 				<div class="form-group ">
+								<div class="row">
+									<label class="form-label col-md-2"><b>기간선택</b></label>
+									<div class="col-md-10 form-group">							
+										<div class="input-group-prepend">									
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="startDate" name="startDate">
+											<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="endDate" name="endDate">
+										</div>
+					
+									</div>									
+								</div>
+							</div> 
+							<div class="row" style="margin-left:250px">
+								<div class="col-md-4 mb-0">
+									<!--<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</a>-->
+									<button id="searchBtn" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</button>
+								</div>
+								<div class="col-md-4 mb-0">
+									<input type="reset" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i>
+									<!--<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a> -->
+								</div>
+							</div>				
+	<!-- 원래있던거 -->		</div> 
+				<!--  </form> -->					
+					</div>
+				</div>
+<!-- 검색창 끝-->	</div>
 
-<!--  -->				<div class="input-group">
-							<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="">
-							<div class="input-group-append ">
-								<button type="button" class="btn btn-white br-tr-7 br-br-7">
-									<i class="fa fa-search" aria-hidden="true"></i>
-								</button>
-							</div>
-						</div>
-						<div class="card mt-5  ">
-							<div class="table-responsive">
-								<table class="table card-table ">
-									<thead class="bg-primary text-white">
-										<tr class="border-bottom text-white">											
-											<th class="text-white font-weight-normal">payid</th>
-											<th class="text-white font-weight-normal">가격</th>
-											<th class="text-white font-weight-normal">uid</th>
-											<th class="text-white font-weight-normal">카드번호</th>
-											<th class="text-white font-weight-normal">status</th>
-											<th class="text-white font-weight-normal">카드이름</th>
-											<th class="text-white font-weight-normal">pgtid</th>
-											<th class="text-white font-weight-normal">결제자</th>
-											<th class="text-white font-weight-normal">결제일</th>
-										</tr>
-									</thead>
-									<tbody>
-									<c:if test="${empty list}">
-										<tr align="center" noshade>
-										   <td colspan="9">정보가 없습니다.</td>
-										</tr>
-									</c:if>
-									<c:forEach var="dto" items="${list}">
-											<tr class="border-bottom">											
-											<td>${dto.payinfo_payid}</td>
-											<td>${dto.payinfo_price}</td>
-											<td class="text-red">${dto.payinfo_uid}</td>
-											<td class="">${dto.payinfo_cardnum}</td>
-											<td>${dto.payinfo_status}</td>
-											<td class="">${dto.payinfo_cardname}</td>
-											<td>${dto.payinfo_pgtid}</td>
-											<td class="text-right">${dto.payinfo_buyername}</td>
-											<td>${dto.payinfo_rdate}</td>
-										</tr>	
-										</c:forEach>											
-									</tbody>
-								</table>
-							</div>
-<!--  -->				</div>
+			<div class="card mt-5  ">
+				<div class="table-responsive">
+					<table class="table card-table ">
+						<thead class="bg-primary text-white">
+							<tr class="border-bottom text-white">											
+								<th class="text-white font-weight-normal">payid</th>
+								<th class="text-white font-weight-normal">가격</th>
+								<th class="text-white font-weight-normal">uid</th>
+								<th class="text-white font-weight-normal">카드번호</th>
+								<th class="text-white font-weight-normal">status</th>
+								<th class="text-white font-weight-normal">카드이름</th>
+								<th class="text-white font-weight-normal">pgtid</th>
+								<th class="text-white font-weight-normal">결제자</th>
+								<th class="text-white font-weight-normal">결제일</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:if test="${empty list}">
+							<tr align="center" noshade>
+							   <td colspan="9">정보가 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach var="dto" items="${list}">
+								<tr class="border-bottom">											
+								<td>${dto.payinfo_payid}</td>
+								<td>${dto.payinfo_price}</td>
+								<td class="text-red">${dto.payinfo_uid}</td>
+								<td class="">${dto.payinfo_cardnum}</td>
+								<td>${dto.payinfo_status}</td>
+								<td class="">${dto.payinfo_cardname}</td>
+								<td>${dto.payinfo_pgtid}</td>
+								<td class="text-right">${dto.payinfo_buyername}</td>
+								<td>${dto.payinfo_rdate}</td>
+							</tr>	
+							</c:forEach>											
+						</tbody>
+					</table>
+				</div>
+<!--  -->	</div>
 					<ul class="pagination mb-5">
 							<!--  이전페이지 -->
 						<c:if test="${pac.nowPage != 1}">
@@ -448,7 +508,8 @@
 		<!-- Fullside-menu Js-->
 		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
 	
-
+		<!--Select2 js -->
+		<script src="../plugins/select2/select2.full.min.js"></script>
 		
 		<!-- Charts Plugin -->
 		<script src="../plugins/chart/Chart.bundle.js"></script>
@@ -458,8 +519,7 @@
 		<script src="../plugins/morris/raphael-min.js"></script>  
 		<script src="../plugins/morris/morris.js"></script>		
 		 
-		
-		<!-- Input Mask Plugin
+		<!-- Input Mask Plugin 원래여기
 		<script src="../plugins/input-mask/jquery.mask.min.js"></script>
 		<script src="../js/index5.js"></script>  -->
 		
@@ -486,17 +546,46 @@
 		<script src="../plugins/accordion/accordion.min.js"></script>
 		<script src="../js/accor.js"></script>
 		
+		<!-- Custom scroll bar Js-->
+		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
 		
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
 		<script src="../plugins/counters/waypoints.min.js"></script>
 
-		<!-- Custom scroll bar Js-->
-		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
 		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
-
 	</body>
+	
+<script type="text/javascript">
+/*var searchForm =$("#searchForm");
+var type = $("#type option:selected").val();
+var keyword = $("#keyword").val();
+var startDate=  $("#startDate").val();
+var endDate = $("#endDate").val();
+$("#searchForm button").on("click", function(e){
+	
+    alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate.length+",종료일 :"+endDate);         
+   
+})*/
+
+$(document).ready(function(){
+	$("#searchBtn").click(function(){						        
+          var type = $("#type option:selected").val();
+          var keyword = $("#keyword").val();
+          var startDate=  $("#startDate").val();
+          var endDate = $("#endDate").val();
+          if(startDate.length ==0 ||endDate .length == 0 ){
+        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  window.location.href="searchCor.do?type="+type+"&keyword="+keyword;
+          }else{
+        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  window.location.href="searchCor.do?type="+type+"&keyword="+keyword+"&startDate="+startDate+"&endDate="+endDate;
+          }
+         
+     })
+})
+</script>
+
 </html>
