@@ -243,7 +243,7 @@ https://docs.iamport.kr/implementation/payment
 */
 name: '프로젝트 등록 결제',
 //결제창에서 보여질 이름
-amount:'100',
+amount: '100', 
 	//${pjpaym.pjpaym_fprice},
 //가격
 buyer_email: '${corInfo.mem_email}',
