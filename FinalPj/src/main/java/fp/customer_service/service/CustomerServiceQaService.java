@@ -45,6 +45,6 @@ public interface CustomerServiceQaService {
 	List<Qa_recommend>qa_recommend_listS(String mem_email);
 	void qa_recommend_insertS(Map<String, Object>map);
 	void qa_recommend_delS(Map<String, Object>map);
-	Map<String, Object> qa_recommend_update_inS(Map<String, Object>map);
-	Map<String, Object> qa_recommend_update_delS(Map<String, Object>map);
+	//void qa_recommend_update_inS(Map<String, Object>map);
+	//void qa_recommend_update_delS(Map<String, Object>map);
 }

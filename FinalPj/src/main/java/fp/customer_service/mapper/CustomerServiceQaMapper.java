@@ -46,9 +46,9 @@ public interface CustomerServiceQaMapper {
 	List<Qa_recommend>qa_recommend_list(String mem_email);
 	void qa_recommend_insert(Map<String, Object>map);
 	void qa_recommend_del(Map<String, Object>map);
-	Map<String, Object> qa_recommend_update_in(Map<String, Object>map);
+	void qa_recommend_update_in(Map<String, Object>map);
 	//boolean qa_recommend_update_in(long qa_num);
-	Map<String, Object> qa_recommend_update_del(Map<String, Object>map);
+	void qa_recommend_update_del(Map<String, Object>map);
 	//boolean qa_recommend_update_del(long qa_num);
 
 }

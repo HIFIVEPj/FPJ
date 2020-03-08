@@ -154,18 +154,18 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 		return customerServiceQaMapper.qa_recommend_list(mem_email);
 	}
 	@Override
-	//@Transactional
+	@Transactional
 	public void qa_recommend_insertS(Map<String, Object>map) {
 		customerServiceQaMapper.qa_recommend_insert(map);
-		//return customerServiceQaMapper.qa_recommend_update_in(map);	
+		customerServiceQaMapper.qa_recommend_update_in(map);	
 	}
 	@Override
-	//@Transactional
+	@Transactional
 	public void qa_recommend_delS(Map<String, Object>map) {
 		customerServiceQaMapper.qa_recommend_del(map);
-		//return customerServiceQaMapper.qa_recommend_update_del(map);
+		customerServiceQaMapper.qa_recommend_update_del(map);
 	}
-
+	/*
 	@Override
 	public Map<String, Object> qa_recommend_update_inS(Map<String, Object>map) {
 		return customerServiceQaMapper.qa_recommend_update_in(map);		
@@ -175,5 +175,5 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 	public Map<String, Object> qa_recommend_update_delS(Map<String, Object>map) {
 		return customerServiceQaMapper.qa_recommend_update_del(map);	
 	}
-
+	*/
 }

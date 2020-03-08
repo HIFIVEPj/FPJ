@@ -105,32 +105,41 @@ public class CustomerServiceQaController {
 	
 	@RequestMapping(value="qa_recommend_insert", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> qa_recommend_insert(@RequestParam long qa_num, @RequestParam long qa_recommnum, @RequestParam String mem_email) {
-		log.info("!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+	public CustomerServiceQa qa_recommend_insert(@RequestParam long qa_num, @RequestParam String mem_email) {
+		//log.info("!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
 		Map<String, Object>map = new HashMap<String, Object>();
 		map.put("qa_num", qa_num);
-		map.put("qa_recommnum", qa_recommnum);
+		//map.put("qa_recommnum", qa_recommnum);
 		map.put("mem_email", mem_email);
 		customerServiceQaService.qa_recommend_insertS(map);
-		
+		//customerServiceQaService.qa_contentS(qa_num);
 		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
-		log.info("!!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
-		return customerServiceQaService.qa_recommend_update_inS(map);
+		//log.info("!!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
+		return customerServiceQaService.qa_contentS(qa_num);
+		//long qa_recommnum = customerServiceQa.getQa_recommnum();
+		//log.info("!!!!!qa_recommnum : " + qa_recommnum);
+		//return qa_recommnum;
 	}
 		
 	@RequestMapping(value="qa_recommend_del", method=RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> qa_recommend_del(@RequestParam long qa_num, @RequestParam long qa_recommnum, @RequestParam String mem_email) {
-		log.info("$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+	public CustomerServiceQa qa_recommend_del(@RequestParam long qa_num, @RequestParam String mem_email) {
+		//log.info("$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
 		Map<String, Object>map = new HashMap<String, Object>();
 		map.put("qa_num", qa_num);
-		map.put("qa_recommnum", qa_recommnum);
+		//map.put("qa_recommnum", qa_recommnum);
 		map.put("mem_email", mem_email);
 		customerServiceQaService.qa_recommend_delS(map);
-		
+		//customerServiceQaService.qa_contentS(qa_num);
+		//customerServiceQaService.qa_recommend_update_delS(map);
 		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
-		log.info("$$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
-		return customerServiceQaService.qa_recommend_update_delS(map);
+		//log.info("$$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
+		return customerServiceQaService.qa_contentS(qa_num);
+		//long qa_recommnum = customerServiceQa.getQa_recommnum();
+		//log.info("@@@@@qa_recommnum : " + qa_recommnum);
+		//return qa_recommnum;
 		
 	}
 	
@@ -245,7 +254,7 @@ public class CustomerServiceQaController {
 	
 	
 	@GetMapping("customer_service_qa_modify")
-	public String customer_service_qa_modify(Model model, @RequestParam("qa_num") long qa_num) {
+	public String customer_service_qa_modify(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false)String mem_email) {
 		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
 		return "customer_service/customer_service_qa_modify";
 	}
@@ -253,6 +262,6 @@ public class CustomerServiceQaController {
 	@PostMapping("customer_service_qa_modify")
 	public String customer_service_qa_modify(CustomerServiceQa customerServiceQa) {
 		customerServiceQaService.qa_modifyS(customerServiceQa);
-		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num();
+		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num() + "&mem_email=" + customerServiceQa.getMem_email();
 	}
 }
