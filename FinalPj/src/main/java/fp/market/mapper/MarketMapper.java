@@ -72,6 +72,8 @@ public interface MarketMapper {
 	
 	public List<MarketBuysellList> writeReview(HashMap<String,Object> map);
 
+	public List<Market> searchBoxMarketList(Map<String,Object> map);
+	public int getsearchBoxMarketCount(Map<String,Map<String,Object>> map);
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);
 //	public List<Corporation> getMarketRevCor(long market_num);

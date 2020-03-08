@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.Map;
 import java.util.Vector;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,15 +104,66 @@ if(nowPage ==null &&cntPerPage ==null) {
 	public ModelAndView market_searchBoxlist(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
 									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
 									,HttpSession session
-									,@RequestParam(value="checkedCate[]",required=false)List<String> checkedCate
+									,@RequestParam(value="checkedCate[]",required=false)List<Integer> checkedCate
 									,@RequestParam(value="checkedExp[]",required=false)List<String> checkedExp
 									,@RequestParam(value="marketPrice",required=false)String marketPrice){
 
 		log.info("1111111checkedCate[]"+checkedCate);
 		log.info("22222222checkedExp[]"+checkedExp);
 		log.info("3333333333marketPrice"+marketPrice);
-	
+		
+		
+		//오류range String result1 = marketPrice.substring(marketPrice.indexOf('￦')+1,marketPrice.indexOf(' ')+1);
+		String result1 = marketPrice.substring(marketPrice.indexOf('￦')+1,marketPrice.indexOf('-')-1);
+		result1 = result1.trim();
+		String result2 = marketPrice.substring(marketPrice.lastIndexOf('￦')+1);
+		result2 = result2.trim();
+		int price1=Integer.parseInt(result1);
+		int price2=Integer.parseInt(result2);
 
+		log.info("#####price1:"+price1);
+		log.info("#####price2"+price2);
+		Map<String,Object> mapCate = new HashMap<String,Object>();
+		Map<String,Object> mapExp = new HashMap<String,Object>();
+		Map<String,Object> mapPrice = new HashMap<String,Object>();
+		Map<String,Map<String,Object>> total= new HashMap<String,Map<String,Object>>();
+		mapPrice.put("price1", price1);
+		mapPrice.put("price2", price2);
+		
+		if(checkedCate.size()!=0) {
+			for(int i=0; i<checkedCate.size();i++) {
+				int cate=checkedCate.get(i);
+				mapCate.put("cate"+i,cate);
+			}
+		}
+		
+		if(checkedExp.size()!=0) {
+			for(int i=0; i<checkedExp.size();i++) {
+				String exp=checkedExp.get(i);
+				if(exp=="exp1") {
+					mapExp.put("cate1",1);
+					mapExp.put("cate3",3);
+				}else if(exp=="exp2") {
+					mapExp.put("cate4",4);
+					mapExp.put("cate6",6);
+				}else {//exp=="exp3"
+					mapExp.put("cate7",7);
+					
+				}
+			}
+		}
+		total.put("mapPrice", mapPrice);
+		total.put("mapCate", mapCate);
+		total.put("mapExp", mapExp);
+		log.info("#####price1:"+total.get("mapPrice").get("price1"));
+		log.info("#####price1:"+mapPrice.get("price1"));
+		log.info("#####price2:"+mapPrice.get("price2"));
+		int i =marketService.getsearchBoxMarketCount(total);
+	//	List<Market> mp= marketService.searchBoxMarketList(mapPrice);
+	//	List<Market> mc= marketService.searchBoxMarketList(mapCate);
+	//	List<Market> me= marketService.searchBoxMarketList(mapExp);
+		
+		log.info("!!!!!!!!mapCate"+mapCate);
 
 		 ModelAndView mv = new ModelAndView("market/market-list");
 

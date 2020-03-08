@@ -176,6 +176,13 @@ public class MarketServiceImpl implements MarketService {
 	public List<MarketBuysellList> writeReview(HashMap<String,Object> map){
 		return mapper.writeReview(map);	
 	}
+	
+	public List<Market> searchBoxMarketList(Map<String,Object> map){
+		return mapper.searchBoxMarketList(map);
+	}
+	public int getsearchBoxMarketCount(Map<String,Map<String,Object>> map) {
+		return mapper.getsearchBoxMarketCount(map);
+	}
 
 }
 

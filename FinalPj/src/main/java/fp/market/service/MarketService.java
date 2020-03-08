@@ -64,7 +64,11 @@ public interface MarketService {
 	 void insertMarketBuy(HashMap<String,Object> map);
 	 
 	 List<MarketBuysellList> writeReview(HashMap<String,Object> map);
+	 
+	 List<Market> searchBoxMarketList(Map<String,Object> map);
+	 int getsearchBoxMarketCount(Map<String,Map<String,Object>> map);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
+	
 
 }

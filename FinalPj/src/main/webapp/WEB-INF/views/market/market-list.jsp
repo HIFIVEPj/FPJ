@@ -96,12 +96,12 @@
 								<div class="" id="">
 									<div class="filter-product-checkboxs" id="cateCheckbox">
 										<label for="개발" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="cate_num" value="cate1"  id="개발">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="1"  id="개발">
 											<span class="custom-control-label" class="text-dark">개발자<span class="label label-secondary float-right">14</span>
 											</span>
 										</label>
 										<label for="퍼블리싱" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="cate_num" value="cate2" id="퍼블리싱">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="2" id="퍼블리싱">
 											<span class="custom-control-label" class="text-dark">디자이너<span class="label label-secondary float-right">22</span>
 											</span>
 										</label>

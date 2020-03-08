@@ -163,19 +163,36 @@
 		</if>		
 		<![CDATA[where rnum>#{start} and rnum<=#{end}]]>				
 	</select>
-<!-- 페이징 처리 후 마켓 searchBox orderLists
-<select id="searchBoxMarketList" resultMap="resultMarketSearchBox">
-	<![CDATA[
-		select * from (select ROWNUM rnum , aa.* from 
-	    (select * from market m left outer join FREELANCER_PROFILE fp on fp.free_code=m.free_code 
-	    where cate_num=1 
-	    and market_price between 1000 and 80000
-	    and fp.pro_exp between 1 and 4 
-	    order by market_num desc)aa) 
-	    where rnum>#{start} and rnum<=#{end}
-	    ]]>
-</select>	
--->		
+<!-- 페이징 처리 후 마켓 searchBox orderLists-->	
+	<select id="getsearchBoxMarketCount" resultType="Integer" parameterType="Map">
+		SELECT COUNT(*) FROM MARKET m left outer join FREELANCER_PROFILE fp on fp.free_code=m.free_code 
+		where market_state=1 
+		and market_price between #{total.mapPrice.price1} and #{total.mapPrice.price2}
+		<if test="total.mapCate != null">	
+			and 
+			<foreach collection="total.mapCate" item="mapCatei" separator="or">
+				cate_num=#{mapCatei} 
+			</foreach>
+		</if>
+		<if test="total.mapExp != null">
+			and
+			<foreach collection="total.mapExp" item="mapExpi" separator="or">
+			 	fp.pro_exp between #{mapExpi} and #{mapExpi}
+			</foreach>
+		</if>
+	</select>
+	<select id="searchBoxMarketList" resultMap="resultMarketSearchBox" parameterType="java.util.Map">
+			select * from (select ROWNUM rnum , aa.* from 
+		    (select * from market m left outer join FREELANCER_PROFILE fp on fp.free_code=m.free_code 
+		    where cate_num=#{cate_num} 
+		    and market_price between #{price1} and #{price2}
+		    and fp.pro_exp between #{exp1} and #{exp2} 
+		    order by market_num desc)aa) 
+		<![CDATA[
+		 	 where rnum>#{start} and rnum<=#{end}
+		    ]]>
+	</select>	
+	
 	
 <!-- 마켓상세보기 -->
 	<select id="getMarket" resultType="Market" parameterType="long">
