@@ -12,6 +12,7 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
@@ -74,8 +75,8 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 
 	//체크박스 삭제//
 	@Override
-	public void checkdelete1(long PRO_NUM) {
-		 mapper.checkdelete1(PRO_NUM);
+	public void checkdelete1(Map<String, Object> map) {
+		 mapper.checkdelete1(map);
 	}
 	
 	//프로필 작성//
@@ -83,11 +84,31 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void listInsert(FreeLancerProfile freelancerprofile){
 		mapper.listInsert(freelancerprofile);
 	}
-	
+
 	@Override
 	public void insertPjpkeyword(Map<String, Object> map){
 		 mapper.insertPjpkeyword(map);
 	}
+	//프로필 작성페이지 수정//
+	@Override
+	@Transactional
+	public void listUpdate(FreeLancerProfile freelancerprofile){
+		mapper.listUpdate(freelancerprofile);
+		mapper.typeUpdate(freelancerprofile.getType_num());
+	  //  mapper.keyUpdate(map);
+	}
+
+	@Override
+	@Transactional
+	public void keyUpdate(Map<String, Object> map) {
+		 mapper.keyDelete(map);
+		 mapper.keyUpdate(map);
+		
+	}
+/*	@Override
+	public void keyDelete(Map<String, Object> map) {
+		 mapper.keyDelete(map);
+	}*/
 
 	@Override
 	public List<FreeLancerProfile> profile_free_select(String mem_email){
@@ -98,10 +119,11 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.getTotalCountFree(free_code);
 	}
 
-	
-	
-	
-	
+	//프로필 수정//
+	@Override
+	public FreeLancerProfile showContent(long pro_num) {
+		return mapper.showContent(pro_num);
+	}
 	
 	
 	//나영추가 + mydash_free
@@ -127,5 +149,5 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<FreeLancer>select_pj_applied_free_paging(long pj_num){
 		return mapper.select_pj_applied_free_paging(pj_num);
 	}
-	
+
 }

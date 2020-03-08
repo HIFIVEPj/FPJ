@@ -415,9 +415,12 @@
 									<a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i></a>
 									
 									<div>
-								
-										<a href="freelancercontent?free_code=${list.free_code}" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;${list.free_name}</a><br>
+						
+										<c:forEach var="num" items="${list.list_review}" varStatus="status">
 									
+									
+										<a href="freelancercontent?free_code=${list.free_code}&pro_num=${num.pro_num}" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;${list.free_name}</a><br>
+									</c:forEach>
 									<c:forEach var="exp" items="${list.list_freelancerprofile}" varStatus="status">
 										<small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small>&nbsp;|	
 									</c:forEach>

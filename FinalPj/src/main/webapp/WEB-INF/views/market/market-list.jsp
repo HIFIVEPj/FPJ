@@ -394,6 +394,7 @@ if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
 										 <c:when test = "${p != paging.nowPage }">
 											<li class="page-item">
 												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}">${p}</a>
+
 											</li>
 										</c:when>
 									</c:choose>

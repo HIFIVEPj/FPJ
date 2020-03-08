@@ -194,7 +194,7 @@
 	 </delete>
 	 <insert id="updateKeyword_In" parameterType="PjPickKeyword">
 		  	<foreach collection ="key_numList" item="key_num" separator=";" open="DECLARE BEGIN " close="; END;">
-			 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num) values(PJP_KEYNUM_SEQ.nextval, #{key_num},  #{pj_num})
+			 	insert into PJ_PICK_KEYWORD(pjp_keynum, key_num, pj_num) values(PJP_KEYNUM_SEQ.nextval, #{key_num}, #{pj_num})
 			 </foreach>
 	 </insert>
 	 
@@ -278,4 +278,5 @@
 	<update id ="pj_status_update" parameterType="long">
 		update project set pj_status=1 where pj_num=#{pj_num}
 	</update>
+
 </mapper>

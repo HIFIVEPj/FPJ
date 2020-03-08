@@ -48,6 +48,7 @@ public class AdminController {
 	session.setAttribute("classN", class_num);
 	session.setAttribute("keyword", keyword);
 	map.put("keyword", keyword);
+
 	
 	long totalCount =service.getTotalCount(map);	
 	if(nowPage == null && cntPerPage == null) {
@@ -91,7 +92,7 @@ public class AdminController {
 			
 			return mv;
 	}
-	
+
 	@RequestMapping("admin_marketF")
 	public ModelAndView admin_marketF(MemberVo memberVo, @RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {

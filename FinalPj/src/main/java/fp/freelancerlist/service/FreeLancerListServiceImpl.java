@@ -5,15 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fp.freelancerlist.domain.FreeLancerListVO;
+
 import fp.freelancerlist.domain.List_FreeLancer;
 import fp.freelancerlist.domain.List_FreeLancerProfile;
+
 import fp.freelancerlist.domain.List_PagingVO;
 import fp.freelancerlist.domain.List_Type;
 import fp.freelancerlist.mapper.FreeLancerlistMapper;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
+import fp.freelancerprofile.domain.List_FreeLancerReview;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 
@@ -28,7 +30,6 @@ import fp.freelancerprofile.domain.Type;
 	public int countFreeLancer(){
 		return mapper.countFreeLancer();
 	}
-
 	@Override
 	public List<List_FreeLancer> SelectList(List_PagingVO vo) {
 		return mapper.SelectList(vo);
@@ -41,6 +42,7 @@ import fp.freelancerprofile.domain.Type;
 	public List<Project> SelectList3(){
 		return mapper.SelectList3();
 	}
+	//컨텐츠//
 	@Override
 	public List<Freelancer_FreeLancerProfile> freelancercontent(long free_code){
 		return mapper.freelancercontent(free_code);
@@ -63,10 +65,18 @@ import fp.freelancerprofile.domain.Type;
 	}
 	@Override
 	public List<FreeLancerProfile> freelancercontent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
+	//리뷰//	
+	@Override
+	public int countReview() {
+		return mapper.countReview();
+	}
+	@Override
+	public List<List_FreeLancerReview> freelancerReview(List_FreeLancerReview freelancerreview) {
+		return mapper.freelancerReview(freelancerreview);
+	}
+	
 	@Override
 	public FreeLancer free_list_select(String mem_email) {
 		// TODO Auto-generated method stub
@@ -76,5 +86,16 @@ import fp.freelancerprofile.domain.Type;
 	@Override
 	public long getTotalCountFree(long free_code) {
 		return getTotalCountFree(free_code);
+	}
+	@Override
+	public void reviewInsert(List_FreeLancerReview freelancerreview) {
+		mapper.reviewInsert(freelancerreview);
+	}
+	public void  reviewUpdate(long freerev_num) {
+		mapper.reviewUpdate(freerev_num);
+	}
+	@Override
+	public void reviewDelete(long freerev_num) {
+		mapper.reviewDelete(freerev_num);
 	}
 }

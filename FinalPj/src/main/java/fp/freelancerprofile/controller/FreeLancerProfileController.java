@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
+import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 import com.sun.mail.iap.Response;
@@ -34,12 +35,13 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
-
+import fp.freelancerprofile.service.FreeLancerProfileServiceImpl;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -50,7 +52,7 @@ public class FreeLancerProfileController {
 	private ProjectService pjservice;
 	@Autowired
 	private FreeLancerProfileService service;
-
+	private FreeLancerProfileServiceImpl serviceimple;
 
 	/*@GetMapping("freelancerMyprofile_write")
 	public String freelancerMyprofile_write() {
@@ -96,6 +98,54 @@ public class FreeLancerProfileController {
 		return "profile/freelancerProfile_content";
 	}
 	
+	//프로필 수정..//
+	
+	@GetMapping("freelancerMyprofile_change")
+	public ModelAndView freelancerMyprofile_change(@RequestParam long pro_num) {
+	
+		FreeLancerProfile freelancerprofile = service.showContent(pro_num);
+	
+		ModelAndView mv = new ModelAndView ("profile/freelancerMyprofile_change");
+		mv.addObject("freelancerprofile", freelancerprofile);
+		log.info("get:" + freelancerprofile.getClass());
+		return mv;
+		
+	}
+	
+	
+	@PostMapping("freelancerMyprofile_change")
+	public String freelancerProfile_update(FreeLancerProfile freelancerprofile, HttpServletRequest request, FreePickKeyWord freepickkeyword) {
+	
+		log.info("@@@@@@@@@@@@@@@@@@@ freelancerprofile: "+freelancerprofile);
+
+		String[] listKeyNum = request.getParameterValues("key_num");
+		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
+		int[] listIntKeyNum = Arrays.stream(listKeyNum).mapToInt(Integer::parseInt).toArray();
+		
+		 Map<String, Object> map = new HashMap<String, Object>();
+		  for(int i = 0; i<listIntKeyNum.length; i++) {
+		      arraykeynum.add(listIntKeyNum[i]);
+		  }
+		   map.put("key_num", arraykeynum);
+		   map.put("free_code", freelancerprofile.getFree_code());
+		   map.put("pro_num", freelancerprofile.getPro_num());
+		log.info("@@@@@@@@@@arraykeynum: "+arraykeynum);
+		
+		String type = request.getParameter("type_name"); //type을 받아옴
+		int type_num = Integer.parseInt(type);
+	//	log.info("###type_num: "+type_num);
+		
+		freepickkeyword.setKey_numList(arraykeynum);
+		freelancerprofile.setType_num(type_num);
+		
+		service.listUpdate(freelancerprofile);
+		service.keyUpdate(map);
+		//service.keyDelete(map);
+		return "redirect:freelancerProfile_list?mem_email="+freelancerprofile.getMem_email(); 
+
+	}
+	
+
 	//프로필 리스트//
 	@RequestMapping("freelancerProfile_list")
 	public ModelAndView ProfileList(String mem_email, PagingVO vo
@@ -154,43 +204,38 @@ public class FreeLancerProfileController {
 	}
 	//삭제//
 	@RequestMapping("freelancerProfile_delete")
-	public String ProfileListDelete(@RequestParam long PRO_NUM) {
+	public String ProfileListDelete(@RequestParam long PRO_NUM, @RequestParam String mem_email) {
 		service.listDelete(PRO_NUM);
 	
-		return  "redirect:freelancerProfile_list?";
-
+		return "redirect:freelancerProfile_list?mem_email="+mem_email;
 	}
 
 	
 	@GetMapping("freelancerProfile_cehck_delete")
-		public String List_checkbox_delete(HttpServletRequest request, long pro_num) {
+		public String List_checkbox_delete(HttpServletRequest request, long pro_num, @RequestParam String mem_email) {
 	      
 			   String[] ListCheckNum = request.getParameterValues("pro_num"); 
 //			   log.info("#ListCheckNum.length: "  + ListCheckNum.length );
 			   
 			   ArrayList<Integer> arrayChecknum = new ArrayList<Integer>();
-			   
-			      
+
 		   int[] ListIntCheckNum = Arrays.stream(ListCheckNum).mapToInt(Integer::parseInt).toArray();
-		   
-			
+
 			   Map<String, Object> map = new HashMap<String, Object>();
 				   for(int i = 0; i<ListIntCheckNum.length; i++) {
 					   arrayChecknum.add(ListIntCheckNum[i]);
 				   }
-				   log.info("@#!#@$  arraykeynum: "+ arrayChecknum);
+			    log.info("@#!#@$  arraykeynum: "+ arrayChecknum);
 				   map.put("pro_num", arrayChecknum);
-			      log.info("@#@@#@#map: "+map);
-			   service.checkdelete1(pro_num);
+				   map.put("mem_email", mem_email);
+			    log.info("@#@@#@#map: "+map);
+			   service.checkdelete1(map);
 			   //service.checkdelete2(PRO_NUM);
 			      
-			   return "redirect:freelancerProfile_list";
+			   return "redirect:freelancerProfile_list?mem_email="+mem_email+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num;
 			 }
 	
-	@RequestMapping("freelancerMyprofile_change")	//프로필수정
-	public String FreelancerMyprofile_change() { 
-		return "profile/freelancerMyprofile_change";
-	}
+
 	@RequestMapping("payments")	//
 	public String payments() { 
 		return "profile/payments";
@@ -340,5 +385,4 @@ public class FreeLancerProfileController {
 		}
 	 //--------------
 
-		
 }

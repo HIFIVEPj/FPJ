@@ -67,7 +67,7 @@ public interface MarketMapper {
 	public void deleteMarketPick(HashMap<String,Object> map);
 	public void updatePlusMarketPick(long market_num);
 	public void updateMinusMarketPick(long market_num);
-	
+
 	public void insertMarketBuy(HashMap<String,Object> map);
 	
 	public List<MarketBuysellList> writeReview(HashMap<String,Object> map);

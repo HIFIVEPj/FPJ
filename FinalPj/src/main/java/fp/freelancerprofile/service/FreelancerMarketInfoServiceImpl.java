@@ -71,7 +71,4 @@ public class FreelancerMarketInfoServiceImpl implements FreelancerMarketInfoServ
 		mapper.deleteMarketPayment(marketPaym_num);
 		
 	}
-
-	
-
 }

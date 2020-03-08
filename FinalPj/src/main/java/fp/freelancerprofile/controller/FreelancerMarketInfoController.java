@@ -29,6 +29,7 @@ public class FreelancerMarketInfoController {
 	@Autowired
 	private FreelancerMarketInfoService service;
 	
+
 	//세영 추가-마켓찜--------myfavoriteMarket,구매마켓
 	@RequestMapping("myfavoriteMarket")
 	public ModelAndView pickedMarket(HttpSession session
@@ -67,7 +68,6 @@ public class FreelancerMarketInfoController {
 		map.put("mem_email",mem_email);
 		map.put("start",start);
 		map.put("end",end);
-		
 		map2.put("mem_email",mem_email);
 		map2.put("start",start2);
 		map2.put("end",end2);

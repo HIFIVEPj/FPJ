@@ -2,24 +2,14 @@
 package fp.freelancerprofile.service;
 
 import java.util.*;
-
-import org.springframework.context.annotation.Profile;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
-import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.KeyWord;
-import fp.freelancerprofile.domain.PagingVO;
-import fp.freelancerprofile.domain.Project;
-import fp.freelancerprofile.domain.Type;
-import fp.market.domain.FreelancerProfile;
-import fp.market.domain.MarketPick;
+
 
 public interface FreeLancerProfileService {
+	
 	
 	List<FreeLancer> selectProfileList();
 	
@@ -43,19 +33,29 @@ public interface FreeLancerProfileService {
 	public void listInsert(FreeLancerProfile freelancerprofile);
 	public void insertPjpkeyword(Map<String, Object> map);
 	
+	//수정//
+	public void listUpdate(FreeLancerProfile freelancerprofile);
+	public void keyUpdate(Map<String, Object> map);
+	//public void keyDelete(Map<String, Object> map);
+
+
 	//체크박스 삭제//
-	void checkdelete1(long PRO_NUM);
-		
+	void checkdelete1(Map<String, Object> map);
+
 	long getTotalCountFree(long free_code);
 
-	List<FreeLancerProfile> profile_free_select(String mem_email);
 
+	//프로필 수정//
+	public FreeLancerProfile showContent(long pro_num);
+	List<FreeLancerProfile> profile_free_select(String mem_email);
+	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
 	public List<FreeLancer>select_pj_applied_free();
 	public List<FreeLancer>select_pj_applied_free_paging(long pj_num);
+
 
 
 

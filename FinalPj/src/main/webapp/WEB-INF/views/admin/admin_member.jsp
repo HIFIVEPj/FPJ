@@ -354,11 +354,11 @@
 							</div>
 						</div>
 <!--  -->
-	
 <!-- User-All-->	
 			<div class="">
 				<div class="row">
 					<div class="col-lg-12 users-list">
+<<<<<<< HEAD
 					<form action="admin_member" method="Get"> 					
 						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
 							<select class="form-control page-select" name="class_num" id="class_num" >
@@ -445,7 +445,6 @@
 					</c:forEach>
 						<c:if test ="${pa.nowPage != pa.lastPage}">
 								<li class="page-item page-next">
-									
 									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">Next</a>
 								</li>
 						</c:if>

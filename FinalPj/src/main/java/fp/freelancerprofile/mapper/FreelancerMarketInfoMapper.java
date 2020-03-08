@@ -32,4 +32,5 @@ public interface FreelancerMarketInfoMapper {
 	public List<MarketBuysellList> myBuyMarket(HashMap<String,Object> map);
 //판매마켓삭제	
 	public void deleteMarketPayment(long marketPaym_num);	
+
 }

@@ -665,7 +665,6 @@
 						<div class="row">
 							<div class="col-sm-6 col-md-6">
 								<div class="form-group">
-									
 									<label class="form-label">지원할 프로필 선택</label>
 									<c:forEach var="profile_dto" items="${profile_select}">
 										<div class="custom-controls-stacked">

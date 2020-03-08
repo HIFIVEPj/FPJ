@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   												
 <mapper namespace="fp.freelancerprofile.mapper.FreelancerMarketInfoMapper">
-
 	<resultMap type="MarketPick" id="resultMarketPick">
 		<id property="marketP_num" column="marketP_num" />
 			<result property="market_num" column="market_nump" />
@@ -120,5 +119,4 @@
 		order by m.market_num desc ) aa )where rnum>#{start} and rnum<=#{end} 
 	]]>
 	</select>	
-	
 </mapper>
