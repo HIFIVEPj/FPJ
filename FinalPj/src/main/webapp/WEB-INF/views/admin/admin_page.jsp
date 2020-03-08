@@ -258,7 +258,7 @@
 					</div> -->
 					<ul class="side-menu">
 						    <li>	
-                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
@@ -270,20 +270,9 @@
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
+                                 <a class="side-menu__item" href="#"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
                             </li>
-                            
-                             <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">2</span></a>
-                            </li>
-                            
-                             <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">3</span></a>
-                            </li>
-                            
-				
-
-					</ul>
+      				</ul>
 					
 
 	

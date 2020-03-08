@@ -17,7 +17,6 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> 
 
-
 		<!-- Title -->
 		<title>Pinlist â Clean & Modern Admin Dashboard Bootstrap 4  HTML Template</title>
 		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
@@ -47,8 +46,6 @@
 		<!---Font icons-->
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet" />
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet" />
-
-
 
 	</head>
 		<body class="app sidebar-mini">
@@ -273,10 +270,7 @@
                             
                              <li>	
                                  <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
-                            </li>                       
-                          
-				
-
+                            </li>    
 					</ul>
 					
 
@@ -337,66 +331,79 @@
 						</div>
 
 <!--  -->				
-					<div class=" col-lg-12 bg-white mb-4 p-4 border" >	
-							<h3 class="card-title">검색</h3>
-						
-						<div class="form-group ">
-							<div class="row">
-					<!--  		<div class="col-md-3">
-									<label class="form-label">검색</label>
-								</div> -->
-								<div class="col-md-2">
-									<select class="form-control">
-										<option selected="">선택해주세요.</option>
-										<option>payid</option>
-										<option>uid</option>
-										<option>가격</option>
-										<option>결제상태</option>
-										<option>pgtid</option>
-										<option>구매자</option>
-									</select>
-								</div>
-								<div class="col-md-10 input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색하기">
-								</div>
-							</div>
-						</div>						
-						<div class="form-group ">
-							<div class="row">
-								<label class="form-label col-md-2"><b>기간선택</b></label>
-								<div class="col-md-10 form-group">							
-									<div class="input-group-prepend">									
-										<div class="input-group-text">
-											<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-										</div>
-										<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
-										<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
-										<div class="input-group-text">
-											<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-										</div>
-										<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
+			<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-default active">
+					<div class="panel-heading " role="tab" id="headingOne">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#SearchF" aria-expanded="true" aria-controls="collapseOne">
+								<b>검색하기</b><i class="fa fa-search"></i>
+							</a>
+						</h4>
+					</div>				
+							
+				<div id="SearchF" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			<!-- <form action="searchFree.do" method="get"> -->
+	<!-- 원래있던거 --> <div class=" col-lg-12 bg-white mb-4 p-4 border" >
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-md-2">
+										<label class="form-label"><b>조건선택</b></label>
 									</div>
-				
-								</div>									
-							</div>
-						</div>
-						<div class="row" style="margin-left:250px">
-							<div class="col-md-4 mb-0">
-								<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</a>
-							</div>
-							<div class="col-md-4 mb-0">
-								<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a>
-							</div>
-						</div>
-						
+									<div class="col-md-3">
+										<select class="form-control" name="type" id="type">
+											<option value="" <c:out value="${paf.type == null?'selected':'' }" />>선택</option>
+											<option value="PI" <c:out value="${paf.type eq 'PI'?'selected':'' }" />>payid</option>
+											<option value="P" <c:out value="${paf.type eq 'P'?'selected':'' }" />>가격</option>
+											<option value="S" <c:out value="${paf.type eq 'S'?'selected':'' }" />>결제상태</option>
+											<option value="PGI" <c:out value="${paf.type eq 'PGI'?'selected':'' }" />>pgtid</option>
+											<option value="N" <c:out value="${paf.type eq 'N'?'selected':'' }" />>구매자</option>
+										</select>
+									</div>
+									<div class="col-md-7 input-group">
+										<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색해주세요." id="keyword" name="keyword" value="${paf.keyword}">
+									</div>
+								</div>
+							</div>						
+			 				<div class="form-group ">
+								<div class="row">
+									<label class="form-label col-md-2"><b>기간선택</b></label>
+									<div class="col-md-10 form-group">							
+										<div class="input-group-prepend">									
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="startDate" name="startDate">
+											<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="endDate" name="endDate">
+										</div>
+					
+									</div>									
+								</div>
+							</div> 
+							<div class="row" style="margin-left:250px">
+								<div class="col-md-4 mb-0">
+									<!--<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</a>-->
+									<button id="searchBtn" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</button>
+								</div>
+								<div class="col-md-4 mb-0">
+									<input type="reset" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i>
+									<!--<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a> -->
+								</div>
+							</div>				
+	<!-- 원래있던거 -->	</div> 
+				<!-- </form>	-->				
 					</div>
-				
+				</div>
+<!--  -->	</div>
+		
 						<div class="card mt-5  ">
 							<div class="table-responsive">
 								<table class="table card-table ">
 									<thead class="bg-primary text-white">
-										<tr class="border-bottom text-white">
-											
+										<tr class="border-bottom text-white">											
 											<th class="text-white font-weight-normal">payid</th>
 											<th class="text-white font-weight-normal">가격</th>
 											<th class="text-white font-weight-normal">uid</th>
@@ -411,7 +418,7 @@
 									<tbody>
 									<c:if test="${empty list}">
 										<tr align="center" noshade>
-										   <td colspan="9">데이터가 하나도 없음</td>
+										   <td colspan="9">정보가 없습니다.</td>
 										</tr>
 									</c:if>
 									<c:forEach var="dto" items="${list}">
@@ -435,7 +442,7 @@
 							<!--  이전페이지 -->
 						<c:if test="${paf.nowPage != 1}">
 							<li class="page-item page-prev">							
-								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage-1}&cntPerPage=${paf.cntPerPage}" tabindex="-1">Prev</a>
+								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage-1}&cntPerPage=${paf.cntPerPage}&type=${paf.type}&keyword=${paf.keyword}" tabindex="-1">Prev</a>
 							</li>
 						</c:if>
 						<c:forEach var='p' begin="${paf.startPage}" end="${paf.endPage}">
@@ -444,14 +451,14 @@
 										<li class='page-item active'><a class="page-link">${p}</a></li>
 									</c:when>
 									<c:when test = "${p != paf.nowPage }">
-										<li class="page-item"><a class="page-link" href="admin_marketF?nowPage=${p}&cntPerPage=${paf.cntPerPage}">${p}</a></li>
+										<li class="page-item"><a class="page-link" href="admin_marketF?nowPage=${p}&cntPerPage=${paf.cntPerPage}&type=${paf.type}&keyword=${paf.keyword}">${p}</a></li>
 									</c:when>
 								</c:choose>
 						</c:forEach>
 						<c:if test ="${paf.nowPage != paf.lastPage}">
 							<li class="page-item page-next">
 								
-								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage+1}&cntPerPage=${paf.cntPerPage}">Next</a>
+								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage+1}&cntPerPage=${paf.cntPerPage}&type=${paf.type}&keyword=${paf.keyword}">Next</a>
 							</li>
 						</c:if>
 					</ul> 
@@ -497,7 +504,8 @@
 		<!-- Fullside-menu Js-->
 		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
 	
-
+		<!--Select2 js -->
+		<script src="../plugins/select2/select2.full.min.js"></script>
 		
 		<!-- Charts Plugin -->
 		<script src="../plugins/chart/Chart.bundle.js"></script>
@@ -507,8 +515,7 @@
 		<script src="../plugins/morris/raphael-min.js"></script>  
 		<script src="../plugins/morris/morris.js"></script>		
 		 
-		
-		<!-- Input Mask Plugin
+		<!-- Input Mask Plugin 원래여기
 		<script src="../plugins/input-mask/jquery.mask.min.js"></script>
 		<script src="../js/index5.js"></script>  -->
 		
@@ -531,16 +538,38 @@
 		<!--InputMask Js-->
 		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
 		
+		<!---Accordion Js-->
+		<script src="../plugins/accordion/accordion.min.js"></script>
+		<script src="../js/accor.js"></script>
+		
+		<!-- Custom scroll bar Js-->
+		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+		
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
 		<script src="../plugins/counters/waypoints.min.js"></script>
 
-		<!-- Custom scroll bar Js-->
-		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
 		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
-
+				
 	</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#searchBtn").click(function(){
+	    var type = $("#type option:selected").val();
+	    var keyword = $("#keyword").val();
+	    var startDate=  $("#startDate").val();
+	    var endDate = $("#endDate").val();
+          if(startDate.length ==0 ||endDate .length == 0 ){
+        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword;
+          }else{
+        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword+"&startDate="+startDate+"&endDate="+endDate;
+          }            
+     })  
+})
+</script>
+
 </html>

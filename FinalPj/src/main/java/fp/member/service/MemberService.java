@@ -18,10 +18,10 @@ public interface MemberService {
 	
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
-	long getTotalCountMC();
+	long getTotalCountMC(MemberVo memberVO);
 	//개인
 	List<PayInformation> marketListFree(MemberVo memberVO);
-	long getTotalCountMF();
+	long getTotalCountMF(MemberVo memberVO);
 	/*
 	public boolean loginCheck(Member member,HttpSession session);
 	public void logout(HttpSession session); */

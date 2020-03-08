@@ -74,7 +74,7 @@
 	<sql id="paging">
 			<choose> 
 			 	<when test="class_num == 4"> WHERE CLASS_NUM =#{class_num}</when>
-			 	<when test="class_num == 2"> WHERE CLASS_NUM=2 OR CLASS_NUM=3 </when>
+			 	<when test="class_num == 2"> WHERE (CLASS_NUM=2 OR CLASS_NUM=3) </when>
 			 	<otherwise> where CLASS_NUM>1 </otherwise>			 
 			 </choose>
 	
@@ -91,8 +91,10 @@
 	
 	<select id="marketListCor" parameterType="MemberVo" resultMap="PayInformationMap" >
 	 	<![CDATA[
-			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'project_%') aa)
-				 where rnum>#{start} and rnum<=#{end} 
+			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'project_%' ]]>
+			 <include refid="searchAll" />
+		<![CDATA[	
+		 ) aa) where rnum>#{start} and rnum<=#{end} 
 	  	]]>
 	</select>
 	
@@ -100,17 +102,51 @@
 	<![CDATA[
 		select count(PAYINFO_NUM) from PAY_INFORMATION where PAYINFO_UID like 'project_%'
 	]]>	
+		<include refid="searchAll" />
 	</select>
+	
+	<!-- 프리랜서 마켓 -->
 	<select id="marketListFree" parameterType="MemberVo" resultMap="PayInformationMap" >
 	 	<![CDATA[
-			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'market_%') aa)
-				 where rnum>#{start} and rnum<=#{end} 
+			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'market_%'  ]]>
+			 <include refid="searchAll" />	
+		<![CDATA[ 
+			) aa) where rnum>#{start} and rnum<=#{end} 
 	  	]]>
 	</select>
 	
-	<select id="getTotalCountMF"  resultType="long" >
+	<select id="getTotalCountMF" resultType="long" >
 	<![CDATA[
 		select count(PAYINFO_PAYID) from PAY_INFORMATION where PAYINFO_UID like 'market_%'
-	]]>	
+	]]>		
+		<include refid="searchAll" />
 	</select>
+
+	<sql id="searchAll">
+		<if test="type != null">
+			<if test="type == 'PI'.toString()"> AND PAYINFO_PAYID like '%'||#{keyword}||'%' </if> 
+			<if test="type == 'P'.toString()"> AND PAYINFO_PRICE like '%'||#{keyword}||'%' </if>
+			<if test="type == 'S'.toString()"> AND PAYINFO_STATUS like '%'||#{keyword}||'%' </if>
+			<if test="type == 'PGI'.toString()"> AND PAYINFO_PGTID like '%'||#{keyword}||'%' </if>
+			<if test="type == 'N'.toString()"> AND PAYINFO_BUYERNAME like '%'||#{keyword}||'%' </if>
+		</if>
+		<if test="startDate != null and endDate != null ">
+			AND PAYINFO_RDATE between #{startDate} and  #{endDate}
+		</if>
+	</sql>
+ 	<!--  
+	<sql id="searchFree">
+		<trim  prefix="(" suffix=") AND " prefixOverrides="OR" >
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'PI'.toString()"> PAYINFO_PAYID like '%'||#{keyword}||'%' </when>
+						
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>  -->
+	
+
 </mapper>
