@@ -97,7 +97,6 @@
 									<div class="tabs-menus">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
-<<<<<<< HEAD
 										<c:choose>
 											<c:when test="${selectTab == 'tab1'}">
 												<li class=""><a href="#tab1" class="active" data-toggle="tab">찜 목록</a></li>

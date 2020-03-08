@@ -358,7 +358,6 @@
 			<div class="">
 				<div class="row">
 					<div class="col-lg-12 users-list">
-<<<<<<< HEAD
 					<form action="admin_member" method="Get"> 					
 						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
 							<select class="form-control page-select" name="class_num" id="class_num" >
