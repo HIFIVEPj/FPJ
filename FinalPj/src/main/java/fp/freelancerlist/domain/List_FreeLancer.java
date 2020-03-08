@@ -3,6 +3,7 @@ package fp.freelancerlist.domain;
 import java.sql.Date;
 import java.util.List;
 
+import fp.freelancerprofile.domain.List_FreeLancerReview;
 import fp.freelancerprofile.domain.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;

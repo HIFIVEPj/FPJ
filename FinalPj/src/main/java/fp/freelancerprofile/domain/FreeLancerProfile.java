@@ -54,12 +54,6 @@ public class FreeLancerProfile {
 	private List<Applied_Project> applied_project;
 
 	private List<FreePickKeyWord> freePickKeyWord;
-/*	public List<Integer> pro_num() {
-		pronum = new ArrayList<Integer>();
-		for(int i = 0; i<pro_nums.size(); i++) {
-			//pronum.add(pronum.get(i).getPro_num());
-		}
-		return pronum;
-	}*/
+
 }
 
