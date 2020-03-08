@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import fp.market.domain.Market;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
@@ -44,18 +45,23 @@ public class MarketController {
 
 
 	@GetMapping("market-list")
-	public ModelAndView market_list(
-			@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
-			,@RequestParam(value="cntPerPage", required=false,defaultValue="9")String cntPerPage,HttpSession session){
+	public ModelAndView market_list(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
+									,HttpSession session
+									,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS){
 		int total = marketService.getMarketCount();
-	/*	if(nowPage ==null &&cntPerPage ==null) {
-			nowPage="1";
-			cntPerPage ="9";
-		}else if(nowPage == null) {
-			nowPage = "1";
-		}else if(cntPerPage == null) {
-			cntPerPage = "9";
-		}*/
+/*
+if(nowPage ==null &&cntPerPage ==null) {
+		nowPage="1";
+		cntPerPage ="9";
+	}else if(nowPage == null) {
+		nowPage = "1";
+	}else if(cntPerPage == null) {
+		cntPerPage = "9";
+}
+*/		
+		int selectedKey=Integer.parseInt(selectedKeyS);
+
 		String mem_email=(String) session.getAttribute("email");
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
 		MarketPagingVO marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
@@ -65,6 +71,9 @@ public class MarketController {
 		 HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();
 		 Pagingmap.put("start",marketVO.getStart());
 		 Pagingmap.put("end",marketVO.getEnd());
+		 
+		 Pagingmap.put("selectedKey",selectedKey);
+		 
 		 List<Market> list = marketService.getMarketList(Pagingmap);
 		 
 		 List<MarketPick> pickState=new ArrayList<MarketPick>();
@@ -85,20 +94,41 @@ public class MarketController {
 		 mv.addObject("list", list);
 	     mv.addObject("paging", marketVO);  
 	     mv.addObject("marketNumList", marketNumList); 
+	     mv.addObject("selectedKey", selectedKey); 
+
+		return mv;
+	}
+
+//searchBox 검색 리스팅 
+	@GetMapping("market-searchBoxlist")
+	public ModelAndView market_searchBoxlist(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
+									,HttpSession session
+									,@RequestParam(value="checkedCate[]",required=false)List<String> checkedCate
+									,@RequestParam(value="checkedExp[]",required=false)List<String> checkedExp
+									,@RequestParam(value="marketPrice",required=false)String marketPrice){
+
+		log.info("1111111checkedCate[]"+checkedCate);
+		log.info("22222222checkedExp[]"+checkedExp);
+		log.info("3333333333marketPrice"+marketPrice);
+	
 
 
-	/*    
-	 *  //모델로하는방법 
-		marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		model.addAttribute("paging", marketVO);
-		model.addAttribute("market", marketService.getMarketList(marketVO));*/
-	     
+		 ModelAndView mv = new ModelAndView("market/market-list");
+
+
 		return mv;
 	}
 	
 	
+	
+	
+	
+	
+	
+	
 	@GetMapping("market-content")
-	public ModelAndView market_content(@RequestParam long market_num
+	public ModelAndView market_content(HttpSession session,@RequestParam long market_num
 			,@RequestParam(value="nowPageQ",required=false)String nowPageQ
 			,@RequestParam(value="cntPerPageQ", required=false)String cntPerPageQ
 			,@RequestParam(value="nowPageR",required=false)String nowPageR
@@ -164,6 +194,11 @@ public class MarketController {
 		List<MarketQA> mq = marketService.getMarketQA(mapq);
 		System.out.println("###$$$$$$$$$$$$$$$"+mq);
 		
+		//마켓리뷰쓰는조건
+		HashMap<String,Object> mapMbs=new HashMap<String,Object>();
+		mapMbs.put("market_num",market_num);
+		mapMbs.put("mem_email",(String)session.getAttribute("email"));
+		List<MarketBuysellList> mbs =marketService.writeReview(mapMbs);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("market/market-content"); // 뷰의 이름
@@ -174,6 +209,8 @@ public class MarketController {
 		mv.addObject("freeProfile", fP);
 		mv.addObject("marketVORev", marketVORev);//도메인끼리는 정보가 다담기는데 페이징 정보는 안담김 왜냐? 디비에 테이블이 없어서? 같은 도메인 패키지에 없어서?
 		mv.addObject("marketVOQA", marketVOQA);
+		
+		mv.addObject("mbs", mbs);
 		return mv;
 		
 	}

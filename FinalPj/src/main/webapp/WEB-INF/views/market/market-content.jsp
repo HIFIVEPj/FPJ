@@ -163,10 +163,10 @@
 									<a href="#" class="btn btn-primary icons"><i class="si si-heart  mr-1"></i> 678</a>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<!-- 세션일치시에만보이는거 --> 
-									<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
-									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
-								<!--// 세션일치시에만보이는거 -->
+									<c:if test="${sessionScope.email== freeProfile.freelancer.mem_email}">
+										<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
+										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -372,17 +372,30 @@
 										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
 									</div>
 									  -->
-									 <c:if test="${sessionScope.email !=null}" >
-										<div class="form-group">
-											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="Comment">${marketRev_cont}</textarea>
-										</div>	
-										<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
-									</c:if>		
-									<c:if test="${sessionScope.email ==null}" >
+									 <c:if test="${sessionScope.email ==null}" >
 										<div class="form-group">
 											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
 										</div>	
 									</c:if>		
+									<c:if test="${fn:length(mbs)>0}" >
+										<c:if test="${sessionScope.email!=null||market.market_num ==mbs.market_num}" >
+											<div class="form-group">
+												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="이용 후기를 남겨주세요">${marketRev_cont}</textarea>
+											</div>	
+											<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
+										</c:if>		
+									</c:if>		
+									<c:if test="${fn:length(mbs)==0}" >
+										<c:if test="${sessionScope.email!=null}" >
+											<div class="form-group">
+												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="마켓 구매 후 이용하실 수 있습니다"></textarea>
+											</div>	
+										</c:if>		
+									</c:if>		
+									
+									
+									
+									
 									
 								</div>
 							</div>
@@ -395,9 +408,9 @@
 							<div class="card-header">
 								<h3 class="card-title">문의</h3>
 							</div>
-						<div class="card-body p-0" id="QAajax">	
+							
 						<c:if test="${fn:length(marketQA) > 0}">				
-							 <div class="card-body p-0">									 
+							 <div class="card-body p-0" id="QAajax0">									 
 								<c:forEach var="marketQA" items="${marketQA}">
 								<div id="htmlQA">
 									<input type="hidden" name="marketQA_prnum" id="marketQA_prnumID" value="${marketQA.marketQA_prnum} "/>
@@ -470,9 +483,9 @@
 								</c:forEach>
 							</div>
 						</c:if>	
-					</div>	
+					
 						<c:if test="${fn:length(marketQA) == 0}">		
-							<div class="card-body p-0" id="QAajax">
+							<div class="card-body p-0" id="QAajax0">
 								<div class="card-body p-0">
 									<div class="media mt-0 p-5">
 						               <div class="media-body"><text align="center"> 등록된 문의가 없습니다</text></div>
@@ -1256,7 +1269,7 @@
 		    			html+='</h5>';
 		    			html+='<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> '+dateTime+' </small>';
 		    			html+='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> '+data[i].marketRev_cont+'</p>';
-		    			html+='<a href="" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate('+data[i].marketRev_num+','+data[i].market_num+',"'+data[i].marketRev_cont +'",'+data[i].marketRev_star+');" ><span class="">수정</span></a>';
+		    			html+='<a href="" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate('+data[i].marketRev_num+','+data[i].market_num+','+data[i].marketRev_cont +','+data[i].marketRev_star+');" ><span class="">수정</span></a>';
 		    			html+='<a href="" class="mr-2" data-toggle="modal" onclick="Revdelete('+data[i].marketRev_num+','+data[i].market_num+');" ><span class="">삭제</span></a>';
 		   				html+='</div>';
 		   				html+='</div>';
@@ -1347,14 +1360,9 @@
 		    			 var someTimestamp = Number(marketQAList[i].marketQA_rdate);
 						 var dateTime = new Date(someTimestamp);
 						 dateTime=dateToYYYYMMDD(dateTime);
-			    		//	console.log("11111marketQAList"+marketQAList);
-			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_cont);
-			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_rdate);
-			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_name);
-			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_fname);
-			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_mname);
-			    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_fname);
-			    		html+='<div class="card-body p-0">';
+
+			    		html+='<div class="card-body p-0" id="QAajax0">';
+			    		html+='<div class="card-body p-0" id="QAajax1">';
 			    		html+='<div id="htmlQA">';
 			    		html+='	<input type="hidden" name="marketQA_prnum" id="marketQA_prnumID" value="'+marketQAList[i].marketQA_prnum+' "/>';
 			    		html+='<input type="hidden" name="marketQA_lev" id="marketQA_levID" value="'+marketQAList[i].marketQA_lev+'  "/>';
@@ -1370,7 +1378,6 @@
 			    		}else{
 			    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
 			    		}
-			    		
 			    		html+='</div>';
 			    		html+='<div class="media-body">';
 			    		html+=' <h5 class="mt-0 mb-1 font-weight-semibold">'+ marketQAList[i].member.mem_name;
@@ -1381,16 +1388,17 @@
 			    		html+='<a href="#" onclick="javascript:QAFile('+marketQAList[i].marketQA_prnum+','+marketQAList[i].marketQA_market_num+');"  data-toggle="modal" data-target="#exampleModalLong">'+marketQAList[i].marketQA_sub+'</a><br>';
 			    		html+='	</p>';
 			    		html+='<a href="#" onclick="mqajaxRE('+marketQAList[i].marketQA_prnum+','+marketQAList[i].marketQA_lev+' ,'+marketQAList[i].marketQA_sun+');" data-toggle="modal" data-target="#Comment" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>';
-			    		html+='<a href="#" class="mr-2" onclick="QAupdate("'+marketQAList[i].marketQA_sub+'" ,"'+marketQAList[i].marketQA_cont+'" ,'+marketQAList[i].marketQA_num+' ,'+marketQAList[i].market_num+' ,'+marketQAList[i].marketQA_ox+' );"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>';
-			    		html+='<a href="#" class="mr-2" onclick="QAdelete('+marketQAList[i].marketQA_num+','+marketQAList[i].market_num+');"><span class="">삭제</span></a>';
-			    		html+='</div> ';
-			    		html+='</div> ';
-			    		html+='</div> ';
-			    		html+='</div> ';
-			    		html+='</div> ';			
+			    		html+='<a href="#" class="mr-2" onclick="QAupdate('+ marketQAList[i].marketQA_sub +','+marketQAList[i].marketQA_cont+' ,'+marketQAList[i].marketQA_num+' ,'+marketQAList[i].market_num+' ,'+marketQAList[i].marketQA_ox+' );"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>';
+			    		html+='<a href="#" class="mr-2" onclick="QAdelete('+ marketQAList[i].marketQA_num+','+marketQAList[i].market_num+');"><span class="">삭제</span></a>';
+			    		html+='</div>';
+			    		html+='</div>';
+			    		html+='</div>';
+			    		html+='</div>';
+			    		html+='</div>';			
+			    		html+='</div>';
 				}
-	    		$('#QAajax').empty();
-	    		$('#QAajax').html(html);
+	    		$('#QAajax0').empty();
+	    		$('#QAajax0').html(html);
 		    		
 		    	}	
 		   	}); 
@@ -1398,9 +1406,9 @@
 		}
 //문의 리댓글 만따로빼려면이거씀
 	  function mqajaxRE(prnum,lev,sun){
-			alert(prnum);
-			alert(lev);
-			alert(sun);
+			//alert(prnum);
+			//alert(lev);
+			//alert(sun);
 		    
 		   $('#Comment').on('show.bs.modal', function (event) {
 				//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
@@ -1411,8 +1419,6 @@
         	});           	
 		
 		}
-		
-		
 	  $('#submitQARE').click(function(){   
 		  console.log("ddddddddd");
 		  var url=$('#mqModal').attr('action');
@@ -1426,6 +1432,7 @@
 		    	data:QAREqueryString,
 		    	error:onError,
 		    	success:function onSuccess(marketQAList){
+		    		history.go(); 
 			    	console.log("11111marketQAList");
 		    		 var QA='';
 		    		 for(i=0; i<marketQAList.length; i++){
