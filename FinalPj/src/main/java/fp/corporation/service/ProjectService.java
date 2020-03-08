@@ -11,7 +11,7 @@ import fp.corporation.domain.ProjectPick;
 import fp.corporation.vo.ProjectVo;
 
 public interface ProjectService {
-	List<Project> list (ProjectVo projectVo);
+	List<Project> list (Map<String, Object> map);
 	long getTotalCount();
 	List<Project> keywords();
 	Project showContent(long pj_num);
@@ -26,6 +26,10 @@ public interface ProjectService {
 	void updateKeyword(Map<String, Object> map);
 
 	void updateKeyword(PjPickKeyword pjpkeyword);	
+	
+	//sorting 할때 필요한 매퍼들
+	long getTotalCount_select(int type_nums);
+	
 	//mydash_cor에서 project 관리부분들
 	List<Project> listMydashCor (Map<String, Object> map);
 	long getTotalCountCor(long cor_code);
