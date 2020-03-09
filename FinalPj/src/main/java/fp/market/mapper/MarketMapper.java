@@ -8,6 +8,7 @@ import java.util.Map;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
@@ -66,8 +67,10 @@ public interface MarketMapper {
 	public void deleteMarketPick(HashMap<String,Object> map);
 	public void updatePlusMarketPick(long market_num);
 	public void updateMinusMarketPick(long market_num);
-	
+
 	public void insertMarketBuy(HashMap<String,Object> map);
+	
+	public List<MarketBuysellList> writeReview(HashMap<String,Object> map);
 
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);

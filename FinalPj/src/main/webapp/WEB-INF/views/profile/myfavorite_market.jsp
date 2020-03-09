@@ -70,8 +70,9 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myMarket">마켓관리</a></li>
-												<li><a class="slide-item" href="myMarket">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
@@ -273,7 +274,6 @@
 																
 																<div style="padding-top:5px;">
 																
-																	
 																</div>
 															</div>
 														</div>
@@ -357,6 +357,7 @@
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
 									<c:if test="${fn:length(mPickList)>0 }">
+
 										<c:if test="${paging.nowPage !=1}">
 											<li class="page-item">
 												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
@@ -404,7 +405,7 @@
 			</div>
 		</section>
 		<!--/User Dashboard-->
-		
+
 <script type="text/javascript">
     $(function() {
         var hijax = function(panel) {

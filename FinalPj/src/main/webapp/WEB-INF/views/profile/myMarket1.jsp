@@ -6,24 +6,7 @@
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-<script>
-$(document).ready(function() {
-	  var v = "#" + window.location.hash.substr(1);
-	  $("#mytab1 li").each(function() {
-	    var href = $(this).children().first().attr("href");
-	    if (href == v) $(this).addClass("active");
-	    else $(this).removeClass("active");
-	  });
-	});
 
-	//Whenever we click on a li, remove all "active" classes and finally add "active" to the one we clicked.
-	$("#mytab1 li").on("click", function() {
-	  $("#mytab1 li").each(function() {
-	    $(this).removeClass("active");
-	  });
-	  $(this).addClass("active");
-	});
-</script>
 <!--/header-->
 
 		<!--Breadcrumb-->
@@ -89,8 +72,9 @@ $(document).ready(function() {
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myMarket">마켓관리</a></li>
-												<li><a class="slide-item" href="myMarket">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
@@ -108,37 +92,17 @@ $(document).ready(function() {
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
-								<h3 class="card-title"><b>등록한 마켓</b></h3>
+								<h3 class="card-title"><b>나의 마켓</b></h3>
 							</div>
 							<div class="card-body">
-							<div class="ads-tabs">
-									<div class="tabs-menus">
-										<!-- Tabs -->
-										<ul class="nav panel-tabs" id="mytab1">
-											<li><a href="#tab1" class="active" data-toggle="tab" value="mymakret">나의 마켓</a></li>
-											<li><a href="#tab2" data-toggle="tab" value="sellmakret">팔린마켓</a></li>
-										</ul>
-										
-									</div>
-								<div class="tab-content">
-<script type="text/javascript" >
-	$(document).ready(function(){
-		
-		$("#mytab1").click(function(){						        
-	          var list = $("#mytab1 li" a).val();
-	          alert("list:::::::"+list);
-	          
-	          
-	          
-	        //  window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
-	      })
-	})
-</script>							
+							
 								
+								<div class="tab-content">
+			
 								
 								<!-- 탭1 -->
 									<c:if test="${fn:length(myMarket)>0 }">
-										<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
+										
 											<table class="table table-bordered table-hover mb-0 text-nowrap">
 												<thead style="text-align:center;">
 													<tr>
@@ -213,89 +177,12 @@ $(document).ready(function() {
 											</c:forEach>					
 											</table>
 										
-										</div>
 									</c:if>
 									<c:if test="${fn:length(myMarket)==0 }">
 										<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
 										</div>
 									</c:if>
 								<!-- 탭1 -->	
-								
-								
-								
-								
-							<!-- 탭2 -->			
-							<c:if test="${fn:length(mySellMarket)>0 }">
-								<div class="tab-pane table-responsive border-top userprof-tab" id="tab2">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th colspan="2"><b>제목</b></th>
-												<th><b>가격</b></th>
-												<th><b>상태</b></th>
-												<th><b>판매일</b></th>
-												<th><b>완료버튼</b></th>
-											</tr>
-										</thead>
-										
-									<c:forEach var="mySellMarket" items="${mySellMarket}">	
-										<tbody>
-										<tr>
-											<td colspan="2">
-												<div class="media mt-0 mb-0">
-												<!-- 	<div class="card-aside-img">
-														<a href="#"></a>
-														<img src="../images/products/h1.png" alt="img">
-													</div>
-												-->													
-													 <div class="media-body">
-														<div class="card-item-desc ml-4 p-0 mt-2">
-															<a href="market-content?market_num=${mySellMarket.market_num}" class="text-dark"><h4 class=""><b>${mySellMarket.marketPaym_pdName}</b></h4></a>
-															
-															<div style="padding-top:5px;">
-															<span class="text-warning">
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																</span>
-																<i class="fa fa-star"> </i> | <i class="fa fa-eye"></i> 344<br>
-															</div>
-														</div>
-													</div>
-												</div>
-											</td>
-											
-											<td class="font-weight-semibold fs-16">
-												<fmt:formatNumber value="${mySellMarket.marketPaym_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
-											</td> 
-											
-											
-											<td>
-												<a href="#" class="badge badge-secondary">진행중</a>
-											</td>
-											<td class="font-weight-semibold fs-16">
-												${mySellMarket.marketPaym_rdate}
-											</td>
-											<td class="font-weight-semibold fs-16">
-												<a href="javascript:void(0)" onclick="deleteCheck(${mySellMarket.marketPaym_num})"class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="거절하기"><i class="fa fa-trash"></i></a>
-												<a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="완료"><i class="fa fa-shopping-cart"></i></a>
-											</td>
-											</tr>
-										</tbody>
-									</c:forEach>
-										
-									</table>
-							
-								</div>
-							</c:if>
-							<c:if test="${fn:length(mySellMarket)==0 }">
-								<div class="tab-pane table-responsive border-top userprof-tab" id="tab2">
-								</div>
-							</c:if>
-							<!-- 탭2 -->		
-								
-
 
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
@@ -341,7 +228,7 @@ $(document).ready(function() {
 		
 							<!-- section-wrapper -->
 						</div>
-					</div>
+					
 					</div>
 				</div>
 			</div>

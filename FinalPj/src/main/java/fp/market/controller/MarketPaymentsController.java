@@ -84,6 +84,7 @@ public class MarketPaymentsController {
 		marketService.insertPaymentMarket(payinfoMarket);
 	//판매자기준내역리스트insert
 		payinfoMarket.put("mem_email", mem_emailFree);
+		payinfoMarket.put("mem_emailBuy", mem_emailSession);
 		payinfoMarket.put("market_num", market_num);
 		payinfoMarket.put("marketPaym_feeRate",  marketPaym_feeRate);
 		marketService.insertPaymentMarket2(payinfoMarket);

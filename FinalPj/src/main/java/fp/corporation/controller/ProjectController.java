@@ -45,9 +45,12 @@ public class ProjectController {
 	@Autowired
 	private FreeLancerProfileService freeService;
 	
-	@RequestMapping("project_list")
+	@RequestMapping(value="/project_list", method=RequestMethod.GET)
+	@ResponseBody
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email) {
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email
+			 ,@RequestParam(value="selectKeyword", required=false)String selectKeyword
+			 ,@RequestParam(value="typeList[]", required=false)List<Integer>typeList) {
 		long totalCount = service.getTotalCount();
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
@@ -57,10 +60,24 @@ public class ProjectController {
 		}else if(cntPerPage == null) {
 			cntPerPage ="4";
 		}
-		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
-		List<Project> list = service.list(projectVo);
-
+		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("ProjectVo", projectVo);
+		if(selectKeyword != null) {
+			map.put("SortingKey",selectKeyword);
+		}else {
+			map.put("SortingKey",null);
+		}
+		List<Project> list = service.list(map);
+		
+		long countDevelop= service.getTotalCount_select(1);
+		long countPublishing= service.getTotalCount_select(2);
+		long countDesign= service.getTotalCount_select(3);
+		long countPlan= service.getTotalCount_select(4);
+		long countEtc= service.getTotalCount_select(5);
+		
+		ModelAndView mv = new ModelAndView("project/project_list");
 		if(mem_email != null) {
 			FreeLancer free = freeService.mydash_free_select(mem_email);
 			if(free != null) {
@@ -69,77 +86,61 @@ public class ProjectController {
 				for(int j=0; j<pjplist.size(); j++) {
 					pjnumList.add(pjplist.get(j).getPj_num());
 				}
-				ModelAndView mv = new ModelAndView("project/project_list");
-				mv.addObject("list", list);
-				mv.addObject("pa", projectVo);
-				List<Project> keyname = service.keywords();
-				mv.addObject("keyname", keyname);
 				mv.addObject("free", free);
 				mv.addObject("pjplist",pjplist);
 				mv.addObject("pjnumList",pjnumList);
-				return mv;
 			}
-			ModelAndView mv = new ModelAndView("project/project_list");
-			mv.addObject("list", list);
-			mv.addObject("pa", projectVo);
-			List<Project> keyname = service.keywords();
-			mv.addObject("keyname", keyname);		
-			return mv;
 		}
-		ModelAndView mv = new ModelAndView("project/project_list");
+		if(typeList!=null) {
+			log.info("typeList: "+typeList);
+		}
+		mv.addObject("selectKeyword",selectKeyword);
+		mv.addObject("countDevelop",countDevelop);
+		mv.addObject("countPublishing",countPublishing);
+		mv.addObject("countDesign",countDesign);
+		mv.addObject("countPlan",countPlan);
+		mv.addObject("countEtc",countEtc);
 		mv.addObject("list", list);
 		mv.addObject("pa", projectVo);
 		List<Project> keyname = service.keywords();
 		mv.addObject("keyname", keyname);		
 		return mv;
 	}
-	
+	@RequestMapping(value="project_list_sort", method=RequestMethod.GET)
+	@ResponseBody
+	public String project_list_sort(@RequestParam String selectKeyword, @RequestParam(value="mem_email", required=false)String mem_email){
+		if(mem_email != null) {
+			return "mem_email="+mem_email+"&selectKeyword="+selectKeyword;
+		}
+		return selectKeyword;
+	}
 	@RequestMapping("project_content")
 	public ModelAndView project_content(@RequestParam long pj_num, @RequestParam(value="mem_email", required=false)String mem_email) {
+		
+		Project project = service.showContent(pj_num);
+		Corporation corInfo = service.corInfo(pj_num);
+		ModelAndView mv = new ModelAndView("project/project_content");
+		mv.addObject("projectCont", project);
+		mv.addObject("corInfo", corInfo);
+		
 		if(mem_email != null) {
-			Project project = service.showContent(pj_num);
-			Corporation corInfo = service.corInfo(pj_num);
 			FreeLancer free = freeService.mydash_free_select(mem_email);
-				
 			if(free != null) {
 				List<FreeLancerProfile>profile_select = freeService.profile_free_select(mem_email);
 					Map<String, Object>map = new HashMap<String, Object>();
 					map.put("pj_num", pj_num);
 					map.put("free_code", free.getFree_code());
-					
 					AppliedProject appp = service.select_applied_pj(map);
-					ModelAndView mv = new ModelAndView("project/project_content");
 				if(profile_select !=null) {
-					mv.addObject("appp", appp);
-					mv.addObject("free", free);
-					mv.addObject("projectCont", project);
-					mv.addObject("corInfo", corInfo);
 					mv.addObject("profile_select", profile_select);
-					return mv;
-				}else {				
-					mv.addObject("appp", appp);
-					mv.addObject("free", free);
-					mv.addObject("projectCont", project);
-					mv.addObject("corInfo", corInfo);
-		
-					return mv;
-				}
-			}else {
-				ModelAndView mv = new ModelAndView("project/project_content");
+				}		
+				mv.addObject("appp", appp);
+				mv.addObject("free", free);
 				mv.addObject("projectCont", project);
 				mv.addObject("corInfo", corInfo);
-				
-				return mv;
 			}
-		}else {
-			Project project = service.showContent(pj_num);
-			Corporation corInfo = service.corInfo(pj_num);
-			ModelAndView mv = new ModelAndView("project/project_content");
-			mv.addObject("projectCont", project);
-			mv.addObject("corInfo", corInfo);
-			
-			return mv;
 		}
+		return mv;
 	}
 	
 	@GetMapping("project_update")

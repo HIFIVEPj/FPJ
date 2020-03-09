@@ -32,9 +32,34 @@ public class AdminController {
 	MemberService service;
 	
 	@RequestMapping("admin")
-	public String admin() {
-		return "admin/admin_page";
+	public ModelAndView admin() {
+		
+		List<Long> sumFree=service.sumFree();
+		List<Long> sumCor=service.sumCor();
+		List<Long> month=service.month();
+		
+				
+		Map<String,Object> map = new HashMap<String, Object>();	
+		map.put("class_num","2");	
+		long totalCountFree =service.getTotalCount(map);	
+		map.put("class_num","4");
+		long totalCountCor =service.getTotalCount(map);
+		map.put("class_num","");
+		long totalCount =service.getTotalCount(map);
+		
+		log.info("totalCount : "+totalCount);
+		ModelAndView mv = new ModelAndView("admin/admin_page");
+		mv.addObject("totalCountFree", totalCountFree);
+		mv.addObject("totalCountCor", totalCountCor);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("sumFree",sumFree);
+		mv.addObject("sumCor",sumCor);
+		mv.addObject("month",month);
+		return mv;
 	}
+	
+	
+	
 	@RequestMapping("admin_member")
 	public ModelAndView member_list(
 			@RequestParam (required = false)String class_num ,
@@ -48,6 +73,7 @@ public class AdminController {
 	session.setAttribute("classN", class_num);
 	session.setAttribute("keyword", keyword);
 	map.put("keyword", keyword);
+
 	
 	long totalCount =service.getTotalCount(map);	
 	if(nowPage == null && cntPerPage == null) {
@@ -91,7 +117,7 @@ public class AdminController {
 			
 			return mv;
 	}
-	
+
 	@RequestMapping("admin_marketF")
 	public ModelAndView admin_marketF(MemberVo memberVo, @RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {

@@ -29,6 +29,7 @@ public class FreelancerMarketInfoController {
 	@Autowired
 	private FreelancerMarketInfoService service;
 	
+
 	//세영 추가-마켓찜--------myfavoriteMarket,구매마켓
 	@RequestMapping("myfavoriteMarket")
 	public ModelAndView pickedMarket(HttpSession session
@@ -67,7 +68,6 @@ public class FreelancerMarketInfoController {
 		map.put("mem_email",mem_email);
 		map.put("start",start);
 		map.put("end",end);
-		
 		map2.put("mem_email",mem_email);
 		map2.put("start",start2);
 		map2.put("end",end2);
@@ -107,7 +107,7 @@ public class FreelancerMarketInfoController {
 		return "redirect:myfavoriteMarket";
 		
 	}
-	
+/*	
 
 	@RequestMapping("myMarket")
 	public ModelAndView getMyMarket(HttpSession session
@@ -146,6 +146,97 @@ public class FreelancerMarketInfoController {
 		return mv;
 		
 	}
+*/
+	//나의마켓
+	@RequestMapping("myMarket1")
+	public ModelAndView getMyMarket1(HttpSession session
+			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+			,@RequestParam(value="cntPerPage", required=false,defaultValue="5")String cntPerPage) 
+	{
+		ModelAndView mv = new ModelAndView();
+		String mem_email=(String)session.getAttribute("email");
+		int totalMymarket=service.getTotalMyMarket(mem_email);
+		int totalSell=service.getTotalPaymentDetails(mem_email);
+		
+		MarketPagingVO myMarketListVO = new MarketPagingVO(totalMymarket, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("mem_email",mem_email);
+		map.put("start",myMarketListVO.getStart());
+		map.put("end",myMarketListVO.getEnd());
+
+		List<Market> myMarket=service.getMyMarket(map);
+		
+		Freelancer free = getFreefname(mem_email);
+		mv.setViewName("profile/myMarket1");
+		mv.addObject("myMarket",myMarket);
+		mv.addObject("paging",myMarketListVO);
+		mv.addObject("free",free);
+		return mv;
+		
+	}
+	//판매마켓
+	@RequestMapping("myMarket2")
+	public ModelAndView getMyMarket2(HttpSession session
+			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+			,@RequestParam(value="cntPerPage", required=false,defaultValue="5")String cntPerPage) 
+	{
+		ModelAndView mv = new ModelAndView();
+		String mem_email=(String)session.getAttribute("email");
+
+		int totalSell=service.getTotalPaymentDetails(mem_email);
+				
+		MarketPagingVO myMarketSellVO = new MarketPagingVO(totalSell, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));		
+	
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("mem_email",mem_email);
+		map.put("start",myMarketSellVO.getStart());
+		map.put("end",myMarketSellVO.getEnd());
+		
+		List<MarketPayment> mySellMarket=service.paymentDetails(map);
+		
+		Freelancer free = getFreefname(mem_email)
+				;
+		mv.setViewName("profile/myMarket2");
+		mv.addObject("mySellMarket",mySellMarket);
+		mv.addObject("paging",myMarketSellVO);
+		mv.addObject("free",free);
+		return mv;
+		
+	}
+	//구매마켓
+	@RequestMapping("myMarket3")
+	public ModelAndView getMyMarket3(HttpSession session
+			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+			,@RequestParam(value="cntPerPage", required=false,defaultValue="5")String cntPerPage) 
+	{
+		String mem_email=(String) session.getAttribute("email");
+
+		int total=service.getTotalBuyMarket(mem_email);
+		MarketPagingVO marketBuyListVO = new MarketPagingVO(total,Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+		int start=marketBuyListVO.getStart(); 
+		int end = marketBuyListVO.getEnd(); 
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("mem_email",mem_email);
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<MarketBuysellList> mbuy=service.myBuyMarket(map);
+		
+		Freelancer free = getFreefname(mem_email);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("profile/myMarket3");
+		mv.addObject("mBuyList",mbuy);
+		mv.addObject("paging",marketBuyListVO);
+		mv.addObject("free",free);
+		return mv;
+		
+	}
 	public Freelancer getFreefname(String mem_email) {
 		Freelancer free=service.getFreefname(mem_email);
 		return free;
@@ -156,7 +247,7 @@ public class FreelancerMarketInfoController {
 		log.info("11111111marketPaym_num"+marketPaym_numS);
 		Long marketPaym_num = Long.parseLong(marketPaym_numS);
 		service.deleteMarketPayment(marketPaym_num);
-		return "redirect:myMarket";
+		return "redirect:myMarket2";
 
 		
 	}

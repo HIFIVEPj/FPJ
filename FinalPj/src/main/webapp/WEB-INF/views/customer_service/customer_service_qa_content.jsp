@@ -82,13 +82,14 @@
 								</div>
 								
 							</div>
+							
+
 							<div class="card-header">
 								<!--
 								<div class="item7-card-desc d-flex mb-2 mt-2">
 									<a href="#"><i class="fa fa-paperclip text-muted mr-2"></i>abc.txt</a>	
 								</div>
-								-->
-								
+								-->								
 								
 								<div class='bigPictureWrapper'>
 								  <div class='bigPicture'>
@@ -147,69 +148,159 @@
 									width:600px;
 								}
 								
-								</style>
-								
+								</style>							
 								
 								<div class="uploadResult">
 									<ul>
 									
 									</ul>
 								</div>
-								
 
 							</div>
 
 							<div class="card-body text-justify">	
 								<p>${qa_content.qa_cont}</p>
 							</div>
+							<!--
 							<div class="card-footer mx-auto" style="border-top: #fff;">	
 								<a class="btn btn-app">
 									<span class="badge badge-pill bg-blue">5</span>
 									<i class="fa fa-thumbs-o-up"></i>
 								</a>
-								
-								<!--
-								<div class="icons">
-									<a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a>
-								</div>
-								
-								<div class="product-tags clearfix">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a></li>
-									</ul>
-								</div>
-								-->
-							</div>
-							<!--
-							<div class="card-body product-filter-desc">
-								<div class="product-tags clearfix">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#">좋아요 버튼 이걸로 할까?</a></li>
-									</ul>
-								</div>
-							</div>
-							-->
-							<!--
-							<div class="card-body item-user">
-								<div class="row">
-									<div class="profile-pic mb-0">
-										<img src="../images/faces/male/25.jpg" class="brround avatar-xxl" alt="user">
-									</div>
-									<div>
-										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">&nbsp;한나영</h4></a>
-										<span class="text-gray">&nbsp;개발자</span>
-										<span class="text-gray">&nbsp;|</span>
-										<span class="text-muted">&nbsp;경력 3년</span>
-									</div>
-								</div>
 							</div>
 							-->
 							
+							<!-- 좋아요 -->
+							<!--
+							<div class="card-footer mx-auto" style="border-top: #fff;">
+							-->
+							<div class="card-header mx-auto" style="border-top: #fff; border-bottom: 0px;">
+							
+							<input type="hidden" value="${sessionScope.email}" class="mem_email"/>
+							<!--
+							<input type="hidden" value="${qa_content.qa_recommnum}" class="qa_recommnum"/>
+							-->
+							<c:if test="${empty sessionScope.email}">
+								<a class="btn btn-app" href="javasript:void(0)" onclick="javascript:needtoLogin()">
+									<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+									<i class="fa fa-thumbs-o-up"></i>
+								</a>
+							</c:if>
+							
+							
+							<c:if test="${!empty sessionScope.email}">
+								<c:choose>
+									<c:when test="${qa_recommend_num_list.contains(qa_content.qa_num)}">
+										<!--										
+										<a class="btn btn-app" onclick="javascript:del_recomm(${qa_content.qa_num})" id="del_recomm${qa_content.qa_num}">
+										-->
+										<div id="recomm${qa_content.qa_num}">
+											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num})" id="del_recomm${qa_content.qa_num}">
+												<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+												<i class="fa fa-thumbs-up"></i>
+											</a>
+										</div>									
+									</c:when>
+									<c:otherwise>
+										<!--
+										<a class="btn btn-app" onclick="javascript:add_recomm(${qa_content.qa_num})" id="insert_recomm${qa_content.qa_num}">
+										-->
+										<div id="recomm${qa_content.qa_num}">
+											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num})" id="insert_recomm${qa_content.qa_num}">
+												<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+												<i class="fa fa-thumbs-o-up"></i>
+											</a>
+										</div>									
+									</c:otherwise>	
+								</c:choose>
+								
+								<div id="recomm${qa_content.qa_num}">
+								
+								</div>
+					
+							</c:if>
+							
+							
+							<script>
+							function needtoLogin(){
+								alert("로그인 후 사용 가능한 서비스 입니다.")
+							}
+							function add_recomm(qa_num){
+								//alert("mem_email : " + mem_email)
+								//alert("qa_num : " + qa_num)
+								//alert("qa_recommnum add before: " + qa_recommnum)
+								$.ajax({
+									url:"qa_recommend_insert",
+									type:"GET",
+									//async: true,
+									cache: false,
+									dataType:"json",
+								    //dataType: "json",
+								    //contentType:"application/json;charset=UTF-8",
+					    			//data:"qa_num="+qa_num+"&mem_email="+$(".mem_email").val()+"&qa_recommnum="+$(".qa_recommnum").val(),
+					    			//data:"qa_num="+qa_num+"&qa_recommnum="+qa_recommnum+"&mem_email="+$(".mem_email").val(),
+					    			data:"qa_num="+qa_num+"&mem_email="+$(".mem_email").val(),
+									success: function(data){
+										//console.log(data);
+										//alert(data.qa_recommnum);
+										$('#insert_recomm'+qa_num).remove();
+										//add_recomm(qa_num, qa_recommnum);
+										//$('#insert_recomm'+qa_num);
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
+										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
+										//alert("qa_recommnum add after: " + qa_recommnum);
+									},
+									error: function(data){
+										alert("실패1");
+									}
+								});
+								//alert("qa_recommnum add last: " + qa_recommnum);
+							}
+							function del_recomm(qa_num){
+								//alert("qa_recommnum del before: " + qa_recommnum)
+								$.ajax({
+									url:"qa_recommend_del",
+									type:"GET",
+									//async: true,
+									cache: false,
+									dataType:"json",
+								    //dataType: "json",
+								    //contentType:"application/json;charset=UTF-8",
+									//data: "qa_num="+qa_num+"&qa_recommnum="+qa_recommnum+"&mem_email="+$(".mem_email").val(),
+									data:"qa_num="+qa_num+"&mem_email="+$(".mem_email").val(),
+									success:function(data){
+										//console.log(data);
+										//alert(data.qa_recommnum);
+										$('#del_recomm'+qa_num).remove();
+										//del_recomm(qa_num, qa_recommnum);
+										//$('#del_recomm'+qa_num);
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
+										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+										//alert("qa_recommnum del after: " + qa_recommnum);
+									},
+									error: function(data){
+										alert("실패2");
+									}
+								});
+								//alert("qa_recommnum del last: " + qa_recommnum);
+							}
+							</script>
+					
+							</div>
+							<!-- /좋아요 -->
+							
+							<!--
 							<div class="card-footer" style="padding: 0rem 0rem;">
+							-->
+							<div class="card-header border-top" style="padding: 0rem 0rem; border-bottom: 0px;">
 							<div class="card" style="margin-bottom: 0rem; border:0;">
 								<div class="media mt-0 p-5">											
 		                        	<div class="d-flex mr-3">
-		                            	<a href="#"><img src="../images/faces/female/test5.png" alt="64x64" class=" avatar avatar-xxl brround mx-auto"> </a>
+		                            	<a href="#"><img src="../images/faces/female/test5.png" alt="64x64" class="avatar avatar-xxl brround mx-auto"> </a>
 		                            </div>
 		                            <div class="media-body">
 		                            	
@@ -240,16 +331,17 @@
 										<a href="" class="mr-2" data-toggle="modal" data-target="#message"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8;"><i class=" ml-1 si si-envelope"></i>&nbsp;연락</span></a>	
 										<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>									
 										
-										<!-- 즐겨찾기 설정 상태 -->
+											<!-- 즐겨찾기 설정 상태 -->
+											<!--
 											<div class="item-card2-icons">
 												<a href="#" class="item-card9-icons1 wishlist active" data-toggle="tooltip" data-placement="top" title="찜하기"> <i class="fa fa fa-heart-o"></i></a>
 											</div>
-											
+											-->
 											<!-- 즐겨찾기 해제 상태 
 											<div class="item-card2-icons">
 												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
 											</div>
-										-->
+											-->
 									</div>	
 								</div>
 							</div>
@@ -331,10 +423,10 @@
 									</li>
 									-->
 									
-								</ul>
-								
-								
+								</ul>				
 							</div>
+							
+							<!--
 							<div class="card-footer mx-auto" style="border-top: 0px;">
 
 								<ul class="pagination mg-b-0 page-0">
@@ -368,10 +460,60 @@
 										<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
 									</li>
 								</ul>
-				
+							</div>
+							-->
+							
+							<!--
+							<div class="card-footer mx-auto" style="border-top: 0px;">
+							-->
+							<div class="card-footer mx-auto" style="border-top: 0px;">
+							<!--
+								<ul class="pagination mg-b-0 page-0">																							
+									<c:if test="${pageMaker.prev}">
+										<li class="page-item">
+											<a aria-label="Last" class="page-link" href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-double-left"></i></a>
+										</li>
+									</c:if>
+									<c:if test="${pageMaker.prev}">
+										<li class="page-item">
+											<a aria-label="Next" class="page-link" href="customer_service_qa?pageNum=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-left"></i></a>
+										</li>
+									</c:if>
+
+									<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+										<c:choose>
+											<c:when test="${num == pageMaker.cri.pageNum}">
+												<li class="page-item active" style="color:#fff">
+													<div class="page-link">${num}</div>
+												</li>
+											</c:when>
+											<c:when test="${num != pageMaker.cri.pageNum}">
+												<li class="page-item">
+													<a class="page-link" href="customer_service_qa?pageNum=${num}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${num}</a>
+												</li>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+																				
+									<c:if test="${pageMaker.next}">
+										<li class="page-item">
+											<a aria-label="Next" class="page-link" href="customer_service_qa?pageNum=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-right"></i></a>
+										</li>
+									</c:if>
+									<c:if test="${pageMaker.next}">
+										<li class="page-item">
+											<a aria-label="Last" class="page-link" href="customer_service_qa?pageNum=${pageMaker.lastPage}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-double-right"></i></a>
+										</li>
+									</c:if>	
+												
+								</ul>
+							-->									
 							</div>
 							
-							<div class="card-footer">
+							<!--
+							<div class="card-fotter">
+							-->
+							<div class="card-body border-top">
 
 								<div class="row">
 									
@@ -380,7 +522,14 @@
 										<input type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
 										-->
 										<c:if test="${sessionScope.class_num > 0}">
+											<!--
 											<input id="addReplyBtn" type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
+											-->
+											<button id="addReplyBtn" class="btn btn-primary waves-effect waves-light">댓글쓰기</button>
+											<!--
+											<input id="addReplyBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
+											<a href="" id="addReplyBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Comment">댓글쓰기</a>
+											-->
 											<a href="customer_service_qa_write#" class="btn btn-danger">답글쓰기</a>
 										</c:if>	
 									</div>
@@ -393,8 +542,17 @@
 										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 										-->
 										<c:if test="${sessionScope.email == qa_content.mem_email}">
-											<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-											<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_qa_modify?qa_num=${qa_content.qa_num}#';">
+											<!--
+											<input type="hidden" name="mem_email" value="${sessionScope.email}">
+											-->
+											
+											<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal" value='삭제'>
+											
+											<!--
+											<a id="deleteQa" href="javasript:void(0)" type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#deleteQa" onclick="javascript:deleteQa()">삭제</a>											
+											<a href="javasript:void(0)" type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#deleteQa" onclick="javascript:deleteQa()">삭제</a>
+											-->
+											<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_qa_modify?qa_num=${qa_content.qa_num}&mem_email=${sessionScope.email}#';">
 										</c:if>
 										
 										
@@ -412,332 +570,7 @@
 
 							</div>
 						</div>
-						<!--Comments-->
-						
-						<!--Comments backup-->
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">댓글</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<!--
-								<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-clock-o"></i>&nbsp;최신순</span></a>
-								<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8"><i class="fa fa-thumbs-o-up"></i>&nbsp;추천순</span></a>	
-								-->							
-								<label class="mr-2 mt-1 mb-sm-1">정렬 :</label>
-								<select name="item" class="form-control select-sm w-15">
-									<option value="1">오래된순</option>
-									<option value="2">추천순</option>
-									<option value="3">최신순</option>
-								</select>		
-							</div>			
-							<div class="card-body p-0">
-								<div class="media mt-0 p-5">
-                                    <div class="d-flex mr-3">
-                                        <a href="#"><img src="../images/faces/female/test7.png" alt="64x64" class="media-object brround"> </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1 font-weight-semibold">김소담
-											<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="verified"><i class="fa fa-check-circle-o text-success"></i></span>&nbsp;&nbsp;&nbsp;
-											<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${qa_content.qa_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
-										</h5>
-										<!--
-										<small class="text-muted"><i class="fa fa-calendar"></i> Dec 21st&nbsp;&nbsp;&nbsp;<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a></small>
-                                        -->
-                                        <p class="font-13  mb-2 mt-2">
-                                           	별로네요.
-                                        </p>
-                                        <a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8">&nbsp;<i class="fa fa-thumbs-o-up"></i>&nbsp;21&nbsp;</span></a>	
-                                        <a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-										<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-pencil-square-o"></i>&nbsp;수정</span></a>
-										<a href="" class="mr-2" data-toggle="modal" data-target="#smallModal1"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-trash-o"></i>&nbsp;삭제</span></a>
-										<!--
-										<input type="button" class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-										-->
-										<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>
-										<!-- 댓글 -->
-                                        <div class="media mt-5 border-top">
-                                            <div class="d-flex mr-3" style="margin-top: 1.5rem !important;">
-                                                <a href="#"> <img src="../images/faces/female/test5.png" alt="64x64" class="media-object brround"> </a>
-                                            </div>
-											<div class="media-body" style="margin-top: 1.5rem !important;">
-												<h5 class="mt-0 mb-1 font-weight-semibold">한나영
-													<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="verified"><i class="fa fa-check-circle-o text-success"></i></span>&nbsp;&nbsp;&nbsp;
-													<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${qa_content.qa_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
-												</h5>												
-												<p class="font-13  mb-2 mt-2">
-												   뭐요?
-												</p>
-												<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8">&nbsp;<i class="fa fa-thumbs-o-up"></i>&nbsp;21&nbsp;</span></a>	
-		                                        <a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-												<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-pencil-square-o"></i>&nbsp;수정</span></a>
-												<a href="" class="mr-2" data-toggle="modal" data-target="#smallModal1"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-trash-o"></i>&nbsp;삭제</span></a>												
-												<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>
-												<!-- 댓글 -->
-												<div class="media mt-5 border-top">
-		                                            <div class="d-flex mr-3" style="margin-top: 1.5rem !important;">
-		                                                <a href="#"> <img src="../images/faces/female/test5.png" alt="64x64" class="media-object brround"> </a>
-		                                            </div>
-													<div class="media-body" style="margin-top: 1.5rem !important;">
-														<h5 class="mt-0 mb-1 font-weight-semibold">한나영
-															<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="verified"><i class="fa fa-check-circle-o text-success"></i></span>&nbsp;&nbsp;&nbsp;
-															<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${qa_content.qa_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
-														</h5>												
-														<p class="font-13  mb-2 mt-2">
-														   <i class="fa fa-expeditedssl"></i>&nbsp;&nbsp;비밀 댓글
-														</p>														
-														<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8">&nbsp;<i class="fa fa-thumbs-o-up"></i>&nbsp;21&nbsp;</span></a>	
-				                                        <a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-														<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-pencil-square-o"></i>&nbsp;수정</span></a>
-														<a href="" class="mr-2" data-toggle="modal" data-target="#smallModal1"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-trash-o"></i>&nbsp;삭제</span></a>												
-														<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>
-													</div>
-												</div>
-												<!-- /댓글 -->
-											</div>
-										</div>
-										<!-- /댓글 -->
-										<!-- 댓글 -->
-										<div class="media mt-5 border-top">
-                                            <div class="d-flex mr-3" style="margin-top: 1.5rem !important;">
-                                                <a href="#"> <img src="../images/faces/female/test5.png" alt="64x64" class="media-object brround"> </a>
-                                            </div>
-											<div class="media-body" style="margin-top: 1.5rem !important;">
-												<h5 class="mt-0 mb-1 font-weight-semibold">한나영
-													<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="verified"><i class="fa fa-check-circle-o text-success"></i></span>&nbsp;&nbsp;&nbsp;
-													<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${qa_content.qa_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
-												</h5>												
-												<p class="font-13  mb-2 mt-2">
-												   <i class="fa fa-lock" style="color:red;"></i>&nbsp;&nbsp;비밀 댓글
-												</p>
-												<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8">&nbsp;<i class="fa fa-thumbs-o-up"></i>&nbsp;21&nbsp;</span></a>	
-				                                <a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-												<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-pencil-square-o"></i>&nbsp;수정</span></a>
-												<a href="" class="mr-2" data-toggle="modal" data-target="#smallModal1"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-trash-o"></i>&nbsp;삭제</span></a>												
-												<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>
-											</div>
-										</div>
-										<!-- 댓글 -->
-										<!-- 댓글 -->
-										<div class="media mt-5 border-top">
-                                            <div class="d-flex mr-3" style="margin-top: 1.5rem !important;">
-                                                <a href="#"> <img src="../images/faces/female/test5.png" alt="64x64" class="media-object brround"> </a>
-                                            </div>
-											<div class="media-body" style="margin-top: 1.5rem !important;">
-												<h5 class="mt-0 mb-1 font-weight-semibold">한나영
-													<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="verified"><i class="fa fa-check-circle-o text-success"></i></span>&nbsp;&nbsp;&nbsp;
-													<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${qa_content.qa_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
-												</h5>												
-												<p class="font-13  mb-2 mt-2">
-												   <i class="fa fa-expeditedssl" style="color:red;"></i>&nbsp;&nbsp;비밀 댓글
-												</p>												
-												<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8">&nbsp;<i class="fa fa-thumbs-o-up"></i>&nbsp;21&nbsp;</span></a>	
-				                                <a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-												<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-pencil-square-o"></i>&nbsp;수정</span></a>
-												<a href="" class="mr-2" data-toggle="modal" data-target="#smallModal1"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-trash-o"></i>&nbsp;삭제</span></a>												
-												<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>
-											</div>
-										</div>
-										<!-- 댓글 -->
-									</div>
-								</div>
-								<div class="media p-5 border-top border-bottom mt-0">
-									<div class="d-flex mr-3">
-										<a href="#"> <img src="../images/faces/female/test5.png" alt="64x64" class="media-object brround"> </a>
-									</div>
-									<div class="media-body">
-										<h5 class="mt-0 mb-1 font-weight-semibold">한나영
-											<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="verified"><i class="fa fa-check-circle-o text-success"></i></span>&nbsp;&nbsp;&nbsp;
-											<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;<fmt:formatDate value="${qa_content.qa_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
-										</h5>												
-										<p class="font-13  mb-2 mt-2">
-                                           	가나다라마바사아자차카타파하. 가나다라마바사아자차카타파하가나다라마바사아자차카타파하. 가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하.
-                                        </p>
-										<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8">&nbsp;<i class="fa fa-thumbs-o-up"></i>&nbsp;21&nbsp;</span></a>	
-		                                <a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-										<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-pencil-square-o"></i>&nbsp;수정</span></a>
-										<a href="" class="mr-2" data-toggle="modal" data-target="#smallModal1"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 fa fa-trash-o"></i>&nbsp;삭제</span></a>												
-										<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer mx-auto" style="border-top: 0px;">
-
-								<ul class="pagination mg-b-0 page-0">
-									<li class="page-item disabled">
-										<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-									</li>
-									<li class="page-item disabled">
-										<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-									</li>
-
-									<li class="page-item active">
-										<a class="page-link" href="#">1</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">2</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">3</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">4</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link hidden-xs-down" href="#">5</a>
-									</li>
-
-									<li class="page-item">
-										<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-									</li>
-									<li class="page-item">
-										<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-									</li>
-								</ul>
-				
-							</div>
-							
-							<div class="card-footer">
-
-								<div class="row">
-									
-									<div class="col">
-										<input type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
-										<a href="customer_service_qa_write#" class="btn btn-danger">답글쓰기</a>
-									</div>
-									
-									<div class="col col-auto">
-
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num+1}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num-1}" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
-										<!--
-										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
-										-->
-										<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-										<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_qa_modify?qa_num=${qa_content.qa_num}#';">
-		
-										
-										
-										<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_qa';">
-										
-										<!--
-										<a href="customer_service_qa?qa_num=${qa_list.qa_num}&pageNum=${pageMaker.cri.pageNum}&amount=5&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}" class="btn btn-primary waves-effect waves-light">이전</a>
-										-->
-										<a href="customer_service_qa_write#" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
-
-									</div>
-								</div>
-
-							</div>
-						</div>
-						<!--Comments-->
-						
-						
-						
-						<!-- 댓글 쓰기 창 이전 버전 -->
-						<!--
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">댓글 쓰기 (이거 모달창 폼 쓸거면 필요 없겠는데? 거기서 수정/삭제)</h3>
-							</div>
-							<div class="card-body">
-								<div>
-									-->
-									<!--
-									<div class="form-group">
-										<input type="text" class="form-control" id="name1" placeholder="Your Name">
-									</div>
-									<div class="form-group">
-										<input type="email" class="form-control" id="email" placeholder="Email Address">
-									</div>
-									-->
-									<!--
-									<div class="form-group">
-										<textarea class="form-control" name="example-textarea-input" rows="6" placeholder="댓글 입력"></textarea>
-									</div>
-									-->
-									
-									<!--
-									<label class="custom-control custom-checkbox mb-0 text-left">
-									-->
-										<!--
-										<input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-										-->
-										<!--
-										<input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
-										<span class="custom-control-label">비밀글</span>
-									</label>
-									<div class="text-right">
-										<a href="#" class="btn btn-primary">Send Reply</a>
-									</div>
-									-->
-									<!--
-									<div class="row">
-										<div class="col">
-											<label class="custom-control custom-checkbox mb-0">
-												-->
-												<!--
-												<input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1" checked="">
-												-->
-												<!--
-												<input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
-												<span class="custom-control-label">비밀글</span>
-											</label>
-										</div>	
-										<div class="col col-auto">
-											<a href="#" class="btn btn-primary mb-0">&nbsp;댓글&nbsp;쓰기&nbsp;</a>
-										</div>
-									</div>
-									-->
-									<!--
-									<div class="row">
-										<div class="col">
-											<a class="mb-0">Job ID : #8976542</a>
-										</div>
-										<div class="col col-auto">
-											Posted By <a class="mb-0 font-weight-bold">Company</a> / 25th Dec 2018
-										</div>
-									</div>
-									-->
-									
-									
-									<!--
-								</div>
-							</div>
-							<div class="card-footer">
-
-								<div class="row">
-									<div class="col">	
-										<a href="customer_service_qa_write" class="btn btn-danger">답글쓰기</a>
-									</div>
-									
-									<div class="col col-auto">
-
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num+1}" class="btn btn-primary waves-effect waves-light">이전</a>
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num-1}" class="btn btn-primary waves-effect waves-light">다음</a>
-										-->
-										<!--
-										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
-										-->
-										<!--
-										<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-										<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_qa_modify?qa_num=${qa_content.qa_num}';">
-		
-										
-										<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_qa';">				
-										<a href="customer_service_qa_write#" class="btn btn-danger">　글쓰기　</a>
-
-									</div>
-								</div>
-
-							</div>
-						</div>
-						-->
-						<!-- /댓글 쓰기 창 이전 버전 -->
-						
+						<!--Comments-->				
 					</div>
 
 					<!--Rightside Content-->
@@ -926,38 +759,7 @@
 			</div>
 		</section>
 		<!--/Add listing-->
-
-		<!-- small Modal -->
-			
-		<div id="smallModal1" class="modal fade">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-					
-						<!--
-						<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
-						-->
-						
-						<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<p>글을 정말 삭제할까요?</p>
-					</div>
-					
-					<div class="modal-footer">
-					
-						<a href="customer_service_qa_delete?qa_num=${qa_content.qa_num}" class="btn btn-primary">네</a>
-						
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
-					</div>
-				</div>
-			</div>		
-		</div>
 		
-		<!-- /small Modal -->
 
 		<!-- Message Modal -->
 		<!--
@@ -1094,79 +896,37 @@
 			</div>
 		</div>
 		-->
+
 		<!-- small Modal -->
-		<!--
-		<div id="smallModal1" class="modal fade">
+		<!--			
+		<div id="smallModal" class="modal fade">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-					-->
-						<!--
-						<h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
-						-->
-					<!--	
+						
 						<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						<p>댓글을 정말 삭제할까요?</p>
+						<p>글을 정말 삭제할까요?</p>
 					</div>
 					
 					<div class="modal-footer">
+					
 						<a href="customer_service_qa_delete?qa_num=${qa_content.qa_num}" class="btn btn-primary">네</a>
-						<button id='modalRemoveBtn' type="button" class="btn btn-primary">네</button>
+						
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
 					</div>
 				</div>
 			</div>		
 		</div>
-		-->
+		-->		
 		<!-- /small Modal -->
 		
-		
-		
-		<!-- Modal -->
-		<!-- 참고 모달 -->
-		<!--	
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"
-                aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Reply</label> 
-                <input class="form-control" name='reply' value='New Reply!!!!'>
-              </div>      
-              <div class="form-group">
-                <label>Replyer</label> 
-                <input class="form-control" name='replyer' value='replyer'>
-              </div>
-              <div class="form-group">
-                <label>Reply Date</label> 
-                <input class="form-control" name='replyDate' value='2018-01-01 13:13'>
-              </div>
-      
-            </div>
-		<div class="modal-footer">
-        <button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
-        <button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
-        <button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
-        <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
-      </div>          </div>
-        </div>
-      </div>
-      -->
-      <!-- /.modal -->
-		
-		
 		<!--Comment Modal / ajax 적용 댓글 달기 테스트-->
-		<div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
+		<div class="modal fade" id="Comment" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -1233,9 +993,10 @@
 		
 		<!-- 댓글 js -->
 		<script type="text/javascript" src="../js/reply.js"></script>
-		
-		<script>
-		
+		<!-- /댓글 js -->
+
+		<!-- 댓글  -->		
+		<script>		
 		$(document).ready(function () {
 			  
 			  var qa_numValue = '<c:out value="${qa_content.qa_num}"/>';
@@ -1245,16 +1006,26 @@
 			    showList(1);
 			    
 			function showList(page){
-			    
-			    replyService.getList({qa_num:qa_numValue,page:page|| 1 }, function(list) {
-
-			     var str="";
+				    
+			    replyService.getList({qa_num:qa_numValue,page:page|| 1 }, function(replyCnt, list) {
+			    	
+			    	console.log("replyCnt: "+ replyCnt);
+			        console.log("list: " + list);
+			        console.log(list);
+			        
+					if(page == -1) {
+						pageNum = Math.ceil(replyCnt/5.0);
+						showList(pageNum);
+						return;
+					}
+			    		
+			    	var str="";
 			     
-			     if(list == null || list.length == 0){
-			     	replyUL.html("");
+			    	if(list == null || list.length == 0){
+			     		//replyUL.html("");
 			     	
-			     	return;
-			     }
+			     		return;
+			     	}
 
 			     for (var i = 0, len = list.length || 0; i < len; i++) {
 			       str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"'>";
@@ -1268,19 +1039,81 @@
 			       str +="		</h5>";
 			       str +="		<p class='font-13  mb-2 mt-2'>"+list[i].qacomm_cont+"</p>";
 			       str +="		<a href='#' class='mr-2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#7fa5b8'>&nbsp;<i class='fa fa-thumbs-o-up'></i>&nbsp;21&nbsp;</span></a>";
-			       str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem;'><i class=' ml-1 fa fa-comment-o'></i>&nbsp;댓글</span></a>";
-				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
+			       str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment1'><span class='badge badge-primary' style='font-size: 0.8rem;'><i class=' ml-1 fa fa-comment-o'></i>&nbsp;댓글</span></a>";
+				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
 				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#smallModal1'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-trash-o'></i>&nbsp;삭제</span></a>";
-				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#report'><span class='badge badge-danger' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 si si-ban'></i>&nbsp;신고</span></a>";
+				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#report1'><span class='badge badge-danger' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 si si-ban'></i>&nbsp;신고</span></a>";
 				   str +="	</div>";
 				   str +="</li>";
 			     }
 			     
 			     replyUL.html(str);
-
+				 
+			     showReplyPage(replyCnt);
+			     
 			   });
 			     
-			 }
+			 }						
+			
+			// 댓글 페이징
+			var pageNum = 1;
+		    var replyPageFooter = $(".card-footer");
+		    
+		    function showReplyPage(replyCnt){
+		      
+		      var endNum = Math.ceil(pageNum / 5.0) * 5;  
+		      var startNum = endNum - 4; 
+		      
+		      var prev = startNum != 1;
+		      var next = false;
+		      
+		      if(endNum * 5 >= replyCnt){
+		        endNum = Math.ceil(replyCnt/5.0);
+		      }
+		      
+		      if(endNum * 5 < replyCnt){
+		        next = true;
+		      }
+		      
+		      var str = "<ul class='pagination mg-b-0 page-0'>";
+		      
+		      if(prev){
+		        str+= "<li class='page-item'><a aria-label='Next' class='page-link' href='"+(startNum -1)+"'><i class='fa fa-angle-left'></i></a></li>";
+		      }
+		      
+		      for(var i = startNum; i <= endNum; i++){
+		        
+		        var active = pageNum == i? "active":"";
+		        
+		        str+= "<li class='page-item "+active+"' style='color:#fff'><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+		      }
+		      
+		      if(next){
+		        str+= "<li class='page-item'><a aria-label='Next' class='page-link' href='"+(endNum + 1)+"'><i class='fa fa-angle-right'></i></a></li>";
+		      }
+		      
+		      str += "</ul></div>";
+		      
+		      console.log(str);
+		      
+		      replyPageFooter.html(str);
+		    }
+		    
+		    replyPageFooter.on("click","li a", function(e){
+		        e.preventDefault();
+		        console.log("page click");
+		        
+		        var targetPageNum = $(this).attr("href");
+		        
+		        console.log("targetPageNum: " + targetPageNum);
+		        
+		        pageNum = targetPageNum;
+		        
+		        showList(pageNum);
+		    });
+		 	// 댓글 페이징
+			
+			
 			
 			var modal = $(".modal");
 		    var modalInputQacomm_cont = modal.find("textarea[name='qacomm_cont']"); //textarea를 이용해서 입력하려면 "input[name='qacomm_cont']" 대신에 "textarea[name='qacomm_cont']"라고 써야함
@@ -1298,7 +1131,8 @@
 		    
 		    $("#addReplyBtn").on("click", function(e){
 		      
-		      modal.find("input").val("");
+		      //modal.find("input").val("");
+		      modal.find("textarea").val(""); // input을 textarea로 바꿔야 함. 그래야 댓글쓰기 버튼을 누를 때, 이전에 띄웠던 모달창의 댓글 내용이 불러와지지 않음
 		      modalInputQacomm_rdate.closest("div").hide();
 		      modal.find("button[id !='modalCloseBtn']").hide();
 		      
@@ -1321,11 +1155,12 @@
 		        
 		        alert(result);
 		        
-		        modal.find("input").val("");
+		        //modal.find("input").val("");
+		        modal.find("textarea").val("");
 		        modal.modal("hide");
 		        
-		        showList(1);
-		        //showList(-1);
+		        //showList(1); // 새로운 댓글 등록 후 댓글 목록 갱신
+		        showList(-1);
 		        
 		      });
 		      
@@ -1363,7 +1198,8 @@
 		              
 		          alert(result);
 		          modal.modal("hide");
-		          showList(1);
+		          //showList(1);
+		          showList(pageNum);
 		          
 		        });
 		        
@@ -1377,7 +1213,8 @@
 	    	        
 	    	      alert(result);
 	    	      modal.modal("hide");
-	    	      showList(1);
+	    	      //showList(1);
+	    	      showList(pageNum);
 	    	      
 	    	  });
 	    	  
@@ -1434,10 +1271,11 @@
 		replyService.get(11, function(data) {
 			console.log(data);
 		});
-		*/
-		
+		*/		
 		</script>
+		<!-- /댓글  -->
 
+		<!-- 첨부파일 -->
 		<script>
 			$(document).ready(function(){
 			  
@@ -1508,6 +1346,7 @@
 
 			});
 		</script>
+		<!-- /첨부파일 -->
 
 
 <!--footer-->

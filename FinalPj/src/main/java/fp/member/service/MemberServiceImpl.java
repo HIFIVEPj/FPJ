@@ -74,5 +74,22 @@ public class MemberServiceImpl implements MemberService {
 	public long getTotalCountMF(MemberVo memberVO) {
 		return memberMapper.getTotalCountMF(memberVO);
 	}
+	
 
+	@Override
+	public List<Long> sumFree() {
+		
+		return memberMapper.sumFree();
+	}
+	
+	@Override
+	public List<Long> sumCor() {
+		return memberMapper.sumCor();
+	}
+
+	@Override
+	public List<Long> month() {
+		// TODO Auto-generated method stub
+		return memberMapper.month();
+	}
 }

@@ -24,8 +24,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private ProjectMapper mapper;
 	
 	@Override
-	public List<Project> list(ProjectVo projectVo) {
-		return mapper.list(projectVo);
+	public List<Project> list(Map<String, Object> map) {
+		return mapper.list(map);
 	}
 
 	@Override
@@ -33,6 +33,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return mapper.getTotalCount();
 	}
 
+	//sorting 할때 필요한 매퍼들
+	@Override
+	public long getTotalCount_select(int type_nums){
+		return mapper.getTotalCount_select(type_nums);
+	}
 	//mydash_cor에서 project 관리부분들
 	@Override
 	public List<Project> listMydashCor(Map<String, Object> map){

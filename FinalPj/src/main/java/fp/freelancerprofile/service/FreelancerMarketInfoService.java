@@ -26,4 +26,5 @@ public interface FreelancerMarketInfoService {
 	List<MarketBuysellList> myBuyMarket(HashMap<String,Object> map);
 
 	void deleteMarketPayment(long marketPaym_num);	
+
 }

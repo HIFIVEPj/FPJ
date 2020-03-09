@@ -22,7 +22,9 @@ public interface MemberService {
 	//개인
 	List<PayInformation> marketListFree(MemberVo memberVO);
 	long getTotalCountMF(MemberVo memberVO);
-	/*
-	public boolean loginCheck(Member member,HttpSession session);
-	public void logout(HttpSession session); */
+
+	
+	List<Long> sumFree();
+	List<Long> sumCor();
+	List<Long> month();
 }

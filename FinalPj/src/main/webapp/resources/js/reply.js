@@ -29,7 +29,9 @@ var replyService = (function(){
 		$.getJSON("/replies/pages/" + qa_num + "/" + page + ".json",
 			function(data) {
 				if (callback) {
-					callback(data);
+					//callback(data); // 댓글의 목록만 가져오기
+					//alert("@@@replyCnt : " + data.replyCnt);
+					callback(data.replyCnt, data.list); // 댓글 수와 목록을 함께 가져오기					
 				}
 			}).fail(function(xhr, status, err) {
 				if (error) {

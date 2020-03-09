@@ -53,6 +53,21 @@
 		UPDATE MEMBER SET MEM_PWD=#{pwd} WHERE MEM_EMAIL=#{email} 
 	</update>
 	
+	<!-- 관리자 매출합계 -->
+	<select id="sumFree" resultType="Long" >
+		select SUM(payinfo_price)from pay_information where PAYINFO_UID like 'market_%' group by TO_CHAR (payinfo_rdate, 'MM')
+	</select>
+	
+	<select id="sumCor" resultType="Long" >
+		select SUM(payinfo_price)from pay_information where PAYINFO_UID like 'project_%' group by TO_CHAR (payinfo_rdate, 'MM')
+	</select>
+	
+	<select id="month" resultType="Long" >
+		SELECT  TO_CHAR(payinfo_rdate, 'MM') FROM pay_information where PAYINFO_UID like 'market_%' 
+		group by TO_CHAR (payinfo_rdate, 'MM')
+	</select>
+	
+	
 	<!-- 관리자 멤버리스트  -->
 	<select id="getList" parameterType="Map" resultMap="MemberMap">
 	 	<![CDATA[
@@ -89,12 +104,13 @@
 		</choose>
 	</sql>
 	
+	<!-- 기업 마켓  -->
 	<select id="marketListCor" parameterType="MemberVo" resultMap="PayInformationMap" >
 	 	<![CDATA[
 			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'project_%' ]]>
 			 <include refid="searchAll" />
 		<![CDATA[	
-		 ) aa) where rnum>#{start} and rnum<=#{end} 
+		 order by PAYINFO_RDATE desc ) aa) where rnum>#{start} and rnum<=#{end} 
 	  	]]>
 	</select>
 	
@@ -111,19 +127,24 @@
 			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'market_%'  ]]>
 			 <include refid="searchAll" />	
 		<![CDATA[ 
-			) aa) where rnum>#{start} and rnum<=#{end} 
+			order by PAYINFO_RDATE desc ) aa) where rnum>#{start} and rnum<=#{end} 
 	  	]]>
 	</select>
 	
 	<select id="getTotalCountMF" resultType="long" >
-	<![CDATA[
-		select count(PAYINFO_PAYID) from PAY_INFORMATION where PAYINFO_UID like 'market_%'
-	]]>		
-		<include refid="searchAll" />
+		<![CDATA[
+			select count(PAYINFO_PAYID) from PAY_INFORMATION where PAYINFO_UID like 'market_%'
+		]]>		
+			<include refid="searchAll" />
 	</select>
-
+	
+	<!-- 결제정보 검색 -->
 	<sql id="searchAll">
 		<if test="type != null">
+			<if test="type == 'ALL'.toString()"> 
+				AND (PAYINFO_PAYID like '%'||#{keyword}||'%' OR PAYINFO_PRICE like '%'||#{keyword}||'%'
+				OR PAYINFO_STATUS like '%'||#{keyword}||'%' OR PAYINFO_PGTID like '%'||#{keyword}||'%' OR PAYINFO_BUYERNAME like '%'||#{keyword}||'%')
+			</if> 
 			<if test="type == 'PI'.toString()"> AND PAYINFO_PAYID like '%'||#{keyword}||'%' </if> 
 			<if test="type == 'P'.toString()"> AND PAYINFO_PRICE like '%'||#{keyword}||'%' </if>
 			<if test="type == 'S'.toString()"> AND PAYINFO_STATUS like '%'||#{keyword}||'%' </if>
