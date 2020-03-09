@@ -190,6 +190,13 @@
 							
 							<c:if test="${!empty sessionScope.email}">
 								<c:choose>
+									<c:when test="${qa_content.mem_email eq sessionScope.email}">
+										<a class="btn btn-app" href="javasript:void(0)" onclick="javascript:notMine()">
+											<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+											<i class="fa fa-thumbs-o-up"></i>
+										</a>
+									</c:when>
+								
 									<c:when test="${qa_recommend_num_list.contains(qa_content.qa_num)}">
 										<!--										
 										<a class="btn btn-app" onclick="javascript:del_recomm(${qa_content.qa_num})" id="del_recomm${qa_content.qa_num}">
@@ -197,7 +204,10 @@
 										<div id="recomm${qa_content.qa_num}">
 											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num})" id="del_recomm${qa_content.qa_num}">
 												<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+												<!--
 												<i class="fa fa-thumbs-up"></i>
+												-->
+												<i class="fa fa-thumbs-up" style="color:#e8564a"></i>
 											</a>
 										</div>									
 									</c:when>
@@ -225,6 +235,9 @@
 							function needtoLogin(){
 								alert("로그인 후 사용 가능한 서비스 입니다.")
 							}
+							function notMine(){
+								alert("타인의 게시물만 추천 가능합니다.")
+							}
 							function add_recomm(qa_num){
 								//alert("mem_email : " + mem_email)
 								//alert("qa_num : " + qa_num)
@@ -249,7 +262,7 @@
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
-										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
+										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
 										//alert("qa_recommnum add after: " + qa_recommnum);
 									},
 									error: function(data){

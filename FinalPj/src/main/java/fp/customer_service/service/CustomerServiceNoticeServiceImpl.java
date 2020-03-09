@@ -1,11 +1,15 @@
 package fp.customer_service.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fp.customer_service.domain.CustomerServiceNotice;
+import fp.customer_service.domain.Notice_recommend;
+import fp.customer_service.domain.Qa_recommend;
 import fp.customer_service.mapper.CustomerServiceNoticeMapper;
 
 @Service
@@ -43,17 +47,22 @@ public class CustomerServiceNoticeServiceImpl implements CustomerServiceNoticeSe
 		return customerServiceNoticeMapper.notice_modify(customerServiceNotice);
 	}
 	
-	/*
+	// 공지글 좋아요
 	@Override
-	public void insertS(Address address) {
-		//addressDao.insert(address);
-		addressMapper.insert(address);//AddressServiceImpl1는 mapper를 참조할 것임
+	public List<Notice_recommend>notice_recommend_listS(String mem_email){
+		return customerServiceNoticeMapper.notice_recommend_list(mem_email);
 	}
 	@Override
-	public void deleteS(long seq) {
-		//addressDao.delete(seq);
-		addressMapper.delete(seq);//AddressServiceImpl1는 mapper를 참조할 것임
+	@Transactional
+	public void notice_recommend_insertS(Map<String, Object>map) {
+		customerServiceNoticeMapper.notice_recommend_insert(map);
+		customerServiceNoticeMapper.notice_recommend_update_in(map);	
 	}
-	*/
+	@Override
+	@Transactional
+	public void notice_recommend_delS(Map<String, Object>map) {
+		customerServiceNoticeMapper.notice_recommend_del(map);
+		customerServiceNoticeMapper.notice_recommend_update_del(map);
+	}
 
 }

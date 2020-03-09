@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -86,7 +88,7 @@ public class CustomerServiceQaController {
 
 	
 	@GetMapping("customer_service_qa_content")
-	public String customer_service_qa_content(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false)String mem_email) {
+	public String customer_service_qa_content(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false) String mem_email, HttpSession session) {
 		List<Qa_recommend>qa_recommend_list = customerServiceQaService.qa_recommend_listS(mem_email);
 		log.info("%%%mem_email : " + mem_email);
 		ArrayList<Long>qa_recommend_num_list  = new ArrayList<Long>();
@@ -96,7 +98,16 @@ public class CustomerServiceQaController {
 		}
 		log.info("#####qa_recommend_list : " + qa_recommend_list);
 		log.info("#####qa_recommend_num_list : " + qa_recommend_num_list);
-		customerServiceQaService.qa_vcntS(qa_num);
+		
+		String sessionEmail = (String)session.getAttribute("email");
+		sessionEmail = sessionEmail.trim();
+		mem_email = mem_email.trim();
+		log.info("%%%%%mem_email : " + mem_email);
+		log.info("%%%%%sessionEmail : " + sessionEmail);
+		if(!mem_email.equals(sessionEmail)) { //자기 게시글 조회수 증가 방지
+			customerServiceQaService.qa_vcntS(qa_num);
+		}
+			
 		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
 		model.addAttribute("qa_recommend_list", qa_recommend_list);
 		model.addAttribute("qa_recommend_num_list", qa_recommend_num_list);
