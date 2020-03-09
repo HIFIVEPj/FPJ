@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
@@ -40,8 +41,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<Market> getMarketList(MarketPagingVO marketVO) {
-		return mapper.getMarketList(marketVO);
+	public List<Market> getMarketList ( HashMap<String,Object> Pagingmap) {
+		return mapper.getMarketList(Pagingmap);
 	}
 
 	@Override
@@ -139,14 +140,18 @@ public class MarketServiceImpl implements MarketService {
 	public String getFreeName(long market_num) {
 		return mapper.getFreeName(market_num);
 	}
-
+	@Override
 	public void insertPaymentMarket(Map<String,Object> map) {
 		mapper.insertPaymentMarket(map);
 	}
+	@Override
+	public void insertPaymentMarket2(Map<String, Object> map) {
+		mapper.insertPaymentMarket2(map);
+	}
+	
 //마켓리스팅시 하트색깔 여부를위해서
 	public List<MarketPick> pickState(String mem_email) {
-		return mapper.pickState(mem_email);
-		
+		return mapper.pickState(mem_email);	
 	}
 	@Override
 	public void insertMarketPick(HashMap<String,Object> map) {
@@ -161,6 +166,15 @@ public class MarketServiceImpl implements MarketService {
 
 		mapper.deleteMarketPick(map);
 		mapper.updateMinusMarketPick(market_num);
+	}
+//마켓구매내역insert
+	@Override
+	public void insertMarketBuy(HashMap<String, Object> map) {
+		mapper.insertMarketBuy(map);
+		
+	}
+	public List<MarketBuysellList> writeReview(HashMap<String,Object> map){
+		return mapper.writeReview(map);	
 	}
 
 }

@@ -192,66 +192,48 @@
                                        <th>첨부파일</th>
                                  </tr>
                               </thead>
-
-						 <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
-						  
-								<form id="del_list" method="get" action="freelancerProfile_cehck_delete?mem_email=${sessionScope.email}&pro_num=${freeLancer.pro_num}" name="checkdelete1">
-							</c:forEach>
 						
-                               
-                
-                     <c:forEach  var="freelancer" items="${profile_list}" varStatus="status">
-
-                             <tr>
+			
+							<form id="del_list" method="get" action="freelancerProfile_cehck_delete" name="checkdelete1">
+							
+  								<input type="hidden" name="mem_email" value="${profile_list[0].mem_email}" />
+  								<!-- input type="hidden" name="pro_num" value="${profile_list[0].pro_num}" />-->
+                    			 <c:forEach  var="freelancer" items="${profile_list}" varStatus="status">
+                            		 <tr>
                                        <td scope="row">
                                           <label class="custom-control custom-checkbox ">                                 			
                                              <input type="checkbox" class="custom-control-input ab" name="pro_num" value="${freelancer.pro_num}" >          
                                              <span class="custom-control-label"> </span>
                                           </label>           
                                        </td>
-                                       
-                                       
+
                                           <td><a href='freelancerProfile_content?mem_email=${sessionScope.email}&PRO_NUM=${freelancer.pro_num}'class="btn-link">${freelancer.profile_sub}</a></td>       
                                     <!--      <td>${freeLancer.mem_email}</td>-->
                                        <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
-
-				
-								
-                  				
-                                   		
+                           		
                                    	<c:set var="doneLoop" value="true" />					
                                    	<c:choose>
                                    	   <c:when test="${empty file_name}">
 									   </c:when>
-									
+										
 										<c:otherwise>
 											<c:forEach var="file" items="${file_name}">
 													<c:if test="${file.pro_num eq freelancer.pro_num && doneLoop}">	
 														<c:set var="doneLoop" value="false" />		
-													</c:if>	
-																				
-											</c:forEach>   
-											 	
+													</c:if>										
+											</c:forEach>   					 	
 										</c:otherwise>
 									</c:choose>
 									
 									<c:choose>
 									    <c:when test="${!doneLoop}">
-									   
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
-									     
 									    </c:when>
-									       
-									    
+									       	    
 									    <c:otherwise>
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>
 									    </c:otherwise>
-									</c:choose>
-                                   
-												
-								   				
-									
-									
+									</c:choose>				
                                    	
                               </tr>
                   </c:forEach>  	

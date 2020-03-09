@@ -8,6 +8,7 @@ import java.util.Map;
 import fp.corporation.domain.Corporation;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
@@ -22,7 +23,7 @@ public interface MarketService {
 	//문의 페이징에 필요한 총 문의 수 
 	 int getMarketQACount(long market_num);
 	 
-	 List<Market> getMarketList(MarketPagingVO marketVO);
+	 List<Market> getMarketList(HashMap<String, Object> pagingmap);
 //	 Market getMarketContent(long market_num);
 	 Market getMarket(long market_num);
 	 Integer getMarketStar(long market_num);
@@ -54,10 +55,15 @@ public interface MarketService {
 	 String getFreeName(long market_num);
 	 
 	 void insertPaymentMarket(Map<String, Object> payinfoMarket);
-
+	 void insertPaymentMarket2(Map<String,Object> map);
+	 
 	 List<MarketPick> pickState(String mem_email);
 	 void insertMarketPick(HashMap<String,Object> map);
 	 void deleteMarketPick(HashMap<String,Object> map);
+	 
+	 void insertMarketBuy(HashMap<String,Object> map);
+	 
+	 List<MarketBuysellList> writeReview(HashMap<String,Object> map);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 

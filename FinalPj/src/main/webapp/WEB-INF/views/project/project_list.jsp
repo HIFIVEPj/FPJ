@@ -19,56 +19,6 @@
 				<!--  				<h1 class=""><span class="font-weight-bold">12,32,523</span> Books Available</h1>  -->	
 								</div>
 								<div class="search-background mb-0">
-						 <!--			<div class="form row no-gutters">
-											<div class="form-group  col-xl-6 col-lg-5 col-md-12 mb-0">
-											<input type="text" class="form-control input-lg border-right-0" id="text" placeholder="Search Your Book">
-										</div>  
-										
-											
-								  	<div class="form-group col-xl-4 col-lg-4 select2-lg  col-md-12 mb-0">
-											<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
-												<optgroup label="Categories">
-													<option>Category</option>
-													<option value="1">Action and adventure</option>
-													<option value="2">Alternate history</option>
-													<option value="3">Anthology</option>
-													<option value="4">Chick lit</option>
-													<option value="5">Children's literature</option>
-													<option value="6">Comic book</option>
-													<option value="7">Coming-of-age</option>
-													<option value="8">Crime</option>
-													<option value="9">Drama</option>
-													<option value="10">Fairytale</option>
-													<option value="11">Fantasy</option>
-													<option value="12">Graphic novel</option>
-													<option value="13">Historical fiction</option>
-													<option value="14">Mystery</option>
-													<option value="15">Paranormal romance</option>
-													<option value="16">Picture book</option>
-													<option value="17">Poetry</option>
-													<option value="18">Political thriller</option>
-													<option value="19">Romance</option>
-													<option value="20">Satire</option>
-													<option value="21">Science fiction</option>
-													<option value="22">Love</option>
-													<option value="23">Short story</option>
-													<option value="24">Suspense</option>
-													<option value="25">Thriller</option>
-													<option value="26">Art</option>
-													<option value="27">Autobiography</option>
-													<option value="28">Biography</option>
-													<option value="29">Book review</option>
-												</optgroup>
-											</select>
-										</div>   
-										
-										
-										
-										<div class="col-xl-2 col-lg-3 col-md-12 mb-0">
-											<a href="#" class="btn btn-lg btn-block btn-secondary">Search</a>
-										</div>
-									</div>  -->	
-									
 									
 								</div>
 							</div>
@@ -85,9 +35,9 @@
 				<div class="page-header">
 					<h4 class="page-title">Project</h4>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Books List Right</li>
+						<li class="breadcrumb-item"><a href="..">Home</a></li>
+						<li class="breadcrumb-item"><a href="#">Project</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Project List</li>
 					</ol>
 				</div>
 			</div>
@@ -103,6 +53,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="input-group">
+								
 									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색">
 									<div class="input-group-append ">
 										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
@@ -113,48 +64,48 @@
 							</div>
 						</div>
 						<div class="card">
-						
+						<form id="no_submit">
 						<!-- 구분 카테고리 -->
 							<div class="card-header border-top">
-								<h3 class="card-title">구분</h3>
+								<h3 class="card-title">직종</h3>
 							</div>
 									<div class="card-body">
 								<div class="filter-product-checkboxs">
 								
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<input type="checkbox" class="custom-control-input" name="type" value="1">
 										<span class="custom-control-label">
 											개발
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countDevelop}</span>
 										</span>
 									</label>
 									
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="2">
 										<span class="custom-control-label">
 											퍼블리싱
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countPublishing}</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="3">
 										<span class="custom-control-label">
 											디자인
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countDesign}</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="4">
 										<span class="custom-control-label">
 											기획
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countPlan}</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="5">
 										<span class="custom-control-label">
 											기타
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countEtc}</span>
 										</span>
 									</label>
 								</div>
@@ -168,7 +119,7 @@
 								<div class="filter-product-checkboxs">
 								
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<input type="checkbox" class="custom-control-input" name="pj_fgrade" value="1">
 										<span class="custom-control-label">
 											초급
 											<span class="label label-secondary float-right">14</span>
@@ -176,14 +127,14 @@
 									</label>
 									
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pj_fgrade" value="2">
 										<span class="custom-control-label">
 											중급
 											<span class="label label-secondary float-right">14</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pj_fgrade" value="3">
 										<span class="custom-control-label">
 											고급
 											<span class="label label-secondary float-right">14</span>
@@ -200,7 +151,7 @@
 								<div class="filter-product-checkboxs">
 								
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<input type="checkbox" class="custom-control-input" name="pj_place" value="0">
 										<span class="custom-control-label">
 											비상주
 											<span class="label label-secondary float-right">14</span>
@@ -208,21 +159,21 @@
 									</label>
 									
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pj_place" value="1">
 										<span class="custom-control-label">
 											상주
 											<span class="label label-secondary float-right">14</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pj_place" value="2">
 										<span class="custom-control-label">
 											반상주
 											<span class="label label-secondary float-right">14</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pj_place" value="3">
 										<span class="custom-control-label">
 											상관없음
 											<span class="label label-secondary float-right">14</span>
@@ -237,7 +188,7 @@
 							</div>
 									<div class="card-body">
 								<div class="filter-product-checkboxs">
-																				<div class="d-flex"> 
+									<div class="d-flex"> 
 											<select name="all_area" id="all_area" class="form-control select-sm w-100">
 												<option>전체</option>
 												<option value="100">서울</option>
@@ -295,160 +246,11 @@
 								</div>
 							</div>
 						<!-- /지역 카테고리 -->
-							<div class="card-header border-top">
-								<h3 class="card-title">관련기술</h3>
-							</div>
-							<div class="card-body">
-								<div class="" id="container">
-									<div class="filter-product-checkboxs">
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">CGI<span class="label label-secondary float-right">14</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">jQuery<span class="label label-secondary float-right">22</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox3" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">.Net<span class="label label-secondary float-right">78</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox4" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">Java<span class="label label-secondary float-right">35</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox5" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">C<span class="label label-secondary float-right">23</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox6" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">C++<span class="label label-secondary float-right">14</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">Angular<span class="label label-secondary float-right">45</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">HTML<span class="label label-secondary float-right">34</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">CFML<span class="label label-secondary float-right">12</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">Ajax<span class="label label-secondary float-right">18</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">Flash<span class="label label-secondary float-right">02</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">Android<span class="label label-secondary float-right">15</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">JavaScript<span class="label label-secondary float-right">32</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">MySQL<span class="label label-secondary float-right">23</span></a>
-											</span>
-										</label>
-										<label class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-											<span class="custom-control-label">
-												<a href="#" class="text-dark">SQL<span class="label label-secondary float-right">19</span></a>
-											</span>
-										</label>
-									</div>
-
-								</div>
-							</div>
-						<!-- /관련기술 카테고리 -->	
-				<!--  	<div class="card-header border-top">
-								<h3 class="card-title">Price Range</h3>
-							</div>
-							<div class="card-body">
-								<h6>
-								   <label for="price">Price Range:</label>
-								   <input type="text" id="price">
-								</h6>
-								<div id="mySlider"></div>
-							</div> 	-->		
 							
-				<!-- 	<div class="card-header border-top">
-								<h3 class="card-title">Posted By</h3>
-							</div>
-							<div class="card-body">
-								<div class="filter-product-checkboxs">
-									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
-										<span class="custom-control-label">
-											Individually
-										</span>
-									</label>
-									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-										<span class="custom-control-label">
-											Authors
-										</span>
-									</label>
-									<label class="custom-control custom-checkbox mb-0">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-										<span class="custom-control-label">
-											Publications
-										</span>
-									</label>
-								</div>
-							</div> -->
 							<div class="card-footer">
 								<a href="#" class="btn btn-secondary btn-block">Apply Filter</a>
 							</div>
-						</div>
-						<div class="card mb-lg-0">
-					<!--  	<div class="card-header">
-								<h3 class="card-title">Shares</h3>
-							</div> 
-							<div class="card-body product-filter-desc">
-								<div class="product-filter-icons text-center">
-									<a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-									<a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-									<a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-									<a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
-									<a href="#" class="pinterest-bg"><i class="fa fa-pinterest"></i></a>
-								</div>
-							</div> -->
+						</form>	
 						</div>
 					</div>
 					<!--Left Side Content-->
@@ -457,23 +259,96 @@
 						<div class="card mb-0">
 							<div class="card-body">
 								<div class="item2-gl ">
-									<div class="item2-gl-nav d-flex" style="width:100%; margin-right:-70px;" >
-								<!--  <h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6> -->		
-										<ul class="nav item2-gl-menu ml-auto">
-											<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
-											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>
-										</ul>
-										<div class="d-flex" style="margin-right:-50px;"> 
+									<div class="item2-gl-nav d-flex" style="width:100%;" align="right" >
+									  <h6 class="mb-0 mt-2">Showing &nbsp;${pa.nowPage}&nbsp; to &nbsp;${pa.cntPerPage}&nbsp; of &nbsp;${pa.total}&nbsp; entries</h6> 	
+										<ul class="nav item2-gl-menu ml-auto"></ul>
+										<div class="d-flex"> 
 								<!--  		<label class="mr-2 mt-1 mb-sm-1">Sort By:</label>  -->	
-											<select name="item" class="form-control select-sm w-70">
-												<option value="1">Latest</option>
-												<option value="2">Oldest</option>
-												<option value="3">Price:Low-to-High</option>
-												<option value="5">Price:Hight-to-Low</option>
+										<c:if test="${empty selectKeyword}">
+											<select name="item" class="form-control select-sm"  style="width:160px;" id="selectbox_cate" onchange="sortSelectbox(this.value)">
+												<option id ="pj_rdate" value="pj_rdate" selected>최신순</option>
+												<option id ="pj_recnum" value="pj_recnum">모집인원순</option>
+												<option id ="pj_pay" value="pj_pay">규모순</option>
+												<option id ="pj_vcnt"  value="pj_vcnt">조회높은순</option>
 											</select>
+										</c:if>
+										<c:if test="${!empty selectKeyword}">
+											<select name="item" class="form-control select-sm"  style="width:160px;" id="selectbox_cate" onchange="sortSelectbox(this.value)">
+												<option id ="pj_rdate" value="pj_rdate"<c:if test="${selectKeyword eq 'pj_rdate'}"> selected</c:if>>최신순</option>
+												<option id ="pj_recnum" value="pj_recnum"<c:if test="${selectKeyword eq 'pj_recnum'}"> selected</c:if>>모집인원순</option>
+												<option id ="pj_pay" value="pj_pay"<c:if test="${selectKeyword eq 'pj_pay'}"> selected</c:if>>규모순</option>
+												<option id ="pj_vcnt"  value="pj_vcnt"<c:if test="${selectKeyword eq 'pj_vcnt'}"> selected</c:if>>조회높은순</option>
+											</select>
+										</c:if>
 										</div>
 										
 									</div>
+									<script>
+									
+									$("form#no_submit input:checkbox[name='type']").on("click",function(){
+										var type = new Array();
+										var type_cnt = 0;
+										 $('input:checkbox[name="type"]').each(function() {
+												if(this.checked){
+													type[type_cnt] = this.value;
+													type_cnt++;
+												}
+										});
+										 sortAjax(type);
+									});
+									
+									function sortAjax(value){
+									var objParam={
+											"typeList" : value
+									};
+										 $.ajax({
+											 type:"get",
+											 url:"<c:url value='project_list' />",
+											 data:objParam,
+											 dataType: "json",
+											 success:function(data){
+												 var list = data.countDevelop;
+												 alert(list);
+												 console.log(list);
+											 },
+											 error:function(data){
+												 alert("에러발생");
+											 }
+										 });
+									}	
+									
+									function sortSelectbox(value){
+										var selectkey= value; 
+										//alert(selectkey);
+										var flag= ${!empty sessionScope.email};
+										if(flag==true){
+											var email="${sessionScope.email}";
+											$.ajax({
+												type:"get",
+												url:"<c:url value='project_list_sort' />",
+												data:"selectKeyword="+selectkey+"&mem_email="+email,
+												success: function(data){
+													location.href="project_list?"+data;
+												},
+												error: function(data){
+												alert("에러발생");
+												}
+											});
+										}else{
+											$.ajax({
+												type:"get",
+												url:"<c:url value='project_list_sort' />",
+												data:"selectKeyword="+selectkey,
+												success: function(data){
+													location.href="project_list?selectKeyword="+data;
+												},
+												error: function(data){
+												alert("에러발생");
+												}
+											});
+										}
+									}
+									</script>
 									<!--  <div><a href="project_write" class="btn btn-primary" style="margin-top:-85px; margin-left:15px;">글쓰기</a></div>
 									-->
 									<div class="tab-content">
@@ -529,6 +404,7 @@
 														</div>
 														</c:if>
 														<script>
+														
 														function onlyFree(){
 															alert("프리랜서 회원만 이용가능한 서비스 입니다.")
 														}
@@ -544,6 +420,7 @@
 																success: function(data){
 																	$('#insertwish'+pj_num).remove();
 																	$('#zzim'+pj_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pj_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pj_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
+																	alert("프로젝트가 찜목록에 추가되었습니다.")
 																},
 																error: function(data){
 																alert("에러발생");
@@ -563,13 +440,40 @@
 														}
 														</script>
 															<div class="item-card9">
+															<i class="fa fa-map-marker"></i>
 															<c:set var = "loc" value="${fn:split(dto.pj_loc,' ')}"/>
 															<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
 															<c:if test="${g.count<3}" >
-															${pj_loc}
+															 ${pj_loc}
 															</c:if>
 															</c:forEach>
-																/
+															<span style="margin-left:10px; margin-right:10px">
+																 <i class="fa fa-user" ></i>
+																<c:if test="${dto.type_num==1}">
+																개발
+																</c:if>
+																<c:if test="${dto.type_num==2}">
+																퍼블리싱
+																</c:if>
+																<c:if test="${dto.type_num==3}">
+																디자인
+																</c:if>
+																<c:if test="${dto.type_num==4}">
+																기획
+																</c:if>
+																<c:if test="${dto.type_num==5}">
+																기타
+																</c:if>
+																|<c:if test="${dto.pj_fgrade == 1}" >
+																초급
+																</c:if>
+																<c:if test="${dto.pj_fgrade == 2}" >
+																중급
+																</c:if>
+																<c:if test="${dto.pj_fgrade == 3}" >
+																고급
+																</c:if>
+																</span>
 																<c:forEach var="key" items="${keyname}">
 																	<c:if test="${key.pj_num eq dto.pj_num}">
 																		<c:choose>
@@ -592,8 +496,7 @@
 																			</c:otherwise>
 																		</c:choose>
 																	</c:if>
-																</c:forEach>
-																/ ${dto.corporation.cor_name}<br/><br/>
+																</c:forEach><br/><br/>
 																<c:if test="${!empty sessionScope.email }">
 																<a href="project_content?pj_num=${dto.pj_num}&mem_email=${sessionScope.email}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
 																</c:if>
@@ -625,14 +528,14 @@
 															<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 															<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
 															<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
-															<c:choose>
-																<c:when test="${endDate > currentDate}">
+															
+																<c:if test="${dto.pj_status==0 && endDate > currentDate}">
 																	D -${endDate - currentDate}
-																</c:when>
-																<c:otherwise>
+																</c:if>
+																<c:if test="${dto.pj_status==1 || endDate <= currentDate}">
 																	마감
-																</c:otherwise>
-															</c:choose>
+																</c:if>
+															
 															</strong></span>
 														&nbsp;&nbsp;&nbsp;
 														<span> (${dto.pj_ddate})</span>
@@ -648,76 +551,17 @@
 											</c:forEach>
 										</c:if>
 										</div>
-										<div class="tab-pane" id="tab-12">
-											<div class="row">
-											<c:forEach var="dto" items="${list}">	
-												<div class="col-lg-6 col-md-12 col-xl-6">
-													<div class="card overflow-hidden">
-														<div >
-											<!--  			<div class="arrow-ribbon bg-primary">New</div> -->	
-															<div class="item-card9-imgs">
-																<a href="books.html"></a>
-												<!-- 				<img src="../images/products/books/11.png" alt="img" class="cover-image h-100">  -->	
-															</div>
-															<div class="item-card9-icons">
-																<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-															</div>
-														</div>
-														<div class="card-body ">
-															<div class="item-card9">
-																${dto.pj_loc} / 사용언어 /${dto.corporation.cor_name}<br/><br/>
-																<a href="content.do" class="text-dark"><h4 class="font-weight-bold mt-1 mb-1">${dto.pj_sub}</h4></a>
-																<small class="">${dto.pj_cont}</small><br/><br/>
-																<p class="mb-0 leading-tight mt-1">급여 : ${dto.pj_pay}</p>
-															</div>
-														</div>
-														<div class="card-footer pt-4 pb-4">
-															<div class="item-card9-footer d-flex">
-																<div class="item-card9-cost">
-																<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>D - 10</strong></span>
-																&nbsp;&nbsp;&nbsp;
-																<span> (${dto.pj_ddate})</span>
-													<!--  					<h4 class="text-dark font-weight-semibold mb-0 mt-0">$263.99</h4>-->	
-																</div>
-														<!-- 		<div class="ml-auto">
-																	<div class="rating-stars block">
-																		<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="3">
-																		<div class="rating-stars-container">
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																			<div class="rating-star sm">
-																				<i class="fa fa-star"></i>
-																			</div>
-																		</div>
-																	</div>
-																</div> -->
-															</div>
-														</div>
-													</div>
-												</div>
-											</c:forEach>
-											</div>
-										</div>
 									</div>
 								</div>
 								<c:choose>
 								<c:when test="${!empty sessionScope.email}">
+								<c:if test="${!empty selectKeyword}">
 								<div class="center-block text-center">
 									<ul class="pagination mb-0">
 									<c:if test="${pa.nowPage != 1}">
 														<!--이전 페이지 이동 -->
 										<li class="page-item page-prev">
-											<a class="page-link" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">prev</a>
+											<a class="page-link mem_prev" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}&selectKeyword=${selectKeyword}">prev</a>
 										</li>
 									</c:if>
 									<!--페이지번호 -->
@@ -727,18 +571,79 @@
 												<li class='page-item active'><a class="page-link">${p}</a></li>
 											</c:when>
 											<c:when test = "${p != pa.nowPage }">
-												<li class="page-item"><a class="page-link" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">${p}</a></li>
+												<li class="page-item"><a class="page-link mem_no_nowPage" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}&selectKeyword=${selectKeyword}">${p}</a></li>
 											</c:when>
 										</c:choose>
 										</c:forEach>
 										<c:if test ="${pa.nowPage != pa.lastPage}">
 											<li class="page-item page-next">
-												<a class="page-link" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">Next</a>
+												<a class="page-link mem_next" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}&selectKeyword=${selectKeyword}">Next</a>
 											</li>
 										</c:if>
 										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
 									</ul>
 								</div>
+								</c:if>
+								<c:if test="${empty selectKeyword}">
+								<div class="center-block text-center">
+									<ul class="pagination mb-0">
+									<c:if test="${pa.nowPage != 1}">
+														<!--이전 페이지 이동 -->
+										<li class="page-item page-prev">
+											<a class="page-link mem_prev" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">prev</a>
+										</li>
+									</c:if>
+									<!--페이지번호 -->
+									<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
+										<c:choose>
+											<c:when test="${p == pa.nowPage}">
+												<li class='page-item active'><a class="page-link">${p}</a></li>
+											</c:when>
+											<c:when test = "${p != pa.nowPage }">
+												<li class="page-item"><a class="page-link mem_no_nowPage" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">${p}</a></li>
+											</c:when>
+										</c:choose>
+										</c:forEach>
+										<c:if test ="${pa.nowPage != pa.lastPage}">
+											<li class="page-item page-next">
+												<a class="page-link mem_next" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">Next</a>
+											</li>
+										</c:if>
+										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
+									</ul>
+								</div>
+								</c:if>
+								</c:when>
+								<c:otherwise>
+								<c:choose>
+								<c:when test="${!empty selectKeyword}">
+									<div class="center-block text-center">
+										<ul class="pagination mb-0">
+										<c:if test="${pa.nowPage != 1}">
+															<!--이전 페이지 이동 -->
+											<li class="page-item page-prev">
+												<a class="page-link noMem_prev" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&selectKeyword=${selectKeyword}">prev</a>
+											</li>
+										</c:if>
+										<!--페이지번호 -->
+										<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
+											<c:choose>
+												<c:when test="${p == pa.nowPage}">
+													<li class='page-item active'><a class="page-link">${p}</a></li>
+												</c:when>
+												<c:when test = "${p != pa.nowPage }">
+													<li class="page-item"><a class="page-link noMem_no_nowPage" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}&selectKeyword=${selectKeyword}">${p}</a></li>
+												</c:when>
+											</c:choose>
+											</c:forEach>
+											<c:if test ="${pa.nowPage != pa.lastPage}">
+												<li class="page-item page-next">
+													<a class="page-link noMem_next" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&selectKeyword=${selectKeyword}">Next</a>
+												</li>
+											</c:if>
+											<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
+										</ul>
+									</div>
 								</c:when>
 								<c:otherwise>
 									<div class="center-block text-center">
@@ -746,7 +651,7 @@
 									<c:if test="${pa.nowPage != 1}">
 														<!--이전 페이지 이동 -->
 										<li class="page-item page-prev">
-											<a class="page-link" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}">prev</a>
+											<a class="page-link noMem_prev" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}">prev</a>
 										</li>
 									</c:if>
 									<!--페이지번호 -->
@@ -756,18 +661,20 @@
 												<li class='page-item active'><a class="page-link">${p}</a></li>
 											</c:when>
 											<c:when test = "${p != pa.nowPage }">
-												<li class="page-item"><a class="page-link" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
+												<li class="page-item"><a class="page-link noMem_no_nowPage" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
 											</c:when>
 										</c:choose>
 										</c:forEach>
 										<c:if test ="${pa.nowPage != pa.lastPage}">
 											<li class="page-item page-next">
-												<a class="page-link" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+												<a class="page-link noMem_next" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
 											</li>
 										</c:if>
 										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
 									</ul>
 								</div>
+								</c:otherwise>
+								</c:choose>
 								</c:otherwise>
 								</c:choose>
 							</div>

@@ -94,14 +94,14 @@
 							</div>
 							<div class="card-body">
 								<div class="" id="">
-									<div class="filter-product-checkboxs">
+									<div class="filter-product-checkboxs" id="cateCheckbox">
 										<label for="개발" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="cate_num" value="1"  id="개발">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="cate1"  id="개발">
 											<span class="custom-control-label" class="text-dark">개발자<span class="label label-secondary float-right">14</span>
 											</span>
 										</label>
 										<label for="퍼블리싱" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="cate_num" value="2" id="퍼블리싱">
+											<input type="checkbox" class="custom-control-input" name="cate_num" value="cate2" id="퍼블리싱">
 											<span class="custom-control-label" class="text-dark">디자이너<span class="label label-secondary float-right">22</span>
 											</span>
 										</label>
@@ -122,21 +122,21 @@
 								<h3 class="card-title">Condition</h3>
 							</div>
 							<div class="card-body">
-								<div class="filter-product-checkboxs">
+								<div class="filter-product-checkboxs" id="expCheckbox">
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp1">
 										<span class="custom-control-label">
 											초급
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp2">
 										<span class="custom-control-label">
 											중급
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp3">
 										<span class="custom-control-label">
 											고급
 										</span>
@@ -144,14 +144,68 @@
 								</div>
 							</div>
 							<div class="card-footer">
-								<a href="#" class="btn btn-secondary btn-block">Apply Filter</a>
+								<a href="javascript:void(0);" class="btn btn-secondary btn-block" id="marketSearchBox">Apply Filter</a>
 							</div>
 						</div>		
-					</form>
-						
-						
+					</form>		
 					</div>
 					<!--/Left Side Content-->
+<script>
+
+	$("#marketSearchBox").click(function (){
+		var checkedCate = [];
+		var checkedExp = [];
+		var marketPrice=$("#price").val()
+		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
+			//alert(index+":"+ $(this).val());
+			checkedCate.push($(this).val());
+		});
+		$("input:checkbox[name='pro_exp']:checked").each(function (index, item) {
+			//alert(index+":"+ $(this).val());
+			checkedExp.push($(this).val());
+		});
+		alert("checkedCate:"+checkedCate);
+		alert("checkedExp:"+checkedExp);
+		alert($("#price").val());
+//ajax로만 보내짐	
+		$.ajax({
+		        url: 'market-searchBoxlist'
+		        , type: 'Get'
+		        , dataType: 'text'
+		        , data: {
+		        	checkedCate: checkedCate,
+		        	checkedExp: checkedExp,
+		        	marketPrice: marketPrice
+		        }
+		    });
+//아래로보내면 배열이 안보내짐 (위에 아작스로보내야함)
+//window.location.href="market-searchBoxlist?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice;
+	});
+
+/*
+ * // 전체 갯수
+ $("input:checkbox[name=is_check]").length
+ 
+//선택된 갯수
+$("input:checkbox[name=is_check]:checked").length
+
+//전체 체크
+$("input[name=mycheck]:checkbox").prop("checked", true);
+
+//전체 체크 순회
+$("input:checkbox[name=is_check]").each(function() {
+this.checked = true;
+});
+
+//체크여부 확인
+if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
+//작업
+}
+ */
+	
+	
+	
+</script>				
 
 					<!--Add Lists-->
 					<div class="col-xl-9 col-lg-8 col-md-12">
@@ -161,14 +215,28 @@
 									<div class="item2-gl-nav d-flex">
 										<h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6>
 										<ul class="nav item2-gl-menu ml-auto">
-										<li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
-											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>
+										<!-- <li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li> 
+											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>-->	
 										</ul>
-										<div class="d-flex">
-											<select name="item" class="form-control select-sm w-100">
-												<option value="1">최신순</option>
-												<option value="2">평점순</option>
-												<option value="3">조회높은순</option>
+										<div class="d-flex"id="marketOrderDiv">
+											<select name="item" class="form-control select-sm w-100" id="marketOrder">
+											<c:choose>
+												<c:when test="${selectedKey==1}">
+													<option value="1" id="select1" selected="selected">최신순</option>
+													<option value="2" id="select2">평점순</option>
+													<option value="3" id="select3">조회높은순</option>
+												</c:when>
+												<c:when test="${selectedKey==2}">
+													<option value="1" id="select1">최신순</option>
+													<option value="2" id="select2" selected="selected">평점순</option>
+													<option value="3" id="select3">조회높은순</option>
+												</c:when>
+												<c:when test="${selectedKey==3}">
+													<option value="1" id="select1">최신순</option>
+													<option value="2" id="select2">평점순</option>
+													<option value="3" id="select3" selected="selected">조회높은순</option>
+												</c:when>	
+											</c:choose>
 											</select>
 										</div>
 									</div>
@@ -254,7 +322,7 @@
 																<c:choose>
 																	<c:when test="${sessionScope.email != null}">
 																		<c:if test="${fn:length(marketNumList) == 0}">	
-																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"> <i class="fa fa fa-heart-o"></i></a>
+																			<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"  id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o"></i></a>
 																		</c:if>
 																	</c:when>
 																	<c:otherwise>
@@ -309,10 +377,10 @@
 								<!--이전 페이지 이동 -->
 									<c:if test="${paging.nowPage != 1}">
 										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
+											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-left"></i></a>
 										</li>
 										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
+											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-left"></i></a>
 										</li>
 									</c:if>
 								 <!--페이지번호 -->
@@ -325,7 +393,8 @@
 										</c:when>
 										 <c:when test = "${p != paging.nowPage }">
 											<li class="page-item">
-												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}">${p}</a>
+
 											</li>
 										</c:when>
 									</c:choose>
@@ -333,16 +402,16 @@
 	 								<!--다음페이지이동 --> 
 	 								   <c:if test ="${paging.nowPage != paging.lastPage}">
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+												<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-right"></i></a>
 											</li>
 										
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
+												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 											<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
-												<div style="margin-left:500px;"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+												<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 											</c:if>
 										 
 									</ul>
@@ -389,7 +458,26 @@
 		});
 	}
 </script>
+<script>
+	/*
+	 $(document).ready(function(){
+		$("#marketOrder").click(function(){						        
+	         var orderKeyword = $("#marketOrder option:selected").val();
+	          alert("order::"+orderKeyword);
+	          window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
+	      })
+	})
+	*/
+	$('#marketOrder').change( function(){
+	    alert($(this).val());
+	    var selectedKey= $(this).val();
+	    alert("selectedKeyword"+selectedKey);
+	    window.location.href="market-list?selectedKey="+selectedKey;	
+	});
 
+	
+
+</script>
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

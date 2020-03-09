@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class List_PagingVO {
-
 		//total:게시글총개수, cntPerPage:페이지당글개수  start, end : 쿼리용
 		private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
 		private int cntPage=4;
-
+		private long pro_num;
+		
 		public List_PagingVO(int total, int nowPage, int cntPerPage) {
 			setNowPage(nowPage);
 			setCntPerPage(cntPerPage);

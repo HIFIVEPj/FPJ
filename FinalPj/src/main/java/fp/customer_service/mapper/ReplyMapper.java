@@ -14,4 +14,5 @@ public interface ReplyMapper {
 	public int delete(Long qacomm_num);
 	public int update(ReplyVO reply);
 	public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("qa_num") Long qa_num); //댓글 목록 불러오기
+	public long getCountByQa_num(Long qa_num);
 }

@@ -5,14 +5,15 @@
   
 <configuration>
 	<typeAliases>
-
 		<!-- 승훈 -->
 		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
 		<typeAlias alias="CustomerServiceQa" type="fp.customer_service.domain.CustomerServiceQa"/>
+		<typeAlias alias="CustomerServiceFaq" type="fp.customer_service.domain.CustomerServiceFaq"/>
 		<typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
 	  	<typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
 	  	<typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
 	  	<typeAlias alias="BoardAttachVO" type="fp.customer_service.domain.BoardAttachVO"/>
+	  	<typeAlias alias="Qa_recommend" type="fp.customer_service.domain.Qa_recommend"/>
 		<!--
 		<typeAlias alias="CustomerServicePagingVO" type="fp.customer_service.domain.CustomerServicePagingVO"/>
 		-->
@@ -20,7 +21,6 @@
 		
 		<!-- 세영 -->
 		<typeAlias alias="Market" type="fp.market.domain.Market"/>
-        <typeAlias alias="MarketVO" type="fp.market.utils.MarketPagingVO"/>
         <typeAlias alias="mFreelancer" type="fp.market.domain.Freelancer"/>
         <typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
         <typeAlias alias="MarketRevComm" type="fp.market.domain.MarketRevComm"/>
@@ -31,6 +31,8 @@
         <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
         <typeAlias alias="MarketPayment" type="fp.market.domain.MarketPayment"/>
      	<typeAlias alias="MarketPick" type="fp.market.domain.MarketPick"/>
+     	<typeAlias alias="MarketBuysellList" type="fp.market.domain.MarketBuysellList"/>
+
 		
 		<!-- 별 -->
 		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
@@ -41,14 +43,15 @@
         <typeAlias alias="FreeLancerProfileListVO" type="fp.freelancerprofile.domain.FreeLancerProfileListVO"/>
         <typeAlias alias="PagingVO" type="fp.freelancerprofile.domain.PagingVO"/>
 
-		<!--<typeAlias alias="frType" type="fp.freelancerprofile.domain.Type"/> -->
         <typeAlias alias="frKeyWord" type="fp.freelancerprofile.domain.KeyWord"/>
        	<typeAlias alias="frProject" type="fp.freelancerprofile.domain.Project"/>
+       	<typeAlias alias="freePickKeyWord" type="fp.freelancerprofile.domain.FreePickKeyWord"/> 
+       	 <typeAlias alias="List_FreeLancerReview" type="fp.freelancerprofile.domain.List_FreeLancerReview"/>
        	<!-- 프리랜서 리스트 페이지 -->
  	    <typeAlias alias="FreeLancerListVO" type="fp.freelancerlist.domain.FreeLancerListVO"/>
 	    <typeAlias alias="List_FreeLancer" type="fp.freelancerlist.domain.List_FreeLancer"/>
 	    <typeAlias alias="List_FreeLancerProfile" type="fp.freelancerlist.domain.List_FreeLancerProfile"/>
-	    <typeAlias alias="List_FreeLancerReview" type="fp.freelancerlist.domain.List_FreeLancerReview"/>
+	 <!--   <typeAlias alias="List_FreeLancerReview" type="fp.freelancerlist.domain.List_FreeLancerReview"/> -->
 	    <typeAlias alias="List_PagingVO" type="fp.freelancerlist.domain.List_PagingVO"/>
 	    <typeAlias alias="List_Project" type="fp.freelancerlist.domain.List_Project"/>
 	    <typeAlias alias="List_Type" type="fp.freelancerlist.domain.List_Type"/>  
@@ -71,6 +74,7 @@
    	   <typeAlias alias="Member" type="fp.member.domain.Member"/>
    	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
    	    <typeAlias alias="MemberVo" type="fp.member.domain.MemberVo"/>
+   	      <typeAlias alias="PayInformation" type="fp.member.domain.PayInformation"/>
    	    <!-- <typeAlias alias="CustomUserDetails" type="fp.password.security.CustomUserDetails"/> -->
 
 	</typeAliases>

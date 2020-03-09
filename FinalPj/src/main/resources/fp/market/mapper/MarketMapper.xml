@@ -39,7 +39,6 @@
 			<id property="pro_num" column="pro_num" />
 			<id property="free_code" column="free_code" />
 			<id property="Type_num" column="Type_num" />
-			<id property="pro_num" column="pro_num" />
 			<id property="pro_exp" column="pro_exp" />
 			<id property="pro_cv" column="pro_cv" />
 			<id property="pro_addr" column="pro_addr" />
@@ -53,6 +52,26 @@
 		</association> 
 	</resultMap>
 	
+<resultMap id="resultMarketSearchBox" type="Market">
+	<id property="market_num" column="market_num" />
+	<result property="free_code" column="free_code" />
+	<result property="cate_num" column="cate_num" />
+	<result property="market_price" column="market_price" />
+	<result property="market_sub" column="market_sub" />
+	<result property="market_cont" column="market_cont" />
+	<result property="market_vcnt" column="market_vcnt" />
+	<result property="market_fname" column="market_fname" />
+	<result property="market_ofname" column="market_ofname" />
+	<result property="market_state" column="market_state" />
+	<result property="market_pcnt" column="market_pcnt" />
+	<result property="option3" column="option3" />
+   	<association property="freelancerProfile" javaType="mFreelancerProfile" column ="pro_num" ><!--프리랜서정보를뽑는데 따로 원하는정보들만!있는 클래스를 모아서 맵으로써야하는지 몰라서 일단 적어놓음, 일단 resultMarket에 같이 프리프로필을 넣어버림-->	
+		<id property="pro_num" column="pro_num" />
+		<id property="free_code" column="free_code" />
+		<id property="pro_exp" column="pro_exp" />
+	</association> 
+</resultMap>
+
 	<resultMap id="resultMarketRev" type="MarketRev">
         <id property="marketRev_num" column ="marketRev_num" />
          <result property="marketRev_cont" column ="marketRev_cont" />
@@ -74,6 +93,11 @@
 	        <result property="cor_mname" column ="cor_mname" />    
 	        <result property="cor_fname" column ="cor_fname" /><!-- result안쓰는 컬럼은 unread 로 나옴 -->
 	        <result property="cor_ofname" column ="cor_ofname" />    
+    	</association>
+    	<association property="member" javaType="mMember" column ="mem_email" >
+	       	<id property="mem_email" column ="mem_email" />
+	        <result property="mem_name" column ="mem_name" />
+	        <result property="class_num" column ="class_num" />     
     	</association>
 	</resultMap>
 	
@@ -100,6 +124,11 @@
 	     	<result property="mem_email" column ="mem_email" /> <!-- 빼면 기업의 이메일이 unread로됨 -->
 	        <result property="cor_mname" column ="cor_mname" />    
     	</association>
+    	<association property="member" javaType="mMember" column ="mem_email" >
+	       	<id property="mem_email" column ="mem_email" />
+	        <result property="mem_name" column ="mem_name" />
+	        <result property="class_num" column ="class_num" />     
+    	</association>
 	</resultMap>
 	
 	<!-- 마켓 총 게시글 갯수 출력 -->
@@ -116,17 +145,37 @@
 		SELECT COUNT(*) FROM MARKET_QA where market_num=#{market_num}
 	</select>
 	
-	<!-- 페이징 처리 후 게시글 조회 -->
-	<select id="getMarketList" resultMap="resultMarket" parameterType="MarketVO">
-		<![CDATA[
-			select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-			(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+<!-- 페이징 처리 후 게시글 조회 최신순 평점순 조회순-->
+	<select id="getMarketList" resultMap="resultMarket" parameterType="hashmap">
+		select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+			(select FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
 			right outer join
 			(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
-			on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
-			where rnum>#{start} and rnum<=#{end}
-		]]>
+			on A.MARKET_NUM=B.마켓넘 
+		<if test="selectedKey==1">
+			ORDER BY A.MARKET_NUM desc ) aa)
+		</if>	
+		<if test="selectedKey==2">
+			ORDER BY B.marketRev_star desc nulls last) aa)
+		</if>		
+		<if test="selectedKey==3">
+			ORDER BY A.MARKET_VCNT desc) aa)
+		</if>		
+		<![CDATA[where rnum>#{start} and rnum<=#{end}]]>				
 	</select>
+<!-- 페이징 처리 후 마켓 searchBox orderLists
+<select id="searchBoxMarketList" resultMap="resultMarketSearchBox">
+	<![CDATA[
+		select * from (select ROWNUM rnum , aa.* from 
+	    (select * from market m left outer join FREELANCER_PROFILE fp on fp.free_code=m.free_code 
+	    where cate_num=1 
+	    and market_price between 1000 and 80000
+	    and fp.pro_exp between 1 and 4 
+	    order by market_num desc)aa) 
+	    where rnum>#{start} and rnum<=#{end}
+	    ]]>
+</select>	
+-->		
 	
 <!-- 마켓상세보기 -->
 	<select id="getMarket" resultType="Market" parameterType="long">
@@ -141,17 +190,31 @@
 	<select id="getMarketQA" resultMap="resultMarketQA" parameterType="hashmap">
 		<![CDATA[
 		select * from 
-	    (select rownum rnum , aa.* from
-	        (select COR_MNAME,MARKETQA_NUM,MARKET_NUM,MARKETQA_SUB,MARKETQA_CONT,MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX,mq.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_QA mq 
-	        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
-	    aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
+			(select rownum rnum , aa.* from
+		        (select mem_name, class_num,MARKETQA_NUM, MARKET_NUM, MARKETQA_SUB, MARKETQA_CONT,
+	            MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX
+	            ,mq.MEM_EMAIL,FREE_FNAME, COR_FNAME
+	            from MARKET_QA mq 
+		        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL 
+	            left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL 
+	            left outer join MEMBER m on mq.MEM_EMAIL =m.MEM_EMAIL 
+	            where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
+			aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
 		]]>
 	</select>
-								<!--	select * from (select * from 
+								<!--	
+								select * from 
+								    (select rownum rnum , aa.* from
+								        (select COR_MNAME,MARKETQA_NUM,MARKET_NUM,MARKETQA_SUB,MARKETQA_CONT,MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX,mq.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_QA mq 
+								        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
+								    aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
+									]]>
+								
+								select * from (select * from 
 									(select rownum rnum , aa.* from
 									(select * from MARKET_QA order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) aa )
 									where rnum >#{marketVOQAStart} and rnum <= #{marketVOQAEnd})where MARKET_NUM=#{market_num}
-									-->	
+							-->	
 <!-- 마켓문의,파일 update&insert  -->	
 	<!-- insert 전에 업데이트 먼저 순서숫자 겹치는거 방지하려고-->
  	<!-- 받아온 값의 뒷순서들에 +1씩한 후에 insert하면 순서겹치지않음-->
@@ -202,26 +265,22 @@
 <!-- 마켓리뷰 페이징보기 -->	
 	<select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">
 		<![CDATA[
+			select * from (select rownum rnum , aa.* from 
+		    	(select mem_name,class_num,COR_FNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,
+			    FREE_FNAME from MARKET_REVIEW mr 
+				left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL 
+	            left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL 
+	            left outer join MEMBER m on mr.MEM_EMAIL =m.MEM_EMAIL 
+	            where MARKET_NUM=#{market_num}  order by MARKETREV_NUM desc)
+	        aa )where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd}
+	            
+            ]]>
+           <!-- mem_name 조인안한쿼리 위에로조인함 
+            <![CDATA[
 			select * from (select rownum rnum , aa.* from (select COR_MNAME,COR_FNAME,COR_OFNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
 			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETREV_NUM desc) aa )where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd}
-		]]>
-		
-		<!--이상하게봅히는 전쿼리
-			<![CDATA[
-			select * from (select * from 
-			(select rownum rnum ,aa.* from
-			(select COR_MNAME,MARKETREV_NUM,MARKETREV_CONT,MARKETREV_STAR,MARKETREV_RDATE,MARKET_NUM,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
-			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL 
-			JOIN CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL order by MARKETREV_NUM desc) aa )
-			where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
 			]]>
-		-->
-		<!--	프리이름이안뽑히는쿼리
-			select * from (select * from 
-			(select rownum rnum , aa.* from
-			(select * from MARKET_REVIEW order by MARKETREV_NUM desc) aa )
-			where rnum >#{marketVORevStart}  and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
-		-->	
+			 -->
 	</select>
 	<!-- 마켓리뷰 프리이름									
 	<select id="getMarketRevFree" resultType="Freelancer" parameterType="long">
@@ -243,7 +302,10 @@
 	<update id="updateMarketRev" parameterType="hashmap">
 		update MARKET_REVIEW set marketRev_cont=#{marketRev_cont}, marketRev_star=#{marketRev_star} where market_num=#{market_num} and MARKETREV_NUM=#{marketRev_num}
 	</update>
-
+	<!-- 리뷰글쓰기조건주기 -->
+	<select id="writeReview" parameterType="hashmap" resultType="MarketBuysellList">
+		select * from market_buyselllist where mem_email=#{mem_email} and market_num=#{market_num}
+	</select>
 <!-- 마켓 프리랜서 정보뽑기 -->
 	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">
 		select f.MEM_EMAIL,f.FREE_NAME, fp.PRO_CV, f.FREE_RDATE rdate, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME
@@ -273,14 +335,22 @@
 	<update id="updateMarketVcnt" parameterType="long">
 		update market set market_vcnt=market_vcnt+1 where market_num=#{market_num}
 	</update>	
-<!-- 마켓결제에필요한 쿼리들 -->
+<!-- 마켓판매결제에필요한 쿼리들 -->
 	<select id="getFreeName" parameterType="long" resultType="String">
 		select f.FREE_NAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
 	</select>
 	<insert id="insertPaymentMarket" parameterType="java.util.Map">
-		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME ) values
-		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name})
+		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME,PAYINFO_RDATE ) values
+		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name},SYSDATE)
 	</insert>
+	<insert id="insertPaymentMarket2" parameterType="java.util.Map">
+		insert into MARKET_PAYMENT(marketPaym_num,mem_email,mem_emailBuy,market_num,marketPaym_feeRate,marketPaym_price,marketPaym_pdName,marketPaym_rdate) values(MARKETPAYM_NUM_SEQ.NEXTVAL, #{mem_email},#{mem_emailBuy}, #{market_num}, #{marketPaym_feeRate}, #{map.paid_amount}, #{map.name}, SYSDATE)
+	</insert>
+<!-- 구매한마켓 세션이메일로 -->	
+	<insert id="insertMarketBuy" parameterType="hashmap">
+		insert into MARKET_BUYSELLLIST values(MBUYSELL_NUM_SEQ.nextval,#{market_num},#{mem_email},0,SYSDATE,null,null,null)
+	</insert>
+	
 <!-- 마켓찜 -->
 	<select id="pickState" resultType="MarketPick" parameterType="String" >
 		<!-- select * from market_pick where mem_email=#{mem_email}
