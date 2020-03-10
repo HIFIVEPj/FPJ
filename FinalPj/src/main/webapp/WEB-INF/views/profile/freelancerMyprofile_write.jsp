@@ -68,8 +68,9 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
@@ -168,7 +169,7 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">경력</label> 
-											<input type="text" class="form-control" placeholder="경력" name="pro_ex">
+											<input type="text" class="form-control" placeholder="경력" name="pro_exp">
 										</div>
 									</div>
 
@@ -1321,29 +1322,7 @@
 									                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 									                document.getElementById('postcode').value = data.zonecode;
 									                document.getElementById("address").value = addr+extraAddr;
-									                
-									           //좌표찾기(지도 쓸일 없으면 생략가능)------------ 좌표 2차시작
-									                geocoder.addressSearch(data.address, function(results, status) {
-								                // 정상적으로 검색이 완료됐으면
-								                    if (status === daum.maps.services.Status.OK) {
-								
-								                        var result = results[0]; //첫번째 결과의 값을 활용
-								
-								                    // 해당 주소에 대한 좌표를 받아서 입력
-								                        document.getElementById("address_x").value=result.x;
-								                        document.getElementById("address_y").value=result.y; 
-								                        
-								                        var coords = new daum.maps.LatLng(result.y, result.x);
-								                        // 지도를 보여준다.
-								                        mapContainer.style.display = "block";
-								                        map.relayout();
-								                        // 지도 중심을 변경한다.
-								                        map.setCenter(coords);
-								                        // 마커를 결과값으로 받은 위치로 옮긴다.
-								                        marker.setPosition(coords)
-								                    }
-								                });
-									           //여기까지 삭제-------------- 좌표 2차 끝
+									          
 									                // 커서를 상세주소 필드로 이동한다.
 									                document.getElementById("detailAddress").focus();
 									            }

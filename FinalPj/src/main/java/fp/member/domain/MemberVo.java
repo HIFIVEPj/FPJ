@@ -1,5 +1,6 @@
 package fp.member.domain;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.web.util.UriComponents;
@@ -18,10 +19,19 @@ public class MemberVo {
 	private String type;
 	private String keyword;
 	
+	private Date startDate;
+	private Date endDate;
 	
 	public MemberVo() {
 	}
 	//여기 추가해봄
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getKeyword() {
 		return keyword;
 	}
@@ -30,7 +40,7 @@ public class MemberVo {
 		this.keyword = keyword;
 	}
 	
-	public String[] getTypeAtrr() {
+	public String[] getTypeArr() {
 		return type == null? new String[] {}: type.split("");
 	}
 	public String getListLink() {
@@ -43,6 +53,18 @@ public class MemberVo {
 	
 	//여기까지 추가해봄
 	
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 	public MemberVo(long total, int nowPage, int cntPerPage, List<Member> list ,String keyword) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
@@ -59,6 +81,18 @@ public class MemberVo {
 		setTotal(total);
 		calcLastPage(getTotal(), getCntPerPage());
 		calcStartEndPage(getNowPage(), cntPage);
+		calcStartEnd(getNowPage(), getCntPerPage());
+	}
+	public MemberVo(long total, int nowPage, int cntPerPage,String type, String keyword, Date startDate, Date endDate) {
+		setNowPage(nowPage);
+		setCntPerPage(cntPerPage);
+		setTotal(total);
+		calcLastPage(getTotal(), getCntPerPage());
+		calcStartEndPage(getNowPage(), cntPage);
+		this.type=type;
+		this.keyword=keyword;
+		this.startDate=startDate;
+		this.endDate=endDate;
 		calcStartEnd(getNowPage(), getCntPerPage());
 	}
 	// 제일 마지막 페이지 계산
@@ -137,7 +171,6 @@ public class MemberVo {
 		this.cntPage = cntPage;
 	}
 	
-	
 	public List<Member> getList() {
 		return list;
 	}
@@ -149,7 +182,7 @@ public class MemberVo {
 	public String toString() {
 		return "MemberVo [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
 				+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-				+ ", cntPage=" + cntPage + ", list=" + list + ", keyword=" + keyword + "]" ;
+				+ ", cntPage=" + cntPage + ", list=" + list + ", type=" + type + ", keyword=" + keyword+ ", startDate =" + startDate+ ", endDate=" + endDate  + "]" ;
 	}
 
 }

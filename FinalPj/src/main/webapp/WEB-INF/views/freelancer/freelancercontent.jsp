@@ -30,7 +30,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Job List</h4>
+					<h4 class="page-title">Freelancer</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
 						<li class="breadcrumb-item"><a href="#">Pages</a></li>
@@ -74,7 +74,7 @@
 																
 													
 													<div class="rating-stars d-inline-flex mb-2 mr-3">
-													<c:forEach items="${list.list_freeLancerreview}" var="star"  varStatus="status">
+													<c:forEach items="${list.list_freeLancerReview}" var="star"  varStatus="status">
 														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="${star.freerev_star}">
 										
 														<div class="rating-stars-container mr-2">
@@ -169,14 +169,9 @@
 												<c:forEach items="${content.frKeyWord}" var="key"  varStatus="status">
 															<td>${key.key_name}</td>	
 												</c:forEach>
-												</c:forEach>
-											
-											
+											</c:forEach>		
 												</tr>
-										
 												<br/>  
-										
-										
 										<!--		<c:forEach items="${content}" var="list"  varStatus="status">
 												<tr>
 												
@@ -187,12 +182,12 @@
 													</c:forEach>
 									
 											</tr>-->
-										</tbody>
-										
-											
+										</tbody>	
 									</table>
 								</div>
 							</div>
+				
+							
 							<div class="card-footer" align="right">
 								<div class="icons">
 							<!-- 	<span><a href="freelancerdelete?free_code=${list.free_code}" class="btn btn-secondary icons">삭제</a></span> -->
@@ -201,8 +196,263 @@
 								</div>
 							</div>
 						</div>
+					<br/>
 						<!--Add lists-->
-					</div>
+							<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">리뷰</h3>
+							</div>
+							<!--  <div class="card-body">-->
+								<div class="row">
+					
+								
+<c:forEach items="${review}" var="review_content"  varStatus="status">								
+									<div class="col-md-12">
+									<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
+									<div class="media mt-0 p-5">
+   
+			                      	   <div class="d-flex mr-3">
+			                                <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/파일이름.jpg"> </a>
+			                            </div>
+			                                 <div class="media-body"> 
+			                                 
+						                             <h5 class="mt-0 mb-1 font-weight-semibold">강동원 
+														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified">
+															
+														<i class="fa fa-check-circle-o text-success"></i></span>${mMember}
+													
+													 	&nbsp;&nbsp;&nbsp;<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;${review_content.freerev_rdate}</small>
+													 </h5>
+											
+										<span class="rated-products-ratings">
+
+												<i class="fa fa-star-o text-warning"> </i>
+											
+												<i class="fa fa-star-o text-warning"> </i>
+											
+												<i class="fa fa-star-o text-warning"> </i>
+											
+												<i class="fa fa-star-o text-warning"> </i>
+											
+												<i class="fa fa-star-o text-warning"> </i>
+										</span>
+										
+										 	<!-- <div class="badge badge-default mb-2"><i class="fa fa-star">333</i></div> -->
+											${review_content.freerev_star}
+									</div>
+									<div class="col-md-6 text-center align-items-center">
+									</div>      
+
+									</div>                    
+		                                 <div class="font-13  mb-2 mt-2" style="margin-left:80px;">${review_content.freerev_cont}</div>					
+									</div>	
+									
+									<div class="card-body item-user" align="right">
+										<div class="icons"> 
+										
+								   	 		<form method="get" action="review_del" name="DeleteReview">						
+								   				<button type="submit" class="btn btn-primary" id="review_delete">삭제</button>
+								   			</form>
+
+								   			
+								   			
+										<script>
+										function open_field() {
+										field.style.display='block';
+										}
+										function close_field() {
+										field.style.display='none';
+										}
+										</script>
+									<form method="get" action="review_del" name="DeleteReview">	
+										<table width="705" border="0" cellspacing="0" cellpadding="0">
+										  <tr>
+								
+										<td height="30"><a href="javascript:open_field();">수정</a></td>
+										  </tr>
+										  <tr>
+										<td height="5"></td>
+										  </tr>
+										  <tr id="field" style="display:none">
+										<td class="pdd"> <form name="reply" type="hidden" method="post" action="">
+										<input type="hidden" name="number" value="5">
+										<input type="hidden" name="page" value="0">
+										<input type="hidden" name="code" value="groupt">
+										<textarea name="re_contents" cols="90" rows="4"></textarea>
+										
+										<input type="submit" class="btn btn-primary" value="확인">
+										
+										  </form></td>
+										  </tr>
+										</table>
+										<td></td>
+										</tr>
+										</table>								   			
+									</form>							   			
+								   			
+								   			
+								   			
+								   			
+								   			
+								   			
+								   			
+
+
+								    		
+								   	 	</div>
+								    </div>		
+								</div>		
+									
+</c:forEach>									
+									
+								
+									
+									
+									
+					<!-- 페이징 -->				
+						<div class="center-block text-center">
+                           <ul class="pagination mb-0">         
+                        <div class="card-body" style="margin:0 auto; align:center;">
+                           <ul class="pagination mg-b-0 page-0 ">
+                   ${review.get(0).free_code} | ${paging}
+                          <c:if test ="${paging.nowPage != paging.startPage}">
+                          
+                           <!--이전 페이지 이동 -->
+                            <li class="page-item">
+                        <a aria-label="Last" class="page-link" href="freelancercontent?free_code=${paging.get(0).free_code}&pro_num=${paging.get(0).pro_num}&nowPage=${paging.nowPage}&cntPerPage=${paging.cntPerPage}">
+                        <i class="fa fa-angle-double-left"></i></a>
+                     
+                     </li>   
+                     <li class="page-item">
+                        <a aria-label="Next" class="page-link" href="freelancercontent?free_code=${paging.get(0).free_code}&pro_num=${paging.get(0).pro_num}&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
+                        <i class="fa fa-angle-left"></i></a>
+                     </li>   
+                              
+                           </c:if>
+                            
+                           <!--페이지번호 -->
+             ${member}123123
+ <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+                              <c:choose>
+                                 <c:when test="${p == paging.nowPage}">
+                                    <li class='page-item active'><a class="page-link"  >${p}</a></li>
+                                 </c:when>
+                                 <c:when test = "${p != paging.nowPage }">
+                                <c:forEach var='code' items="${review}" >
+                                    <li class="page-item"><a class="page-link"  href="freelancercontent?free_code=${code.free_code}&pro_num=${code.pro_num}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+                                 </c:forEach>
+                                 </c:when>
+                              </c:choose>
+                           </c:forEach>
+                           
+                              <c:if test ="${paging.nowPage != paging.lastPage}">
+                                 <li class="page-item">
+                           <a aria-label="Next" class="page-link" href="freelancercontent?free_code=${list.free_code}&pro_num=${num.pro_num}&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+                         </li>  
+                        <li class="page-item">
+                           <a aria-label="Last" class="page-link" href="freelancercontent?free_code=${list.free_code}&pro_num=${num.pro_num}&nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                        </li>
+                              </c:if>
+             
+                           </ul>
+                           </div>
+                           </ul>
+                           </div>
+									
+					<!-- 페이징 끝 -->					
+									
+
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+										
+								</div>
+							<!--	</div>-->
+				</div>
+			<!-- 리뷰작성 -->	
+<form method="post" action="freelancercontent?free_code=${review[0].free_code}&pro_num=${review[0].pro_num}" name="InsertReview">
+				<div class="card mb-lg-0">
+							<div class="card-header">
+								<h3 class="card-title">리뷰 작성하기</h3>
+							</div>
+							<div class="card-body">
+								<div>
+									<div class="ml-auto">
+										<div class="rating-stars block">
+											<input id="marketRev_starID" type="number" readonly="readonly" class="rating-value star" name="marketRev_star" value=""><!-- name="rating-stars-value" -->
+											<div class="rating-stars-container">
+												<div class="rating-star sm">
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="rating-star sm">
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="rating-star sm">
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="rating-star sm">
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="rating-star sm">
+													<i class="fa fa-star"></i>
+												</div>
+											</div>
+										</div>
+									</div>									
+									<div class="col-md-6 text-center align-items-center"></div>
+									<!--
+									<div class="form-group">
+										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
+									</div>
+									  -->
+									
+										<div class="form-group">
+											<textarea class="form-control" id="marketRev_contID" name="freerev_cont" rows="6"></textarea>
+									<!-- 	<input type="hidden" name="freerev_num" value="" />
+											<input type="hidden" name="freerev_star" value="" />
+											<input type="hidden" name="pro_num" value="" />-->
+											<input type="hidden" name="freerev_num" value="${review[0].freerev_num}" /> 	
+											<input type="hidden" name="mem_email" value="${sessionScope.email}" />
+										</div>	
+										<div align="right">
+   										 <button type="submit" class="btn btn-primary" id="checkMR" style="margin-right:-1px;">작성하기</button>
+   			</form>
+
+   										 </div>
+										</div>
+							</div>
+						</div>
+
+				<!-- 덧글작성 -->		
+					<br/>
+						<div class="card mb-lg-0">
+							<div class="card-header">
+								<h3 class="card-title">덧글 작성하기</h3>
+							</div>
+							<div class="card-body">
+								<div>
+									<div class="form-group">
+										<textarea class="form-control" name="marketQA_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+									</div>		
+										<div align="right">
+		   									<button type="button" class="btn btn-primary" id="checkMR" align="right">작성하기</button>
+		   								</div>
+								</div>
+							</div>
+						</div>
+<!-- 지우면깨짐 -->		</div> <!-- 지우면깨짐 -->
+					
+
+					
 
 					<!--Right Side Content-->
 					<div class="col-xl-4 col-lg-4 col-md-12">
@@ -363,7 +613,7 @@
 								<a href="#" class="btn btn-primary btn-block">검색하기</a>
 							</div>
 						</div>
-						<div class="card mb-0">
+				<!-- <div class="card mb-0">
 							<div class="card-header">
 								<h3 class="card-title">Shares</h3>
 							</div>
@@ -407,7 +657,7 @@
 									</li>
 								</ul>
 							</div>
-						</div>
+						</div>-->
 					</div>
 					<!--Right Side Content-->
 				</div>

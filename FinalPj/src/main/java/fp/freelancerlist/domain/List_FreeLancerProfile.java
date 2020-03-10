@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
- @Data
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class List_FreeLancerProfile {
@@ -33,6 +33,6 @@ public class List_FreeLancerProfile {
 		private List<List_FreeLancer> list_freelancer;
 		private List<List_FreeLancerProfile> list_freelancerprofile;
 		private List_Type list_type;
-		private List<List_FreeLancerReview> list_freelancerreview;
+	//	private List<List_FreeLancerReview> list_freelancerreview;
 		private List<List_Project> list_project;
 }

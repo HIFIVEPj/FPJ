@@ -367,6 +367,9 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/m
 				  <artifactId>thumbnailator</artifactId>
 				  <version>0.4.8</version>
 				</dependency>
+				
+			
+
 	</dependencies>
 	
     <build>

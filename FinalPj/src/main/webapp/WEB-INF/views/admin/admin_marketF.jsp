@@ -17,14 +17,13 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> 
 
-
 		<!-- Title -->
 		<title>Pinlist â Clean & Modern Admin Dashboard Bootstrap 4  HTML Template</title>
 		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
 
+			
 		<!-- Sidemenu Css -->
 		<link href="../plugins/toggle-sidebar/sidemenu.css" rel="stylesheet" />
-
 
 		<!-- Bootstrap Css -->
 		<link href="../plugins/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet" />
@@ -32,7 +31,9 @@
 		<!-- Dashboard Css -->
 		<link href="../css/dashboard.css" rel="stylesheet" />
 		<link href="../css/admin-custom.css" rel="stylesheet" />
-
+		<!-- Date Picker Plugin -->
+		<link href="../plugins/date-picker/spectrum.css" rel="stylesheet" />
+		
 		<!-- c3.js Charts Plugin -->
 		<link href="../plugins/charts-c3/c3-chart.css" rel="stylesheet" />
 
@@ -45,8 +46,6 @@
 		<!---Font icons-->
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet" />
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet" />
-
-
 
 	</head>
 		<body class="app sidebar-mini">
@@ -271,10 +270,7 @@
                             
                              <li>	
                                  <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
-                            </li>                       
-                          
-				
-
+                            </li>    
 					</ul>
 					
 
@@ -334,103 +330,139 @@
 							</div>
 						</div>
 
-<!--  -->				<div class="input-group">
-							<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="">
-							<div class="input-group-append ">
-								<button type="button" class="btn btn-white br-tr-7 br-br-7">
-									<i class="fa fa-search" aria-hidden="true"></i>
-								</button>
-							</div>
-						</div>
+<!--  -->				
+			<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-default active">
+					<div class="panel-heading " role="tab" id="headingOne">
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#SearchF" aria-expanded="true" aria-controls="collapseOne">
+								<b>검색하기</b><i class="fa fa-search"></i>
+							</a>
+						</h4>
+					</div>				
+							
+				<div id="SearchF" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			<!-- <form action="searchFree.do" method="get"> -->
+	<!-- 원래있던거 --> <div class=" col-lg-12 bg-white mb-4 p-4 border" >
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-md-2">
+										<label class="form-label"><b>조건선택</b></label>
+									</div>
+									<div class="col-md-3">
+										<select class="form-control" name="type" id="type">
+											<option value="" <c:out value="${paf.type == null?'selected':'' }" />>선택</option>
+											<option value="PI" <c:out value="${paf.type eq 'PI'?'selected':'' }" />>payid</option>
+											<option value="P" <c:out value="${paf.type eq 'P'?'selected':'' }" />>가격</option>
+											<option value="S" <c:out value="${paf.type eq 'S'?'selected':'' }" />>결제상태</option>
+											<option value="PGI" <c:out value="${paf.type eq 'PGI'?'selected':'' }" />>pgtid</option>
+											<option value="N" <c:out value="${paf.type eq 'N'?'selected':'' }" />>구매자</option>
+										</select>
+									</div>
+									<div class="col-md-7 input-group">
+										<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="검색해주세요." id="keyword" name="keyword" value="${paf.keyword}">
+									</div>
+								</div>
+							</div>						
+			 				<div class="form-group ">
+								<div class="row">
+									<label class="form-label col-md-2"><b>기간선택</b></label>
+									<div class="col-md-10 form-group">							
+										<div class="input-group-prepend">									
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="startDate" name="startDate">
+											<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
+											<div class="input-group-text">
+												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											</div>
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="endDate" name="endDate">
+										</div>
+					
+									</div>									
+								</div>
+							</div> 
+							<div class="row" style="margin-left:250px">
+								<div class="col-md-4 mb-0">
+									<!--<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</a>-->
+									<button id="searchBtn" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</button>
+								</div>
+								<div class="col-md-4 mb-0">
+									<input type="reset" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i>
+									<!--<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a> -->
+								</div>
+							</div>				
+	<!-- 원래있던거 -->	</div> 
+				<!-- </form>	-->				
+					</div>
+				</div>
+<!--  -->	</div>
+		
 						<div class="card mt-5  ">
 							<div class="table-responsive">
 								<table class="table card-table ">
 									<thead class="bg-primary text-white">
-										<tr class="border-bottom text-white">
-											<th class="text-white font-weight-normal">Name</th>
-											<th class="text-white font-weight-normal">Icon</th>
-											<th class="text-white font-weight-normal">Price</th>
-											<th class="text-white font-weight-normal">% 24h</th>
-											<th class="text-white font-weight-normal">Market Cap</th>
-											<th class="text-white font-weight-normal">Circulating Supply</th>
-											<th class="text-white font-weight-normal">Volume 24H</th>
-											<th class="text-white font-weight-normal">CMGR/Month</th>
-											<th class="text-white font-weight-normal">Inflation</th>
+										<tr class="border-bottom text-white">											
+											<th class="text-white font-weight-normal">payid</th>
+											<th class="text-white font-weight-normal">가격</th>
+											<th class="text-white font-weight-normal">uid</th>
+											<th class="text-white font-weight-normal">카드번호</th>
+											<th class="text-white font-weight-normal">status</th>
+											<th class="text-white font-weight-normal">카드이름</th>
+											<th class="text-white font-weight-normal">pgtid</th>
+											<th class="text-white font-weight-normal">결제자</th>
+											<th class="text-white font-weight-normal">결제일</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="border-bottom">
-											<td>Dash</td>
-											<td><img src="../assets/images/crypto-currencies/dash.svg" alt="Dash" class="w-4 h-4"></td>
-
-											<td>$747.222</td>
-											<td class="text-red">-8%</td>
-											<td class="">$5,881,413,815</td>
-											<td>7,833,738 DASH</td>
-											<td class="">$96,147,900</td>
-											<td>19.19% / 47</td>
-											<td class="text-right">0.81%</td>
+									<c:if test="${empty list}">
+										<tr align="center" noshade>
+										   <td colspan="9">정보가 없습니다.</td>
 										</tr>
-										<tr class="border-bottom">
-											<td>Monero</td>
-											<td><img src="../assets/images/crypto-currencies/monero.svg" alt="" class="w-4 h-4"></td>
-											<td>$305.16</td>
-											<td class="text-red">-11%</td>
-											<td class="">$4,778,157,533</td>
-											<td>15,633,286 XMR</td>
-											<td class="">$100,788,000</td>
-											<td>11.88% / 44</td>
-											<td class="text-right">0.78%</td>
-										</tr>
-										<tr class="border-bottom">
-											<td>TRON</td>
-											<td><img src="../assets/images/crypto-currencies/tron.svg" alt="" class="w-4 h-4"></td>
-											<td>$0.067691</td>
-											<td class="text-red">-5%</td>
-											<td class="">$4,450,560,896</td>
-											<td>65,748,193,280 TRX</td>
-											<td class="">$581,651,000</td>
-											<td>142.69% / 4</td>
-											<td class="text-right">0.00%</td>
-										</tr>
-										<tr>
-											<td>Bitcoin Gold</td>
-											<td><img src="../assets/images/crypto-currencies/bitcoinglod.svg" alt="" class="w-4 h-4"></td>
-											<td>$181.39</td>
-											<td class="text-red">-7%</td>
-											<td class="">$3,084,108,676</td>
-											<td>16,779,700 BTG</td>
-											<td class="">$199,652,000</td>
-											<td>-25.44% / 3</td>
-											<td class="text-right">0.34%</td>
-										</tr>
-
-										<tr class="border-bottom">
-											<td>Bitcoin</td>
-											<td><img src="../assets/images/crypto-currencies/bitcoin.svg" alt="Bitcoin" class="w-4 h-4"></td>
-											<td>$10513.00</td>
-											<td class="text-red">-7%</td>
-											<td class="">$179,470,305,923</td>
-											<td>16,819,612 BTC</td>
-											<td class="">$9,578,830,000</td>
-											<td>8.11% / 57</td>
-											<td class="text-right">0.36%</td>
-										</tr>
-										<tr class="border-bottom">
-											<td>Ethereum</td>
-											<td><img src="../assets/images/crypto-currencies/ethereum.svg" alt="Ethereum" class="w-4 h-4"></td>
-											<td>$966.61</td>
-											<td class="text-red">-6%</td>
-											<td class="">$95,270,125,036</td>
-											<td>97,145,024 ETH</td>
-											<td class="">$3,466,060,000</td>
-											<td>22.62% / 29</td>
-											<td class="text-right">0.64%</td>
-										</tr>				
+									</c:if>
+									<c:forEach var="dto" items="${list}">
+											<tr class="border-bottom">											
+											<td>${dto.payinfo_payid}</td>
+											<td>${dto.payinfo_price}</td>
+											<td class="text-red">${dto.payinfo_uid}</td>
+											<td class="">${dto.payinfo_cardnum}</td>
+											<td>${dto.payinfo_status}</td>
+											<td class="">${dto.payinfo_cardname}</td>
+											<td>${dto.payinfo_pgtid}</td>
+											<td class="text-right">${dto.payinfo_buyername}</td>
+											<td>${dto.payinfo_rdate}</td>
+										</tr>	
+										</c:forEach>											
 									</tbody>
 								</table>
 							</div>
-<!--  -->				</div>						
+<!--  -->				</div>
+					<ul class="pagination mb-5">
+							<!--  이전페이지 -->
+						<c:if test="${paf.nowPage != 1}">
+							<li class="page-item page-prev">							
+								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage-1}&cntPerPage=${paf.cntPerPage}&type=${paf.type}&keyword=${paf.keyword}" tabindex="-1">Prev</a>
+							</li>
+						</c:if>
+						<c:forEach var='p' begin="${paf.startPage}" end="${paf.endPage}">
+								<c:choose>
+									<c:when test="${p == paf.nowPage}">
+										<li class='page-item active'><a class="page-link">${p}</a></li>
+									</c:when>
+									<c:when test = "${p != paf.nowPage }">
+										<li class="page-item"><a class="page-link" href="admin_marketF?nowPage=${p}&cntPerPage=${paf.cntPerPage}&type=${paf.type}&keyword=${paf.keyword}">${p}</a></li>
+									</c:when>
+								</c:choose>
+						</c:forEach>
+						<c:if test ="${paf.nowPage != paf.lastPage}">
+							<li class="page-item page-next">
+								
+								<a class="page-link" href="admin_marketF?nowPage=${paf.nowPage+1}&cntPerPage=${paf.cntPerPage}&type=${paf.type}&keyword=${paf.keyword}">Next</a>
+							</li>
+						</c:if>
+					</ul> 
+								
 					</div>
 				</div>
 			</div>
@@ -453,55 +485,91 @@
 
 
 		<!-- Dashboard Core -->
-		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
+		
+		<script src="../js/vendors/jquery-3.2.1.min.js"></script>	
 		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
+		
 		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 		<script src="../js/vendors/jquery.sparkline.min.js"></script>
 		<script src="../js/vendors/selectize.min.js"></script>
 		<script src="../js/vendors/jquery.tablesorter.min.js"></script>
 		<script src="../js/vendors/circle-progress.min.js"></script>
 		<script src="../plugins/rating/jquery.rating-stars.js"></script>		
+		
+		<script src="../js/flot.js"></script> 
 		<script src="../plugins/flot/jquery.flot.js"></script>
 		<script src="../plugins/flot/jquery.flot.fillbetween.js"></script>
-		<script src="../plugins/flot/jquery.flot.pie.js"></script>
+		<script src="../plugins/flot/jquery.flot.pie.js"></script> 
 		
-	
 		<!-- Fullside-menu Js-->
 		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
-
-
+	
+		<!--Select2 js -->
+		<script src="../plugins/select2/select2.full.min.js"></script>
+		
 		<!-- Charts Plugin -->
 		<script src="../plugins/chart/Chart.bundle.js"></script>
 		<script src="../plugins/chart/utils.js"></script>
 
-		<!--Morris.js Charts Plugin -->
-		<script src="../plugins/morris/raphael-min.js"></script>
-		<script src="../plugins/morris/morris.js"></script>
-
-		<!-- Input Mask Plugin -->
+		<!-- 원래 여기 Morris.js Charts Plugin  -->
+		<script src="../plugins/morris/raphael-min.js"></script>  
+		<script src="../plugins/morris/morris.js"></script>		
+		 
+		<!-- Input Mask Plugin 원래여기
 		<script src="../plugins/input-mask/jquery.mask.min.js"></script>
-		<script src="../js/index5.js"></script>
-
-  		<!-- Index Scripts  그래프 -->
-		<script src="../js/flot.js"></script> 
-		<script src="../js/charts.js"></script>
+		<script src="../js/index5.js"></script>  -->
 		
-		<!-- c3.js Charts Plugin 도넛-->
-		<script src="../plugins/charts-c3/d3.v5.min.js"></script>
+  		<!-- c3.js Charts Plugin 도넛 Index Scripts  그래프 보다 먼저 -->
+  		<script src="../plugins/charts-c3/d3.v5.min.js"></script>
 		<script src="../plugins/charts-c3/c3-chart.js"></script>
 		
+		<!-- Index Scripts  그래프 -->		
+		<script src="../js/charts.js"></script> 
+		
+		<!-- Datepicker js 날짜입력 -->
+		<script src="../plugins/date-picker/spectrum.js"></script>
+		<script src="../plugins/date-picker/jquery-ui.js"></script>
+		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
 
+		<!-- Inline js -->
+		<script src="../js/select2.js"></script>
+		<script src="../js/formelements.js"></script>
+		
+		<!--InputMask Js-->
+		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+		
+		<!---Accordion Js-->
+		<script src="../plugins/accordion/accordion.min.js"></script>
+		<script src="../js/accor.js"></script>
+		
+		<!-- Custom scroll bar Js-->
+		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+		
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
 		<script src="../plugins/counters/waypoints.min.js"></script>
 
-		<!-- Custom scroll bar Js-->
-		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
-
-		<!-- Custom Js-->
+		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
-		<script src="../js/custom.js"></script>
-
+		<script src="../js/custom.js"></script> 
+				
 	</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#searchBtn").click(function(){
+	    var type = $("#type option:selected").val();
+	    var keyword = $("#keyword").val();
+	    var startDate=  $("#startDate").val();
+	    var endDate = $("#endDate").val();
+          if(startDate.length ==0 ||endDate .length == 0 ){
+        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword;
+          }else{
+        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword+"&startDate="+startDate+"&endDate="+endDate;
+          }            
+     })  
+})
+</script>
+
 </html>

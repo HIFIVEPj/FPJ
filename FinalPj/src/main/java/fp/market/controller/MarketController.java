@@ -42,14 +42,57 @@ public class MarketController {
 	
 	@Autowired
 	private MarketService marketService;
-
-
+	
+/*	
+		public ModelAndView Commonlist(String nowPage,String cntPerPage,HttpSession session,String selectedKeyS){
+			
+			int total = marketService.getMarketCount();
+			
+			int selectedKey=Integer.parseInt(selectedKeyS);
+		
+			String mem_email=(String) session.getAttribute("email");
+			log.info("1@#@!#!#@!mem_mail"+mem_email);
+			MarketPagingVO marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			 ModelAndView mv = new ModelAndView("market/market-list");
+			 
+			 
+			 HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();
+			 Pagingmap.put("start",marketVO.getStart());
+			 Pagingmap.put("end",marketVO.getEnd());
+			 
+			 Pagingmap.put("selectedKey",selectedKey);
+			 
+			 List<Market> list = marketService.getMarketList(Pagingmap);
+			 
+			 List<MarketPick> pickState=new ArrayList<MarketPick>();
+			 ArrayList<Long> marketNumList = new ArrayList<Long>();
+			 //세션이메일이 존재할때
+			 if(mem_email != null) {
+				 if(marketService.pickState(mem_email).size() != 0) {
+					 pickState = marketService.pickState(mem_email);
+					 for(int i=0;i<pickState.size();i++) {
+						long marketNum=pickState.get(i).getMarket_num();
+						marketNumList.add(marketNum);
+					 }
+				 }
+			 }else {
+				//세션이메일이 존재하지 않을 때	 
+			 }
+			 log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
+			 mv.addObject("list", list);
+		     mv.addObject("paging", marketVO);  
+		     mv.addObject("marketNumList", marketNumList); 
+		     mv.addObject("selectedKey", selectedKey); 
+		
+			return mv;
+			
+		}
+*/
 	@GetMapping("market-list")
 	public ModelAndView market_list(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
 									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
 									,HttpSession session
 									,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS){
-		int total = marketService.getMarketCount();
 /*
 if(nowPage ==null &&cntPerPage ==null) {
 		nowPage="1";
@@ -60,7 +103,8 @@ if(nowPage ==null &&cntPerPage ==null) {
 		cntPerPage = "9";
 }
 */		
-		int selectedKey=Integer.parseInt(selectedKeyS);
+		int total = marketService.getMarketCount();	
+ 		int selectedKey=Integer.parseInt(selectedKeyS);
 
 		String mem_email=(String) session.getAttribute("email");
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
@@ -95,19 +139,30 @@ if(nowPage ==null &&cntPerPage ==null) {
 	     mv.addObject("paging", marketVO);  
 	     mv.addObject("marketNumList", marketNumList); 
 	     mv.addObject("selectedKey", selectedKey); 
-
 		return mv;
 	}
+	@GetMapping("market-searchButtonList")
+	public ModelAndView searchButtonList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+										,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
+										,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS
+										,@RequestParam(value="searchWord",required=false)String searchWord
+										,HttpSession session) {
+		return null;
+		
+	}
+	//searchBox 검색 리스팅 
+	@GetMapping("market-searchBoxList")
+	public ModelAndView market_searchBoxList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+											,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
+											,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS
+											,HttpSession session
+											,@RequestParam(value="checkedCate",required=false)List<Integer> checkedCate
+											,@RequestParam(value="checkedExp",required=false)List<String> checkedExp
+											,@RequestParam(value="marketPrice",required=false)String marketPrice){
 
-//searchBox 검색 리스팅 
-	@GetMapping("market-searchBoxlist")
-	public ModelAndView market_searchBoxlist(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
-									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
-									,HttpSession session
-									,@RequestParam(value="checkedCate[]",required=false)List<Integer> checkedCate
-									,@RequestParam(value="checkedExp[]",required=false)List<String> checkedExp
-									,@RequestParam(value="marketPrice",required=false)String marketPrice){
-
+		String mem_email=(String) session.getAttribute("email");
+		int selectedKey=Integer.parseInt(selectedKeyS);
+		
 		log.info("1111111checkedCate[]"+checkedCate);
 		log.info("22222222checkedExp[]"+checkedExp);
 		log.info("3333333333marketPrice"+marketPrice);
@@ -136,41 +191,61 @@ if(nowPage ==null &&cntPerPage ==null) {
 				mapCate.put("cate"+i,cate);
 			}
 		}
-		
+
 		if(checkedExp.size()!=0) {
-			for(int i=0; i<checkedExp.size();i++) {
+			for(int i=0 ; checkedExp.size()>i ; i++) {
 				String exp=checkedExp.get(i);
-				if(exp=="exp1") {
-					mapExp.put("cate1",1);
-					mapExp.put("cate3",3);
-				}else if(exp=="exp2") {
-					mapExp.put("cate4",4);
-					mapExp.put("cate6",6);
-				}else {//exp=="exp3"
-					mapExp.put("cate7",7);
-					
+				if(exp.equals("exp1")) {
+					mapExp.put("exp1","exp1");
+				}
+				if(exp.equals("exp2")) {
+					mapExp.put("exp2","exp2");
+				}
+				if(exp.equals("exp3")) {
+					mapExp.put("exp3","exp3");	
 				}
 			}
 		}
+		log.info("#####mapExp"+mapExp);
 		total.put("mapPrice", mapPrice);
 		total.put("mapCate", mapCate);
 		total.put("mapExp", mapExp);
-		log.info("#####price1:"+total.get("mapPrice").get("price1"));
-		log.info("#####price1:"+mapPrice.get("price1"));
-		log.info("#####price2:"+mapPrice.get("price2"));
-		int i =marketService.getsearchBoxMarketCount(total);
-	//	List<Market> mp= marketService.searchBoxMarketList(mapPrice);
-	//	List<Market> mc= marketService.searchBoxMarketList(mapCate);
-	//	List<Market> me= marketService.searchBoxMarketList(mapExp);
-		
-		log.info("!!!!!!!!mapCate"+mapCate);
+		int searchBoxTotal =marketService.getsearchBoxMarketCount(total);
+		MarketPagingVO marketVO = new MarketPagingVO(searchBoxTotal, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();
+		Pagingmap.put("start",marketVO.getStart());
+		Pagingmap.put("end",marketVO.getEnd());
+		Pagingmap.put("selectedKey",selectedKey);
+		total.put("Pagingmap", Pagingmap);
+		// List<Market> list = marketService.getMarketList(Pagingmap);
+		 List<Market> list= marketService.searchBoxMarketList(total);
+
+		 List<MarketPick> pickState=new ArrayList<MarketPick>();
+		 ArrayList<Long> marketNumList = new ArrayList<Long>();
+		 //세션이메일이 존재할때
+		 if(mem_email != null) {
+			 if(marketService.pickState(mem_email).size() != 0) {
+				 pickState = marketService.pickState(mem_email);
+				 for(int i=0;i<pickState.size();i++) {
+					long marketNum=pickState.get(i).getMarket_num();
+					marketNumList.add(marketNum);
+				 }
+			 }
+		 }else {
+			//세션이메일이 존재하지 않을 때	 
+		 }
 
 		 ModelAndView mv = new ModelAndView("market/market-list");
-
-
+		 mv.addObject("list", list);
+	     mv.addObject("paging", marketVO);  
+	     mv.addObject("marketNumList", marketNumList); 
+	     mv.addObject("selectedKey", selectedKey); 
+	     
+	     mv.addObject("mapCate", mapCate);
+	     mv.addObject("mapExp", mapExp);
+	   //  mv.addObject("marketPrice", marketPrice);
 		return mv;
 	}
-	
 	
 	
 	
@@ -298,7 +373,6 @@ if(nowPage ==null &&cntPerPage ==null) {
 		mv.setViewName("market/market-update");
 		mv.addObject("market", m);
 		return mv;		
-
 	}
 
 	@PostMapping("market-update2")
@@ -354,7 +428,4 @@ if(nowPage ==null &&cntPerPage ==null) {
 		list.add(fileName);
 		return list;
 	}
-
-
-	
 }

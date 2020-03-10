@@ -47,32 +47,36 @@
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
-											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">Edit Profile</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">Edit Profile-1</a></li>
-												<li><a class="slide-item " href="mydash.html">Edit Profile-2</a></li>
+												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
+												<li><a class="slide-item " href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
+												<li><a class="slide-item " href="mydash.html">기업</a></li>
 											</ul>
 										</li>
-										<li class="slide">
+								<!-- 		<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-diamond"></i><span class="side-menu__label"> My Ads</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myads.html"> My Ads-1</a></li>
 												<li><a class="slide-item" href="myads.html"> My Ads-2</a></li>
 											</ul>
-										</li>
+										</li> -->
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label"> My Favorite</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html"> My Favorite-1</a></li>
-												<li><a class="slide-item" href="myfavorite.html"> My Favorite-2</a></li>
+												<li><a class="slide-item" href="myfavorite.html"> 프론젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavorite.html"> 프리랜서 찜</a></li>
+												<li><a class="slide-item" href="myfavorite.html"> 마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">Managed Ads</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="manged.html">Managed Ads-1</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 												<li class="sub-slide">
-													<a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>
+												<!--  <a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>-->	
 													<ul class="child-sub-menu ">
 														<li><a class="slide-item" href="manged.html">Managed Ads-3</a></li>
 														<li><a class="slide-item" href="manged.html">Managed Ads-4</a></li>
@@ -81,7 +85,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">Payments</span></a>
+											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-basket"></i><span class="side-menu__label">Orders</span><i class="angle fa fa-angle-right"></i></a>
@@ -90,7 +94,7 @@
 												<li><a class="slide-item" href="orders.html">Orders-2</a></li>
 											</ul>
 										</li>
-										<li class="slide">
+								<!--  		<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-game-controller"></i><span class="side-menu__label"> Safety Tips</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="tips.html">Safety Tips-1</a></li>
@@ -103,7 +107,7 @@
 												<li><a class="slide-item" href="settings.html">Settings-1</a></li>
 												<li><a class="slide-item" href="settings.html">Settings-2</a></li>
 											</ul>
-										</li>
+										</li>-->
 										<li>
 											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
@@ -111,7 +115,7 @@
 								</div>
 							</aside>
 						</div>
-						<div class="card my-select">
+			<!-- 			<div class="card my-select">
 							<div class="card-header">
 								<h3 class="card-title">Search Ads</h3>
 							</div>
@@ -142,7 +146,7 @@
 									<a href="#" class="btn  btn-primary">Search</a>
 								</div>
 							</div>
-						</div>
+						</div> 
 						<div class="card mb-xl-0">
 							<div class="card-header">
 								<h3 class="card-title">Safety Tips For Buyers</h3>
@@ -163,7 +167,7 @@
 									</li>
 								</ul>
 							</div>
-						</div>
+						</div>-->
 					</div>
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
@@ -325,7 +329,7 @@
 							</div>
 							<div class="card-footer" align="right">
 							
-								<a href="freelancerMyprofile_change?mem_email=${sessionScope.email}" class="btn btn-secondary icons">수정하기</a>
+								<a href="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-secondary icons">수정하기</a>
 								
 								<a href='freelancerProfile_delete?mem_email=${sessionScope.email}&PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								

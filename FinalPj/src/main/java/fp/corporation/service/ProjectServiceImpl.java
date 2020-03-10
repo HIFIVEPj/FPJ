@@ -24,8 +24,8 @@ public class ProjectServiceImpl implements ProjectService {
 	private ProjectMapper mapper;
 	
 	@Override
-	public List<Project> list(ProjectVo projectVo) {
-		return mapper.list(projectVo);
+	public List<Project> list(Map<String, Object> map) {
+		return mapper.list(map);
 	}
 
 	@Override
@@ -33,6 +33,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return mapper.getTotalCount();
 	}
 
+	//sorting 할때 필요한 매퍼들
+	@Override
+	public long getTotalCount_select(int type_nums){
+		return mapper.getTotalCount_select(type_nums);
+	}
 	//mydash_cor에서 project 관리부분들
 	@Override
 	public List<Project> listMydashCor(Map<String, Object> map){
@@ -125,8 +130,10 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	//프로젝트지원
 	@Override
+	@Transactional
 	public void applied_pj(Map<String, Object>map) {
 		mapper.applied_pj(map);
+		pjpick_del(map);
 	}
 	@Override
 	public AppliedProject select_applied_pj(Map<String, Object>map) {
@@ -136,5 +143,16 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Project>select_appp_pj_free(Map<String, Object>map){
 		return mapper.select_appp_pj_free(map);
 	}
-	
+	@Override
+	public void appp_status_update(Map<String, Object>map) {
+		mapper.appp_status_update(map);
+	}
+	@Override
+	public int appp_count(long pj_num) {
+		return mapper.appp_count(pj_num);
+	}
+	@Override
+	public void pj_status_update(long pj_num) {
+		mapper.pj_status_update(pj_num);
+	}
 }

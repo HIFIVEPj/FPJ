@@ -78,9 +78,9 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search" id="searchText">
 									<div class="input-group-append ">
-										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
+										<button type="button" class="btn btn-primary br-tr-7 br-br-7" id="search" onclick="searchW(1,9,'${selectedKey}')">
 											Search
 										</button>
 									</div>
@@ -96,12 +96,26 @@
 								<div class="" id="">
 									<div class="filter-product-checkboxs" id="cateCheckbox">
 										<label for="개발" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="cate_num" value="1"  id="개발">
+										<c:choose>
+											<c:when test="${mapCate.containsKey('cate0') }">
+												<input type="checkbox" class="custom-control-input" name="cate_num" value="1"  id="개발" checked>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" class="custom-control-input" name="cate_num" value="1"  id="개발">
+											</c:otherwise>	
+										</c:choose>
 											<span class="custom-control-label" class="text-dark">개발자<span class="label label-secondary float-right">14</span>
 											</span>
 										</label>
-										<label for="퍼블리싱" class="custom-control custom-checkbox mb-3">
-											<input type="checkbox" class="custom-control-input" name="cate_num" value="2" id="퍼블리싱">
+										<label for="디자이너" class="custom-control custom-checkbox mb-3">
+										<c:choose>
+											<c:when test="${mapCate.containsKey('cate1') }">
+												<input type="checkbox" class="custom-control-input" name="cate_num" value="2" id="디자이너" checked>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" class="custom-control-input" name="cate_num" value="2" id="디자이너">
+											</c:otherwise>	
+										</c:choose>
 											<span class="custom-control-label" class="text-dark">디자이너<span class="label label-secondary float-right">22</span>
 											</span>
 										</label>
@@ -114,7 +128,7 @@
 							<div class="card-body">
 								<h6>
 								   <label for="price">Price Range:</label>
-								   <input type="text" id="price">
+								   <input type="text" id="price" >
 								</h6>
 								<div id="mySlider"></div>
 							</div>
@@ -124,19 +138,40 @@
 							<div class="card-body">
 								<div class="filter-product-checkboxs" id="expCheckbox">
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp1">
+										<c:choose>
+											<c:when test="${mapExp.containsKey('exp1') }">
+												<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp1" checked>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp1">
+											</c:otherwise>	
+										</c:choose>
 										<span class="custom-control-label">
 											초급
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp2">
-										<span class="custom-control-label">
+										<c:choose>
+											<c:when test="${mapExp.containsKey('exp2') }">
+												<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp2" checked>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp2">
+											</c:otherwise>	
+										</c:choose>
+											<span class="custom-control-label">
 											중급
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp3">
+										<c:choose>
+											<c:when test="${mapExp.containsKey('exp3') }">
+												<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp3" checked>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" class="custom-control-input" name="pro_exp" value="exp3">
+											</c:otherwise>	
+										</c:choose>
 										<span class="custom-control-label">
 											고급
 										</span>
@@ -151,7 +186,14 @@
 					</div>
 					<!--/Left Side Content-->
 <script>
-
+//검색창
+function searchW(nowPage,cntPerPage,selectedKey){
+		var searchWord=$("#searchText").val()		
+		alert("searchWord:"+searchWord);			
+		window.location.href="market-searchButtonList?selectedKey="+${selectedKey}+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage+"&searchWord="+searchWord;
+	
+}
+//searchBox검색
 	$("#marketSearchBox").click(function (){
 		var checkedCate = [];
 		var checkedExp = [];
@@ -167,20 +209,28 @@
 		alert("checkedCate:"+checkedCate);
 		alert("checkedExp:"+checkedExp);
 		alert($("#price").val());
-//ajax로만 보내짐	
-		$.ajax({
-		        url: 'market-searchBoxlist'
-		        , type: 'Get'
-		        , dataType: 'text'
-		        , data: {
-		        	checkedCate: checkedCate,
-		        	checkedExp: checkedExp,
-		        	marketPrice: marketPrice
-		        }
-		    });
-//아래로보내면 배열이 안보내짐 (위에 아작스로보내야함)
-//window.location.href="market-searchBoxlist?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice;
+
+		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+${selectedKey};
 	});
+	
+	function checkedPage(nowPage,cntPerPage,selectedKey){
+		var checkedCate = [];
+		var checkedExp = [];
+		var marketPrice=$("#price").val()
+		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
+			//alert(index+":"+ $(this).val());
+			checkedCate.push($(this).val());
+		});
+		$("input:checkbox[name='pro_exp']:checked").each(function (index, item) {
+			//alert(index+":"+ $(this).val());
+			checkedExp.push($(this).val());
+		});
+		alert("checkedCate:"+checkedCate);
+		alert("checkedExp:"+checkedExp);
+		alert($("#price").val());
+
+		window.location.href="market-searchBoxlist?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+${selectedKey}+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage;
+	}
 
 /*
  * // 전체 갯수
@@ -298,7 +348,9 @@ if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
 <!-- ///////////////////////////////////////2list -->										
 										<div class="tab-pane active" id="tab-12">
 											<div class="row">
-											
+											<c:if test="${fn:length(list) == 0}">	
+											검색한 마켓이 없습니다
+											</c:if>
 											<c:forEach items="${list}" var="list"  varStatus="status">	
 												<div class="col-lg-6 col-md-12 col-xl-4">
 													<div class="card overflow-hidden">
@@ -372,15 +424,26 @@ if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
 										</div>
 									</div>
 								</div>
+								<c:if test="${fn:length(list) >0}">
 								<div class="center-block text-center">
 									<ul class="pagination mg-b-0 page-0 ">
 								<!--이전 페이지 이동 -->
 									<c:if test="${paging.nowPage != 1}">
 										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-left"></i></a>
+											<c:if test="${empty mapCate && empty mapExp}">
+												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-left"></i></a>
+											</c:if>
+											<c:if test="${!empty mapCate|| !empty mapExp}">
+												<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.startPage},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-double-left"></i></a>
+											</c:if>
 										</li>
 										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-left"></i></a>
+											<c:if test="${empty mapCate && empty mapExp}">
+												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-left"></i></a>
+											</c:if>
+											<c:if test="${!empty mapCate||!empty mapExp}">
+												<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.nowPage-1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-left"></i></a>
+											</c:if>
 										</li>
 									</c:if>
 								 <!--페이지번호 -->
@@ -393,7 +456,12 @@ if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
 										</c:when>
 										 <c:when test = "${p != paging.nowPage }">
 											<li class="page-item">
-												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}">${p}</a>
+												<c:if test="${empty mapCate && empty mapExp}">
+													<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}">${p}</a>
+												</c:if>
+												<c:if test="${!empty mapCate|| !empty mapExp}">
+													<a class="page-link" href="javascript:void(0)" onclick="checkedPage(${p},${paging.cntPerPage},${selectedKey})">${p}</a>
+												</c:if>
 											</li>
 										</c:when>
 									</c:choose>
@@ -401,20 +469,30 @@ if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
 	 								<!--다음페이지이동 --> 
 	 								   <c:if test ="${paging.nowPage != paging.lastPage}">
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-right"></i></a>
+												<c:if test="${empty mapCate && empty mapExp}">
+													<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-right"></i></a>
+												</c:if>
+												<c:if test="${!empty mapCate|| !empty mapExp}">
+													<a aria-label="Next" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.nowPage+1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-right"></i></a>
+												</c:if>
 											</li>
 										
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-right"></i></a>
+												<c:if test="${empty mapCate && empty mapExp}">
+													<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-right"></i></a>
+												</c:if>
+												<c:if test="${!empty mapCate|| !empty mapExp}">
+													<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.endPage},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-double-right"></i></a>
+												</c:if>
 											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-											<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
-												<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
-											</c:if>
-										 
+										<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
+											<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+										</c:if>
 									</ul>
 							 	 </div>
+							 	 </c:if>
 							</div>
 						</div>
 					</div>

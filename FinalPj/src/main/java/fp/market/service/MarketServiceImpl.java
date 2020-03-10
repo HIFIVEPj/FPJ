@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fp.corporation.domain.Corporation;
+import fp.market.controller.MarketController;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
@@ -20,7 +21,8 @@ import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
 import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
-
+import lombok.extern.log4j.Log4j;
+@Log4j
 @Service
 @AllArgsConstructor
 public class MarketServiceImpl implements MarketService {
@@ -177,10 +179,11 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.writeReview(map);	
 	}
 	
-	public List<Market> searchBoxMarketList(Map<String,Object> map){
+	public List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map){
 		return mapper.searchBoxMarketList(map);
 	}
 	public int getsearchBoxMarketCount(Map<String,Map<String,Object>> map) {
+		log.info("Service-map:"+map);
 		return mapper.getsearchBoxMarketCount(map);
 	}
 

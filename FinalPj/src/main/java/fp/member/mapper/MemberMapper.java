@@ -21,9 +21,14 @@ public interface MemberMapper {
 	//List<Member> list(Map map);
 	List<Member> getList(Map<String, Object> map);
 	long getTotalCount(Map<String, Object> map);
-	
+
+	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
-	long getTotalCountMC();
+	long getTotalCountMC(MemberVo memberVO);
+	//개인
+	List<PayInformation> marketListFree(MemberVo memberVO);
+	long getTotalCountMF(MemberVo memberVO);
+
 
 }
 

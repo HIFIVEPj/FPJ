@@ -51,26 +51,6 @@
 			<id property="pro_place" column="pro_place" />
 		</association> 
 	</resultMap>
-	
-<resultMap id="resultMarketSearchBox" type="Market">
-	<id property="market_num" column="market_num" />
-	<result property="free_code" column="free_code" />
-	<result property="cate_num" column="cate_num" />
-	<result property="market_price" column="market_price" />
-	<result property="market_sub" column="market_sub" />
-	<result property="market_cont" column="market_cont" />
-	<result property="market_vcnt" column="market_vcnt" />
-	<result property="market_fname" column="market_fname" />
-	<result property="market_ofname" column="market_ofname" />
-	<result property="market_state" column="market_state" />
-	<result property="market_pcnt" column="market_pcnt" />
-	<result property="option3" column="option3" />
-   	<association property="freelancerProfile" javaType="mFreelancerProfile" column ="pro_num" ><!--프리랜서정보를뽑는데 따로 원하는정보들만!있는 클래스를 모아서 맵으로써야하는지 몰라서 일단 적어놓음, 일단 resultMarket에 같이 프리프로필을 넣어버림-->	
-		<id property="pro_num" column="pro_num" />
-		<id property="free_code" column="free_code" />
-		<id property="pro_exp" column="pro_exp" />
-	</association> 
-</resultMap>
 
 	<resultMap id="resultMarketRev" type="MarketRev">
         <id property="marketRev_num" column ="marketRev_num" />
@@ -122,6 +102,7 @@
 	   <association property="corporation" javaType="mCorporation" column ="cor_code" >
 	       	<id property="cor_code" column ="cor_code" />
 	     	<result property="mem_email" column ="mem_email" /> <!-- 빼면 기업의 이메일이 unread로됨 -->
+	     	 <result property="cor_fname" column ="cor_fname" />
 	        <result property="cor_mname" column ="cor_mname" />    
     	</association>
     	<association property="member" javaType="mMember" column ="mem_email" >
@@ -163,34 +144,100 @@
 		</if>		
 		<![CDATA[where rnum>#{start} and rnum<=#{end}]]>				
 	</select>
+	
+	
 <!-- 페이징 처리 후 마켓 searchBox orderLists-->	
-	<select id="getsearchBoxMarketCount" resultType="Integer" parameterType="Map">
+	<select id="getsearchBoxMarketCount" resultType="Integer" parameterType="java.util.Map">
 		SELECT COUNT(*) FROM MARKET m left outer join FREELANCER_PROFILE fp on fp.free_code=m.free_code 
 		where market_state=1 
-		and market_price between #{total.mapPrice.price1} and #{total.mapPrice.price2}
-		<if test="total.mapCate != null">	
+		<if test="mapPrice.size()>0">
+			and market_price between #{mapPrice.price1} and #{mapPrice.price2}
+		</if>
+		<if test="mapCate.size()>0">	
 			and 
-			<foreach collection="total.mapCate" item="mapCatei" separator="or">
+			<foreach collection="mapCate" item="mapCatei" separator="or">
 				cate_num=#{mapCatei} 
 			</foreach>
 		</if>
-		<if test="total.mapExp != null">
-			and
-			<foreach collection="total.mapExp" item="mapExpi" separator="or">
-			 	fp.pro_exp between #{mapExpi} and #{mapExpi}
+
+		<if test="mapExp.size()>0">
+			<foreach collection="mapExp" item="mapExpi" index="index">
+				<if test="mapExp.containsKey('exp3')">
+					and fp.pro_exp >=9
+				</if>
+				<if test="mapExp.containsKey('exp2')">
+					and fp.pro_exp between 4 and 8
+				</if>
+				<if test="mapExp.containsKey('exp1')">
+					and fp.pro_exp between 1 and 3
+				</if>
 			</foreach>
-		</if>
+		</if>	
+	
+		
 	</select>
-	<select id="searchBoxMarketList" resultMap="resultMarketSearchBox" parameterType="java.util.Map">
-			select * from (select ROWNUM rnum , aa.* from 
-		    (select * from market m left outer join FREELANCER_PROFILE fp on fp.free_code=m.free_code 
-		    where cate_num=#{cate_num} 
-		    and market_price between #{price1} and #{price2}
-		    and fp.pro_exp between #{exp1} and #{exp2} 
-		    order by market_num desc)aa) 
-		<![CDATA[
-		 	 where rnum>#{start} and rnum<=#{end}
-		    ]]>
+	<select id="searchBoxMarketList" resultMap="resultMarket" parameterType="java.util.Map">
+			select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+			(select f.FREE_NAME , MARKET_NUM, MARKET_SUB  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME,pro_exp,cate_num
+            from FREELANCER f 
+            join MARKET m on m.FREE_CODE=f.FREE_CODE 
+            left outer join FREELANCER_PROFILE fp on f.FREE_CODE=fp.FREE_CODE where m.MARKET_STATE=1) A
+			full outer join
+			(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star 
+            from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
+        	on A.MARKET_NUM=B.마켓넘
+		    <if test="mapCate.size() != 0">	
+		    where
+				<foreach collection="mapCate" item="mapCatei" separator="or">
+					  A.cate_num=#{mapCatei} 
+				</foreach>
+			</if>
+		    <if test="mapPrice.size() != 0 and mapCate.size() != 0">  
+				and A.market_price between #{mapPrice.price1} and #{mapPrice.price2}
+			</if>
+			<if test="mapPrice.size() != 0 and mapCate.size() == 0">  
+				where A.market_price between #{mapPrice.price1} and #{mapPrice.price2}
+			</if>
+		<!--첫선택x  -->	
+		    <if test="mapExp.size()>0 and (mapCate.size()>0 or mapPrice.size()>0)">
+			   	<foreach collection="mapExp" item="mapExpi" index="index">
+					<if test="mapExp.containsKey('exp3')">
+						and A.pro_exp >=9
+					</if>
+					<if test="mapExp.containsKey('exp2')">
+						and A.pro_exp between 4 and 8
+					</if>
+					<if test="mapExp.containsKey('exp1')">
+						and A.pro_exp between 1 and 3
+					</if>
+				</foreach>
+			</if>
+		<!--첫선택o -->	
+			 <if test="mapExp.size()>0 and (mapCate.size()==0 and mapPrice.size() == 0)">
+			 	where 
+		 	 	<foreach collection="mapExp" item="mapExpi" index="index" separator="or">
+			 	 	<if test="mapExpi=='exp3'">
+						A.pro_exp >=9
+					</if>
+					<if test="mapExpi=='exp2'">
+						A.pro_exp between 4 and 8
+					</if>
+						<if test="mapExpi=='exp1'">
+						A.pro_exp between 1 and 3
+					</if>
+				</foreach>
+			</if>
+			
+		<if test="Pagingmap.selectedKey==1">
+			ORDER BY A.MARKET_NUM desc ) aa)
+		</if>	
+		<if test="Pagingmap.selectedKey==2">
+			ORDER BY B.marketRev_star desc nulls last) aa)
+		</if>		
+		<if test="Pagingmap.selectedKey==3">
+			ORDER BY A.MARKET_VCNT desc) aa)
+		</if>		
+		<![CDATA[where rnum>#{Pagingmap.start} and rnum<=#{Pagingmap.end}]]>				
 	</select>	
 	
 	

@@ -274,7 +274,6 @@
 																
 																<div style="padding-top:5px;">
 																
-																	
 																</div>
 															</div>
 														</div>
@@ -358,6 +357,7 @@
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
 									<c:if test="${fn:length(mPickList)>0 }">
+
 										<c:if test="${paging.nowPage !=1}">
 											<li class="page-item">
 												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
@@ -405,7 +405,7 @@
 			</div>
 		</section>
 		<!--/User Dashboard-->
-		
+
 <script type="text/javascript">
     $(function() {
         var hijax = function(panel) {

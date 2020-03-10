@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AppliedProject {
 	private long free_code;
+	private long pro_num;
 	private long pj_num;
 	private int appp_status;
 	private Date appp_date;
