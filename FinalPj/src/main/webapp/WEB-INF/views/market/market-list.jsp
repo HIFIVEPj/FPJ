@@ -78,9 +78,16 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search" id="searchText">
+									<c:choose>
+										<c:when test="${empty searchWord}">
+											<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search" id="searchText">
+										</c:when>
+										<c:when test="${!empty searchWord}">
+											<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search" id="searchText" value="${searchWord}">
+										</c:when>
+									</c:choose>
 									<div class="input-group-append ">
-										<button type="button" class="btn btn-primary br-tr-7 br-br-7" id="search" onclick="searchW(1,9,'${selectedKey}')">
+										<button type="button" class="btn btn-primary br-tr-7 br-br-7" id="search" onclick="searchWord(1,9,${selectedKey})">
 											Search
 										</button>
 									</div>
@@ -186,18 +193,22 @@
 					</div>
 					<!--/Left Side Content-->
 <script>
+
 //검색창
-function searchW(nowPage,cntPerPage,selectedKey){
-		var searchWord=$("#searchText").val()		
-		alert("searchWord:"+searchWord);			
-		window.location.href="market-searchButtonList?selectedKey="+${selectedKey}+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage+"&searchWord="+searchWord;
-	
-}
+	function searchWord(nowPage,cntPerPage,selectedKey){
+			var searchWord=$("#searchText").val()		
+			alert("searchWord:"+searchWord);			
+			window.location.href="market-DefaultList-searchButtonList?selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage+"&searchWord="+searchWord;
+	}
+
+
+
 //searchBox검색
 	$("#marketSearchBox").click(function (){
 		var checkedCate = [];
 		var checkedExp = [];
 		var marketPrice=$("#price").val()
+		var selectedKey= $("#marketOrder option:selected").val();
 		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
 			//alert(index+":"+ $(this).val());
 			checkedCate.push($(this).val());
@@ -210,13 +221,16 @@ function searchW(nowPage,cntPerPage,selectedKey){
 		alert("checkedExp:"+checkedExp);
 		alert($("#price").val());
 
-		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+${selectedKey};
+		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
 	});
 	
 	function checkedPage(nowPage,cntPerPage,selectedKey){
 		var checkedCate = [];
 		var checkedExp = [];
-		var marketPrice=$("#price").val()
+		var marketPrice=$("#price").val();
+		var selectedKey= $("#marketOrder option:selected").val();
+
+
 		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
 			//alert(index+":"+ $(this).val());
 			checkedCate.push($(this).val());
@@ -229,31 +243,8 @@ function searchW(nowPage,cntPerPage,selectedKey){
 		alert("checkedExp:"+checkedExp);
 		alert($("#price").val());
 
-		window.location.href="market-searchBoxlist?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+${selectedKey}+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage;
+		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage;
 	}
-
-/*
- * // 전체 갯수
- $("input:checkbox[name=is_check]").length
- 
-//선택된 갯수
-$("input:checkbox[name=is_check]:checked").length
-
-//전체 체크
-$("input[name=mycheck]:checkbox").prop("checked", true);
-
-//전체 체크 순회
-$("input:checkbox[name=is_check]").each(function() {
-this.checked = true;
-});
-
-//체크여부 확인
-if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
-//작업
-}
- */
-	
-	
 	
 </script>				
 
@@ -533,7 +524,36 @@ if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
 				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
-	}
+	 }
+//selectKey
+	$('#marketOrder').change( function(){
+	    alert($(this).val());
+	    var selectedKey= $(this).val();
+	    var searchWord=$("#searchText").val();	
+	   
+	    alert("selectedKeyword"+selectedKey);
+	    
+	    var checkedCate = [];
+		var checkedExp = [];
+		var marketPrice=$("#price").val();
+
+		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
+			//alert(index+":"+ $(this).val());
+			checkedCate.push($(this).val());
+		});
+		$("input:checkbox[name='pro_exp']:checked").each(function (index, item) {
+			//alert(index+":"+ $(this).val());
+			checkedExp.push($(this).val());
+		});
+    
+	    if(checkedCate.length == 0 && checkedExp.length == 0){
+	   	 	window.location.href="market-DefaultList-searchButtonList?selectedKey="+selectedKey+"&searchWord="+searchWord;	
+	    }else if(checkedCate.length != 0 ||checkedExp.length != 0){
+	    	window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
+
+	    }
+	});
+	
 </script>
 <script>
 	/*
@@ -545,14 +565,6 @@ if($("input:checkbox[name=complete_yn]").is(":checked") == true) {
 	      })
 	})
 	*/
-	$('#marketOrder').change( function(){
-	    alert($(this).val());
-	    var selectedKey= $(this).val();
-	    alert("selectedKeyword"+selectedKey);
-	    window.location.href="market-list?selectedKey="+selectedKey;	
-	});
-
-	
 
 </script>
 <!--footer-->

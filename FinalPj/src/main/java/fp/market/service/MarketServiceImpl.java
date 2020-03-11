@@ -182,9 +182,18 @@ public class MarketServiceImpl implements MarketService {
 	public List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map){
 		return mapper.searchBoxMarketList(map);
 	}
-	public int getsearchBoxMarketCount(Map<String,Map<String,Object>> map) {
+	public int searchBoxMarketCount(Map<String,Map<String,Object>> map) {
 		log.info("Service-map:"+map);
-		return mapper.getsearchBoxMarketCount(map);
+		return mapper.searchBoxMarketCount(map);
+	}
+
+	@Override
+	public int searchButtonMarketCount(String searchWord) {
+		return mapper.searchButtonMarketCount(searchWord);	
+	}
+	@Override
+	public List<Market> searchButtonMarketList(HashMap<String,Object> map) {
+		return mapper.searchButtonMarketList(map);	
 	}
 
 }
