@@ -198,7 +198,7 @@
 	function searchWord(nowPage,cntPerPage,selectedKey){
 			var searchWord=$("#searchText").val()		
 			alert("searchWord:"+searchWord);			
-			window.location.href="market-DefaultList-searchButtonList?selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage+"&searchWord="+searchWord;
+			window.location.href="market-list?selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage+"&searchWord="+searchWord;
 	}
 
 
@@ -547,7 +547,7 @@
 		});
     
 	    if(checkedCate.length == 0 && checkedExp.length == 0){
-	   	 	window.location.href="market-DefaultList-searchButtonList?selectedKey="+selectedKey+"&searchWord="+searchWord;	
+	   	 	window.location.href="market-list?selectedKey="+selectedKey+"&searchWord="+searchWord;	
 	    }else if(checkedCate.length != 0 ||checkedExp.length != 0){
 	    	window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
 

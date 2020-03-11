@@ -98,7 +98,7 @@ public class MarketController {
 			
 		}
 */
-	@GetMapping("market-DefaultList-searchButtonList")
+	@GetMapping("market-list")
 	public ModelAndView getDefaultList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
 									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
 									,HttpSession session

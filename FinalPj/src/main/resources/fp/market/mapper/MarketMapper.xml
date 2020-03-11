@@ -146,12 +146,12 @@
 	</select>
 <!-- 마켓 검색창 List -->
 <select id="searchButtonMarketCount" resultType="Integer" parameterType="String">
-		SELECT COUNT(*) FROM MARKET m where m.MARKET_STATE=1 and MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%'
+		SELECT COUNT(*) FROM MARKET m where MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%' and m.MARKET_STATE=1 
 </select>	
 <select id="searchButtonMarketList" resultMap="resultMarket" parameterType="hashmap">
 		select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
 		    (select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_cont  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f 
-		        join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1 and MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%') A
+		        join MARKET m on m.FREE_CODE=f.FREE_CODE where MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%' and  m.MARKET_STATE=1) A
 		left outer join
 		    (select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
 		        right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
