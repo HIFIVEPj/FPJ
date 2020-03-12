@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fp.market.domain.Market;
 import fp.member.domain.Criteria;
 import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
@@ -22,6 +23,11 @@ public interface MemberMapper {
 	List<Member> getList(Map<String, Object> map);
 	long getTotalCount(Map<String, Object> map);
 
+	//마켓 게시글 
+	long getMarketCount();
+	List<Market> getMarketList(MemberVo memberVO);
+	void upMarketS(Market market);
+	
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
 	long getTotalCountMC(MemberVo memberVO);

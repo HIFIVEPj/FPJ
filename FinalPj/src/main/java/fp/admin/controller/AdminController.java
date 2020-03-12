@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.market.domain.Market;
 import fp.member.domain.Criteria;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
@@ -32,7 +33,8 @@ public class AdminController {
 	MemberService service;
 	
 	@RequestMapping("admin")
-	public ModelAndView admin() {
+	public ModelAndView admin(@RequestParam(value="nowPage", required = false)String nowPage
+			, @RequestParam(value="cntPerPage", required = false)String cntPerPage){
 		
 		List<Long> sumFree=service.sumFree();
 		List<Long> sumCor=service.sumCor();
@@ -47,8 +49,24 @@ public class AdminController {
 		map.put("class_num","");
 		long totalCount =service.getTotalCount(map);
 		
-		log.info("totalCount : "+totalCount);
+		long totalMarketCount =service.getMarketCount();	
+		if(nowPage == null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10"; //페이지당 글 갯수리스트목록
+		}else if(nowPage ==null) {
+			nowPage="1";
+		}else if(cntPerPage == null) {
+			cntPerPage="10"; //리스트목록
+		}			
+		MemberVo Vo = new MemberVo(totalMarketCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<Market> list = service.getMarketList(Vo);
+		
+		log.info("list!@#!@#!@#@!#!#! : "+list);
+		log.info("Vo!@#!@#!@#@!#!#! : "+Vo);
 		ModelAndView mv = new ModelAndView("admin/admin_page");
+		
+		mv.addObject("list", list);
+		mv.addObject("pamarket", Vo);
 		mv.addObject("totalCountFree", totalCountFree);
 		mv.addObject("totalCountCor", totalCountCor);
 		mv.addObject("totalCount", totalCount);
@@ -57,8 +75,11 @@ public class AdminController {
 		mv.addObject("month",month);
 		return mv;
 	}
-	
-	
+	/*
+	@RequestMapping("updateMarketState.do")
+	public ModelAndView upMarketS() {
+		
+	}*/
 	
 	@RequestMapping("admin_member")
 	public ModelAndView member_list(

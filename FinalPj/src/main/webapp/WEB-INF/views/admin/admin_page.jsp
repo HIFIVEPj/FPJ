@@ -390,10 +390,87 @@
 							</div>
 						</div> -->
 						
-						
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title">Product List</h3>
+									</div>
+									<div class="card-body">
+										<div class="table-responsive border-top userprof-tab">
+											<table class="table table-bordered table-hover mb-0">
+												<thead>
+													<tr>
+														<th></th>
+														<th>제목</th>
+														<th>이메일</th>
+														<th>가격</th>
+														<th>결제상태</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+												<c:forEach var="dto" items="${list}">
+													<tr>
+														<td>
+															<label class="custom-control custom-checkbox">
+																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+																<span class="custom-control-label"></span>
+															</label>
+														</td>
+														<td>
+															<div class="media mt-0 mb-0">
+																<div class="card-aside-img">
+																	<a href="#"></a>
+																	<img src="../images/products/f1.png" alt="img">
+																</div>
+																<div class="media-body">
+																	<div class="card-item-desc ml-4 p-0 mt-2">
+																		<a href="market-content?market_num=${dto.market_num}" class="text-dark"><h4 class="font-weight-semibold">${dto.market_sub}</h4></a>
+																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>																		
+																	</div>
+																</div>
+															</div>
+														</td>
+														<td>Restaurant</td>														
+														<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.market_price}" pattern="#,###,###,###" /></td>
+														<td>
+															<c:if test="${dto.market_state eq 0}">
+															<a href="#" class="badge badge-warning">미승인</a>
+															</c:if>
+															<c:if test="${dto.market_state eq 0}">
+															<a href="#" class="badge badge-success">승인</a>
+															</c:if>
+															<c:if test="${dto.market_state eq 0}">
+															<a href="#" class="badge badge-primary">거절</a>
+															</c:if>
+															
+														</td>
+														<td>
+															<button id="admitBt" class="btn btn-primary btn-sm"><a href="updateMarketState.do?market_state=1"></a><i class="fa fa-check"></i> 승인하기</button>
+															<button id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i> 거절하기</button>
+														<!-- <a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+															<a class="btn btn-danger text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
+															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a> -->
+														</td>
+													</tr>
+												</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>			
+											
 					</div>
 				</div>
-			</div>
+				
+				
+				
+<!-- page main -->	</div>
+					
 			
 			<!--footer-->
 			<footer class="footer">

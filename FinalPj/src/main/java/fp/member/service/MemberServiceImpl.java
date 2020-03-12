@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fp.market.domain.Market;
 import fp.member.domain.Criteria;
 import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
@@ -56,6 +57,21 @@ public class MemberServiceImpl implements MemberService {
 
 	
 	@Override
+	public long getMarketCount() {		
+		return memberMapper.getMarketCount();
+	}
+	
+	@Override
+	public List<Market> getMarketList(MemberVo memberVO) {		
+		return memberMapper.getMarketList(memberVO);
+	}
+	
+	@Override
+	public void upMarketS(Market market) {
+		memberMapper.upMarketS(market);
+		
+	}
+	@Override
 	public List<PayInformation> marketListCor(MemberVo memberVO) {
 		return memberMapper.marketListCor(memberVO);
 	}
@@ -89,7 +105,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<Long> month() {
-		// TODO Auto-generated method stub
 		return memberMapper.month();
 	}
 }
