@@ -3,27 +3,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% String classN = request.getParameter("classN");// %>
-<% String keyword = request.getParameter("keyword");// %>
+
 
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+		<meta http-equiv="x-ua-compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="msapplication-TileColor" content="#0f75ff">
-		<meta name="theme-color" content="#9d37f6">
+		<meta name="theme-color" content="#2ddcd3">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
-		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> 
+		<meta name="description" content="프리랜서 플랫폼">
+		<meta name="author" content="sprukotechnologies">
+		<meta name="keywords" content="freelancer,freelance,project,market service, free market">
+		<link rel="icon" type="image/png" href="../images/hifive.png" />
+		<link rel="shortcut icon" type="image/png" href="../images/hifive.png" />
 
 
 		<!-- Title -->
-		<title>Pinlist â Clean & Modern Admin Dashboard Bootstrap 4  HTML Template</title>
-		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
+		<title>하이파이브</title>
+
 
 		<!-- Sidemenu Css -->
 		<link href="../plugins/toggle-sidebar/sidemenu.css" rel="stylesheet" />
@@ -261,6 +263,9 @@
 						</div>
 					</div> -->
 					<ul class="side-menu">
+							<li>	
+                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">통계</span></a>
+                            </li>
 						    <li>	
                                 <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
@@ -273,9 +278,6 @@
                                  <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
                             
-                             <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
-                            </li>
                     </ul>
 <!--  본문 시작 -->	
 					<div class="app-sidebar-footer">
@@ -429,7 +431,7 @@
 							<!--  이전페이지 -->
 					<c:if test="${pa.nowPage != 1}">
 						<li class="page-item page-prev">							
-							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}" tabindex="-1">Prev</a>
+							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&keyword=${pa.keyword}" tabindex="-1">Prev</a>
 						</li>
 					</c:if>
 					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
@@ -438,13 +440,13 @@
 									<li class='page-item active'><a class="page-link">${p}</a></li>
 								</c:when>
 								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">${p}</a></li>
+									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}&keyword=${pa.keyword}">${p}</a></li>
 								</c:when>
 							</c:choose>
 					</c:forEach>
 						<c:if test ="${pa.nowPage != pa.lastPage}">
 								<li class="page-item page-next">
-									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">Next</a>
+									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${pa.keyword}">Next</a>
 								</li>
 						</c:if>
 					</ul>  
@@ -534,10 +536,14 @@
 
 <script type="text/javascript" >
 $(document).ready(function(){
+	/*
+	$('#class_num').on('change', function() {
+		var class_num = $("#class_num option:selected").val();		 
+		window.location.href= "admin_member?class_num="+class_num;
+	});*/
 	$("#searchBtn").click(function(){						        
           var class_num = $("#class_num option:selected").val();
-          var keyword = $("#keyword").val();
-          alert(class_num+","+keyword);
+          var keyword = $("#keyword").val();         
           window.location.href="admin_member?class_num="+class_num+"&keyword="+keyword;	
       })
 })

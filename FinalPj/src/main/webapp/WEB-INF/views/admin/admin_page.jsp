@@ -4,23 +4,24 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+		<meta http-equiv="x-ua-compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="msapplication-TileColor" content="#0f75ff">
-		<meta name="theme-color" content="#9d37f6">
+		<meta name="theme-color" content="#2ddcd3">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
-		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> 
+		<meta name="description" content="프리랜서 플랫폼">
+		<meta name="author" content="sprukotechnologies">
+		<meta name="keywords" content="freelancer,freelance,project,market service, free market">
+		<link rel="icon" type="image/png" href="../images/hifive.png" />
+		<link rel="shortcut icon" type="image/png" href="../images/hifive.png" />
 
 
 		<!-- Title -->
-		<title>Pinlist â Clean & Modern Admin Dashboard Bootstrap 4  HTML Template</title>
-		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
+		<title>하이파이브</title>
 
 		<!-- Sidemenu Css -->
 		<link href="../plugins/toggle-sidebar/sidemenu.css" rel="stylesheet" />
@@ -257,6 +258,10 @@
 						</div>
 					</div> -->
 					<ul class="side-menu">
+							<li>	
+                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">통계</span></a>
+                            </li>
+                            
 						    <li>	
                                 <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
@@ -269,9 +274,7 @@
                                  <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
                             
-                             <li>	
-                                 <a class="side-menu__item" href="#"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
-                            </li>
+                             
       				</ul>
 					
 
@@ -298,11 +301,11 @@
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
-						<!-- <h4 class="page-title">관리자페이지</h4>
+							 <h4 class="page-title">통계</h4>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
-							</ol> -->
+							</ol> 
 						</div>
 
 						<div class="row">
@@ -313,7 +316,7 @@
 											<i class="pe-7s-users fs-40 text-primary"></i>
 										</div>
 										<h5>Total Users</h5>
-										<h2 class="counter mb-0">5,768</h2>
+										<h2 class="counter mb-0">${totalCount}</h2>
 									</div>
 								</div>
 							</div>
@@ -324,7 +327,7 @@
 											<i class="pe-7s-refresh-2 fs-40 text-primary"></i>
 										</div>
 										<h5>Total Updates</h5>
-										<h2 class="counter mb-0">7,682</h2>
+										<h2 class="counter mb-0">${totalCount}</h2>
 									</div>
 								</div>
 							</div>
@@ -356,29 +359,37 @@
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Profits Analysis</h3>
+										<h3 class="card-title">마켓/프로젝트 매출</h3>
 									</div>
-								<!-- 	<div class="card-body">
-										<div id="morrisBar3" class="chart-visitors overflow-hidden"></div>
-									</div> -->
 									<div class="card-body">
-										<div id="placeholder2" class="chartsh"></div>
+										<div id="linechart" class="chartsh"></div>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Ratings</h3>
+										<h3 class="card-title">회원비율</h3>
 									</div>
 									<div class="card-body">
 										<div id="chart-donut3" class="chartsh"></div>
-									</div>
-
+									</div> 
+									
 								</div>
 							</div>
 						</div>
-
+						
+	<!-- 				<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">마켓/프로젝트 매출</h3>
+								</div>
+								<div class="card-body">
+									<div id="chart" class="chartsh"></div>
+								</div>
+							</div>
+						</div> -->
+						
 						<div class="row">
 							<div class="col-md-12">
 								<div class="card">
@@ -391,117 +402,15 @@
 												<thead>
 													<tr>
 														<th></th>
-														<th>Item</th>
-														<th>Category</th>
-														<th>Price</th>
-														<th>Ad Status</th>
+														<th>제목</th>
+														<th>이메일</th>
+														<th>가격</th>
+														<th>결제상태</th>
 														<th>Action</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Camera 2d33</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>sale</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$54</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring IT Developers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Oct-23-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$156</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/h2.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">2Bk Delux Rooms</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-15-2018 , 12:45</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Rent</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>RealEstate</td>
-														<td class="font-weight-semibold fs-16">$22,765</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
+												<c:forEach var="dto" items="${list}">
 													<tr>
 														<td>
 															<label class="custom-control custom-checkbox">
@@ -517,105 +426,52 @@
 																</div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Chiness Food</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
+																		<a href="market-content?market_num=${dto.market_num}" class="text-dark"><h4 class="font-weight-semibold">${dto.market_sub}</h4></a>
+																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>																		
 																	</div>
 																</div>
 															</div>
 														</td>
-														<td>Restaurant</td>
-														<td class="font-weight-semibold fs-16">$89</td>
+														<td>Restaurant</td>														
+														<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.market_price}" pattern="#,###,###,###" /></td>
 														<td>
-															<a href="#" class="badge badge-success">Active</a>
+															<c:if test="${dto.market_state eq 0}">
+															<a href="#" class="badge badge-warning">미승인</a>
+															</c:if>
+															<c:if test="${dto.market_state eq 0}">
+															<a href="#" class="badge badge-success">승인</a>
+															</c:if>
+															<c:if test="${dto.market_state eq 0}">
+															<a href="#" class="badge badge-primary">거절</a>
+															</c:if>
+															
 														</td>
 														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+															<button id="admitBt" class="btn btn-primary btn-sm"><a href="updateMarketState.do?market_state=1"></a><i class="fa fa-check"></i> 승인하기</button>
+															<button id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i> 거절하기</button>
+														<!-- <a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+															<a class="btn btn-danger text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
 															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
+															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a> -->
 														</td>
 													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/l1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Lenova laptop</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Feb-21-2018 , 16:54</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i>used</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Electronics</td>
-														<td class="font-weight-semibold fs-16">$25</td>
-														<td>
-															<a href="#" class="badge badge-warning">Published</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
-															<div class="media mt-0 mb-0">
-																<div class="card-aside-img">
-																	<a href="#"></a>
-																	<img src="../images/products/j1.png" alt="img">
-																</div>
-																<div class="media-body">
-																	<div class="card-item-desc ml-4 p-0 mt-2">
-																		<a href="#" class="text-dark"><h4 class="font-weight-semibold">Hiring Civil Engineers</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-22-2018 , 9:18</a><br>
-																		<a href="#"><i class="fa fa-tag mr-1"></i> Open</a>
-																	</div>
-																</div>
-															</div>
-														</td>
-														<td>Jobs</td>
-														<td class="font-weight-semibold fs-16">$14,000</td>
-														<td>
-															<a href="#" class="badge badge-primary">featured</a>
-														</td>
-														<td>
-															<a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-															<a class="btn btn-danger btn-sm text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-														</td>
-													</tr>
+												</c:forEach>
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
 							</div>
-
-						</div>
+						</div>			
+											
 					</div>
 				</div>
-			</div>
-
+				
+				
+				
+<!-- page main -->	</div>
+					
+			
 			<!--footer-->
 			<footer class="footer">
 				<div class="container">
@@ -690,6 +546,79 @@
 		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
-
 	</body>
+<script>
+$(document).ready(function(){
+	/*  도넛차트 적용하기   */
+	var pieData = {
+		      기업: ${totalCountCor},
+		      개인: ${totalCountFree},
+		 //인증안한개인: 666,
+
+		}
+		var chartDonut = c3.generate({
+		  bindto: "#chart-donut3",
+		  data: {
+		    json: [pieData],
+		    keys: {
+		      value: Object.keys(pieData),
+		    },
+		    type: "donut",
+		  },
+		  donut: {
+		    title: "회원구분",
+		  },
+		});
+
+		
+/*  도넛차트 적용하기 끝   */	
+
+
+/*******바 차트(chart) **************/
+		var chart = c3.generate({
+		    data: {
+		        columns: [
+		            ['data1', 100, 300, 200, 400, 500],
+		            ['data2', 10, 30, 20, 40, 50]
+		        ],
+		    type: 'bar'
+		    }
+		});
+/************************/
+ /*****************************************
+
+ var chart = c3.generate({
+	  bindto: "#linechart",
+	  data: {
+	    columns: [
+	      ['data1', 30, 200, 100, 400, 150, 250],
+	      ['data2', 50, 20, 10, 40, 15, 25]
+	    ]
+	  }
+	});
+*****************************************/
+  var chart = c3.generate({
+     bindto: '#linechart',
+     data:{
+         json:{
+             date: ${month},             
+           	  마켓: ${sumFree},
+                                  프로젝트: ${sumCor}
+         },
+         x: 'date',
+         type: 'line',
+     },
+     grid: {
+         x: {
+             show: true
+         },
+         y: {
+             show: true
+         }
+     }
+ });
+ 
+})
+		
+</script>
 </html>

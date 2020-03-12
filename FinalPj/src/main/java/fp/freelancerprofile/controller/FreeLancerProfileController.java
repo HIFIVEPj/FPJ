@@ -109,43 +109,48 @@ public class FreeLancerProfileController {
 	@GetMapping("freelancerMyprofile_change")
 	public ModelAndView freelancerMyprofile_change(@RequestParam long pro_num) {
 	
-		FreeLancerProfile freelancerprofile = service.showContent(pro_num);
+		FreeLancerProfile profile = service.showContent(pro_num);
 	
 		ModelAndView mv = new ModelAndView ("profile/freelancerMyprofile_change");
-		mv.addObject("freelancerprofile", freelancerprofile);
-		log.info("get:" + freelancerprofile.getClass());
+		mv.addObject("profile", profile);
+		log.info("profile!!!!!!!!!!!!!!!!!!!!  :"+profile);
+		
 		return mv;
 		
 	}
 	
 	
 	@PostMapping("freelancerMyprofile_change")
-	public String freelancerProfile_update(FreeLancerProfile freelancerprofile, HttpServletRequest request, FreePickKeyWord freepickkeyword) {
-	
+	public String freelancerProfile_update(FreeLancerProfile freelancerprofile, @RequestParam String mem_email,HttpServletRequest request, FreePickKeyWord freepickkeyword) {
+		
 		log.info("@@@@@@@@@@@@@@@@@@@ freelancerprofile: "+freelancerprofile);
-
-		String[] listKeyNum = request.getParameterValues("key_num");
-		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
-		int[] listIntKeyNum = Arrays.stream(listKeyNum).mapToInt(Integer::parseInt).toArray();
+		freelancerprofile.setMem_email(mem_email);
+		String[] listKeyNum = request.getParameterValues("free_keynum"); //free_keynum으로변경
+		ArrayList<Long> arrayFree_keynum = new ArrayList<Long>();
 		
-		 Map<String, Object> map = new HashMap<String, Object>();
-		  for(int i = 0; i<listIntKeyNum.length; i++) {
-		      arraykeynum.add(listIntKeyNum[i]);
+		long[] listIntFree_keynum = Arrays.stream(listKeyNum).mapToLong(Long::parseLong).toArray();		
+		 //Map<String, Object> map = new HashMap<String, Object>();
+		  for(int i = 0; i<listIntFree_keynum.length; i++) {
+		      arrayFree_keynum.add(listIntFree_keynum[i]);
 		  }
-		   map.put("key_num", arraykeynum);
-		   map.put("free_code", freelancerprofile.getFree_code());
-		   map.put("pro_num", freelancerprofile.getPro_num());
-		log.info("@@@@@@@@@@arraykeynum: "+arraykeynum);
+		   //map.put("key_num", arraykeynum);
+		  // map.put("free_code", freelancerprofile.getFree_code());
+		   //map.put("pro_num", freelancerprofile.getPro_num());
+		 freepickkeyword.setFreepickkeyword(arrayFree_keynum);
+		log.info("@@@@@@@@@@arraykeynum: "+freepickkeyword);
 		
-		String type = request.getParameter("type_name"); //type을 받아옴
-		int type_num = Integer.parseInt(type);
-	//	log.info("###type_num: "+type_num);
+		String[] ListKeyNum = request.getParameterValues("key_num"); //type을 받아옴
+		ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
+		int[] ListIntKeyNum = Arrays.stream(ListKeyNum).mapToInt(Integer::parseInt).toArray();
+		for(int i = 0; i<ListIntKeyNum.length; i++) {
+			arraykeynum.add(ListIntKeyNum[i]);
+		}
 		
 		freepickkeyword.setKey_numList(arraykeynum);
-		freelancerprofile.setType_num(type_num);
+		//freelancerprofile.setType_num(type_num);
 		
 		service.listUpdate(freelancerprofile);
-		service.keyUpdate(map);
+		service.keyUpdate(freepickkeyword);
 		//service.keyDelete(map);
 		return "redirect:freelancerProfile_list?mem_email="+freelancerprofile.getMem_email(); 
 

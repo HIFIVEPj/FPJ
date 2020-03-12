@@ -1344,8 +1344,8 @@
 											<label class="form-label">업무가능여부</label>
 										</div>
 										<div class="col-md-9">
-											<label class="custom-switch">
-												<input type="checkbox" name="pro_ox" class="custom-switch-input">
+											<label class="custom-switch">												
+												<input type="checkbox" name="pro_ox" id="pro_ox" class="custom-switch-input">
 												<span class="custom-switch-indicator"></span>
 												<span class="custom-switch-description">불가능/가능</span>
 											</label>
@@ -1503,8 +1503,18 @@ function check(){
       var key_num = new Array();
       var key_cnt = 0;
      
+      
+      var test = $('input:checkbox[id="pro_ox"]').val();
+      alert(test);
       //for(var i=0; i<key_num_size; i++){
-   
+   	/* $('input:checkbox[name="pro_ox"]')is(":checked") {	
+   	 	var test = $(this).val();
+   	 	var test1 = $(this).val().length;
+   	 	alert("업무가능여부"+test+"업무가능길이:"+test1);
+   	 	});
+   	 	
+   	 	*/
+   	 	
       $('input:checkbox[name="key_num"]').each(function() {	
          if(this.checked){
             key_num[key_cnt] = this.value;

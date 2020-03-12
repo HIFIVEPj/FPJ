@@ -19,8 +19,8 @@ public class FreePickKeyWord {
 	private int key_num; //키워드번호
 	private long free_code; //개인등록번호
 	private long pro_num; //개인 프로필번호
-	private FreePickKeyWord freePickKeyWord;
-	private KeyWord keyword;
+	//private FreePickKeyWord freePickKeyWord;
+	//private KeyWord keyword;
 
 	private List<Long> freepickkeyword;
 	private List<Integer> key_numList;
