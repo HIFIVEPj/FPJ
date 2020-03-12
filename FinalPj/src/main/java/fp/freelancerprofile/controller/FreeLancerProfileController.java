@@ -247,31 +247,13 @@ public class FreeLancerProfileController {
 	//나영 수정---------
 		@RequestMapping(value="payments",  method = { RequestMethod.GET, RequestMethod.POST })	//
 		public String payments(Model model, HttpServletRequest request,HttpServletResponse response) {
-			String imp_key="";
-			String imp_secret="";
-			String requestURL = "https://api.iamport.kr/users/getToken";
-			JSONObject json = new JSONObject();
-			try {
-				imp_key = URLEncoder.encode("5114851490149044", "UTF-8");
-				imp_secret=URLEncoder.encode("Z2qlDMfbUrEK0OdXOnqJrRcwAK9cycLyfbUSY94SBJDBxQzmeZ6FQibq3kDBxoaNz4GxeKqQt4r1U0o8", "UTF-8");
-
-				json.put("imp_key", imp_key);
-				json.put("imp_secret", imp_secret);
-				String  _token = OpenBankingController.getToken(request, response, json, requestURL);
-				log.info("token: "+_token);
-				if(_token.equals(null)==false) {
-					String bank_code="020";
-					String bank_num="1002234782602";
-					log.info("값을 주세요 : "+OpenBankingController.getBankInfo(request,response,_token,bank_code,bank_num));
-				}
-
-			} catch (UnsupportedEncodingException e) {
-				log.info("EXCEPTION E2: "+e);
-				e.printStackTrace();
-			} catch (Exception e) {
-				log.info("EXCEPTION E3: "+e);
-				e.printStackTrace();
-			}
+			log.info("accessToken: "+OpenBankingController.getAccessTokenIMPORT());
+			JsonNode node = OpenBankingController.getAccessTokenIMPORT();
+			JsonNode responseNode = node.get("response");
+			String accessToken = responseNode.get("access_token").asText();
+			
+			log.info("accessToken: "+accessToken);
+			log.info("제발 받아져라 좀: "+OpenBankingController.getBankInfo(accessToken));
 			return "profile/payments";
 		}
 		@RequestMapping("myfavorite")	//관심있는프로젝트

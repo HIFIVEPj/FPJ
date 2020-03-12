@@ -157,32 +157,45 @@
 									<form>
 										<div class="tab-pane active show" id="tab1">
 										<div class="row">
-										<div class = "col-sm-6 col-md-6">
+										
+										<div class = "col-sm-5 col-md-5">
+										<div class="form-group">
+												<label class="form-label">계좌번호</label>
+												<input type="text" class="form-control" name="account" id="name1" placeholder="계좌번호를 입력하세요">
+											</div>
+											</div>
+											<div class = "col-sm-5 col-md-5">
+											<div class="form-group">
+												<label class="form-label">은행</label>
+													<select class="form-control" name="bank">
+														<option selected> </option>
+														<option value="003">기업은행</option>
+														<option value="004">국민은행</option>
+														<option value="089">케이뱅크</option>
+														<option value="088">신한은행</option>
+														<option value="020">우리은행</option>
+														<option value="090">카카오뱅크</option>
+														<option value="035">제주은행</option>
+														<option value="023">SC제일은행</option>
+														<option value="011">농협</option>
+														<option value="048">신협</option>
+														<option value="071">우체국</option>
+													</select>
+											</div>
+											</div>
+											<div class = "col-sm-2 col-md-2">
+											<div class="form-group">
+											<label class="form-label">&nbsp;</label>
+												<a href="javascript:void(0)" class="btn btn-primary">계좌확인</a>
+											</div>
+											</div>
+											<div class = "col-sm-6 col-md-6">
 											<div class="form-group">
 												<label class="form-label">예금주</label>
 												<input type="text" class="form-control" id="name1" placeholder="예금주를 입력하세요">
 											</div>
 											</div>
-											<div class = "col-sm-6 col-md-6">
-											<div class="form-group">
-												<label class="form-label">은행</label>
-														<select class="form-control">
-															<option selected> </option>
-															<option>기업은행</option>
-															<option>국민은행</option>
-															<option>케이뱅크</option>
-															<option>신한은행</option>
-															<option>우리은행</option>
-															<option>카카오뱅크</option>
-														</select>
-											</div>
-											</div>
-											<div class = "col-sm-12 col-md-12">
-											<div class="form-group">
-												<label class="form-label">계좌번호</label>
-												<input type="text" class="form-control" id="name1" placeholder="계좌번호를 입력하세요">
-											</div>
-											</div>
+											
 											</div>
 											<!--  
 											<div class="row">
