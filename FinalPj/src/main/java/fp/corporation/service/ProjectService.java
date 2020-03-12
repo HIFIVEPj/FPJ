@@ -12,7 +12,7 @@ import fp.corporation.vo.ProjectVo;
 
 public interface ProjectService {
 	List<Project> list (Map<String, Object> map);
-	long getTotalCount();
+	long getTotalCount(Map<String, Object> map);
 	List<Project> keywords();
 	Project showContent(long pj_num);
 	Corporation corInfo(long pj_num);

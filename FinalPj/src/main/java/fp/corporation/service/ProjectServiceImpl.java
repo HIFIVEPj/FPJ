@@ -29,8 +29,8 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public long getTotalCount() {
-		return mapper.getTotalCount();
+	public long getTotalCount(Map<String, Object> map) {
+		return mapper.getTotalCount(map);
 	}
 
 	//sorting 할때 필요한 매퍼들

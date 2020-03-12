@@ -69,7 +69,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments_cor?mem_email=${sessionScope.email}"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
 											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
@@ -467,6 +467,7 @@
 	.evenList { background: #FAFAFA;}
 	.activeList { width:50px; height:50px; font-weight:bold;}
 </style>
+<script src="../js/dateFormat.js"></script>
 <script>
 function page(){ 
 	var reSortColors = function($div) {
@@ -563,32 +564,7 @@ function page(){
 	   $div.trigger('repaginate');
 	 });
 	}
- var format = function (time, format) {
-           var t = new Date(time);
-           var tf = function (i) { return (i < 10 ? '0' : '') + i };
-           return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function (a) {
-               switch (a) {
-                   case 'yyyy':
-                       return tf(t.getFullYear());
-                       break;
-                   case 'MM':
-                       return tf(t.getMonth() + 1);
-                       break;
-                   case 'mm':
-                       return tf(t.getMinutes());
-                       break;
-                   case 'dd':
-                       return tf(t.getDate());
-                       break;
-                   case 'HH':
-                       return tf(t.getHours());
-                       break;
-                   case 'ss':
-                       return tf(t.getSeconds());
-                       break;
-               }
-           })
-       }
+
 function free_list(pj_num){
 	var values = [];
 	$.ajax({

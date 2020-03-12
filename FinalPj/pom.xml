@@ -367,7 +367,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/m
 				  <artifactId>thumbnailator</artifactId>
 				  <version>0.4.8</version>
 				</dependency>
-	</dependencies>
+				
+				<!-- Json -->
+			<dependency>
+		       <groupId>com.fasterxml.jackson.core</groupId>
+		      <artifactId>jackson-core</artifactId>
+		      <version>2.10.0</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.fasterxml.jackson.core</groupId>
+			  <artifactId>jackson-databind</artifactId>
+			  <version>2.10.0</version>
+			</dependency>
+		</dependencies>
 	
     <build>
         <plugins>

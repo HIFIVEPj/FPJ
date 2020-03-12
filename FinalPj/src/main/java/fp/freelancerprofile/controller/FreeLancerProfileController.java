@@ -6,10 +6,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -29,6 +33,8 @@ import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.mail.iap.Response;
 
 import fp.freelancerprofile.domain.FreeLancer;
@@ -236,13 +242,38 @@ public class FreeLancerProfileController {
 			 }
 	
 
-	@RequestMapping("payments")	//
-	public String payments() { 
-		return "profile/payments";
-	}
+
 	
 	//나영 수정---------
-	
+		@RequestMapping(value="payments",  method = { RequestMethod.GET, RequestMethod.POST })	//
+		public String payments(Model model, HttpServletRequest request,HttpServletResponse response) {
+			String imp_key="";
+			String imp_secret="";
+			String requestURL = "https://api.iamport.kr/users/getToken";
+			JSONObject json = new JSONObject();
+			try {
+				imp_key = URLEncoder.encode("5114851490149044", "UTF-8");
+				imp_secret=URLEncoder.encode("Z2qlDMfbUrEK0OdXOnqJrRcwAK9cycLyfbUSY94SBJDBxQzmeZ6FQibq3kDBxoaNz4GxeKqQt4r1U0o8", "UTF-8");
+
+				json.put("imp_key", imp_key);
+				json.put("imp_secret", imp_secret);
+				String  _token = OpenBankingController.getToken(request, response, json, requestURL);
+				log.info("token: "+_token);
+				if(_token.equals(null)==false) {
+					String bank_code="020";
+					String bank_num="1002234782602";
+					log.info("값을 주세요 : "+OpenBankingController.getBankInfo(request,response,_token,bank_code,bank_num));
+				}
+
+			} catch (UnsupportedEncodingException e) {
+				log.info("EXCEPTION E2: "+e);
+				e.printStackTrace();
+			} catch (Exception e) {
+				log.info("EXCEPTION E3: "+e);
+				e.printStackTrace();
+			}
+			return "profile/payments";
+		}
 		@RequestMapping("myfavorite")	//관심있는프로젝트
 		public ModelAndView Myfavorite(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
 				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {

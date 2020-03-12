@@ -154,6 +154,7 @@
 										<li><a href="#tab2" data-toggle="tab" class=""><i class="fa fa-university"></i> 내 계좌정보</a></li>
 									</ul>
 									<div class="tab-content">
+									<form>
 										<div class="tab-pane active show" id="tab1">
 										<div class="row">
 										<div class = "col-sm-6 col-md-6">
@@ -208,6 +209,7 @@
 												</div>
 											</div>
 										</div>
+										</form>
 										<!--  
 										<div class="tab-pane" id="tab2">
 											<h6 class="font-weight-semibold">Paypal is easiest way to pay online</h6>

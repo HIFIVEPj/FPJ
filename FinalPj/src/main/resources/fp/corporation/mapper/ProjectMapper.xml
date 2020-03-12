@@ -93,6 +93,35 @@
 			(select * from PROJECT pj join CORPORATION cor on pj.cor_code = cor.cor_code 
 			where pj.pj_paystatus=1 
 			]]>
+			
+			<if test="type!=null">
+			and type_num in
+				<foreach collection ="type" item="type" open="(" separator="," close=")">
+					#{type}
+				</foreach>
+			</if>
+			<if test="fgrade!=null">
+			and pj_fgrade in
+				<foreach collection ="fgrade" item="fgrade" open="(" separator="," close=")">
+					#{fgrade}
+				</foreach>
+			</if>
+			<if test="pj_place!=null">
+			and pj_place in
+				<foreach collection ="pj_place" item="pj_place" open="(" separator="," close=")">
+					#{pj_place}
+				</foreach>
+			</if>
+			<if test="loc_first !=null">
+				<if test ="loc_first != ' %'">
+					and pj_loc like #{loc_first}
+				</if>
+			</if>
+			<if test="searchKey != null">
+				<if test ="searchKey != '%%'">
+					and pj_sub like #{searchKey} or pj_cont like #{searchKey}
+				</if>
+			</if>
 			<if test="SortingKey == null">
 			order by PJ_RDATE desc
 			</if>
@@ -113,8 +142,33 @@
 			]]>
 	    
 	</select>	
-	<select id="getTotalCount" resultType="long" >
+	<select id="getTotalCount" resultType="long"  parameterType="map">
 		select count(PJ_NUM) from PROJECT where pj_paystatus=1
+		<if test="type != null"> and type_num in
+			<foreach collection ="type" item="type" open="(" separator="," close=")">
+				#{type}
+			</foreach>
+		</if>
+		<if test="fgrade!=null"> and pj_fgrade in
+			<foreach collection ="fgrade" item="fgrade" open="(" separator="," close=")">
+				#{fgrade}
+			</foreach>
+		</if>
+		<if test="pj_place!=null">and pj_place in
+				<foreach collection ="pj_place" item="pj_place" open="(" separator="," close=")">
+					#{pj_place}
+				</foreach>
+		</if>
+		<if test="loc_first !=null">
+			<if test ="loc_first != ' %'">
+				and pj_loc like #{loc_first}
+			</if>
+		</if>
+		<if test="searchKey != null">
+			<if test ="searchKey != '%%'">
+				and pj_sub like #{searchKey} or pj_cont like #{searchKey}
+			</if>
+		</if>
 	</select>
 	<!--  -->
 	

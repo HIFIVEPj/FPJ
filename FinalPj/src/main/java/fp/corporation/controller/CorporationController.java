@@ -46,8 +46,11 @@ public class CorporationController {
 	private FreeLancerProfileService freeProService;
 	
 	@RequestMapping("payments_cor")
-	public String payments_cor(){
-		return "corporation/payments_cor";
+	public ModelAndView payments_cor(String mem_email){
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("corporation/payments_cor");
+		mv.addObject("cor",corporation);
+		return mv;
 	}
 	
 	@RequestMapping("myfavorite_cor")

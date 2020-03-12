@@ -48,10 +48,8 @@ public class ProjectController {
 	@RequestMapping(value="/project_list", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email
-			 ,@RequestParam(value="selectKeyword", required=false)String selectKeyword
-			 ,@RequestParam(value="typeList[]", required=false)List<Integer>typeList) {
-		long totalCount = service.getTotalCount();
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email) {
+		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "4";
@@ -60,15 +58,10 @@ public class ProjectController {
 		}else if(cntPerPage == null) {
 			cntPerPage ="4";
 		}
-		
-		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		Map<String,Object>map = new HashMap<String, Object>();
+		long totalCount = service.getTotalCount(map);
+		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		map.put("ProjectVo", projectVo);
-		if(selectKeyword != null) {
-			map.put("SortingKey",selectKeyword);
-		}else {
-			map.put("SortingKey",null);
-		}
 		List<Project> list = service.list(map);
 		
 		long countDevelop= service.getTotalCount_select(1);
@@ -91,10 +84,6 @@ public class ProjectController {
 				mv.addObject("pjnumList",pjnumList);
 			}
 		}
-		if(typeList!=null) {
-			log.info("typeList: "+typeList);
-		}
-		mv.addObject("selectKeyword",selectKeyword);
 		mv.addObject("countDevelop",countDevelop);
 		mv.addObject("countPublishing",countPublishing);
 		mv.addObject("countDesign",countDesign);
@@ -113,6 +102,95 @@ public class ProjectController {
 			return "mem_email="+mem_email+"&selectKeyword="+selectKeyword;
 		}
 		return selectKeyword;
+	}
+	
+	@RequestMapping(value="project_list_ajax", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList,ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email 
+			,@RequestParam(value="selectKeyword", required=false)String selectKeyword
+			,@RequestParam(value="pj_fgradeList[]", required=false)List<Integer> pj_fgradeList
+			,@RequestParam(value="pj_placeList[]", required=false)List<Integer> pj_placeList
+			,@RequestParam(value="loc_first", required=false)String loc_first
+			,@RequestParam(value="loc_second", required=false)String loc_second
+			,@RequestParam(value="searchKey", required=false)String searchKey){
+		
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "4";
+		}else if (nowPage == null) {
+			nowPage ="1";
+		}else if(cntPerPage == null) {
+			cntPerPage ="4";
+		}
+
+		Map<String,Object>map = new HashMap<String, Object>();
+		//직종 선택 
+		if(typeList==null) {			
+			map.put("type",null);
+		}else {
+			map.put("type",typeList);
+		}
+		//프리랜서 등급선택
+		if(pj_fgradeList==null) {			
+			map.put("fgrade",null);
+		}else {
+			map.put("fgrade",pj_fgradeList);
+		}
+		//지역(도 단위) 선택
+		if(loc_first != null) {
+			map.put("loc_first",loc_first+"%");
+			if(loc_second != null) {
+				map.put("loc_first",loc_first+" "+loc_second+"%");
+			}
+		}else {
+			map.put("loc_first",null);
+		}
+		//검색 ajax
+		if(searchKey != null){
+			map.put("searchKey","%"+searchKey+"%");
+		}else {
+			map.put("searchKey",null);
+		}
+		//셀렉박스 sorting keyword 선택
+		if(selectKeyword != null) {
+			map.put("SortingKey",selectKeyword);
+		}else {
+			map.put("SortingKey",null);
+		}
+		//어디서 일할지 선택
+		if(pj_placeList != null){
+			map.put("pj_place",pj_placeList);
+		}else {
+			map.put("pj_place",null);
+		}
+		
+		
+		long totalCount = service.getTotalCount(map);
+		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		map.put("ProjectVo", projectVo);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("jsonView");
+		if(mem_email != null) {
+			FreeLancer free = freeService.mydash_free_select(mem_email);
+			if(free != null) {
+				List<ProjectPick> pjplist = service.pjpick_list(free.getFree_code());
+				ArrayList<Long>pjnumList  = new ArrayList<Long>();
+				for(int j=0; j<pjplist.size(); j++) {
+					pjnumList.add(pjplist.get(j).getPj_num());
+				}
+				mv.addObject("free", free);
+				mv.addObject("pjplist",pjplist);
+				mv.addObject("pjnumList",pjnumList);
+			}
+		}
+		List<Project> list = service.list(map);
+		mv.addObject("list", list);
+		mv.addObject("pa", projectVo);
+		List<Project> keyname = service.keywords();
+		mv.addObject("keyname", keyname);
+		return mv;
 	}
 	@RequestMapping("project_content")
 	public ModelAndView project_content(@RequestParam long pj_num, @RequestParam(value="mem_email", required=false)String mem_email) {
@@ -150,6 +228,7 @@ public class ProjectController {
 		ModelAndView mv = new ModelAndView ("project/project_update");
 		mv.addObject("projectCont", project);
 		mv.addObject("corInfo", corInfo);
+		log.info("&*&*^&^&project: "+project);
 		return mv;
 		
 	}
