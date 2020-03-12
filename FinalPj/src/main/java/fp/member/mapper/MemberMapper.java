@@ -26,7 +26,7 @@ public interface MemberMapper {
 	//마켓 게시글 
 	long getMarketCount();
 	List<Market> getMarketList(MemberVo memberVO);
-	void upMarketS(Market market);
+	void upMarketS(Map<String, Object> map);
 	
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
