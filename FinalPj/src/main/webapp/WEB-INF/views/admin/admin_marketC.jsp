@@ -307,20 +307,18 @@
 							</div>			
 
 
-						<div class="row">
+						<div class="row">							
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Profits Analysis</h3>
+										<h3 class="card-title">프로젝트 매출</h3>
 									</div>
-								<!-- 	<div class="card-body">
-										<div id="morrisBar3" class="chart-visitors overflow-hidden"></div>
-									</div> -->
 									<div class="card-body">
-										<div id="placeholder2" class="chartsh"></div>
+										<div id="chart" class="chartsh"></div>
 									</div>
 								</div>
 							</div>
+							
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
@@ -443,7 +441,7 @@
 							<!--  이전페이지 -->
 						<c:if test="${pac.nowPage != 1}">
 							<li class="page-item page-prev">							
-								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage-1}&cntPerPage=${pac.cntPerPage}" tabindex="-1">Prev</a>
+								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage-1}&cntPerPage=${pac.cntPerPage}&type=${pac.type}&keyword=${pac.keyword}" tabindex="-1">Prev</a>
 							</li>
 						</c:if>
 						<c:forEach var='p' begin="${pac.startPage}" end="${pac.endPage}">
@@ -452,14 +450,14 @@
 										<li class='page-item active'><a class="page-link">${p}</a></li>
 									</c:when>
 									<c:when test = "${p != pac.nowPage }">
-										<li class="page-item"><a class="page-link" href="admin_marketC?nowPage=${p}&cntPerPage=${pac.cntPerPage}">${p}</a></li>
+										<li class="page-item"><a class="page-link" href="admin_marketC?nowPage=${p}&cntPerPage=${pac.cntPerPage}&type=${pac.type}&keyword=${pac.keyword}">${p}</a></li>
 									</c:when>
 								</c:choose>
 						</c:forEach>
 						<c:if test ="${pac.nowPage != pac.lastPage}">
 							<li class="page-item page-next">
 								
-								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage+1}&cntPerPage=${pac.cntPerPage}">Next</a>
+								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage+1}&cntPerPage=${pac.cntPerPage}&type=${pac.type}&keyword=${pac.keyword}">Next</a>
 							</li>
 						</c:if>
 					</ul> 
@@ -579,6 +577,29 @@ $(document).ready(function(){
 	   	  $("#endDate").val('');
      }) 
 })
+/*******바 차트(chart) **************
+var chart = c3.generate({
+    data: {
+        columns: [
+            ['data1', 100, 300, 200, 400, 500],
+            ['data2', 10, 30, 20, 40, 50]
+        ],
+    type: 'bar'
+    }
+});
+************************/
+  var chart = c3.generate({
+	  data:{
+		  json:{
+	          date: ${month},             
+	                               프로젝트: ${sumCor}
+	      },
+	      x: 'date',
+	    type: 'bar'
+	    }
+});
+
+
 </script>
 
 </html>

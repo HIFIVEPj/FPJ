@@ -14,10 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KeyWord {
 	//사용언어//
-	private long key_num;
+	private int key_num;
 	private String key_name;
-	private List<FreeLancerProfile> freelancerprofile;
-
-	private  List<KeyWord> frKeyWord;
+	//private List<FreeLancerProfile> freelancerprofile;
+	//private  List<KeyWord> frKeyWord;
 
 }

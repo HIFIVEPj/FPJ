@@ -15,7 +15,7 @@ public class List_FreeLancerProfile {
 		List_FreeLancerProfile(long free_code){}
 	
 		private long free_code; //개인등록번호
-		private long pro_num; //개인프로필번호
+		private long pro_num; //개인프로필번
 		private int type_num; //직종번호 
 		private int pro_exp; //경력
 		private String pro_cv; //자기소개

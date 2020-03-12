@@ -527,14 +527,15 @@ $(document).ready(function(){
 })
 
 /*******바 차트(chart) **************/
-var chart = c3.generate({
-    data: {
-        columns: [
-            ['data1', 100, 300, 200, 400, 500],
-            ['data2', 10, 30, 20, 40, 50]
-        ],
-    type: 'bar'
-    }
+  var chart = c3.generate({
+	  data:{
+		  json:{
+	          date: ${month},             
+	          	마켓: ${sumFree}
+	      },
+	      x: 'date',
+	    type: 'bar'
+	    }
 });
 /************************/
 </script>

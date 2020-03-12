@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import fp.corporation.domain.Keyword;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FreeLancerProfile {
-	//private FreeLancerProfile(long pro_num) {}
+	
 
 	private long pro_num; //개인프로필번호
 	private long free_code; //개인등록번호
@@ -31,7 +32,7 @@ public class FreeLancerProfile {
 	private int pro_grade;//등급
 	private long pro_vcnt;//조회수
 	private long pro_pcnt;//찜수
-	private String pro_place;
+	private String pro_place; //상주 반상주
 	private String pro_workplace; //업무장소
 	private String profile_sub; //프로필명
 	private Date profile_date; //프로필 등록일
@@ -41,6 +42,7 @@ public class FreeLancerProfile {
 	private List<FreeLancerProfile> freelancerprofile;
 	private List<FreeLancerProfileFile> freelancerprofilefile;
 	private Type type;
+	
 	private List<Project> projcet;
 	private List<FreeLancer> freelancer;
 	private List<List_FreeLancerReview> list_freeLancerreview;
@@ -50,10 +52,29 @@ public class FreeLancerProfile {
 
 	private List<FreeLancerProfileFile> freeLancerProfileFile;
 	private List<KeyWord> keyword;
+	private List<Integer> keynums; //담추가
+	private List<String> keynames; //담추가
+	
 	
 	private List<Applied_Project> applied_project;
 
 	private List<FreePickKeyWord> freePickKeyWord;
+
+	public List<Integer> keynum() {
+		keynums = new ArrayList<Integer>();
+		for(int i = 0; i<keyword.size(); i++) {
+			keynums.add(keyword.get(i).getKey_num());
+		}
+		return keynums;
+	}
+	public List<String> keyname() {
+		keynames = new ArrayList<String>();
+		for(int i = 0; i<keyword.size(); i++) {
+			keynames.add(keyword.get(i).getKey_name());
+		}
+		return keynames;
+	}
+
 
 }
 

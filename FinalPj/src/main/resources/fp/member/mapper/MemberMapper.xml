@@ -97,9 +97,9 @@
 	<sql id="search">
 		<choose>
 			<when test="keyword != null and keyword != ''">
-				AND MEM_NAME LIKE '%'||#{keyword}||'%' 
+				AND (MEM_NAME LIKE '%'||#{keyword}||'%' 
 				OR MEM_EMAIL LIKE '%'||#{keyword}||'%'  
-				OR MEM_RDATE LIKE '%'||#{keyword}||'%' 
+				OR MEM_RDATE LIKE '%'||#{keyword}||'%') 
 			</when>			
 		</choose>
 	</sql>
@@ -152,7 +152,7 @@
 			<if test="type == 'N'.toString()"> AND PAYINFO_BUYERNAME like '%'||#{keyword}||'%' </if>
 		</if>
 		<if test="startDate != null and endDate != null ">
-			AND PAYINFO_RDATE between #{startDate} and  #{endDate}
+			AND PAYINFO_RDATE between #{startDate} and #{endDate}
 		</if>
 	</sql>
  	<!--  

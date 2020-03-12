@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% String classN = request.getParameter("classN");// %>
-<% String keyword = request.getParameter("keyword");// %>
+
 
 	<head>
 		<meta charset="UTF-8">
@@ -431,7 +431,7 @@
 							<!--  이전페이지 -->
 					<c:if test="${pa.nowPage != 1}">
 						<li class="page-item page-prev">							
-							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}" tabindex="-1">Prev</a>
+							<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&keyword=${pa.keyword}" tabindex="-1">Prev</a>
 						</li>
 					</c:if>
 					<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
@@ -440,13 +440,13 @@
 									<li class='page-item active'><a class="page-link">${p}</a></li>
 								</c:when>
 								<c:when test = "${p != pa.nowPage }">
-									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">${p}</a></li>
+									<li class="page-item"><a class="page-link" href="admin_member?class_num=${classN}&nowPage=${p}&cntPerPage=${pa.cntPerPage}&keyword=${pa.keyword}">${p}</a></li>
 								</c:when>
 							</c:choose>
 					</c:forEach>
 						<c:if test ="${pa.nowPage != pa.lastPage}">
 								<li class="page-item page-next">
-									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${keyword}">Next</a>
+									<a class="page-link" href="admin_member?class_num=${classN}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&keyword=${pa.keyword}">Next</a>
 								</li>
 						</c:if>
 					</ul>  

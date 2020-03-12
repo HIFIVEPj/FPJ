@@ -71,7 +71,7 @@ public class AdminController {
 	map.put("class_num",class_num);		
 	HttpSession session=request.getSession();
 	session.setAttribute("classN", class_num);
-	session.setAttribute("keyword", keyword);
+	//session.setAttribute("keyword", keyword);
 	map.put("keyword", keyword);
 
 	
@@ -88,7 +88,7 @@ public class AdminController {
 	map.put("MemberVo", memberVo);	
 	MemberVo mvo =service.getMemberVo(map);		
 	ModelAndView mv = new ModelAndView("admin/admin_member");	
-	log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:"+mvo);
+	log.info(" mvo:" + mvo);
 	mv.addObject("pa", mvo);
 		
 		return mv;
@@ -97,6 +97,9 @@ public class AdminController {
 	@RequestMapping("admin_marketC")
 	public ModelAndView admin_marketC(MemberVo memberVo,@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
+		
+		List<Long> sumCor=service.sumCor();
+		List<Long> month=service.month();
 		
 		long totalCount =service.getTotalCountMC(memberVo);	
 		if(nowPage == null && cntPerPage == null) {
@@ -111,10 +114,10 @@ public class AdminController {
 	
 		List<PayInformation> list =service.marketListCor(Vo);		
 		ModelAndView mv = new ModelAndView("admin/admin_marketC");	
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:"+list);
 		mv.addObject("list", list);
 		mv.addObject("pac",Vo);
-			
+		mv.addObject("sumCor",sumCor);
+		mv.addObject("month",month);	
 			return mv;
 	}
 
@@ -122,9 +125,9 @@ public class AdminController {
 	public ModelAndView admin_marketF(MemberVo memberVo, @RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
 		
-		//log.info("memberVo1313213123는 어케 넘어오나 >>>>>> "+memberVo.getKeyword());
+		List<Long> sumFree=service.sumFree();
+		List<Long> month=service.month();
 		long totalCount =service.getTotalCountMF(memberVo);	
-		//log.info("프리랜서 마켓카운트트트트ㅡ트틑"+totalCount);
 		if(nowPage == null && cntPerPage == null) {
 			nowPage="1";
 			cntPerPage="10"; //페이지당 글 갯수리스트목록
@@ -141,6 +144,8 @@ public class AdminController {
 		//log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!memberVo:"+Vo);
 		mv.addObject("list", list);
 		mv.addObject("paf", Vo);
+		mv.addObject("sumFree",sumFree);
+		mv.addObject("month",month);
 			
 			return mv;
 	}
@@ -149,8 +154,8 @@ public class AdminController {
 	public ModelAndView searchMarketF(MemberVo membeVO, 
 			@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
-		log.info("여기는 오니?;"+membeVO);
-		log.info("memberVo1313213123는 어케 넘어오나 >>>>>> "+ membeVO.getKeyword());
+		List<Long> sumFree=service.sumFree();
+		List<Long> month=service.month();	
 		long totalCount =service.getTotalCountMF(membeVO);	
 		log.info("검색 : " +totalCount);
 		if(nowPage == null && cntPerPage == null) {
@@ -165,10 +170,11 @@ public class AdminController {
 	
 		List<PayInformation> list =service.marketListFree(Vo);		
 		ModelAndView mv = new ModelAndView("admin/admin_marketF");	
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!검색추가:"+list);
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!Vo 검색추가:"+Vo);
+		
 		mv.addObject("list", list);
 		mv.addObject("paf", Vo);
+		mv.addObject("sumFree",sumFree);
+		mv.addObject("month",month);
 			
 			return mv;
 	}
@@ -177,9 +183,12 @@ public class AdminController {
 	public ModelAndView searchMarketC(MemberVo membeVO, 
 			@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
-		log.info("시작 :"+membeVO.getStartDate()+"끝  :"+membeVO.getEndDate());
-		long totalCount =service.getTotalCountMC(membeVO);	
-		log.info("검색 : " +totalCount);
+		
+		
+		List<Long> sumCor=service.sumCor();
+		List<Long> month=service.month();
+		
+		long totalCount =service.getTotalCountMC(membeVO);			
 		if(nowPage == null && cntPerPage == null) {
 			nowPage="1";
 			cntPerPage="10"; //페이지당 글 갯수리스트목록
@@ -192,12 +201,13 @@ public class AdminController {
 	
 		List<PayInformation> list =service.marketListCor(Vo);		
 		ModelAndView mv = new ModelAndView("admin/admin_marketC");	
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!검색추가:"+list);
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!Vo 검색추가:"+Vo);
+		
 		mv.addObject("list", list);
 		mv.addObject("pac", Vo);
-			
-			return mv;
+		mv.addObject("sumCor",sumCor);
+		mv.addObject("month",month);	
+		
+		return mv;
 	}
 	
 }
