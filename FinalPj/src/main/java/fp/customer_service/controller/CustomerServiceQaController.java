@@ -88,29 +88,37 @@ public class CustomerServiceQaController {
 
 	
 	@GetMapping("customer_service_qa_content")
-	public String customer_service_qa_content(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false) String mem_email, HttpSession session) {
-		List<Qa_recommend>qa_recommend_list = customerServiceQaService.qa_recommend_listS(mem_email);
-		log.info("%%%mem_email : " + mem_email);
-		ArrayList<Long>qa_recommend_num_list  = new ArrayList<Long>();
-		for(int j = 0; j < qa_recommend_list.size(); j++) {
-			//pjnumList.add(pjplist.get(j).getPj_num());
-			qa_recommend_num_list.add(qa_recommend_list.get(j).getQa_num());
-		}
-		log.info("#####qa_recommend_list : " + qa_recommend_list);
-		log.info("#####qa_recommend_num_list : " + qa_recommend_num_list);
-		
-		String sessionEmail = (String)session.getAttribute("email");
-		sessionEmail = sessionEmail.trim();
-		mem_email = mem_email.trim();
-		log.info("%%%%%mem_email : " + mem_email);
-		log.info("%%%%%sessionEmail : " + sessionEmail);
-		if(!mem_email.equals(sessionEmail)) { //자기 게시글 조회수 증가 방지
+	public String customer_service_qa_content(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false) String mem_email_writer, HttpSession session) {
+		//중간에 자기 게시글 조회수 증가 방지를 위해서 코드 추가했다가 꼬여서 아래와 같이 처리
+		//jsp에서 받아온 mem_email은 글쓴이의 mem_email이어서 controller에서 mem_email_writer의 이름으로 씀
+		//session - email은 mem_email로 씀
+		//log.info("mem_email_writer : " + mem_email_writer);
+		String mem_email = (String)session.getAttribute("email");
+		//log.info("%%%%%sessionEmail : " + mem_email);
+		if(mem_email != null) {
+			List<Qa_recommend>qa_recommend_list = customerServiceQaService.qa_recommend_listS(mem_email);
+			ArrayList<Long>qa_recommend_num_list  = new ArrayList<Long>();
+			for(int j = 0; j < qa_recommend_list.size(); j++) {
+				//pjnumList.add(pjplist.get(j).getPj_num());
+				qa_recommend_num_list.add(qa_recommend_list.get(j).getQa_num());
+			}
+			//log.info("#####qa_recommend_list : " + qa_recommend_list);
+			//log.info("#####qa_recommend_num_list : " + qa_recommend_num_list);	
+			model.addAttribute("qa_recommend_list", qa_recommend_list);
+			model.addAttribute("qa_recommend_num_list", qa_recommend_num_list);
+		}		
+		//mem_email_writer = mem_email_writer.trim();
+		//log.info("%%%%%mem_email_writer : " + mem_email_writer);	
+	
+		if(mem_email == null) {
 			customerServiceQaService.qa_vcntS(qa_num);
+		}else if(!mem_email.equals(mem_email_writer)) { //자기 게시글 조회수 증가 방지
+			customerServiceQaService.qa_vcntS(qa_num);
+		}else {
 		}
-			
-		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
-		model.addAttribute("qa_recommend_list", qa_recommend_list);
-		model.addAttribute("qa_recommend_num_list", qa_recommend_num_list);
+		
+		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));	
+		
 		return "customer_service/customer_service_qa_content";
 	}
 	

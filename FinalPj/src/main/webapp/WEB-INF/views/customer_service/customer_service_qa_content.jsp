@@ -73,8 +73,8 @@
 											<i class="fa fa-comment-o text-muted mr-2"></i><c:out value="${qa_content.replyCnt}"/>&nbsp;&nbsp;&nbsp;
 										</span>
 										<span><i class="fa fa-eye text-muted mr-2"></i>${qa_content.qa_vcnt}</span>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									</div>
 									<div class="col col-auto">											
 										<span><i class="fa fa-calendar-o text-muted mr-2"></i><fmt:formatDate value="${qa_content.qa_rdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>												
@@ -232,6 +232,9 @@
 							
 							
 							<script>
+							function closed(){
+								alert("프로필이 비공개 상태 입니다.")
+							}
 							function needtoLogin(){
 								alert("로그인 후 사용 가능한 서비스 입니다.")
 							}
@@ -313,11 +316,33 @@
 							<div class="card" style="margin-bottom: 0rem; border:0;">
 								<div class="media mt-0 p-5">											
 		                        	<div class="d-flex mr-3">
-		                            	<a href="#"><img src="../images/faces/female/test5.png" alt="64x64" class="avatar avatar-xxl brround mx-auto"> </a>
+		                        		<c:if test="${qa_content.class_num == 1}">
+		                            		<a href='#'><img src='../images/hifive.png' alt='X' class='media-object brround'> </a>                           		
+		                            	</c:if>	
+		                        		<c:if test="${qa_content.class_num == 2 or qa_content.class_num == 3}">
+		                        			<c:choose>
+			                            		<c:when test="${qa_content.free_fname ne null}">
+													<a href="#"><img src="../hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
+												</c:when>
+												<c:otherwise>
+													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
+												</c:otherwise>
+											</c:choose>                           		
+		                            	</c:if>
+		                            	<c:if test="${qa_content.class_num == 4}">
+		                            		<c:choose>
+			                            		<c:when test="${qa_content.cor_fname ne null}">
+													<a href="#"><img src="../hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
+												</c:when>
+												<c:otherwise>
+													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
+												</c:otherwise>
+											</c:choose>	                            		
+		                            	</c:if>
 		                            </div>
 		                            <div class="media-body">
 		                            	
-		                            	<h5 class="mt-0 mb-1 font-weight-semibold">한나영
+		                            	<h5 class="mt-0 mb-1 font-weight-semibold">${qa_content.mem_name}
 											<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
 										</h5>
 										
@@ -338,9 +363,54 @@
 											</div>
 										</div>									
 										-->
-										<small class="text-muted"><i class="si si-briefcase"></i> 개발자  |<i class=" ml-1 fa fa-clock-o"></i>&nbsp;경력 3년</small>&nbsp;&nbsp;
 										
-										<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-drivers-license-o"></i>&nbsp;프로필</span></a>
+										<c:if test="${qa_content.class_num == 1}">
+											<small class="text-muted"><i class="si si-briefcase"></i> 하이파이브</small>&nbsp;&nbsp;
+										</c:if>
+										
+										<c:if test="${qa_content.class_num == 2 or qa_content.class_num == 3}">
+											<c:choose>
+												<c:when test="${qa_content.type_name ne null and qa_content.type_name ne null}">
+													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.type_name}  |<i class=" ml-1 fa fa-clock-o"></i>&nbsp;경력 ${qa_content.pro_exp}년</small>&nbsp;&nbsp;
+												</c:when>
+												<c:when test="${qa_content.type_name ne null and qa_content.type_name eq null}">
+													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.type_name}  </small>&nbsp;&nbsp;
+												</c:when>
+												<c:when test="${qa_content.type_name eq null and qa_content.type_name ne null}">
+													<small class="text-muted"><i class=" ml-1 fa fa-clock-o"></i>&nbsp;경력 ${qa_content.pro_exp}년</small>&nbsp;&nbsp;
+												</c:when>
+												<c:otherwise>
+													<small class="text-muted"></small>
+												</c:otherwise>	
+											</c:choose>
+										</c:if>
+										
+										<c:if test="${qa_content.class_num == 4}">
+											<c:choose>
+												<c:when test="${qa_content.cor_name ne null and qa_content.cor_type ne null}">
+													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.cor_name}  |<i class=" ml-1 si si-settings"></i>&nbsp;${qa_content.cor_type}</small>&nbsp;&nbsp;
+												</c:when>
+												<c:when test="${qa_content.cor_name ne null and qa_content.cor_type eq null}">
+													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.cor_name}  </small>&nbsp;&nbsp;
+												</c:when>
+												<c:when test="${qa_content.cor_name eq null and qa_content.cor_type ne null}">
+													<small class="text-muted"><i class=" ml-1 si-settings"></i>&nbsp;${qa_content.cor_type}</small>&nbsp;&nbsp;
+												</c:when>
+												<c:otherwise>
+													<small class="text-muted"></small>
+												</c:otherwise>	
+											</c:choose>
+										</c:if>
+										<c:if test="${qa_content.class_num == 3}">
+											<c:choose>
+												<c:when test="${qa_content.profile_choice == 1}">
+													<a href="freelancercontent?free_code=${qa_content.free_code}&pro_num=${qa_content.pro_num}" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-drivers-license-o"></i>&nbsp;프로필</span></a>
+												</c:when>
+												<c:otherwise>
+													<a class="mr-2" href="javasript:void(0)" onclick="javascript:closed()"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-drivers-license-o"></i>&nbsp;프로필</span></a>													
+												</c:otherwise>
+											</c:choose>		
+										</c:if>
 										<a href="" class="mr-2" data-toggle="modal" data-target="#message"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8;"><i class=" ml-1 si si-envelope"></i>&nbsp;연락</span></a>	
 										<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>									
 										
@@ -536,7 +606,7 @@
 										-->
 										<c:if test="${sessionScope.class_num > 0}">
 											<!--
-											<input id="addReplyBtn" type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
+											<input id="addReplyBtn" type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>											
 											-->
 											<button id="addReplyBtn" class="btn btn-primary waves-effect waves-light">댓글쓰기</button>
 											<!--
@@ -910,8 +980,7 @@
 		</div>
 		-->
 
-		<!-- small Modal -->
-		<!--			
+		<!-- small Modal -->		
 		<div id="smallModal" class="modal fade">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
@@ -934,8 +1003,7 @@
 					</div>
 				</div>
 			</div>		
-		</div>
-		-->		
+		</div>	
 		<!-- /small Modal -->
 		
 		<!--Comment Modal / ajax 적용 댓글 달기 테스트-->
@@ -1011,16 +1079,15 @@
 		<!-- 댓글  -->		
 		<script>		
 		$(document).ready(function () {
-			  
 			  var qa_numValue = '<c:out value="${qa_content.qa_num}"/>';
-			  var mem_emailValue = '<c:out value="${sessionScope.email}"/>';
+			  var mem_emailValue = '<c:out value="${sessionScope.email}"/>';			  
 			  var replyUL = $(".chat");
 			  
 			    showList(1);
 			    
 			function showList(page){
 				    
-			    replyService.getList({qa_num:qa_numValue,page:page|| 1 }, function(replyCnt, list) {
+			    replyService.getList({qa_num:qa_numValue, page:page || 1 }, function(replyCnt, list) {
 			    	
 			    	console.log("replyCnt: "+ replyCnt);
 			        console.log("list: " + list);
@@ -1034,16 +1101,56 @@
 			    		
 			    	var str="";
 			     
-			    	if(list == null || list.length == 0){
-			     		//replyUL.html("");
-			     	
-			     		return;
+			    	if(list == null || list.length == 0){			     	
+			    		/*
+			    		replyUL.html("");
+			    		if(pageNum == 1){
+			    			replyPageFooter.html("");
+			    		}else{
+			    			//showList(pageNum-1);
+			    			showList(-1);
+			    			//replyPageFooter.html(str);
+			    		}
+			    		return;
+			    		*/			    		
+			    		if(pageNum == 1){
+			    			replyUL.html("");
+			    			replyPageFooter.html("");
+			    		}else{
+			    			showList(-1);
+			    		}
+			    		return;
 			     	}
-
-			     for (var i = 0, len = list.length || 0; i < len; i++) {
+				
+			     //for (var i = 0, len = list.length || 0; i < len; i++) {
+			     var len = list.length;
+			     var commentList = list;
+			     commentList.sort(function(a, b){
+			    	 return a.qacomm_num - b.qacomm_num
+			     })
+			     for (var i = 0; i < len; i++) {	 
+			       //alert("comment_start" + list[i].qacomm_num);
+			       
 			       str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"'>";
 			       str +="	<div class='d-flex mr-3'>";
-			       str +="		<a href='#'> <img src='../images/faces/female/test5.png' alt='64x64' class='media-object brround'> </a>";
+			       if(list[i].class_num == 1){
+			       //str +="	<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";
+			    	   str +="	<a href='#'><img src='../images/hifive.png' alt='X' class='media-object brround'> </a>";
+			       }else if(list[i].class_num == 2 || list[i].class_num == 3){
+			       		if(list[i].free_fname != null){
+			       str +="			<a href='#'><img src='../hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+			       		}else{
+			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";		
+			       		}    	
+			       }else if(list[i].class_num == 4){
+			    	    if(list[i].cor_fname != null){
+			       str +="			<a href='#'><img src='../hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+			    	    }else{
+			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";    	
+			    	    }
+			       }else{
+			    	  	needtoLogin();
+			       }
 			       str +="	</div>";
 			       str +="	<div class='media-body'>";
 			       str +="		<h5 class='mt-0 mb-1 font-weight-semibold'>"+list[i].mem_name;
@@ -1053,13 +1160,14 @@
 			       str +="		<p class='font-13  mb-2 mt-2'>"+list[i].qacomm_cont+"</p>";
 			       str +="		<a href='#' class='mr-2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#7fa5b8'>&nbsp;<i class='fa fa-thumbs-o-up'></i>&nbsp;21&nbsp;</span></a>";
 			       str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment1'><span class='badge badge-primary' style='font-size: 0.8rem;'><i class=' ml-1 fa fa-comment-o'></i>&nbsp;댓글</span></a>";
-				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
+				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
 				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#smallModal1'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-trash-o'></i>&nbsp;삭제</span></a>";
 				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#report1'><span class='badge badge-danger' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 si si-ban'></i>&nbsp;신고</span></a>";
 				   str +="	</div>";
 				   str +="</li>";
+				   //alert("comment_end" + list[i].qacomm_num);
 			     }
-			     
+		     
 			     replyUL.html(str);
 				 
 			     showReplyPage(replyCnt);
@@ -1073,10 +1181,9 @@
 		    var replyPageFooter = $(".card-footer");
 		    
 		    function showReplyPage(replyCnt){
-		      
+
 		      var endNum = Math.ceil(pageNum / 5.0) * 5;  
 		      var startNum = endNum - 4; 
-		      
 		      var prev = startNum != 1;
 		      var next = false;
 		      
@@ -1091,7 +1198,7 @@
 		      var str = "<ul class='pagination mg-b-0 page-0'>";
 		      
 		      if(prev){
-		        str+= "<li class='page-item'><a aria-label='Next' class='page-link' href='"+(startNum -1)+"'><i class='fa fa-angle-left'></i></a></li>";
+		        str+= "<li class='page-item'><a aria-label='Next' class='page-link' href='"+(startNum - 1)+"'><i class='fa fa-angle-left'></i></a></li>";
 		      }
 		      
 		      for(var i = startNum; i <= endNum; i++){
@@ -1127,8 +1234,9 @@
 		 	// 댓글 페이징
 			
 			
-			
-			var modal = $(".modal");
+			// 댓글 모달 처리
+			//var modal = $(".modal");
+		 	var modal = $("#Comment");
 		    var modalInputQacomm_cont = modal.find("textarea[name='qacomm_cont']"); //textarea를 이용해서 입력하려면 "input[name='qacomm_cont']" 대신에 "textarea[name='qacomm_cont']"라고 써야함
 		    //var modalInputMem_email = modal.find("input[name='mem_email']");
 		    var modalInputQacomm_rdate = modal.find("input[name='qacomm_rdate']");
@@ -1151,7 +1259,8 @@
 		      
 		      modalRegisterBtn.show();
 		      
-		      $(".modal").modal("show");
+		      //$(".modal").modal("show");
+		      $("#Comment").modal("show");
 		      
 		    });
 		    
@@ -1181,25 +1290,27 @@
 		    
 		    
 		    // 특정 댓글 클릭 시 이벤트 처리 
+		    //$(".chat").on("click", "li", function(e){
 		    $(".chat").on("click", "li", function(e){
-		      
+		      alert(mem_emailValue);
+		    	
 		      var qacomm_num = $(this).data("qacomm_num");
 		      
 		      replyService.get(qacomm_num, function(qacomm_cont){
 		    	  modalInputQacomm_cont.val(qacomm_cont.qacomm_cont);
 		    	  //modalInputMem_email.val(qacomm_cont.mem_email);
-		    	  modalInputQacomm_rdate.val(replyService.displayTime(qacomm_cont.qacomm_rdate))
-		          .attr("readonly","readonly");
+		    	  modalInputQacomm_rdate.val(replyService.displayTime(qacomm_cont.qacomm_rdate)).attr("readonly","readonly");
 		          modal.data("qacomm_num", qacomm_cont.qacomm_num);
 		          
 		          modal.find("button[id !='modalCloseBtn']").hide();
 		          modalModBtn.show();
 		          modalRemoveBtn.show();
 		          
-		          $(".modal").modal("show");
+		          //$(".modal").modal("show");
+		          $("#Comment").modal("show");
 
 		      });
-			
+		    
 		    });
 		    
 		    
