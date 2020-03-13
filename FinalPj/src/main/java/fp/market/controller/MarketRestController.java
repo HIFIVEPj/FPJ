@@ -43,23 +43,6 @@ public class MarketRestController {
 		
 		return marketQAList;
 	}
-//리뷰1페이지 리스트다시전송	
-	public HashMap<String,Object> marketRevList(long market_num) {
-		HashMap<String,Object> mapList=new HashMap<String,Object>();
-		int totalRev=marketService.getMarketRevCount(market_num);
-		MarketPagingVO marketVORev = new MarketPagingVO(totalRev, 1, 4);
-
-		mapList.put("market_num", market_num);
-		mapList.put("marketVORevStart",1);
-		mapList.put("marketVORevEnd",4);
-		List<MarketRev> marketrevList=marketService.getMarketRev(mapList);
-		HashMap<String,Object> voAndlist=new HashMap<String,Object>();
-		log.info("11111111#marketRevList"+marketrevList);
-		voAndlist.put("marketrevList", marketrevList);
-		voAndlist.put("marketVORev", marketVORev);
-		
-		return voAndlist;
-	}
 
 //마켓문의 글insert
 	@PostMapping("marketQA-insert")
@@ -158,7 +141,46 @@ public class MarketRestController {
 		return list;
 	}
 	
-//마켓리뷰 글insert
+//리뷰1페이지 리스트다시전송	
+	@GetMapping("marketRev-list")
+	public  List<Object> marketRevList(long market_num
+												,@RequestParam(value="nowPageR",required=false,defaultValue="1")String nowPageR
+												,@RequestParam(value="cntPerPageR", required=false, defaultValue="4")String cntPerPageR) {
+		HashMap<String,Object> mapList=new HashMap<String,Object>();
+		int totalRev=marketService.getMarketRevCount(market_num);
+		MarketPagingVO marketVORev = new MarketPagingVO(totalRev, Integer.parseInt(nowPageR), Integer.parseInt(cntPerPageR));
+	
+		mapList.put("market_num", market_num);
+		mapList.put("marketVORevStart",marketVORev.getStart());
+		mapList.put("marketVORevEnd",marketVORev.getEnd());
+		List<MarketRev> marketrevList=marketService.getMarketRev(mapList);
+		HashMap<String,Object> voAndlist=new HashMap<String,Object>();
+		log.info("11111111#marketRevList"+marketrevList);
+		voAndlist.put("marketrevList", marketrevList);
+		voAndlist.put("marketVORev", marketVORev);
+		
+		List<Object> mrStar= new ArrayList<Object>();
+		mrStar.add(voAndlist);
+		return mrStar;
+	}	
+//리뷰1페이지 리스트메소드	
+	public HashMap<String,Object> marketRevList(long market_num) {
+		HashMap<String,Object> mapList=new HashMap<String,Object>();
+		int totalRev=marketService.getMarketRevCount(market_num);
+		MarketPagingVO marketVORev = new MarketPagingVO(totalRev, 1, 4);
+
+		mapList.put("market_num", market_num);
+		mapList.put("marketVORevStart",0);
+		mapList.put("marketVORevEnd",4);
+		List<MarketRev> marketrevList=marketService.getMarketRev(mapList);
+		HashMap<String,Object> voAndlist=new HashMap<String,Object>();
+		log.info("11111111#marketRevList"+marketrevList);
+		voAndlist.put("marketrevList", marketrevList);
+		voAndlist.put("marketVORev", marketVORev);
+		return voAndlist;
+	}
+	
+//마켓리뷰 글insert update delete
 	@PostMapping("marketRev-insert")
 	public List<Object> marketRev_insert(MarketRev marketRev
 			,@RequestParam(value="nowPageR",required=false,defaultValue="1")String nowPageR
@@ -173,8 +195,6 @@ public class MarketRestController {
 
 		List<Object> mrStar= new ArrayList<Object>();
 		HashMap<String,Object> map = marketRevList(marketRev.getMarket_num());
-		log.info("map.get(\"marketrevList\");="+map.get("marketrevList"));
-		log.info("map.get(\"marketVORev\");="+map.get("marketVORev"));
 		log.info("@@@@@@@@@@map;="+map);
 		Integer avgStar=marketService.reloadMarketRevAVG( marketRev.getMarket_num());
 		mrStar.add(map);
@@ -183,8 +203,6 @@ public class MarketRestController {
 
 		return mrStar;
 	}
-	
-
 	@PostMapping("marketRev-update")
 	public List<Object> marketRev_update(MarketRev marketRev){
 		log.info("111111111111111110marketRev"+marketRev);
@@ -195,19 +213,19 @@ public class MarketRestController {
 		int marketRev_star=marketRev.getMarketRev_star();
 		log.info("22222222222222222222marketRev"+marketRev);
 		
-		HashMap<String,Object>map =new HashMap<String,Object>();
+		HashMap<String,Object>mapquery =new HashMap<String,Object>();
 
-		map.put("marketRev_cont", marketRev_cont);
-		map.put("marketRev_num", marketRev_num);
-		map.put("market_num", market_num);
-		map.put("marketRev_star", marketRev_star);
-		marketService.updateMarketRev(map);
+		mapquery.put("marketRev_cont", marketRev_cont);
+		mapquery.put("marketRev_num", marketRev_num);
+		mapquery.put("market_num", market_num);
+		mapquery.put("marketRev_star", marketRev_star);
+		marketService.updateMarketRev(mapquery);
 		
 		Integer avgStar=marketService.reloadMarketRevAVG(market_num);
 		List<Object> mrStar= new ArrayList<Object>();
-	//	List<MarketRev> mr = marketRevList(market_num);
+		HashMap<String,Object> map = marketRevList(market_num);
 		
-		//mrStar.add(mr);
+		mrStar.add(map);
 		mrStar.add(avgStar);
 		log.info("@@mrStar"+mrStar);
 		
@@ -218,21 +236,21 @@ public class MarketRestController {
 	public List<Object>  deleteMarketRev(@RequestParam(value="marketRev_num") String marketRev_numS,
 							   @RequestParam(value="market_num") String market_numS) 
 	{
-		HashMap<String,Object>map =new HashMap<String,Object>();
+		HashMap<String,Object>mapquery =new HashMap<String,Object>();
 		long marketRev_num=Long.parseLong(marketRev_numS);
 		long market_num=Long.parseLong(market_numS);
 		log.info("aaaaaaaaaaaaaaaaadelete"+marketRev_numS);
 		log.info("aaaaaaaaaaaaaaaaaadelete"+market_numS);
 		
-		map.put("marketRev_num", marketRev_num);
-		map.put("market_num", market_num);
-		marketService.deleteMarketRev(map);
+		mapquery.put("marketRev_num", marketRev_num);
+		mapquery.put("market_num", market_num);
+		marketService.deleteMarketRev(mapquery);
 		Integer avgStar=marketService.reloadMarketRevAVG(market_num);
 		
 		List<Object> mrStar= new ArrayList<Object>();
-		//List<MarketRev> mr = marketRevList(market_num);
+		HashMap<String,Object> map = marketRevList(market_num);
 		
-		//mrStar.add(mr);
+		mrStar.add(map);
 		mrStar.add(avgStar);
 		log.info("@!@@@@@mrStar:"+mrStar);
 		return mrStar;

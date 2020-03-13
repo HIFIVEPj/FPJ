@@ -100,6 +100,6 @@ public class MarketPagingVO {
 	@Override
 	public String toString() {
 		return "PagingVO[nowPage=" + nowPage +",startPage=" + startPage +", endPage=" +endPage +",total=" +total +
-		",cntPerPage=" +cntPerPage +",lastPage"+lastPage+", start=" + start+",end=" +end +",cntPage="+cntPage+"]";
+		",cntPerPage=" +cntPerPage +",lastPage="+lastPage+", start=" + start+",end=" +end +",cntPage="+cntPage+"]";
 	}
 }

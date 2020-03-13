@@ -311,18 +311,18 @@
 					</c:if>		
 										
 				</div>
-						
+				<div id="paging">		
 				<!--마켓리뷰페이징  -->		
 				<c:if test="${fn:length(marketRev) > 0}">	
-						<div class="center-block text-center" id="paging">
+						<div class="center-block text-center">
 						<ul class="pagination mg-b-0 page-0 ">
 						
 						<c:if test="${marketVORev.nowPage>1}">
 							<li class="page-item">
-								<a aria-label="Last" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.startPage}&market_num=${market.market_num}"><i class="fa fa-angle-double-left"></i></a>
+								<a aria-label="Last" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${marketVORev.startPage},${market.market_num})"><i class="fa fa-angle-double-left"></i></a>
 							</li>
 							<li class="page-item">
-								<a aria-label="Next" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.nowPage+1}&market_num=${market.market_num}"><i class="fa fa-angle-left"></i></a>
+								<a aria-label="Next" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${marketVORev.nowPage-1},${market.market_num})"><i class="fa fa-angle-left"></i></a>
 							</li>
 						</c:if>	
 							
@@ -333,28 +333,30 @@
 								</c:when>
 								<c:when test="${p==marketVORev.nowPage}">
 									<li class="page-item active">
-										<a class="page-link" href="#">${p}</a>
+										<a class="page-link" href="javascript:void(0)">${p}</a>
 									</li>
 								</c:when>
 								
 								<c:when test="${p!=marketVORev.nowPage}">
 									<li class="page-item">
-										<a class="page-link" href="market-content?nowPageR=${p}&cntPerPageR=${marketVORev.cntPerPage}&market_num=${market.market_num}">${p}</a>
+										<a class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${p},${market.market_num})">${p}</a>
 									</li>
 								</c:when>
 							</c:choose>	
 						</c:forEach>	
 						<c:if test="${marketVORev.nowPage != marketVORev.lastPage}">	
 							<li class="page-item">
-								<a aria-label="Next" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.nowPage+1}&market_num=${market.market_num}"><i class="fa fa-angle-right"></i></a>
-							</li>
+								<a aria-label="Next" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${marketVORev.nowPage+1},${market.market_num})" ><i class="fa fa-angle-right"></i></a>
+							</li><!-- href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.nowPage+1}&market_num=${market.market_num}" 
+							 		href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.lastPage}&market_num=${market.market_num}"-->
 							<li class="page-item">
-								<a aria-label="Last" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.lastPage}&market_num=${market.market_num}"><i class="fa fa-angle-double-right"></i></a>
+								<a aria-label="Last" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${marketVORev.lastPage},${market.market_num})"><i class="fa fa-angle-double-right"></i></a>
 							</li>
 						</c:if>
 						</ul>
 						</div>
-					</c:if>		
+					</c:if>	
+					</div>	
 				<!--/마켓리뷰페이징-->	
 				
 				
@@ -1440,6 +1442,18 @@
 
 </script> 
 <script>
+	function reviewList(cntPerPage,nowPage,market_num){
+		$.ajax({
+			type:'GET',
+	    	url:href='marketRev-list?cntPerPageR='+cntPerPage+'&nowPageR='+nowPage+'&market_num='+market_num,
+	    	dataType:'json',
+	    	async :true,
+	    	error:onError,
+	    	success: onSuccessReview	
+		});
+		
+	}
+
 	function Revdelete(revNum,mNum){
 		/* alert("revNum"+revNum);
 		alert("mNum"+mNum); */
@@ -1565,8 +1579,8 @@
 		var pagingHtml='';
 		//var stringdata=JSON.stringify(data);
 		//console.log("stringify::"+ stringdata);
-		console.log("data[0][1]marketrevList.length+"+data[0].marketrevList.length);
-		console.log("data[0][1]marketrevList.length+"+data[0].marketrevList[i]);
+		//console.log("data[0][1]marketrevList.length+"+data[0].marketrevList.length);
+		//console.log("data[0][1]marketrevList.length+"+data[0].marketrevList[i]);
 	//	console.log("data[0][1].length+"+data[0].length);
 	//	console.log("data"+	data[0][i].marketRev_rdate);
 		//console.log("stringdata"+	stringdata.length);
@@ -1614,34 +1628,45 @@
 				html+='</div>';	    		
 		}
 		//console.log("ssss"+data[0].marketVORev.nowPage);
- 
+				var prev=data[0].marketVORev.nowPage-1;
+				var next=data[0].marketVORev.nowPage+1;
+	
+				pagingHtml+='<div class="center-block text-center">';
 				pagingHtml+='<ul class="pagination mg-b-0 page-0 ">';
-		/* 		pagingHtml+='<li class="page-item">';
-				pagingHtml+='<a aria-label="Last" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.startPage+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-double-left"></i></a>';
-				pagingHtml+='</li>';
-				pagingHtml+='<li class="page-item">';
-				pagingHtml+='<a aria-label="Next" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.startPage+1+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-left"></i></a>';
-				pagingHtml+='</li>';	
- */				 
+		
+				if(1<data[0].marketVORev.nowPage){
+				    pagingHtml+='<li class="page-item">';
+					pagingHtml+='<a aria-label="Last" class="page-link" onclick="reviewList('+data[0].marketVORev.cntPerPage+','+data[0].marketVORev.startPage+','+${market.market_num}+')"><i class="fa fa-angle-double-left"></i></a>';
+					pagingHtml+='</li>';
+					pagingHtml+='<li class="page-item">';
+					pagingHtml+='<a aria-label="Next" class="page-link" onclick="reviewList('+data[0].marketVORev.cntPerPage+','+prev+','+${market.market_num}+')"><i class="fa fa-angle-left"></i></a>';
+					pagingHtml+='</li>';	
+ 				}	 
 				for(var i=1;i<=data[0].marketVORev.endPage;i++){
 					if(i!=data[0].marketVORev.nowPage){
 						pagingHtml+='<li class="page-item">';
-						pagingHtml+='<a class="page-link" href="market-content?nowPageR='+i+'&cntPerPageR='+data[0].marketVORev.cntPerPage+'&market_num='+data[0].marketrevList[0].market_num+'">'+i+'</a>';
+						pagingHtml+='<a class="page-link" onclick="reviewList('+data[0].marketVORev.cntPerPage+','+i+','+${market.market_num}+')">'+i+'</a>';
 						pagingHtml+='</li>';
 					}
 					if(i==data[0].marketVORev.nowPage){
 						pagingHtml+='<li class="page-item active">';
-						pagingHtml+='<a class="page-link" href="#">'+i+'</a>';
+						pagingHtml+='<a class="page-link" href="javascript:void(0)">'+i+'</a>';
 						pagingHtml+='</li>';
 					}
 				}
-				pagingHtml+='<li class="page-item">';
-				pagingHtml+='<a aria-label="Next" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.nowPage+1+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-right"></i></a>';
-				pagingHtml+='</li>';
-				pagingHtml+='<li class="page-item">';
-				pagingHtml+='<a aria-label="Last" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.lastPage+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-double-right"></i></a>';
-				pagingHtml+='</li>';
+				if(data[0].marketVORev.endPage>data[0].marketVORev.nowPage){
+				//	if(data[0].marketVORev.nowPage < data[0].marketVORev.endPage){
+					pagingHtml+='<li class="page-item">';
+					pagingHtml+='<a aria-label="Next" class="page-link" onclick="reviewList('+data[0].marketVORev.cntPerPage+','+next+','+${market.market_num}+')"><i class="fa fa-angle-right"></i></a>';
+					pagingHtml+='</li>';
+					pagingHtml+='<li class="page-item">';
+					pagingHtml+='<a aria-label="Last" class="page-link" onclick="reviewList('+data[0].marketVORev.cntPerPage+','+data[0].marketVORev.lastPage+','+${market.market_num}+')"><i class="fa fa-angle-double-right"></i></a>';
+					pagingHtml+='</li>';
+				//	}
+				}
+					
 				pagingHtml+='</ul>';
+				pagingHtml+='</div>';
 		for(var i=0;i<data[1];i++){
 			srarHtml+='<i class="fa fa-star text-warning"> </i>';
   		}
@@ -1651,11 +1676,14 @@
 
 		$('#ajaxRev0').empty();
 		$('#ajaxRev0').html(html);
-		$('#changeStar').html(srarHtml);
+		
+		if(data.length>1){
+			$('#changeStar').html(srarHtml);
+		}		
 		$('#REVUpdate').modal('hide');
 		
-		//$('#paging').empty();
-		//$('#paging').html(pagingHtml);
+		$('#paging').empty();
+		$('#paging').html(pagingHtml);
 	}
 
 	//페이징 아작스 
