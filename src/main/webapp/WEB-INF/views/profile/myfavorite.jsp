@@ -236,8 +236,8 @@
 													<a href="#" class="badge badge-primary">모집중</a>
 												</td>
 												<td>
-													<a href="myfavorite_del?pj_num=${dto.pj_num}&free_code=${free.free_code}&mem_email=${sessionScope.email}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-													<a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="지원하기"><i class="fa fa-send"></i></a>
+													<a href="myfavorite_del?pj_num=${dto.pj_num}&free_code=${free.free_code}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<!--  <a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="지원하기"><i class="fa fa-send"></i></a>-->
 												</td>
 											</tr>
 											</c:forEach>

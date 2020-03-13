@@ -70,8 +70,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
-												<li><a class="slide-item" href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
+												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 											
 											
@@ -207,7 +207,7 @@
                                           </label>           
                                        </td>
 
-                                          <td><a href='freelancerProfile_content?mem_email=${sessionScope.email}&PRO_NUM=${freelancer.pro_num}'class="btn-link">${freelancer.profile_sub}</a></td>       
+                                          <td><a href='freelancerProfile_content?pro_num=${freelancer.pro_num}'class="btn-link">${freelancer.profile_sub}</a></td>       
                                     <!--      <td>${freeLancer.mem_email}</td>-->
                                        <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
                            		 
@@ -251,106 +251,50 @@
                <thead>
                      <div class="card">       
                         <div class="card-footer" align="right">
-                        <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a> 
-                         <a href='freelancerMyprofile_write?mem_email=${sessionScope.email}'><button type="submit" class="btn btn-primary">작성</button></a>  
-              
- 						 <a href="javascript:void(0)" onclick="" class="btn btn-primary" id="profile_open">프로필공개</a>
-                       
+                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
+                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
+                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#choiceModal">프로필공개</button>			 
                         </div>
-                     
-          
-     <script>    
-     $("input:checkbox[name='pro_num']").on("click",function(){
-    	 //alert("test");
-         var pronum ="";
-          $('input:checkbox[name="pro_num"]').each(function() {
-               if(this.checked){
-            	   pronum = this.value;
-               }
-         });
-          $("#profile_open").attr("onclick","choiceAjax("+pronum+")");
-          //choiceAjax(pronum);
-      });
-      
-      function choiceAjax(value){
-    	  //var pronum_list= new Array();
-    	  //pronum_list=value;
-         var flag= ${!empty sessionScope.email};
-         var objParam={
-               "pro_numList" : value
-         };
-          $.ajax({
-             type:"get",
-             url:"choiceProfile",
-             data:objParam,
-             dataType: "json",
-             success:function(data){
-               alert("성공");
-                
-             },
-             error:function(data){
-                alert("에러발생");
-             }
-          });
-      }
- 	 
-</script>
-          
-          
-          
-          
-          
-          
-          
-          
+
                 <div class="center-block text-center">
                            <ul class="pagination mb-0">         
                         <div class="card-body" style="margin:0 auto; align:center;">
                            <ul class="pagination mg-b-0 page-0 ">
-                     
                           <c:if test ="${paging.nowPage != paging.startPage}">
-                          
                            <!--이전 페이지 이동 -->
                             <li class="page-item">
-                        <a aria-label="Last" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
-                        <i class="fa fa-angle-double-left"></i></a>
-                     
-                     </li>   
-                     <li class="page-item">
-                        <a aria-label="Next" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
-                        <i class="fa fa-angle-left"></i></a>
-                     </li>   
-                              
-                           </c:if>
-                            
+	                        <a aria-label="Last" class="page-link" href="freelancerProfile_list?&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
+	                        <i class="fa fa-angle-double-left"></i></a>
+		                     </li>   
+		                     <li class="page-item">
+		                        <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
+		                        <i class="fa fa-angle-left"></i></a>
+		                     </li>   
+                          </c:if>
                            <!--페이지번호 -->
-             
- <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+                            <!-- 시작페이지~끝페이지 -->  
+ 							 <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
                                     <li class='page-item active'><a class="page-link"  >${p}</a></li>
                                  </c:when>
                                  <c:when test = "${p != paging.nowPage }">
-                                    <li class="page-item"><a class="page-link"  href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+                                    <li class="page-item"><a class="page-link"  href="freelancerProfile_list?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
                                  </c:when>
                               </c:choose>
                            </c:forEach>
-                           
-                              <c:if test ="${paging.nowPage != paging.lastPage}">
-                                 <li class="page-item">
-                           <a aria-label="Next" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+                           <c:if test ="${paging.nowPage != paging.lastPage}">
+                               <li class="page-item">
+                           <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
                          </li>  
                         <li class="page-item">
-                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
                         </li>
-                              </c:if>
-                              
-                            
+                           </c:if>
                            </ul>
                            </div>
                            </ul>
-                           </div>
-                                                                       
+                           </div>                                   
 <!--  
                               <li class="page-item">
                                  <a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
@@ -384,7 +328,6 @@
 -->
                         </div>
                         </div>
-
                         <!-- pagination-wrapper -->
                      </div>
                      <!-- section-wrapper -->
@@ -392,11 +335,8 @@
                </div>
             </div>
          </div>
-   
       </section>
       <!--/User Dashboard-->
-
-
 <!--Footer Section-->
 		<section>
 			<footer class="text-white" style="background-color:#0e284c;">
@@ -505,29 +445,85 @@ function choice(){
       }
 
 </script>
+<script>    
+	 $("input:checkbox[name='pro_num']").on("click",function(){
+		var pronum ="";
+		$('input:checkbox[name="pro_num"]').each(function() {
+			 if(this.checked){
+			      pronum = this.value;
+			      }
+			 });
+			   $("#profile_open").attr("onclick","choiceAjax("+pronum+")");
+			      });
+			      
+			      function choiceAjax(value){
+			         var flag= ${!empty sessionScope.email};
+			         var objParam={
+			               "pro_numList" : value
+			         };
+			          $.ajax({
+			             type:"get",
+			             url:"choiceProfile",
+			             data:objParam,
+			             dataType: "json",
+			             success:function(data){
+			               alert("성공");  
+			             },
+			             error:function(data){
+			                alert("에러발생");
+			             }
+			          });
+			      }
+</script>
 
-		<!-- Modal -->
-        <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-           <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                       <h5 class="modal-title" id="exampleModalLabel"> <span class=" btn btn-icon btn-primary btn-sm mb-1"><i class="fa fa-envelope"></i> </span> &nbsp; <b>이메일인증</b> </h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      				 <span aria-hidden="true">×</span>
-                           </button>
-                 					 </div>
-              							<div class="modal-body " style="margin:0 auto;">
-                                       <input type="text" id="email" name="email" placeholder="이메일을 입력하세요" class="form-control" style="width:250px; float:left;" />
-                                       <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button>
-                                    </div>
-                                    <div class="modal-footer">
-
-                                    <input type="hidden" path="random" id="random" value="${random}" />
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        <!--Modal 끝-->
+<!-- delete Modal -->   
+      <div id="deleteModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 정말 삭제할까요?</p>
+               </div>
+               <div class="modal-footer">
+               <a href="javascript:void(0)" class="btn btn-primary" style="color:white;" onclick="javascript:check();">네</a> 
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /delete Modal -->
+<!-- open Modal -->   
+      <div id="choiceModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 공개할까요?</p>
+               </div>
+               <div class="modal-footer">
+                <a href="javascript:void(0)" onclick="" class="btn btn-primary" id="profile_open">프로필공개</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /open Modal -->
 
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>

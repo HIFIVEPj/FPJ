@@ -27,6 +27,7 @@
 				<result column="mem_email" property="mem_email"/>	
 				<result property="pro_exp" column="pro_exp"/>
 				<result property="pro_vcnt" column="pro_vcnt"/>
+				<result property="pro_pcnt" column="pro_pcnt"/>
 				<result property="profile_choice" column="profile_choice"/>
 		</collection>	 
 	  	<collection property="list_project" javaType="java.util.ArrayList" ofType="List_Project" >
@@ -40,7 +41,8 @@
 			  <result property="pj_place" column="pj_place"/>
 			  <result property="pj_name" column="pj_name"/>	
 		</collection>	
-		<collection property="list_review" javaType="java.util.ArrayList" ofType="List_FreeLancerReview">	
+		<collection property="list_review" javaType="java.util.ArrayList" ofType="List_FreeLancerReview">
+			  <id property="freerev_num" column="freerev_num"/>	
 			  <id property="free_code" column="free_code"/>
 			  <result property="pro_num" column="pro_num"/>
 		 	  <result property="mem_email" column="mem_email"/>	
@@ -81,6 +83,8 @@
 				  <result property="pro_start" column="pro_start"/>
 			 	  <result property="pro_ox" column="pro_ox"/>
 				  <result property="pro_place" column="pro_place"/>
+				  <result property="pro_cv" column="pro_cv"/>
+				  <result property="pro_pcnt" column="pro_pcnt"/>
 				  <result property="pro_workplace" column="pro_workplace"/>
 	
 			  	<collection property="freelancer" javaType="java.util.ArrayList" ofType="freelancer">
@@ -136,7 +140,7 @@
 					<id property="free_code" column="free_code"/>
 					<result property="pro_num" column="pro_num"/>
 					<result property="type_num" column="type_num"/>
-					
+					<result property="mem_email" column="mem_email"/>
 				<collection property="FreePick" javaType="java.util.ArrayList" ofType="FreePick" >
 					<id property="free_keynum" column="free_keynum"/>
 					<result property="key_num" column="key_num"/>
@@ -233,6 +237,7 @@
     							    , profile_choice
     							    , FREEREV_STAR
                        				, m.class_num
+                       				, pro_pcnt
                        	              from FREELANCER_PROFILE fp
                                         full outer join FREELANCER_REVIEW fr
 										on fp.FREE_CODE= fr.FREE_CODE
@@ -240,9 +245,9 @@
 											on fp.free_code=f.free_code 				
 		                                        right outer join member m
 		                                        on m.mem_email=f.mem_email
-                                                    where profile_choice=1)aa)
+                                                    where profile_choice=1 order by profile_date desc )aa)
                                                         where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}
-                                                            order by profile_date desc					
+                                                          		
 		  ]]>
 	</select>
 	
@@ -286,7 +291,7 @@
 	</select> 
 
 	<!-- 컨텐츠 -->
-	<select id="freelancercontent" resultMap="freelancerContent" parameterType="long">
+	<select id="freelancercontent" resultMap="freelancerContent" parameterType="map">
 		<![CDATA[
 			select distinct fp.free_code 
 							, free_name 
@@ -301,9 +306,12 @@
 							, pro_start 
 							, pro_ox 
 							, pro_place 
+							, pro_cv
+							, pro_pcnt
 								from freelancer f, freelancer_profile fp 
-								where fp.free_code=f.free_code AND 
-									  fp.free_code=#{free_code}		
+								where fp.free_code=f.free_code 
+									and fp.free_code=#{free_code}
+									and fp.pro_num=#{pro_num}		
 		 ]]>		
 	</select>	
 	<!--프로필 조회수-->
@@ -318,8 +326,7 @@
 					, pj_sub
 					, appp_date
 					from freelancer_profile fp
-						inner join 
-						APPLIED_PROJECT ap
+						inner join APPLIED_PROJECT ap
 						on  fp.free_code=ap.free_code
 							inner join Project p
 							on ap.pj_num= p.pj_num
@@ -332,6 +339,8 @@
 			select fp.free_code
 					, fpk.KEY_NUM
 					, KEY_NAME
+					, fp.pro_num
+					, mem_email
 						from FREELANCER_PROFILE fp
 							left outer join FREE_PICK_KEYWORD fpk
 							on fp.FREE_CODE=fpk.FREE_CODE
@@ -349,7 +358,7 @@
 						from FREELANCER_PROFILE fp
 							left outer join TYPE t
 							on t.TYPE_NUM=fp.TYPE_NUM
-							where FREE_CODE=#{FREE_CODE}
+								where FREE_CODE=#{FREE_CODE}
 			]]>		
 	</select> 
 		<!-- 컨텐츠 5-->
@@ -370,6 +379,7 @@
 	<select id="selectStar" resultType="List_FreeLancerReview" parameterType="long">
 	select freerev_star from freelancer_review where pro_num=#{pro_num}
 	</select>
+	
 	<!-- 프리랜서 리뷰(+페이징) -->
 	<select id="countReview" resultType="int">
    		select count(*) from freelancer_review
@@ -399,26 +409,19 @@
 	</select> 
 	
 	<!-- 리뷰 insert -->
- 	<insert id="reviewInsert" parameterType="fp.freelancerprofile.domain.List_FreeLancerReview"> 
-  	<selectKey keyProperty="freerev_num" order="BEFORE" resultType="long">
-		select FREEREV_NUM_SEQ.NEXTVAL from dual
-	 </selectKey> 
+ 	<insert id="reviewInsert" parameterType="map" >
 	<![CDATA[
-		insert into freelancer_review (freerev_num, freerev_star, freerev_cont, freerev_rdate,pro_num, free_code, mem_email)
+		insert into freelancer_review (freerev_num, freerev_star,  freerev_cont, freerev_rdate, pro_num, free_code, mem_email)
 	values
-		(#{freerev_num}, #{freerev_star}, #{freerev_cont}, sysdate, #{pro_num} , #{free_code}, #{mem_email})
+		(freerev_num_seq.nextval,  #{freerev_star}, #{cont}, sysdate, #{pnum} , #{fcode}, #{mem_email})
 		   ]]>
 	</insert>
 	<!-- 리뷰 update -->
- 	<update id="reviewUpdate" parameterType="long"> 
- 	  <selectKey keyProperty="freerev_num" order="BEFORE" resultType="fp.freelancerprofile.domain.List_FreeLancerReview">
-		select FREEREV_NUM_SEQ.NEXTVAL from dual
-	  </selectKey> 
+ 	<update id="reviewUpdate" parameterType="long">
 	<![CDATA[
-		update set freelancer_review freerev_num= #{freerev_num},freerev_star= #{freerev_star},freerev_cont= #{freerev_cont}
+		update freelancer_review set freerev_star=#{review_star}, freerev_cont= #{freerev_cont}, freerev_rdate=sysdate, where freerev_num= #{freerev_num}
 		   ]]>
 	</update>  
-	
 	<!-- 리뷰 delete -->
  	<delete id="reviewDelete" parameterType="long"> 
 	<![CDATA[

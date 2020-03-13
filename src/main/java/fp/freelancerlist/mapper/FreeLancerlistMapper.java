@@ -26,24 +26,26 @@ public interface FreeLancerlistMapper {
 	public List<List_FreeLancer> SelectList(Map<String, Object> map);
 	public List<List_FreeLancerProfile> SelectList2();
 	public List<Project> SelectList3();
+	
 	//컨텐츠//
-	public List<Freelancer_FreeLancerProfile> freelancercontent(long free_code);
+	public List<Freelancer_FreeLancerProfile> freelancercontent(Map<String, Object> map);
 	public List<Freelancer_FreeLancerProfile> freelancercontent2(long free_code);
 	public List<Freelancer_FreeLancerProfile> freelancercontent3(long free_code);
 	public List<Type> freelancercontent4(long free_code);
 	public List<Project> freelancercontent5(long free_code);
 	public void vcnt(long free_code, long pro_num);
-		//프로필 조회수//
+	//프로필 조회수//
 	public void vcnt(long pro_num);
 	public List<List_FreeLancerReview> selectStar(long free_code);
+	
 	//리뷰//
 	public int countReview();
 	public List<List_FreeLancerReview> freelancerReview(List_PagingVO vo);
 	public List<List_FreeLancerReview> freelancerReview(List_FreeLancerReview freelancerreview);
-	public void reviewInsert(List_FreeLancerReview freelancerreview);
+	//리뷰crud//
+	public void reviewInsert(Map<String, Object> map);
+	public void reviewUpdate(Map<String, Object> map);
 	public void reviewDelete(long freerev_num);
-	public void reviewUpdate(long freerev_num);
-
 
 	
 

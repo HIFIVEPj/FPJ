@@ -49,8 +49,8 @@ import fp.freelancerprofile.domain.Type;
 	}
 	//컨텐츠//
 	@Override
-	public List<Freelancer_FreeLancerProfile> freelancercontent(long free_code){
-		return mapper.freelancercontent(free_code);
+	public List<Freelancer_FreeLancerProfile> freelancercontent(Map<String, Object> map){
+		return mapper.freelancercontent(map);
 		
 	}
 	@Override
@@ -78,11 +78,6 @@ import fp.freelancerprofile.domain.Type;
 	public List<List_FreeLancerReview> selectStar(long free_code) {
 		return mapper.selectStar(free_code);
 	}
-	
-	@Override
-	public List<FreeLancerProfile> freelancercontent() {
-		return null;
-	}
 	//리뷰//	
 	@Override
 	public int countReview() {
@@ -92,7 +87,20 @@ import fp.freelancerprofile.domain.Type;
 	public List<List_FreeLancerReview> freelancerReview(List_FreeLancerReview freelancerreview) {
 		return mapper.freelancerReview(freelancerreview);
 	}
+	@Override
+	public void reviewInsert(Map<String, Object> map) {
+		mapper.reviewInsert(map);
+	}
 	
+	public void  reviewUpdate(Map<String, Object> map) {
+		mapper.reviewUpdate(map);
+	}
+	@Override
+	public void reviewDelete(long freerev_num) {
+		mapper.reviewDelete(freerev_num);
+	}
+
+
 	@Override
 	public FreeLancer free_list_select(String mem_email) {
 		// TODO Auto-generated method stub
@@ -103,17 +111,5 @@ import fp.freelancerprofile.domain.Type;
 	public long getTotalCountFree(long free_code) {
 		return getTotalCountFree(free_code);
 	}
-	@Override
-	public void reviewInsert(List_FreeLancerReview freelancerreview) {
-		mapper.reviewInsert(freelancerreview);
-	}
-	public void  reviewUpdate(long freerev_num) {
-		mapper.reviewUpdate(freerev_num);
-	}
-	@Override
-	public void reviewDelete(long freerev_num) {
-		mapper.reviewDelete(freerev_num);
-	}
-
 
 }

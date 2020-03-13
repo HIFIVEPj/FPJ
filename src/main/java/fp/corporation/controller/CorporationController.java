@@ -1,21 +1,29 @@
-
 package fp.corporation.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +32,11 @@ import fp.corporation.domain.Project;
 import fp.corporation.service.CorporationService;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
+import fp.freelancerlist.controller.FreeLancerListController;
+import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.domain.KeyWord;
+import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -32,20 +45,66 @@ import lombok.extern.log4j.Log4j;
 public class CorporationController {
 	@Autowired
 	private CorporationService service;
-	
 	@Autowired
 	private ProjectService pjService;
+	@Autowired
+	private FreeLancerProfileService freeProService;
+
+	
+	// 프리랜서 찜하기 목록보기
+	@RequestMapping("myfavorite_cor")	//관심있는프로젝트
+	public ModelAndView Myfavorite_cor(ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("corporation/myfavorite_cor");
+		
+		long totalCountfreepick = freeProService.getTotalCountFreep(corporation.getCor_code());
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		}else if (nowPage == null) {
+			nowPage ="1";
+		}else if(cntPerPage == null) {
+			cntPerPage ="5";
+		}
+		
+		projectVo = new ProjectVo(totalCountfreepick, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("ProjectVo", projectVo);
+		map.put("cor_code",corporation.getCor_code());
+		
+		List<FreeLancerProfile>freePickList = freeProService.freepick_cor(map);
+		List<FreeLancerProfile>selectAllFreeKeywords = freeProService.selectAllFreeKeywords();
+		mv.addObject("cor", corporation);
+		mv.addObject("freeP", freePickList);
+		mv.addObject("pa", projectVo);
+		mv.addObject("keyword",selectAllFreeKeywords);
+		return mv;
+	}
+	@RequestMapping("myfavorite_cor_del")
+	public String myfavorite_cor_del(@RequestParam long pro_num, @RequestParam long cor_code){
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("pro_num",pro_num);
+		map.put("cor_code", cor_code);
+		freeProService.freepick_del(map);
+		return "redirect:myfavorite_cor";
+	}
 	@RequestMapping("payments_cor")
-	public String payments_cor(){
-		return "corporation/payments_cor";
+	public ModelAndView payments_cor(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("corporation/payments_cor");
+		mv.addObject("cor",corporation);
+		return mv;
 	}
 	
-	@RequestMapping("myfavorite_cor")
-	public String myfavorite_cor(){
-		return "corporation/myfavorite_cor";
-	}
 	@GetMapping("mydash_cor")
-	public ModelAndView write(String mem_email) {
+	public ModelAndView write(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		Corporation corporation = service.mydash_cor_select(mem_email);
 		ModelAndView mv = new ModelAndView("corporation/mydash_cor");
 		mv.addObject("cor",corporation);
@@ -96,9 +155,10 @@ public class CorporationController {
 	}
 	
 	@RequestMapping("managed_project")
-	public ModelAndView managed_project(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
+	public ModelAndView managed_project(HttpServletRequest request, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		Corporation corporation = service.mydash_cor_select(mem_email);
 		long totalCount = pjService.getTotalCountCor(corporation.getCor_code());
 		
@@ -119,19 +179,56 @@ public class CorporationController {
 		
 		ModelAndView mv = new ModelAndView("corporation/managed_project");
 		List<Project> listMydashCor = pjService.listMydashCor(map);
+		List<FreeLancer> freeList = freeProService.select_pj_applied_free();
+		List<Object> freeList_pjnum = new ArrayList<Object>();
+		if(freeList.size()!=0) {
+			for(int i =0; i<freeList.size(); i++) {
+				for(int j =0; j<freeList.get(i).getApplied_project().size(); j++)
+					freeList_pjnum.add(freeList.get(i).getApplied_project().get(j).getPj_num());
+			}
+		}
+		log.info("#&*$#@&*$( 프리랜서 수1 "+freeList_pjnum);
 		mv.addObject("cor",corporation);
 		mv.addObject("list", listMydashCor);
 		mv.addObject("pa",projectVo);
-		
-		log.info("#@#^#$%^#$ projectVO: "+ projectVo);
-		log.info("#@#^#$%^#$ map: "+ corporation);
-		log.info("#@#^#$%^#$ map: "+ map);
+		mv.addObject("freeList_pjnum",freeList_pjnum);
+		//log.info("#@#^#$%^#$ projectVO: "+ projectVo);
+		//log.info("#@#^#$%^#$ map: "+ corporation);
+		//log.info("#@#^#$%^#$ map: "+ map);
 		List<Project> keyname = pjService.keywords();
 		mv.addObject("keyname", keyname);
 		return mv;
 	}
-	
-	
+	@RequestMapping(value="/appp_pj_freeList", method=RequestMethod.GET)
+	@ResponseBody
+	public List<FreeLancer> apply_free(@RequestParam long pj_num) {
+		//ResponseEntity<Map<String,Object>> entity = null;
+		//long totalCount= freeProService.totalCount_pj_applied_free(pj_num);
+		List<FreeLancer> listAll =  freeProService.select_pj_applied_free_paging(pj_num);
+		
+		List<FreeLancer> listProfile = new ArrayList<FreeLancer>();
+		for(int i=0; i<listAll.size(); i++) {
+			listProfile.add(listAll.get(i));
+		}
+		//log.info("@#*&$^@#&*$list: "+listProfile);
+		return listProfile;
+	}
+	@RequestMapping(value="/select_free_project", method=RequestMethod.GET)
+	@ResponseBody
+	public int select_free_project(@RequestParam long pj_num, @RequestParam long pro_num) {
+		log.info("@#&$(@#&pj_num: "+pj_num+", pro_num: "+pro_num);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("pro_num",pro_num);
+		map.put("pj_num",pj_num);
+		pjService.appp_status_update(map);
+		Project pj = pjService.showContent(pj_num);
+		int appp_count = pjService.appp_count(pj_num);
+		if(appp_count>=pj.getPj_recnum()) {
+			pjService.pj_status_update(pj_num);
+		}
+		int pj_status = pjService.showContent(pj_num).getPj_status();
+		return pj_status;
+	}
 	public String saveStore(MultipartFile fileName) {
 		String ofname = fileName.getOriginalFilename();
 		int idx = ofname.lastIndexOf(".");

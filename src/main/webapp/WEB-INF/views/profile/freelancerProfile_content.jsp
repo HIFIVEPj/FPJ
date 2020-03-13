@@ -49,9 +49,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
-												<li><a class="slide-item " href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
-												<li><a class="slide-item " href="mydash.html">기업</a></li>
+												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+												<li><a class="slide-item " href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
 								<!-- 		<li class="slide">
@@ -255,8 +254,6 @@
 												</thead>
 												<tbody>
 												
-												
-									
 													<tr>
 													<c:forEach  var="content" items="${content4}" varStatus="status">
 													<c:forEach  var="name" items="${content.project}" varStatus="status">
@@ -286,15 +283,12 @@
 									</c:choose>
 									
 									<c:choose>
-									    <c:when test="${!doneLoop}">
-									   
-									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
-									     
+									    <c:when test="${!doneLoop}">									   
+									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>									     
 									    </c:when>
-									       
 									    
 									    <c:otherwise>
-									         <td><i class="fa fa-save"></i>&nbsp;등록된 파일이 없습니다.</td>
+									         <td colspan="3"><i class="fa fa-save"></i>&nbsp;등록된 파일이 없습니다.</td>
 									    </c:otherwise>
 									</c:choose>
 									
@@ -328,12 +322,12 @@
 							</div>
 							<div class="card-footer" align="right">
 							
-								<a href="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-secondary icons">수정하기</a>
+								<a href="freelancerMyprofile_change?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-primary icons">수정하기</a>
 								
-								<a href='freelancerProfile_delete?mem_email=${sessionScope.email}&PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
+								<a href='freelancerProfile_delete?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								
-								<a href="freelancerProfile_list?mem_email=${sessionScope.email}" class="btn btn-secondary icons">목록</a>				
-									
+								<a href="freelancerProfile_list" class="btn btn-primary icons">목록</a>				
+
 							</div>
 						
 						<!-- 	<div class="card-footer" align="right">
@@ -348,7 +342,54 @@
 			</div>
 		</section>
 		<!--/User Dashboard-->
-
+<!-- delete Modal -->   
+      <div id="deleteModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 정말 삭제할까요?</p>
+               </div>
+               <div class="modal-footer">
+               <a href='freelancerProfile_delete?pro_num${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-primary" style="color:white;">네</a>	
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /delete Modal -->
+<!-- edit Modal -->   
+      <div id="editModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 수정할까요?</p>
+               </div>
+               <div class="modal-footer">
+              <a href="freelancerMyprofile_change?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-primary">네</a>	
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /edit Modal -->
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 

@@ -3,9 +3,9 @@ package fp.freelancerprofile.mapper;
 
 import java.util.*;
 
-import org.springframework.context.annotation.Profile;
 
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
@@ -39,8 +39,11 @@ public interface FreeLancerProfileMapper {
 	//프로필 작성페이지 수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
 	public void typeUpdate(int type_num);
-	public void keyUpdate(Map<String, Object> map);
-	public void keyDelete(Map<String, Object> map);
+	//public void keyUpdate(Map<String, Object> map);
+	public void keyUpdate(FreePickKeyWord freepickkeyword);
+	//public void keyDelete(Map<String, Object> map);
+	void updateKeyword_Del(FreePickKeyWord freepickkeyword);
+	void updateKeyword_In(FreePickKeyWord freepickkeyword);
 
 	//체크박스 삭제//
 	public void checkdelete1(Map<String, Object> map);
@@ -58,14 +61,21 @@ public interface FreeLancerProfileMapper {
 	public void mydash_free_insert(FreeLancer freelancer);
 	public void mydash_free_update(FreeLancer freelancer);
 	public void mydash_update_classnum(String mem_email);
+	public List<FreeLancer>select_pj_applied_free();
+	List<FreeLancer>select_pj_applied_free_paging(long pj_num);
 	
 	public void insertPjpkeyword(Map<String, Object> map);
-
-
-
-
-
-
+	//프리랜서 찜
+	List<FreeLancerPick>freepick_list(long cor_code);
+	void freepick_insert(Map<String, Object>map);
+	void freepick_del(Map<String, Object>map);
+	void freepick_pro_update_in(Map<String, Object>map);
+	void freepick_pro_update_del(Map<String, Object>map);
 	
+	long getTotalCountFreep(long cor_code);
+	List<FreeLancerProfile> freepick_cor(Map<String, Object>map);
+	
+	//profile keyword 전체뽑기
+	List<FreeLancerProfile> selectAllFreeKeywords();
 	
 }

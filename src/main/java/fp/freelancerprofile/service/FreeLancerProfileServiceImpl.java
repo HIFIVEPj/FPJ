@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.PjPickKeyword;
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
@@ -100,12 +102,18 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	  //  mapper.keyUpdate(map);
 	}
 
-	@Override
+	/*@Override
 	@Transactional
 	public void keyUpdate(Map<String, Object> map) {
 		 mapper.keyDelete(map);
 		 mapper.keyUpdate(map);
 		
+	}*/
+	@Override
+	@Transactional
+	public void keyUpdate(FreePickKeyWord freepickkeyword) {
+		mapper.updateKeyword_Del(freepickkeyword);
+		mapper.updateKeyword_In(freepickkeyword);
 	}
 /*	@Override
 	public void keyDelete(Map<String, Object> map) {
@@ -147,9 +155,45 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void mydash_free_update(FreeLancer freelancer) {
 		mapper.mydash_free_update(freelancer);
 	}
-
+	@Override
+	public List<FreeLancer>select_pj_applied_free(){
+		return mapper.select_pj_applied_free();
+	}
+	@Override
+	public List<FreeLancer>select_pj_applied_free_paging(long pj_num){
+		return mapper.select_pj_applied_free_paging(pj_num);
+	}
+	//프리랜서 찜
+	@Override
+	public List<FreeLancerPick>freepick_list(long cor_code){
+		return mapper.freepick_list(cor_code);
+	}
+	@Override
+	@Transactional
+	public void freepick_insert(Map<String, Object>map){
+		mapper.freepick_insert(map);
+		mapper.freepick_pro_update_in(map);
+	}
+	@Override
+	@Transactional
+	public void freepick_del(Map<String, Object>map) {
+		mapper.freepick_del(map);
+		mapper.freepick_pro_update_del(map);
+	}
+	@Override
+	public long getTotalCountFreep(long cor_code) {
+		return mapper.getTotalCountFreep(cor_code);
+	}
+	@Override
+	public List<FreeLancerProfile> freepick_cor(Map<String, Object>map){
+		return mapper.freepick_cor(map);
+	}
 	
-
-
+	//profile keyword 전체뽑기
+	@Override
+	public List<FreeLancerProfile> selectAllFreeKeywords(){
+		return mapper.selectAllFreeKeywords();
+	}
 
 }
+
