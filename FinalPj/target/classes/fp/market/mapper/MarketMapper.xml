@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fp.market.mapper.MarketMapper">
+
+ 	<!--mybatis-config.xml에서 알리아스줄 수 있음↓type-->
+	<resultMap id="resultMarket" type="Market">
+		<id property="market_num" column="market_num" />
+		<result property="free_code" column="free_code" />
+		<result property="cate_num" column="cate_num" />
+		<result property="market_price" column="market_price" />
+		<result property="market_sub" column="market_sub" />
+		<result property="market_cont" column="market_cont" />
+		<result property="market_vcnt" column="market_vcnt" />
+		<result property="market_fname" column="market_fname" />
+		<result property="market_ofname" column="market_ofname" />
+		<result property="market_state" column="market_state" />
+		<result property="market_pcnt" column="market_pcnt" />
+		<result property="option3" column="option3" />
+		<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+	       <id property="free_code" column ="free_code" />
+	       <result property="mem_email" column ="mem_email" />
+	       <result property="free_name" column ="free_name" />
+	       <result property="free_tel" column ="free_tel" />
+	       <result property="free_point" column ="free_point" />
+	       <result property="rdate" column ="rdate" />
+	       <result property="free_level" column ="free_level" />
+	       <result property="free_acctox" column ="free_acctox" />
+	       <result property="free_fname" column ="free_fname" />
+	       <result property="free_ofname" column ="free_ofname" />       
+		</association>
+    	<association property="marketRev" javaType="MarketRev" column ="marketRev_num">
+	       <id property="marketRev_num" column ="marketRev_num" />
+	         <result property="marketRev_star" column ="marketRev_star" />
+	         <result property="market_num" column ="마켓넘" />
+    	</association>
+    	<association property="freelancerProfile" javaType="mFreelancerProfile" column ="pro_num" ><!--프리랜서정보를뽑는데 따로 원하는정보들만!있는 클래스를 모아서 맵으로써야하는지 몰라서 일단 적어놓음, 일단 resultMarket에 같이 프리프로필을 넣어버림-->	
+			<id property="pro_num" column="pro_num" />
+			<id property="free_code" column="free_code" />
+			<id property="Type_num" column="Type_num" />
+			<id property="pro_num" column="pro_num" />
+			<id property="pro_exp" column="pro_exp" />
+			<id property="pro_cv" column="pro_cv" />
+			<id property="pro_addr" column="pro_addr" />
+			<id property="pro_edu" column="pro_edu" />
+			<id property="pro_start" column="pro_start" />
+			<id property="pro_ox" column="pro_ox" />
+			<id property="pro_grade" column="pro_grade" />
+			<id property="pro_vcnt" column="pro_vcnt" />
+			<id property="pro_pcnt" column="pro_pcnt" />	
+			<id property="pro_place" column="pro_place" />
+		</association> 
+	</resultMap>
+	
+	<resultMap id="resultMarketRev" type="MarketRev">
+        <id property="marketRev_num" column ="marketRev_num" />
+         <result property="marketRev_cont" column ="marketRev_cont" />
+         <result property="marketRev_star" column ="marketRev_star" />
+         <result property="marketRev_rdate" column ="marketRev_rdate" />
+         <result property="market_num" column ="market_num" />
+         <result property="marketRev_star" column ="marketRev_star" />
+
+         <result property="mem_email" column ="mem_email" /> 	
+    	 <association property="freelancer" javaType="mFreelancer" column ="free_code" >
+	       <id property="free_code" column ="free_code" />
+	       <result property="free_name" column ="free_name" />
+	       <result property="free_fname" column ="free_fname" />
+	       <result property="free_ofname" column ="free_ofname" />       
+		</association>
+		<association property="corporation" javaType="mCorporation" column ="cor_code" >
+	       	<id property="cor_code" column ="cor_code" />
+	        <result property="mem_email" column ="mem_email" />
+	        <result property="cor_mname" column ="cor_mname" />    
+	        <result property="cor_fname" column ="cor_fname" /><!-- result안쓰는 컬럼은 unread 로 나옴 -->
+	        <result property="cor_ofname" column ="cor_ofname" />    
+    	</association>
+	</resultMap>
+	
+	<resultMap id="resultMarketQA" type="MarketQA">
+        <id property="marketQA_num" column ="marketQA_num" />
+        <result property="market_num" column ="market_num" />	
+        <result property="marketQA_sub" column ="marketQA_sub" />
+		<result property="marketQA_cont" column ="marketQA_cont" />
+		<result property="marketQA_rdate" column ="marketQA_rdate" />
+		<result property="marketQA_vcnt" column ="marketQA_vcnt" />
+		<result property="marketQA_prnum" column ="marketQA_prnum" />
+		<result property="marketQA_lev" column ="marketQA_lev" />
+		<result property="marketQA_sun" column ="marketQA_sun" />
+		<result property="marketQA_ox" column ="marketQA_ox" />   	
+		<result property="mem_email" column ="mem_email" /> 
+	   	<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+	       <id property="free_code" column ="free_code" />
+	       <result property="free_name" column ="free_name" />
+	       <result property="free_fname" column ="free_fname" />
+	       <result property="free_ofname" column ="free_ofname" />       
+	   </association>
+	   <association property="corporation" javaType="mCorporation" column ="cor_code" >
+	       	<id property="cor_code" column ="cor_code" />
+	     	<result property="mem_email" column ="mem_email" /> <!-- 빼면 기업의 이메일이 unread로됨 -->
+	        <result property="cor_mname" column ="cor_mname" />    
+    	</association>
+	</resultMap>
+	
+	<!-- 마켓 총 게시글 갯수 출력 -->
+	<select id="getMarketCount" resultType="Integer">
+		SELECT COUNT(*) FROM MARKET where market_state=1
+	</select>
+	<!-- 마켓리뷰 총 게시글 갯수 출력 -->
+	<select id="getMarketRevCount" resultType="Integer" parameterType="long">
+	<!-- SELECT (SELECT COUNT(*) FROM MARKET_REVIEW) + (SELECT COUNT(*) FROM MARKET_REVIEWCOMMENT) FROM DUAL -->
+		SELECT COUNT(*) FROM MARKET_REVIEW where market_num=#{market_num}
+	</select>
+	<!-- 마켓문의 총 게시글 갯수 출력 -->
+	<select id="getMarketQACount" resultType="Integer" parameterType="long">
+		SELECT COUNT(*) FROM MARKET_QA where market_num=#{market_num}
+	</select>
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="getMarketList" resultMap="resultMarket" parameterType="MarketVO">
+		<![CDATA[
+			select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+			(select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_CONT , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where m.MARKET_STATE=1) A
+			right outer join
+			(select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
+			on A.MARKET_NUM=B.마켓넘 ORDER BY A.MARKET_NUM desc) aa)
+			where rnum>#{start} and rnum<=#{end}
+		]]>
+	</select>
+	
+<!-- 마켓상세보기 -->
+	<select id="getMarket" resultType="Market" parameterType="long">
+		select * from MARKET where MARKET_NUM=#{market_num}
+	</select>
+	<select id="getMarketStar" resultType="Integer" parameterType="long">
+ 		select avg(MARKETREV_STAR) marketRev_star
+ 		 from MARKET_REVIEW where MARKET_NUM=#{market_num}
+	</select>
+	
+<!-- 마켓문의페이징 -->	
+	<select id="getMarketQA" resultMap="resultMarketQA" parameterType="hashmap">
+		<![CDATA[
+		select * from 
+	    (select rownum rnum , aa.* from
+	        (select COR_MNAME,MARKETQA_NUM,MARKET_NUM,MARKETQA_SUB,MARKETQA_CONT,MARKETQA_RDATE,MARKETQA_VCNT,MARKETQA_PRNUM,MARKETQA_LEV,MARKETQA_SUN,MARKETQA_OX,mq.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_QA mq 
+	        left outer join FREELANCER f on mq.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mq.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) 
+	    aa )where rnum >#{marketVOQAStart} and rnum <=#{marketVOQAEnd}
+		]]>
+	</select>
+								<!--	select * from (select * from 
+									(select rownum rnum , aa.* from
+									(select * from MARKET_QA order by MARKETQA_PRNUM desc, MARKETQA_SUN asc ) aa )
+									where rnum >#{marketVOQAStart} and rnum <= #{marketVOQAEnd})where MARKET_NUM=#{market_num}
+									-->	
+<!-- 마켓문의,파일 update&insert  -->	
+	<!-- insert 전에 업데이트 먼저 순서숫자 겹치는거 방지하려고-->
+ 	<!-- 받아온 값의 뒷순서들에 +1씩한 후에 insert하면 순서겹치지않음-->
+ 	<update id="updateMarketQA"  parameterType="MarketQA">
+		 UPDATE MARKET_QA SET marketQA_sun = marketQA_sun+1 WHERE market_num=#{market_num} AND marketQA_sun>=#{marketQA_sun}
+	</update>
+	<insert id="insertMarketQA" parameterType="MarketQA">
+			<!-- prnum이 0일때 즉 댓글또는 첫댓글일때 1 또는 맥스값의 +1 리턴-->
+			<!-- 또는 대댓글일때 prnum맥스값을 그대로 리턴 -->
+		<selectKey resultType="long" keyProperty="marketQA_prnum" order="BEFORE">
+			<choose>
+				<when test="marketQA_prnum==0">
+					SELECT NVL(MAX(MARKETQA_PRNUM),0)+1 marketQA_prnum FROM MARKET_QA where market_num=#{market_num}
+				</when>
+				<otherwise>
+					SELECT MAX(MARKETQA_PRNUM) marketQA_prnum FROM MARKET_QA where market_num=#{market_num}
+				</otherwise>
+			</choose>
+		</selectKey>
+		insert into
+			MARKET_QA(MARKETQA_NUM, MARKET_NUM, MARKETQA_SUB, MARKETQA_CONT, MARKETQA_RDATE, MARKETQA_VCNT,
+					MARKETQA_PRNUM, MARKETQA_LEV, MARKETQA_SUN,MARKETQA_OX,MEM_EMAIL)
+		values
+			(MARKETQA_NUM_SEQ.NEXTVAL, #{market_num}, #{marketQA_sub}, #{marketQA_cont},SYSDATE, #{marketQA_vcnt},
+				#{marketQA_prnum}, #{marketQA_lev},#{marketQA_sun},#{marketQA_ox},#{mem_email})
+	</insert>
+	<insert id="insertMarketQAFile" parameterType="hashmap">
+		<selectKey resultType="long" keyProperty="marketQA_num" order="BEFORE">
+			select max(MARKETQA_NUM) from market_QA where market_num=#{market_num}
+		</selectKey>
+		insert into MARKET_QAFILE values(MARKETQAFILE_NUM_SEQ.NEXTVAL, #{marketQA_num}, #{market_num}, #{marketQAFile_fname},#{marketQAFile_ofname},#{marketQAFile_size},null,null,null)
+	</insert>
+	
+<!-- 마켓문의 파일,글 만 보기 -->	
+	<select id="marketQAFile" parameterType="hashmap" resultType="MarketQAFile">
+		select * from MARKET_QAFile where market_num=#{market_num} and marketQA_num=#{marketQA_num}
+	</select>	
+	<select id="marketQAcont" parameterType="hashmap" resultType="MarketQA">
+		select marketQA_cont from market_QA where market_num=#{market_num}  and marketQA_num=#{marketQA_num}
+	</select>	
+<!-- 마켓문의글 삭제 수정 -->
+	<delete id="deleteMarketQA"  parameterType="hashmap">
+		delete market_QA where marketQA_num=#{marketQA_num} and market_num=#{market_num}
+	</delete>
+	<update id="updateMarketQA2" parameterType="hashmap">
+		update market_QA set marketQA_sub=#{marketQA_sub}, marketQA_cont=#{marketQA_cont}, marketQA_ox=#{marketQA_ox} where marketQA_num=#{marketQA_num} and market_num=#{market_num}
+	</update>
+<!-- 마켓리뷰 페이징보기 -->	
+	<select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">
+		<![CDATA[
+			select * from (select rownum rnum , aa.* from (select COR_MNAME,COR_FNAME,COR_OFNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
+			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL where MARKET_NUM=#{market_num} order by MARKETREV_NUM desc) aa )where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd}
+		]]>
+		
+		<!--이상하게봅히는 전쿼리
+			<![CDATA[
+			select * from (select * from 
+			(select rownum rnum ,aa.* from
+			(select COR_MNAME,MARKETREV_NUM,MARKETREV_CONT,MARKETREV_STAR,MARKETREV_RDATE,MARKET_NUM,mr.MEM_EMAIL,FREE_NAME,FREE_OFNAME,FREE_FNAME from MARKET_REVIEW mr 
+			left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL 
+			JOIN CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL order by MARKETREV_NUM desc) aa )
+			where rnum >#{marketVORevStart} and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
+			]]>
+		-->
+		<!--	프리이름이안뽑히는쿼리
+			select * from (select * from 
+			(select rownum rnum , aa.* from
+			(select * from MARKET_REVIEW order by MARKETREV_NUM desc) aa )
+			where rnum >#{marketVORevStart}  and rnum <=#{marketVORevEnd})where MARKET_NUM=#{market_num}
+		-->	
+	</select>
+	<!-- 마켓리뷰 프리이름									
+	<select id="getMarketRevFree" resultType="Freelancer" parameterType="long">
+		select FREE_CODE, mr.MEM_EMAIL, FREE_NAME,FREE_FNAME,FREE_OFNAME from FREELANCER f join MARKET_REVIEW mr
+		on mr.MEM_EMAIL=f.MEM_EMAIL where mr.MARKET_NUM=#{market_num}
+	</select>	
+	또는 기업이름			
+	<select id="getMarketRevCor" resultType="Corporation" parameterType="long" >
+		select COR_MNAME, COR_FNAME ,COR_OFNAME, mr.MEM_EMAIL from CORPORATION cor join MARKET_REVIEW mr on mr.MEM_EMAIL=cor.MEM_EMAIL where mr.MARKET_NUM=#{market_num}
+	</select>									
+	-->									
+<!-- 마켓리뷰 insert update delete-->
+	<insert id="insertMarketRev" parameterType="MarketRev" >
+		insert into MARKET_REVIEW values(MARKETREV_NUM_SEQ.NEXTVAL,#{marketRev_cont},#{marketRev_star},SYSDATE,#{market_num},#{mem_email},null,null,null)
+	</insert>
+	<delete id="deleteMarketRev"  parameterType="hashmap">
+		delete MARKET_REVIEW where marketRev_num=#{marketRev_num} and market_num=#{market_num}
+	</delete>
+	<update id="updateMarketRev" parameterType="hashmap">
+		update MARKET_REVIEW set marketRev_cont=#{marketRev_cont}, marketRev_star=#{marketRev_star} where market_num=#{market_num} and MARKETREV_NUM=#{marketRev_num}
+	</update>
+
+<!-- 마켓 프리랜서 정보뽑기 -->
+	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">
+		select f.MEM_EMAIL,f.FREE_NAME, fp.PRO_CV, f.FREE_RDATE rdate, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME
+		from FREELANCER f left outer join FREELANCER_PROFILE fp on fp.FREE_CODE=f.FREE_CODE join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
+	</select>
+<!-- 마켓상세보기 -->	
+<!-- 마켓 등록 (전에프리코드필요)-->
+	<select id="getFreeCode" parameterType="String" resultType="long">
+		select free_code from FREELANCER where mem_email=#{mem_email}
+	</select>
+	<insert id="insertMarket" parameterType="Market">
+		insert into Market values(MARKET_NUM_SEQ.NEXTVAL,#{free_code},#{cate_num},#{market_price},#{market_sub},#{market_cont},0,#{market_fname},#{market_ofname},1,0,null,null,null)
+	</insert>
+
+<!-- 마켓 삭제 -->
+	<delete id="deleteMarket"  parameterType="long">
+		delete from MARKET where market_num=#{market_num}
+	</delete>
+<!-- 마켓 수정 -->
+	<select id="updateMarket1" resultType="Market" parameterType="long">
+		select * from market where MARKET_NUM=#{market_num}	
+	</select>
+	<update id="updateMarket2"  parameterType="Market">
+		UPDATE MARKET SET MARKET_PRICE=#{market_price},MARKET_SUB=#{market_sub},MARKET_CONT=#{market_cont},MARKET_FNAME= #{market_fname},MARKET_OFNAME=#{market_ofname} WHERE MARKET_NUM = #{market_num}
+	</update>
+<!-- 마켓조회수+ -->
+	<update id="updateMarketVcnt" parameterType="long">
+		update market set market_vcnt=market_vcnt+1 where market_num=#{market_num}
+	</update>	
+<!-- 마켓결제에필요한 쿼리들 -->
+	<select id="getFreeName" parameterType="long" resultType="String">
+		select f.FREE_NAME from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
+	</select>
+	<insert id="insertPaymentMarket" parameterType="java.util.Map">
+		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME ) values
+		(PAYINFO_NUM_SEQ.nextval, #{map.imp_uid}, #{map.merchant_uid}, #{map.paid_amount}, #{map.apply_num, jdbcType=VARCHAR}, #{map.status}, #{map.card_name, jdbcType=VARCHAR}, #{map.pg_tid}, #{map.buyer_name})
+	</insert>
+<!-- 마켓찜 -->
+	<select id="pickState" resultType="MarketPick" parameterType="String" >
+		<!-- select * from market_pick where mem_email=#{mem_email}
+		SELECT * FROM market_pick WHERE EXISTS(select * from market_pick where mem_email=#{mem_email}) -->
+		select market_num from market_pick where mem_email=#{mem_email}
+	</select>
+	<insert id="insertMarketPick" parameterType="hashmap">
+	 	insert into MARKET_PICK(MARKETP_NUM, MARKET_NUM, MEM_EMAIL)values(MARKETP_NUM_SEQ.NEXTVAL, #{market_num}, #{mem_email}) 
+	</insert>
+	<delete id="deleteMarketPick" parameterType="hashmap">
+		 delete MARKET_PICK where market_num=#{market_num} and mem_email=#{mem_email}
+	</delete>
+	<update id="updatePlusMarketPick" parameterType="long">
+		update market set MARKET_PCNT=market_pcnt+1 where market_num=#{market_num}
+	</update>
+	<update id="updateMinusMarketPick" parameterType="long">
+		update market set MARKET_PCNT=market_pcnt-1 where market_num=#{market_num}
+	</update>
+
+
+</mapper>	
