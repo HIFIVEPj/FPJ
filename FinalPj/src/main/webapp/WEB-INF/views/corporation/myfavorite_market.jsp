@@ -63,18 +63,18 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite?mem_email=${sessionScope.email}">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
+												<li><a class="slide-item" href="cor-myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
-												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
-												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
+												<li><a class="slide-item" href="project_write?mem_email=${sessionScope.email}">프로젝트 작성하기</a></li>
+												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
 											</ul>
 										</li>
+										
 										<li>
 											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
@@ -93,14 +93,13 @@
 								<h3 class="card-title"><b>나의 찜한마켓</b></h3>
 							</div>
 							<div class="card-body">
-							
-								<div class="tab-content">
+								<div class="tab-content">					
+									<button aria-haspopup="true" class="btn btn-primary"><a href="#" style="color:white">찜 목록</a></button>
+									<button aria-haspopup="true" class="btn btn-primary"><a href="cor-myBuyMarket" style="color:white">구매한 마켓</a></button>
 								
-								
-								
-								<!-- 탭1 -->
-									<c:if test="${fn:length(mPickList)>0 }">
-								
+									</br></br>
+									<!-- 탭1 -->				 
+										<c:if test="${fn:length(corPickList)>0 }">
 											<table class="table table-bordered table-hover mb-0 text-nowrap">
 												<thead style="text-align:center;">
 													<tr>
@@ -111,9 +110,7 @@
 														<th><b>버튼</b></th>
 													</tr>
 												</thead>
-												
-												
-											<c:forEach items="${mPickList }" var="pickList">	
+											<c:forEach items="${corPickList }" var="pickList">	
 												<tbody>
 													<tr>
 														<td>
@@ -147,13 +144,10 @@
 																</div>
 															</div>			
 														</td>
-														
 														<td class="font-weight-semibold fs-16">
 															<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 														</td> 
-														
-														
-														
+
 														<c:if test="${pickList.market.market_state==1}">
 															<td>
 																<a href="#" class="badge badge-warning">판매중</a>
@@ -161,40 +155,44 @@
 														</c:if>
 														<td>
 															<a href="deleteMarketPick?marketP_num=${pickList.marketP_num}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-															<a href="javascript:void(0);" onclick="paymentFormSubmit()" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
-		
-														<form id="paymentsForm" action="market-payments" method="post">
-															<input type="hidden" value="${pickList.market.market_sub}" name="marketPaym_pdName">
-															<input type="hidden" value="${pickList.market.market_num}" name="market_num">
-															<input type="hidden" value="${sessionScope.email}" name="mem_email">
-															<input type="hidden" value="${pickList.market.market_price}" name="marketPaym_price">
-															<c:choose>
-																<c:when test="${pickList.market.market_price<=500000}">
-																	<input type="hidden" value=20 name="marketPaym_feeRate">
-																</c:when>
-																<c:when test="${pickList.market.market_price<=2000000}">
-																	<input type="hidden" value=12 name="marketPaym_feeRate">
-																</c:when>
-																<c:otherwise>
-																	<input type="hidden" value=6 name="marketPaym_feeRate">
-																</c:otherwise>
-															</c:choose>
-														</form>
-																		
-														<script>
-															function paymentFormSubmit(){
-																//document.paymentsForm.submit(); 
-																document.getElementById("paymentsForm").submit();
-															}
-														</script>
-																		
+															 <a href="javascript:void(0);" onclick="paymentFormSubmit()"class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
+							 
+							
+																<form id="paymentsForm" action="market-payments" method="post">
+																	<input type="hidden" value="${pickList.market.market_sub}" name="marketPaym_pdName">
+																	<input type="hidden" value="${pickList.market.market_num}" name="market_num">
+																	<input type="hidden" value="${sessionScope.email}" name="mem_email">
+																	<input type="hidden" value="${pickList.market.market_price}" name="marketPaym_price">
+																	<c:choose>
+																		<c:when test="${pickList.market.market_price<=500000}">
+																			<input type="hidden" value=20 name="marketPaym_feeRate">
+																		</c:when>
+																		<c:when test="${pickList.market.market_price<=2000000}">
+																			<input type="hidden" value=12 name="marketPaym_feeRate">
+																		</c:when>
+																		<c:otherwise>
+																			<input type="hidden" value=6 name="marketPaym_feeRate">
+																		</c:otherwise>
+																	</c:choose>
+														
+																</form>
+																
+															<script>
+																function paymentFormSubmit(){
+																	//document.paymentsForm.submit(); 
+																	document.getElementById("paymentsForm").submit();
+																}
+															</script>						
+							
+							
+							
 														</td>
 													</tr>
 												</tbody>
 											</c:forEach>	
 											</table>
 											</c:if>
-											<c:if test="${fn:length(mPickList)==0 }">
+											<c:if test="${fn:length(corPickList)==0 }">
 												<div class="card">
 													<div class="card-body" style="margin:0 auto; align:center;">
 														찜한 마켓이 없습니다.
@@ -202,7 +200,6 @@
 												</div>
 											</c:if>
 										 <!-- 페이징 -->
-										 <c:if test="${fn:length(mPickList)>0 }">
 											<div class="card">
 												<div class="card-body" style="margin:0 auto; align:center;">
 													<ul class="pagination mg-b-0 page-0 ">
@@ -224,7 +221,7 @@
 																</c:when>	
 																<c:otherwise>
 																	<li class="page-item">
-																		<a class="page-link hidden-xs-down" href="myfavoriteMarket?nowPageP=${p}&cntPerPageP=${paging.cntPerPage}">${p}</a>
+																		<a class="page-link hidden-xs-down" href="cor-myfavoriteMarket?nowPageP=${p}&cntPerPageP=${paging.cntPerPage}">${p}</a>
 																	</li>
 																</c:otherwise>
 															</c:choose>
@@ -240,16 +237,23 @@
 													</ul>
 												</div>
 											</div>
-											</c:if>
 									<!-- 페이징 -->	
+										
+					<!-- 
+									<c:if test="${fn:length(mPickList)==0 }">
+										<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
 										</div>
+									</c:if>
+						 -->
 								<!-- 탭1 -->	
 							<!-- section-wrapper -->
 						</div>
-					</div>
+					
 					</div>
 				</div>
 			</div>
+</div>
+</div>		
 		</section>
 		<!--/User Dashboard-->
 

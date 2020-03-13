@@ -19,4 +19,6 @@ public class MarketPayment {
 	private String marketPaym_pdName;
 	private Date marketPaym_rdate;
 	
+	private Market market;
+	private MarketRev marketRev;
 }

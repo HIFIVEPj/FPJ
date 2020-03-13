@@ -1,7 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -779,53 +780,68 @@
 							<div class="card-header">
 								<h3 class="card-title">최신 등록 서비스</h3>
 							</div>
+							
+							
 							<div class="card-body">
 								<div id="categorizes-demo" class="owl-carousel owl-carousel-icons5">
+								
+						<c:forEach items="${list}" var="list"  varStatus="status">		
 									<div class="item">
 										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
+											
 											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
+												<a href="market-content?market_num=${list.market_num}"></a>
+												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image">
 											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											
-											<!-- 즐겨찾기 해제 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
+									<!-- 즐겨찾기 설정 상태 -->
+											<div class="item-card9-icons" id="heartDivID${list.market_num}">
+												<c:if test="${fn:length(marketNumList) > 0}">	
+													<c:choose>
+														<c:when test="${marketNumList.contains(list.market_num)}">
+															<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick(${list.market_num})" id="fullHeart${list.market_num}" style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>
+														</c:when>
+														<c:otherwise>
+															<a href="javasript:void(0)" class="item-card9-icons1 wishlist" onclick="addPick(${list.market_num})" id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o" ></i></a>
+														</c:otherwise>
+													</c:choose>
+												</c:if>
+												<c:choose>
+													<c:when test="${sessionScope.email != null}">
+														<c:if test="${fn:length(marketNumList) == 0}">	
+															<a href="javasript:void(0)" class="item-card9-icons1 wishlist"  onclick="addPick(${list.market_num})"  id="emptyHeart${list.market_num}"> <i class="fa fa fa-heart-o"></i></a>
+														</c:if>
+													</c:when>
+													<c:otherwise>
+														<a href="javascript:void(0);" class="item-card9-icons1 wishlist" onclick="loginCheck()"> <i class="fa fa fa-heart-o"></i></a>
+													</c:otherwise>
+												</c:choose>
+											</div>										
+										<!-- 즐겨찾기 설정 상태 -->
 											<div class="card-body">
 												<div class="item-card2">
 													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
+														<small class="">By: ${list.freelancer.free_name}</small>
 														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
+															<a href="market-content?market_num=${list.market_num}" class="text-dark"><h4 class="font-weight-bold">${list.market_sub}</h4></a>
 														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
+														<!--  <p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>-->
+														<h2><fmt:formatNumber value="${list.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span></h2>
 														<div>
 															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
+																<span class="rated-products-ratings">
+																	<c:if test="${list.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																		<c:forEach var="1" begin="1" end="${list.marketRev.marketRev_star}">
+																			<i class="fa fa-star text-warning"> </i>
+																		</c:forEach>
+																		<c:forEach var="1" begin="1" end="${5-list.marketRev.marketRev_star}">
+																			<i class="fa fa-star-o text-warning"> </i>
+																		</c:forEach>	
+																	</c:if>
+																</span>&nbsp;${list.marketRev.marketRev_star}&nbsp;&nbsp;&nbsp;
+																
 																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
+																	 <a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> ${list.marketRev.marketRev_num}</span></a>
+					 												 <a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i>${list.market_vcnt}</span></a>
 																</span>
 														</div>
 														<!-- 
@@ -833,404 +849,17 @@
 														-->
 													</div>
 												</div>
-											</div>
+											</div>						
 										</div>
 									</div>
-									<div class="item">
-										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
-											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
-											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 즐겨찾기 해제 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-									
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
-											<div class="card-body">
-												<div class="item-card2">
-													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
-														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
-														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
-														<div>
-															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
-																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
-																</span>
-														</div>
-														<!-- 
-														<a href="books.html" class="btn btn-primary text-white mt-3">자세히 보기</a>
-														-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
-											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
-											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 즐겨찾기 해제 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-									
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
-											<div class="card-body">
-												<div class="item-card2">
-													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
-														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
-														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
-														<div>
-															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
-																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
-																</span>
-														</div>
-														<!-- 
-														<a href="books.html" class="btn btn-primary text-white mt-3">자세히 보기</a>
-														-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
-											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
-											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											
-											<!-- 즐겨찾기 해제 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
-											<div class="card-body">
-												<div class="item-card2">
-													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
-														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
-														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
-														<div>
-															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
-																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
-																</span>
-														</div>
-														<!-- 
-														<a href="books.html" class="btn btn-primary text-white mt-3">자세히 보기</a>
-														-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
-											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
-											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											
-											<!-- 즐겨찾기 해제 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
-											<div class="card-body">
-												<div class="item-card2">
-													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
-														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
-														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
-														<div>
-															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
-																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
-																</span>
-														</div>
-														<!-- 
-														<a href="books.html" class="btn btn-primary text-white mt-3">자세히 보기</a>
-														-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
-											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
-											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											
-											<!-- 즐겨찾기 해제 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
-											<div class="card-body">
-												<div class="item-card2">
-													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
-														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
-														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
-														<div>
-															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
-																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
-																</span>
-														</div>
-														<!-- 
-														<a href="books.html" class="btn btn-primary text-white mt-3">자세히 보기</a>
-														-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
-											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
-											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											
-											<!-- 즐겨찾기 해제 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
-											<div class="card-body">
-												<div class="item-card2">
-													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
-														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
-														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
-														<div>
-															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
-																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
-																</span>
-														</div>
-														<!-- 
-														<a href="books.html" class="btn btn-primary text-white mt-3">자세히 보기</a>
-														-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="item">
-										<div class="card mb-0">
-											<!--  
-											<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-											-->
-											<div class="item-card-img">
-												<a href="books.html"></a>
-												<img src="../images/products/books/3.png" alt="img" class="cover-image">
-											</div>
-				
-											
-											<!-- 즐겨찾기 설정 상태 
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											-->
-											<!-- 즐겨찾기 해제 상태 -->
-											<div class="item-card2-icons">
-												<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-											</div>
-											
-											<!-- 
-											<div class="item-card7-overlaytext">
-												<a href="books-list.html" class="text-white badge badge-primary">JAVA</a>
-											</div>
-											-->
-											<div class="card-body">
-												<div class="item-card2">
-													<div class="item-card2-desc">
-														<small class="">By: 윤별</small>
-														<div class="item-card2-text mt-1">
-															<a href="books.html" class="text-dark"><h4 class="font-weight-bold">AWS서버구축 및 기술지원</h4></a>
-														</div>
-														<p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>
-														<h2>22,000 <span class="fs-16">원</span> <!-- <span class="fs-16"><del>$25</del></span> --></h2>
-														<div>
-															<a href="#" class="icons">
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star text-warning"></i>
-																<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7</a>&nbsp;&nbsp;
-																<span>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Comments"><span class="text-muted mr-2"><i class="fa fa-comment-o"></i> 16</span></a>
-																	<a href="#" data-toggle="tooltip" data-placement="top" title="Views"><span class="text-muted"><i class="fa fa-eye"></i> 36</span></a>
-																</span>
-														</div>
-														<!-- 
-														<a href="books.html" class="btn btn-primary text-white mt-3">자세히 보기</a>
-														-->
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+								</c:forEach>	
 								</div>
 							</div>						
-						</div>
-						
+						</div>		
 						<br/>
-						
 					</div>
-					
 					<div class style="align:center; margin:0 auto;">
-						<a href="marketList" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+						<a href="market-list" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
 					
 				</div>
@@ -1624,7 +1253,40 @@
 			</div>
 		</section>
 		<!--프리랜서-->
-
+<script>
+	function loginCheck(){
+		alert("로그인 후 이용해주세요");
+	}
+	
+	function addPick(market_num){
+		alert("marketnum"+market_num);
+		$.ajax({
+			type:"get",  
+			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
+			success: function(){
+				$('#emptyHeart'+market_num).remove();
+				$('#heartDivID'+market_num).append('<a href="javasript:void(0)" class="item-card9-icons1 delwish" onclick="delPick('+market_num+')" id="fullHeart'+market_num+'" style="margin-right:40%; background-color: #e8564a;"><i class="fa fa fa-heart" style="color:white" ></i></a>');
+			},
+			error: function(request,status,error){
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+	function delPick(market_num){
+		alert("marketnum"+market_num);
+		$.ajax({
+			type:"get",  
+			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',
+			success: function(){
+				$('#fullHeart'+market_num).remove();
+				$('#heartDivID'+market_num).append('<a href="javasript:void(0)" class="item-card9-icons1 wishlist" onclick="addPick('+market_num+')" id="emptyHeart'+market_num+'"> <i class="fa fa fa-heart-o" ></i></a>');
+			},
+			error: function(request,status,error){
+				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	 }
+</script>
 
 
 <!--footer-->

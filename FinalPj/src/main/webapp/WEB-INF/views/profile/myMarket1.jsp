@@ -92,7 +92,7 @@
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
-								<h3 class="card-title"><b>나의 마켓</b></h3>
+								<h3 class="card-title"><b>나의 등록마켓</b></h3>
 							</div>
 							<div class="card-body">
 							
@@ -133,16 +133,24 @@
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
 																		<a href="market-content?market_num=${myMarket.market_num}" class="text-dark"><h4 class=""><b>${myMarket.market_sub }</b></h4></a>
-															<!-- 		<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>-->
+														
 																 	<div style="padding-top:5px;">
-																	<!--	<span class="text-warning">
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			</span>-->
+																			<span class="rated-products-ratings">
+																					
+																				<c:if test="${myMarket.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																					<c:forEach var="1" begin="1" end="${myMarket.marketRev.marketRev_star}">
+																						<i class="fa fa-star text-warning"> </i>
+																					</c:forEach>
+																					<c:forEach var="1" begin="1" end="${5-myMarket.marketRev.marketRev_star}">
+																						<i class="fa fa-star-o text-warning"> </i>
+																					</c:forEach>	
+																				</c:if>
+																				
+																			</span>|
+																			
 																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${myMarket.market_vcnt }
 																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${myMarket.market_pcnt }
+																			 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${myMarket.marketRev.marketRev_num }
 																		</div> 
 																	
 																	</div>
@@ -168,8 +176,8 @@
 															</td>
 														</c:if>
 														<td>
-															<a href="" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
+															<a href="market-delete?market_num=${myMarket.market_num}&location=myMarket" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+															<a href="market-updateRefusalMarket1?market_num=${myMarket.market_num}" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="수정하기"><i class="fa fa-shopping-cart"></i></a>
 							
 														</td>
 													</tr>
@@ -179,24 +187,27 @@
 										
 									</c:if>
 									<c:if test="${fn:length(myMarket)==0 }">
-										<div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
+										<div class="card">
+											<div class="card-body" style="margin:0 auto; align:center;">
+												등록한 마켓이 없습니다.
+											</div>
 										</div>
 									</c:if>
 								<!-- 탭1 -->	
-
+<c:if test="${fn:length(myMarket)>0 }">
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
-									<c:if test="${fn:length(myMarket)>0 }">
+									
 										<c:if test="${paging.nowPage !=1}">
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
+												<a aria-label="Last" class="page-link" href="myMarket1?&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
 											</li>
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+												<a aria-label="Next" class="page-link" href="myMarket1?&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
 											</li>
 										</c:if>
-									</c:if>
+								
 										<c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
 											<c:choose>
 												<c:when test="${paging.nowPage == p }">
@@ -206,29 +217,29 @@
 												</c:when>	
 												<c:otherwise>
 													<li class="page-item">
-														<a class="page-link hidden-xs-down" href="myMarket?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+														<a class="page-link hidden-xs-down" href="myMarket1?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
-									<c:if test="${fn:length(myMarket)>0 }">
+									
 										<c:if test="${ paging.nowPage!=paging.lastPage }">
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+												<a aria-label="Next" class="page-link" href="myMarket1?&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
 											</li>
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
+												<a aria-label="Last" class="page-link" href="myMarket1?&nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</c:if>
-									</c:if>	
+									
 									</ul>
 								</div>
 								<!-- pagination-wrapper -->
 							</div>
-		
+		</c:if>	
 							<!-- section-wrapper -->
 						</div>
-					
+					</div>
 					</div>
 				</div>
 			</div>

@@ -63,5 +63,4 @@ public interface FreeLancerProfileMapper {
 	public void insertPjpkeyword(Map<String, Object> map);
 
 	
-	
 }

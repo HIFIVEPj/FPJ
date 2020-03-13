@@ -56,7 +56,7 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite_temp">프로젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="cor-myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">

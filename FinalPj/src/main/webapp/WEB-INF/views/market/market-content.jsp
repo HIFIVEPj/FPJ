@@ -156,6 +156,7 @@
 									
 								</div>
 							</div>
+						<c:if test="${session.class_num!=1}">
 							<div class="card-footer">
 								<div class="icons">
 									<a href="#" class="btn btn-info icons"><i class="si si-share mr-1"></i> Share Ad</a>
@@ -169,6 +170,11 @@
 									</c:if>
 								</div>
 							</div>
+						</c:if>
+							<c:if test="${session.class_num==1}">
+								<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>승인</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
+								<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal2">거절</button>
+							</c:if>
 						</div>
 					</form>
 					<!-- small Modal -->   
@@ -195,6 +201,31 @@
 				         </div>      
 				      </div>
 				      <!-- /small Modal -->
+				      
+				    <!-- 관리자small Modal -->   
+				      <div id="smallModal2" class="modal fade">
+				         <div class="modal-dialog modal-sm" role="document">
+				            <div class="modal-content">
+				               <div class="modal-header">
+				                  <!--
+				                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+				                  -->
+				                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+				                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				                     <span aria-hidden="true">&times;</span>
+				                  </button>
+				               </div>
+				               <div class="modal-body">
+				                  <p>글을 정말 거절하시겠습니까?</p>
+				               </div>
+				               <div class="modal-footer">
+				                 <a class="btn btn-primary" style="color:white;" href="">네</a> 			                  
+				                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+				               </div>
+				            </div>
+				         </div>      
+				      </div>
+				  <!-- /small Modal -->
 					
 <!--/Add Description-->
 
@@ -451,8 +482,8 @@
 			                                        <p class="font-13  mb-2 mt-2">
 			                                       		 <비밀글 입니다.> <br>
 			                                            <p class="font-13  mb-2 mt-2">
-			                                      		 	<a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-		                                        		</p>
+			                                      		 	<a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong">${marketQA.marketQA_sub}</a><br>
+		                                    			</p>
 		                                        	</p>
 		                                        </c:when>
 		                                        <c:when test="${marketQA.marketQA_ox == 1}">
