@@ -521,6 +521,5 @@
 	<update id="updateACCT" parameterType="fp.freelancerprofile.domain.Freelnacer_account">
 	update FREELANCER_ACCOUNT set freeac_acct=#{freeac_acct},freeac_bank=#{freeac_bank},freeac_holder=#{freeac_holder} where free_code=#{free_code}
 	</update>
-
 	<!--/////////////////////////// -->
 </mapper>

@@ -78,11 +78,9 @@ public interface FreeLancerProfileMapper {
 	
 	//profile keyword 전체뽑기
 	List<FreeLancerProfile> selectAllFreeKeywords();
-
 	//계좌추가
 	void updateACCTOX(long free_code);
 	void addACCT(Freelnacer_account freeacct);
 	Freelnacer_account selectFreeACCT(long free_code);
 	void updateACCT(Freelnacer_account freeacct);
-
 }

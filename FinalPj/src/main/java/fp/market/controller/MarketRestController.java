@@ -44,7 +44,7 @@ public class MarketRestController {
 		return marketQAList;
 	}
 //리뷰1페이지 리스트다시전송	
-	private List<MarketRev> marketRevList(long market_num) {
+	public HashMap<String,Object> marketRevList(long market_num) {
 		HashMap<String,Object> mapList=new HashMap<String,Object>();
 		int totalRev=marketService.getMarketRevCount(market_num);
 		MarketPagingVO marketVORev = new MarketPagingVO(totalRev, 1, 4);
@@ -321,7 +321,3 @@ log.info(mapSubmit);
 	}
 
 }
-
-
-
-	

@@ -10,13 +10,8 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.Freelnacer_account;
-
 import fp.freelancerprofile.domain.KeyWord;
-import fp.freelancerprofile.domain.PagingVO;
-import fp.freelancerprofile.domain.Project;
-import fp.freelancerprofile.domain.Type;
-import fp.market.domain.FreelancerProfile;
-import fp.market.domain.MarketPick;
+
 
 public interface FreeLancerProfileService {
 	

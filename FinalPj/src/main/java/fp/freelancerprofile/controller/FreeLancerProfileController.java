@@ -302,7 +302,6 @@ public class FreeLancerProfileController {
 		public JsonNode bank_holder_check(HttpServletRequest request,HttpServletResponse response,String bank_code, String bank_num) {
 			JsonNode node = OpenBankingController.getAccessTokenIMPORT();
 			log.info("accessToken: "+node);
-
 			JsonNode responseNode = node.get("response");
 			String accessToken = responseNode.get("access_token").asText();
 			
