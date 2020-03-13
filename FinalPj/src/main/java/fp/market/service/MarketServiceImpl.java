@@ -99,7 +99,7 @@ public class MarketServiceImpl implements MarketService {
 		mapper.insertMarketRev(mareketRev);
 	}
 	@Override
-	public int reloadMarketRevAVG(long market_num) {
+	public Integer reloadMarketRevAVG(long market_num) {
 		return mapper.reloadMarketRevAVG(market_num);
 	}
 //marketQA insert	

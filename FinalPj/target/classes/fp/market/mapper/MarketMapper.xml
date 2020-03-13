@@ -404,7 +404,7 @@
 	<update id="updateMarketRev" parameterType="hashmap">
 		update MARKET_REVIEW set marketRev_cont=#{marketRev_cont}, marketRev_star=#{marketRev_star} where market_num=#{market_num} and MARKETREV_NUM=#{marketRev_num}
 	</update>
-<select id="reloadMarketRevAVG" parameterType="long" resultType="int">
+<select id="reloadMarketRevAVG" parameterType="long" resultType="Integer">
 	select avg(MARKETREV_STAR) from market_review where market_num=#{market_num}
 </select>
 	<!-- 리뷰글쓰기조건주기 -->

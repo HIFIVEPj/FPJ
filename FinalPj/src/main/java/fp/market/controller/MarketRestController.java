@@ -44,17 +44,23 @@ public class MarketRestController {
 		return marketQAList;
 	}
 //리뷰1페이지 리스트다시전송	
-	public List<MarketRev> marketRevList(long market_num) {
+	public HashMap<String,Object> marketRevList(long market_num) {
 		HashMap<String,Object> mapList=new HashMap<String,Object>();
+		int totalRev=marketService.getMarketRevCount(market_num);
+		MarketPagingVO marketVORev = new MarketPagingVO(totalRev, 1, 4);
+
 		mapList.put("market_num", market_num);
-		mapList.put("marketVORevStart",0);
+		mapList.put("marketVORevStart",1);
 		mapList.put("marketVORevEnd",4);
 		List<MarketRev> marketrevList=marketService.getMarketRev(mapList);
+		HashMap<String,Object> voAndlist=new HashMap<String,Object>();
 		log.info("11111111#marketRevList"+marketrevList);
+		voAndlist.put("marketrevList", marketrevList);
+		voAndlist.put("marketVORev", marketVORev);
 		
-		return marketrevList;
+		return voAndlist;
 	}
-	
+
 //마켓문의 글insert
 	@PostMapping("marketQA-insert")
 	//@RequestMapping(value = "marketQA-insert", method= {RequestMethod.POST})
@@ -164,17 +170,14 @@ public class MarketRestController {
 		
 		int mrTotal=marketService.getMarketRevCount(marketRev.getMarket_num());
 		MarketPagingVO marketVORev = new MarketPagingVO(mrTotal, Integer.parseInt(nowPageR), Integer.parseInt(cntPerPageR));
-		//log.info("~~~~~~~~~~~~~~~~~~marketVORev.getStart() : "+marketVORev.getStart());
-		//log.info("~~~~~~~~~~~~~~~~~~marketVORev.getLastPage() : "+marketVORev.getLastPage());
-	//log.info("!@#@!@!$!@#@!marketVORev:"+marketVORev);
-		//HashMap<String, Object> map= new HashMap<String, Object>();
-		//map.put("marketVORevStart", marketVORev.getStart());
-		//map.put("marketVORevEnd", marketVORev.getEnd());
-	//	map.put("market_num", marketRev.getMarket_num());
+
 		List<Object> mrStar= new ArrayList<Object>();
-		List<MarketRev> mr = marketRevList(marketRev.getMarket_num());
-		int avgStar=marketService.reloadMarketRevAVG( marketRev.getMarket_num());
-		mrStar.add(mr);
+		HashMap<String,Object> map = marketRevList(marketRev.getMarket_num());
+		log.info("map.get(\"marketrevList\");="+map.get("marketrevList"));
+		log.info("map.get(\"marketVORev\");="+map.get("marketVORev"));
+		log.info("@@@@@@@@@@map;="+map);
+		Integer avgStar=marketService.reloadMarketRevAVG( marketRev.getMarket_num());
+		mrStar.add(map);
 		mrStar.add(avgStar);
 		log.info("@!@@@@@mrStar:"+mrStar);
 
@@ -200,12 +203,13 @@ public class MarketRestController {
 		map.put("marketRev_star", marketRev_star);
 		marketService.updateMarketRev(map);
 		
-		int avgStar=marketService.reloadMarketRevAVG(market_num);
+		Integer avgStar=marketService.reloadMarketRevAVG(market_num);
 		List<Object> mrStar= new ArrayList<Object>();
-		List<MarketRev> mr = marketRevList(market_num);
+	//	List<MarketRev> mr = marketRevList(market_num);
 		
-		mrStar.add(mr);
+		//mrStar.add(mr);
 		mrStar.add(avgStar);
+		log.info("@@mrStar"+mrStar);
 		
 		return mrStar;
 	}
@@ -223,14 +227,14 @@ public class MarketRestController {
 		map.put("marketRev_num", marketRev_num);
 		map.put("market_num", market_num);
 		marketService.deleteMarketRev(map);
+		Integer avgStar=marketService.reloadMarketRevAVG(market_num);
 		
-		int avgStar=marketService.reloadMarketRevAVG(market_num);
 		List<Object> mrStar= new ArrayList<Object>();
-		List<MarketRev> mr = marketRevList(market_num);
+		//List<MarketRev> mr = marketRevList(market_num);
 		
-		mrStar.add(mr);
+		//mrStar.add(mr);
 		mrStar.add(avgStar);
-
+		log.info("@!@@@@@mrStar:"+mrStar);
 		return mrStar;
 	}
 	
