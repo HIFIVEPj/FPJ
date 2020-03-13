@@ -665,14 +665,11 @@
 						<div class="row">
 							<div class="col-sm-6 col-md-6">
 								<div class="form-group">
-									<label class="form-label">지원할 프로필 선택</label>
+									
+									<label class="form-label">지원하시겠습니까?</label>
 									<c:forEach var="profile_dto" items="${profile_select}">
-										<div class="custom-controls-stacked">
-											<label class="custom-control custom-radio">
-												<input type="radio" class="custom-control-input" name="pro_num" value="${profile_dto.pro_num}" checked>
-												<span class="custom-control-label">${profile_dto.profile_sub}</span>
-											</label>
-										</div>
+										<input type="radio" class="custom-control-input" name="example-radios" value="${profile_dto.pro_num}" checked>
+										<span>${profile_dto.profile_sub}</span>
 									</c:forEach>
 								</div>
 							</div>
@@ -706,18 +703,16 @@
 				alert("프로필을 등록하셔야 이용할 수 있습니다.")
 				$("#apply").modal('hide');
 			}
-			function apply(){
-				var pro_num = $('input:radio[name="pro_num"]:checked').val();
-				
+			function apply(){	
 				$.ajax({
 					type:"get",  
 					url:"<c:url value='apply'/>",
-	    			data:"pj_num=${projectCont.pj_num}&free_code=${free.free_code}&pro_num="+pro_num,
+	    			data:"pj_num=${projectCont.pj_num}+&free_code=${free.free_code}",
 					success: function(data){
+						alert("성공");
 						$('#app_btn').remove();
 						$('#btns').prepend("<a href='javascript:apply_done();' class='btn btn-info icons' > 지원하기</a>")
 						$("#apply").modal('hide');
-						$("#apply_done").modal();
 					},
 					error: function(data){
 					alert("에러발생");
@@ -759,23 +754,20 @@
       <!-- /small Modal -->
 
     <!-- small Modal -->   
-      <div id="apply_done" class="modal fade">
+      <div id="" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-  			 <div class="modal-header">
+               <div class="modal-header">
                   <!--
                   <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
                   -->
-                  <div class="float-right btn btn-icon btn-info btn-sm mt-3"><i class="fa fa-send"></i></div>
+                 
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                   </button>
                </div>
-               <div class="modal-body" class="center" style="margin:0 auto; text-align:center;">
-               		<h4>지원이 완료되었습니다.</h4>
-               	<a href="myfavorite?mem_email=${sessionScope.email}#tab2" class="btn btn-primary" style="margin-top:10px;">
-					지원한 프로젝트 목록 바로가기
-				</a>
+               <div class="modal-body">
+               
                </div>
             </div>
          </div>      

@@ -54,4 +54,3 @@ public interface ProjectService {
 	void pj_status_update(long pj_num);
 
 }
-

@@ -117,7 +117,6 @@ public class FreelancerMarketInfoController {
 		return "redirect:myfavoriteMarket";
 	}
 /*	
-
 	@RequestMapping("myMarket")
 	public ModelAndView getMyMarket(HttpSession session
 			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage

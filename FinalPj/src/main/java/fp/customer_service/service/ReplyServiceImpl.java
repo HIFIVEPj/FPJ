@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fp.customer_service.domain.Criteria;
-import fp.customer_service.domain.ReplyPageDTO;
 import fp.customer_service.domain.ReplyVO;
 import fp.customer_service.mapper.CustomerServiceQaMapper;
 import fp.customer_service.mapper.ReplyMapper;
@@ -50,12 +49,6 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public List<ReplyVO> getList(Criteria cri, Long qa_num) {		
 		return replyMapper.getListWithPaging(cri, qa_num);
-	}
-	
-	@Override
-	public ReplyPageDTO getListPage(Criteria cri, Long qa_num) {
-		return new ReplyPageDTO(replyMapper.getCountByQa_num(qa_num), replyMapper.getListWithPaging(cri, qa_num));
-				
 	}
 
 }

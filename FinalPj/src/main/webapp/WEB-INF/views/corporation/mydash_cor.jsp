@@ -543,12 +543,6 @@
 													<option value="웹개발">웹 개발</option>
 													<option value="솔루션 개발" selected>솔루션개발</option>
 												 </c:when>
-												  <c:otherwise>
-													<option selected> 직종 분류 선택 </option>
-													<option value="프로그램 개발" >프로그램 개발</option>
-													<option value="웹개발">웹 개발</option>
-													<option value="솔루션 개발" >솔루션개발</option>
-												 </c:otherwise>
 											  </c:choose>
 											</select>
 										

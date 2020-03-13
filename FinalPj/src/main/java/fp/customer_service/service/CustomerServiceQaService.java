@@ -1,12 +1,10 @@
 package fp.customer_service.service;
 
 import java.util.List;
-import java.util.Map;
 
 import fp.customer_service.domain.BoardAttachVO;
 import fp.customer_service.domain.Criteria;
 import fp.customer_service.domain.CustomerServiceQa;
-import fp.customer_service.domain.Qa_recommend;
 
 public interface CustomerServiceQaService {
 	/*
@@ -40,11 +38,4 @@ public interface CustomerServiceQaService {
 	
 	// 파일
 	public List<BoardAttachVO> getAttachList(Long qa_num);
-	
-	// 문의글 좋아요
-	List<Qa_recommend>qa_recommend_listS(String mem_email);
-	void qa_recommend_insertS(Map<String, Object>map);
-	void qa_recommend_delS(Map<String, Object>map);
-	//void qa_recommend_update_inS(Map<String, Object>map);
-	//void qa_recommend_update_delS(Map<String, Object>map);
 }

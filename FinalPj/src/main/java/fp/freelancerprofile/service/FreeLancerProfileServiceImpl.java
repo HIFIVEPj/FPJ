@@ -84,8 +84,10 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	
 	//프로필 작성//
 	@Override
+	@Transactional
 	public void listInsert(FreeLancerProfile freelancerprofile){
 		mapper.listInsert(freelancerprofile);
+		
 	}
 
 	@Override
@@ -132,6 +134,10 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Override
 	public FreeLancerProfile showContent(long pro_num) {
 		return mapper.showContent(pro_num);
+	}
+	@Override	
+	public void choiceProfile(Map<String, Object> map) {
+		mapper.choiceProfile(map);
 	}
 	
 	

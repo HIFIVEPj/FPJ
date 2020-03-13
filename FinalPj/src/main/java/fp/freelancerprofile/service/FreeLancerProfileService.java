@@ -10,8 +10,13 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.Freelnacer_account;
-import fp.freelancerprofile.domain.KeyWord;
 
+import fp.freelancerprofile.domain.KeyWord;
+import fp.freelancerprofile.domain.PagingVO;
+import fp.freelancerprofile.domain.Project;
+import fp.freelancerprofile.domain.Type;
+import fp.market.domain.FreelancerProfile;
+import fp.market.domain.MarketPick;
 
 public interface FreeLancerProfileService {
 	
@@ -50,11 +55,14 @@ public interface FreeLancerProfileService {
 
 	long getTotalCountFree(long free_code);
 
-
 	//프로필 수정//
 	public FreeLancerProfile showContent(long pro_num);
 	List<FreeLancerProfile> profile_free_select(String mem_email);
+
+	void choiceProfile(Map<String, Object> map);
 	
+	
+
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
 	public void mydash_free_insert(FreeLancer freelancer);
@@ -78,4 +86,5 @@ public interface FreeLancerProfileService {
 	void addACCT(Freelnacer_account freeacct);
 	Freelnacer_account selectFreeACCT(long free_code);
 	void updateACCT(Freelnacer_account freeacct);
+
 }

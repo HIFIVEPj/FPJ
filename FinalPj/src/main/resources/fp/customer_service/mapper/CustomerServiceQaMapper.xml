@@ -211,27 +211,4 @@
 		update qa set replycnt = replycnt + #{amount} where qa_num = #{qa_num}
 	</update>
 	
-	
-	<!-- 문의글 좋아요 -->
-	<select id="qa_recommend_list" resultType="Qa_recommend">
-		select * from qa_recommend where mem_email=#{mem_email}	
-	</select>
-	
-	<insert id="qa_recommend_insert" parameterType="map">
-		insert into qa_recommend(qa_recommend_num, mem_email, qa_num) values(QA_RECOMMEND_NUM_SEQ.nextval, #{mem_email}, #{qa_num})
-	</insert>
-	
-	<delete id="qa_recommend_del" parameterType="map">
-		delete from qa_recommend where mem_email=#{mem_email} and qa_num=#{qa_num}
-	</delete>
-	
-	<update id="qa_recommend_update_in" parameterType="map">
-		update qa set qa_recommnum=qa_recommnum+1 where qa_num=#{qa_num}
-	</update>
-	
-	<update id="qa_recommend_update_del" parameterType="map">
-		update qa set qa_recommnum=qa_recommnum-1 where qa_num=#{qa_num}
-	</update>
-	
-	
 </mapper>

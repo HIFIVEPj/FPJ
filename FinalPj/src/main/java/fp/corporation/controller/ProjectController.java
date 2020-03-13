@@ -1,4 +1,3 @@
-
 package fp.corporation.controller;
 
 import java.util.ArrayList;
@@ -166,8 +165,7 @@ public class ProjectController {
 		}else {
 			map.put("pj_place",null);
 		}
-		
-		
+
 		long totalCount = service.getTotalCount(map);
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		map.put("ProjectVo", projectVo);

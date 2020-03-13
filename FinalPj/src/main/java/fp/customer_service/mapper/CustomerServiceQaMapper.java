@@ -1,14 +1,11 @@
 package fp.customer_service.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import fp.corporation.domain.ProjectPick;
 import fp.customer_service.domain.Criteria;
 import fp.customer_service.domain.CustomerServiceQa;
-import fp.customer_service.domain.Qa_recommend;
 
 public interface CustomerServiceQaMapper {
 	/*
@@ -23,9 +20,8 @@ public interface CustomerServiceQaMapper {
 	//int qa_count(); // 페이징 게시물 총 개수
 	
 	//List<CustomerServiceQa> qa_list(CustomerServicePagingVO customerServicePagingVO); // 페이징 처리 게시글 조회
-	
-	// 카테고리 sorting
-	int qa_cate_count_project(); 
+
+	int qa_cate_count_project(); // 카테고리 sorting
 	int qa_cate_count_freemarket();
 	int qa_cate_count_freelancer();
 	int qa_cate_count_sign();
@@ -41,14 +37,5 @@ public interface CustomerServiceQaMapper {
 	List<CustomerServiceQa> qa_list(Criteria cri);
 	
 	int qa_count(Criteria cri);
-	
-	// 좋아요
-	List<Qa_recommend>qa_recommend_list(String mem_email);
-	void qa_recommend_insert(Map<String, Object>map);
-	void qa_recommend_del(Map<String, Object>map);
-	void qa_recommend_update_in(Map<String, Object>map);
-	//boolean qa_recommend_update_in(long qa_num);
-	void qa_recommend_update_del(Map<String, Object>map);
-	//boolean qa_recommend_update_del(long qa_num);
 
 }

@@ -39,15 +39,14 @@
 	}
 	$( "#mySlider" ).slider({
 		range: true,
-		step: 100000, //슬라이더 간격
-		min: 0, //슬라이더 최소 값
-		max: 10000000, //슬라이더 최대 값
-		values: [ 0, 10000000], //슬라이더 디폴트 값
+		min: 10,
+		max: 999,
+		values: [ 200, 500 ],
 		slide: function( event, ui ) {
-			$( "#price" ).val( " ￦" + ui.values[ 0 ] + " - ￦" + ui.values[ 1 ] );
+			$( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 		}
 	});
 
-	$( "#price" ).val( "￦" + $( "#mySlider" ).slider( "values", 0 ) +
-			   " - ￦" + $( "#mySlider" ).slider( "values", 1 ) );
+	$( "#price" ).val( "$" + $( "#mySlider" ).slider( "values", 0 ) +
+			   " - $" + $( "#mySlider" ).slider( "values", 1 ) );
 })(jQuery);

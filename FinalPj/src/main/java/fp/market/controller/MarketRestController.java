@@ -44,7 +44,7 @@ public class MarketRestController {
 		return marketQAList;
 	}
 //리뷰1페이지 리스트다시전송	
-	public List<MarketRev> marketRevList(long market_num) {
+	private List<MarketRev> marketRevList(long market_num) {
 		HashMap<String,Object> mapList=new HashMap<String,Object>();
 		mapList.put("market_num", market_num);
 		mapList.put("marketVORevStart",0);

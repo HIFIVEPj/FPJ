@@ -27,7 +27,7 @@
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
-	 <form method='post' name='edit_free_profile' action="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${profile.pro_num}">
+	 <form method='post' name='edit_free_profile' action="freelancerMyprofile_change?pro_num=${profile.pro_num}">
 				<div class="row">
 					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
@@ -49,8 +49,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
-												<li><a class="slide-item" href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
+												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
 								<!-- 		<li class="slide">
@@ -2454,7 +2454,7 @@
 										</div>
 									</div>				
 												<div class="card-footer" align="right" >			
-												<a href="freelancerProfile_list?mem_email=${sessionScope.email}" class="btn btn-secondary icons">목록</a>	 	
+												<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>	 	
 												<input type="button" onclick="check();" class="btn btn-primary" value="수정하기"></a> 	
 												</div>
 											</form>							

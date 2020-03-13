@@ -16,12 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import fp.customer_service.domain.Criteria;
-import fp.customer_service.domain.ReplyPageDTO;
 import fp.customer_service.domain.ReplyVO;
 import fp.customer_service.service.ReplyService;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
 @RequestMapping("/replies/")
 @RestController
 public class ReplyController {
@@ -70,11 +67,10 @@ public class ReplyController {
 	@GetMapping(value = "/pages/{qa_num}/{page}", 
 			produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("qa_num") Long qa_num) {		
+	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("qa_num") Long qa_num) {
+
 		Criteria cri = new Criteria(page, 5);
-		log.info("@@@qa_num : " + qa_num);
-		log.info("###cri : " + cri);
-		return new ResponseEntity<>(replyService.getListPage(cri, qa_num), HttpStatus.OK);
+		return new ResponseEntity<>(replyService.getList(cri, qa_num), HttpStatus.OK);
 	}
 	
 }

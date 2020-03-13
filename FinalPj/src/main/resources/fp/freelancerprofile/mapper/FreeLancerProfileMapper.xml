@@ -204,7 +204,6 @@
     <select id="countProfileList" resultType="long">
    		 select count(profile_sub) from freelancer_profile where free_code=#{free_code}
     </select>
-    
 	  <select id="selectAllFreeKeywords" resultMap="free_profile">
 			<![CDATA[
 				SELECT pro.PRo_NUM, kw.KEY_NAME as key_name
@@ -223,7 +222,12 @@
 	  <![CDATA[
 		select * from 
 			(select ROWNUM rnum , aa.* from 
-				(select PROFILE_SUB, PROFILE_DATE, FREE_CODE, PRO_NUM, mem_email from FREELANCER_PROFILE
+				(select PROFILE_SUB
+						, PROFILE_DATE
+						, FREE_CODE
+						, PRO_NUM
+						, mem_email
+						, profile_choice from FREELANCER_PROFILE
 					 where FREE_CODE=#{free_code} order by PROFILE_DATE desc)aa) 
 						where rnum>=#{PagingVo.start} and rnum<=#{PagingVo.end}
 	  ]]> 
@@ -351,7 +355,7 @@
 		 </foreach>) A
 		 </if>
 	 </insert>
-
+ 
 	<!-- 프로필 update -->
  	<update id="listUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
 
@@ -380,21 +384,22 @@
 		update freelancer_profile set type_num=#{type_num}
 		  ]]>
 	</update> 
-		<!-- 프로필 update(키워드 insert) 
+		<!-- 삭제1 (체크박스 데이터 삭제) -->
+    <delete id="keyDelete" parameterType="fp.freelancerprofile.domain.FreeLancerProfile">
+		 	delete from free_pick_keyword  where
+		  <foreach collection ="key_num" item="key_num" separator="or"> 
+			 key_num=#{key_num}
+		 </foreach>and pro_num=#{pro_num}
+	</delete> 
 
-	<insert id="keyUpdate" parameterType="map">	
-		<selectKey keyProperty="free_keynum" order="BEFORE" resultType="long">
-			 select FREE_KEYNUM_SEQ.NEXTVAL from dual
-		 </selectKey>
-	 
-		 <if test="key_num != null">
-		 	insert into FREE_PICK_KEYWORD(free_keynum, key_num, free_code, pro_num)
-		 	select  free_keynum_seq.nextval, A.* from(
-		  <foreach collection ="key_num" item="key_num" separator="UNION ALL "> 
-			 select  #{key_num}, #{free_code}, #{pro_num} from dual
-		 </foreach>) A
-		 </if>
-	</insert>  -->
+	
+	 <!-- 공개할 프로필 선택 -->	
+	<update id="choiceProfile" parameterType="map"> 
+		<![CDATA[
+		update freelancer_profile set
+			profile_choice=1 where pro_num=#{pronum}
+		  ]]>
+	</update> 
  	 <!-- 프로필 update(키워드 delete) 
    <delete id="keyDelete" parameterType="long">
 	   <![CDATA[
@@ -427,6 +432,7 @@
 	
 	
 	
+
 
 	<!-- 나영 추가 / mydash_free -->
 	<select id="mydash_free_select" parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancer">
@@ -515,5 +521,6 @@
 	<update id="updateACCT" parameterType="fp.freelancerprofile.domain.Freelnacer_account">
 	update FREELANCER_ACCOUNT set freeac_acct=#{freeac_acct},freeac_bank=#{freeac_bank},freeac_holder=#{freeac_holder} where free_code=#{free_code}
 	</update>
+
 	<!--/////////////////////////// -->
 </mapper>

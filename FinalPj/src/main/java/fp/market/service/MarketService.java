@@ -51,7 +51,7 @@ public interface MarketService {
 	
 	 void deleteMarketRev (HashMap<String, Object> map);
 	 void updateMarketRev (HashMap<String, Object> map);
-	 int reloadMarketRevAVG(long market_num);
+	 Integer reloadMarketRevAVG(long market_num);
 	
 	 String getFreeName(long market_num);
 	 

@@ -58,19 +58,19 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class FreeLancerProfileController {
+	
 	@Autowired
 	private ProjectService pjservice;
 	@Autowired
 	private FreeLancerProfileService service;
 	private FreeLancerProfileServiceImpl serviceimple;
 
-	/*@GetMapping("freelancerMyprofile_write")
-	public String freelancerMyprofile_write() {
-		return "profile/freelancerMyprofile_write";
-	}*/
+	@GetMapping("freelancerMyprofile_write")	
+	public ModelAndView ProFileWrite(HttpServletRequest request) { 
+		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 	
-	@RequestMapping("freelancerMyprofile_write")	
-	public ModelAndView ProFileWrite( @RequestParam String mem_email) { 
 		FreeLancer freelancer = service.mydash_free_select(mem_email);
 		ModelAndView mv = new ModelAndView("profile/freelancerMyprofile_write");
 		mv.addObject("freelancer", freelancer);
@@ -78,10 +78,11 @@ public class FreeLancerProfileController {
 	}
 	
 	//프로필 작성//
-	@PostMapping("freelancerMyprofile_write")
-		public String freelancerMyprofile_write(FreeLancerProfile freelancerprofile, HttpServletRequest request, @RequestParam String mem_email) {
+	@RequestMapping("freelancerMyprofile_write")
+		public String freelancerMyprofile_write(FreeLancerProfile freelancerprofile, HttpServletRequest request) {
 		
-		log.info("@@@@@@@@@@@@@@@@@@@ freelancerprofile: "+freelancerprofile);
+			HttpSession session = request.getSession();
+			String mem_email= (String)session.getAttribute("email");
 		
 		   String[] ListKeyNum = request.getParameterValues("key_num");
 		   ArrayList<Integer> arraykeynum = new ArrayList<Integer>();
@@ -99,17 +100,16 @@ public class FreeLancerProfileController {
 		      log.info("@@@@@@@@@@@@@@@  arraykeynum: "+ arraykeynum);
 		      log.info("@@@@@@@@@@@@@@@  project: " +freelancerprofile);
 		      log.info("@#!#@$  map: "+ map);
-		   return "redirect:freelancerProfile_list?mem_email="+mem_email;
+		   return "redirect:freelancerProfile_list";
 		   }
 	
 	//프로필 컨텐츠//
-	@RequestMapping("freelancerProfile_content")
-	public String Profile_content() { 
-		return "profile/freelancerProfile_content";
-	}
+//	@RequestMapping("freelancerProfile_content")
+//	public String Profile_content() { 
+//		return "profile/freelancerProfile_content";
+//	}
 	
-	//프로필 수정..//
-	
+	//프로필 수정//
 	@GetMapping("freelancerMyprofile_change")
 	public ModelAndView freelancerMyprofile_change(@RequestParam long pro_num) {
 	
@@ -123,9 +123,12 @@ public class FreeLancerProfileController {
 		
 	}
 	
-	
 	@PostMapping("freelancerMyprofile_change")
-	public String freelancerProfile_update(FreeLancerProfile freelancerprofile, @RequestParam String mem_email,HttpServletRequest request, FreePickKeyWord freepickkeyword) {
+	public String freelancerProfile_update(FreeLancerProfile freelancerprofile
+											,HttpServletRequest request, FreePickKeyWord freepickkeyword) {
+		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		
 		log.info("@@@@@@@@@@@@@@@@@@@ freelancerprofile: "+freelancerprofile);
 		freelancerprofile.setMem_email(mem_email);
@@ -159,15 +162,34 @@ public class FreeLancerProfileController {
 		return "redirect:freelancerProfile_list?mem_email="+freelancerprofile.getMem_email(); 
 
 	}
-	
+	//프로필 공개//
+	@RequestMapping(value="choiceProfile", method=RequestMethod.GET)
+	@ResponseBody
+	public void choiceProfile(@RequestParam(value="pro_numList") long pro_numList){ 
+		 
+		 Map<String, Object> map = new HashMap<String, Object>();
+		 log.info("dfdfsdssdf: "+pro_numList);
+		
+		if(pro_numList==0) {
+			 map.put("pronum", null);
+		 }else {
+			 map.put("pronum", pro_numList);
+		 }
+		 service.choiceProfile(map);
+
+	}
+
 
 	//프로필 리스트//
 	@RequestMapping("freelancerProfile_list")
-	public ModelAndView ProfileList(String mem_email, PagingVO vo
+	public ModelAndView ProfileList(HttpServletRequest request, PagingVO vo
 						, @RequestParam(value="nowPage", required=false)String nowPage
 						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-
-		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
+		 
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		 
+		FreeLancer freelancerprofile = service.mydash_free_select(mem_email);
 		long total = service.countProfileList(freelancerprofile.getFree_code()); //글의 총 갯수
 
 	
@@ -199,11 +221,15 @@ public class FreeLancerProfileController {
 	
 	//프로필 컨텐츠//
 	@GetMapping("freelancerProfile_content") 
-	public ModelAndView ProFileContent(@RequestParam long PRO_NUM ,@RequestParam String mem_email) {
+	public ModelAndView ProFileContent(@RequestParam long pro_num , HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		
 		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
-		List<FreeLancer> content = service.selectProfileContent(PRO_NUM);
-		List<FreeLancerProfile> content2 = service.selectProfileContent2(PRO_NUM);	
-		List<KeyWord> content3 = service.selectProfileContent3(PRO_NUM);
+		List<FreeLancer> content = service.selectProfileContent(pro_num);
+		List<FreeLancerProfile> content2 = service.selectProfileContent2(pro_num);	
+		List<KeyWord> content3 = service.selectProfileContent3(pro_num);
 		List<FreeLancerProfileFile> file_name = service.selectFilename();
 		List<FreeLancer> content4 = service.selectProfileContent4(freelancerprofile.getFree_code());
 		
@@ -219,18 +245,24 @@ public class FreeLancerProfileController {
 	}
 	//삭제//
 	@RequestMapping("freelancerProfile_delete")
-	public String ProfileListDelete(@RequestParam long PRO_NUM, @RequestParam String mem_email) {
-		service.listDelete(PRO_NUM);
+	public String ProfileListDelete(@RequestParam long pro_num, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		
+		service.listDelete(pro_num);
 	
-		return "redirect:freelancerProfile_list?mem_email="+mem_email;
+		return "redirect:freelancerProfile_list";
 	}
 
-	
+	//체크박스 삭제//
 	@GetMapping("freelancerProfile_cehck_delete")
-		public String List_checkbox_delete(HttpServletRequest request, long pro_num, @RequestParam String mem_email) {
+		public String List_checkbox_delete(HttpServletRequest request, long pro_num) {
+		
+			HttpSession session = request.getSession();
+			String mem_email= (String)session.getAttribute("email");
 	      
-			   String[] ListCheckNum = request.getParameterValues("pro_num"); 
-//			   log.info("#ListCheckNum.length: "  + ListCheckNum.length );
+			String[] ListCheckNum = request.getParameterValues("pro_num"); 
 			   
 			   ArrayList<Integer> arrayChecknum = new ArrayList<Integer>();
 
@@ -247,7 +279,7 @@ public class FreeLancerProfileController {
 			   service.checkdelete1(map);
 			   //service.checkdelete2(PRO_NUM);
 			      
-			   return "redirect:freelancerProfile_list?mem_email="+mem_email+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num+"&pro_num="+pro_num;
+			   return "redirect:freelancerProfile_list?pro_num="+pro_num;
 			 }
 	
 
@@ -270,6 +302,7 @@ public class FreeLancerProfileController {
 		public JsonNode bank_holder_check(HttpServletRequest request,HttpServletResponse response,String bank_code, String bank_num) {
 			JsonNode node = OpenBankingController.getAccessTokenIMPORT();
 			log.info("accessToken: "+node);
+
 			JsonNode responseNode = node.get("response");
 			String accessToken = responseNode.get("access_token").asText();
 			

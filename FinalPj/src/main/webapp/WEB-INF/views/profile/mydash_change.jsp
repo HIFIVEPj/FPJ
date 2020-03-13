@@ -222,7 +222,11 @@
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+<<<<<<< HEAD
 												<li><a class="slide-item" href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
+=======
+												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
+>>>>>>> 471977c4d994dd337975e3f70a2387d9c24b63d7
 											</ul>
 										</li>
 										<li class="slide">
@@ -235,9 +239,14 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
+<<<<<<< HEAD
 												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
 												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
 												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
+=======
+												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
+												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+>>>>>>> 471977c4d994dd337975e3f70a2387d9c24b63d7
 											</ul>
 										</li>
 										<li>

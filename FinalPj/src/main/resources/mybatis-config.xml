@@ -19,6 +19,7 @@
 		-->
 		
 		
+		
 		<!-- 세영 -->
 		<typeAlias alias="Market" type="fp.market.domain.Market"/>
         <typeAlias alias="mFreelancer" type="fp.market.domain.Freelancer"/>
@@ -61,16 +62,16 @@
 	   
 		
 		<!-- 나영 -->
-		<typeAlias type="fp.corporation.domain.Project" alias="corProject"/>
-        <typeAlias type="fp.corporation.domain.Keyword" alias="corKeyword"/>
-        <typeAlias type="fp.corporation.domain.PjPickKeyword" alias="PjPickKeyword"/>
-        <typeAlias type="fp.corporation.domain.Type" alias="corType"/>   
-        <typeAlias type="fp.corporation.domain.Corporation" alias="Corporation"/>   
+		<typeAlias alias="corProject" type="fp.corporation.domain.Project" />
+        <typeAlias alias="corKeyword" type="fp.corporation.domain.Keyword" />
+        <typeAlias  alias="PjPickKeyword" type="fp.corporation.domain.PjPickKeyword"/>
+        <typeAlias alias="corType" type="fp.corporation.domain.Type" />   
+        <typeAlias  alias="Corporation" type="fp.corporation.domain.Corporation"/>   
 		
-        <typeAlias type="fp.corporation.vo.ProjectVo" alias="ProjectVo"/>
-        <typeAlias type="fp.corporation.vo.ProjectKeyNameVo" alias="ProjectKeyNameVo"/>
+        <typeAlias alias="ProjectVo" type="fp.corporation.vo.ProjectVo" />
+        <typeAlias alias="ProjectKeyNameVo" type="fp.corporation.vo.ProjectKeyNameVo"/>
 			   
-		<!-- 소담 -->
+			<!-- 소담 -->
    	   <typeAlias alias="Member" type="fp.member.domain.Member"/>
    	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
    	    <typeAlias alias="MemberVo" type="fp.member.domain.MemberVo"/>

@@ -266,19 +266,19 @@
                                 <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
-                             <li>	
-                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
+						    <li>	
+                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
                             </li>
                             
-                             
+                             <li>	
+                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                            </li>
       				</ul>
-					
 
-	
 					<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
@@ -443,8 +443,7 @@
 															<a href="#" class="badge badge-success">승인</a>
 															</c:if>
 															<c:if test="${dto.market_state eq 2}">
-															<a href="#" class="badge badge-danger">거절</a>
-															</c:if>
+															<a href="#" class="badge badge-danger">거절</a>		</c:if>
 															
 														</td>
 														<td>
@@ -491,6 +490,7 @@
 							</li>
 						</c:if>
 					</ul> 		
+
 											
 					</div>
 				</div>
@@ -520,50 +520,42 @@
 		<!-- Dashboard Core -->
 		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
 		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
-		
 		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 		<script src="../js/vendors/jquery.sparkline.min.js"></script>
 		<script src="../js/vendors/selectize.min.js"></script>
 		<script src="../js/vendors/jquery.tablesorter.min.js"></script>
 		<script src="../js/vendors/circle-progress.min.js"></script>
 		<script src="../plugins/rating/jquery.rating-stars.js"></script>		
-		
-		<script src="../js/flot.js"></script> 
 		<script src="../plugins/flot/jquery.flot.js"></script>
 		<script src="../plugins/flot/jquery.flot.fillbetween.js"></script>
-		<script src="../plugins/flot/jquery.flot.pie.js"></script> 
+		<script src="../plugins/flot/jquery.flot.pie.js"></script>
 		
+	
 		<!-- Fullside-menu Js-->
 		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
-	
-		<!-- Datepicker js 날짜입력 -->
-		<script src="../plugins/date-picker/spectrum.js"></script>
-		<script src="../plugins/date-picker/jquery-ui.js"></script>
-		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
 
-		<!--InputMask Js-->
-		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
-		
+
 		<!-- Charts Plugin -->
 		<script src="../plugins/chart/Chart.bundle.js"></script>
 		<script src="../plugins/chart/utils.js"></script>
 
-		<!-- 원래 여기 Morris.js Charts Plugin   
-		<script src="../plugins/morris/morris.js"></script>		
-		<script src="../plugins/morris/raphael-min.js"></script>  -->
-		
-		<!-- Input Mask Plugin
+		<!--Morris.js Charts Plugin -->
+		<script src="../plugins/morris/raphael-min.js"></script>
+		<script src="../plugins/morris/morris.js"></script>
+
+		<!-- Input Mask Plugin -->
 		<script src="../plugins/input-mask/jquery.mask.min.js"></script>
-		<script src="../js/index5.js"></script>  -->
+		<script src="../js/index5.js"></script>
+
+  		<!-- Index Scripts  그래프 -->
+		<script src="../js/flot.js"></script> 
+		<script src="../js/charts.js"></script>
 		
-  		<!-- c3.js Charts Plugin 도넛 Index Scripts  그래프 보다 먼저 -->
-  		<script src="../plugins/charts-c3/d3.v5.min.js"></script>
+		<!-- c3.js Charts Plugin 도넛-->
+		<script src="../plugins/charts-c3/d3.v5.min.js"></script>
 		<script src="../plugins/charts-c3/c3-chart.js"></script>
 		
-		<!-- Index Scripts  그래프 -->
-		
-		<script src="../js/charts.js"></script> 
-		
+
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
 		<script src="../plugins/counters/waypoints.min.js"></script>
@@ -571,7 +563,8 @@
 		<!-- Custom scroll bar Js-->
 		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-		<!-- Custom Js -->
+
+		<!-- Custom Js-->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
 	</body>
@@ -648,7 +641,6 @@ $(document).ready(function(){
  
 })
 
-
 $("#admitBtn").on("click",function(){
 	//var market_state=1;
 	$("#market_state").attr("value","1");
@@ -671,7 +663,7 @@ $("#refuseBtn").on("click",function(){
 function admitBtn() {	
 	alert("버튼1을 누르셨습니다.");
 }*/
-	
+
 		
 </script>
 </html>

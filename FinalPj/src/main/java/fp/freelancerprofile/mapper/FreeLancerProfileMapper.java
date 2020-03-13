@@ -36,6 +36,7 @@ public interface FreeLancerProfileMapper {
 
 	//프로필 작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
+	
 	//프로필 작성페이지 수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
 	public void typeUpdate(int type_num);
@@ -48,12 +49,13 @@ public interface FreeLancerProfileMapper {
 	//체크박스 삭제//
 	public void checkdelete1(Map<String, Object> map);
 	
+	
 	public List<FreeLancerProfile> profile_free_select(String mem_email);
 	public long getTotalCountFree(long free_code);
 	
 	//프로필 수정//
 	public FreeLancerProfile showContent(long pro_num);
-
+	void choiceProfile(Map<String, Object> map);
 	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);

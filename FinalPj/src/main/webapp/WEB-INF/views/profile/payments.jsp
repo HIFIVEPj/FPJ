@@ -139,7 +139,6 @@
 												<div class="form-group">
 													<label class="form-label">예금주</label>
 													<input type="text" class="form-control" id="holder" name="freeac_holder" readonly>
-												</div>
 											</div>
 											<div class = "col-sm-1 col-md-1">
 												<div class="form-group">
@@ -147,6 +146,7 @@
 													<a href="javascript:void(0)" class="btn btn-primary" onclick="check();">계좌확인</a>
 												</div>
 											</div>
+											
 											</div>
 											<c:if test="${empty freeacct}">
 											<div class="col-md-12">
