@@ -63,8 +63,8 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite?mem_email=${sessionScope.email}">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
@@ -133,16 +133,22 @@
 																		<a href="market-content?market_num=${pickList.market_num }" class="text-dark"><h4 class=""><b>${pickList.market.market_sub }</b></h4></a>
 															<!-- 		<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>-->
 																 	<div style="padding-top:5px;">
-																	<!--	<span class="text-warning">
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			</span>-->
-																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${pickList.market.market_vcnt}		
+																	<span class="rated-products-ratings">
+																					
+																				<c:if test="${pickList.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																					<c:forEach var="1" begin="1" end="${pickList.marketRev.marketRev_star}">
+																						<i class="fa fa-star text-warning"> </i>
+																					</c:forEach>
+																					<c:forEach var="1" begin="1" end="${5-pickList.marketRev.marketRev_star}">
+																						<i class="fa fa-star-o text-warning"> </i>
+																					</c:forEach>	
+																				</c:if>
+																				
+																			</span>|
+																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${pickList.market.market_vcnt}	
 																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${pickList.market.market_pcnt}
+																			 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${pickList.marketRev.marketRev_num }
 																		</div> 
-																	
 																	</div>
 																</div>
 															</div>			

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.market.domain.Market;
 import fp.member.domain.Criteria;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
@@ -32,9 +33,65 @@ public class AdminController {
 	MemberService service;
 	
 	@RequestMapping("admin")
-	public String admin() {
-		return "admin/admin_page";
+	public ModelAndView admin(@RequestParam(value="nowPage", required = false)String nowPage
+			, @RequestParam(value="cntPerPage", required = false)String cntPerPage){
+		
+		List<Long> sumFree=service.sumFree();
+		List<Long> sumCor=service.sumCor();
+		List<Long> month=service.month();
+		
+				
+		Map<String,Object> map = new HashMap<String, Object>();	
+		map.put("class_num","2");	
+		long totalCountFree =service.getTotalCount(map);	
+		map.put("class_num","4");
+		long totalCountCor =service.getTotalCount(map);
+		map.put("class_num","");
+		long totalCount =service.getTotalCount(map);
+		
+		long totalMarketCount =service.getMarketCount();	
+		if(nowPage == null && cntPerPage == null) {
+			nowPage="1";
+			cntPerPage="10"; //페이지당 글 갯수리스트목록
+		}else if(nowPage ==null) {
+			nowPage="1";
+		}else if(cntPerPage == null) {
+			cntPerPage="10"; //리스트목록
+		}			
+		MemberVo Vo = new MemberVo(totalMarketCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		List<Market> list = service.getMarketList(Vo);
+		
+		log.info("list!@#!@#!@#@!#!#! : "+list);
+		log.info("Vo!@#!@#!@#@!#!#! : "+Vo);
+		ModelAndView mv = new ModelAndView("admin/admin_page");
+		
+		mv.addObject("list", list);
+		mv.addObject("pamarket", Vo);
+		mv.addObject("totalCountFree", totalCountFree);
+		mv.addObject("totalCountCor", totalCountCor);
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("sumFree",sumFree);
+		mv.addObject("sumCor",sumCor);
+		mv.addObject("month",month);
+		return mv;
 	}
+	
+	@RequestMapping("updateMarketState.do")
+	public String upMarketS(Market market,@RequestParam long market_num) {
+		log.info("market_num : " + market_num);
+		Map<String,Object> map = new HashMap<String, Object>();	
+		map.put("market_num",market_num);
+		int market_state=market.getMarket_state();
+		log.info("market_state : " + market_state);
+		
+		map.put("market_state",market_state);
+		service.upMarketS(map);
+		
+		
+		return "redirect:admin";
+		
+	}
+	
 	@RequestMapping("admin_member")
 	public ModelAndView member_list(
 			@RequestParam (required = false)String class_num ,
@@ -46,7 +103,7 @@ public class AdminController {
 	map.put("class_num",class_num);		
 	HttpSession session=request.getSession();
 	session.setAttribute("classN", class_num);
-	session.setAttribute("keyword", keyword);
+	//session.setAttribute("keyword", keyword);
 	map.put("keyword", keyword);
 
 	
@@ -63,7 +120,7 @@ public class AdminController {
 	map.put("MemberVo", memberVo);	
 	MemberVo mvo =service.getMemberVo(map);		
 	ModelAndView mv = new ModelAndView("admin/admin_member");	
-	log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:"+mvo);
+	log.info(" mvo:" + mvo);
 	mv.addObject("pa", mvo);
 		
 		return mv;
@@ -72,6 +129,9 @@ public class AdminController {
 	@RequestMapping("admin_marketC")
 	public ModelAndView admin_marketC(MemberVo memberVo,@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
+		
+		List<Long> sumCor=service.sumCor();
+		List<Long> month=service.month();
 		
 		long totalCount =service.getTotalCountMC(memberVo);	
 		if(nowPage == null && cntPerPage == null) {
@@ -86,10 +146,10 @@ public class AdminController {
 	
 		List<PayInformation> list =service.marketListCor(Vo);		
 		ModelAndView mv = new ModelAndView("admin/admin_marketC");	
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:"+list);
 		mv.addObject("list", list);
 		mv.addObject("pac",Vo);
-			
+		mv.addObject("sumCor",sumCor);
+		mv.addObject("month",month);	
 			return mv;
 	}
 
@@ -97,9 +157,9 @@ public class AdminController {
 	public ModelAndView admin_marketF(MemberVo memberVo, @RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
 		
-		//log.info("memberVo1313213123는 어케 넘어오나 >>>>>> "+memberVo.getKeyword());
+		List<Long> sumFree=service.sumFree();
+		List<Long> month=service.month();
 		long totalCount =service.getTotalCountMF(memberVo);	
-		//log.info("프리랜서 마켓카운트트트트ㅡ트틑"+totalCount);
 		if(nowPage == null && cntPerPage == null) {
 			nowPage="1";
 			cntPerPage="10"; //페이지당 글 갯수리스트목록
@@ -116,6 +176,8 @@ public class AdminController {
 		//log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!memberVo:"+Vo);
 		mv.addObject("list", list);
 		mv.addObject("paf", Vo);
+		mv.addObject("sumFree",sumFree);
+		mv.addObject("month",month);
 			
 			return mv;
 	}
@@ -124,8 +186,8 @@ public class AdminController {
 	public ModelAndView searchMarketF(MemberVo membeVO, 
 			@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
-		log.info("여기는 오니?;"+membeVO);
-		log.info("memberVo1313213123는 어케 넘어오나 >>>>>> "+ membeVO.getKeyword());
+		List<Long> sumFree=service.sumFree();
+		List<Long> month=service.month();	
 		long totalCount =service.getTotalCountMF(membeVO);	
 		log.info("검색 : " +totalCount);
 		if(nowPage == null && cntPerPage == null) {
@@ -140,10 +202,11 @@ public class AdminController {
 	
 		List<PayInformation> list =service.marketListFree(Vo);		
 		ModelAndView mv = new ModelAndView("admin/admin_marketF");	
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!검색추가:"+list);
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!Vo 검색추가:"+Vo);
+		
 		mv.addObject("list", list);
 		mv.addObject("paf", Vo);
+		mv.addObject("sumFree",sumFree);
+		mv.addObject("month",month);
 			
 			return mv;
 	}
@@ -152,9 +215,12 @@ public class AdminController {
 	public ModelAndView searchMarketC(MemberVo membeVO, 
 			@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
-		log.info("시작 :"+membeVO.getStartDate()+"끝  :"+membeVO.getEndDate());
-		long totalCount =service.getTotalCountMC(membeVO);	
-		log.info("검색 : " +totalCount);
+		
+		
+		List<Long> sumCor=service.sumCor();
+		List<Long> month=service.month();
+		
+		long totalCount =service.getTotalCountMC(membeVO);			
 		if(nowPage == null && cntPerPage == null) {
 			nowPage="1";
 			cntPerPage="10"; //페이지당 글 갯수리스트목록
@@ -167,12 +233,13 @@ public class AdminController {
 	
 		List<PayInformation> list =service.marketListCor(Vo);		
 		ModelAndView mv = new ModelAndView("admin/admin_marketC");	
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!검색추가:"+list);
-		log.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!Vo 검색추가:"+Vo);
+		
 		mv.addObject("list", list);
 		mv.addObject("pac", Vo);
-			
-			return mv;
+		mv.addObject("sumCor",sumCor);
+		mv.addObject("month",month);	
+		
+		return mv;
 	}
 	
 }

@@ -4,23 +4,24 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+		<meta http-equiv="x-ua-compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="msapplication-TileColor" content="#0f75ff">
-		<meta name="theme-color" content="#9d37f6">
+		<meta name="theme-color" content="#2ddcd3">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320">
-		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> 
+		<meta name="description" content="프리랜서 플랫폼">
+		<meta name="author" content="sprukotechnologies">
+		<meta name="keywords" content="freelancer,freelance,project,market service, free market">
+		<link rel="icon" type="image/png" href="../images/hifive.png" />
+		<link rel="shortcut icon" type="image/png" href="../images/hifive.png" />
 
 
 		<!-- Title -->
-		<title>Pinlist â Clean & Modern Admin Dashboard Bootstrap 4  HTML Template</title>
-		<link rel="stylesheet" href="../fonts/fonts/font-awesome.min.css">
+		<title>하이파이브</title>
 
 		<!-- Sidemenu Css -->
 		<link href="../plugins/toggle-sidebar/sidemenu.css" rel="stylesheet" />
@@ -257,6 +258,9 @@
 						</div>
 					</div> -->
 					<ul class="side-menu">
+							<li>	
+                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">통계</span></a>
+                            </li>
 						    <li>	
                                 <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
@@ -268,11 +272,7 @@
                              <li>	
                                  <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
-                            
-                             <li>	
-                                 <a class="side-menu__item" href="payments.html"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">매출관리</span></a>
-                            </li>
-                  
+                                              
 					</ul>
 					
 
@@ -307,20 +307,18 @@
 							</div>			
 
 
-						<div class="row">
+						<div class="row">							
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Profits Analysis</h3>
+										<h3 class="card-title">프로젝트 매출</h3>
 									</div>
-								<!-- 	<div class="card-body">
-										<div id="morrisBar3" class="chart-visitors overflow-hidden"></div>
-									</div> -->
 									<div class="card-body">
-										<div id="placeholder2" class="chartsh"></div>
+										<div id="chart" class="chartsh"></div>
 									</div>
 								</div>
 							</div>
+							
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
@@ -344,8 +342,7 @@
 						</h4>
 					</div>				
 							
-				<div id="SearchC" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-			<!--  <form id="searchForm" action="searchCor.do" method="get"> -->
+				<div id="SearchC" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">		
 	<!-- 원래있던거 --> <div class=" col-lg-12 bg-white mb-4 p-4 border" >
 							<div class="form-group ">
 								<div class="row">
@@ -392,12 +389,11 @@
 									<button id="searchBtn" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> 검색하기</button>
 								</div>
 								<div class="col-md-4 mb-0">
-									<input type="reset" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i>
-									<!--<a href="#" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i> 초기화</a> -->
+									<!--<input type="reset" class="btn btn-block btn-primary fs-14 "><i class="fa fa-repeat"></i>-->
+									<button id="resetBtn" class="btn btn-block btn-primary fs-14"><i class="fa fa-repeat"></i> 초기화</button> 
 								</div>
 							</div>				
 	<!-- 원래있던거 -->		</div> 
-				<!--  </form> -->					
 					</div>
 				</div>
 <!-- 검색창 끝-->	</div>
@@ -408,7 +404,7 @@
 						<thead class="bg-primary text-white">
 							<tr class="border-bottom text-white">											
 								<th class="text-white font-weight-normal">payid</th>
-								<th class="text-white font-weight-normal">가격</th>
+								<th class="text-white font-weight-normal">가격(원)</th>
 								<th class="text-white font-weight-normal">uid</th>
 								<th class="text-white font-weight-normal">카드번호</th>
 								<th class="text-white font-weight-normal">status</th>
@@ -427,7 +423,7 @@
 						<c:forEach var="dto" items="${list}">
 								<tr class="border-bottom">											
 								<td>${dto.payinfo_payid}</td>
-								<td>${dto.payinfo_price}</td>
+								<td><fmt:formatNumber value="${dto.payinfo_price}" pattern="#,###,###,###" /></td>
 								<td class="text-red">${dto.payinfo_uid}</td>
 								<td class="">${dto.payinfo_cardnum}</td>
 								<td>${dto.payinfo_status}</td>
@@ -445,7 +441,7 @@
 							<!--  이전페이지 -->
 						<c:if test="${pac.nowPage != 1}">
 							<li class="page-item page-prev">							
-								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage-1}&cntPerPage=${pac.cntPerPage}" tabindex="-1">Prev</a>
+								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage-1}&cntPerPage=${pac.cntPerPage}&type=${pac.type}&keyword=${pac.keyword}" tabindex="-1">Prev</a>
 							</li>
 						</c:if>
 						<c:forEach var='p' begin="${pac.startPage}" end="${pac.endPage}">
@@ -454,14 +450,14 @@
 										<li class='page-item active'><a class="page-link">${p}</a></li>
 									</c:when>
 									<c:when test = "${p != pac.nowPage }">
-										<li class="page-item"><a class="page-link" href="admin_marketC?nowPage=${p}&cntPerPage=${pac.cntPerPage}">${p}</a></li>
+										<li class="page-item"><a class="page-link" href="admin_marketC?nowPage=${p}&cntPerPage=${pac.cntPerPage}&type=${pac.type}&keyword=${pac.keyword}">${p}</a></li>
 									</c:when>
 								</c:choose>
 						</c:forEach>
 						<c:if test ="${pac.nowPage != pac.lastPage}">
 							<li class="page-item page-next">
 								
-								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage+1}&cntPerPage=${pac.cntPerPage}">Next</a>
+								<a class="page-link" href="admin_marketC?nowPage=${pac.nowPage+1}&cntPerPage=${pac.cntPerPage}&type=${pac.type}&keyword=${pac.keyword}">Next</a>
 							</li>
 						</c:if>
 					</ul> 
@@ -574,7 +570,36 @@ $(document).ready(function(){
           }
          
      })
+     $("#resetBtn").click(function(){ 
+	   	  $("#type option:selected").val('');    	 
+	   	  $('#keyword').val('');
+	   	  $("#startDate").val('');
+	   	  $("#endDate").val('');
+     }) 
 })
+/*******바 차트(chart) **************
+var chart = c3.generate({
+    data: {
+        columns: [
+            ['data1', 100, 300, 200, 400, 500],
+            ['data2', 10, 30, 20, 40, 50]
+        ],
+    type: 'bar'
+    }
+});
+************************/
+  var chart = c3.generate({
+	  data:{
+		  json:{
+	          date: ${month},             
+	                               프로젝트: ${sumCor}
+	      },
+	      x: 'date',
+	    type: 'bar'
+	    }
+});
+
+
 </script>
 
 </html>

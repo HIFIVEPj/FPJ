@@ -63,7 +63,7 @@
 												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
 
 												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>		
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">

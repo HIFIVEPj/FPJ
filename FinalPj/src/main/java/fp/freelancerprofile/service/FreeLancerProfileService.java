@@ -2,9 +2,12 @@
 package fp.freelancerprofile.service;
 
 import java.util.*;
+
+import fp.corporation.domain.PjPickKeyword;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
+import fp.freelancerprofile.domain.FreePickKeyWord;
 import fp.freelancerprofile.domain.KeyWord;
 
 
@@ -35,7 +38,8 @@ public interface FreeLancerProfileService {
 	
 	//수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
-	public void keyUpdate(Map<String, Object> map);
+	//public void keyUpdate(Map<String, Object> map);
+	public void keyUpdate(FreePickKeyWord freepickkeyword);
 	//public void keyDelete(Map<String, Object> map);
 
 

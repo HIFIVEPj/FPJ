@@ -319,20 +319,30 @@
 
 		<![CDATA[
 		update freelancer_profile set
-			 mem_email=#{mem_email}, pro_exp=#{pro_exp}, pro_cv=#{pro_cv}
+			pro_exp=#{pro_exp}, pro_cv=#{pro_cv}
 			, pro_addr=#{pro_addr}, pro_postcode=#{pro_postcode}, pro_detailloc=#{pro_detailloc}
 			, pro_edu=#{pro_edu}, pro_start=#{pro_start}, pro_ox=#{pro_ox}, pro_grade=#{pro_grade}
 			, pro_place=#{pro_place}, pro_workplace=#{pro_workplace}, profile_sub=#{profile_sub}, profile_date=sysdate
 				 where pro_num=#{pro_num}
 		  ]]>
 	</update> 
+	
+	<delete id="updateKeyword_Del" parameterType="fp.freelancerprofile.domain.FreePickKeyWord">
+	 	delete from FREE_PICK_KEYWORD where PRO_NUM=#{pro_num}
+	 </delete>
+	 <insert id="updateKeyword_In" parameterType="fp.freelancerprofile.domain.FreePickKeyWord">
+		  	<foreach collection ="key_numList" item="key_num" separator=";" open="DECLARE BEGIN " close="; END;">
+			 	insert into FREE_PICK_KEYWORD(free_keynum, key_num, pro_num) values(FREE_KEYNUM_SEQ.nextval, #{key_num}, #{pro_num})
+			 </foreach>
+	 </insert>
+	
 		<!-- 프로필 update(직종) -->
 	<update id="typeUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
 		<![CDATA[
 		update freelancer_profile set type_num=#{type_num}
 		  ]]>
 	</update> 
-		<!-- 프로필 update(키워드 insert) -->
+		<!-- 프로필 update(키워드 insert) 
 
 	<insert id="keyUpdate" parameterType="map">	
 		<selectKey keyProperty="free_keynum" order="BEFORE" resultType="long">
@@ -346,13 +356,13 @@
 			 select  #{key_num}, #{free_code}, #{pro_num} from dual
 		 </foreach>) A
 		 </if>
-	</insert> 
- 	 <!-- 프로필 update(키워드 delete) -->
+	</insert>  -->
+ 	 <!-- 프로필 update(키워드 delete) 
    <delete id="keyDelete" parameterType="long">
 	   <![CDATA[
 		 	delete from free_pick_keyword where pro_num=#{pro_num}
-	   ]]>
-	</delete>
+	   ]]> 
+	</delete>  -->
 	
 	    <!-- insert했던 데이터 뽑기-->
    <select id="showContent"  parameterType="long" resultMap="free_profile">

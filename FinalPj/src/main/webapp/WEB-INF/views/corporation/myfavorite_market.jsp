@@ -130,14 +130,20 @@
 																		<a href="market-content?market_num=${pickList.market_num }" class="text-dark"><h4 class=""><b>${pickList.market.market_sub }</b></h4></a>
 															<!-- 		<span class="font-12">고 퀄리티 반응형 홈페이지 제작 가능합니다. </span><br>-->
 																 	<div style="padding-top:5px;">
-																	<!--	<span class="text-warning">
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			<i class="fa fa-star"> </i>
-																			</span>-->
-																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${pickList.market.market_vcnt}		
-																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${pickList.market.market_pcnt}
+																		<span class="rated-products-ratings">
+
+																			<c:if test="${pickList.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																				<c:forEach var="1" begin="1" end="${pickList.marketRev.marketRev_star}">
+																					<i class="fa fa-star text-warning"> </i>
+																				</c:forEach>
+																				<c:forEach var="1" begin="1" end="${5-pickList.marketRev.marketRev_star}">
+																					<i class="fa fa-star-o text-warning"> </i>
+																				</c:forEach>	
+																			</c:if>
+																		</span>|	
+																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${pickList.market.market_vcnt}
+																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${pickList.market.market_pcnt }
+																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${pickList.marketRev.marketRev_num}
 																		</div> 
 																	
 																	</div>

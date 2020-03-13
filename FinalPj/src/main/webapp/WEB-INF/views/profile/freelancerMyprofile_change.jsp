@@ -27,7 +27,7 @@
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
-	 <form method='post' name='edit_free_profile' action="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${freelancerprofile.pro_num}">
+	 <form method='post' name='edit_free_profile' action="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${profile.pro_num}">
 				<div class="row">
 					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
@@ -49,9 +49,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
+												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
 												<li><a class="slide-item" href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
-												<li><a class="slide-item" href="mydash.html">기업</a></li>
 											</ul>
 										</li>
 								<!-- 		<li class="slide">
@@ -181,16 +180,16 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 										<label class="form-label">직종</label>
-                                 			<select class="form-control" id="type" name="type_name">
+                                 			<select class="form-control" id="type_num" name="type_num">
                                  		<c:choose>		 
-                                 			 <c:when test="${freelancerprofile.type.type_num eq '1'}">
+                                 			 <c:when test="${profile.type_num eq '1'}">
                                     			<option value=1 selected>개발</option>
                                     			<option value=2>퍼블리싱</option>
                                     			<option value=3>디자인</option>
                                     			<option value=4>기획</option>
                                     			<option value=5>기타</option>		
                                     		</c:when>
-                                    		 <c:when test="${freelancerprofile.type.type_num eq '2'}">
+                                    		 <c:when test="${profile.type_num eq '2'}">
                                     			<option value=1>개발</option>
                                     			<option value=2 selected>퍼블리싱</option>
                                     			<option value=3>디자인</option>
@@ -198,14 +197,14 @@
                                     			<option value=5>기타</option>
                                     		</c:when>
                                     		
-                                    		<c:when test="${freelancerprofile.type.type_num eq '3'}">
+                                    		<c:when test="${profile.type_num eq '3'}">
 												<option value=1>개발</option>
                                     			<option value=2>퍼블리싱</option>
                                     			<option value=3 selected>디자인</option>
                                     			<option value=4>기획</option>
                                     			<option value=5>기타</option>
                                     		</c:when>
-                                    		<c:when test="${freelancerprofile.type.type_num eq '4'}">
+                                    		<c:when test="${profile.type_num eq '4'}">
 												<option value=1>개발</option>
                                     			<option value=2>퍼블리싱</option>
                                     			<option value=3>디자인</option>
@@ -227,9 +226,8 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">경력</label>
-											
-										<c:if test="${freelancerprofile ne '[]'}">
-											<input type="text" class="form-control"  value="${freelancerprofile.pro_exp}" name = "pro_exp">
+										<c:if test="${profile ne '[]'}">
+											<input type="text" class="form-control"  value="${profile.pro_exp}" name = "pro_exp">
 										</c:if>									
 										</div>
 									</div>
@@ -245,23 +243,33 @@
 									<div class="tabs-menus">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
-										 	<li><a href="#tab1" <c:if test="${freelancerprofile.type_num eq 1}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="1">개발</a></li> 
-											<li><a href="#tab2" <c:if test="${freelancerprofile.type_num eq 2}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="2">퍼블리셔</a></li>
-											<li><a href="#tab3" <c:if test="${freelancerprofile.type_num eq 3}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="3">디자인</a></li>
-											<li><a href="#tab4" <c:if test="${freelancerprofile.type_num eq 4}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="4">기획</a></li>
-											<li><a href="#tab5" <c:if test="${freelancerprofile.type_num eq 5}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="5">기타</a></li>											
+										 	<li><a href="#tab1" <c:if test="${profile.type_num eq 1}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="1">개발</a></li> 
+											<li><a href="#tab2" <c:if test="${profile.type_num eq 2}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="2">퍼블리셔</a></li>
+											<li><a href="#tab3" <c:if test="${profile.type_num eq 3}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="3">디자인</a></li>
+											<li><a href="#tab4" <c:if test="${profile.type_num eq 4}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="4">기획</a></li>
+											<li><a href="#tab5" <c:if test="${profile.type_num eq 5}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="5">기타</a></li>											
 										</ul>
+						<!-- 담추가 	<input type="hidden" name="type_num" value="" id="type_num" /> -->	
 									</div>
+									
+									<label class="form-label"><b>키워드</b></label>
+									<c:choose>
+										<c:when test="${profile.keyword ne '[]'}">
+											<c:forEach var="i" begin="0" end="${profile.freePickKeyWord.size()-1}">
+												<input type="hidden" value="${profile.freePickKeyWord.get(i).free_keynum}" name = "free_keynum">
+											</c:forEach>
+										</c:when>
+									</c:choose>
+									
+									
 									<div class="tab-content">
 										<!-- tab 개발 시작   -->	
-										<div class="tab-pane  table-responsive border-top userprof-tab" id="tab1">
+										<div class="tab-pane <c:if test="${profile.type_num eq 1}"> active </c:if> table-responsive border-top userprof-tab" id="tab1">
 											<!-- 개발자 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
 											<!------------------------ java 시작----------------------------------------------------------->										
 												<br/>	
-											
-												
 														
 												<div class="row">									
 													<div class="col-md-2">																								
@@ -269,65 +277,58 @@
 												</div>
 										
 												<div class="col-md-2">											
-													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+													<label class="custom-control custom-checkbox">																											
 														<input type="checkbox" class="custom-control-input" name="key_num" value="1"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 1}">
+															<c:if test="${profile.keyname().contains('Front-end')}">
 															checked
-															</c:if>>
-													</c:forEach>			
+															</c:if>>															
 													<span class="custom-control-label">Front-end</span>
 													</label>
 												</div>
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+													<c:forEach var="i" begin="0" end="${profile.keyword.size()-1}">																												
 														<input type="checkbox" class="custom-control-input" name="key_num" value="2"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 2}">
+															<c:if test="${profile.keyname().contains('Back_End')}">
 															checked
-															</c:if>>
-													</c:forEach>
-														<span class="custom-control-label">Back_End</span>	
+															</c:if>>	
+													</c:forEach>												
+														<span class="custom-control-label">Back-End</span>	
 													</label>
 												</div>
 												
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+														<c:forEach var="i" begin="0" end="${profile.keyword.size()-1}">							
 														<input type="checkbox" class="custom-control-input" name="key_num" value="3"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 3}">
+															<c:if test="${profile.keyname().contains('Java')}">
 															checked
 															</c:if>>
-													</c:forEach>
+														</c:forEach>
 														<span class="custom-control-label">Java</span>
 													</label>
 												</div>
 												
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																								
 														<input type="checkbox" class="custom-control-input" name="key_num" value="4"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 4}">
+															<c:if test="${profile.keyname().contains('Spring')}">
 															checked
 															</c:if>>
-													</c:forEach>
+													
 														<span class="custom-control-label">Spring</span>
 													</label>
 												</div>
 												
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+													
 														<input type="checkbox" class="custom-control-input" name="key_num" value="5"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 5}">
+															<c:if test="${profile.keyname().contains('Xplatform')}">
 															checked
-															</c:if>>
-													</c:forEach>
-													
-								
-													
-													
+															</c:if>>													
 														<span class="custom-control-label">Xplatform</span>
 													</label>
 												</div>
@@ -339,58 +340,58 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																												
 														<input type="checkbox" class="custom-control-input" name="key_num" value="6"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 6}">
+															<c:if test="${profile.keyname().contains('Miplantform')}">
 															checked
 															</c:if>>
-													</c:forEach>
+												
 														<span class="custom-control-label">Miplantform</span>
 													</label>
 												</div>
 												
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																											
 														<input type="checkbox" class="custom-control-input" name="key_num" value="7"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 7}">
+															<c:if test="${profile.keyname().contains('Nexacro')}">
 															checked
 															</c:if>>
-													</c:forEach>
+												
 														<span class="custom-control-label">Nexacro</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 														<input type="checkbox" class="custom-control-input" name="key_num" value="8"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 8}">
+															<c:if test="${profile.keyname().contains('Proframe')}">
 															checked
 															</c:if>>
-													</c:forEach>
+													
 														<span class="custom-control-label">Proframe</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																												
 														<input type="checkbox" class="custom-control-input" name="key_num" value="9"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 9}">
+															<c:if test="${profile.keyname().contains('Maven')}"> 
 															checked
 															</c:if>>
-													</c:forEach>
+													
 														<span class="custom-control-label">Maven</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																												
 														<input type="checkbox" class="custom-control-input" name="key_num" value="10"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 10}">
+															<c:if test="${profile.keyname().contains('Jenkins')}"> 
 															checked
 															</c:if>>
-													</c:forEach>
+													
 														<span class="custom-control-label">Jenkins</span>
 													</label>
 												</div>	
@@ -402,56 +403,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																												
 														<input type="checkbox" class="custom-control-input" name="key_num" value="11"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 11}">
+															<c:if test="${profile.keyname().contains('Sencha')}">
 															checked
 															</c:if>>
-													</c:forEach>
+												
 															<span class="custom-control-label">Sencha</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																												
 														<input type="checkbox" class="custom-control-input" name="key_num" value="12"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 12}">
+															<c:if test="${profile.keyname().contains('Trustform')}"> 
 															checked
 															</c:if>>
-													</c:forEach>
+												
 															<span class="custom-control-label">Trustform</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																											
 														<input type="checkbox" class="custom-control-input" name="key_num" value="13"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 13}">
+															<c:if test="${profile.keyname().contains('Tuxedo')}"> 
 															checked
 															</c:if>>
-													</c:forEach>
+												
 															<span class="custom-control-label">Tuxedo</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="14"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 14}">
+																	<c:if test="${profile.keyname().contains('Gauce')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Gauce</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="15"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 15}">
+																	<c:if test="${profile.keyname().contains('Pro*C')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">Pro*C</span>
 														</label>
 													</div>
@@ -462,23 +463,23 @@
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="16"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 16}">
+																	<c:if test="${profile.keyname().contains('DecOn')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">DecOn</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="17"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 17}">
+																	<c:if test="${profile.keyname().contains('Thymeleaf')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Thymeleaf</span>
 														</label>
 													</div>
@@ -496,57 +497,57 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="18"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 18}">
+																	<c:if test="${profile.keyname().contains('Hybrid')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Hybrid</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																											
 																<input type="checkbox" class="custom-control-input" name="key_num" value="19"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 19}">
+																	<c:if test="${profile.keyname().contains('Android')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">Android</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="20"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 20}">
+																	<c:if test="${profile.keyname().contains('ios(Object-C)')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">ios(Object-C)</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="21"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 21}">
+																	<c:if test="${profile.keyname().contains('ios(Swift)')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">ios(Swift)</span>
 														</label>
 													</div>
 																				
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="22"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 22}">
+																	<c:if test="${profile.keyname().contains('WebView')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">WebView</span>
 														</label>
 													</div>
@@ -558,12 +559,12 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="23"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 23}">
+																	<c:if test="${profile.keyname().contains('IoT')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">IoT</span>
 														</label>
 													</div>	
@@ -581,56 +582,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="24"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 24}">
+																	<c:if test="${profile.keyname().contains('PHP')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">PHP</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="25"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 25}">
+																	<c:if test="${profile.keyname().contains('Laravel')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Laravel</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="26"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 26}">
+																	<c:if test="${profile.keyname().contains('Codeigniter')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+													
 															<span class="custom-control-label">Codeigniter</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="27"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 27}">
+																	<c:if test="${profile.keyname().contains('Symfony')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">Symfony</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="29"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 29}">
+																	<c:if test="${profile.keyname().contains('WordPress')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">WordPress</span>
 														</label>
 													</div>
@@ -641,23 +642,23 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="30"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 30}">
+																	<c:if test="${profile.keyname().contains('ASP')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">ASP</span>
 														</label>
 													</div>	
 													<div class="col-md-4">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="28"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 28}">
+																	<c:if test="${profile.keyname().contains('ZendFramework')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">ZendFramework</span>
 														</label>
 													</div>	
@@ -675,56 +676,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="31"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 31}">
+																	<c:if test="${profile.keyname().contains('ASP.net')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">ASP.net</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="32"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 32}">
+																	<c:if test="${profile.keyname().contains('C')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">C</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="33"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 33}">
+																	<c:if test="${profile.keyname().contains('C++')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+														
 															<span class="custom-control-label">C++</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="34"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 34}">
+																	<c:if test="${profile.keyname().contains('C#')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">C#</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="35"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 35}">
+																	<c:if test="${profile.keyname().contains('MFC')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">MFC</span>
 														</label>
 													</div>
@@ -735,34 +736,34 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="36"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 36}">
+																	<c:if test="${profile.keyname().contains('OpenGL')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">OpenGL</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="38"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 38}">
+																	<c:if test="${profile.keyname().contains('VBA')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">VBA</span>
 														</label>
 													</div>														
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																											
 																<input type="checkbox" class="custom-control-input" name="key_num" value="37"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 37}">
+																	<c:if test="${profile.keyname().contains('DevExpress')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">DevExpress</span>
 														</label>
 													</div>	
@@ -780,56 +781,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 																<input type="checkbox" class="custom-control-input" name="key_num" value="39"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 39}">
+																	<c:if test="${profile.keyname().contains('node.js')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">node.js</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 																<input type="checkbox" class="custom-control-input" name="key_num" value="40"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 40}">
+																	<c:if test="${profile.keyname().contains('AngularJS')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">AngularJS</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="41"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 41}">
+																	<c:if test="${profile.keyname().contains('React.js')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">React.js</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="42"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 42}">
+																	<c:if test="${profile.keyname().contains('Vue.js')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Vue.js</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="43"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 43}">
+																	<c:if test="${profile.keyname().contains('jQuery')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">jQuery</span>
 														</label>
 													</div>
@@ -840,12 +841,12 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="44"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 44}">
+																	<c:if test="${profile.keyname().contains('JavaScript')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">JavaScript</span>
 														</label>
 													</div>		
@@ -863,56 +864,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="45"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 45}">
+																	<c:if test="${profile.keyname().contains('Server')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Server</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="46"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 46}">
+																	<c:if test="${profile.keyname().contains('UNIX')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">UNIX</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="47"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 47}">
+																	<c:if test="${profile.keyname().contains('Embedded')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Embedded</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="48"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 48}">
+																	<c:if test="${profile.keyname().contains('Firmware')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Firmware</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="50"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 50}">
+																	<c:if test="${profile.keyname().contains('Aduino')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Aduino</span>
 														</label>
 													</div>
@@ -923,45 +924,45 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="51"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 51}">
+																	<c:if test="${profile.keyname().contains('Qt')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Qt</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="53"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 53}">
+																	<c:if test="${profile.keyname().contains('LabVIEW')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">LabVIEW</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="52"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 52}">
+																	<c:if test="${profile.keyname().contains('MetaLab')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">MetaLab</span>
 														</label>
 													</div>	
 													<div class="col-md-4">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="49"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 49}">
+																	<c:if test="${profile.keyname().contains('Machine Vision')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Machine Vision</span>
 														</label>
 													</div>																																									
@@ -980,56 +981,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="54"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 54}">
+																	<c:if test="${profile.keyname().contains('Oracle')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Oracle</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="55"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 55}">
+																	<c:if test="${profile.keyname().contains('MSSQL')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">MSSQL</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="56"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 56}">
+																	<c:if test="${profile.keyname().contains('MySQL')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">MySQL</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="57"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 57}">
+																	<c:if test="${profile.keyname().contains('MariaDB')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">MariaDB</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="58"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 58}">
+																	<c:if test="${profile.keyname().contains('MongoDB')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">MongoDB</span>
 														</label>
 													</div>
@@ -1040,34 +1041,34 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="60"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 60}">
+																	<c:if test="${profile.keyname().contains('CUBRID')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">CUBRID</span>
 														</label>
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="61"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 61}">
+																	<c:if test="${profile.keyname().contains('Tibero')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Tibero</span>
 														</label>
 													</div>	
 													<div class="col-md-4">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="59"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 59}">
+																	<c:if test="${profile.keyname().contains('Postgresql')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Postgresql</span>
 														</label>
 													</div>																																									
@@ -1081,7 +1082,7 @@
 								<!-- tab 개발 끝   -->
 								
 								<!-- tab 퍼블리셔 시작   -->	
-									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab2">
+									<div class="tab-pane <c:if test="${profile.type_num eq 2}"> active </c:if> table-responsive border-top userprof-tab" id="tab2">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -1094,56 +1095,56 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="62"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 62}">
+																<c:if test="${profile.keyname().contains('HTML5')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 													<span class="custom-control-label">HTML5</span>
 													</label>
 												</div>
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="63"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 63}">
+																<c:if test="${profile.keyname().contains('CSS')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">CSS</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="64"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 64}">
+																<c:if test="${profile.keyname().contains('ActionScript')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">ActionScript</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="40"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 40}">
+																<c:if test="${profile.keyname().contains('AngularJS')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">AngularJS</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="41"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 41}">
+																<c:if test="${profile.keyname().contains('React.js')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">React.js</span>
 													</label>
 												</div>
@@ -1154,57 +1155,57 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="42"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 42}">
+																<c:if test="${profile.keyname().contains('Vue.js')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">Vue.js</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="43"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 43}">
+																<c:if test="${profile.keyname().contains('jQuery')}">
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">jQuery</span>
 													</label>
 												</div>	
 								<!-- 중복끝 -->					
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="69"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 69}">
+																<c:if test="${profile.keyname().contains('JavaScript')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">JavaScript</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="70"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 70}">
+																<c:if test="${profile.keyname().contains('WordPress')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">WordPress</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="65"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 65}">
+																<c:if test="${profile.keyname().contains('BootStrap')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 														<span class="custom-control-label">BootStrap</span>
 													</label>
 												</div>	
@@ -1216,56 +1217,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																														
 															<input type="checkbox" class="custom-control-input" name="key_num" value="66"
-																<c:if test="${freelancerprofile.keyword.get(i).key_num eq 66}">
+																<c:if test="${profile.keyname().contains('Photoshop')}"> 
 																checked
 																</c:if>>
-														</c:forEach>
+														
 															<span class="custom-control-label">Photoshop</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="67"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 67}">
+																	<c:if test="${profile.keyname().contains('Flash')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Flash</span>
 														</label>
 														</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="68"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 68}">
+																	<c:if test="${profile.keyname().contains('웹접근성')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">웹접근성</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="69"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 69}">
+																	<c:if test="${profile.keyname().contains('웹표준')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">웹표준</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="70"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 70}">
+																	<c:if test="${profile.keyname().contains('Git')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">Git</span>
 														</label>
 													</div>
@@ -1277,7 +1278,7 @@
 									</div> <!-- tab 퍼블리셔 끝   -->	
 									
 							<!-- tab 디자인 시작   -->	
-									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
+									<div class="tab-pane <c:if test="${profile.type_num eq 3}"> active </c:if> table-responsive border-top userprof-tab" id="tab3">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -1290,56 +1291,56 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="72"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 71}">
+																	<c:if test="${profile.keyname().contains('웹디자인')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 													<span class="custom-control-label">웹디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="72"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 72}">
+																	<c:if test="${profile.keyname().contains('앱디자인')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">앱디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="74"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 74}">
+																	<c:if test="${profile.keyname().contains('게임디자인')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">게임디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="76"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 76}">
+																	<c:if test="${profile.keyname().contains('3D디자인')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">3D디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="77"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 77}">
+																	<c:if test="${profile.keyname().contains('그래픽디자인')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">그래픽디자인</span>
 													</label>
 												</div>
@@ -1350,57 +1351,57 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="78"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 78}">
+																	<c:if test="${profile.keyname().contains('패키지디자인')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">패키지디자인</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="79"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 79}">
+																	<c:if test="${profile.keyname().contains('아트 디렉션')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">아트 디렉션</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="80"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 80}">
+																	<c:if test="${profile.keyname().contains('Proframe')}"> 80}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">애니메이션</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="81"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 81}">
+																	<c:if test="${profile.keyname().contains('로고브랜딩')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">로고브랜딩</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="75"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 75}">
+																	<c:if test="${profile.keyname().contains('판촉물디자인')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">판촉물디자인</span>
 													</label>
 												</div>	
@@ -1412,12 +1413,12 @@
 													</div>	
 													<div class="col-md-6">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="73"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 73}">
+																	<c:if test="${profile.keyname().contains('출판/편집디자인')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">출판/편집디자인</span>
 														</label>
 													</div>
@@ -1429,7 +1430,7 @@
 										<!-- 디자인 끝  -->				
 									</div> <!-- tab 디자인 끝   -->
 								<!-- tab 기획 시작   -->	
-									<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
+									<div class="tab-pane <c:if test="${profile.type_num eq 4}"> active </c:if> table-responsive border-top userprof-tab" id="tab4">
 											<!-- 퍼블리셔 시작  -->											
 											<div class="col-sm-6 col-md-12">									
 											<div class="form-group ">
@@ -1442,56 +1443,56 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="82"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 82}">
+																	<c:if test="${profile.keyname().contains('PM')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 													<span class="custom-control-label">PM</span>
 													</label>
 												</div>
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="83"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 83}">
+																	<c:if test="${profile.keyname().contains('PL')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">PL</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="86"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 86}">
+																	<c:if test="${profile.keyname().contains('웹기획')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">웹기획</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">					
-													<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																													
 														<input type="checkbox" class="custom-control-input" name="key_num" value="87"
-															<c:if test="${freelancerprofile.keyword.get(i).key_num eq 87}">
+															<c:if test="${profile.keyname().contains('앱기획')}"> 
 															checked
 															</c:if>>
-													</c:forEach>
+													
 														<span class="custom-control-label">앱기획</span>
 													</label>
 												</div>
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="88"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 88}">
+																	<c:if test="${profile.keyname().contains('컨설팅')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">컨설팅</span>
 													</label>
 												</div>
@@ -1502,57 +1503,57 @@
 													</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="89"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 89}">
+																	<c:if test="${profile.keyname().contains('제안')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">제안</span>
 													</label>
 												</div>
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="90"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 90}">
+																	<c:if test="${profile.keyname().contains('쇼핑몰')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">쇼핑몰</span>
 													</label>
 												</div>	
 													
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="91"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 91}">
+																	<c:if test="${profile.keyname().contains('여행사')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">여행사</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="92"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 92}">
+																	<c:if test="${profile.keyname().contains('금융')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">금융</span>
 													</label>
 												</div>	
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="93"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 93}">
+																	<c:if test="${profile.keyname().contains('증권')}">
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 														<span class="custom-control-label">증권</span>
 													</label>
 												</div>	
@@ -1564,56 +1565,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="94"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 94}">
+																	<c:if test="${profile.keyname().contains('카드')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">카드</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="99"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 99}">
+																	<c:if test="${profile.keyname().contains('물류')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">물류</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="95"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 95}">
+																	<c:if test="${profile.keyname().contains('보험')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">보험</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="96"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 96}">
+																	<c:if test="${profile.keyname().contains('대학')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">대학</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="97"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 97}">
+																	<c:if test="${profile.keyname().contains('병원')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">병원</span>
 														</label>
 													</div>													
@@ -1624,56 +1625,56 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="100"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 100}">
+																	<c:if test="${profile.keyname().contains('회계')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">회계</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="101"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 101}">
+																	<c:if test="${profile.keyname().contains('제조')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">제조</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="102"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 102}">
+																	<c:if test="${profile.keyname().contains('건설')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">건설</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="103"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 103}">
+																	<c:if test="${profile.keyname().contains('암호화폐')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">암호화폐</span>
 														</label>
 													</div>
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="84"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 84}">
+																	<c:if test="${profile.keyname().contains('PMO')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">PMO</span>
 														</label>
 													</div>													
@@ -1684,23 +1685,23 @@
 													</div>	
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="98"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 98}">
+																	<c:if test="${profile.keyname().contains('공공기관')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">공공기관</span>
 														</label>
 													</div>
 													<div class="col-md-6">	
 														<label class="custom-control custom-checkbox">
-															<c:forEach var="i" begin="0" end="${freelancerprofile.keyword.size()-1}">																
+																															
 																<input type="checkbox" class="custom-control-input" name="key_num" value="85"
-																	<c:if test="${freelancerprofile.keyword.get(i).key_num eq 85}">
+																	<c:if test="${profile.keyname().contains('시스템분석/설계')}"> 
 																	checked
 																	</c:if>>
-															</c:forEach>
+															
 															<span class="custom-control-label">시스템분석/설계</span>
 														</label>
 													</div>												
@@ -1725,7 +1726,7 @@
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
 													<input type="checkbox" class="custom-control-input" name="key_num" value="82"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 82}">
+															<c:if test="${profile.keyname().contains('PM')}">
 															checked
 															</c:if>>
 													<span class="custom-control-label">PM</span>
@@ -1734,7 +1735,7 @@
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="83"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 83}">
+															<c:if test="${profile.keyname().contains('PL')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">PL</span>
@@ -1743,7 +1744,7 @@
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="84"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 84}">
+															<c:if test="${profile.keyname().contains('PMO')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">PMO</span>
@@ -1752,7 +1753,7 @@
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="104"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 104}">
+															<c:if test="${profile.keyname().contains('DA')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">DA</span>
@@ -1761,7 +1762,7 @@
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="105"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 105}">
+															<c:if test="${profile.keyname().contains('DBA')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">DBA</span>
@@ -1775,7 +1776,7 @@
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="106"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 106}">
+															<c:if test="${profile.keyname().contains('TA')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">TA</span>
@@ -1784,7 +1785,7 @@
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="107"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 107}">
+															<c:if test="${profile.keyname().contains('AA')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">AA</span>
@@ -1794,7 +1795,7 @@
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="108"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 108}">
+															<c:if test="${profile.keyname().contains('NA')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">NA</span>
@@ -1803,7 +1804,7 @@
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="109"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 109}">
+															<c:if test="${profile.keyname().contains('SE')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">SE</span>
@@ -1812,7 +1813,7 @@
 												<div class="col-md-2">	
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="110"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 110}">
+															<c:if test="${profile.keyname().contains('QA')}">
 															checked
 															</c:if>>
 														<span class="custom-control-label">QA</span>
@@ -1827,7 +1828,7 @@
 													<div class="col-md-2">	
 														<label class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input" name="key_num" value="111"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 111}">
+															<c:if test="${profile.keyname().contains('QC')}">
 															checked
 															</c:if>>
 															<span class="custom-control-label">QC</span>
@@ -1837,7 +1838,7 @@
 													<div class="col-md-6">	
 														<label class="custom-control custom-checkbox">
 															<input type="checkbox" class="custom-control-input" name="key_num" value="85"
-															<c:if test="${freelancerprofile.keyword.get(0).key_num eq 85}">
+															<c:if test="${profile.keyname().contains('시스템분석/설계')}">
 															checked
 															</c:if>>
 															<span class="custom-control-label">시스템분석/설계</span>
@@ -2062,7 +2063,7 @@
 									<div class="col-sm-3 col-md-3">
 									<label class="form-label"><b>주소</b></label>
 										<div class="form-group">
-											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pro_postcode" value="${freelancerprofile.pro_postcode}">
+											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pro_postcode" value="${profile.pro_postcode}">
 										</div>
 									</div>
 									<div class="col-sm-4 col-md-4">
@@ -2073,12 +2074,12 @@
 									<div class="row">
 									<div class="col-sm-12 col-md-7">
 										<div class="form-group">
-											<input type="text" class="form-control" id="address" placeholder="주소" name="pro_addr" value="${freelancerprofile.pro_addr}"><br>
+											<input type="text" class="form-control" id="address" placeholder="주소" name="pro_addr" value="${profile.pro_addr}"><br>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-5">
 										<div class="form-group">	
-											<input type="text" class="form-control" id="detailAddress"  name="pro_detailloc" value="${freelancerprofile.pro_detailloc}">
+											<input type="text" class="form-control" id="detailAddress"  name="pro_detailloc" value="${profile.pro_detailloc}">
 										</div>
 									</div>
 									</div>
@@ -2175,10 +2176,10 @@
 										<div class="col-md-9" name="pro_ox">
 											<label class="custom-switch" >
 											<input type="checkbox" name="pro_ox" class="custom-switch-input " 
-												<c:if test="${freelancerprofile.pro_ox eq 'on'}">
+												<c:if test="${profile.pro_ox eq 'on'}">
 															checked
 												</c:if>
-												<c:if test="${freelancerprofile.pro_ox eq 'null'}">
+												<c:if test="${profile.pro_ox eq 'null'}">
 												</c:if>>												
 												<span class="custom-switch-indicator"></span>
 												<span class="custom-switch-description">불가능/가능</span>
@@ -2200,7 +2201,7 @@
 														<div class="input-group-text">
 															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 														</div>
-													</div><input class="form-control fc-datepicker" type="text" name="pro_start" value="${freelancerprofile.pro_start}" >
+													</div><input class="form-control fc-datepicker" type="text" name="pro_start" value="${profile.pro_start}" >
 												</div>
 											</div>
 										</div>
@@ -2211,25 +2212,25 @@
 									<div class="col-sm-6 col-md-12">	
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">근무형태</label>
+												<label class="form-label">업무형태</label>
 											</div>
 											<div class="col-md-9">
 												
 												<select class="form-control" name="pro_place">
 	                                    		 <c:choose>	
-	                                    			<c:when test="${freelancerprofile.pro_place eq '0'}">
+	                                    			<c:when test="${profile.pro_place eq '0'}">
 	                                    				<option value="0" selected>상주</option>
 	                                    				<option value="1">반상주</option>
 	                                   					<option value="2">자택</option>
 	                                   					<option value="3">상관없음</option>
 	                                    			</c:when>
-	                                    			<c:when test="${freelancerprofile.pro_place eq '1'}">
+	                                    			<c:when test="${profile.pro_place eq '1'}">
 	                                    				<option value="0">상주</option>
 	                                    				<option value="1" selected>반상주</option>
 	                                   					<option value="2">자택</option>
 	                                   					<option value="3">상관없음</option>
 	                                    			</c:when>
-	                                    			<c:when test="${freelancerprofile.pro_place eq '2'}">
+	                                    			<c:when test="${profile.pro_place eq '2'}">
 	                                    				<option value="0">상주</option>
 	                                    				<option value="1">반상주</option>
 	                                   					<option value="2" selected>자택</option>
@@ -2244,8 +2245,8 @@
                                    				</c:choose>
 	                                			</select>
 	                                			 										
-										    <input type="hidden" name="free_code"  value="${freelancerprofile.free_code}"/>  									    
-                               				<input type="hidden" name="pro_num"  value="${freelancerprofile.pro_num}"/>
+										    <input type="hidden" name="free_code"  value="${profile.free_code}"/>  									    
+                               				<input type="hidden" name="pro_num"  value="${profile.pro_num}"/>
 											</div>
 										</div>
 									</div>
@@ -2253,9 +2254,31 @@
 									<div class="col-sm-6 col-md-12">	
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">근무가능지역</label>
+												<label class="form-label">업무가능지역</label>
 											</div>
-												<!-- 근무가능지역 select 박스 -->							
+											<div class="col-md-9">
+												  <select class="form-control" name="pro_workplace">
+	                                    			<option selected> </option>
+	                                    			<option value="서울">서울</option>
+	                                    			<option value="경기">경기</option>
+	                                    			<option value="인천">인천</option>
+	                                    			<option value="강원">강원</option>
+	                                    			<option value="충남">충남</option>
+	                                    			<option value="충북">충북</option>
+	                                   				<option value="대전">대전</option>
+	                                   				<option value="대구">대구</option>
+	                                   				<option value="울산">울산</option>
+	                                   				<option value="부산">부산</option>
+	                                   				<option value="경북">경북</option>
+	                                   				<option value="경남">경남</option>
+	                                   				<option value="광주">광주</option>
+	                                   				<option value="전북">전북</option>
+	                                   				<option value="전남">전남</option>
+	                                   				<option value="제주">제주</option> 	 	 	 
+	                                   				 
+	                                			 </select>
+											</div>
+												<!-- 근무가능지역 select 박스 							
 												<script type="text/javascript">
 												$('document').ready(function() {
 												 var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
@@ -2303,12 +2326,12 @@
 												});
 												</script>
 												
-												<select class="form-control" style="width:300px; margin-left:11px;" name="pro_workplace" id="sido1"></select> &nbsp;&nbsp;
-												<select class="form-control" style="width:300px; margin-left:10px;" name="gugun1" id="gugun1"></select>
-														</div>
-													</div>
-												</div>								
-																						
+											<select class="form-control" style="width:300px; margin-left:11px;" name="pro_workplace" id="sido1"></select> &nbsp;&nbsp;
+										 	<select class="form-control" style="width:300px; margin-left:10px;" name="gugun1" id="gugun1"></select>  -->
+											</div>
+										</div>
+									</div>								
+																			
 										
 								<!-- 	<div class="col-sm-6 col-md-3">
 										<div class="form-group">
@@ -2351,28 +2374,31 @@
 											<input type="text" class="form-control" placeholder="https://www.facebook.com/">
 										</div>
 									</div>    -->
-
+									<br/>
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
 												<label class="form-label">제목</label>
-												<input type="text" class="form-control" style="width:804px; margin-left:11px;" name="profile_sub" value="${freelancerprofile.profile_sub}">
+												<input type="text" class="form-control"  name="profile_sub" value="${profile.profile_sub}">
+											<!-- <input type="text" class="form-control" style="width:804px; margin-left:11px;" name="profile_sub" value="${profile.profile_sub}"> -->
 											</div>
-										</div>
-									</div>
-
-									<div class="col-md-12">
-										<div class="form-group">
-											<label class="form-label">자기소개</label>
-											<textarea rows="5" class="form-control" name="pro_cv">${freelancerprofile.pro_cv}</textarea>
+											
 										</div>
 									</div>
 									
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
+											<div class="form-group">
+												<label class="form-label">자기소개</label>
+												<textarea rows="5" class="form-control" name="pro_cv">${profile.pro_cv}</textarea>											
+											</div>											
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
 												<label class="form-label">학력</label>
-												<input type="text" class="form-control" name="pro_edu" value="${freelancerprofile.pro_edu}">
+												<input type="text" class="form-control" name="pro_edu" value="${profile.pro_edu}">
 											</div>
 										</div>
 									</div>
@@ -2399,20 +2425,19 @@
 											</div>
 										</div>
 									</div> -->
-									<div class="col-md-12">
-											<div class="form-group ">
-												<label class="form-label mt-2">첨부파일</label>
-												<div class="custom-file">
-													<input type="file" class="custom-file-input" name="example-file-input-custom">
-													<label class="custom-file-label">Upload Files</label>
-												</div>
+									<div class="col-sm-12 col-md-12">
+										<div class="form-group ">
+											<label class="form-label mt-2">첨부파일</label>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" name="example-file-input-custom">
+												<label class="custom-file-label">Upload Files</label>
 											</div>
-											</div>		
+										</div>
+									</div>		
 
-											<div class="col-md-12">
-											<div class="form-group ">
-											
-												<div class="p-2 border mb-4">
+									<div class="col-sm-12 col-md-12">
+										<div class="form-group ">
+											<div class="p-2 border mb-4">
 												<div class="upload-images d-flex">
 													<div>
 														<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
@@ -2425,19 +2450,20 @@
 														<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
 													</div>
 												</div>
-												</div>	
-											</div>
-											</div>				
+											</div>	
+										</div>
+									</div>				
 												<div class="card-footer" align="right" >			
 												<a href="freelancerProfile_list?mem_email=${sessionScope.email}" class="btn btn-secondary icons">목록</a>	 	
-												<input type="submit" onclick="javascript:check();" class="btn btn-primary" value="수정하기"></a> 	
+												<input type="button" onclick="check();" class="btn btn-primary" value="수정하기"></a> 	
+												</div>
 											</form>							
 										</div>										
 									</div>
 								</div>
 							</div>								
-								</div>
-							</div>
+						</div>
+					</div>
 
 						<!-- 	<div class="card-footer" align="right">
 								<div class="icons">
@@ -2453,21 +2479,24 @@
 		</section>
 		<!--/User Dashboard-->
 <script>
-	function check(){
-	
-		var type_num = $('.active').attr('value'); //타입 버튼
-		document.getElementById('type_num').value = type_num;
+	function check(){	
+		//var type_num = $('.active').attr('value'); //타입 버튼
+		var type_num = $("#type_num option:selected").val(); //타입 버튼
+		
+		//document.getElementById('type_num').value = type_num;
 		alert("type_num"+type_num)
 	
-		var type = document.getElementById('type_name'); //직종
-			
+		//var type = document.getElementById('type_name'); //직종
+		var key_num = new Array();
+		var key_cnt = 0;
+		
 		$('input:checkbox[name="key_num"]').each(function() {
 			if(this.checked){
 				key_num[key_cnt] = this.value;
 				key_cnt++; 
-			}alert("type: "+key_num)
+			}
 
-		 });alert("type: "+key_num)
+		 });alert("key_num: "+key_num)
 		 if(key_num == ""){
 				alert("키워드는 1개 이상 설정해야합니다.")
 				return;
@@ -2476,19 +2505,19 @@
 
 		
 
-		//var pjp_keynum = new Array();
-		//var pjp_cnt=0;
-		// $('input[name=pjp_keynum]').each(function(){
-		//		 pjp_keynum[pjp_cnt]=this.value;
-		//		 pjp_cnt++;
-		 //});
-		
-		// alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
+		var free_keynum = new Array();
+		var free_cnt=0;
+		 $('input[name=free_keynum]').each(function(){
+			 	free_keynum[free_cnt]=this.value;
+			 	free_cnt++;
+		 });
+		//alert("mem_email: "+edit_free_profile.mem_email.value)
+		 //alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
 		// alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
 		 //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
-		// alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
-		// alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
-		// edit_free_profile.submit();
+		 //alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
+		 //alert("pj_loc: "+edit_free_profile.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+		 edit_free_profile.submit();
 		}
 	//});
 </script>	

@@ -17,5 +17,6 @@ public class MarketBuysellList {
 	
 	private Market market;
 	private MarketRev marketRev;
+	private Freelancer freelancer;
 
 }

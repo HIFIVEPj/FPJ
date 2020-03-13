@@ -49,9 +49,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
+												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
 												<li><a class="slide-item " href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
-												<li><a class="slide-item " href="mydash.html">기업</a></li>
 											</ul>
 										</li>
 								<!-- 		<li class="slide">
@@ -66,7 +65,7 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html"> 프론젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavorite.html"> 프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite.html"> 마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket"> 마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
@@ -256,8 +255,6 @@
 												</thead>
 												<tbody>
 												
-												
-									
 													<tr>
 													<c:forEach  var="content" items="${content4}" varStatus="status">
 													<c:forEach  var="name" items="${content.project}" varStatus="status">
@@ -287,15 +284,12 @@
 									</c:choose>
 									
 									<c:choose>
-									    <c:when test="${!doneLoop}">
-									   
-									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
-									     
+									    <c:when test="${!doneLoop}">									   
+									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>									     
 									    </c:when>
-									       
 									    
 									    <c:otherwise>
-									         <td><i class="fa fa-save"></i>&nbsp;등록된 파일이 없습니다.</td>
+									         <td colspan="3"><i class="fa fa-save"></i>&nbsp;등록된 파일이 없습니다.</td>
 									    </c:otherwise>
 									</c:choose>
 									
@@ -329,11 +323,11 @@
 							</div>
 							<div class="card-footer" align="right">
 							
-								<a href="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-secondary icons">수정하기</a>
+								<a href="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-primary icons">수정하기</a>
 								
-								<a href='freelancerProfile_delete?mem_email=${sessionScope.email}&PRO_NUM=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
+								<a href='freelancerProfile_delete?mem_email=${sessionScope.email}&pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								
-								<a href="freelancerProfile_list?mem_email=${sessionScope.email}" class="btn btn-secondary icons">목록</a>				
+								<a href="freelancerProfile_list?mem_email=${sessionScope.email}" class="btn btn-primary icons">목록</a>				
 									
 							</div>
 						

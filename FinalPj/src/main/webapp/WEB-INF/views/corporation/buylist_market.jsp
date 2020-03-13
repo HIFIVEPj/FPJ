@@ -156,7 +156,21 @@ $(document).ready(function() {
 																<a href="market-content?market_num=${BuyList.market_num }" class="text-dark"><h4 class=""><b>${BuyList.market.market_sub}</b></h4></a>
 																
 																<div style="padding-top:5px;">
-																
+																<span class="rated-products-ratings">
+
+																			<c:if test="${BuyList.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																				<c:forEach var="1" begin="1" end="${BuyList.marketRev.marketRev_star}">
+																					<i class="fa fa-star text-warning"> </i>
+																				</c:forEach>
+																				<c:forEach var="1" begin="1" end="${5-BuyList.marketRev.marketRev_star}">
+																					<i class="fa fa-star-o text-warning"> </i>
+																				</c:forEach>	
+																			</c:if>
+																		</span>|	
+																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${BuyList.market.market_vcnt}
+																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${BuyList.market.market_pcnt }
+																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${BuyList.marketRev.marketRev_num}
+																	 <a href="mailto:${BuyList.freelancer.mem_email}">메일보내기</a>
 																	
 																</div>
 															</div>

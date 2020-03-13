@@ -46,6 +46,7 @@ public interface MarketMapper {
 	public void insertMarketRev(MarketRev marketRev);	
 	public void deleteMarketRev (HashMap<String, Object> map);
 	public void updateMarketRev (HashMap<String, Object> map);
+	public int reloadMarketRevAVG(long market_num);
 	
 	public void insertMarketQA(MarketQA marketQA);
 	public void insertMarketQAFile(HashMap<String, Object> map);

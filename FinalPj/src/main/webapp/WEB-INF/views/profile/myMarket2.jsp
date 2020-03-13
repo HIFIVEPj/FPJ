@@ -82,8 +82,8 @@ $(document).ready(function() {
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite?mem_email=${sessionScope.email}">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
@@ -159,12 +159,11 @@ $(document).ready(function() {
 																					<i class="fa fa-star-o text-warning"> </i>
 																				</c:forEach>	
 																			</c:if>
-																		</span>|
-																			
-																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${mySellMarket.market.market_vcnt}
-																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${mySellMarket.market.market_pcnt }
-																			 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mySellMarket.marketRev.marketRev_num}
-																		
+																		</span>|	
+																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${mySellMarket.market.market_vcnt}
+																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${mySellMarket.market.market_pcnt }
+																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mySellMarket.marketRev.marketRev_num}
+																		<a href="mailto:${mySellMarket.mem_emailBuy}">메일보내기</a>
 															
 															
 															</div>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.PjPickKeyword;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
@@ -98,12 +99,18 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	  //  mapper.keyUpdate(map);
 	}
 
-	@Override
+	/*@Override
 	@Transactional
 	public void keyUpdate(Map<String, Object> map) {
 		 mapper.keyDelete(map);
 		 mapper.keyUpdate(map);
 		
+	}*/
+	@Override
+	@Transactional
+	public void keyUpdate(FreePickKeyWord freepickkeyword) {
+		mapper.updateKeyword_Del(freepickkeyword);
+		mapper.updateKeyword_In(freepickkeyword);
 	}
 /*	@Override
 	public void keyDelete(Map<String, Object> map) {

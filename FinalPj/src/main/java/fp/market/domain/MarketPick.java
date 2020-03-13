@@ -13,4 +13,5 @@ public class MarketPick {
 	private String mem_email;
 	
 	private Market market;
+	private MarketRev marketRev;
 }

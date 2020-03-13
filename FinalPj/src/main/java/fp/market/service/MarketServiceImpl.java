@@ -93,11 +93,14 @@ public class MarketServiceImpl implements MarketService {
 	public long getFreecode(String mem_email) {
 		return mapper.getFreeCode(mem_email);
 	}
-	
+//marketReview insert		
 	@Override
 	public void insertMarketRev(MarketRev mareketRev) {
 		mapper.insertMarketRev(mareketRev);
-		
+	}
+	@Override
+	public int reloadMarketRevAVG(long market_num) {
+		return mapper.reloadMarketRevAVG(market_num);
 	}
 //marketQA insert	
 	@Transactional
@@ -135,7 +138,6 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public void updateMarketRev(HashMap<String, Object> map) {
 		mapper.updateMarketRev(map);
-		
 	}
 //마켓결제
 	@Override
@@ -195,6 +197,7 @@ public class MarketServiceImpl implements MarketService {
 	public List<Market> searchButtonMarketList(HashMap<String,Object> map) {
 		return mapper.searchButtonMarketList(map);	
 	}
+	
 
 }
 

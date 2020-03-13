@@ -5,6 +5,7 @@ import java.util.*;
 
 import org.springframework.context.annotation.Profile;
 
+import fp.corporation.domain.PjPickKeyword;
 import fp.corporation.domain.Project;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
@@ -39,8 +40,11 @@ public interface FreeLancerProfileMapper {
 	//프로필 작성페이지 수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
 	public void typeUpdate(int type_num);
-	public void keyUpdate(Map<String, Object> map);
-	public void keyDelete(Map<String, Object> map);
+	//public void keyUpdate(Map<String, Object> map);
+	public void keyUpdate(FreePickKeyWord freepickkeyword);
+	//public void keyDelete(Map<String, Object> map);
+	void updateKeyword_Del(FreePickKeyWord freepickkeyword);
+	void updateKeyword_In(FreePickKeyWord freepickkeyword);
 
 	//체크박스 삭제//
 	public void checkdelete1(Map<String, Object> map);
