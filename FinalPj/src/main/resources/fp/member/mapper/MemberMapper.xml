@@ -14,7 +14,21 @@
 		<result property="option1" column="OPTION1"/>
 		<result property="option2" column="OPTION2"/>
 		<result property="option3" column="OPTION3"/>	
-		
+	</resultMap>
+	 <resultMap id="PayInformationMap" type="PayInformation">	 	
+	 	<id property="payinfo_num" column="PAYINFO_NUM"/>
+	 	<result property="payinfo_payid" column="PAYINFO_PAYID"/>		
+		<result property="payinfo_uid" column="PAYINFO_UID"/>
+		<result property="payinfo_price" column="PAYINFO_PRICE"/>
+		<result property="payinfo_cardnum" column="PAYINFO_CARDNUM"/>
+		<result property="payinfo_status" column="PAYINFO_STATUS"/>
+		<result property="payinfo_cardname" column="PAYINFO_CARDNAME"/>
+		<result property="payinfo_pgtid" column="PAYINFO_PGTID"/>
+		<result property="payinfo_buyername" column="PAYINFO_BUYERNAME"/>	
+		<result property="payinfo_rdate" column="PAYINFO_RDATE"/>	
+		<result property="option1" column="OPTION1"/>
+		<result property="option2" column="OPTION2"/>
+		<result property="option3" column="OPTION3"/>	
 	</resultMap>
 	<select id = "idCheck" parameterType = "String" resultType = "int">
     	SELECT COUNT(*) FROM MEMBER WHERE MEM_EMAIL = #{email}
@@ -68,7 +82,8 @@
    	<update id="upMarketS"  parameterType="Map">
 		UPDATE MARKET SET MARKET_STATE=#{market_state} WHERE MARKET_NUM=#{market_num}  
 	</update>
-<!-- 관리자 멤버리스트  -->
+	
+	<!-- 관리자 멤버리스트  -->
 	<select id="getList" parameterType="Map" resultMap="MemberMap">
 	 	<![CDATA[
 			 select * from (select ROWNUM rnum , aa.* from (select * from Member ]]>

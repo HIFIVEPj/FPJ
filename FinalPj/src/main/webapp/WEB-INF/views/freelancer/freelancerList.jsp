@@ -256,7 +256,13 @@
 									<c:forEach var="exp" items="${list.list_freelancerprofile}" varStatus="status">
 										<small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small>&nbsp;|	
 									</c:forEach>			
-									<small>&nbsp;&nbsp;</small>수정수정${freelancerList2[0].list_type.type_name}				
+									<c:forEach var="type" items="${freelancerList2}" varStatus="status">
+									<c:forEach var="typename" items="${type.list_type}" varStatus="status">
+										<c:if test="${list.free_code eq type.free_code}">
+											<small>&nbsp;&nbsp;</small>${typename.type_name}
+										</c:if>
+									</c:forEach>
+						 		</c:forEach>				
 							 
 									</div>
 								
@@ -292,13 +298,7 @@
 							
 								</c:forEach>
 								</c:if>
-								<c:forEach var="type" items="${freelancerList2}" varStatus="status">
-									<c:forEach var="typename" items="${type.list_type}" varStatus="status">
-										<c:if test="${list.free_code eq type.free_code}">
-											<small>&nbsp;&nbsp;</small>${typename.type_name}
-										</c:if>
-									</c:forEach>
-						 		</c:forEach>	
+								
 							</div>
 			<script>
 			function onlyCor(){

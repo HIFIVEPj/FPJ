@@ -340,9 +340,10 @@
 						</c:forEach>	
 					</c:if>		
 					
-					
-					<c:if test="${fn:length(marketRev) == 0}">		
-							<div class="card-body p-0">
+				
+					<c:if test="${fn:length(marketRev) == 0}">	
+						<div class="card-body p-0" id="ajaxRev0">	
+							<div class="card-body p-0" id="ajaxRev">
 								<div class="media mt-0 p-5">
 					               <div class="media-body"><text align="center"> 등록된 리뷰가 없습니다</text></div>
 								</div>
@@ -353,7 +354,7 @@
 						
 				<!--마켓리뷰페이징  -->		
 				<c:if test="${fn:length(marketRev) > 0}">	
-						<div class="center-block text-center">
+						<div class="center-block text-center" id="paging">
 						<ul class="pagination mg-b-0 page-0 ">
 						
 						<c:if test="${marketVORev.nowPage>1}">
@@ -502,41 +503,6 @@
 					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 				                                        </c:when>
 				                                         
-
-<<<<<<< HEAD
-			                                      		 <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-		                                        	</p>
-		                                        </c:when>
-		                                        <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.email  == freeProfile.freelancer.mem_email}">
-			                                        <p class="font-13  mb-2 mt-2">
-			                                       		 <비밀글 입니다.> <br>
-			                                            <p class="font-13  mb-2 mt-2">
-			                                      		 	<a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong">${marketQA.marketQA_sub}</a><br>
-		                                    			</p>
-		                                        	</p>
-		                                        </c:when>
-		                                        <c:when test="${marketQA.marketQA_ox == 1}">
-			                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-		                                        </c:when>	                                         
-	                                        </c:choose> 
-	                                        
-			                                  <!-- 모달로 정보보내기
-			                                   <button type="button"  data-toggle="modal" data-target="#Comment" data-prnum="${marketQA.marketQA_prnum}" data-lev="${marketQA.marketQA_lev}" data-sun="${marketQA.marketQA_sun}" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></button>
-			                                   --> <!-- onclick="mqajax(0,0,0);" -->
-	                                    	<c:choose>
-		                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
-		                                  			<a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>
-													<a href="javascript:void(0)" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
-													<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}');"  ><span class="">삭제</span></a>
-												</c:when>
-												<c:when test="${empty sessionScope.name}">
-												</c:when>
-												<c:when test="${sessionScope.email != marketQA.mem_email}">
-													<a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" ><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-												</c:when>
-										  </c:choose>
-										 </div>                                             		
-=======
 			                                        </c:choose> 
 			                                        
 			                                  <!-- 모달로 정보보내기
@@ -1405,83 +1371,7 @@
 	    	async :false,
 	    	error:onError,
 	    //	beforeSend:{},
-<<<<<<< HEAD
 	    	success:onSuccessReview
-=======
-	    	success:function onSuccess(data){
-	 
-    	//	for(var i=0; i<1; i++){ 
-				 console.log(data);	
-    			 console.log("1"+data[0].marketRev_cont);	
-    			 console.log("2"+data[0].marketRev_star);	
-    			 console.log("3"+data[0].corporation.cor_name);	
-    			 console.log("4"+data[0].freelancer.free_name);	
-    			 console.log("5"+data[0].mem_email);	
-    			 console.log("6"+data[0].marketRev_rdate);	
-    			 console.log("7"+data[0].corporation.cor_fname);	 
-    			 console.log("8"+data[0].freelancer.free_fname);
-    			 //서버로부터 받은 날짜데이터를 포맷에맞게 바꾸기
-    			 
-    			 var cor=data[0].corporation.cor_name;
-    			 var free=data[0].freelancer.free_name;
-    			// console.log("cor"+cor); console.log("free"+free);
-    			 var someTimestamp = Number(data[0].marketRev_rdate);
-    			 var dateTime = new Date(someTimestamp);
-    			 dateTime=dateToYYYYMMDD(dateTime);
-	
-    			 revfree='';
-    			 revcor ='';
-    			 revmem='';
-    			 rev='';
-	 			revfree +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].freelancer.free_fname+'"> </a></div>';
-	 			revfree +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name; 
-   	   			revfree +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
-   	   			revfree +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
-   	   			revfree +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
-   	   			revfree +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
-   	   			
-	 			revcor +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/cor_thumb/'+data[0].corporation.cor_fname+'"> </a></div>';
-	 			revcor +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].corporation.cor_mname;
-	 			revcor +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
-   	   			revcor +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
-   	   			revcor +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
-   	   			revcor +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
-   	   			 
-   	   			revmem +='<c:if test="${marketRev[0].freelancer== null && marketRev[0].corporation==null }"> <a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a></div>';
-   	   			revmem +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">'+data[0].mem_email+'</c:if>';
-   	   			revmem +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
-   	   			revmem +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
-   	   			revmem +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
-   	   			revmem +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
-	   	   		if(cor !=null){
-	   	   			rev=revcor;
-	   	 		}else if(free != null){
-	   	 			rev=revfree;
-	   	 		}else{
-	   	 			rev=revmem;
-	   	 		}
-   	   			var eleCount='';
-	  			//오류 댓글 4개쓰면 2페이지로 넘어가면서 댓글이 사라짐, 리로드 = 다시생김
-
-			    if (document.getElementById('ajaxRev')){//별점이 존재한다면 밑에 실행
-					console.log("ssssssss");
-			    	eleCount = 0;
-			    }else{
-			    }
-				console.log("eleCount__"+eleCount);
-				console.log("22eleCount__"+"${fn:length(marketRev)}");
-	  			if("${fn:length(marketRev)}" == 0){		
-  				//	$('#ajaxRev').html(html);
-	  				location.reload();
-	  			}else if("${fn:length(marketRev)}" >3){
-	  				$("#ajaxRev:last-child").remove();	
-  					$('#ajaxRev').prepend(rev);
-	  			}else if("${fn:length(marketRev)}" > 0){
-	  				$('#ajaxRev').prepend(rev);
-	  			}
-
-	    	}
->>>>>>> 471977c4d994dd337975e3f70a2387d9c24b63d7
 	    });
 	});
 	function onError(request,status,error){
@@ -1558,22 +1448,7 @@
 		    	contentType: false,
 		    	async :false,
 		    	error:onError,
-<<<<<<< HEAD
 		    	success:onSuccess
-=======
-		    	success:function onSuccess(marketQAList){
-		    		location.reload();
-		    		for(i=0; i<marketQAList.length; i++){//프리네임, 날짜 ,제목
-		    		//	console.log("11111marketQAList"+marketQAList);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_cont);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_rdate);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_name);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_fname);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_mname);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_fname);
-		    		}
-		    	}	
->>>>>>> 471977c4d994dd337975e3f70a2387d9c24b63d7
 		   	}); 
 			return false;
 		}
@@ -1606,26 +1481,8 @@
 		    	async :false,
 		    	data:QAREqueryString,
 		    	error:onError,
-<<<<<<< HEAD
 		    	success:onSuccess
 		    	
-=======
-		    	success:function onSuccess(marketQAList){
-			    	console.log("11111marketQAList");
-		    		 var QA='';
-		    		 for(i=0; i<marketQAList.length; i++){
-    					var freeName=marketQAList[i].freelancer.free_name;
-    					var freeFname=marketQAList[i].freelancer.free_fname;
-    					var corMName=marketQAList[i].corporation.cor_mname;
-    					var corFname=marketQAList[i].corporation.cor_fname;
-    					var subject=marketQAList[i].marketQA_sub;
-    					var content=marketQAList[i].marketQA_cont;
-    					var rdate=marketQAList[i].marketQA_rdate;
-    					var email=marketQAList[i].mem_email;
-    					var ox=marketQAList[i].marketQA_ox;
-	    			 }
-			     }	
->>>>>>> 471977c4d994dd337975e3f70a2387d9c24b63d7
 		   	}); 	    
 	   });
 	 
@@ -1815,45 +1672,86 @@
 	function onSuccessReview(data){
 		var html ='';
 		var srarHtml='';
+		var pagingHtml='';
 		//var stringdata=JSON.stringify(data);
 		//console.log("stringify::"+ stringdata);
-		//console.log("data"+	data);
+		console.log("data[0][1]marketrevList.length+"+data[0].marketrevList.length);
+		console.log("data[0][1]marketrevList.length+"+data[0].marketrevList[i]);
+	//	console.log("data[0][1].length+"+data[0].length);
+	//	console.log("data"+	data[0][i].marketRev_rdate);
 		//console.log("stringdata"+	stringdata.length);
 		//console.log("data:"+ data[0][0].marketRev_num);
 		//console.log("data2:"+data[0][1].member.mem_name);
 		//console.log("data[1].MarketRev[1]"+ data[1].MarketRev[0]);
-		for(var i=0; data[0].length>i; i++){	
+		if(data==null){
+			html +='<div class="card-body p-0" id="ajaxRev">';
+				html +='<div class="media mt-0 p-5">';
+					html +='<div class="media-body"><text align="center"> 등록된 리뷰가 없습니다</text></div>';
+				html +='</div>';
+			html +='</div>';
+								
+		}
+		for(var i=0; data[0].marketrevList.length>i; i++){	
 			//alert("11111111"+data[i].freelancer.free_fname);
-			 var someTimestamp = Number(data[0][i].marketRev_rdate);
+			 var someTimestamp = Number(data[0].marketrevList[i].marketRev_rdate);
 			 var dateTime = new Date(someTimestamp);
 			 dateTime=dateToYYYYMMDD(dateTime);
 			//console.log("11111"+data[i]);
 					html +='<div class="card-body p-0" id="ajaxRev">';
 				html +='<div class="media mt-0 p-5" >';
 				html +='<div class="d-flex mr-3">';
-				if(data[0][i].member.class_num==2||data[0][i].member.class_num==3){//개인일때 		
-	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0][i].freelancer.free_fname+'"> </a>';
+				if(data[0].marketrevList[i].member.class_num==2||data[0].marketrevList[i].member.class_num==3){//개인일때 		
+	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
 	    			html += '</div>';
-	    		}else if(data[0][i].member.class_num==4){
-	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0][i].corporation.cor_fname+'"> </a>';
+	    		}else if(data[0].marketrevList[i].member.class_num==4){
+	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
 	    			html += '</div>';
 	    		}else{
 	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
 	    			html += '</div>';
 	    		}	
 				html+=' <div class="media-body">';
-				html+='<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0][i].member.mem_name;
+				html+='<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].marketrevList[i].member.mem_name;
 				html+='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
-				html+='<span class="fs-14 ml-2" name="marketRev_star" id="starR" > '+data[0][i].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
+				html+='<span class="fs-14 ml-2" name="marketRev_star" id="starR" > '+data[0].marketrevList[i].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
 				html+='</h5>';
 				html+='<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> '+dateTime+' </small>';
-				html+='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> '+data[0][i].marketRev_cont+'</p>';
-				html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate('+data[0][i].marketRev_num+','+data[0][i].market_num+','+data[0][i].marketRev_cont +','+data[0][i].marketRev_star+');" ><span class="">수정</span></a>';
-				html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" onclick="Revdelete('+data[0][i].marketRev_num+','+data[0][i].market_num+');" ><span class="">삭제</span></a>';
+				html+='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> '+data[0].marketrevList[i].marketRev_cont+'</p>';
+				html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+','+data[0].marketrevList[i].marketRev_cont +','+data[0].marketrevList[i].marketRev_star+');" ><span class="">수정</span></a>';
+				html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" onclick="Revdelete('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+');" ><span class="">삭제</span></a>';
 				html+='</div>';
 				html+='</div>';
 				html+='</div>';	    		
 		}
+		//console.log("ssss"+data[0].marketVORev.nowPage);
+ 
+				pagingHtml+='<ul class="pagination mg-b-0 page-0 ">';
+		/* 		pagingHtml+='<li class="page-item">';
+				pagingHtml+='<a aria-label="Last" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.startPage+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-double-left"></i></a>';
+				pagingHtml+='</li>';
+				pagingHtml+='<li class="page-item">';
+				pagingHtml+='<a aria-label="Next" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.startPage+1+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-left"></i></a>';
+				pagingHtml+='</li>';	
+ */				 
+				for(var i=1;i<=data[0].marketVORev.endPage;i++){
+					if(i!=data[0].marketVORev.nowPage){
+						pagingHtml+='<li class="page-item">';
+						pagingHtml+='<a class="page-link" href="market-content?nowPageR='+i+'&cntPerPageR='+data[0].marketVORev.cntPerPage+'&market_num='+data[0].marketrevList[0].market_num+'">'+i+'</a>';
+						pagingHtml+='</li>';
+					}
+					if(i==data[0].marketVORev.nowPage){
+						pagingHtml+='<li class="page-item active">';
+						pagingHtml+='<a class="page-link" href="#">'+i+'</a>';
+						pagingHtml+='</li>';
+					}
+				}
+				pagingHtml+='<li class="page-item">';
+				pagingHtml+='<a aria-label="Next" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.nowPage+1+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-right"></i></a>';
+				pagingHtml+='</li>';
+				pagingHtml+='<li class="page-item">';
+				pagingHtml+='<a aria-label="Last" class="page-link" href="market-content?cntPerPageR='+data[0].marketVORev.cntPerPage+'&nowPageR='+data[0].marketVORev.lastPage+'&market_num='+data[0].marketrevList[0].market_num+'"><i class="fa fa-angle-double-right"></i></a>';
+				pagingHtml+='</li>';
+				pagingHtml+='</ul>';
 		for(var i=0;i<data[1];i++){
 			srarHtml+='<i class="fa fa-star text-warning"> </i>';
   		}
@@ -1865,7 +1763,20 @@
 		$('#ajaxRev0').html(html);
 		$('#changeStar').html(srarHtml);
 		$('#REVUpdate').modal('hide');
+		
+		//$('#paging').empty();
+		//$('#paging').html(pagingHtml);
 	}
+
+	//페이징 아작스 
+		
+
+	
+	
+	
+	
+	
+	
 </script>
 
 <!-- 
