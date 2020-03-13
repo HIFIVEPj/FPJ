@@ -51,7 +51,8 @@ public interface MarketService {
 	
 	 void deleteMarketRev (HashMap<String, Object> map);
 	 void updateMarketRev (HashMap<String, Object> map);
-	 
+	 int reloadMarketRevAVG(long market_num);
+	
 	 String getFreeName(long market_num);
 	 
 	 void insertPaymentMarket(Map<String, Object> payinfoMarket);
@@ -64,7 +65,15 @@ public interface MarketService {
 	 void insertMarketBuy(HashMap<String,Object> map);
 	 
 	 List<MarketBuysellList> writeReview(HashMap<String,Object> map);
+	 
+	 List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map);
+	 int searchBoxMarketCount(Map<String,Map<String,Object>> map);
+	 
+	 int searchButtonMarketCount(String searchWord);
+	 List<Market> searchButtonMarketList(HashMap<String,Object> map);
+	 
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
+	
 
 }

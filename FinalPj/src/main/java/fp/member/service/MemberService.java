@@ -16,7 +16,7 @@ public interface MemberService {
 	int idCheck(String email);
 	void insertM(Member member);		
 	
-	void upMarketS(Market market);
+	void upMarketS(Map<String,Object> map);
 	//마켓 게시글 
 	long getMarketCount();
 	List<Market> getMarketList(MemberVo memberVO);

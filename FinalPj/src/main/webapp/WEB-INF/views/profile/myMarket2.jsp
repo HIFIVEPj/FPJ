@@ -82,8 +82,8 @@ $(document).ready(function() {
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite?mem_email=${sessionScope.email}">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
@@ -109,7 +109,7 @@ $(document).ready(function() {
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
-								<h3 class="card-title"><b>판매마켓</b></h3>
+								<h3 class="card-title"><b>나의 판매된마켓</b></h3>
 							</div>
 							<div class="card-body">
 					
@@ -127,6 +127,7 @@ $(document).ready(function() {
 												<th><b>가격</b></th>
 												<th><b>상태</b></th>
 												<th><b>판매일</b></th>
+												<th><b>구매자</b></th>
 												<th><b>완료버튼</b></th>
 											</tr>
 										</thead>
@@ -136,23 +137,35 @@ $(document).ready(function() {
 										<tr>
 											<td colspan="2">
 												<div class="media mt-0 mb-0">
-												<!-- 	<div class="card-aside-img">
-														<a href="#"></a>
-														<img src="../images/products/h1.png" alt="img">
+												 	<div class="card-aside-img">
+														<a href="market-content?market_num=${mySellMarket.market.market_num}"></a>
+														<img src="../hifiveImages/marketThumbnails/${mySellMarket.market.market_fname}" alt="img">
 													</div>
-												-->													
+																								
 													 <div class="media-body">
 														<div class="card-item-desc ml-4 p-0 mt-2">
-															<a href="market-content?market_num=${mySellMarket.market_num}" class="text-dark"><h4 class=""><b>${mySellMarket.marketPaym_pdName}</b></h4></a>
+															<a href="market-content?market_num=${mySellMarket.market_num}" class="text-dark"><h4 class=""><b>${mySellMarket.market.market_sub}</b></h4></a>
 															
 															<div style="padding-top:5px;">
-															<span class="text-warning">
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																<i class="fa fa-star"> </i>
-																</span>
-																<i class="fa fa-star"> </i> | <i class="fa fa-eye"></i> 344<br>
+															
+														
+																		<span class="rated-products-ratings">
+
+																			<c:if test="${mySellMarket.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																				<c:forEach var="1" begin="1" end="${mySellMarket.marketRev.marketRev_star}">
+																					<i class="fa fa-star text-warning"> </i>
+																				</c:forEach>
+																				<c:forEach var="1" begin="1" end="${5-mySellMarket.marketRev.marketRev_star}">
+																					<i class="fa fa-star-o text-warning"> </i>
+																				</c:forEach>	
+																			</c:if>
+																		</span>|	
+																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${mySellMarket.market.market_vcnt}
+																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${mySellMarket.market.market_pcnt }
+																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mySellMarket.marketRev.marketRev_num}
+																		<a href="mailto:${mySellMarket.mem_emailBuy}">메일보내기</a>
+															
+															
 															</div>
 														</div>
 													</div>
@@ -160,7 +173,8 @@ $(document).ready(function() {
 											</td>
 											
 											<td class="font-weight-semibold fs-16">
-												<fmt:formatNumber value="${mySellMarket.marketPaym_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
+												<fmt:formatNumber value="${mySellMarket.marketPaym_price}" pattern="#,###,###,###" /><span class="fs-16">원</span> </br>
+												<small>수수료율:${mySellMarket.marketPaym_feeRate}%</small>
 											</td> 
 											
 											
@@ -169,6 +183,18 @@ $(document).ready(function() {
 											</td>
 											<td class="font-weight-semibold fs-16">
 												${mySellMarket.marketPaym_rdate}
+											</td>
+											<td class="font-weight-semibold fs-16">
+											
+												<c:forEach items="${member}" var="entry" varStatus="status">
+													<c:if test="${fn:contains(entry, mySellMarket.mem_emailBuy) }">
+														<c:out value="${entry.NAME}"/>
+													</c:if>
+												</c:forEach>
+
+
+
+											
 											</td>
 											<td class="font-weight-semibold fs-16">
 												<a href="javascript:void(0)" onclick="deleteCheck(${mySellMarket.marketPaym_num})"  data-toggle="modal" data-target="#smallModal1"   class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="거절하기"><i class="fa fa-trash"></i></a>
@@ -182,26 +208,29 @@ $(document).ready(function() {
 	
 							</c:if>
 							<c:if test="${fn:length(mySellMarket)==0 }">
-								<div class="tab-pane table-responsive border-top userprof-tab" id="tab2">
+								<div class="card">
+									<div class="card-body" style="margin:0 auto; align:center;">
+										판매한 마켓이 없습니다.
+									</div>
 								</div>
 							</c:if>
 							<!-- 탭2 -->		
 								
-
+<c:if test="${fn:length(mySellMarket)>0 }">
 
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
-									<c:if test="${fn:length(myMarket)>0 }">
+									
 										<c:if test="${paging.nowPage !=1}">
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
+												<a aria-label="Last" class="page-link" href="myMarket1?&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
 											</li>
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
+												<a aria-label="Next" class="page-link" href="myMarket1?&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
 											</li>
 										</c:if>
-									</c:if>
+									
 										<c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
 											<c:choose>
 												<c:when test="${paging.nowPage == p }">
@@ -211,26 +240,26 @@ $(document).ready(function() {
 												</c:when>	
 												<c:otherwise>
 													<li class="page-item">
-														<a class="page-link hidden-xs-down" href="myMarket?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+														<a class="page-link hidden-xs-down" href="myMarket1?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
-									<c:if test="${fn:length(myMarket)>0 }">
+									
 										<c:if test="${ paging.nowPage!=paging.lastPage }">
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+												<a aria-label="Next" class="page-link" href="myMarket1?&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
 											</li>
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
+												<a aria-label="Last" class="page-link" href="myMarket1?&nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</c:if>
-									</c:if>	
+									
 									</ul>
 								</div>
 								<!-- pagination-wrapper -->
 							</div>
-		
+		</c:if>
 							<!-- section-wrapper -->
 						</div>
 					

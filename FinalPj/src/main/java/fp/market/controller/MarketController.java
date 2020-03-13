@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.Map;
 import java.util.Vector;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,40 +42,99 @@ public class MarketController {
 	
 	@Autowired
 	private MarketService marketService;
-
-
+	/*
+	if(nowPage ==null &&cntPerPage ==null) {
+			nowPage="1";
+			cntPerPage ="9";
+		}else if(nowPage == null) {
+			nowPage = "1";
+		}else if(cntPerPage == null) {
+			cntPerPage = "9";
+	}
+	*/	
+	
+/*	
+		public ModelAndView Commonlist(String nowPage,String cntPerPage,HttpSession session,String selectedKeyS){
+			
+			int total = marketService.getMarketCount();
+			
+			int selectedKey=Integer.parseInt(selectedKeyS);
+		
+			String mem_email=(String) session.getAttribute("email");
+			log.info("1@#@!#!#@!mem_mail"+mem_email);
+			MarketPagingVO marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			 ModelAndView mv = new ModelAndView("market/market-list");
+			 
+			 
+			 HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();
+			 Pagingmap.put("start",marketVO.getStart());
+			 Pagingmap.put("end",marketVO.getEnd());
+			 
+			 Pagingmap.put("selectedKey",selectedKey);
+			 
+			 List<Market> list = marketService.getMarketList(Pagingmap);
+			 
+			 List<MarketPick> pickState=new ArrayList<MarketPick>();
+			 ArrayList<Long> marketNumList = new ArrayList<Long>();
+			 //세션이메일이 존재할때
+			 if(mem_email != null) {
+				 if(marketService.pickState(mem_email).size() != 0) {
+					 pickState = marketService.pickState(mem_email);
+					 for(int i=0;i<pickState.size();i++) {
+						long marketNum=pickState.get(i).getMarket_num();
+						marketNumList.add(marketNum);
+					 }
+				 }
+			 }else {
+				//세션이메일이 존재하지 않을 때	 
+			 }
+			 log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
+			 mv.addObject("list", list);
+		     mv.addObject("paging", marketVO);  
+		     mv.addObject("marketNumList", marketNumList); 
+		     mv.addObject("selectedKey", selectedKey); 
+		
+			return mv;
+			
+		}
+*/
 	@GetMapping("market-list")
-	public ModelAndView market_list(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+	public ModelAndView getDefaultList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
 									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
 									,HttpSession session
-									,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS){
-		int total = marketService.getMarketCount();
-/*
-if(nowPage ==null &&cntPerPage ==null) {
-		nowPage="1";
-		cntPerPage ="9";
-	}else if(nowPage == null) {
-		nowPage = "1";
-	}else if(cntPerPage == null) {
-		cntPerPage = "9";
-}
-*/		
-		int selectedKey=Integer.parseInt(selectedKeyS);
+									,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS
+									,@RequestParam(value="searchWord",required=false, defaultValue="")String searchWord){
+		int total=0;
+		List<Market> list=new ArrayList<Market>();//마켓리스트
+		MarketPagingVO marketVO = new MarketPagingVO();//뷰페이징 
+		HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();//mybatis 쿼리 파라미터
+		
+ 		int selectedKey=Integer.parseInt(selectedKeyS);
 
 		String mem_email=(String) session.getAttribute("email");
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
-		MarketPagingVO marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		 ModelAndView mv = new ModelAndView("market/market-list");
-		 
-		 
-		 HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();
-		 Pagingmap.put("start",marketVO.getStart());
-		 Pagingmap.put("end",marketVO.getEnd());
-		 
-		 Pagingmap.put("selectedKey",selectedKey);
-		 
-		 List<Market> list = marketService.getMarketList(Pagingmap);
-		 
+
+		 if(searchWord.equals("")||searchWord==null ) {
+				total = marketService.getMarketCount();	
+				marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+				Pagingmap.put("start",marketVO.getStart());
+				Pagingmap.put("end",marketVO.getEnd()); 
+				Pagingmap.put("selectedKey",selectedKey);
+				list = marketService.getMarketList(Pagingmap);
+		 }else {
+			total = marketService.searchButtonMarketCount(searchWord);
+			marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+			Pagingmap.put("start",marketVO.getStart());
+			Pagingmap.put("end",marketVO.getEnd()); 
+			Pagingmap.put("selectedKey",selectedKey);
+			Pagingmap.put("searchWord", searchWord);
+			list =marketService.searchButtonMarketList(Pagingmap);
+		 }
+
+			//log.info("@@@@@@@@@@list:"+list);
+			//log.info("@@@@@@@@@@total:"+total);
+			//log.info("@@@@marketVO.getStartPage()"+marketVO.getStartPage());
+			//log.info("@@@@@@@@@@searchWord:"+searchWord);
 		 List<MarketPick> pickState=new ArrayList<MarketPick>();
 		 ArrayList<Long> marketNumList = new ArrayList<Long>();
 		 //세션이메일이 존재할때
@@ -91,44 +150,155 @@ if(nowPage ==null &&cntPerPage ==null) {
 			//세션이메일이 존재하지 않을 때	 
 		 }
 		 log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
+		 ModelAndView mv = new ModelAndView("market/market-list");
 		 mv.addObject("list", list);
 	     mv.addObject("paging", marketVO);  
 	     mv.addObject("marketNumList", marketNumList); 
 	     mv.addObject("selectedKey", selectedKey); 
-
+	     mv.addObject("searchWord", searchWord); 
 		return mv;
 	}
+/*	@GetMapping("market-searchButtonList")
+	public ModelAndView getSearchButtonList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+										,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
+										,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS
+										,@RequestParam(value="searchWord",required=false)String searchWord
+										,HttpSession session) {
+		
+		String mem_email=(String) session.getAttribute("email");
+		int selectedKey=Integer.parseInt(selectedKeyS);
+		int total = marketService.searchButtonMarketCount(searchWord);
+		
+		MarketPagingVO marketVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+	//mapper로 갈 파라미터들
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("searchWord", searchWord);
+		map.put("start", marketVO.getStart());
+		map.put("end", marketVO.getEnd());
+		log.info("searchWord"+searchWord);
+		List<Market> marketList =marketService.searchButtonMarketList(map);
+		List<MarketPick> pickState=new ArrayList<MarketPick>();
+		 ArrayList<Long> marketNumList = new ArrayList<Long>();
+		 //세션이메일이 존재할때
+		 if(mem_email != null) {
+			 if(marketService.pickState(mem_email).size() != 0) {
+				 pickState = marketService.pickState(mem_email);
+				 for(int i=0;i<pickState.size();i++) {
+					long marketNum=pickState.get(i).getMarket_num();
+					marketNumList.add(marketNum);
+				 }
+			 }
+		 }else {
+			//세션이메일이 존재하지 않을 때	 
+		 }
+		 ModelAndView mv = new ModelAndView("market/market-list");
+		 mv.addObject("list", marketList);
+	     mv.addObject("paging", marketVO);  
+	     mv.addObject("marketNumList", marketNumList); 
+	     mv.addObject("selectedKey", selectedKey); 
+	     mv.addObject("searchWord", searchWord); 
+		return mv;
+		
+	}*/
+	//searchBox 검색 리스팅 
+	@GetMapping("market-searchBoxList")
+	public ModelAndView getSearchBoxList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+											,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
+											,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS
+											,HttpSession session
+											,@RequestParam(value="checkedCate",required=false)List<Integer> checkedCate
+											,@RequestParam(value="checkedExp",required=false)List<String> checkedExp
+											,@RequestParam(value="marketPrice",required=false)String marketPrice){
 
-//searchBox 검색 리스팅 
-	@GetMapping("market-searchBoxlist")
-	public ModelAndView market_searchBoxlist(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
-									,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
-									,HttpSession session
-									,@RequestParam(value="checkedCate[]",required=false)List<String> checkedCate
-									,@RequestParam(value="checkedExp[]",required=false)List<String> checkedExp
-									,@RequestParam(value="marketPrice",required=false)String marketPrice){
-
+		String mem_email=(String) session.getAttribute("email");
+		int selectedKey=Integer.parseInt(selectedKeyS);
+		
 		log.info("1111111checkedCate[]"+checkedCate);
 		log.info("22222222checkedExp[]"+checkedExp);
 		log.info("3333333333marketPrice"+marketPrice);
-	
+		
+		
+		//오류range String result1 = marketPrice.substring(marketPrice.indexOf('￦')+1,marketPrice.indexOf(' ')+1);
+		String result1 = marketPrice.substring(marketPrice.indexOf('￦')+1,marketPrice.indexOf('-')-1);
+		result1 = result1.trim();
+		String result2 = marketPrice.substring(marketPrice.lastIndexOf('￦')+1);
+		result2 = result2.trim();
+		int price1=Integer.parseInt(result1);
+		int price2=Integer.parseInt(result2);
 
+		log.info("#####price1:"+price1);
+		log.info("#####price2"+price2);
+		Map<String,Object> mapCate = new HashMap<String,Object>();
+		Map<String,Object> mapExp = new HashMap<String,Object>();
+		Map<String,Object> mapPrice = new HashMap<String,Object>();
+		Map<String,Map<String,Object>> total= new HashMap<String,Map<String,Object>>();
+		mapPrice.put("price1", price1);
+		mapPrice.put("price2", price2);
+		
+		if(checkedCate.size()!=0) {
+			for(int i=0; i<checkedCate.size();i++) {
+				int cate=checkedCate.get(i);
+				mapCate.put("cate"+i,cate);
+			}
+		}
+
+		if(checkedExp.size()!=0) {
+			for(int i=0 ; checkedExp.size()>i ; i++) {
+				String exp=checkedExp.get(i);
+				if(exp.equals("exp1")) {
+					mapExp.put("exp1","exp1");
+				}
+				if(exp.equals("exp2")) {
+					mapExp.put("exp2","exp2");
+				}
+				if(exp.equals("exp3")) {
+					mapExp.put("exp3","exp3");	
+				}
+			}
+		}
+		log.info("#####mapExp"+mapExp);
+		total.put("mapPrice", mapPrice);
+		total.put("mapCate", mapCate);
+		total.put("mapExp", mapExp);
+		int searchBoxTotal =marketService.searchBoxMarketCount(total);
+		MarketPagingVO marketVO = new MarketPagingVO(searchBoxTotal, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();
+		Pagingmap.put("start",marketVO.getStart());
+		Pagingmap.put("end",marketVO.getEnd());
+		Pagingmap.put("selectedKey",selectedKey);
+		total.put("Pagingmap", Pagingmap);
+		// List<Market> list = marketService.getMarketList(Pagingmap);
+		 List<Market> list= marketService.searchBoxMarketList(total);
+
+		 List<MarketPick> pickState=new ArrayList<MarketPick>();
+		 ArrayList<Long> marketNumList = new ArrayList<Long>();
+		 //세션이메일이 존재할때
+		 if(mem_email != null) {
+			 if(marketService.pickState(mem_email).size() != 0) {
+				 pickState = marketService.pickState(mem_email);
+				 for(int i=0;i<pickState.size();i++) {
+					long marketNum=pickState.get(i).getMarket_num();
+					marketNumList.add(marketNum);
+				 }
+			 }
+		 }else {
+			//세션이메일이 존재하지 않을 때	 
+		 }
 
 		 ModelAndView mv = new ModelAndView("market/market-list");
-
+		 mv.addObject("list", list);
+	     mv.addObject("paging", marketVO);  
+	     mv.addObject("marketNumList", marketNumList); 
+	     mv.addObject("selectedKey", selectedKey); 
+	     
+	     mv.addObject("mapCate", mapCate);
+	     mv.addObject("mapExp", mapExp);
 
 		return mv;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	@GetMapping("market-content")
-	public ModelAndView market_content(HttpSession session,@RequestParam long market_num
+	public ModelAndView getContent(HttpSession session,@RequestParam long market_num
 			,@RequestParam(value="nowPageQ",required=false)String nowPageQ
 			,@RequestParam(value="cntPerPageQ", required=false)String cntPerPageQ
 			,@RequestParam(value="nowPageR",required=false)String nowPageR
@@ -182,7 +352,7 @@ if(nowPage ==null &&cntPerPage ==null) {
 		
 	
 	//	m=marketService.getMarketFreelancer(market_num);이렇게해도되고 메소드 따로 만들어서  아래한줄처럼해도됨 
-		Market fP=getmarketPreePrefile(market_num);//하지만 왜 마켓테이블 정보는 안나오지->왜냐! 변수 m에 매퍼를 뒤집어썼기때문에 다른 변수에 넣어줘야함//리스트로하는이유는 개인당 여러개의 마켓을 가질수있으므로
+		Market fP=getMarketPreePrefile(market_num);//하지만 왜 마켓테이블 정보는 안나오지->왜냐! 변수 m에 매퍼를 뒤집어썼기때문에 다른 변수에 넣어줘야함//리스트로하는이유는 개인당 여러개의 마켓을 가질수있으므로
 	
 		int mrStar=0;
 		List<MarketRev> mr = marketService.getMarketRev(mapr);	
@@ -215,7 +385,7 @@ if(nowPage ==null &&cntPerPage ==null) {
 		
 	}
 	//마켓에 필요한 프리랜서정보를 리턴하는 메소드 
-	public Market getmarketPreePrefile(long market_num){
+	public Market getMarketPreePrefile(long market_num){
 		Market marketFreelancer;
 		marketFreelancer=marketService.getMarketFreelancer(market_num);
 		return marketFreelancer;
@@ -227,10 +397,10 @@ if(nowPage ==null &&cntPerPage ==null) {
 	}
 
 	@PostMapping("market-insert")
-	public String market_insert(Market market,MultipartHttpServletRequest mtfRequest,@SessionAttribute("email") String email) {
-
-		String originFileName=Fileupload(mtfRequest).get(0);
-		String fileName=Fileupload(mtfRequest).get(1);
+	public String putInsert(Market market,MultipartHttpServletRequest mtfRequest,@SessionAttribute("email") String email) {
+		log.info("@@@@@@!!!!!!!mtfRequest:"+mtfRequest);
+		String originFileName=doFileupload(mtfRequest).get(0);
+		String fileName=doFileupload(mtfRequest).get(1);
 		long free_code=marketService.getFreecode(email);
 		
 		market.setFree_code(free_code);
@@ -241,18 +411,17 @@ if(nowPage ==null &&cntPerPage ==null) {
 	}	
 
 	@PostMapping("market-update")
-	public ModelAndView market_update1(@RequestParam long market_num){
+	public ModelAndView update1(@RequestParam long market_num){
 		Market m=marketService.updateMarket1(market_num);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("market/market-update");
 		mv.addObject("market", m);
 		return mv;		
-
 	}
 
 	@PostMapping("market-update2")
-	public String market_update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
-		List<String> list=Fileupload(mtfRequest);
+	public String update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
+		List<String> list=doFileupload(mtfRequest);
 		String originFileName=list.get(0);
 		log.info("!!!!!!!originFileName:"+originFileName);
 		String fileName=list.get(1);
@@ -264,14 +433,21 @@ if(nowPage ==null &&cntPerPage ==null) {
 		return "redirect:market-list";
 	}
 	@GetMapping("market-delete")
-	public String market_delete(@RequestParam long market_num) {
+	public String market_delete(@RequestParam long market_num,@RequestParam(value="location", required=false, defaultValue="")String location) {
 		marketService.deleteMarket(market_num);	
-		return "redirect:market-list";
+		if(location.equals("myMarket")) {
+			return "redirect:myMarket1";
+		}else {
+			return "redirect:market-list";
+			}
+		
+		
 		
 	}
-	public List<String> Fileupload(MultipartHttpServletRequest mtfRequest) {
+	public List<String> doFileupload(MultipartHttpServletRequest mtfRequest) {
 		//String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
 		String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
+		System.out.println("111111111111111111111111111111111111111111111"+path);
 		File Folder = new File(path);
 		// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
 		if (!Folder.exists()) {
@@ -303,7 +479,4 @@ if(nowPage ==null &&cntPerPage ==null) {
 		list.add(fileName);
 		return list;
 	}
-
-
-	
 }

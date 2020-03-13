@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -38,6 +37,10 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.service.FreeLancerProfileService;
+import fp.market.domain.Freelancer;
+import fp.market.domain.MarketBuysellList;
+import fp.market.domain.MarketPick;
+import fp.market.utils.MarketPagingVO;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -288,5 +291,76 @@ public class CorporationController {
 			file.delete();
 		}
 	}
+//마켓찜
+//세영 추가-마켓찜--------myfavoriteMarket,구매마켓,프로필사진
+	@RequestMapping("cor-myfavoriteMarket")
+	public ModelAndView pickedMarket(HttpSession session
+									,@RequestParam(value="nowPageP",required=false, defaultValue="1")String nowPage
+									,@RequestParam(value="cntPerPageP", required=false,defaultValue="5")String cntPerPage) 
+	{
+
+		String mem_email=(String) session.getAttribute("email");
 	
+		int total=service.getTotalMarketPick(mem_email);
+
+
+		MarketPagingVO marketPickListVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		int start=marketPickListVO.getStart(); 
+		int end = marketPickListVO.getEnd(); 
+		
+
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("mem_email",mem_email);
+		map.put("start",start);
+		map.put("end",end);
+
+		
+		List<MarketPick> corp=service.marketPickList(map);
+		
+		Corporation cor = getCorfname(mem_email);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("corporation/myfavorite_market");
+		mv.addObject("corPickList",corp);
+		mv.addObject("paging",marketPickListVO);
+		mv.addObject("cor",cor);
+		return mv;
+	}
+	
+	public Corporation getCorfname(String mem_email) {
+		Corporation cor=service.getCorfname(mem_email);
+		return cor;
+	}
+	//구매마켓
+	@RequestMapping("cor-myBuyMarket")
+	public ModelAndView getMyMarket3(HttpSession session
+			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+			,@RequestParam(value="cntPerPage", required=false,defaultValue="5")String cntPerPage) 
+	{
+		String mem_email=(String) session.getAttribute("email");
+
+		int total=service.getTotalBuyMarket(mem_email);
+		MarketPagingVO marketBuyListVO = new MarketPagingVO(total,Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+		int start=marketBuyListVO.getStart(); 
+		int end = marketBuyListVO.getEnd(); 
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("mem_email",mem_email);
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<MarketBuysellList> corBuy=service.myBuyMarket(map);
+		
+		Corporation cor = getCorfname(mem_email);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("corporation/buylist_market");
+		mv.addObject("corBuyList",corBuy);
+		mv.addObject("paging",marketBuyListVO);
+		mv.addObject("cor",cor);
+		return mv;
+		
+	}
 }

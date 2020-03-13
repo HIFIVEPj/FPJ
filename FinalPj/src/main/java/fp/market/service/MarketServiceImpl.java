@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fp.corporation.domain.Corporation;
+import fp.market.controller.MarketController;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
@@ -20,7 +21,8 @@ import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
 import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
-
+import lombok.extern.log4j.Log4j;
+@Log4j
 @Service
 @AllArgsConstructor
 public class MarketServiceImpl implements MarketService {
@@ -91,11 +93,14 @@ public class MarketServiceImpl implements MarketService {
 	public long getFreecode(String mem_email) {
 		return mapper.getFreeCode(mem_email);
 	}
-	
+//marketReview insert		
 	@Override
 	public void insertMarketRev(MarketRev mareketRev) {
 		mapper.insertMarketRev(mareketRev);
-		
+	}
+	@Override
+	public int reloadMarketRevAVG(long market_num) {
+		return mapper.reloadMarketRevAVG(market_num);
 	}
 //marketQA insert	
 	@Transactional
@@ -133,7 +138,6 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public void updateMarketRev(HashMap<String, Object> map) {
 		mapper.updateMarketRev(map);
-		
 	}
 //마켓결제
 	@Override
@@ -176,6 +180,24 @@ public class MarketServiceImpl implements MarketService {
 	public List<MarketBuysellList> writeReview(HashMap<String,Object> map){
 		return mapper.writeReview(map);	
 	}
+	
+	public List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map){
+		return mapper.searchBoxMarketList(map);
+	}
+	public int searchBoxMarketCount(Map<String,Map<String,Object>> map) {
+		log.info("Service-map:"+map);
+		return mapper.searchBoxMarketCount(map);
+	}
+
+	@Override
+	public int searchButtonMarketCount(String searchWord) {
+		return mapper.searchButtonMarketCount(searchWord);	
+	}
+	@Override
+	public List<Market> searchButtonMarketList(HashMap<String,Object> map) {
+		return mapper.searchButtonMarketList(map);	
+	}
+	
 
 }
 

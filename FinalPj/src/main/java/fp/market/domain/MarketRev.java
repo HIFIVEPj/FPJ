@@ -24,5 +24,6 @@ public class MarketRev {
 	private Freelancer freelancer;
 	private Corporation corporation;
 	private Member member;
+
 }
 

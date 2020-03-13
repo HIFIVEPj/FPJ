@@ -2,12 +2,14 @@ package fp.freelancerprofile.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
+import fp.market.domain.Member;
 
 public interface FreelancerMarketInfoService {
 	Freelancer getFreefname(String mem_email);
@@ -26,5 +28,9 @@ public interface FreelancerMarketInfoService {
 	List<MarketBuysellList> myBuyMarket(HashMap<String,Object> map);
 
 	void deleteMarketPayment(long marketPaym_num);	
-
+//거절당한마켓수정
+	Market updateRefusalMarket1(long market_num);
+	void updateRefusalMarket2(Market market);
+	
+	Map<String,String> paymentDetailsGetBuyerName(String mem_email);
 }

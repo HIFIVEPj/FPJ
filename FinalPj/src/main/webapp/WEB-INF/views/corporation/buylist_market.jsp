@@ -5,7 +5,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-
+<style>
+	.btn-primary {
+		
+		background-color: #1f719a;
+		border-color: #1f719a;
+		color: #fff;
+	}
+	.btn-primary:hover {
+		
+		background-color: #145A82;
+		border-color: #145A82;
+		color: #fff;
+	}
+</style>
 <script>
 $(document).ready(function() {
 	  var v = "#" + window.location.hash.substr(1);
@@ -82,8 +95,8 @@ $(document).ready(function() {
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite?mem_email=${sessionScope.email}">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
@@ -112,13 +125,12 @@ $(document).ready(function() {
 								<h3 class="card-title"><b>나의 구매마켓</b></h3>
 							</div>
 							<div class="card-body">
-					
-									
 								<div class="tab-content">					
-								
-								
+									<button aria-haspopup="true" class="btn btn-primary"><a href="cor-myfavoriteMarket" style="color:white">찜 마켓</a></button>
+									<button aria-haspopup="true" class="btn btn-primary"><a href="#" style="color:white">구매 마켓</a></button>
+								</br></br>
 						<!-- 탭2 -->			
-							<c:if test="${fn:length(mBuyList)>0 }">
+							<c:if test="${fn:length(corBuyList)>0 }">
 									<table class="table table-bordered table-hover mb-0 text-nowrap">
 										<thead style="text-align:center;">
 											<tr>
@@ -129,36 +141,36 @@ $(document).ready(function() {
 											</tr>
 										</thead>
 										
-										<c:forEach var="mBuyList" items="${mBuyList}">
+										<c:forEach var="BuyList" items="${corBuyList}">
 											<tbody>
 											<tr>
 												<td colspan="2">
 													<div class="media mt-0 mb-0">
 													 	<div class="card-aside-img">
-															<a href="market-content?market_num=${mBuyList.market_num }"></a>
-															<img src="../hifiveImages/marketThumbnails/${mBuyList.market.market_fname}" alt="img">
+															<a href="market-content?market_num=${BuyList.market_num }"></a>
+															<img src="../hifiveImages/marketThumbnails/${BuyList.market.market_fname}" alt="img">
 														</div>
 																										
 														 <div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="market-content?market_num=${mBuyList.market_num }" class="text-dark"><h4 class=""><b>${mBuyList.market.market_sub}</b></h4></a>
+																<a href="market-content?market_num=${BuyList.market_num }" class="text-dark"><h4 class=""><b>${BuyList.market.market_sub}</b></h4></a>
 																
 																<div style="padding-top:5px;">
-																		<span class="rated-products-ratings">
+																<span class="rated-products-ratings">
 
-																			<c:if test="${mBuyList.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
-																				<c:forEach var="1" begin="1" end="${mBuyList.marketRev.marketRev_star}">
+																			<c:if test="${BuyList.marketRev.marketRev_star >= 0}" ><!-- 마켓리뷰점수가 -->
+																				<c:forEach var="1" begin="1" end="${BuyList.marketRev.marketRev_star}">
 																					<i class="fa fa-star text-warning"> </i>
 																				</c:forEach>
-																				<c:forEach var="1" begin="1" end="${5-mBuyList.marketRev.marketRev_star}">
+																				<c:forEach var="1" begin="1" end="${5-BuyList.marketRev.marketRev_star}">
 																					<i class="fa fa-star-o text-warning"> </i>
 																				</c:forEach>	
 																			</c:if>
-																		</span>|
-																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${mBuyList.market.market_vcnt}
-																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${mBuyList.market.market_pcnt }
-																			 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mBuyList.marketRev.marketRev_num}
-																		
+																		</span>|	
+																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${BuyList.market.market_vcnt}
+																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${BuyList.market.market_pcnt }
+																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${BuyList.marketRev.marketRev_num}
+																	 <a href="mailto:${BuyList.freelancer.mem_email}">메일보내기</a>
 																	
 																</div>
 															</div>
@@ -167,50 +179,49 @@ $(document).ready(function() {
 												</td>
 												
 												<td class="font-weight-semibold fs-16">
-													<fmt:formatNumber value="${mBuyList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
+													<fmt:formatNumber value="${BuyList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 												</td> 
 												<td>
-													<c:if test="${mBuyList.mbuysell_state==0 }">
+													<c:if test="${BuyList.mbuysell_state==0 }">
 														<a href="#" class="badge badge-secondary">거래중</a>
 													</c:if>
-													<c:if test="${mBuyList.mbuysell_state==1}">
+													<c:if test="${BuyList.mbuysell_state==1}">
 														<a href="#" class="badge badge-secondary">거래완료</a>
 													</c:if>
-													<c:if test="${mBuyList.mbuysell_state==2 }">
+													<c:if test="${BuyList.mbuysell_state==2 }">
 														<a href="#" class="badge badge-secondary">거래취소</a>
 													</c:if>
 												</td>
 												<td class="font-weight-semibold fs-16">
-													${mBuyList.mbuysell_date}
+													${BuyList.mbuysell_date}
 												</td>
 												</tr>
 											</tbody>
 										</c:forEach>
+										
 									</table>
-								
 							</c:if>
-							<c:if test="${fn:length(mBuyList)==0 }">
+							<c:if test="${fn:length(corBuyList)==0 }">
 								<div class="card">
 									<div class="card-body" style="margin:0 auto; align:center;">
-										구매한 마켓이 없습니다.
+									구매한 마켓이 없습니다.
 									</div>
 								</div>
 							</c:if>
-							
-							<c:if test="${fn:length(mBuyList)>0 }">
+							<c:if test="${fn:length(corBuyList)>0 }">
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
 									<ul class="pagination mg-b-0 page-0 ">
-									
+									<c:if test="${fn:length(myMarket)>0 }">
 										<c:if test="${paging.nowPage !=1}">
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="myMarket1?&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-left"></i></a>
+												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
 											</li>
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="myMarket1?&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-left"></i></a>
+												<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
 											</li>
 										</c:if>
-								
+									</c:if>
 										<c:forEach var="p" begin="${paging.startPage}" end="${paging.endPage}">
 											<c:choose>
 												<c:when test="${paging.nowPage == p }">
@@ -220,27 +231,28 @@ $(document).ready(function() {
 												</c:when>	
 												<c:otherwise>
 													<li class="page-item">
-														<a class="page-link hidden-xs-down" href="myMarket1?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+														<a class="page-link hidden-xs-down" href="cor-myBuyMarket?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
-									
+									<c:if test="${fn:length(myMarket)>0 }">
 										<c:if test="${ paging.nowPage!=paging.lastPage }">
 											<li class="page-item">
-												<a aria-label="Next" class="page-link" href="myMarket1?&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+												<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
 											</li>
 											<li class="page-item">
-												<a aria-label="Last" class="page-link" href="myMarket1?&nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
+												<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
 											</li>
 										</c:if>
-									
+									</c:if>	
 									</ul>
 								</div>
 								<!-- pagination-wrapper -->
 							</div>
-		</c:if>	
+						</c:if>
 							<!-- section-wrapper -->
+
 						</div>
 					
 					</div>

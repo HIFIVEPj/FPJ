@@ -1148,3 +1148,11 @@
 .horizontalMenu ul li a.btn{
 	font-size:14px !important;
 }
+.horizontalMenuSY {
+	color: #fff;
+	font-size: 14px;
+	padding: 0;
+	float: left;
+	display: block;
+	
+}
