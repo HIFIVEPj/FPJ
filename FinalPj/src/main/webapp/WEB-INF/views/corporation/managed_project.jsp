@@ -360,40 +360,6 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							</div>
 							
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">

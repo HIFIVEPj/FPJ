@@ -169,13 +169,51 @@
        </collection>  
 
       </resultMap>
+      
+	<resultMap type="fp.freelancerprofile.domain.FreeLancerProfile" id="freePickList">   
+         <id property="free_code" column="free_code"/>
+        <result property="pro_num" column="pro_num"/>
+        <result property="type_num" column="type_num"/>
+        <result property="pro_exp" column="pro_exp"/>
+        <result property="pro_cv" column="pro_cv"/>
+        <result property="pro_addr" column="pro_addr"/>
+        <result property="pro_edu" column="pro_edu"/>
+        <result property="pro_start" column="pro_start"/>
+        <result property="pro_ox" column="pro_ox"/>
+        <result property="pro_grade" column="pro_grade"/>
+        <result property="profile_vcnt" column="profile_vcnt"/>
+        <result property="profile_pcnt" column="profile_pcnt"/>
+        <result property="pro_workplace" column="pro_workplace"/>
+       <result property="profile_sub" column="profile_sub"/>
+        <result property="profile_date" column="profile_date"/>     
+         <result property="freerev_starAVG" column="freerev_starAVG"/>
+          
+      <association  property="free" javaType="fp.freelancerprofile.domain.FreeLancer">
+      	<id property="free_code" column="free_code"/>
+        <result property="free_name" column="free_name"/>
+        <result property="free_fname" column="free_fname"/>
+      </association>   
+      <collection property="list_freeLancerreview" javaType="java.util.ArrayList" ofType="fp.freelancerprofile.domain.List_FreeLancerReview" >
+        	<id property="pro_num" column="pro_num"/>
+	      	<result property="freerev_star" column="freerev_star"/>
+       </collection>  
+      </resultMap>
+
 
    <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
     <select id="countProfileList" resultType="long">
    		 select count(profile_sub) from freelancer_profile where free_code=#{free_code}
     </select>
-  
-  
+    
+	  <select id="selectAllFreeKeywords" resultMap="free_profile">
+			<![CDATA[
+				SELECT pro.PRo_NUM, kw.KEY_NAME as key_name
+	   			FROM KEYWORD kw
+	  			LEFT OUTER JOIN FREE_PICK_KEYWORD freepkw ON freepkw.KEY_NUM = kw.KEY_NUM
+	   			RIGHT OUTER JOIN FREELANCER_PROFILE pro ON pro.pro_NUM = freepkw.pro_NUM
+			]]>
+		</select>
+  	
 	<select id='profile_free_select' parameterType="String" resultType="FreeLancerProfile">
 		select * from FREELANCER_PROFILE where mem_email=#{mem_email}
 	</select>
@@ -423,6 +461,47 @@
 		pj.pj_num=#{pj_num}
 		 order by appp.appp_date
 		 ]]>
+	</select>
+	<!-- 프리랜서 찜 -->
+	<select id="freepick_list" resultType="fp.freelancerprofile.domain.FreeLancerPick" parameterType="long">
+		select * from freelancer_pick where cor_code=#{cor_code}
+	</select>
+	<insert id="freepick_insert" parameterType="map">
+	 insert into freelancer_pick(FREEP_NUM, PRO_NUM, cor_code) values (FREEP_NUM_SEQ.nextval, #{pro_num}, #{cor_code})
+	</insert>
+	<delete id="freepick_del" parameterType="map">
+	delete from freelancer_pick where cor_code=#{cor_code} and pro_num=#{pro_num}
+	</delete>
+	<update id="freepick_pro_update_in" parameterType="map">
+	update freelancer_profile set PRO_PCNT= PRO_PCNT+1 where pro_num=#{pro_num}
+	</update>
+	<update id="freepick_pro_update_del" parameterType="map">
+	update freelancer_profile set PRO_PCNT= PRO_PCNT-1 where pro_num=#{pro_num}
+	</update>
+	<!--  기업 mypage에서 프리랜서 찜  조회 -->
+	<select id="getTotalCountFreep" resultType="long" >
+		select count(pro.pro_num) from Freelancer_profile pro join freelancer_pick freep on pro.pro_num=freep.pro_num where cor_code=#{cor_code}  
+	</select>
+	<select id ="freepick_cor" parameterType="map" resultMap="freePickList">
+	 <![CDATA[
+		 select * from (select ROWNUM rnum , aa.* from
+		(select A.*, B.* from
+		(select pro.pro_num as pro_num,pro.type_num, pro.pro_exp, pro.PRO_OX, free.free_name, free.free_fname, pro.free_code, free.mem_email
+		from freelancer_profile pro join
+		Freelancer free on
+		pro.free_code = free.free_code 
+		join freelancer_pick freep 
+		on freep.pro_num=pro.pro_num 
+		where freep.cor_code=#{cor_code}) A
+		left outer join
+		(select pro.pro_num BNUM , avg(freerev.FREEREV_STAR) as freerev_starAVG
+		from freelancer_profile pro
+		left outer join FREELANCER_REVIEW freerev
+		on pro.pro_num = freerev.pro_num
+		group by pro.pro_num) B
+		on A.pro_num =B.BNUM 
+		order by A.pro_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
+	 ]]>
 	</select>
 	<!--/////////////////////////// -->
 </mapper>

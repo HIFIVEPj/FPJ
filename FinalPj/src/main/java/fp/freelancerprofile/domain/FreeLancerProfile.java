@@ -37,6 +37,7 @@ public class FreeLancerProfile {
 	private String profile_sub; //프로필명
 	private Date profile_date; //프로필 등록일
 	
+	private float freerev_starAVG; // free
 
 
 	private List<FreeLancerProfile> freelancerprofile;
@@ -55,6 +56,7 @@ public class FreeLancerProfile {
 	private List<Integer> keynums; //담추가
 	private List<String> keynames; //담추가
 	
+	private FreeLancer free;
 	
 	private List<Applied_Project> applied_project;
 

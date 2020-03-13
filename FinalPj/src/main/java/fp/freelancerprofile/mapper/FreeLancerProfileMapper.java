@@ -3,11 +3,9 @@ package fp.freelancerprofile.mapper;
 
 import java.util.*;
 
-import org.springframework.context.annotation.Profile;
 
-import fp.corporation.domain.PjPickKeyword;
-import fp.corporation.domain.Project;
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
@@ -65,7 +63,17 @@ public interface FreeLancerProfileMapper {
 	List<FreeLancer>select_pj_applied_free_paging(long pj_num);
 	
 	public void insertPjpkeyword(Map<String, Object> map);
-
+	//프리랜서 찜
+	List<FreeLancerPick>freepick_list(long cor_code);
+	void freepick_insert(Map<String, Object>map);
+	void freepick_del(Map<String, Object>map);
+	void freepick_pro_update_in(Map<String, Object>map);
+	void freepick_pro_update_del(Map<String, Object>map);
 	
+	long getTotalCountFreep(long cor_code);
+	List<FreeLancerProfile> freepick_cor(Map<String, Object>map);
+	
+	//profile keyword 전체뽑기
+	List<FreeLancerProfile> selectAllFreeKeywords();
 	
 }

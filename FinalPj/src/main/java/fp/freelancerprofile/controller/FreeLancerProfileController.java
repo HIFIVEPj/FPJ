@@ -12,6 +12,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -262,8 +263,10 @@ public class FreeLancerProfileController {
 			return "profile/payments";
 		}
 		@RequestMapping("myfavorite")	//관심있는프로젝트
-		public ModelAndView Myfavorite(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
+		public ModelAndView Myfavorite(HttpServletRequest request,ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
 				, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+			HttpSession session = request.getSession();
+			String mem_email = session.getAttribute("email").toString();
 			FreeLancer freelancer = service.mydash_free_select(mem_email);
 			ModelAndView mv = new ModelAndView("profile/myfavorite");
 			long totalCountPjpick = pjservice.getTotalCountPickPj(freelancer.getFree_code());
@@ -290,17 +293,19 @@ public class FreeLancerProfileController {
 			return mv;
 		}
 		@RequestMapping("myfavorite_del")
-		public String myfavorite_del(@RequestParam long pj_num, @RequestParam long free_code, @RequestParam String mem_email) {
+		public String myfavorite_del(@RequestParam long pj_num, @RequestParam long free_code) {
 			//log.info("@#^$&*@$# pj_num: "+pj_num+", free_code: "+free_code);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("pj_num", pj_num);
 			map.put("free_code", free_code);
 			pjservice.pjpick_del(map);
-			return "redirect:myfavorite?mem_email="+mem_email;
+			return "redirect:myfavorite";
 		}
 	
 		@RequestMapping("mydash_free")	//회원정보수정
-		public ModelAndView Mydash_change(@RequestParam String mem_email) {
+		public ModelAndView Mydash_change(HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String mem_email= (String)session.getAttribute("email");
 			FreeLancer freelancer = service.mydash_free_select(mem_email);
 			ModelAndView mv = new ModelAndView("profile/mydash_change");
 			mv.addObject("mydash", freelancer);

@@ -7,16 +7,21 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.Corporation;
+import fp.corporation.domain.ProjectPick;
+import fp.corporation.service.CorporationService;
 import fp.freelancerlist.domain.FreeLancerListVO;
 import fp.freelancerlist.domain.List_FreeLancer;
 import fp.freelancerlist.domain.List_FreeLancerProfile;
@@ -25,11 +30,13 @@ import fp.freelancerlist.domain.List_PagingVO;
 import fp.freelancerlist.domain.List_Type;
 import fp.freelancerlist.service.FreeLancerListService;
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
+import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.market.domain.Member;
 import lombok.extern.log4j.Log4j;
 
@@ -41,11 +48,18 @@ public class FreeLancerListController {
 	@Autowired
 	private FreeLancerListService service;
 	
+	@Autowired
+	private CorporationService corService;
+	@Autowired
+	private FreeLancerProfileService proService;
+	
 	@GetMapping("freelancerList")
 	public ModelAndView FreelnacerList(List_PagingVO vo, FreeLancerListVO listVo
 						, @RequestParam(value="nowPage", required=false)String nowPage
-						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-
+						, @RequestParam(value="cntPerPage", required=false)String cntPerPage
+						, HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 	//	FreeLancer freelancer = service.free_list_select(mem_email);
 	//	long totalFreeCount = service.getTotalCountFree(freelancer.getFree_code());
 
@@ -64,11 +78,26 @@ public class FreeLancerListController {
 		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();
 		List<Project> freelancerList3 = service.SelectList3();
 		ModelAndView mv = new ModelAndView("freelancer/freelancerList");
+		if(mem_email != null) {
+			Corporation cor = corService.mydash_cor_select(mem_email);
+			if(cor != null) {
+				List<FreeLancerPick> freeplist = proService.freepick_list(cor.getCor_code());
+				ArrayList<Long>pronumList  = new ArrayList<Long>();
+				for(int j=0; j<freeplist.size(); j++) {
+					pronumList.add(freeplist.get(j).getPRO_NUM());
+				}
+				mv.addObject("cor", cor);
+				mv.addObject("freeplist",freeplist);
+				mv.addObject("pronumList",pronumList);
+			}
+		}
 		mv.addObject("paging", vo);
 		mv.addObject("freelancerList", freelancerList);
 		mv.addObject("freelancerList2", freelancerList2);
 		mv.addObject("freelancerList3", freelancerList3);
+		
 		return mv;
+		
 	}
 	
 	/*		//프리랜서 리스트 컨텐츠//
@@ -146,6 +175,25 @@ public class FreeLancerListController {
 	public String reviewDelete(long freerev_num){
 		service.reviewDelete(freerev_num);
 		return "null";
+	}
+	
+	//찜하기 버튼 구현
+	@RequestMapping(value="/free_wish", method=RequestMethod.GET)
+	@ResponseBody
+	public void free_wish(@RequestParam long pro_num, @RequestParam long cor_code) {
+		//log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code);
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("pro_num",pro_num);
+		map.put("cor_code", cor_code);
+		proService.freepick_insert(map);
+	}
+	@RequestMapping(value="/free_wish_del", method=RequestMethod.GET)
+	@ResponseBody
+	public void free_wish_del(@RequestParam long pro_num, @RequestParam long cor_code) {
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("pro_num", pro_num);
+		map.put("cor_code", cor_code);
+		proService.freepick_del(map);
 	}
 
 }

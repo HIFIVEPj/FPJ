@@ -38,43 +38,45 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
+								<c:if test="${free.free_fname eq null}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name} </h4></a>
+								</c:if>
+								<c:if test = "${free.free_fname ne null}">
+									<div class="profile-pic-img">
+										<img src="../hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
+									</div>
+								</c:if>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
-							<aside class=" doc-sidebar my-dash">
+							<aside class="doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
-												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
-												<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
-												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
-												</c:if>
+												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+												<li><a class="slide-item" href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
-
-												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>		
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">마켓관리</a></li>
+												<li><a class="slide-item" href="myMarket2">구매관리</a></li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
 											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>

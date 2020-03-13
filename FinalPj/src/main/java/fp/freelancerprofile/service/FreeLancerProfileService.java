@@ -5,6 +5,7 @@ import java.util.*;
 
 import fp.corporation.domain.PjPickKeyword;
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
@@ -59,8 +60,16 @@ public interface FreeLancerProfileService {
 	public void mydash_free_update(FreeLancer freelancer);
 	public List<FreeLancer>select_pj_applied_free();
 	public List<FreeLancer>select_pj_applied_free_paging(long pj_num);
+	//프리랜서 찜
+	List<FreeLancerPick>freepick_list(long cor_code);
+	void freepick_insert(Map<String, Object>map);
+	void freepick_del(Map<String, Object>map);
 
-
-
+	//mydash_cor에서 프리랜서찜한 목록 보기
+	long getTotalCountFreep(long cor_code);
+	List<FreeLancerProfile> freepick_cor(Map<String, Object>map);
+	
+	//profile keyword 전체뽑기
+	List<FreeLancerProfile> selectAllFreeKeywords();
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,8 +49,9 @@ public class ProjectController {
 	@RequestMapping(value="/project_list", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email) {
-		
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "4";
@@ -193,8 +195,9 @@ public class ProjectController {
 		return mv;
 	}
 	@RequestMapping("project_content")
-	public ModelAndView project_content(@RequestParam long pj_num, @RequestParam(value="mem_email", required=false)String mem_email) {
-		
+	public ModelAndView project_content(@RequestParam long pj_num, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		Project project = service.showContent(pj_num);
 		Corporation corInfo = service.corInfo(pj_num);
 		ModelAndView mv = new ModelAndView("project/project_content");
@@ -261,7 +264,9 @@ public class ProjectController {
 	}
 	
 	@GetMapping("project_write")
-	public ModelAndView project_write(String mem_email) {
+	public ModelAndView project_write( HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		Corporation cor = corService.mydash_cor_select(mem_email);
 		ModelAndView mv = new ModelAndView("project/project_write");
 		mv.addObject("cor", cor);

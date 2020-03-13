@@ -36,32 +36,40 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
+								<c:if test="${cor.cor_fname eq ''}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">김소담</h4></a>
+								</c:if>
+								<c:if test = "${cor.cor_fname ne '' }">
+									<div class="profile-pic-img">
+										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+									</div>
+								</c:if>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
 							<aside class="doc-sidebar my-dash">
+							<!--<aside class="app-sidebar doc-sidebar my-dash">-->
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
+												<li><a class="slide-item " href="mydash_cor">기업</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite_temp">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_cor.html">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
+												<li><a class="slide-item" href="myfavorite_market">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
+												<li><a class="slide-item" href="project_write?mem_email=${sessionScope.email}">프로젝트 작성하기</a></li>
 												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
 											</ul>
 										</li>
@@ -69,68 +77,12 @@
 											<a class="side-menu__item" href="payments_cor?mem_email=${sessionScope.email}"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
 							</aside>
 						</div>
-						<!--  
-						<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">Safety Tips For Buyers</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						-->
 					</div>
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
@@ -143,8 +95,7 @@
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">전체보기</a></li>
-											<li><a href="#tab2" data-toggle="tab">모집중인 공고</a></li>
-											<li><a href="#tab3" data-toggle="tab">마감된 공고</a></li>
+											<li><a href="#tab2" data-toggle="tab">업무가능 프리랜서</a></li>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -154,13 +105,22 @@
 											<tr>
 												<th></th>
 												<th><b>프로필</b></th>
-												<th><b>이름</b></th>
 												<th><b>경력</b></th>
 												<th><b>업무가능 여부</b></th>
 												<th><b>버튼</b></th>
 											</tr>
 										</thead>
 										<tbody>
+										<c:choose>
+											<c:when test="${empty freeP}">
+												<tr>
+													<td colspan="6" id="center">
+														찜한 프리랜서가 없습니다.
+													</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+											<c:forEach var="dto" items="${freeP}">
 											<tr>
 												<td>
 													<label class="custom-control custom-checkbox">
@@ -172,38 +132,78 @@
 													<div class="media mt-0 mb-0">
 														<div class="card-aside-img">
 															<a href="#"></a>
-															<img src="../images/products/h2.png" alt="img">
+															<c:if test="${dto.free.free_fname eq null}">
+																<!-- <img src="../images/products/h2.png" class="brround" alt="user"> -->
+																<i class="fa fa-user-circle text-muted mr-1 fa-3x"></i>
+															</c:if>
+															<c:if test = "${dto.free.free_fname ne null}">
+																<img src="../hifiveImages/free_thumb/${dto.free.free_fname}" class="brround" alt="${dto.free.free_fname}">
+															</c:if>
 														</div>
 														<div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">
-																<a href="#" class="text-dark"><h4 class="font-weight-semibold"><b>열심히 할게요</b></h4></a>
-																<a href="#" ><i class="fa fa fa-user mr-1"></i> 개발자 / 초급 </a> | 
-																<span class="text-warning">
-																	<i class="fa fa-star"> </i>
-																	<i class="fa fa-star"> </i>
-																	<i class="fa fa-star"> </i>
-																	<i class="fa fa-star"> </i>
-																	</span>
-																	<i class="fa fa-star"> </i>
-																(4.0)<br>
+																<a href="freelancercontent?free_code=${dto.free_code}&pro_num=${dto.pro_num}" class="text-dark"><h4 class="font-weight-semibold"><b>${dto.free.free_name}</b></h4></a>
+																<a href="#" ><i class="fa fa fa-user mr-1"></i> 
+																<c:if test="${dto.type_num == 1}">개발</c:if>
+																<c:if test="${dto.type_num == 2}">퍼블리싱</c:if>
+																<c:if test="${dto.type_num == 3}">디자인</c:if>
+																<c:if test="${dto.type_num == 4}">기획</c:if>
+																<c:if test="${dto.type_num == 5}">기타</c:if></a> | 
+																 <c:if test="${dto.freerev_starAVG >= 0}" ><!-- 마켓리뷰점수가 -->
+																	<c:forEach var="1" begin="1" end="${dto.freerev_starAVG}">
+																	   <i class="fa fa-star text-warning"> </i>
+																	</c:forEach>
+																	<c:forEach var="1" begin="1" end="${5-dto.freerev_starAVG}">
+																	   <i class="fa fa-star-o text-warning"> </i>
+																	</c:forEach>   
+																 </c:if>
+																(${dto.freerev_starAVG})<br>
 																<div class="tags" style="margin-top:3px;">
-																	<span class="tag tag-gray">JAVA</span><span class="tag tag-gray">SPRING</span>
-																	<span class="tag tag-gray">ORACLE</span><span class="tag tag-gray">HTML</span>
-																	<span class="tag tag-gray">CSS</span>
+															${keyword.get(1).keyword}
+															<c:forEach var="key" items="${keyword}">
+																	<c:if test="${key.pro_num eq dto.pro_num}">
+																		<c:choose>
+																			<c:when test="${key.keyword eq '[]'}">
+																				키워드 없음
+																			</c:when>
+																			<c:otherwise>
+																				<c:choose>
+																				<c:when test="${key.keyword.size()>2}">
+																					<c:forEach var="i" begin="0" end="2">
+																						<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
+																					</c:forEach>
+																				</c:when>
+																				<c:otherwise>
+																					<c:forEach var="i" begin="0" end="${key.keyword.size()-1}">
+																						<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
+																					</c:forEach>
+																				</c:otherwise>
+																				</c:choose>
+																			</c:otherwise>
+																		</c:choose>
+																	</c:if>
+																</c:forEach>
 															</div>
 														</div>
 													</div>
 												</td>
-												<td>한나영</td>
-												<td class="font-weight-semibold fs-16">1년</td>
+												<td class="font-weight-semibold fs-16"> ${dto.pro_exp}년</td>
 												<td>
-													<a href="#" class="badge badge-primary">가능</a>
+													<c:if test = "${dto.pro_ox eq '가능'}">
+														<a href="#" class="badge badge-primary">${dto.pro_ox}</a>
+													</c:if>
+													<c:if test = "${dto.pro_ox eq '불가능'}">
+														<a href="#" class="badge badge-danger">${dto.pro_ox}</a>
+													</c:if>	
 												</td>
 												<td>
-													<a href="#" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-													<a href="#" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="연락하기"><i class="fa fa-envelope"></i></a>
+													<a href="myfavorite_cor_del?pro_num=${dto.pro_num}&cor_code=${cor.cor_code}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<a href="mailto:${dto.free.mem_email}" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="연락하기"><i class="fa fa-envelope"></i></a>
 												</td>
 											</tr>
+											</c:forEach>
+											</c:otherwise>
+											</c:choose>
 										</tbody>
 									</table>
 								</div>
@@ -213,29 +213,116 @@
 											<tr>
 												<th></th>
 												<th><b>프로필</b></th>
-												<th><b>이름</b></th>
 												<th><b>경력</b></th>
 												<th><b>업무가능 여부</b></th>
 												<th><b>버튼</b></th>
 											</tr>
 										</thead>
 										<tbody>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
+										<c:choose>
+											<c:when test="${empty freeP}">
+												<tr>
+													<td colspan="6" id="center">
+														찜한 프리랜서가 없습니다.
+													</td>
+												</tr>
+											</c:when>
+											<c:otherwise>
+											<c:forEach var="dto" items="${freeP}">
+											<c:choose>
+											<c:when test="${dto.pro_ox eq '가능'}">
 											<tr>
-												<th></th>
-												<th><b>프로필</b></th>
-												<th><b>이름</b></th>
-												<th><b>경력</b></th>
-												<th><b>업무가능 여부</b></th>
-												<th><b>버튼</b></th>
+												<td>
+													<label class="custom-control custom-checkbox">
+														<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
+														<span class="custom-control-label"></span>
+													</label>
+												</td>
+												<td>
+													<div class="media mt-0 mb-0">
+														<div class="card-aside-img">
+															<a href="#"></a>
+															<c:if test="${dto.free.free_fname eq null}">
+																<!-- <img src="../images/products/h2.png" class="brround" alt="user"> -->
+																<i class="fa fa-user-circle text-muted mr-1 fa-3x"></i>
+															</c:if>
+															<c:if test = "${dto.free.free_fname ne null}">
+																<img src="../hifiveImages/free_thumb/${dto.free.free_fname}" class="brround" alt="${dto.free.free_fname}">
+															</c:if>
+														</div>
+														<div class="media-body">
+															<div class="card-item-desc ml-4 p-0 mt-2">
+																<a href="freelancercontent?free_code=${dto.free_code}&pro_num=${dto.pro_num}" class="text-dark"><h4 class="font-weight-semibold"><b>${dto.free.free_name}</b></h4></a>
+																<a href="#" ><i class="fa fa fa-user mr-1"></i> 
+																<c:if test="${dto.type_num == 1}">개발</c:if>
+																<c:if test="${dto.type_num == 2}">퍼블리싱</c:if>
+																<c:if test="${dto.type_num == 3}">디자인</c:if>
+																<c:if test="${dto.type_num == 4}">기획</c:if>
+																<c:if test="${dto.type_num == 5}">기타</c:if></a> | 
+																 <c:if test="${dto.freerev_starAVG >= 0}" ><!-- 마켓리뷰점수가 -->
+																	<c:forEach var="1" begin="1" end="${dto.freerev_starAVG}">
+																	   <i class="fa fa-star text-warning"> </i>
+																	</c:forEach>
+																	<c:forEach var="1" begin="1" end="${5-dto.freerev_starAVG}">
+																	   <i class="fa fa-star-o text-warning"> </i>
+																	</c:forEach>   
+																 </c:if>
+																(${dto.freerev_starAVG})<br>
+																<div class="tags" style="margin-top:3px;">
+															${keyword.get(1).keyword}
+															<c:forEach var="key" items="${keyword}">
+																	<c:if test="${key.pro_num eq dto.pro_num}">
+																		<c:choose>
+																			<c:when test="${key.keyword eq '[]'}">
+																				키워드 없음
+																			</c:when>
+																			<c:otherwise>
+																				<c:choose>
+																				<c:when test="${key.keyword.size()>2}">
+																					<c:forEach var="i" begin="0" end="2">
+																						<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
+																					</c:forEach>
+																				</c:when>
+																				<c:otherwise>
+																					<c:forEach var="i" begin="0" end="${key.keyword.size()-1}">
+																						<span class="tag tag-gray">${key.keyword.get(i).key_name}</span>
+																					</c:forEach>
+																				</c:otherwise>
+																				</c:choose>
+																			</c:otherwise>
+																		</c:choose>
+																	</c:if>
+																</c:forEach>
+															</div>
+														</div>
+													</div>
+												</td>
+												<td class="font-weight-semibold fs-16"> ${dto.pro_exp}년</td>
+												<td>
+													<c:if test = "${dto.pro_ox eq '가능'}">
+														<a href="#" class="badge badge-primary">${dto.pro_ox}</a>
+													</c:if>
+													<c:if test = "${dto.pro_ox eq '불가능'}">
+														<a href="#" class="badge badge-danger">${dto.pro_ox}</a>
+													</c:if>	
+												</td>
+												<td>
+													<a href="free_wish_del?pro_num=${dto.pro_num}&cor_code=${cor.cor_code}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<a href="mailto:${dto.free.mem_email}" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="연락하기"><i class="fa fa-envelope"></i></a>
+												</td>
 											</tr>
-										</thead>
-										<tbody>
+											</c:when>
+											<c:when test="${dto.pro_ox ne '불가능' }">
+											<tr>
+												<td colspan="6" id="center">
+													업무가능한 프리랜서가 없습니다.
+												</td>
+												</tr>
+											</c:when>
+											</c:choose>
+											</c:forEach>
+											</c:otherwise>
+											</c:choose>
 										</tbody>
 									</table>
 								</div>
@@ -244,37 +331,33 @@
 							
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
-									<ul class="pagination mg-b-0 page-0 ">
-										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
+									<div class="center-block text-center">
+									<ul class="pagination mb-0">
+									<c:if test="${pa.nowPage != 1}">
+														<!--이전 페이지 이동 -->
+										<li class="page-item page-prev">
+											<a class="page-link" href="managed_project?mem_email=${sessionScope.email}&nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}">prev</a>
 										</li>
-										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-										</li>
-				
-										<li class="page-item active">
-											<a class="page-link" href="#">1</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link" href="#">2</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link hidden-xs-down" href="#">3</a>
-										</li>
-										<li class="page-item ">
-											<a class="page-link" href="#">4</a>
-										</li>
-										<li class="page-item">
-											<a class="page-link hidden-xs-down" href="#">5</a>
-										</li>
-								
-										<li class="page-item">
-											<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-										</li>
-										<li class="page-item">
-											<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-										</li>
+									</c:if>
+									<!--페이지번호 -->
+									<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
+										<c:choose>
+											<c:when test="${p == pa.nowPage}">
+												<li class='page-item active'><a class="page-link">${p}</a></li>
+											</c:when>
+											<c:when test = "${p != pa.nowPage }">
+												<li class="page-item"><a class="page-link" href="managed_project?mem_email=${sessionScope.email}&nowPage=${p}&cntPerPage=${pa.cntPerPage}">${p}</a></li>
+											</c:when>
+										</c:choose>
+										</c:forEach>
+										<c:if test ="${pa.nowPage != pa.lastPage}">
+											<li class="page-item page-next">
+												<a class="page-link" href="managed_project?mem_email=${sessionScope.email}&nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}">Next</a>
+											</li>
+										</c:if>
+										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
 									</ul>
+								</div>
 								</div>
 								<!-- pagination-wrapper -->
 							</div>
