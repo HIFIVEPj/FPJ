@@ -503,5 +503,17 @@
 		order by A.pro_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
 	 ]]>
 	</select>
+	<update id="updateACCTOX" parameterType="long">
+	update freelancer set free_acctox=1 where free_code=#{free_code}
+	</update>
+	<insert id="addACCT" parameterType="fp.freelancerprofile.domain.Freelnacer_account">
+	 insert into FREELANCER_ACCOUNT(free_code,freeac_acct,freeac_bank,freeac_holder) values(#{free_code},#{freeac_acct},#{freeac_bank},#{freeac_holder})
+	</insert>
+	<select id="selectFreeACCT" parameterType="long" resultType="fp.freelancerprofile.domain.Freelnacer_account">
+	select * from FREELANCER_ACCOUNT where free_code=#{free_code}
+	</select>
+	<update id="updateACCT" parameterType="fp.freelancerprofile.domain.Freelnacer_account">
+	update FREELANCER_ACCOUNT set freeac_acct=#{freeac_acct},freeac_bank=#{freeac_bank},freeac_holder=#{freeac_holder} where free_code=#{free_code}
+	</update>
 	<!--/////////////////////////// -->
 </mapper>

@@ -1,4 +1,4 @@
-package fp.freelancerprofile.controller;
+package fp.member.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -50,10 +50,11 @@ public class OpenBankingController {
 	return returnNode;
 	}
 	
-	public static JsonNode getBankInfo(String accessToken) {
-		final String RequestUrl = "https://api.iamport.kr/vbanks/holder?bank_code=020&bank_num=1002234782602";
+	public static JsonNode getBankInfo(String accessToken, String bank_code, String bank_num) {
+		final String RequestUrl = "https://api.iamport.kr/vbanks/holder?bank_code="+bank_code+"&bank_num="+bank_num;
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpGet httpget = new HttpGet(RequestUrl);
+		JsonNode holder =null;
 		//httpget.setHeader("Content-Type","application/json");
 		httpget.addHeader("Authorization", "Bearer "+accessToken);
 		JsonNode returnNode = null;
@@ -69,6 +70,13 @@ public class OpenBankingController {
 		// JSON 형태 반환값 처리
 		ObjectMapper mapper = new ObjectMapper();
 		returnNode = mapper.readTree(response.getEntity().getContent());
+		log.info("returnNode: "+returnNode);
+		if(returnNode.get("code").asInt()==-1) {
+			holder= returnNode.get("code");
+		}else {
+			holder = returnNode.get("response").get("bank_holder");
+		}
+		log.info("bbbbbb: "+holder);
 		log.info("상태번호 : "+response.getStatusLine().getStatusCode());
 	} catch (ClientProtocolException e) {
 		e.printStackTrace();
@@ -77,6 +85,6 @@ public class OpenBankingController {
 	} finally {
 	// clear resources
 	}
-	return returnNode;
+	return holder;
 	}
 }

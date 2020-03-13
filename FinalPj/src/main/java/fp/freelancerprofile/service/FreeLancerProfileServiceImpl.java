@@ -15,6 +15,7 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
@@ -187,6 +188,25 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Override
 	public List<FreeLancerProfile> selectAllFreeKeywords(){
 		return mapper.selectAllFreeKeywords();
+	}
+	
+	//계좌추가
+	@Override
+	public void updateACCTOX(long free_code) {
+		mapper.updateACCTOX(free_code);
+	}
+	@Override
+	public void addACCT(Freelnacer_account freeacct){
+		mapper.addACCT(freeacct);
+	}
+	
+	@Override
+	public Freelnacer_account selectFreeACCT(long free_code) {
+		return mapper.selectFreeACCT(free_code);
+	}
+	@Override
+	public void updateACCT(Freelnacer_account freeacct) {
+		mapper.updateACCT(freeacct);
 	}
 }
 
