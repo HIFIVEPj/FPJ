@@ -821,7 +821,7 @@
 				 alert("성공2");  
 				   },
 			 error:function(data){
-				 //alert("에러발생2");
+				 //alert("에러발생2"..);
 			       }
 			});
 	 }
