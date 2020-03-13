@@ -270,7 +270,7 @@
 													<td class="text-center">${qa_list.qa_num}</td>
 													<td class="text-center">${qa_list.qa_cate}</td>
 													<!--<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}">${qa_list.qa_sub}</a>&nbsp;<span style="color:red">+${qa_comment_count.qa_comment_count}</span></td>-->
-													<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}">${qa_list.qa_sub}</a>&nbsp;<c:if test="${qa_list.replyCnt > 0}"><span style="color:red"><b>[<c:out value="${qa_list.replyCnt}"/>]</b></span></c:if></td>
+													<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}&mem_email=${qa_list.mem_email}">${qa_list.qa_sub}</a>&nbsp;<c:if test="${qa_list.replyCnt > 0}"><span style="color:red"><b>[<c:out value="${qa_list.replyCnt}"/>]</b></span></c:if></td>
 													<!--<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}&pageNum=${pageMaker.cri.pageNum}&amount='+sel+'&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${qa_list.qa_sub}</a></td>-->
 													<td class="text-center">${qa_list.mem_name}</td>
 													<td class="text-center"><fmt:formatDate value="${qa_list.qa_rdate}" pattern="yyyy.MM.dd"/></td>
@@ -525,7 +525,7 @@
 					
 									<c:if test="${sessionScope.class_num > 0}">
 									<div class="col-md-4 text-right">
-										<a href="customer_service_qa_test" class="btn btn-primary"><i class="fa fa-user-circle"></i>&nbsp;내 문의 보기</a>
+										<a href="customer_service_qa_test" class="btn btn-primary"><i class="fa fa-user-circle"></i>&nbsp;내 문의</a>
 										<a href="customer_service_qa_write#" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
 									</div>
 									</c:if>
@@ -1088,4 +1088,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> ae82e0fe4b132d55bb86f97ae28424b889cadc8c
 <!--/footer-->

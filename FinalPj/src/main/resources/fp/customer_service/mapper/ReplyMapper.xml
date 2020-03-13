@@ -27,7 +27,44 @@
 		<!--
 		select * from qa_comment where qa_num=#{qa_num} order by qacomm_num asc
 		-->
+		<!--
+		select qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name from qa_comment, member where qa_comment.mem_email=member.mem_email and qa_num=#{qa_num} order by qacomm_num asc
+		-->
 		
-		select qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name from qa_comment, member where qa_comment.mem_email=member.mem_email and qa_num=#{qa_num} order by qacomm_num asc		
+		<!-- index 사용 -->
+		<!--
+		<![CDATA[
+		select qacomm_num, qa_num, mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, option1, option2, option3, mem_name from (select /*+INDEX(qa_comment idx_reply) */ rownum rn, qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name from qa_comment, member where qa_comment.mem_email=member.mem_email and qa_num=#{qa_num} and qacomm_num > 0 and rownum <= #{cri.pageNum} * #{cri.amount}) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>	
+		-->
+		
+		<!-- index 사용하지 않음-->
+		<!--
+		<![CDATA[
+		select qacomm_num, qa_num, mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, option1, option2, option3, mem_name from (select rownum rn, qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name from qa_comment, member where qa_comment.mem_email=member.mem_email and qa_num=#{qa_num} and qacomm_num > 0 and rownum <= #{cri.pageNum} * #{cri.amount}) where rn > (#{cri.pageNum} -1) * #{cri.amount} order by qa_num desc, qacomm_num asc
+		]]>	
+		-->
+		
+		<!-- index 사용하지 않음--><!-- 프로필 사진 가져오기 -->
+		<!--
+		<![CDATA[
+		select qacomm_num, qa_num, mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, option1, option2, option3, mem_name, class_num, cor_fname, free_fname from (select rownum rn, qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name, class_num, cor_fname, free_fname from qa_comment left outer join member on qa_comment.mem_email = member.mem_email left outer join corporation on qa_comment.mem_email = corporation.mem_email left outer join freelancer on qa_comment.mem_email = freelancer.mem_email where qa_num = #{qa_num} and qacomm_num > 0 and rownum <= (#{cri.pageNum} * #{cri.amount})) where rn > ((#{cri.pageNum}-1) * #{cri.amount}) order by qa_num desc, qacomm_num asc
+		]]>
+		-->
+		<!--
+		<![CDATA[
+		select qacomm_num, qa_num, mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, option1, option2, option3, mem_name, class_num, cor_fname, free_fname from (select rownum rn, qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name, class_num, cor_fname, free_fname from qa_comment left outer join member on qa_comment.mem_email = member.mem_email left outer join corporation on qa_comment.mem_email = corporation.mem_email left outer join freelancer on qa_comment.mem_email = freelancer.mem_email where qa_num = #{qa_num} and qacomm_num > 0 and rownum <= (#{cri.pageNum} * #{cri.amount}) order by qacomm_num asc) where rn > ((#{cri.pageNum}-1) * #{cri.amount})
+		]]>
+		-->
+		<!-- index 사용 -->
+		<![CDATA[
+		select qacomm_num, qa_num, mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, option1, option2, option3, mem_name, class_num, cor_fname, free_fname from (select /*+INDEX(qa_comment idx_qa_comment) */ rownum rn, qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name, class_num, cor_fname, free_fname from qa_comment left outer join member on qa_comment.mem_email = member.mem_email left outer join corporation on qa_comment.mem_email = corporation.mem_email left outer join freelancer on qa_comment.mem_email = freelancer.mem_email where qa_num = #{qa_num} and qacomm_num > 0 and rownum <= (#{cri.pageNum} * #{cri.amount})) where rn > ((#{cri.pageNum}-1) * #{cri.amount})
+		]]>
+	</select>
+	
+	<select id="getCountByQa_num" resultType="long">
+		<![CDATA[
+		select count(qa_num) from qa_comment where qa_num = #{qa_num}
+		]]>
 	</select>
 </mapper>

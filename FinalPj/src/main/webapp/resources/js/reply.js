@@ -1,4 +1,4 @@
-console.log("### Reply Module");
+//console.log("### Reply Module");
 
 var replyService = (function(){
 	function add(qacomm_cont, callback, error){
@@ -29,7 +29,9 @@ var replyService = (function(){
 		$.getJSON("/replies/pages/" + qa_num + "/" + page + ".json",
 			function(data) {
 				if (callback) {
-					callback(data);
+					//callback(data); // 댓글의 목록만 가져오기
+					//alert(data.list);
+					callback(data.replyCnt, data.list); // 댓글 수와 목록을 함께 가져오기					
 				}
 			}).fail(function(xhr, status, err) {
 				if (error) {
@@ -44,7 +46,9 @@ var replyService = (function(){
 			url : '/replies/' + qacomm_num,
 			success : function(deleteResult, status, xhr) {
 				if (callback) {
+					//alert("삭제 성공!");
 					callback(deleteResult);
+					//alert("이것도 뜨나?");
 				}
 			},
 			error : function(xhr, status, er) {

@@ -12,8 +12,11 @@
 		<typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
 	  	<typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
 	  	<typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
+	  	<typeAlias alias="ReplyPageDTO" type="fp.customer_service.domain.ReplyPageDTO"/>
+	  	<typeAlias alias="AttachFileDTO" type="fp.customer_service.domain.AttachFileDTO"/>
 	  	<typeAlias alias="BoardAttachVO" type="fp.customer_service.domain.BoardAttachVO"/>
 	  	<typeAlias alias="Qa_recommend" type="fp.customer_service.domain.Qa_recommend"/>
+	  	<typeAlias alias="Notice_recommend" type="fp.customer_service.domain.Notice_recommend"/>
 		<!--
 		<typeAlias alias="CustomerServicePagingVO" type="fp.customer_service.domain.CustomerServicePagingVO"/>
 		-->
