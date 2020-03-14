@@ -16,4 +16,7 @@ public class MarketBuysellList {
 	private Date mbuysell_date;
 	
 	private Market market;
+	private MarketRev marketRev;
+	private Freelancer freelancer;
+
 }

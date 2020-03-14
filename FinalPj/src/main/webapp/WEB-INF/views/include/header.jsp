@@ -174,12 +174,12 @@
 											</a>
 											</c:if>
 											<c:if test="${sessionScope.class_num==4}">
-												<a href="mydash_cor?mem_email=${sessionScope.email}" class="dropdown-item" >
+												<a href="mydash_cor" class="dropdown-item" >
 													<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 												</a>
 											</c:if>
 											<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
-											<a href="mydash_free?mem_email=${sessionScope.email}" class="dropdown-item" >
+											<a href="mydash_free" class="dropdown-item" >
 												<i class="dropdown-icon si si-user" style="color:#1f719a;"></i> 프로필 관리
 											</a>
 											</c:if>
@@ -237,7 +237,7 @@
 									<li aria-haspopup="true"><a href="project_list">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
 									</c:when>
 									<c:otherwise>
-									<li aria-haspopup="true"><a href="project_list?mem_email=${sessionScope.email}">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
+									<li aria-haspopup="true"><a href="project_list">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
 									</c:otherwise>
 								</c:choose>								<!--
 								<li aria-haspopup="true"><a href="./" class="active">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
@@ -251,7 +251,14 @@
 									</ul>
 								</li>							
 								<li aria-haspopup="true"><a href="market-list">프리마켓</a></li>
-								<li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
+								<c:choose>
+									<c:when test="${empty sessionScope.email}">
+									<li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
+									</c:when>
+									<c:otherwise>
+									<li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
+									</c:otherwise>
+								</c:choose>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="#">개발</a></li>
 										<li aria-haspopup="true"><a href="#">디자인</a></li>
@@ -279,7 +286,7 @@
 																<li class="title"><a href="project_list">프로젝트</a></li>
 															</c:when>
 															<c:otherwise>
-																<li class="title"><a href="project_list?mem_email=${sessionScope.email}">프로젝트</a></li>
+																<li class="title"><a href="project_list">프로젝트</a></li>
 															</c:otherwise>
 														</c:choose>
 														<li>

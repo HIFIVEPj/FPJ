@@ -28,6 +28,5 @@ public class MarketQA {
 	private MarketPagingVO marketRevVO;
 	private Freelancer freelancer;
 	private Corporation corporation;
-	private Member member;
 
 }

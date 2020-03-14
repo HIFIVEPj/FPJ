@@ -1,34 +1,44 @@
 package fp.freelancerprofile.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.freelancerprofile.service.FreelancerMarketInfoService;
+import fp.market.controller.MarketController;
 import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
+import fp.market.domain.Member;
+import fp.market.service.MarketService;
 import fp.market.utils.MarketPagingVO;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
+@AllArgsConstructor
 public class FreelancerMarketInfoController {
 
 	@Autowired
 	private FreelancerMarketInfoService service;
-	
+	@Autowired
+	private MarketController marketcontroller;
 
 	//세영 추가-마켓찜--------myfavoriteMarket,구매마켓
 	@RequestMapping("myfavoriteMarket")
@@ -105,10 +115,8 @@ public class FreelancerMarketInfoController {
 		service.deleteMarketPick(map);
 
 		return "redirect:myfavoriteMarket";
-		
 	}
 /*	
-
 	@RequestMapping("myMarket")
 	public ModelAndView getMyMarket(HttpSession session
 			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
@@ -194,14 +202,22 @@ public class FreelancerMarketInfoController {
 		map.put("mem_email",mem_email);
 		map.put("start",myMarketSellVO.getStart());
 		map.put("end",myMarketSellVO.getEnd());
+		Map<String,String> memberMap =new HashMap<String,String>();
+		List<Map<String,String>> member=new ArrayList<Map<String,String>>();
 		
 		List<MarketPayment> mySellMarket=service.paymentDetails(map);
-		
-		Freelancer free = getFreefname(mem_email)
-				;
+		log.info("!!!!!!!@@@@@@@@@@@@@@@@@mySellMarket"+mySellMarket);
+		for(int i=0;i<mySellMarket.size();i++) {
+			String email=mySellMarket.get(i).getMem_emailBuy();
+			memberMap =service.paymentDetailsGetBuyerName(email);
+		}
+		member.add(memberMap);
+		log.info("!!!!!!!@@@@@@@@@@@@@@@@@member"+member);
+		Freelancer free = getFreefname(mem_email);
 		mv.setViewName("profile/myMarket2");
 		mv.addObject("mySellMarket",mySellMarket);
 		mv.addObject("paging",myMarketSellVO);
+		mv.addObject("member",member);
 		mv.addObject("free",free);
 		return mv;
 		
@@ -251,5 +267,31 @@ public class FreelancerMarketInfoController {
 
 		
 	}
+//거절당한 마켓 수정하기	
+	@GetMapping("market-updateRefusalMarket1")
+	public ModelAndView update1(@RequestParam long market_num){
+		Market m=service.updateRefusalMarket1(market_num);
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("market/market-update");
+		mv.addObject("market", m);
+		return mv;		
+	}
+
+	@PostMapping("market-updateRefusalMarket2")
+	public String update2(long market_num,Market market,MultipartHttpServletRequest mtfRequest) {
+		log.info("111!!!!!!!market:"+market);
+		log.info("222!!!!!!!mtfRequest:"+mtfRequest);
+		List<String> list=marketcontroller.doFileupload(mtfRequest);
+		String originFileName=list.get(0);
+		log.info("!!!!!!!originFileName:"+originFileName);
+		String fileName=list.get(1);
+		market.setMarket_ofname(originFileName);
+		market.setMarket_fname(fileName);
+		market.setMarket_num(market_num);
+		log.info("!!!!!!!market:"+market);
+		service.updateRefusalMarket2(market);		
+		return "redirect:myMarket1";
+	}
+
 
 }

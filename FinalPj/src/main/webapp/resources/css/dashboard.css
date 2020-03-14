@@ -19797,3 +19797,11 @@ a.typewrite{
 		width: 100% !important;
 	}
 }
+
+.card-bodySY {
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	margin: 0;
+	padding:0rem 1.5rem;
+	position: relative;
+}

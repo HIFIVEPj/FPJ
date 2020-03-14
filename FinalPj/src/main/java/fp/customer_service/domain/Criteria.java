@@ -19,7 +19,7 @@ public class Criteria { // 페이징에 필요한 클래스 // 검색 기준
 	private String type; // 검색 종류
 	private String keyword; // 검색어
 	public Criteria() {
-		this(1, 10);
+		this(1, 10); //한 페이지 게시글 처음 개수 지정
 	}
 	
 	public Criteria(int pageNum, int amount) {

@@ -60,8 +60,8 @@
 						-->
 						<form role="form" method="post" action="customer_service_qa_modify" name="qa_modify">
 						<input type="hidden" name="qa_num" value="${qa_content.qa_num}">
+						<!-- 나중에 수정해야 할 부분 -->
 						<input type="hidden" name="mem_email" value="${sessionScope.email}">
-						<!-- 나중에 수정해야 할 부분 -->						
 						<input type="hidden" name="qa_prnum" value=0>
 						<input type="hidden" name="qa_lev" value=0>
 						<input type="hidden" name="qa_sun" value=0>

@@ -1,4 +1,3 @@
-
 package fp.corporation.controller;
 
 import java.io.File;
@@ -9,8 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,9 +34,15 @@ import fp.corporation.domain.Project;
 import fp.corporation.service.CorporationService;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
+import fp.freelancerlist.controller.FreeLancerListController;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.service.FreeLancerProfileService;
+import fp.market.domain.Freelancer;
+import fp.market.domain.MarketBuysellList;
+import fp.market.domain.MarketPick;
+import fp.market.utils.MarketPagingVO;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -44,18 +55,62 @@ public class CorporationController {
 	private ProjectService pjService;
 	@Autowired
 	private FreeLancerProfileService freeProService;
+
 	
+	// 프리랜서 찜하기 목록보기
+	@RequestMapping("myfavorite_cor")	//관심있는프로젝트
+	public ModelAndView Myfavorite_cor(ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("corporation/myfavorite_cor");
+		
+		long totalCountfreepick = freeProService.getTotalCountFreep(corporation.getCor_code());
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		}else if (nowPage == null) {
+			nowPage ="1";
+		}else if(cntPerPage == null) {
+			cntPerPage ="5";
+		}
+		
+		projectVo = new ProjectVo(totalCountfreepick, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("ProjectVo", projectVo);
+		map.put("cor_code",corporation.getCor_code());
+		
+		List<FreeLancerProfile>freePickList = freeProService.freepick_cor(map);
+		List<FreeLancerProfile>selectAllFreeKeywords = freeProService.selectAllFreeKeywords();
+		mv.addObject("cor", corporation);
+		mv.addObject("freeP", freePickList);
+		mv.addObject("pa", projectVo);
+		mv.addObject("keyword",selectAllFreeKeywords);
+		return mv;
+	}
+	@RequestMapping("myfavorite_cor_del")
+	public String myfavorite_cor_del(@RequestParam long pro_num, @RequestParam long cor_code){
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("pro_num",pro_num);
+		map.put("cor_code", cor_code);
+		freeProService.freepick_del(map);
+		return "redirect:myfavorite_cor";
+	}
 	@RequestMapping("payments_cor")
-	public String payments_cor(){
-		return "corporation/payments_cor";
+	public ModelAndView payments_cor(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		ModelAndView mv = new ModelAndView("corporation/payments_cor");
+		mv.addObject("cor",corporation);
+		return mv;
 	}
 	
-	@RequestMapping("myfavorite_cor")
-	public String myfavorite_cor(){
-		return "corporation/myfavorite_cor";
-	}
 	@GetMapping("mydash_cor")
-	public ModelAndView write(String mem_email) {
+	public ModelAndView write(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		Corporation corporation = service.mydash_cor_select(mem_email);
 		ModelAndView mv = new ModelAndView("corporation/mydash_cor");
 		mv.addObject("cor",corporation);
@@ -106,9 +161,10 @@ public class CorporationController {
 	}
 	
 	@RequestMapping("managed_project")
-	public ModelAndView managed_project(String mem_email, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
+	public ModelAndView managed_project(HttpServletRequest request, ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		Corporation corporation = service.mydash_cor_select(mem_email);
 		long totalCount = pjService.getTotalCountCor(corporation.getCor_code());
 		
@@ -237,5 +293,76 @@ public class CorporationController {
 			file.delete();
 		}
 	}
+//마켓찜
+//세영 추가-마켓찜--------myfavoriteMarket,구매마켓,프로필사진
+	@RequestMapping("cor-myfavoriteMarket")
+	public ModelAndView pickedMarket(HttpSession session
+									,@RequestParam(value="nowPageP",required=false, defaultValue="1")String nowPage
+									,@RequestParam(value="cntPerPageP", required=false,defaultValue="5")String cntPerPage) 
+	{
+
+		String mem_email=(String) session.getAttribute("email");
 	
+		int total=service.getTotalMarketPick(mem_email);
+
+
+		MarketPagingVO marketPickListVO = new MarketPagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		int start=marketPickListVO.getStart(); 
+		int end = marketPickListVO.getEnd(); 
+		
+
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("mem_email",mem_email);
+		map.put("start",start);
+		map.put("end",end);
+
+		
+		List<MarketPick> corp=service.marketPickList(map);
+		
+		Corporation cor = getCorfname(mem_email);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("corporation/myfavorite_market");
+		mv.addObject("corPickList",corp);
+		mv.addObject("paging",marketPickListVO);
+		mv.addObject("cor",cor);
+		return mv;
+	}
+	
+	public Corporation getCorfname(String mem_email) {
+		Corporation cor=service.getCorfname(mem_email);
+		return cor;
+	}
+	//구매마켓
+	@RequestMapping("cor-myBuyMarket")
+	public ModelAndView getMyMarket3(HttpSession session
+			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
+			,@RequestParam(value="cntPerPage", required=false,defaultValue="5")String cntPerPage) 
+	{
+		String mem_email=(String) session.getAttribute("email");
+
+		int total=service.getTotalBuyMarket(mem_email);
+		MarketPagingVO marketBuyListVO = new MarketPagingVO(total,Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+		int start=marketBuyListVO.getStart(); 
+		int end = marketBuyListVO.getEnd(); 
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("mem_email",mem_email);
+		map.put("start",start);
+		map.put("end",end);
+		
+		List<MarketBuysellList> corBuy=service.myBuyMarket(map);
+		
+		Corporation cor = getCorfname(mem_email);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("corporation/buylist_market");
+		mv.addObject("corBuyList",corBuy);
+		mv.addObject("paging",marketBuyListVO);
+		mv.addObject("cor",cor);
+		return mv;
+		
+	}
 }

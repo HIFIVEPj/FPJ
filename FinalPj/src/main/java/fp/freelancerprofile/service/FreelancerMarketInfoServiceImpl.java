@@ -2,6 +2,7 @@ package fp.freelancerprofile.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
+import fp.market.domain.Member;
 import fp.market.mapper.MarketMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -19,6 +21,7 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class FreelancerMarketInfoServiceImpl implements FreelancerMarketInfoService {
+	private FreelancerMarketInfoMapper mapper;
 //프로필사진띄우기		
 	@Override
 	public Freelancer getFreefname(String mem_email) {
@@ -29,7 +32,7 @@ public class FreelancerMarketInfoServiceImpl implements FreelancerMarketInfoServ
 	public int getTotalMarketPick(String mem_email) {
 		return mapper.getTotalMarketPick(mem_email);
 	}	
-	private FreelancerMarketInfoMapper mapper;
+
 	@Override
 	//삭제
 	public List<MarketPick> marketPickList(HashMap<String, Object> map) {
@@ -70,5 +73,20 @@ public class FreelancerMarketInfoServiceImpl implements FreelancerMarketInfoServ
 	public void deleteMarketPayment(long marketPaym_num) {
 		mapper.deleteMarketPayment(marketPaym_num);
 		
+	}
+//거절당한마켓수정	
+	@Override
+	public Market updateRefusalMarket1(long market_num) {
+		return mapper.updateRefusalMarket1(market_num);
+	}
+	@Override
+	public void updateRefusalMarket2(Market market) {
+		mapper.updateRefusalMarket2(market);
+		
+	}
+//판매된마켓구매자 이름 구하기		
+	@Override
+	public Map<String,String> paymentDetailsGetBuyerName(String mem_email) {
+		return mapper.paymentDetailsGetBuyerName(mem_email);
 	}
 }

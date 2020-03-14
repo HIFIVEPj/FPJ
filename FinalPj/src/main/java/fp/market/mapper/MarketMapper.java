@@ -46,6 +46,7 @@ public interface MarketMapper {
 	public void insertMarketRev(MarketRev marketRev);	
 	public void deleteMarketRev (HashMap<String, Object> map);
 	public void updateMarketRev (HashMap<String, Object> map);
+	public Integer reloadMarketRevAVG(long market_num);
 	
 	public void insertMarketQA(MarketQA marketQA);
 	public void insertMarketQAFile(HashMap<String, Object> map);
@@ -53,7 +54,7 @@ public interface MarketMapper {
 	
 	public void deleteMarketQA (HashMap<String, Object> map);
 	public void updateMarketQA2 (HashMap<String, Object> map);
-	
+
 	public List<MarketQAFile> marketQAFile(HashMap<String, Object> map);
 	public MarketQA marketQAcont(HashMap<String, Object> map);
 	
@@ -72,6 +73,11 @@ public interface MarketMapper {
 	
 	public List<MarketBuysellList> writeReview(HashMap<String,Object> map);
 
+	public List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map);
+	public int searchBoxMarketCount(Map<String,Map<String,Object>> map);
+	
+	public int searchButtonMarketCount(String searchWord);
+	public List<Market> searchButtonMarketList(HashMap<String,Object> map);
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);
 //	public List<Corporation> getMarketRevCor(long market_num);

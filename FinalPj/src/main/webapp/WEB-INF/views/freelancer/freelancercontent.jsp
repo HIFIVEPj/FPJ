@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -24,8 +23,7 @@
 			</div>
 		</div>
 		<!--/Sliders Section--> 
-		 
-	
+		
 		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">
@@ -42,73 +40,100 @@
 		<!--/Breadcrumb-->
 
 		<!--Add listing-->
-		<section class="sptb">
+	<!--	<section class="sptb">
 			<div class="container">
 				<div class="row">
-					<div class="col-xl-8 col-lg-8 col-md-12">
-						<!--Add lists-->
+					<div class="col-xl-8 col-lg-8 col-md-12">-->
+			<section class="sptb">
+			<div class="col-md-6 mx-auto">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-md-12">					
+							<!--Add lists-->
 						<div class="card mb-lg-0">
-							<div class="card-body  item-user">
+							<div class="card-body ">
 								<div class="row">
 									<div class="col">
 										<div class="profile-pic mb-0">
 											<div class="d-md-flex">
 											   <!--	<img src="../images/faces/female/25.jpg" class="w100 h-100 brround" alt="user">   --> 
-											 	<a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i></a> 
+											<div style="margin-top:21px;">   
+ 											<c:if test="${content.get(0).freelancer.get(0).free_fname ne null}">
+				
+												<img src="../hifiveImages/free_thumb/${content.get(0).freelancer.get(0).free_fname}" alt="X" class="avatar-xxl brround"> 
+											</c:if> 
+											<c:if test="${content.get(0).freelancer.get(0).free_fname eq null}">
+												<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>	
+											</c:if>   
+											</div>  
+											   
+											 <!-- <a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i></a> --> 
+											 	
+											 	
+											 	
+											 	
 												<c:forEach items="${content}" var="list"  varStatus="status">
 												<div class="ml-4">
-												<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
-													<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">${profile.free_name}</h4></a>
+													<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
+														<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">${profile.free_name}</h4></a>
 													</c:forEach>
-														
 													<span class="text-gray"></span>&nbsp;
-										
 													<span class="text-muted">${list.pro_exp}&nbsp;년</span><br>
-											<c:forEach items="${content3}" var="key"  varStatus="status">
-											<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status">
-													<span class="text-muted">${keyword.key_name} </span><br>
-											</c:forEach>
-											</c:forEach>
-													<span class="text-gray">${list.pro_addr}</span>&nbsp;
-													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i> ${list.pro_vcnt} Views</a><br>
-																
-													
+												<c:forEach items="${content3}" var="key"  varStatus="status">
+												<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
+													<span class="text-muted">${keyword.key_name} </span> / 
+												</c:forEach>
+												</c:forEach>
+												<br/>
+													<span class="text-gray">${list.pro_addr}</span>&nbsp;<br/>
+													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i> ${list.pro_vcnt} Views</a>&nbsp;&nbsp;
+													<a class="icons"><i class="fa fa-heart text-muted mr-1"></i>&nbsp;${list.pro_pcnt} Picks<br/>
 													<div class="rating-stars d-inline-flex mb-2 mr-3">
-													<c:forEach items="${list.list_freeLancerReview}" var="star"  varStatus="status">
-														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="${star.freerev_star}">
-										
-														<div class="rating-stars-container mr-2">
-															<div class="rating-star sm">
-																<i class="fa fa-star text-warning is--active"> </i>
+													<!-- 별점 -->
+														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
+															<div class="rating-stars d-inline-flex mb-2 mr-3">
+															<c:if test="${empty review}">
+																<span class="rated-products-ratings">
+																	 <i class="fa fa-star-o text-warning"></i>
+																	 <i class="fa fa-star-o text-warning"></i>
+																	 <i class="fa fa-star-o text-warning"></i>
+																	 <i class="fa fa-star-o text-warning"></i>
+																	 <i class="fa fa-star-o text-warning"><span class="text-muted">&nbsp;0</span></i>
+																</span>
+															</c:if>
+														<c:forEach items="${review}" var="review_content"  varStatus="status">	
+															<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
+												 		    <span class="rated-products-ratings">
+					                        		        <c:if test="${review_content.freerev_star >= 0}">
+						                                        <c:forEach var="1" begin="1" end="${review_content.freerev_star}">
+						                                          <i class="fa fa-star text-warning"> </i>
+						                                         </c:forEach>
+					                                         
+						                                        <c:forEach var="1" begin="1" end="${5-review_content.freerev_star}">
+																  <i class="fa fa-star-o text-warning"> </i>
+																</c:forEach>
+															</c:if>    			
+														</c:forEach>
 															</div>
-															<div class="rating-star sm">
-																<i class="fa fa-star text-warning is--active"> </i>
-															</div>
-															<div class="rating-star sm">
-																<i class="fa fa-star text-warning is--active"> </i>
-															</div>
-															<div class="rating-star sm">
-																<i class="fa fa-star-o text-warning is--active"> </i>
-															</div>
-															<div class="rating-star sm">
-																<i class="fa fa-star-o text-warning is--active"> </i>
-															</div>
-					<!-- 별점표시 텍스트 위치 -->				</div> 
-														${star.freerev_star}
-													</c:forEach>
+															<!-- 별점표시 텍스트 -->	
+															<c:forEach items="${review}" var="review_content"  varStatus="status">	
+																<c:if test="${review_content.freerev_star ne null}">
+																${review_content.freerev_star}
+																</c:if>
+															</c:forEach>	 
+															<!-- 별점표시 텍스트 위치 끝 -->	
 													</div>
 												</div>
 												</c:forEach>
 											</div>
 										</div>
 									</div>
-									
-																	<div class="item-card2-icons">
+										<div class="item-card2-icons">
 									<a href="" class="item-card9-icons1 wishlist active"><i  class="fa fa fa-heart-o"></i></a>
 								</div>
 	
 								</div>
-								
+						
 								<h4 class="pb-3 border-bottom mt-4">Profile</h4>
 								<c:forEach items="${content}" var="list"  varStatus="status">
 									<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
@@ -120,25 +145,46 @@
 								<c:forEach items="${content4}" var="content"  varStatus="status">
 									<li><span class="font-weight-semibold">직종:</span>&nbsp;${content4[0].type_name}</li>
 									</c:forEach>
-								<c:forEach items="${content}" var="list"  varStatus="status">
-								<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
+							<c:forEach items="${content}" var="list"  varStatus="status" >
+								
+									<li><span class="font-weight-semibold">사용기술 :</span>
 								<c:forEach items="${content3}" var="key"  varStatus="status">
-								<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status">
-									<li><span class="font-weight-semibold">사용기술 :</span>${keyword.key_name}</li>			
+								<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
+									${keyword.key_name}
 								</c:forEach>
-								</c:forEach>																								
+								</c:forEach>
+									</li>																	
 									<li><span class="font-weight-semibold">주소 :</span> ${list.pro_addr} </li>
 									<li><span class="font-weight-semibold">선호지역 :</span> ${list.pro_workplace}</li>														
-									<li><span class="font-weight-semibold">Email :</span> ${list.mem_email} </li>
+									<li><span class="font-weight">Email :</span> ${list.mem_email} </li>
+									<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
 									<li><span class="font-weight-semibold">연락처 :</span> ${profile.free_tel} </li>
-									<li><span class="font-weight-semibold">현재 근무가능여부 :</span>  ${list.pro_ox}</li>
-									<li><span class="font-weight-semibold">업무가능일 :</span>  ${list.pro_start} </li>									
-									<br/><br/><br/>
-									<li class="w-100 mt-3"><span class="font-weight-semibold">최종학력 : &nbsp;${list.pro_edu}</span> </li>
+									</c:forEach>
+									<li><span class="font-weight-semibold">최종학력 : &nbsp;${list.pro_edu}</span></li>
+									<li><span class="font-weight-semibold">현재 근무가능여부 :</span> 
+										<c:if test ="${list.pro_ox == 'on'}">가능</c:if></li>
+									<li><span class="font-weight-semibold">선호근무형태 :</span>
+										<c:choose> 
+											<c:when test="${list.pro_place eq 0}">
+												비상주
+											</c:when>
+											<c:when test="${list.pro_place eq 1}">
+												상주
+											</c:when>
+											<c:when test="${list.pro_place eq 2}">
+												반상주
+											</c:when>
+											<c:otherwise>
+												상관없음
+											</c:otherwise>
+										</c:choose>
+									</li>
+									<li><span class="font-weight-semibold">업무가능일 :</span>  ${list.pro_start} </li>	
+									<li class="w-100 mt-3"><span class="font-weight-semibold"><h4 class="pb-3 border-bottom mt-4">자기소개</h4>${list.pro_cv}</span></li>
 									<!-- <li><span class="font-weight-semibold"></span> 201402</li> 
 									<li><span class="font-weight-semibold"></span>  ${list.pro_edu}</li>-->
 									</ul>
-								</c:forEach>
+								
 								</c:forEach>
 
 					<!--  		<h4 class="pb-3 border-bottom mt-4">Employment Details</h4>
@@ -147,52 +193,55 @@
 								<h4 class="pb-3 border-bottom mt-5">프로젝트</h4>
 								<div class="table-responsive">
 									<table class="table table-bordered border-top mb-0">
+									
+									<c:if test="${empty content2}">
+										수행한 프로젝트가 없습니다.
+									</c:if>
+									
+									<c:forEach items="${content2}" var="content"  varStatus="status">
+										<c:forEach items="${content.frProject}" var="project"  varStatus="status">
+											<tr>
+												<c:if test="${project.pj_num ne null}">
 										<thead>
 											<tr>
-												<th>프로젝트</th>
+												<th class="pb-3 border-bottom mt-4"><h4>수행한 프로젝트</h4></th>
 												<th>사용언어  & 주요기술</th>
-											<!-- 	<th>첨부파일</th> -->
 											</tr>
 										</thead>
-							
-										<tbody>		
-										<c:forEach items="${content2}" var="content"  varStatus="status">
-											<c:forEach items="${content.frProject}" var="project"  varStatus="status">
-											<tr>
-												<td scope="row"><b>${project.pj_sub}</b><br/>
-												<span>2017-09-08!2018-09-07</span></td>
-											</c:forEach>
-											</c:forEach>
-											
-											
-											<c:forEach items="${content5}" var="content"  varStatus="status">
-												<c:forEach items="${content.frKeyWord}" var="key"  varStatus="status">
-															<td>${key.key_name}</td>	
-												</c:forEach>
-											</c:forEach>		
-												</tr>
-												<br/>  
+									<tbody>	
+										<td scope="row"><b>${project.pj_sub}</b><br/>
+											<c:forEach items="${content.applied_project}" var="apply"  varStatus="status">
+												<span>${apply.appp_date}</span>
+											</c:forEach>	
+										</td>
+											<c:if test="${project.pj_sub ne null}">
+												<td scope="row">
+													<c:forEach items="${content5}" var="content"  varStatus="status">
+															<c:forEach items="${content.frKeyWord}" var="key"  varStatus="status" >
+																${key.key_name}
+															</c:forEach>
+														</c:forEach>
+													</td>
+												</c:if>		
+											</c:if>	
+										</td>
+									</c:forEach>
+								</c:forEach>		
 										<!--		<c:forEach items="${content}" var="list"  varStatus="status">
 												<tr>
-												
-												
 											<c:forEach items="${list.freelancerprofilefile}" var="file"  varStatus="status">
 												<td><a href="#"><i class="fa fa-save"></i>${file.profile_ofname}</td>
 												</c:forEach>
 													</c:forEach>
-									
 											</tr>-->
 										</tbody>	
 									</table>
 								</div>
 							</div>
-				
-							
 							<div class="card-footer" align="right">
 								<div class="icons">
 							<!-- 	<span><a href="freelancerdelete?free_code=${list.free_code}" class="btn btn-secondary icons">삭제</a></span> -->
 									<a href="freelancerList" class="btn btn-secondary icons">목록</a>
-									
 								</div>
 							</div>
 						</div>
@@ -204,110 +253,69 @@
 							</div>
 							<!--  <div class="card-body">-->
 								<div class="row">
-					
-								
-<c:forEach items="${review}" var="review_content"  varStatus="status">								
+							<!-- 리뷰 -->
+								<c:if test="${empty review}">
+									<div class="col-md-12">
+										<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
+											<div class="media mt-0 p-5">
+			                                 	<div class="media-body"> 
+			                                		 등록된 리뷰가 없습니다.      
+												</div>
+								   	 		</div>
+								    	</div>		
+									</div>
+								</c:if>		
+							<c:if test="${!empty review}">		
+								<c:forEach items="${review}" var="review_content"  varStatus="status">								
 									<div class="col-md-12">
 									<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
 									<div class="media mt-0 p-5">
-   
-			                      	   <div class="d-flex mr-3">
-			                                <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/파일이름.jpg"> </a>
+			                      	   <div class="d-flex mr-3" >
+			                                <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/파일이름.jpg" > </a>
 			                            </div>
 			                                 <div class="media-body"> 
-			                                 
 						                             <h5 class="mt-0 mb-1 font-weight-semibold">강동원 
-														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified">
-															
-														<i class="fa fa-check-circle-o text-success"></i></span>${mMember}
-													
+														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified" >							
+														<i class="fa fa-check-circle-o text-success"></i></span>
 													 	&nbsp;&nbsp;&nbsp;<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;${review_content.freerev_rdate}</small>
 													 </h5>
-											
-										<span class="rated-products-ratings">
-
-												<i class="fa fa-star-o text-warning"> </i>
-											
-												<i class="fa fa-star-o text-warning"> </i>
-											
-												<i class="fa fa-star-o text-warning"> </i>
-											
-												<i class="fa fa-star-o text-warning"> </i>
-											
-												<i class="fa fa-star-o text-warning"> </i>
-										</span>
-										
-										 	<!-- <div class="badge badge-default mb-2"><i class="fa fa-star">333</i></div> -->
-											${review_content.freerev_star}
-									</div>
+													<c:forEach items="${review}" var="review_content"  varStatus="status">	
+												 		 <span class="rated-products-ratings">
+					                        		        <c:if test="${review_content.freerev_star >= 0}">
+						                                        <c:forEach var="1" begin="1" end="${review_content.freerev_star}">
+						                                          <i class="fa fa-star text-warning"> </i>
+						                                         </c:forEach>
+					                                         
+						                                        <c:forEach var="1" begin="1" end="${5-review_content.freerev_star}">
+																  <i class="fa fa-star-o text-warning"> </i>
+																  
+																</c:forEach>
+															 </c:if>	${review_content.freerev_star}
+															</span>    			
+													</c:forEach>
+												</div>
 									<div class="col-md-6 text-center align-items-center">
 									</div>      
 
 									</div>                    
-		                                 <div class="font-13  mb-2 mt-2" style="margin-left:80px;">${review_content.freerev_cont}</div>					
+										<c:forEach items="${review}" var="review_content"  varStatus="status">	
+		                                 <div class="font-13  mb-2 mt-2" style="margin-left:80px;">${review_content.freerev_cont}</div>
+		                              	</c:forEach>      		
 									</div>	
 									
 									<div class="card-body item-user" align="right">
 										<div class="icons"> 
-										
-								   	 		<form method="get" action="review_del" name="DeleteReview">						
-								   				<button type="submit" class="btn btn-primary" id="review_delete">삭제</button>
+								   	 		<form method="get" action="review_del" name="DeleteReview" style="padding-right:58px;">						
+								   				 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
+								   				 
 								   			</form>
-
-								   			
-								   			
-										<script>
-										function open_field() {
-										field.style.display='block';
-										}
-										function close_field() {
-										field.style.display='none';
-										}
-										</script>
-									<form method="get" action="review_del" name="DeleteReview">	
-										<table width="705" border="0" cellspacing="0" cellpadding="0">
-										  <tr>
-								
-										<td height="30"><a href="javascript:open_field();">수정</a></td>
-										  </tr>
-										  <tr>
-										<td height="5"></td>
-										  </tr>
-										  <tr id="field" style="display:none">
-										<td class="pdd"> <form name="reply" type="hidden" method="post" action="">
-										<input type="hidden" name="number" value="5">
-										<input type="hidden" name="page" value="0">
-										<input type="hidden" name="code" value="groupt">
-										<textarea name="re_contents" cols="90" rows="4"></textarea>
-										
-										<input type="submit" class="btn btn-primary" value="확인">
-										
-										  </form></td>
-										  </tr>
-										</table>
-										<td></td>
-										</tr>
-										</table>								   			
-									</form>							   			
-								   			
-								   			
-								   			
-								   			
-								   			
-								   			
-								   			
-
-
-								    		
+								   			<form method="post" action="review_update" name="review_update" style="margin-top:-38px;">								    		
+								   				<button type="button" class="btn btn-primary" id="updateReview" onclick="update();">수정</button>
+								   		    </form>	
 								   	 	</div>
 								    </div>		
 								</div>		
-									
-</c:forEach>									
-									
-								
-									
-									
+							</c:forEach>									
 									
 					<!-- 페이징 -->				
 						<div class="center-block text-center">
@@ -331,7 +339,7 @@
                            </c:if>
                             
                            <!--페이지번호 -->
-             ${member}123123
+           
  <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
@@ -359,27 +367,14 @@
                            </ul>
                            </div>
 									
-					<!-- 페이징 끝 -->					
-									
-
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-										
+					<!-- 페이징 끝. 리뷰 끝 -->					
+				</c:if>										
+							
 								</div>
 							<!--	</div>-->
 				</div>
-			<!-- 리뷰작성 -->	
-<form method="post" action="freelancercontent?free_code=${review[0].free_code}&pro_num=${review[0].pro_num}" name="InsertReview">
+			<!-- 리뷰작성 -->
+			<form method="post" action="InsertReview" name="InsertReview">
 				<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">리뷰 작성하기</h3>
@@ -388,7 +383,7 @@
 								<div>
 									<div class="ml-auto">
 										<div class="rating-stars block">
-											<input id="marketRev_starID" type="number" readonly="readonly" class="rating-value star" name="marketRev_star" value=""><!-- name="rating-stars-value" -->
+											<input id="freerev_star" name="freerev_star" type="number" readonly="readonly" class="rating-value star"><!-- name="rating-stars-value" -->
 											<div class="rating-stars-container">
 												<div class="rating-star sm">
 													<i class="fa fa-star"></i>
@@ -414,18 +409,19 @@
 										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
 									</div>
 									  -->
-									
 										<div class="form-group">
-											<textarea class="form-control" id="marketRev_contID" name="freerev_cont" rows="6"></textarea>
-									<!-- 	<input type="hidden" name="freerev_num" value="" />
-											<input type="hidden" name="freerev_star" value="" />
-											<input type="hidden" name="pro_num" value="" />-->
-											<input type="hidden" name="freerev_num" value="${review[0].freerev_num}" /> 	
-											<input type="hidden" name="mem_email" value="${sessionScope.email}" />
-										</div>	
+											<textarea class="form-control" id="freerev_cont" name="freerev_cont" rows="6"></textarea>
+											<c:if test="${!empty review}">
+												<input type="hidden" id="freerev_num" name="freerev_num" value="${review.get(0).freerev_num}" />
+											</c:if>
+												<input type="hidden" id="free_code" name="free_code" value="${content3.get(0).free_code}" />	
+												<input type="hidden" id="mem_email" name="mem_email" value="${content3.get(0).mem_email}" />
+												<input type="hidden" id="pro_num" name="pro_num" value="${content3.get(0).pro_num}" />
+										</div>							
 										<div align="right">
-   										 <button type="submit" class="btn btn-primary" id="checkMR" style="margin-right:-1px;">작성하기</button>
-   			</form>
+										 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" style="margin-right:-1px;" >작성하기</button>
+   										<!-- <button type="button" class="btn btn-primary" id="checkMR" style="margin-right:-1px;" onclick="inreview();">작성하기</button>  -->
+   									</form>
 
    										 </div>
 										</div>
@@ -433,29 +429,14 @@
 						</div>
 
 				<!-- 덧글작성 -->		
-					<br/>
-						<div class="card mb-lg-0">
-							<div class="card-header">
-								<h3 class="card-title">덧글 작성하기</h3>
-							</div>
-							<div class="card-body">
-								<div>
-									<div class="form-group">
-										<textarea class="form-control" name="marketQA_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
-									</div>		
-										<div align="right">
-		   									<button type="button" class="btn btn-primary" id="checkMR" align="right">작성하기</button>
-		   								</div>
-								</div>
-							</div>
-						</div>
-<!-- 지우면깨짐 -->		</div> <!-- 지우면깨짐 -->
+
+<!-- 지우면깨짐 -->	</div> <!-- 지우면깨짐 -->
 					
 
 					
 
 					<!--Right Side Content-->
-					<div class="col-xl-4 col-lg-4 col-md-12">
+				<!--	<div class="col-xl-4 col-lg-4 col-md-12">
 						<div class="card">
 							<div class="card-body">
 								<div class="input-group">
@@ -658,12 +639,125 @@
 								</ul>
 							</div>
 						</div>-->
-					</div>
+					<!--</div>-->
 					<!--Right Side Content-->
 				</div>
 			</div>
 		</section>
 		<!--Add Listing-->
+<!-- delete Modal -->   
+      <div id="deleteModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>리뷰를 정말 삭제할까요?</p>
+               </div>
+               <div class="modal-footer">
+             	  <button class="btn btn-primary" type="button" style="color:white;"  id="deletereview" name="deletereview" onclick="delreview();">네</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /delete Modal -->
+<!-- insert Modal -->   
+      <div id="insertModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>리뷰를 작성 할까요?</p>
+               </div>
+               <div class="modal-footer">
+             	  <button class="btn btn-primary" type="button" style="color:white;" onclick="inreview();">네</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /insert Modal -->
+
+<script>    
+	function inreview(value){
+		cont=$("#freerev_cont").val();
+		pnum=$("#pro_num").val();
+		fcode=$("#free_code").val();
+		mem_email =$("#mem_email").val();
+		freerev_star =$("#freerev_star").val();
+		var objParam={
+			"cont" : cont,
+			"pnum" : pnum,
+			"fcode" : fcode,
+			"mem_email" : mem_email,
+			"freerev_star" : freerev_star
+		};
+		alert("freerev_star:"+freerev_star);
+		
+	 $.ajax({
+		 type:"post",
+		 url:"InsertReview",
+		 data:objParam,
+		 dataType: "json",
+		 
+		 success:function(data){	
+			 alert("성공2");  
+			   },
+		 error:function(data){
+			 alert("에러발생2");
+		       }
+		});
+	 }
+
+	function update(value){
+		freerev_num=$("#freerev_num").val();
+		
+	 $.ajax({
+		 type:"post",
+		 url:"reviewUpdate",
+		 data: "cont="+cont+
+			   "&freerev_star="+freerev_star+
+			   "&freerev_num="+freerev_num,
+		 dataType: "json",
+		 
+		 success:function(data){	
+			 alert("성공2");  
+			   },
+		 error:function(data){
+			 alert("에러발생2");
+		       }
+		});
+	 }
+
+		function delreview(){
+			freerev_num=$("#freerev_num").val();
+			
+		 $.ajax({
+			 type:"get",
+			 url:"review_del",
+			 data:"freerev_num="+freerev_num,
+			 dataType: "json",
+			 
+			 success:function(data){	
+				 alert("성공2");  
+				   },
+			 error:function(data){
+				 alert("에러발생2");
+			       }
+			});
+	 }
+</script>
+
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

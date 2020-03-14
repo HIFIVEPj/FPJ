@@ -2,6 +2,7 @@ package fp.freelancerprofile.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
+import fp.market.domain.Member;
 //@Repository		 
 public interface FreelancerMarketInfoMapper {
 	
@@ -32,5 +34,9 @@ public interface FreelancerMarketInfoMapper {
 	public List<MarketBuysellList> myBuyMarket(HashMap<String,Object> map);
 //판매마켓삭제	
 	public void deleteMarketPayment(long marketPaym_num);	
-
+//거절당한마켓수정
+	public Market updateRefusalMarket1(long market_num);
+	public void updateRefusalMarket2(Market market);
+//판매된마켓구매자이름구하기		
+	public Map<String,String> paymentDetailsGetBuyerName(String mem_email);
 }

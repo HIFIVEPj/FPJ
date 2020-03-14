@@ -9,11 +9,17 @@
 		  	<id column="free_code" property="free_code"/>
 		    <result column="mem_email" property="mem_email"/>		
 			<result column="free_name" property="free_name"/>
+			<result column="free_ofname" property="free_ofname"/>
+			<result column="free_fname" property="free_fname"/>
+		<collection  property="member" javaType="java.util.ArrayList" ofType="Member">
+			<id property="email" column="email"/>
+			<result property="class_num" column="class_num"/>
+		</collection>	
 
-		<association  property="list_type" javaType="List_type" >
-			  <id property="type_num" column="type_num"/>
-			  <result property="type_name" column="type_name"/>
-		</association>	 
+		<collection  property="list_type" javaType="java.util.ArrayList" ofType="List_Type">
+			<id property="type_num" column="type_num"/>
+			<result property="type_name" column="type_name"/>
+		</collection>		 
 		<collection property="list_freelancerprofile" javaType="java.util.ArrayList" ofType="list_freelancerprofile">	
 				<id property="free_code" column="free_code"/>
 				<result property="pro_num" column="pro_num"/>
@@ -21,6 +27,8 @@
 				<result column="mem_email" property="mem_email"/>	
 				<result property="pro_exp" column="pro_exp"/>
 				<result property="pro_vcnt" column="pro_vcnt"/>
+				<result property="pro_pcnt" column="pro_pcnt"/>
+				<result property="profile_choice" column="profile_choice"/>
 		</collection>	 
 	  	<collection property="list_project" javaType="java.util.ArrayList" ofType="List_Project" >
 			<id property="pj_num" column="pj_num"/>
@@ -28,15 +36,23 @@
 			  <result property="cate_num" column="cate_num"/>
 			  <result property="cor_code" column="cor_code"/>
 			  <result property="pj_sub" column="pj_sub"/>
+			  <result property="pj_num" column="pj_num"/>
 			  <result property="pj_ddate" column="pj_ddate"/>
 			  <result property="pj_place" column="pj_place"/>
 			  <result property="pj_name" column="pj_name"/>	
 		</collection>	
-		<collection property="list_review" javaType="java.util.ArrayList" ofType="List_FreeLancerReview">	
-				<id property="free_code" column="free_code"/>
-				 <result property="pro_num" column="pro_num"/>
-		 		 <result property="mem_email" column="mem_email"/>	
-				 <result property="freerev_star" column="freerev_star"/>
+		<collection property="list_review" javaType="java.util.ArrayList" ofType="List_FreeLancerReview">
+			  <id property="freerev_num" column="freerev_num"/>	
+			  <id property="free_code" column="free_code"/>
+			  <result property="pro_num" column="pro_num"/>
+		 	  <result property="mem_email" column="mem_email"/>	
+			  <result property="freerev_star" column="freerev_star"/>
+		</collection>
+		<collection property="applied_Project" javaType="java.util.ArrayList" ofType="Applied_Project" >
+			  <result property="free_code" column="free_code"/>
+			  <result property="pro_num" column="pro_num"/>
+			  <result property="pj_num" column="pj_num"/>
+			  <result property="appp_status" column="appp_status"/>
 		</collection>
 	</resultMap>
 		
@@ -48,21 +64,11 @@
 				<result column="mem_email" property="mem_email"/>	
 				<result property="pro_exp" column="pro_exp"/>
 				<result property="pro_vcnt" column="pro_vcnt"/>
-			<association  property="list_type" javaType="List_type" >
+			<collection  property="list_type" javaType="java.util.ArrayList" ofType="List_Type">
 			  	<id property="type_num" column="type_num"/>
 			 	<result property="type_name" column="type_name"/>
-			</association>	 
-		  		<collection property="list_project" javaType="java.util.ArrayList" ofType="List_Project" >
-				<id property="pj_num" column="pj_num"/>
-				  <result property="type_num" column="type_num"/>
-				  <result property="cate_num" column="cate_num"/>
-				  <result property="cor_code" column="cor_code"/>
-				  <result property="pj_sub" column="pj_sub"/>
-				  <result property="pj_ddate" column="pj_ddate"/>
-				  <result property="pj_place" column="pj_place"/>
-				  <result property="pj_name" column="pj_name"/>	
-				</collection>	
-			</resultMap>
+			</collection>	 
+		</resultMap>
 
 		<!-- 프로젝트 컨텐츠 1 -->
 		   <resultMap type="Freelancer_FreeLancerProfile" id="freelancerContent">
@@ -77,6 +83,8 @@
 				  <result property="pro_start" column="pro_start"/>
 			 	  <result property="pro_ox" column="pro_ox"/>
 				  <result property="pro_place" column="pro_place"/>
+				  <result property="pro_cv" column="pro_cv"/>
+				  <result property="pro_pcnt" column="pro_pcnt"/>
 				  <result property="pro_workplace" column="pro_workplace"/>
 	
 			  	<collection property="freelancer" javaType="java.util.ArrayList" ofType="freelancer">
@@ -84,6 +92,7 @@
 					  <result property="free_name" column="free_name"/>
 					  <result property="mem_email" column="mem_email"/>
 					  <result property="free_tel" column="free_tel"/>
+					  <result property="free_fname" column="free_fname"/>
 				</collection>	
 				<collection property="freelancerprofilefile" javaType="java.util.ArrayList" ofType="freelancerprofilefile" >
 			        <id property="free_code" column="free_code"/>
@@ -107,7 +116,6 @@
 					<id property="free_code" column="free_code"/>
 					<result property="pro_num" column="pro_num"/>
 					<result property="type_num" column="type_num"/>
-				 	 
 			  	<collection property="frProject" javaType="java.util.ArrayList" ofType="frProject" >
 					<id property="pj_num" column="pj_num"/>
 					<result property="type_num" column="type_num"/>
@@ -118,10 +126,11 @@
 					<result property="pj_place" column="pj_place"/>
 					<result property="pj_name" column="pj_name"/>	
 				</collection>	
-				<collection property="Applied_Project" javaType="java.util.ArrayList" ofType="Applied_Project" >
+				<collection property="applied_project" javaType="java.util.ArrayList" ofType="Applied_Project" >
 					<result property="free_code" column="free_code"/>
 					<result property="pro_num" column="pro_num"/>
 					<result property="pj_num" column="pj_num"/>
+					<result property="appp_date" column="appp_date"/>
 					<result property="appp_status" column="appp_status"/>
 				</collection>	
 			</resultMap>
@@ -131,7 +140,7 @@
 					<id property="free_code" column="free_code"/>
 					<result property="pro_num" column="pro_num"/>
 					<result property="type_num" column="type_num"/>
-					
+					<result property="mem_email" column="mem_email"/>
 				<collection property="FreePick" javaType="java.util.ArrayList" ofType="FreePick" >
 					<id property="free_keynum" column="free_keynum"/>
 					<result property="key_num" column="key_num"/>
@@ -148,7 +157,6 @@
 			<resultMap type="frType" id="freelancerContent4">
 			    	<id property="type_num" column="type_num"/>
 				    <result property="type_name" column="type_name"/>
-		
 				<collection property="Freelancer_FreeLancerProfile" javaType="java.util.ArrayList" ofType="Freelancer_FreeLancerProfile">
 					<id property="free_code" column="free_code"/>
 					<result property="pro_num" column="pro_num"/>
@@ -157,40 +165,28 @@
 			</resultMap>
 
 	<!-- 프로젝트 컨텐츠 5-->
-			<resultMap type="frProject" id="freelancerContent5">
-			    	<id property="pj_num" column="pj_num"/>
-					<result property="type_num" column="type_num"/>
-					<result property="cate_num" column="cate_num"/>
-		
-				<collection property="Pj_Pick_Keyword" javaType="java.util.ArrayList" ofType="Pj_Pick_Keyword">
+			<resultMap type="Pj_Pick_Keyword" id="freelancerContent5">						
 					<id property="pjp_keynum" column="pjp_keynum"/>
-					<result property="key_num " column="key_num"/>
-					<result property="pj_num" column="pj_num"/>
-				</collection>
+					<result property="key_num" column="key_num"/>
+				    <result property="pj_num" column="pj_num"/>
 				<collection property="frKeyWord" javaType="java.util.ArrayList" ofType="frKeyWord" >
-					<id property="key_num" column="fr_key_num"/>
+					<id property="key_num" column="key_num"/>
 					<result property="key_name" column="key_name"/>
-				</collection>	
-			</resultMap>
-				
-			<!-- 프로젝트 제목 select -->
-			<resultMap type="frProject" id="subSelect">
+				</collection>
+				<collection property="list_project" javaType="java.util.ArrayList" ofType="List_Project" >
 					<id property="pj_num" column="pj_num"/>
 					<result property="type_num" column="type_num"/>
 					<result property="cate_num" column="cate_num"/>
 					<result property="cor_code" column="cor_code"/>
 					<result property="pj_sub" column="pj_sub"/>
+					<result property="pj_num" column="pj_num"/>
 					<result property="pj_ddate" column="pj_ddate"/>
 					<result property="pj_place" column="pj_place"/>
 					<result property="pj_name" column="pj_name"/>	
-				<collection property="Applied_Project" javaType="java.util.ArrayList" ofType="Applied_Project" >
-				 	<id property="pj_num" column="pj_num"/>
-				  	<result property="free_code" column="free_code"/>
-					<result property="pro_num" column="pro_num"/> 
-					<result property="appp_status" column="appp_status"/> 	
 				</collection>	
-			</resultMap>
+			</resultMap>	
 			
+
 		<!-- 프로필 리뷰 content-->
 			<resultMap type="List_FreeLancerReview" id="freelancerReview">
 					<id property="freerev_num" column="freerev_num"/>
@@ -221,110 +217,121 @@
 
 	<!-- 리스트 select -->
    		<!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
+  <select id="profile_select"  parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancerProfile">
+   		select * from FREELANCER_PROFILE where free_code=#{free_code}
+    </select>	
     <select id="countFreeLancer" resultType="int">
-   		select count(*) from FreeLancer_Profile
+   		select count(*) from FreeLancer_Profile where profile_choice=1
     </select>
-	<select id="SelectList" resultMap="List_FreeLancerResult" parameterType="List_PagingVO">
-	    <![CDATA[
-		select f.rnum, f.FREE_NAME 
-			    , f.PRO_NUM
-			    , f.free_code
-			    , f.PRO_EXP 
-			    , f.PRO_VCNT 
-			    , f.FREEREV_STAR from
-					(select rownum rnum, free.FREE_NAME 
-							  , free.PRO_NUM
-							  , free.free_code
-							  , free.PRO_EXP 
-							  , free.PRO_VCNT
-							  , free.FREEREV_STAR from
-						(select FREE_NAME , f.free_code
-							 			  , fp.PRO_NUM
-      									  , PRO_EXP 
-    									  , PRO_VCNT
-    							 		  , FREEREV_STAR 
-								from FREELANCER f 
-								inner join FREELANCER_PROFILE fp
-									on f.FREE_CODE = fp.FREE_CODE
-									inner join FREELANCER_REVIEW fr
-										on f.FREE_CODE= fr.FREE_CODE) free
-										where rownum <= #{end}) f
-											 where f.rnum>= #{start}
-		]]>
+	<select id="SelectList" resultMap="List_FreeLancerResult" parameterType="map">
+	   	<![CDATA[
+     	select * from 
+			(select ROWNUM rnum , aa.* from 
+				(select fp.free_code, free_name
+									, profile_date
+									, free_ofname
+									, free_fname
+							 		, fp.PRO_NUM
+      								, PRO_EXP 
+    								, PRO_VCNT
+    							    , profile_choice
+    							    , FREEREV_STAR
+                       				, m.class_num
+                       				, pro_pcnt
+                       	              from FREELANCER_PROFILE fp
+                                        full outer join FREELANCER_REVIEW fr
+										on fp.FREE_CODE= fr.FREE_CODE
+											left outer join FREELANCER f
+											on fp.free_code=f.free_code 				
+		                                        right outer join member m
+		                                        on m.mem_email=f.mem_email
+                                                    where profile_choice=1 order by profile_date desc )aa)
+                                                        where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}
+                                                          		
+		  ]]>
 	</select>
 	
-		<!-- 리스트페이지 프로젝트, 타입 select -->
-	<select id="SelectList2" resultMap="TypeNpjSub" parameterType="long">
-	    <![CDATA[
-		select fp.FREE_CODE
-				, t.TYPE_NUM
-				, t.TYPE_NAME
-				, ap.PJ_NUM
-				, p.PJ_SUB
-					from FREELANCER_PROFILE fp
-					left outer join TYPE t 
-						on fp.TYPE_NUM=t.TYPE_NUM
-					left outer join APPLIED_PROJECT ap
-						on fp.FREE_CODE=ap.FREE_CODE
-					left outer join  PROJECT p
-						on ap.PJ_NUM=p.PJ_NUM
-									
-		]]>						
+		<!-- 리스트페이지 타입 select -->
+	<select id="SelectList2" resultMap="List_FreeLancerResult" parameterType="long">
+	  <![CDATA[
+			select fp.free_code
+						, fp.PRO_NUM
+    					, profile_choice
+                        , t.TYPE_NUM
+                        , t.TYPE_NAME        
+                           from FREELANCER_PROFILE fp      
+                              right outer join type t
+                              on fp.type_num=t.type_num
+                                 where profile_choice=1
+	   ]]>			
 	</select> 
 	
 		<!-- 리스트페이지 프로젝트 select -->
-	<select id="SelectList3" resultMap="subSelect" >
-	    <![CDATA[
-		select ap.pj_num
-				,appp_status
-				,pj_sub
-				  from APPLIED_PROJECT ap 
-				  	inner join PROJECT p
-					on ap.pj_num=p.pj_num
-						where appp_status=1
-		]]>						
+	<select id="SelectList3" resultMap="List_FreeLancerResult" >
+		<![CDATA[		
+			select fp.free_code
+						, free_name  
+						, ap.pj_num
+						, fp.PRO_NUM
+    					, profile_choice
+                        , p.pj_num 
+                        , p.pj_sub 
+                        , m.class_num
+                           from FREELANCER_PROFILE fp
+								left outer join FREELANCER f
+								on fp.free_code=f.free_code        
+                                    inner join applied_project ap
+                                    on fp.free_code=ap.free_code
+                                       right OUTER join PROJECT p 
+                                       on ap.pj_num = p.pj_num 
+                                        right outer join member m
+                                        on m.mem_email=f.mem_email
+                                          where profile_choice=1
+		]]>	
 	</select> 
 
 	<!-- 컨텐츠 -->
-	<select id="freelancercontent" resultMap="freelancerContent" parameterType="long">
-	  <![CDATA[
-		select distinct fp.free_code 
-						, free_name
-						, free_tel
-						, fp.mem_email
-						, pro_exp 
-						, pro_addr
-						, pro_workplace
-						, pro_vcnt
-						, pro_edu 
-						, pro_start 
-						, pro_ox 
-						, pro_place 
-						, freerev_star
-						, profile_ofname
-						from freelancer f, freelancer_profile fp
-							,freelancer_profilefile ff, FREELANCER_REVIEW fr
-							where fp.free_code=f.free_code
-							and fp.free_code = ff.free_code
-							and fp.free_code = fr.free_code
-								AND fp.free_code=#{free_code}				
-			]]>		
-	</select> 
+	<select id="freelancercontent" resultMap="freelancerContent" parameterType="map">
+		<![CDATA[
+			select distinct fp.free_code 
+							, free_name 
+							, free_tel 
+							, fp.mem_email
+							, free_fname 
+							, pro_exp 
+							, pro_addr 
+							, pro_workplace 
+							, pro_vcnt
+							, pro_edu 
+							, pro_start 
+							, pro_ox 
+							, pro_place 
+							, pro_cv
+							, pro_pcnt
+								from freelancer f, freelancer_profile fp 
+								where fp.free_code=f.free_code 
+									and fp.free_code=#{free_code}
+									and fp.pro_num=#{pro_num}		
+		 ]]>		
+	</select>	
+	<!--프로필 조회수-->
+	<update id="vcnt" parameterType="map">
+	update freelancer_profile set pro_vcnt= pro_vcnt+1 where pro_num=#{pro_num}
+	</update>
 		<!-- 컨텐츠 2-->
 	<select id="freelancercontent2" resultMap="freelancerContent2" parameterType="long">
 	  <![CDATA[
 			select fp.free_code 
-				, ap.pj_num
-				, pj_sub
-				from freelancer_profile fp
-					inner join 
-					APPLIED_PROJECT ap
-					on  fp.free_code=ap.free_code
-						inner join
-						Project p
-						on ap.pj_num= p.pj_num
-							where fp.free_code=#{FREE_CODE}
-			]]>		
+					, ap.pj_num
+					, pj_sub
+					, appp_date
+					from freelancer_profile fp
+						inner join APPLIED_PROJECT ap
+						on  fp.free_code=ap.free_code
+							inner join Project p
+							on ap.pj_num= p.pj_num
+								where fp.free_code=#{FREE_CODE}
+	  ]]>		
 	</select> 
 		<!-- 컨텐츠 3-->
 	<select id="freelancercontent3" resultMap="freelancerContent3" parameterType="long">
@@ -332,6 +339,8 @@
 			select fp.free_code
 					, fpk.KEY_NUM
 					, KEY_NAME
+					, fp.pro_num
+					, mem_email
 						from FREELANCER_PROFILE fp
 							left outer join FREE_PICK_KEYWORD fpk
 							on fp.FREE_CODE=fpk.FREE_CODE
@@ -349,47 +358,37 @@
 						from FREELANCER_PROFILE fp
 							left outer join TYPE t
 							on t.TYPE_NUM=fp.TYPE_NUM
-							where FREE_CODE=#{FREE_CODE}
-							
+								where FREE_CODE=#{FREE_CODE}
 			]]>		
 	</select> 
 		<!-- 컨텐츠 5-->
 	<select id="freelancercontent5" resultMap="freelancerContent5" parameterType="long">
 	  <![CDATA[
-			select COR_CODE
-					, p.PJ_NUM
-					, PJP_KEYNUM
-					, k.KEY_NUM as fr_key_num
-					, KEY_NAME
-						from PROJECT p
-						left outer join PJ_PICK_KEYWORD pk
-							on p.PJ_NUM= pk.PJ_NUM
-						left outer join KEYWORD k
-							on pk.KEY_NUM=k.KEY_NUM
-								where pk.PJ_NUM=#{PJ_NUM}			
+		select pk.*, key_name, p.pj_num , free_code
+		    from pj_pick_keyword pk
+		        inner join keyword k
+		        on pk.key_num = k.key_num
+		            left outer join project p
+		            on pk.pj_num = p.pj_num	
+                        left outer join applied_project ap
+                        on p.pj_num = ap.pj_num 
+                        	where free_code=#{free_code}
 	  ]]>		
 	</select> 
+	
+	<select id="selectStar" resultType="List_FreeLancerReview" parameterType="long">
+	select freerev_star from freelancer_review where pro_num=#{pro_num}
+	</select>
 	
 	<!-- 프리랜서 리뷰(+페이징) -->
 	<select id="countReview" resultType="int">
    		select count(*) from freelancer_review
     </select>
-	<!-- <select id="freelancerReview" resultMap="freelancerReview" parameterType="map">
-	  <![CDATA[
-		select * from 
-			(select ROWNUM rnum , aa.* from 
-				(select  fr.*, m.mem_name from freelancer_review  fr
-	                 inner join member m
-	                  on fr.mem_email = m.mem_email
-		           		where free_code=#{free_code})aa)
-		                  where rnum>=#{start} and rnum<=#{end}
-	  ]]>		
-	</select>--> 
-		<select id="freelancerReview" resultMap="freelancerReview" parameterType="map">
+	<select id="freelancerReview" resultMap="freelancerReview" parameterType="map">
 	  <![CDATA[
 			select ROWNUM , fr.freerev_num
 						  , fr.freerev_cont
-                          ,fr.freerev_star
+                          , fr.freerev_star
                           , fr.freerev_rdate
                           , fr.pro_num
                           , fr.free_code
@@ -405,32 +404,24 @@
                                     where fr.free_code=#{free_code}
                                      and ROWNUM <= #{end}
                                      and ROWNUM>=#{start} 
-                                     order by freerev_rdate desc
-                                     	
+                                     order by freerev_rdate desc                             	
 	  ]]>	
 	</select> 
 	
 	<!-- 리뷰 insert -->
- 	<insert id="reviewInsert" parameterType="fp.freelancerprofile.domain.List_FreeLancerReview"> 
-  	<selectKey keyProperty="freerev_num" order="BEFORE" resultType="long">
-		select FREEREV_NUM_SEQ.NEXTVAL from dual
-	 </selectKey> 
+ 	<insert id="reviewInsert" parameterType="map" >
 	<![CDATA[
-		insert into freelancer_review (freerev_num, freerev_star, freerev_cont, freerev_rdate,pro_num, free_code, mem_email)
+		insert into freelancer_review (freerev_num, freerev_star,  freerev_cont, freerev_rdate, pro_num, free_code, mem_email)
 	values
-		(#{freerev_num}, #{freerev_star}, #{freerev_cont}, sysdate, #{pro_num} , #{free_code}, #{mem_email})
+		(freerev_num_seq.nextval,  #{freerev_star}, #{cont}, sysdate, #{pnum} , #{fcode}, #{mem_email})
 		   ]]>
 	</insert>
 	<!-- 리뷰 update -->
- 	<update id="reviewUpdate" parameterType="long"> 
- 	  <selectKey keyProperty="freerev_num" order="BEFORE" resultType="fp.freelancerprofile.domain.List_FreeLancerReview">
-		select FREEREV_NUM_SEQ.NEXTVAL from dual
-	  </selectKey> 
+ 	<update id="reviewUpdate" parameterType="long">
 	<![CDATA[
-		update set freelancer_review freerev_num= #{freerev_num},freerev_star= #{freerev_star},freerev_cont= #{freerev_cont}
+		update freelancer_review set freerev_star=#{review_star}, freerev_cont= #{freerev_cont}, freerev_rdate=sysdate, where freerev_num= #{freerev_num}
 		   ]]>
 	</update>  
-	
 	<!-- 리뷰 delete -->
  	<delete id="reviewDelete" parameterType="long"> 
 	<![CDATA[

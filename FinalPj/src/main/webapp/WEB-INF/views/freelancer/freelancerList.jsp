@@ -4,7 +4,6 @@
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
-
 		<!--Sliders Section-->
 		<div>
 			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner7.jpg">
@@ -20,8 +19,6 @@
 											<div class="form-group  col-xl-6 col-lg-5 col-md-12 mb-0">
 											<input type="text" class="form-control input-lg border-right-0" id="text" placeholder="Search Your Book">
 										</div>  
-										
-											
 								  	<div class="form-group col-xl-4 col-lg-4 select2-lg  col-md-12 mb-0">
 											<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
 												<optgroup label="Categories">
@@ -58,15 +55,10 @@
 												</optgroup>
 											</select>
 										</div>   
-										
-										
-										
 										<div class="col-xl-2 col-lg-3 col-md-12 mb-0">
 											<a href="#" class="btn btn-lg btn-block btn-secondary">Search</a>
 										</div>
 									</div>  -->	
-									
-									
 								</div>
 							</div>
 						</div>
@@ -75,7 +67,6 @@
 			</div>
 		</div>
 		<!--/Sliders Section-->
-
 		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">
@@ -90,7 +81,6 @@
 			</div>
 		</div>
 		<!--/Breadcrumb-->
-
 		<!--Add listing-->
 		<section class="sptb">
 			<div class="container">
@@ -111,216 +101,51 @@
 						</div>
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">직종</h3>
+								<h3 class="card-title">구분</h3>
 							</div>
 							<div class="card-body">
-								<div class="panel-group1" id="accordion2">
-									<div class="panel panel-default mb-4">
-										<div class="panel-heading1 ">
-											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse1" aria-expanded="false">개발</a>
-											</h4>
-										</div>
-										<div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
-											<div class="panel-body border-top-0">
-												<div class="filter-product-checkboxs">
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Computer Operator<span class="label label-secondary float-right">14</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Admin<span class="label label-secondary float-right">22</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox3" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Chef<span class="label label-secondary float-right">78</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox4" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Beautician<span class="label label-secondary float-right">35</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox5" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">IT/Hardware<span class="label label-secondary float-right">23</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox6" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Driver<span class="label label-secondary float-right">14</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">IT/Software<span class="label label-secondary float-right">45</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">HR Recruiter<span class="label label-secondary float-right">34</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Sales<span class="label label-secondary float-right">18</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Teachers/Lecturers<span class="label label-secondary float-right">02</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Life Insurance<span class="label label-secondary float-right">15</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Delivery Boy<span class="label label-secondary float-right">32</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Web Designer<span class="label label-secondary float-right">23</span></a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-0">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Web Developer<span class="label label-secondary float-right">19</span></a>
-														</span>
-													</label>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default mb-4">
-										<div class="panel-heading1">
-											<h4 class="panel-title1">
-												<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="false">디자인</a>
-											</h4>
-										</div>
-										<div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
-											<div class="panel-body border-top-0">
-												<div class="filter-product-checkboxs">
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Abids</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Alwal</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox3" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Amberpet</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox4" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Ameerpet</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox5" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Attapur</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox6" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Bachupally</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Bala Nagar</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Banjara Hills</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Lb Nagar</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Uppal</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Hitech City</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Lingampally</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">KPHB</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-3">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">ECIL</a>
-														</span>
-													</label>
-													<label class="custom-control custom-checkbox mb-0">
-														<input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-														<span class="custom-control-label">
-															<a href="#" class="text-dark">Secunderabad</a>
-														</span>
-													</label>
-												</div>
-											</div>
-										</div>
-									</div>
-
+								<div class="filter-product-checkboxs">
+								
+									<label class="custom-control custom-checkbox mb-2">
+										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<span class="custom-control-label">
+											개발
+											<span class="label label-secondary float-right">14</span>
+										</span>
+									</label>
+									
+									<label class="custom-control custom-checkbox mb-2">
+										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<span class="custom-control-label">
+											퍼블리싱
+											<span class="label label-secondary float-right">14</span>
+										</span>
+									</label>
+									<label class="custom-control custom-checkbox mb-2">
+										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<span class="custom-control-label">
+											디자인
+											<span class="label label-secondary float-right">14</span>
+										</span>
+									</label>
+									<label class="custom-control custom-checkbox mb-2">
+										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<span class="custom-control-label">
+											기획
+											<span class="label label-secondary float-right">14</span>
+										</span>
+									</label>
+									<label class="custom-control custom-checkbox mb-2">
+										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<span class="custom-control-label">
+											기타
+											<span class="label label-secondary float-right">14</span>
+										</span>
+									</label>
 								</div>
 							</div>
-							
 							<div class="card-header border-top">
-								<h3 class="card-title">등급</h3>
+								<h3 class="card-title">경력</h3>
 							</div>
 							<div class="card-body">
 								<div class="filter-product-checkboxs">
@@ -343,8 +168,7 @@
 										</span>
 									</label>									
 								</div>
-							</div>							
-							
+							</div>		
 							<div class="card-header border-top">
 								<h3 class="card-title">근무형태</h3>
 							</div>
@@ -376,26 +200,23 @@
 									</label>									
 								</div>
 							</div>
-
-							<div class="card-footer">
+							<!-- <div class="card-footer">
 								<a href="#" class="btn btn-secondary btn-block">Apply Filter</a>
-							</div>
+							</div> -->
 						</div>
-
 					</div>
 					<!--Left Side Content-->
-
 					<div class="col-xl-9 col-lg-8 col-md-12">
 						<div class="card item2-gl ">
 							<div class="item2-gl-nav d-flex">
-								<h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6>
+								<h6 class="mb-0 mt-2">Showing &nbsp;${paging.nowPage}&nbsp; to 10 of &nbsp;${paging.endPage}&nbsp;entries</h6>
 								<ul class="nav item2-gl-menu ml-auto">
-									<li class=""><a href="#tab-11" class="active show" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
-									<li><a href="#tab-12" data-toggle="tab" class="" title="Grid"><i class="fa fa-th"></i></a></li>
-								</ul>
+								<!-- 	<li class=""><a href="#tab-11" class="active show" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
+									<li><a href="#tab-12" data-toggle="tab" class="" title="Grid"><i class="fa fa-th"></i></a></li>-->
+								</ul> 
 								<div class="d-flex">
 								<!-- <label class="mr-2 mt-1 mb-sm-1">Sort By:</label>  -->	
-									<select name="item" class="form-control select-sm w-90">
+									<select name="item" class="form-control select-sm w-90" >
 										<option value="1">최신순</option>
 										<option value="2">평점높은순</option>
 										<option value="3">조회수높은순</option>										
@@ -408,78 +229,157 @@
 					<div> <!-- div 추가 빼면 겹침.(c:forEach때문) -->
 						<div class="card overflow-hidden">
 							<!-- <div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div> -->
-
 							<div class="card-header pt-5 pb-5">
 								<div  class="d-flex">
 							<!-- 		<span class="avatar avatar-md  d-block brround cover-image mr-4" data-image-src="../images/faces/male/25.jpg"></span>  -->
-									<a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i></a>
-									
-									<div>
-						
-										<c:forEach var="num" items="${list.list_review}" varStatus="status">
-									
-									
+				<div class="media mt-0 p-1">                  
+					<div class="d-flex mr-3">
+						<c:if test="${list.member.get(0).class_num == 3}">
+							<c:choose>
+                                <c:when test="${list.free_fname != null}">
+									<img src="../hifiveImages/free_thumb/${list.free_fname}" alt="X" class="avatar-xxl brround mx-auto"> 
+								</c:when>
+								<c:otherwise>
+									<i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i>	
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+								<c:if test="${list.member.get(0).class_num != 3}">
+									<i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i>	
+								</c:if>	
+							</div>
+						</div>
+								<div>
+									<c:forEach var="num" items="${list.list_review}" varStatus="status">
 										<a href="freelancercontent?free_code=${list.free_code}&pro_num=${num.pro_num}" class="font-weight-semibold fs-18 text-body">&nbsp;&nbsp;${list.free_name}</a><br>
 									</c:forEach>
 									<c:forEach var="exp" items="${list.list_freelancerprofile}" varStatus="status">
 										<small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small>&nbsp;|	
+									</c:forEach>			
+									<c:forEach var="type" items="${freelancerList2}" varStatus="status">
+									<c:forEach var="typename" items="${type.list_type}" varStatus="status">
+										<c:if test="${list.free_code eq type.free_code}">
+											<small>&nbsp;&nbsp;</small>${typename.type_name}
+										</c:if>
 									</c:forEach>
-					
-							
-									<small>&nbsp;&nbsp;</small>수정수정${freelancerList2[0].list_type.type_name}				
+						 		</c:forEach>				
 							 
 									</div>
 								
+								
 								</div>
-								<div class="item-card2-icons">
-									<a href="" class="item-card9-icons1 wishlist active"><i  class="fa fa fa-heart-o"></i></a>
-								</div>
-							</div>
-
-						<div class="card-body pb-2 hide-details">
-								<ul class="usertab-list mb-0">
-									<h4>수행한 프로젝트</h4>				
+								<input type="hidden" value="${cor.cor_code}" class="cor_codes"/>
+									<c:if test="${empty cor}">
+									<div class="item-card9-icons zzim">
+										<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" onclick="javascript:onlyCor();">
+										 <i class="fa fa fa-heart-o" style=""></i></a>
+									</div>
+								</c:if>
+								<c:if test="${!empty cor}">
+								<c:forEach var="i" begin="0" end="${list.list_freelancerprofile.size()-1}">
 									
-									<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold"></span>${freelancerList3[0].pj_sub}<br/>		
-
-
-
-
-
+								<c:choose>
+									<c:when test="${pronumList.contains(list.list_freelancerprofile.get(i).pro_num)}">
+										<div class="item-card9-icons"  id="zzim${list.list_freelancerprofile.get(i).pro_num}" >
+											<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${list.list_freelancerprofile.get(i).pro_num})">
+											 <i class="fa fa fa-heart" style="color:white"></i></a>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="item-card9-icons">
+											<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${list.list_freelancerprofile.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${list.list_freelancerprofile.get(i).pro_num})">
+											 <i class="fa fa fa-heart-o" style=""></i></a>
+										</div>
+									</c:otherwise>	
+								</c:choose>
+								<div class="item-card9-icons"  id="zzim${list.list_freelancerprofile.get(i).pro_num}">
+	
+								</div>
+							
+								</c:forEach>
+								</c:if>
+								
+							</div>
+			<script>
+			function onlyCor(){
+				alert("기업 회원만 이용가능한 서비스 입니다.")
+			}
+			function wish(pro_num){	
+				$.ajax({
+					type:"get",  
+					url:"<c:url value='free_wish'/>",
+	    			data:"pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
+					success: function(data){
+						$('#insertwish'+pro_num).remove();
+						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pro_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pro_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
+						alert("프리랜서 프로필이 찜목록에 추가되었습니다.")
+					},
+					error: function(data){
+					alert("에러발생");
+					}
+				});
+			}
+			function del_wish(pro_num){
+				$.ajax({
+					type:"get",
+					url:"<c:url value='free_wish_del'/>",
+					data: "pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
+					success:function(data){
+						$('#delwish'+pro_num).remove();
+						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons wishlist' id='insertwish"+pro_num+"' style='margin-right:40%' onclick='javascript:wish("+pro_num+")'><i class='fa fa fa-heart-o'></i></a>");
+					}
+				})
+			}
+			</script>
+						<div class="card-body pb-2 hide-details">
+									<ul class="usertab-list mb-0">
+										<h4>진행한 프로젝트</h4>				
+									<c:forEach items="${freelancerList3}" var="project" >
+										<c:forEach items="${project.list_freelancerprofile}" var="profile" >								
+											<c:if test="${list.free_code eq profile.free_code}">							
+												<c:forEach items="${project.list_project}" var="sub" >
+												<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold">${sub.pj_sub}</span><br/>
+												</c:forEach>
+											</c:if>
+										</c:forEach>							
+									</c:forEach>							
 								</ul>								
 							</div> 
-					
+							<!-- 별점 -->
 							<div class="card-footer">
 								<div class="row">
 									<div class="product-filter-desc col">										
 										<div class="rating-stars d-inline-flex mb-2 mr-3">
 										<c:forEach  var="star" items="${list.list_review}" varStatus="status">	
-												<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="${star.freerev_star}">
-									<!-- 	</c:forEach> -->
-		                                       <span class="rated-products-ratings">
-		                                          <i class="fa fa-star text-warning"> </i>
-		                                          <i class="fa fa-star text-warning"> </i>
-		                                          <i class="fa fa-star text-warning"> </i>
-		                                          <i class="fa fa-star-half-o text-warning"> </i>
-		                                          <i class="fa fa-star-o text-warning"> </i>
-		                                         <!-- <c:forEach  var="star" items="${list.list_review}" varStatus="status"> -->	
-		                                       </span>&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;							
-												 </c:forEach>
+												<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
+									 		    <span class="rated-products-ratings">
+		                        		      <c:if test="${star.freerev_star >= 0}">
+			                                        <c:forEach var="1" begin="1" end="${star.freerev_star}">
+			                                          <i class="fa fa-star text-warning"> </i>
+			                                        </c:forEach>
+			                                        <c:forEach var="1" begin="1" end="${5-star.freerev_star}">
+													  <i class="fa fa-star-o text-warning"> </i>
+													</c:forEach>
+											  </c:if>      
+		                                      	 </span>&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;							
+										</c:forEach>
 												 <c:forEach  var="views" items="${list.list_freelancerprofile}" varStatus="status">	
-												<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>${views.pro_vcnt}&nbsp;&nbsp;views</a>
+													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>${views.pro_vcnt}&nbsp;Views</a>
 												 </c:forEach>
+												&nbsp;&nbsp;&nbsp;
+												 <c:forEach  var="pcnt" items="${list.list_freelancerprofile}" varStatus="status">
+												 	<a class="icons"><i class="fa fa-heart text-muted mr-1"></i>${pcnt.pro_pcnt}&nbsp;Picks</a>
+												 </c:forEach>
+											</div>
 										</div>
-									</div>
 									<div class="col col-auto dams" >
 										<a class="icons" href="freelancercontent?free_code=${list.free_code}"><i class="fa fa-angle-double-right text-muted mr-1"></i>더보기</a>
-									</div>
-										
+									</div>							
 								</div>
 							</div>		
-							</div>		
-					 	</c:forEach>
-						</div>
-					
+						</div>		
+					 </c:forEach>
+				</div>
 						<!--Add lists-->
 	<!-- 					<div class="card overflow-hidden">
 							 <div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div> 
@@ -518,7 +418,6 @@
 		                                          <i class="fa fa-star-half-o text-warning"> </i>		                                         
 		                                       </span>	4.5 &nbsp;&nbsp;&nbsp;
 												<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>23,030,042 views</a>
-												
 										</div>
 									</div>
 									<div class="col col-auto dams" >
@@ -526,44 +425,35 @@
 									</div>
 								</div>
 							</div>				
-							
 						</div>-->
-
 						<!-- 페이징 -->
-						
-							<div class="center-block text-center" style=align:'center'>
+							<div class="center-block text-center">
                            <ul class="pagination mb-0">			
-								<div class="card-body" style="margin:0 auto; align:center;">
+								<div class="card-body">
 									<ul class="pagination mg-b-0 page-0 ">
-                     
                           <c:if test ="${paging.nowPage != paging.startPage}">
-                          
                            <!--이전 페이지 이동 -->
                             <li class="page-item">
 								<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
 								<i class="fa fa-angle-double-left"></i></a>
-							
 							</li>	
 							<li class="page-item">
 								<a aria-label="Next" class="page-link" href="freelancerList?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
 								<i class="fa fa-angle-left"></i></a>
 							</li>	
-										
                   			</c:if>
-                            
                            <!--페이지번호 -->
-             
- <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+             			   <!-- 시작페이지~끝페이지 -->
+						    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
-                                    <li class='page-item active'><a class="page-link"  >${p}</a></li>
+                                    <li class='page-item active'><a class="page-link">${p}</a></li>
                                  </c:when>
                                  <c:when test = "${p != paging.nowPage }">
                                     <li class="page-item"><a class="page-link"  href="freelancerList?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
                                  </c:when>
                               </c:choose>
                            </c:forEach>
-                           
                               <c:if test ="${paging.nowPage != paging.lastPage}">
                                  <li class="page-item">
 									<a aria-label="Next" class="page-link" href="freelancerList?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
@@ -571,19 +461,7 @@
 								<li class="page-item">
 									<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
 								</li>
-                              </c:if>
-                              
-                            </li>
-                           </ul>
-                           </div>
-                           </ul>
-                           </div>
-						
-						
-							
-						
-						
-
+                              </c:if>         					
 				<!--		<div class="card-body" style="margin:0 auto; align:center;">
 							<ul class="pagination mg-b-0 page-0 ">
 								<li class="page-item">
@@ -622,11 +500,7 @@
 				</div>
 			</div>
 		</section>
-		
 		<!--Add Listing-->
-
-
-
 		<!-- Message Modal -->
 		<div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -652,7 +526,6 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- Message Modal -->
 		<div class="modal fade" id="contact1" tabindex="-1" role="dialog"  aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -681,8 +554,6 @@
 				</div>
 			</div>
 		</div>
-
-
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

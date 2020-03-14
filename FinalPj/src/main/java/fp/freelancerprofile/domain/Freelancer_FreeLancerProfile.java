@@ -38,8 +38,8 @@ public class Freelancer_FreeLancerProfile {
 	private List<FreeLancerProfileFile> freelancerprofilefile;
 	private List<Type> frType;
 	private List<Project> frProject;
-	private List<fp.freelancerprofile.domain.List_FreeLancerReview> list_freeLancerReview;
-	private List<Applied_Project> Applied_Project;
+	private List<List_FreeLancerReview> list_freeLancerReview;
+	private List<Applied_Project> applied_project;
 	private List<KeyWord> frKeyWord;
 	private List<FreePickKeyWord> FreePick;
 	

@@ -27,7 +27,7 @@
 		</section>
 		<!--/Breadcrumb-->
 
-		<!--User dashboard-->
+		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
 				<div class="row">
@@ -38,9 +38,16 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
+								<c:if test="${cor.cor_fname eq ''}">
 									<div class="profile-pic-img">
-										<img src="../images/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
+								</c:if>
+								<c:if test = "${cor.cor_fname ne '' }">
+									<div class="profile-pic-img">
+										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+									</div>
+								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
@@ -58,7 +65,7 @@
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market">마켓 찜</a></li>
+												<li><a class="slide-item" href="cor-myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
@@ -69,7 +76,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments_cor"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments_cor?mem_email=${sessionScope.email}"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
 											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>

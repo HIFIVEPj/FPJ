@@ -49,8 +49,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
-												<li><a class="slide-item " href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
+												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+												<li><a class="slide-item " href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
 								<!-- 		<li class="slide">
@@ -65,14 +65,15 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html"> 프론젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavorite.html"> 프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite.html"> 마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket"> 마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="manged.html">마켓관리</a></li>
-												<li><a class="slide-item" href="manged.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 												<li class="sub-slide">
 												<!--  <a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>-->	
 													<ul class="child-sub-menu ">
@@ -321,13 +322,11 @@
 						</div>
 							</div>
 							<div class="card-footer" align="right">
-							
-								<a href="freelancerMyprofile_change?mem_email=${sessionScope.email}&pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-primary icons">수정하기</a>
+								<a href="freelancerMyprofile_change?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-primary icons">수정하기</a>
 								
-								<a href='freelancerProfile_delete?mem_email=${sessionScope.email}&pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
+								<a href='freelancerProfile_delete?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								
-								<a href="freelancerProfile_list?mem_email=${sessionScope.email}" class="btn btn-primary icons">목록</a>				
-									
+								<a href="freelancerProfile_list" class="btn btn-primary icons">목록</a>				
 							</div>
 						
 						<!-- 	<div class="card-footer" align="right">
@@ -342,7 +341,54 @@
 			</div>
 		</section>
 		<!--/User Dashboard-->
-
+<!-- delete Modal -->   
+      <div id="deleteModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 정말 삭제할까요?</p>
+               </div>
+               <div class="modal-footer">
+               <a href='freelancerProfile_delete?pro_num${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-primary" style="color:white;">네</a>	
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /delete Modal -->
+<!-- edit Modal -->   
+      <div id="editModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 수정할까요?</p>
+               </div>
+               <div class="modal-footer">
+              <a href="freelancerMyprofile_change?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-primary">네</a>	
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /edit Modal -->
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 

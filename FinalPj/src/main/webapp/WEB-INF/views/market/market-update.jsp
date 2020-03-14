@@ -31,7 +31,8 @@
 				<div class="row ">
 					<div class="col-lg-8 col-md-12 col-md-12">
 <!-- /////////////////////////서버로 보내는 폼 ///////////////////////////-->		
-					<form name="updateForm" method="post" action="market-update2?market_num=${market.market_num}" enctype="multipart/form-data">		
+					<form name="updateForm" method="post"  enctype="multipart/form-data">		
+						<input type="hidden" class="form-control" name="market_state" id="market_state"value="${market.market_state}">
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">마켓수정</h3>
@@ -311,7 +312,15 @@
 			   return false;
 			   
 		   }
-		   updateForm.submit();
+
+		  if($("#market_state").val()==1){
+			  updateForm.action="market-update2?market_num=${market.market_num}";
+		   		updateForm.submit();
+		   	}
+		  if($("#market_state").val()==0){
+			  updateForm.action ="market-updateRefusalMarket2?market_num=${market.market_num}";
+		   		updateForm.submit();
+		   	}
 	   }
 </script>
 <!--footer-->

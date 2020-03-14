@@ -1,10 +1,9 @@
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <% String classN = request.getParameter("classN");// %>
-
-
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="x-ua-compatible" content="IE=edge">
@@ -21,38 +20,25 @@
 		<meta name="keywords" content="freelancer,freelance,project,market service, free market">
 		<link rel="icon" type="image/png" href="../images/hifive.png" />
 		<link rel="shortcut icon" type="image/png" href="../images/hifive.png" />
-
-
 		<!-- Title -->
 		<title>하이파이브</title>
-
-
 		<!-- Sidemenu Css -->
 		<link href="../plugins/toggle-sidebar/sidemenu.css" rel="stylesheet" />
-
-
 		<!-- Bootstrap Css -->
 		<link href="../plugins/bootstrap-4.1.3/css/bootstrap.min.css" rel="stylesheet" />
-
 		<!-- Dashboard Css -->
 		<link href="../css/dashboard.css" rel="stylesheet" />
 		<link href="../css/admin-custom.css" rel="stylesheet" />
-
 		<!-- c3.js Charts Plugin -->
 		<link href="../plugins/charts-c3/c3-chart.css" rel="stylesheet" />
-
 		<!-- Morris.js Charts Plugin -->
 		<link href="../plugins/morris/morris.css" rel="stylesheet" />
-
 		<!-- Custom scroll bar css-->
 		<link href="../plugins/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet" />
-
 		<!---Font icons-->
 		<link href="../plugins/iconfonts/plugin.css" rel="stylesheet" />
 		<link href="../plugins/iconfonts/icons.css" rel="stylesheet" />
-
 	</head>
-
 	
 	
 		<body class="app sidebar-mini">
@@ -192,7 +178,6 @@
 													<span class="block">map</span>
 												</a>
 											</li>
-
 											<li>
 												<a href="#" class="drop-icon-item">
 													<i class="si si-bubbles text-dark"></i>
@@ -298,7 +283,6 @@
 						</a>
 					</div>
 				</aside>
-
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
@@ -308,7 +292,6 @@
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
 							</ol> 
 						</div>
-
 						<div class="row">
 							<div class="col-lg-3 col-md-12">
 								<div class="card">
@@ -378,7 +361,6 @@
 									</div>
 								</div>
 							</div>
-
 						
 						</div>		
 					</form>
@@ -458,7 +440,6 @@
 					</div> 
 				</div>
 			</div>
-
 			<!--footer-->
 			<footer class="footer">
 				<div class="container">
@@ -471,11 +452,8 @@
 			</footer>
 			<!-- End Footer-->
 		</div>
-
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>
-
-
 		<!-- Dashboard Core -->
 		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
 		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
@@ -499,14 +477,12 @@
 		<script src="../plugins/date-picker/spectrum.js"></script>
 		<script src="../plugins/date-picker/jquery-ui.js"></script>
 		<script src="../plugins/input-mask/jquery.maskedinput.js"></script>
-
 		<!--InputMask Js-->
 		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
 		
 		<!-- Charts Plugin -->
 		<script src="../plugins/chart/Chart.bundle.js"></script>
 		<script src="../plugins/chart/utils.js"></script>
-
 		<!-- 원래 여기 Morris.js Charts Plugin   
 		<script src="../plugins/morris/morris.js"></script>		
 		<script src="../plugins/morris/raphael-min.js"></script>  -->
@@ -526,14 +502,11 @@
 		<!--Counters -->
 		<script src="../plugins/counters/counterup.min.js"></script>
 		<script src="../plugins/counters/waypoints.min.js"></script>
-
 		<!-- Custom scroll bar Js-->
 		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
 		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
-
 <script type="text/javascript" >
 $(document).ready(function(){
 	/*
@@ -548,6 +521,5 @@ $(document).ready(function(){
       })
 })
 </script>
-
 	</body>
 </html>

@@ -101,14 +101,26 @@
 														<h4 class="panel-title1">
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
+					
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	
 																	<!--
-																	<input type="button" class="btn btn-danger btn-xs" value="삭제" onclick="location.href='customer_service_faq_delete?faq_num=${faq_list.faq_num}';" data-toggle="modal" data-target="#smallModal">
-																	
-																	<input type="button" class="btn btn-danger btn-xs" value="삭제" data-toggle="modal" data-target="#delete" data-faq_num="${faq_list.faq_num}">
-																	-->
+																	<input type="button" class="btn btn-danger btn-xs" value="삭제" onclick="location.href='customer_service_faq_delete?faq_num=${faq_list.faq_num}';" data-toggle="modal" data-target="#smallModal">																																																															
 																	<input type="button" class="btn btn-danger btn-xs" value="삭제" onclick="location.href='customer_service_faq_delete?faq_num=${faq_list.faq_num}';">
+																	-->
+																	<!--
+																	<input type="button" class="btn btn-danger btn-xs" value="삭제" data-toggle="modal" data-target="#deleteFaq" data-faq_num='${faq_list.faq_num}'>
+																	<button id="deleteFaq" class="btn btn-danger btn-xs" value="${faq_list.faq_num}" data-toggle="modal" data-target="#deleteFaqModal">삭제</button>
+																	<button data-toggle="modal" data-target="#deleteFaq" data-faq_num="${faq_list.faq_num}" class="btn btn-danger btn-xs">삭제</button>
+																	-->	
+																	<!--																												
+																	<input type="button" class="btn btn-danger btn-xs" value="삭제" onclick="location.href='customer_service_faq_delete?faq_num=${faq_list.faq_num}';">
+																	-->
 																	
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
+																	<!--
+																	<a href="javascript:void(0)" class="btn btn-danger btn-xs" onclick="deleteFaq(${faq_list.faq_num})">삭제</a>
+																	-->															
 																</c:if>
 															</a>
 														</h4>
@@ -552,14 +564,13 @@
 		</div>
 	</section>
 	<!--/Add listing-->
-
+	
 	<!-- small Modal -->
-	<!--
-	<div id="delete" class="modal fade">
+
+	<div id="deleteModal" class="modal fade">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					
+				<div class="modal-header">				
 					<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -568,40 +579,25 @@
 				<div class="modal-body">
 					<p>글을 정말 삭제할까요?</p>
 				</div>
-				
-				<div class="modal-footer">
-					-->
-					<!--			
-					<a href="customer_service_faq_delete?faq_num=${faq_list.faq_num}" class="btn btn-primary">네</a>
-					-->
-					<!--
-					<button type="button" class="btn btn-primary" onclick="delete();">네</button>
+				<div class="modal-footer">				
+					<a class="btn btn-primary" href="#" id="deleteYes">네</a> 
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
 				</div>
 			</div>
 		</div>		
 	</div>	
-	-->
-	<!-- /small Modal -->
-	<!--
-	<script>
-	    var faq_num="";
-	    
-	    $(document).ready(function() {     
-	        $('#delete').on('show.bs.modal', function(event) {          
-	            faq_num = $(event.relatedTarget).data('faq_num');
-	        });
-	    });
-	    
-	    
-	    function delete()
-	    {
-	        location.href='customer_service_faq_delete?faq_num='+faq_num;
-	    }
 
+	<!-- /small Modal -->
+
+	<script>
+	function deleteFaq(faq_num){
+	   $("#deleteYes").attr("href","customer_service_faq_delete?faq_num="+faq_num);
+	   $("#deleteModal").modal("show");
+	}
 	</script>
-	-->
+}
+	
+
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
-		
