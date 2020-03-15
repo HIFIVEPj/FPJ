@@ -48,7 +48,7 @@ public class IndexController {
 		String mem_email=(String) session.getAttribute("email");
 		
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
-		Pagingmap.put("selectedKey",2);
+		Pagingmap.put("selectedKey",1);
 		Pagingmap.put("start",1);
 		Pagingmap.put("end",10); 
 		log.info("1@#@!#!#@!list"+list);

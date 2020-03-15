@@ -693,6 +693,7 @@
 								<div class="card-footer">
 									<div style="text-align: right; vertical-align:center;">
 										<span style="font-size:20px">결제금액</span></br>
+
 										<span style="font-size:30px" >${market.market_price}</span>
 									</div>
 								</div>

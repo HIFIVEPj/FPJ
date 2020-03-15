@@ -401,7 +401,3 @@ public class MarketRestController {
 	}
 
 }
-
-
-
-	

@@ -1,4 +1,3 @@
-
 package fp.member.mapper;
 
 import java.util.List;
@@ -40,4 +39,3 @@ public interface MemberMapper {
 	List<Long> month();
 
 }
-

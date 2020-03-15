@@ -1,4 +1,3 @@
-
 package fp.corporation.mapper;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import fp.corporation.vo.ProjectVo;
 
 public interface ProjectMapper {
 	List<Project> list (Map<String, Object> map);
-	long getTotalCount();
+	long getTotalCount(Map<String, Object> map);
 	List<Project> pjKeywords();
 	Project content(long pj_num);
 	Corporation corInfo(long pj_num);

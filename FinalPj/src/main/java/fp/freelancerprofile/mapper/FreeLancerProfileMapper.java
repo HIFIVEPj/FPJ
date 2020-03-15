@@ -3,14 +3,13 @@ package fp.freelancerprofile.mapper;
 
 import java.util.*;
 
-import org.springframework.context.annotation.Profile;
 
-import fp.corporation.domain.PjPickKeyword;
-import fp.corporation.domain.Project;
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 
 
@@ -37,6 +36,7 @@ public interface FreeLancerProfileMapper {
 
 	//프로필 작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
+	
 	//프로필 작성페이지 수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
 	public void typeUpdate(int type_num);
@@ -49,12 +49,13 @@ public interface FreeLancerProfileMapper {
 	//체크박스 삭제//
 	public void checkdelete1(Map<String, Object> map);
 	
+	
 	public List<FreeLancerProfile> profile_free_select(String mem_email);
 	public long getTotalCountFree(long free_code);
 	
 	//프로필 수정//
 	public FreeLancerProfile showContent(long pro_num);
-
+	void choiceProfile(Map<String, Object> map);
 	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
@@ -65,6 +66,21 @@ public interface FreeLancerProfileMapper {
 	List<FreeLancer>select_pj_applied_free_paging(long pj_num);
 	
 	public void insertPjpkeyword(Map<String, Object> map);
-
+	//프리랜서 찜
+	List<FreeLancerPick>freepick_list(long cor_code);
+	void freepick_insert(Map<String, Object>map);
+	void freepick_del(Map<String, Object>map);
+	void freepick_pro_update_in(Map<String, Object>map);
+	void freepick_pro_update_del(Map<String, Object>map);
 	
+	long getTotalCountFreep(long cor_code);
+	List<FreeLancerProfile> freepick_cor(Map<String, Object>map);
+	
+	//profile keyword 전체뽑기
+	List<FreeLancerProfile> selectAllFreeKeywords();
+	//계좌추가
+	void updateACCTOX(long free_code);
+	void addACCT(Freelnacer_account freeacct);
+	Freelnacer_account selectFreeACCT(long free_code);
+	void updateACCT(Freelnacer_account freeacct);
 }

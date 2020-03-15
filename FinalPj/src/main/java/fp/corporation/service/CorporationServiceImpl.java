@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import fp.corporation.domain.Corporation;
 import fp.corporation.mapper.CorporationMapper;
 import fp.freelancerprofile.mapper.FreelancerMarketInfoMapper;
-import fp.market.domain.Freelancer;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 

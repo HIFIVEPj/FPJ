@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fp.market.domain.Freelancer;
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
-import fp.market.domain.Member;
+
 
 public interface FreelancerMarketInfoService {
-	Freelancer getFreefname(String mem_email);
+	FreeLancer getFreefname(String mem_email);
 
 	int getTotalMarketPick(String mem_email);
 	List<MarketPick> marketPickList (HashMap<String,Object> map);

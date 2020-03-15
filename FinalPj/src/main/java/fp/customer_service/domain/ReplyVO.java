@@ -20,9 +20,12 @@ public class ReplyVO {
 	private int qacomm_sun;
 	private Date qacomm_rdate;
 	private int qacomm_ox;
-	private long replyCnt;
+	//private long replyCnt;
+	private long option1;
 	private long option2;
 	private String option3;
 	private String mem_name;
-
+	private String free_fname; 
+	private String cor_fname;
+	private String class_num;
 }

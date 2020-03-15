@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fp.corporation.domain.ProjectPick;
 import fp.customer_service.domain.BoardAttachVO;
 import fp.customer_service.domain.Criteria;
 import fp.customer_service.domain.CustomerServiceQa;
 import fp.customer_service.domain.Qa_recommend;
 import fp.customer_service.mapper.BoardAttachMapper;
 import fp.customer_service.mapper.CustomerServiceQaMapper;
-import fp.customer_service.mapper.ReplyMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -27,9 +25,6 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 
 	@Setter(onMethod_= @Autowired)
 	private BoardAttachMapper attachMapper;
-	
-	@Setter(onMethod_= @Autowired)
-	private ReplyMapper replymapper;
 	
 	/*
 	@Override

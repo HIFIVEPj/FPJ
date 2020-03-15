@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import fp.corporation.domain.Corporation;
-import fp.market.domain.Freelancer;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 

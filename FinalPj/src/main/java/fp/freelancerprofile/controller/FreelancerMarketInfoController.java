@@ -18,14 +18,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.service.FreelancerMarketInfoService;
 import fp.market.controller.MarketController;
-import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
-import fp.market.domain.Member;
 import fp.market.service.MarketService;
 import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
@@ -85,7 +84,7 @@ public class FreelancerMarketInfoController {
 		List<MarketPick> mp=service.marketPickList(map);
 		List<MarketBuysellList> mbuy=service.myBuyMarket(map2);
 		
-		Freelancer free = getFreefname(mem_email);
+		FreeLancer free = getFreefname(mem_email);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("profile/myfavorite_market");
 		mv.addObject("mPickList",mp);
@@ -117,7 +116,6 @@ public class FreelancerMarketInfoController {
 		return "redirect:myfavoriteMarket";
 	}
 /*	
-
 	@RequestMapping("myMarket")
 	public ModelAndView getMyMarket(HttpSession session
 			,@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
@@ -177,7 +175,7 @@ public class FreelancerMarketInfoController {
 
 		List<Market> myMarket=service.getMyMarket(map);
 		
-		Freelancer free = getFreefname(mem_email);
+		FreeLancer free = getFreefname(mem_email);
 		mv.setViewName("profile/myMarket1");
 		mv.addObject("myMarket",myMarket);
 		mv.addObject("paging",myMarketListVO);
@@ -214,7 +212,7 @@ public class FreelancerMarketInfoController {
 		}
 		member.add(memberMap);
 		log.info("!!!!!!!@@@@@@@@@@@@@@@@@member"+member);
-		Freelancer free = getFreefname(mem_email);
+		FreeLancer free = getFreefname(mem_email);
 		mv.setViewName("profile/myMarket2");
 		mv.addObject("mySellMarket",mySellMarket);
 		mv.addObject("paging",myMarketSellVO);
@@ -245,7 +243,7 @@ public class FreelancerMarketInfoController {
 		
 		List<MarketBuysellList> mbuy=service.myBuyMarket(map);
 		
-		Freelancer free = getFreefname(mem_email);
+		FreeLancer free = getFreefname(mem_email);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("profile/myMarket3");
 		mv.addObject("mBuyList",mbuy);
@@ -254,8 +252,8 @@ public class FreelancerMarketInfoController {
 		return mv;
 		
 	}
-	public Freelancer getFreefname(String mem_email) {
-		Freelancer free=service.getFreefname(mem_email);
+	public FreeLancer getFreefname(String mem_email) {
+		FreeLancer free=service.getFreefname(mem_email);
 		return free;
 		
 	}

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -193,16 +192,12 @@
 					</div>
 					<!--/Left Side Content-->
 <script>
-
 //검색창
 	function searchWord(nowPage,cntPerPage,selectedKey){
 			var searchWord=$("#searchText").val()		
 			alert("searchWord:"+searchWord);			
 			window.location.href="market-list?selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage+"&searchWord="+searchWord;
 	}
-
-
-
 //searchBox검색
 	$("#marketSearchBox").click(function (){
 		var checkedCate = [];
@@ -220,7 +215,6 @@
 		alert("checkedCate:"+checkedCate);
 		alert("checkedExp:"+checkedExp);
 		alert($("#price").val());
-
 		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
 	});
 	
@@ -229,8 +223,6 @@
 		var checkedExp = [];
 		var marketPrice=$("#price").val();
 		var selectedKey= $("#marketOrder option:selected").val();
-
-
 		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
 			//alert(index+":"+ $(this).val());
 			checkedCate.push($(this).val());
@@ -242,7 +234,6 @@
 		alert("checkedCate:"+checkedCate);
 		alert("checkedExp:"+checkedExp);
 		alert($("#price").val());
-
 		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage;
 	}
 	
@@ -536,7 +527,6 @@
 	    var checkedCate = [];
 		var checkedExp = [];
 		var marketPrice=$("#price").val();
-
 		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
 			//alert(index+":"+ $(this).val());
 			checkedCate.push($(this).val());
@@ -550,7 +540,6 @@
 	   	 	window.location.href="market-list?selectedKey="+selectedKey+"&searchWord="+searchWord;	
 	    }else if(checkedCate.length != 0 ||checkedExp.length != 0){
 	    	window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
-
 	    }
 	});
 	
@@ -565,7 +554,6 @@
 	      })
 	})
 	*/
-
 </script>
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>

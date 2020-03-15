@@ -40,5 +40,25 @@
 		update notice set notice_cate=#{notice_cate}, notice_sub=#{notice_sub}, notice_cont=#{notice_cont} where notice_num=#{notice_num}
 	</update>
 	
+	<!-- 공지글 좋아요 -->
+	<select id="notice_recommend_list" resultType="Notice_recommend">
+		select * from notice_recommend where mem_email=#{mem_email}	
+	</select>
 	
+	<insert id="notice_recommend_insert" parameterType="map">
+		insert into notice_recommend(notice_recommend_num, mem_email, notice_num) values(NOTICE_RECOMMEND_NUM_SEQ.nextval, #{mem_email}, #{notice_num})
+	</insert>
+	
+	<delete id="notice_recommend_del" parameterType="map">
+		delete from notice_recommend where mem_email=#{mem_email} and notice_num=#{notice_num}
+	</delete>
+	
+	<update id="notice_recommend_update_in" parameterType="map">
+		update notice set notice_recommnum=notice_recommnum+1 where notice_num=#{notice_num}
+	</update>
+	
+	<update id="notice_recommend_update_del" parameterType="map">
+		update notice set notice_recommnum=notice_recommnum-1 where notice_num=#{notice_num}
+	</update>
+
 </mapper>

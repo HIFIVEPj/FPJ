@@ -50,7 +50,7 @@
 	       <id property="marketRev_num" column ="marketRev_num" />
 	        <result property="marketRev_star" column ="marketRev_star" />
     	</association>
-		<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+		<association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="mem_email" column ="mem_email" />
 		</association>

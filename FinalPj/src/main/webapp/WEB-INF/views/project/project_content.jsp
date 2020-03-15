@@ -818,7 +818,6 @@ obShareUrl.value=window.document.location.href;
 		obShareUrl.blur();
 		alert("URL이 클립보드에 복사되었습니다.")
 	}
-
 </script>
 <!-- 카카오 공유하기 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -860,9 +859,7 @@ obShareUrl.value=window.document.location.href;
 
 <!-- 프린트 특정영역 인쇄  
 <script type="text/javascript">
-
 var initBody;
-
 function beforePrint() {
  printareas = document.body.innerHTML;
  document.body.innerHTML = printarea.innerHTML;
@@ -873,9 +870,7 @@ function afterPrint() {
 function printArea() {
  window.print();
 }
-
 window.onbeforeprint = beforePrint;
 window.onafterprint = afterPrint;
-
 </script>
 -->

@@ -1,4 +1,3 @@
-
 package fp.market.service;
 
 import java.util.HashMap;
@@ -8,18 +7,13 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fp.corporation.domain.Corporation;
-import fp.market.controller.MarketController;
-import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
-import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
-import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 @Log4j
@@ -200,4 +194,3 @@ public class MarketServiceImpl implements MarketService {
 	
 
 }
-

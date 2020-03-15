@@ -1,4 +1,3 @@
-
 package fp.member.service;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;

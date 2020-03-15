@@ -18,13 +18,13 @@
 		<result property="market_state" column="market_state" />
 		<result property="market_pcnt" column="market_pcnt" />
 		<result property="option3" column="option3" />
-		<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+		<association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="mem_email" column ="mem_email" />
 	       <result property="free_name" column ="free_name" />
 	       <result property="free_tel" column ="free_tel" />
 	       <result property="free_point" column ="free_point" />
-	       <result property="rdate" column ="rdate" />
+	       <result property="free_rdate" column ="rdate" />
 	       <result property="free_level" column ="free_level" />
 	       <result property="free_acctox" column ="free_acctox" />
 	       <result property="free_fname" column ="free_fname" />
@@ -61,13 +61,13 @@
          <result property="marketRev_star" column ="marketRev_star" />
 
          <result property="mem_email" column ="mem_email" /> 	
-    	 <association property="freelancer" javaType="mFreelancer" column ="free_code" >
+    	 <association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="free_name" column ="free_name" />
 	       <result property="free_fname" column ="free_fname" />
 	       <result property="free_ofname" column ="free_ofname" />       
 		</association>
-		<association property="corporation" javaType="mCorporation" column ="cor_code" >
+		<association property="corporation" javaType="Corporation" column ="cor_code" >
 	       	<id property="cor_code" column ="cor_code" />
 	        <result property="mem_email" column ="mem_email" />
 	        <result property="cor_mname" column ="cor_mname" />    
@@ -93,13 +93,13 @@
 		<result property="marketQA_sun" column ="marketQA_sun" />
 		<result property="marketQA_ox" column ="marketQA_ox" />   	
 		<result property="mem_email" column ="mem_email" /> 
-	   	<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+	   	<association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="free_name" column ="free_name" />
 	       <result property="free_fname" column ="free_fname" />
 	       <result property="free_ofname" column ="free_ofname" />       
 	   </association>
-	   <association property="corporation" javaType="mCorporation" column ="cor_code" >
+	   <association property="corporation" javaType="Corporation" column ="cor_code" >
 	       	<id property="cor_code" column ="cor_code" />
 	     	<result property="mem_email" column ="mem_email" /> <!-- 빼면 기업의 이메일이 unread로됨 -->
 	     	 <result property="cor_fname" column ="cor_fname" />
@@ -409,7 +409,7 @@
 </select>
 	<!-- 리뷰글쓰기조건주기 -->
 	<select id="writeReview" parameterType="hashmap" resultType="MarketBuysellList">
-		select * from market_buyselllist where mem_email=#{mem_email} and market_num=#{market_num}
+		select * from market_buyselllist where mem_email=#{mem_email,jdbcType=VARCHAR} and market_num=#{market_num}
 	</select>
 <!-- 마켓 프리랜서 정보뽑기 -->
 	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">

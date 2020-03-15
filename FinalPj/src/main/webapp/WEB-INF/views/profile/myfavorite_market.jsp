@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -70,9 +69,8 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
-												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
-												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
+												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
+												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
 											</ul>
 										</li>
 										<li>
@@ -258,30 +256,6 @@
 			</div>
 		</section>
 		<!--/User Dashboard-->
-
-<script type="text/javascript">
-    $(function() {
-        var hijax = function(panel) {
-            $('a.pagination', panel).click(function(){
-                $(panel).load(this.href, {}, function() {
-                    hijax(this);
-                });
-                return false;
-            });
-        };
-        $("#tabs").tabs({
-            ajaxOptions: {
-                error: function(xhr, status, index, anchor) {
-                    $(anchor.hash).html("Couldn't load this tab.");
-                },
-            },
-            load: function(event, ui) {
-                hijax(ui.panel);
-
-            }
-        });
-    });
-</script>
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
