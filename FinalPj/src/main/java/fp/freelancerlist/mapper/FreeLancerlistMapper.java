@@ -39,13 +39,15 @@ public interface FreeLancerlistMapper {
 	public List<List_FreeLancerReview> selectStar(long free_code);
 	
 	//리뷰//
-	public int countReview();
+	public long countReview(Map<String, Object> map);
 	public List<List_FreeLancerReview> freelancerReview(List_PagingVO vo);
 	public List<List_FreeLancerReview> freelancerReview(List_FreeLancerReview freelancerreview);
 	//리뷰crud//
 	public void reviewInsert(Map<String, Object> map);
 	public void reviewUpdate(Map<String, Object> map);
 	public void reviewDelete(long freerev_num);
+	public List<FreeLancer> selectFile(String mem_email);
+
 
 	
 

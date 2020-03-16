@@ -11,10 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-		
-	public Member(String mem_name){
-			getMem_name();
-		}
+
 	private String mem_email;//멤버이메일
 	private String mem_name;
 	private String mem_pwd;//비밀번호

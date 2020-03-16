@@ -3,6 +3,7 @@ package fp.freelancerlist.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -57,12 +58,9 @@ public class FreeLancerListController {
 	@GetMapping("freelancerList")
 	public ModelAndView FreelnacerList(PagingVO vo, FreeLancerListVO listVo, FreeLancerProfile freelancerprofile, HttpServletRequest request
 						, @RequestParam(value="nowPage", required=false)String nowPage
-						, @RequestParam(value="cntPerPage", required=false)String cntPerPage
-						){
+						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
-	//	FreeLancer freelancer = service.free_list_select(mem_email);
-	//	long totalFreeCount = service.getTotalCountFree(freelancer.getFree_code());
 
 		int total = service.countFreeLancer();
 			if(nowPage == null && cntPerPage == null) {
@@ -105,14 +103,13 @@ public class FreeLancerListController {
 	}
 	
 	@RequestMapping("freelancercontent") 
-	public ModelAndView FreelnacerContent(@RequestParam long free_code
-											, List_FreeLancerReview freelancerreview, Member member
+	@ResponseBody
+	public ModelAndView FreelnacerContent(@RequestParam long free_code, @RequestParam long pro_num
 											, @RequestParam(value="nowPage", required=false)String nowPage
 											, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("free_code", free_code);
-		map.put("pro_num", freelancerreview.getPro_num());
+		map.put("pro_num", pro_num);
 		
 		List<Freelancer_FreeLancerProfile> content = service.freelancercontent(map);
 		List<Freelancer_FreeLancerProfile> content2 = service.freelancercontent2(free_code);	
@@ -121,19 +118,22 @@ public class FreeLancerListController {
 		List<Project> content5 = service.freelancercontent5(free_code);
 		
 		//프로필 조회수//
-		service.vcnt(freelancerreview.getPro_num());
-		List<List_FreeLancerReview> review_content = service.selectStar(freelancerreview.getFree_code());
+		service.vcnt(pro_num);
+		List<List_FreeLancerReview> review_content = service.selectStar(free_code);
 		
 		ModelAndView mv = new ModelAndView("freelancer/freelancercontent");
-
+		
 		mv.addObject("content", content);
 		mv.addObject("content2", content2);
 		mv.addObject("content3", content3);
 		mv.addObject("content4", content4);	
 		mv.addObject("content5", content5);	
 		mv.addObject("star", review_content);	
+		
 		//리뷰//
-		int total = service.countReview();
+		
+		long total =  service.countReview(map);
+		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "1";
@@ -143,11 +143,20 @@ public class FreeLancerListController {
 			cntPerPage="1";
 		}
 	
-		member = new Member(member.getMem_name());
-		freelancerreview = new List_FreeLancerReview(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage),freelancerreview.getFree_code(),freelancerreview.getPro_num());	
+		List_FreeLancerReview freelancerreview = new List_FreeLancerReview(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage),free_code,pro_num);	
 		log.info("(((freelancerreview: " + freelancerreview);
+		
 		List<List_FreeLancerReview> review = service.freelancerReview(freelancerreview);
-		mv.addObject("member", member);	
+	
+		Map<String,String> fnames= new HashMap<String,String>();
+		
+		for(int i=0; i<review.size();i++) {
+			List<FreeLancer> freelancer = service.selectFile(review.get(i).getMem_email());
+			fnames.put("free_fname",freelancer.get(i).getFree_fname());
+			fnames.put("mem_email",freelancer.get(i).getMem_email());
+		}
+		log.info("@#@#@#@#@#"+fnames);
+		mv.addObject("fnames", fnames);	
 		mv.addObject("review", review);	
 		mv.addObject("paging", freelancerreview);
 		return mv;
@@ -155,7 +164,7 @@ public class FreeLancerListController {
 	
 	@RequestMapping(value="InsertReview", method=RequestMethod.POST)
 	@ResponseBody
-	public String freelancerReview_write(List_FreeLancerReview freelancerreview
+	public void freelancerReview_write(List_FreeLancerReview freelancerreview
 										, @RequestParam(value="cont", required=false) String cont
 										, @RequestParam(value="freerev_star", required=false) int freerev_star
 										, @RequestParam(value="fcode", required=false) long fcode
@@ -188,7 +197,7 @@ public class FreeLancerListController {
 			map.put("mem_email",mem_email);
 		}
 	   service.reviewInsert(map);
-	   return "redirect:freelancercontent?free_code="+freelancerreview.getFree_code()+"&pro_num="+freelancerreview.getPro_num();
+	  
 	}
 	@GetMapping("review_del") 
 	@ResponseBody

@@ -5,6 +5,7 @@ import java.util.List;
 
 import fp.market.domain.Member;
 import lombok.AllArgsConstructor;
+import fp.market.domain.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,21 +23,26 @@ public class List_FreeLancerReview {
 	private Date freerev_rdate; //등록일
 	
 	private List<List_FreeLancerReview> freelancerreview;
-	private List<Member> mMember;
-	private List<FreeLancerProfile> FreeLancerProfile;
+	private Member mmember;
+	private List<FreeLancerProfile> freeLancerProfile;
+	private List<FreeLancer> freelancer;
 	
-	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
+	private int nowPage, startPage, endPage, cntPerPage, lastPage, start, end;
+	private long total;
 	private int cntPage=1;
 
-	public List_FreeLancerReview(int total, int nowPage, int cntPerPage, long free_code, long pro_num) {
+
+	public List_FreeLancerReview(long total, int nowPage, int cntPerPage, long free_code, long pro_num) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
 		setTotal(total);
 		setFree_code(free_code);
+		setPro_num(pro_num);
 		calcLastPage(getTotal(), getCntPerPage()); //마지막페이지(총게시글개수,페이지당글개수)
 		calcStartEndPage(getNowPage(), cntPage); //시작,끝페이지(현재페이지,페이지당글개수)
 		clacStartEnd(getNowPage(), getCntPerPage()); //시작페이지(현재페이지, 페이지당글개수)
 		getFree_code();
+		getPro_num();
 	}
 	
 	//쿼리용 start, end계산
@@ -46,7 +52,7 @@ public class List_FreeLancerReview {
 	}
 
 	//제일 마지막페이지 계산
-	private void calcLastPage(int total, int cntPerPage) {
+	private void calcLastPage(long total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 	}
 	//마지막페이지 계산
@@ -61,9 +67,9 @@ public class List_FreeLancerReview {
 		}
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "PagingVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endpage=" + endPage + ", total=" + total +
-				", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end +", cntPage=" + cntPage + ", free_code: " + free_code + ", pro_num:" + + pro_num+"]";
-	}
+				", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end +", cntPage=" + cntPage + ", free_code: " + free_code + ", pro_num:" +  pro_num+mMember+"]";
+	}*/
 }
