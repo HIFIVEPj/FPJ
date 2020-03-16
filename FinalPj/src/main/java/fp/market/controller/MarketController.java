@@ -311,27 +311,21 @@ public class MarketController {
 			//,@CookieValue(value="market_num", required= false)String marketCookie
 			,HttpServletResponse response,HttpServletRequest request) 
 	{		
-		
+/*		
 		String marketCookie=null;
 		boolean find = false;
 		Cookie[] cookies = request.getCookies();
 		
 		if(cookies !=null) {
-			for(int i=0; i < cookies.length; i++){
-	            Cookie c = cookies[i] ; 
-	            // 저장된 쿠키 이름을 가져온다
-	            String cName = c.getName();  
-	            // 쿠키값을 가져온다
-	            String cValue = c.getValue() ;
-	        }
-//			for(Cookie cookie: cookies) {
-//				if("marketCookie1".equals(cookie.getName())) {
-//					find=true;
-//					marketCookie=cookie.getValue();
-//					log.info("!!!marketCookie:"+marketCookie);
-//				}
-//				
-//			}
+			for(Cookie cookie: cookies) {
+				if("marketCookie".equals(cookie.getName())) {
+					find=true;
+					marketCookie=cookie.getValue();
+					log.info("!!!marketCookie:"+marketCookie);
+				}else {
+					
+				}
+			}
 		}	
 		log.info("cookies:"+cookies.length);
 		log.info("cookies:"+cookies);
@@ -344,11 +338,11 @@ public class MarketController {
 				marketCookie=Long.toString(market_num);
 				log.info("@@@L:"+ marketCookie);
 			}catch(Exception e) {
-				marketCookie="없음오류";
+				System.out.println("e:"+e);
 			}
 		}
 
-		Cookie cookie = new Cookie("marketCookie1",marketCookie);
+		Cookie cookie = new Cookie("marketCookie",marketCookie);
 		cookie.setMaxAge(60*60*24*365);
 		cookie.setPath("/");
 		response.addCookie(cookie);
@@ -357,7 +351,26 @@ public class MarketController {
 		log.info("cookies:"+cookies);
 		log.info("marketCookie:"+marketCookie);
 
-		
+	*/	
+	/*List<String> cookieList = new ArrayList<String>();	
+		// 저장된 쿠키 목록을 가져온다.
+		Cookie[] cookies = request.getCookies();
+		// 쿠키값을 저장할 문자열
+		String mycookie = null;
+		 
+		// 쿠키목록이 있다면
+		if (cookies != null) {
+		    for (int i=0; i<cookies.length; i++) {
+		        // 쿠키의 이름을 취득한다.
+		        String cookieName = cookies[i].getName();
+		            // 이름이 내가 원하는 값일 경우 값을 복사한다.
+		            mycookie = cookies[i].getValue();
+		            // 원하는 값을 찾으면 break;
+		            cookieList.add(mycookie);
+		    }
+		}
+
+		*/
 		if(nowPageQ ==null &&cntPerPageQ ==null) {//문의 페이징
 			nowPageQ="1";
 			cntPerPageQ ="4";
