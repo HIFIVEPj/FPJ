@@ -646,7 +646,7 @@
 											<c:if test="${freeProfile.freelancerProfile.pro_exp == null}">
 												<span class="text-muted">프로필을 등록해주세요</span>
 											</c:if >
-											
+											${ marketCookie}
 										
 										
 										<h6 class="mt-2 mb-0"><a href="javascript:void(0);" class="btn btn-primary btn-sm">프로필 보기</a></h6>
