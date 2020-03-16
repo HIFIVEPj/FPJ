@@ -205,7 +205,9 @@
 		   WHERE pj.PJ_NUM=#{pj_num}
 		  ]]>
 	</select>
-
+	<update id="updateProjectVcnt" parameterType="long">
+		update Project set pj_vcnt=pj_vcnt+1 where PJ_NUM=#{pj_num}
+	</update>	
 	<insert id="insertpj" parameterType="corProject" >
 	<selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
 		select pj_num_seq.nextval from dual

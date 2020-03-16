@@ -96,250 +96,187 @@
 								<div class="card-pay">
 									<ul class="tabs-menu nav">
 										<li class=""><a href="#tab1" class="active" data-toggle="tab"><i class="fa fa-credit-card"></i> 계좌등록</a></li>
-										<li><a href="#tab2" data-toggle="tab" class=""><i class="fa fa-university"></i> 내 계좌정보</a></li>
-										<li class=""><a href="#tab3" class="" data-toggle="tab"><i class="fa fa-credit-card"></i>결제내역</a></li>
+										<c:if test="${!empty coracct}"><li><a href="#tab2" data-toggle="tab" class=""><i class="fa fa-university"></i> 내 계좌정보</a></li></c:if>
 									</ul>
 									<div class="tab-content">
-										<div class="tab-pane active show" id="tab1">
+									
+										<div class="tab-pane active" id="tab1">
+										
+										<c:if test ="${empty coracct}">
+										<form name="coracct" action="addCorAccount" method="post">
+										</c:if>
+										<c:if test="${!empty coracct}">
+										<form name="coracct" action="editCorAccount" method="post">
+										</c:if>
+										<input type="hidden" value="${cor.cor_code}" name="cor_code">
 										<div class="row">
-										<div class = "col-sm-6 col-md-6">
-											<div class="form-group">
-												<label class="form-label">예금주</label>
-												<input type="text" class="form-control" id="name1" placeholder="예금주를 입력하세요">
+										<div class = "col-sm-5 col-md-5">
+										
+										<div class="form-group">
+												<label class="form-label">계좌번호</label>
+												<input type="text" class="form-control" name="corac_acct" id="account" placeholder="-빼고 입력하세요">
 											</div>
 											</div>
-											<div class = "col-sm-6 col-md-6">
+											<div class = "col-sm-3 col-md-3">
 											<div class="form-group">
 												<label class="form-label">은행</label>
-														<select class="form-control">
-															<option selected> </option>
-															<option>기업은행</option>
-															<option>국민은행</option>
-															<option>케이뱅크</option>
-															<option>신한은행</option>
-															<option>우리은행</option>
-															<option>카카오뱅크</option>
-														</select>
+													<select class="form-control" name="corac_bank" id="code">
+														<option selected> </option>
+														<option value="003">기업은행</option>
+														<option value="004">국민은행</option>
+														<option value="089">케이뱅크</option>
+														<option value="088">신한은행</option>
+														<option value="020">우리은행</option>
+														<option value="090">카카오뱅크</option>
+														<option value="035">제주은행</option>
+														<option value="023">SC제일은행</option>
+														<option value="011">농협</option>
+														<option value="048">신협</option>
+														<option value="071">우체국</option>
+													</select>
 											</div>
 											</div>
-											<div class = "col-sm-12 col-md-12">
-											<div class="form-group">
-												<label class="form-label">계좌번호</label>
-												<input type="text" class="form-control" id="name1" placeholder="계좌번호를 입력하세요">
-											</div>
-											</div>
-											</div>
-											<!--  
-											<div class="row">
-												<div class="col-sm-8">
-													<div class="form-group">
-														<label class="form-label">Expiration</label>
-														<div class="input-group">
-															<input type="number" class="form-control" placeholder="MM" name="expire-month">
-															<input type="number" class="form-control" placeholder="YY" name="expire-year">
-														</div>
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="form-group">
-														<label class="form-label">CVV <i class="fa fa-question-circle"></i></label>
-														<input type="number" class="form-control" required="">
-													</div>
+											<div class = "col-sm-2 col-md-2">
+												<div class="form-group">
+													<label class="form-label">예금주</label>
+													<input type="text" class="form-control" id="holder" name="corac_holder" readonly>
 												</div>
 											</div>
-											-->
+											<div class = "col-sm-1 col-md-1">
+												<div class="form-group">
+													<label class="form-label">&nbsp;</label>
+													<a href="javascript:void(0)" class="btn btn-primary" onclick="check();">계좌확인</a>
+												</div>
+											</div>
+											</div>
+											<c:if test="${empty coracct}">
 											<div class="col-md-12">
 												<div class="card-footer" style="text-align:center;">
-													<button type="submit" class="btn btn-primary" id="edit_ok">등록완료</button>
+													<button type="button" onclick="add()" class="btn btn-primary">등록</button>
 												</div>
 											</div>
-										</div>
-										
+											</c:if>
+											<c:if test="${!empty coracct}">
+											<div class="col-md-12">
+												<div class="card-footer" style="text-align:center;">
+													<button type="button" onclick="edit()" class="btn btn-primary">수정</button>
+												</div>
+											</div>
+											</c:if>
+											</form>
+											<script>
+											<!--/Breadcrumb-->
+											function check(){
+												var bank_num=$("#account").val();
+												var bank_code=$("#code").val();
+												$.ajax({
+													type:"GET",
+													url:"<c:url value='payments_bankholder' />",
+													data:"bank_code="+bank_code+"&bank_num="+bank_num,
+													dataType:"json",
+													success:function(data){
+														if(data == -1) alert("없는 계좌입니다. 계좌를 확인하세요");
+														else {
+															$("#holder").attr("value",data);
+														}
+													},
+													error:function(data){
+														alert(data);
+													}
+												});
+											}
+											$("documnet").ready(function(){
+												var bank = "${coracct.corac_bank}";
+												$("#selectBANK").val(bank);
+											});
+											
+											function add(){
+												var account = coracct.corac_holder.value;
 
+												if(account==""){
+													alert("계좌 확인 후 등록해주세요");
+													return;
+												}
+												coracct.submit();
+											}
+											function edit(){
+												var account = coracct.corac_holder.value;
+
+												if(account==""){
+													alert("계좌 확인 후 등록해주세요");
+													return;
+												}
+												coracct.submit();
+											}
+											</script>
+											
+										</div>
+										<c:choose>
+										<c:when test="${empty coracct}">
 										<div class="tab-pane" id="tab2">
 											<div class="row">
 											<div class = "col-sm-6 col-md-6">
 											<div class="form-group">
 												<label class="form-label">예금주</label>
-												<input type="text" class="form-control" value="김소담" readonly>
+												<input type="text" class="form-control" value="" readonly>
 											</div>
 											</div>
 											<div class = "col-sm-6 col-md-6">
 											<div class="form-group">
 												<label class="form-label">은행</label>
-												<input type="text" class="form-control" value="기업은행" readonly>
+												<input type="text" class="form-control" value="" readonly>
 											</div>
 											</div>
 											<div class = "col-sm-12 col-md-12">
 											<div class="form-group">
 												<label class="form-label">계좌번호</label>
-												<input type="text" class="form-control" value="123412341233" readonly>
+												<input type="text" class="form-control" value="" readonly>
 											</div>
 											</div>
 										</div>
 									</div>
-									<div class="tab-pane" id="tab3">
-										<div class="card mb-0">
-											<div class="card-header">
-												<h3 class="card-title"><b>결제내역</b></h3>
+									</c:when>
+									<c:otherwise>
+									<div class="tab-pane" id="tab2">
+											<div class="row">
+											<div class = "col-sm-6 col-md-6">
+											<div class="form-group">
+												<label class="form-label">예금주</label>
+												<input type="text" class="form-control" value="${coracct.corac_holder}" readonly>
 											</div>
-											<div class="card-body">
-												<div class="table-responsive border-top">
-													<table class="table table-bordered table-hover text-nowrap">
-														<thead>
-															<tr>
-																<th>Invoice ID</th>
-																<th>Category</th>
-																<th>Purchase Date</th>
-																<th>Price</th>
-																<th>Due Date</th>
-																<th>Action</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>#INV-348</td>
-																<td>Restaurant</td>
-																<td>07-12-2018</td>
-																<td class="font-weight-semibold fs-16">$89</td>
-																<td>17-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-186</td>
-																<td>Rela Estate</td>
-																<td>02-12-2018</td>
-																<td class="font-weight-semibold fs-16">$14,276</td>
-																<td>14-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-831</td>
-																<td>Jobs</td>
-																<td>30-11-2018</td>
-																<td class="font-weight-semibold fs-16">$25,000</td>
-																<td>04-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-672</td>
-																<td>Education</td>
-																<td>25-18-2018</td>
-																<td class="font-weight-semibold fs-16">$50.00</td>
-																<td>07-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-428</td>
-																<td>Electornics</td>
-																<td>24-11-2018</td>
-																<td class="font-weight-semibold fs-16">$99.99</td>
-																<td>11-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-543</td>
-																<td>Vechicle</td>
-																<td>22-11-2018</td>
-																<td class="font-weight-semibold fs-16">$145</td>
-																<td>12-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-986</td>
-																<td>Pet & Animals</td>
-																<td>18-11-2018</td>
-																<td class="font-weight-semibold fs-16">$378</td>
-																<td>07-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-867</td>
-																<td>Cloting</td>
-																<td>17-11-2018</td>
-																<td class="font-weight-semibold fs-16">$509.00</td>
-																<td>06-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-893</td>
-																<td>Computer</td>
-																<td>16-11-2018</td>
-																<td class="font-weight-semibold fs-16">$347</td>
-																<td>30-11-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-267</td>
-																<td>Health & Fitness</td>
-																<td>12-11-2018</td>
-																<td class="font-weight-semibold fs-16">$895</td>
-																<td>27-11-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-															<tr>
-																<td>#INV-931</td>
-																<td>Beauty & Spa</td>
-																<td>11-11-2018</td>
-																<td class="font-weight-semibold fs-16">$765</td>
-																<td>25-12-2018</td>
-																<td>
-																	<a class="btn btn-primary btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-																	<a class="btn btn-danger btn-sm text-white mb-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a><br>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-												<ul class="pagination">
-													<li class="page-item page-prev disabled">
-														<a class="page-link" href="#" tabindex="-1">Prev</a>
-													</li>
-													<li class="page-item active"><a class="page-link" href="#">1</a></li>
-													<li class="page-item"><a class="page-link" href="#">2</a></li>
-													<li class="page-item"><a class="page-link" href="#">3</a></li>
-													<li class="page-item page-next">
-														<a class="page-link" href="#">Next</a>
-													</li>
-												</ul>
+											</div>
+											<div class = "col-sm-6 col-md-6">
+											<div class="form-group">
+												<label class="form-label">은행</label>
+												<select class="form-control" name="corac_bank" id="selectBANK" disabled>
+														<option > </option>
+														<option value="003">기업은행</option>
+														<option value="004">국민은행</option>
+														<option value="089">케이뱅크</option>
+														<option value="088">신한은행</option>
+														<option value="020">우리은행</option>
+														<option value="090">카카오뱅크</option>
+														<option value="035">제주은행</option>
+														<option value="023">SC제일은행</option>
+														<option value="011">농협</option>
+														<option value="048">신협</option>
+														<option value="071">우체국</option>
+													</select>
+											</div>
+											</div>
+											<div class = "col-sm-12 col-md-12">
+											<div class="form-group">
+												<label class="form-label">계좌번호</label>
+												<input type="text" class="form-control" value="${coracct.corac_acct}" readonly>
+											</div>
 											</div>
 										</div>
 									</div>
-									
+									</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>

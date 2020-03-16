@@ -101,19 +101,18 @@
                                  <input type="password" class="form-control" placeholder="비밀번호 확인">
                               </div>
                            </div>
+							<div class="col-sm-6 col-md-6">
+								<div class="form-group">
+									<label class="form-label">사업자등록번호</label>
+									<input type="text" class="form-control authCorRegNum" placeholder="사업자등록번호" name="cor_reg" value="${cor.cor_reg}" data-target="#regModal" data-toggle="modal" readonly>
+								</div>
+							</div>
                            <div class="col-sm-6 col-md-6">
-                              <div class="form-group">
-                                 <label class="form-label">사업자등록번호</label>
-                                 <input type="text" class="form-control" placeholder="사업자등록번호" name="cor_reg">
-                              </div>
-                           </div>
-                           <div class="col-sm-6 col-md-6">
-                              <div class="form-group">
-                                 <label class="form-label">회사명</label>
-                                 <input type="text" class="form-control" placeholder="회사명" name="cor_name">
-                              </div>
-                           </div>
-                           
+								<div class="form-group">
+									<label class="form-label">회사명</label>
+									<input type="text" class="form-control" placeholder="회사명" name="cor_name" value="${cor.cor_name}">
+								</div>
+							</div>
                            <!-- 주소 api부분 -->
                            <div class="col-sm-3 col-md-3">
                            <label class="form-label">주소</label>
@@ -300,8 +299,6 @@
          </div>
       </section>
       <!--Breadcrumb-->
-
-<<<<<<< HEAD
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
@@ -340,7 +337,7 @@
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="cor-myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
+												<li><a class="slide-item" href="cor-myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
@@ -399,16 +396,35 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">사업자등록번호</label>
-											<input type="text" class="form-control" placeholder="사업자등록번호" name="cor_reg" value="${cor.cor_reg}">
+											<input type="text" class="form-control authCorRegNum" placeholder="사업자등록번호" name="cor_reg" value="${cor.cor_reg}" data-target="#regModal" data-toggle="modal" readonly>
 										</div>
 									</div>
-									<div class="col-sm-6 col-md-6">
+		                           <div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">회사명</label>
 											<input type="text" class="form-control" placeholder="회사명" name="cor_name" value="${cor.cor_name}">
 										</div>
 									</div>
-									
+									<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel"> <span class="float-right btn btn-icon btn-primary btn-sm mt-3"><i class="si si-share mr-1"></i></span></h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+												<div class="modal-body " style="margin:0 auto;">
+													 <p style="text-align:center;">사업자 등록번호를 입력하세요</p>
+							                		<input type="text" class="form-control regnum" placeholder="-를 제외한 10자리 숫자" value="${cor.cor_reg}" style="float:left; width:200px;">
+							                		<button type="button" class="btn btn-primary regauth"  onclick="reg_check()">인증</button>
+												</div>
+												<div class="modal-footer">
+						               
+												</div>
+											</div>
+										</div>
+									</div>
 									<!-- 주소 api부분 -->
 									<div class="col-sm-3 col-md-3">
 									<label class="form-label">주소</label>
@@ -544,6 +560,12 @@
 													<option value="웹개발">웹 개발</option>
 													<option value="솔루션 개발" selected>솔루션개발</option>
 												 </c:when>
+												  <c:otherwise>
+													<option selected> 직종 분류 선택 </option>
+													<option value="프로그램 개발" >프로그램 개발</option>
+													<option value="웹개발">웹 개발</option>
+													<option value="솔루션 개발" >솔루션개발</option>
+												 </c:otherwise>
 											  </c:choose>
 											</select>
 										
@@ -583,6 +605,30 @@
       </section>
       <!--/User Dashboard-->
    <script>
+   function reg_check(){
+		var regnum=$(".regnum").val();
+		$.ajax({
+			type:"GET",
+			url:"<c:url value='getCorRegInfo' />",
+			data:"cor_regnum="+regnum,
+			dataType:"json",
+			success:function(data){
+				if(data == "normal"){ 
+					alert("확인 되었습니다.");
+					$(".authCorRegNum").attr("value",regnum);
+				$(".regauth").attr("disabled","disabled");
+				$("#regModal").modal("hide");
+				}else {
+					alert("잘못 입력하셨습니다. 사업자등록번호를(10자리 숫자) 확인해주세요");
+					$(".regnum").attr("value","");
+				}
+			},
+			error:function(data){
+				alert(data);
+			}
+		});
+	}
+   
    function upfile(){
       var filename = document.getElementById("file").value;
       document.getElementById("fileName_label").innerHTML=filename;

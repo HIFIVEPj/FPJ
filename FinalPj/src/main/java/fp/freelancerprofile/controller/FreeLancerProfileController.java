@@ -297,7 +297,7 @@ public class FreeLancerProfileController {
 			mv.addObject("freeacct",freeacct);
 			return mv;
 		}
-		@RequestMapping(value="/payments_bankholder",  method = { RequestMethod.GET, RequestMethod.POST })	//
+		@RequestMapping(value="/payments_bankholder",  method = { RequestMethod.GET, RequestMethod.POST })
 		@ResponseBody
 		public JsonNode bank_holder_check(HttpServletRequest request,HttpServletResponse response,String bank_code, String bank_num) {
 			JsonNode node = OpenBankingController.getAccessTokenIMPORT();

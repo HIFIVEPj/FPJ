@@ -74,9 +74,18 @@
 		update CORPORATION set 
 		cor_reg = #{cor_reg}, cor_name=#{cor_name}, cor_addr=#{cor_addr}, cor_postcode=#{cor_postcode}, cor_detailaddr=#{cor_detailaddr}, cor_addr_x=#{cor_addr_x}, cor_addr_y=#{cor_addr_y}, cor_profile=#{cor_profile}, cor_type=#{cor_type}, cor_fname=#{cor_fname, jdbcType=VARCHAR}, cor_ofname=#{cor_ofname, jdbcType=VARCHAR}
 		where cor_code= #{cor_code}
-
 	</update>
 	
+	<!-- 기업 계좌 추가 -->
+	<insert id="addCorACCT" parameterType="fp.corporation.domain.Corporation_account">
+	 insert into Corporation_account(cor_code,corac_acct,corac_bank,corac_holder) values(#{cor_code},#{corac_acct},#{corac_bank},#{corac_holder})
+	</insert>
+	<select id="selectCorACCT" parameterType="long" resultType="fp.corporation.domain.Corporation_account">
+	select * from Corporation_account where cor_code=#{cor_code}
+	</select>
+	<update id="updateCorACCT" parameterType="fp.corporation.domain.Corporation_account">
+	update Corporation_account set corac_acct=#{corac_acct},corac_bank=#{corac_bank},corac_holder=#{corac_holder} where cor_code=#{cor_code}
+	</update>
 
 <!-- 찜한마켓리스트 -->
 	<select id="getTotalMarketPick" parameterType="String" resultType="int">
