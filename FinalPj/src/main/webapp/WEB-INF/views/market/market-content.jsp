@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -532,7 +532,7 @@
 							
 							<c:if test="${marketVOQA.nowPage > 1 }">
 								<li class="page-item">
-									<a aria-label="Last" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},1,${market.market_num});"><i class="fa fa-angle-double-left"></i></a>
+									<a aria-label="Last" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.startPage},${market.market_num});"><i class="fa fa-angle-double-left"></i></a>
 								</li>
 								<li class="page-item">
 									<a aria-label="Next" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.nowPage-1},${market.market_num});"><i class="fa fa-angle-left"></i></a>
@@ -561,7 +561,7 @@
 									<a aria-label="Next" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.nowPage+1},${market.market_num});"><i class="fa fa-angle-right"></i></a>
 								</li>
 								<li class="page-item">
-									<a aria-label="Last" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.lastPage},${market.market_num});"><i class="fa fa-angle-double-right"></i></a>
+									<a aria-label="Last" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.endPage},${market.market_num});"><i class="fa fa-angle-double-right"></i></a>
 								</li>
 							</c:if>
 							</ul>
@@ -693,8 +693,8 @@
 								<div class="card-footer">
 									<div style="text-align: right; vertical-align:center;">
 										<span style="font-size:20px">결제금액</span></br>
-
-										<span style="font-size:30px" >${market.market_price}</span>
+									<span style="font-size:30px">￦<fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /><span class="fs-16"></span></span>
+										
 									</div>
 								</div>
 								<div class="card-footer">	
@@ -1661,7 +1661,7 @@
 
 		if(1<data[0].marketVOQA.nowPage){
 		    pagingHtml+='<li class="page-item">';
-			pagingHtml+='<a aria-label="Last" class="page-link" onclick="qaList('+data[0].marketVOQA.cntPerPage+','+1+','+${market.market_num}+')"><i class="fa fa-angle-double-left"></i></a>';
+			pagingHtml+='<a aria-label="Last" class="page-link" onclick="qaList('+data[0].marketVOQA.cntPerPage+','+data[0].marketVOQA.startPage+','+${market.market_num}+')"><i class="fa fa-angle-double-left"></i></a>';
 			pagingHtml+='</li>';
 			pagingHtml+='<li class="page-item">';
 			pagingHtml+='<a aria-label="Next" class="page-link" onclick="qaList('+data[0].marketVOQA.cntPerPage+','+prev+','+${market.market_num}+')"><i class="fa fa-angle-left"></i></a>';
@@ -1685,7 +1685,7 @@
 			pagingHtml+='<a aria-label="Next" class="page-link" onclick="qaList('+data[0].marketVOQA.cntPerPage+','+next+','+${market.market_num}+')"><i class="fa fa-angle-right"></i></a>';
 			pagingHtml+='</li>';
 			pagingHtml+='<li class="page-item">';
-			pagingHtml+='<a aria-label="Last" class="page-link" onclick="qaList('+data[0].marketVOQA.cntPerPage+','+data[0].marketVOQA.lastPage+','+${market.market_num}+')"><i class="fa fa-angle-double-right"></i></a>';
+			pagingHtml+='<a aria-label="Last" class="page-link" onclick="qaList('+data[0].marketVOQA.cntPerPage+','+data[0].marketVOQA.endPage+','+${market.market_num}+')"><i class="fa fa-angle-double-right"></i></a>';
 			pagingHtml+='</li>';
 		//	}
 		}
@@ -1825,14 +1825,7 @@
 	}
 
 	//페이징 아작스 
-		
 
-	
-	
-	
-	
-	
-	
 </script>
 
 <!-- 
