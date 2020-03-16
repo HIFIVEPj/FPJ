@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fp.customer_service.mapper.BoardAttachMapper">
+	<insert id="insert">
+		insert into qa_file (uuid, qa_num, fileName, uploadPath, fileType, qafile_size) values (#{uuid}, #{qa_num}, #{fileName}, #{uploadPath}, #{fileType}, 0)
+	</insert>
+	
+	<delete id="delete">
+		delete from qa_file where uuid = #{uuid}
+	</delete>
+	
+	<delete id="deleteAll">
+		delete qa_file where qa_num = #{qa_num}
+	</delete>
+	
+	<select id="findByQa_num" resultType="BoardAttachVO">
+		select * from qa_file where qa_num = #{qa_num}
+	</select>
+</mapper>

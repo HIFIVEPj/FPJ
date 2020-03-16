@@ -187,7 +187,13 @@
                         <!--          <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button> -->
                                	</div> 
                                	<div class="emailAuth_div" id="email_check" ></div>
-                       
+                               	
+                       			<div id='inj' style='margin-top:10px'>
+	                       			<div class='input-group mb-12'>
+		                       			<input type='text' id='emailAuth' name='emailAuth' placeholder='인증번호를 입력하세요' class='form-control'/>
+		                             	<div class='input-group-append'><button class='btn btn-secondary' id='emailAuthBtn' >인증하기</button></div>
+	                             	</div>
+                             	</div>
                              </div> 
                               
                               <div class="modal-footer">
@@ -216,7 +222,12 @@
                         <!--          <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button> -->
                                	</div> 
                                	<div class="c_emailAuth_div" id="c_email_check" ></div>
-                       
+                       			<div id='c_inj' style='margin-top:10px'>
+	                       			<div class='input-group mb-12'>
+		                       			<input type='text' id='c_emailAuth' name='c_emailAuth' placeholder='인증번호를 입력하세요' class='form-control'/>
+										<div class='input-group-append'><button class='btn btn-secondary' id='c_emailAuthBtn' >인증하기</button></div>
+									</div>
+								</div>                             
                              </div> 
                               
                               <div class="modal-footer">

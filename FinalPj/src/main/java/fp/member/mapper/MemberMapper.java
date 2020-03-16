@@ -37,5 +37,10 @@ public interface MemberMapper {
 	List<Long> sumFree();
 	List<Long> sumCor();
 	List<Long> month();
+	
+	List<String> sumCountCorN();
+	List<Long> sumCountCor();
+	List<String> sumCountMarketN();
+	List<Long> sumCountMarket();
 
 }

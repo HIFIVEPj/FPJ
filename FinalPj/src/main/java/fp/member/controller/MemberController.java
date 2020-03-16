@@ -123,8 +123,7 @@ public class MemberController {
     	//String password = pwEncoder.encode(member.getPwd());
     	//member.setPwd(password);
     	//member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
-       	memberservice.insertM(member);
-    	System.out.println("member: 꺄아아아아앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + member);
+       	memberservice.insertM(member);    	
     	return "index";
     } 
 }

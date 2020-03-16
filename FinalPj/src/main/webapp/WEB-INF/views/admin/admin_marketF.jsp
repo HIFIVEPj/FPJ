@@ -82,94 +82,9 @@
 									<a  class="nav-link icon full-screen-link">
 										<i class="fe fe-maximize floating"  id="fullscreen-button"></i>
 									</a>
-								</div> -->
-						
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-bell-o"></i>
-										<span class=" nav-unread badge badge-danger  badge-pill">4</span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item text-center">You have 4 notification</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-envelope-o"></i>
-											</div>
-											<div>
-												<strong>2 new Messages</strong>
-												<div class="small text-muted">17:50 Pm</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-calendar"></i>
-											</div>
-											<div>
-												<strong> 1 Event Soon</strong>
-												<div class="small text-muted">19-10-2019</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-comment-o"></i>
-											</div>
-											<div>
-												<strong> 3 new Comments</strong>
-												<div class="small text-muted">05:34 Am</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-exclamation-triangle"></i>
-											</div>
-											<div>
-												<strong> Application Error</strong>
-												<div class="small text-muted">13:45 Pm</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">See all Notification</a>
-									</div>
-								</div>
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-envelope-o "></i>
-										<span class=" nav-unread badge badge-warning  badge-pill">3</span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/41.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Blake</strong> I've finished it! See you so.......
-												<div class="small text-muted">30 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/1.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Caroline</strong> Just see the my Admin....
-												<div class="small text-muted">12 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Jonathan</strong> Hi! I'am singer......
-												<div class="small text-muted">1 hour ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Emily</strong> Just a reminder that you have.....
-												<div class="small text-muted">45 mins ago</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all Messages</a>
-									</div>
-								</div>
+								</div> -->						
+
+	
 
 								<div class="dropdown ">
 									<a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
@@ -179,15 +94,13 @@
 										<a class="dropdown-item" href="profile.html">
 											<i class="dropdown-icon si si-user"></i> My Profile
 										</a>
-										<a class="dropdown-item" href="emailservices.html">
-											<i class="dropdown-icon si si-envelope"></i> Inbox
+										<a href="logout.do" class="dropdown-item">
+											<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
 										</a>
 										<a class="dropdown-item" href="editprofile.html">
 											<i class="dropdown-icon  si si-settings"></i> Account Settings
 										</a>
-										<a class="dropdown-item" href="login.html">
-											<i class="dropdown-icon si si-power"></i> Log out
-										</a>
+
 									</div>
 								</div>
 							</div>
@@ -232,7 +145,7 @@
 					
 
 	
-					<div class="app-sidebar-footer">
+			<!--	<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
 						</a>
@@ -248,7 +161,7 @@
 						<a href="chat.html">
 							<span class="fa fa-comment" aria-hidden="true"></span>
 						</a>
-					</div>
+					</div> -->
 				</aside>
 
 				<div class="app-content  my-3 my-md-5">
@@ -274,10 +187,11 @@
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Ratings</h3>
+										<h3 class="card-title">Market 매출 Top5</h3>
 									</div>
 									<div class="card-body">
-										<div id="chart-donut3" class="chartsh"></div>
+										<!--  <div id="chart-donut3" class="chartsh"></div> -->
+										<div id="chart1" class="chartsh"></div>
 									</div>
 
 								</div>
@@ -305,8 +219,7 @@
 										<select class="form-control" name="type" id="type">
 											<option value="ALL" <c:out value="${paf.type == null?'selected':'' }" />>선택</option>
 											<option value="PI" <c:out value="${paf.type eq 'PI'?'selected':'' }" />>payid</option>
-											<option value="P" <c:out value="${paf.type eq 'P'?'selected':'' }" />>가격</option>
-											<option value="S" <c:out value="${paf.type eq 'S'?'selected':'' }" />>결제상태</option>
+											<option value="P" <c:out value="${paf.type eq 'P'?'selected':'' }" />>가격</option>											
 											<option value="PGI" <c:out value="${paf.type eq 'PGI'?'selected':'' }" />>pgtid</option>
 											<option value="N" <c:out value="${paf.type eq 'N'?'selected':'' }" />>구매자</option>
 										</select>
@@ -358,11 +271,10 @@
 											<th class="text-white font-weight-normal">payid</th>
 											<th class="text-white font-weight-normal">가격(원)</th>
 											<th class="text-white font-weight-normal">uid</th>
-											<th class="text-white font-weight-normal">카드번호</th>
-											<th class="text-white font-weight-normal">status</th>
+											<th class="text-white font-weight-normal">카드번호</th>											
 											<th class="text-white font-weight-normal">카드이름</th>
 											<th class="text-white font-weight-normal">pgtid</th>
-											<th class="text-white font-weight-normal">결제자</th>
+											<th class="text-white font-weight-normal">구매자</th>
 											<th class="text-white font-weight-normal">결제일</th>
 										</tr>
 									</thead>
@@ -377,11 +289,10 @@
 											<td>${dto.payinfo_payid}</td>											
 											<td><fmt:formatNumber value="${dto.payinfo_price}" pattern="#,###,###,###" /></td>
 											<td class="text-red">${dto.payinfo_uid}</td>
-											<td class="">${dto.payinfo_cardnum}</td>
-											<td>${dto.payinfo_status}</td>
+											<td class="">${dto.payinfo_cardnum}</td>											
 											<td class="">${dto.payinfo_cardname}</td>
 											<td>${dto.payinfo_pgtid}</td>
-											<td class="text-right">${dto.payinfo_buyername}</td>
+											<td >${dto.payinfo_buyername}</td>
 											<td>${dto.payinfo_rdate}</td>
 										</tr>	
 										</c:forEach>											
@@ -502,6 +413,8 @@
 		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
+		
+		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 				
 	</body>
 <script type="text/javascript">
@@ -524,6 +437,18 @@ $(document).ready(function(){
     	  $("#startDate").val('');
     	  $("#endDate").val('');
       }) 
+      
+     $('#startDate').datepicker();
+	 $('#startDate').datepicker("option", "maxDate", $("#endDate").val());
+	 $('#startDate').datepicker("option", "onClose", function ( selectedDate ) {
+	     $("#endDate").datepicker( "option", "minDate", selectedDate );
+	 });
+
+	 $('#endDate').datepicker();
+	 $('#endDate').datepicker("option", "minDate", $("#startDate").val());
+	 $('#endDate').datepicker("option", "onClose", function ( selectedDate ) {
+	     $("#startDate").datepicker( "option", "maxDate", selectedDate );
+	 }); 
 })
 
 /*******바 차트(chart) **************/
@@ -535,9 +460,108 @@ $(document).ready(function(){
 	      },
 	      x: 'date',
 	    type: 'bar'
-	    }
-});
-/************************/
+	    },
+	   bar: {
+    	    width: {
+    	      ratio: 0.2,            
+    	    },
+    },
+ });
+ 
+/************************
+  var sumCountMarketN="''"+${sumCountMarketN}+"'";
+ 
+ var options = {
+        series: [{
+        data: ${sumCountMarket}//[400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+        	       		
+      }],
+        chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: [sumCountMarketN],//${sumCountMarketN},//['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+         // 'United States', 'China', 'Germany'
+        //],
+      }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart1"), options);
+      chart.render();/
+/***********************************/
+
+ //var sumCountMarketN=${sumCountMarketN}
+// var sumCountMarket=${sumCountMarket};
+/*******************************/
+ 
+
+ var chart = c3.generate({
+     bindto: '#chart1',
+     padding: {
+         left: 60
+     },
+     data: {
+    	 
+         json:{
+        	date:${sumCountMarketN},
+        	매출: ${sumCountMarket}
+         },
+         /*   columns:
+         [
+             [sumCountMarketN],
+             [sumCountMarket]
+         ],*/
+         x: 'date',
+         type: 'bar'
+     },
+    /* bar: {
+    	    width: {
+    	      ratio: 0.2,            
+    	    },
+    }, */
+     axis: {
+         rotated: true, //x축 y축 회전
+         x: {
+             type: 'category',
+            //categories: ['이지아', '윤지민', '이세빈', '성빈', '신진오']
+         }
+     }
+	}
+);
+ 
+ /************************
+ var chart = c3.generate({
+        bindto: '#chart1',
+        padding: {
+            left: 60
+        },
+        data: {
+            x: 'x',
+            columns:
+            [
+                ['x', '기업1', '기업2', '기업3', '기업4', '기업5'],
+                ['value', 300, 400, 100, 200, 150]
+            ],
+            type: 'bar'
+        },
+        axis: {
+            rotated: true,
+            x: {
+                type: 'category'
+            }
+        }
+	}
+); **/
+
 </script>
 
 </html>
