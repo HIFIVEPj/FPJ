@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="now" class ="java.util.Date" />
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!--header-->
@@ -212,14 +213,14 @@
 							<div class="tab-content p-0 pt-3">
 								<div class="tab-pane  active show" id="tab-1">
 					<!--Project section-->
-					<div class="row" style="margin:0 auto; align:center;padding-left:10%;">
+					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
 					<c:forEach items="${pjList}" var="pjList">
 					
-						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:1%">
+						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
 							<div class="card-body mx-auto">
 								<div class="item-det row">
 									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
+										<a href="project_content?pj_num=${pjList.pj_num}" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
 										<c:if test="${pjList.type_num==1}">
 										<span class="badge badge-danger fs-12">
 										개발
@@ -236,20 +237,43 @@
 										</span>
 										</c:if>
 										<c:if test="${pjList.type_num==4}">
-										<span class="badge badge-success fs-12">
+										<span class="badge badge-primary fs-12">
 										기획
 										</span>
 										</c:if>
 										<c:if test="${pjList.type_num==5}">
-										<span class="fs-10 label label-danger arrowed-in-right arrowed">
+										<span class="badge badge-default fs-12">
 										기타
 										</span>
 										</c:if>
-										<span class="badge badge-success fs-12"><b>D - 5</b></span><!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
+										
+										<fmt:parseDate value="${pjList.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+										
+											<c:if test="${pjList.pj_status==0 && endDate > currentDate}">
+											<span class="badge badge-success fs-12"><b>	D -${endDate - currentDate}</b></span>
+											<c:if test="${endDate - currentDate<6}">
+												<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>
+											</c:if>
+											</c:if>
+											<c:if test="${pjList.pj_status==1 || endDate <= currentDate}">
+											<span class="badge badge-danger fs-12"><b>	마감</b></span>
+											</c:if>
+										<!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
 										<div class="mt-2" >
 											<ul class="mb-0 d-flex">
 												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> ${pjList.corporation.cor_name}</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 
+												<c:set var = "loc" value="${fn:split(pjList.pj_loc,' ')}"/>
+												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+															<c:if test="${g.count<3}" >
+															 ${pj_loc}
+															</c:if>
+															</c:forEach></a></li>
 															
 											</ul>
 											<ul class="mb-0 d-flex">
@@ -264,8 +288,9 @@
 												고급
 												</c:if>
 												</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/전체</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> ${pjList.pj_term} 개월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> :
+												<fmt:formatNumber value="${pjList.pj_pay}" pattern="#,###,###,###" />원/<span style="font-size:10px;">전체</span></a></li>
 											</ul>
 										</div>
 									</div>											 
@@ -282,321 +307,483 @@
 								</div>
 								<div class="tab-pane" id="tab-2">
 				<!--Project section-->
-					<div class="row">
-					<div class="col-xl-6">
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
+					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
+					<c:forEach items="${pjList}" var="pjList">
+					<c:choose>
+					<c:when test ="${pjList.type_num==1}">
+						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
 							<div class="card-body mx-auto">
 								<div class="item-det row">
 									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-danger fs-12">개발</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
-										<div class="">
+										<a href="project_content?pj_num=${pjList.pj_num}" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
+										<c:if test="${pjList.type_num==1}">
+										<span class="badge badge-danger fs-12">
+										개발
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==2}">
+										<span class="badge badge-info fs-12">
+										퍼블리싱
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==3}">
+										<span class="badge badge-warning fs-12">
+										디자인
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==4}">
+										<span class="badge badge-primary fs-12">
+										기획
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==5}">
+										<span class="badge badge-default fs-12">
+										기타
+										</span>
+										</c:if>
+										
+										<fmt:parseDate value="${pjList.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+										
+											<c:if test="${pjList.pj_status==0 && endDate > currentDate}">
+											<span class="badge badge-success fs-12"><b>	D -${endDate - currentDate}</b></span>
+											<c:if test="${endDate - currentDate<6}">
+												<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>
+											</c:if>
+											</c:if>
+											<c:if test="${pjList.pj_status==1 || endDate <= currentDate}">
+											<span class="badge badge-danger fs-12"><b>	마감</b></span>
+											</c:if>
+										<!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
+										<div class="mt-2" >
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> ${pjList.corporation.cor_name}</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 
+												<c:set var = "loc" value="${fn:split(pjList.pj_loc,' ')}"/>
+												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+															<c:if test="${g.count<3}" >
+															 ${pj_loc}
+															</c:if>
+															</c:forEach></a></li>
 															
 											</ul>
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-bulb text-muted mr-1"></i>
+												<c:if test="${pjList.pj_fgrade == 1}" >
+												초급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 2}" >
+												중급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 3}" >
+												고급
+												</c:if>
+												</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> ${pjList.pj_term} 개월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> :
+												<fmt:formatNumber value="${pjList.pj_pay}" pattern="#,###,###,###" />원/<span style="font-size:10px;">전체</span></a></li>
 											</ul>
 										</div>
 									</div>											 
 								</div>
 							</div>
 						</div>
-
-
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					</div>
-					<div class="col-xl-6">
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-
-
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-danger fs-12">개발</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-							<div class="" style="text-align:center; margin:0 auto;">
-						<a href="list.do" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
-					</div>
-					</div>
-
+					</c:when>
+					</c:choose>	
+					</c:forEach>
 				</div>
+					<div style=" text-align:center; margin:0 auto;">
+						<a href="project_list?type=1" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
+					</div>
+					
 				<!--/Project section-->
 								</div>
 								<div class="tab-pane" id="tab-3">
 				<!--Project section-->
-					<div class="row">
-					<div class="col-xl-6">
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
+					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
+					<c:forEach items="${pjList}" var="pjList">
+					<c:choose>
+					<c:when test ="${pjList.type_num==2}">
+						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
 							<div class="card-body mx-auto">
 								<div class="item-det row">
 									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-info fs-12">퍼블리싱</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
+										<a href="project_content?pj_num=${pjList.pj_num}" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
+										<c:if test="${pjList.type_num==1}">
+										<span class="badge badge-danger fs-12">
+										개발
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==2}">
+										<span class="badge badge-info fs-12">
+										퍼블리싱
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==3}">
+										<span class="badge badge-warning fs-12">
+										디자인
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==4}">
+										<span class="badge badge-primary fs-12">
+										기획
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==5}">
+										<span class="badge badge-default fs-12">
+										기타
+										</span>
+										</c:if>
+										
+										<fmt:parseDate value="${pjList.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+										
+											<c:if test="${pjList.pj_status==0 && endDate > currentDate}">
+											<span class="badge badge-success fs-12"><b>	D -${endDate - currentDate}</b></span>
+											<c:if test="${endDate - currentDate<6}">
+												<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>
+											</c:if>
+											</c:if>
+											<c:if test="${pjList.pj_status==1 || endDate <= currentDate}">
+											<span class="badge badge-danger fs-12"><b>	마감</b></span>
+											</c:if>
+										<!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
+										<div class="mt-2" >
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> ${pjList.corporation.cor_name}</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 
+												<c:set var = "loc" value="${fn:split(pjList.pj_loc,' ')}"/>
+												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+															<c:if test="${g.count<3}" >
+															 ${pj_loc}
+															</c:if>
+															</c:forEach></a></li>
 															
 											</ul>
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-bulb text-muted mr-1"></i>
+												<c:if test="${pjList.pj_fgrade == 1}" >
+												초급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 2}" >
+												중급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 3}" >
+												고급
+												</c:if>
+												</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> ${pjList.pj_term} 개월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> :
+												<fmt:formatNumber value="${pjList.pj_pay}" pattern="#,###,###,###" />원/<span style="font-size:10px;">전체</span></a></li>
 											</ul>
 										</div>
 									</div>											 
 								</div>
 							</div>
 						</div>
-						
-						
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					</div>
-					<div class="col-xl-6">
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->			
-					
-
-					</div>
-				
-					<div class style="align:center; margin:0 auto;">
-						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
-					</div>
-					
+					</c:when>
+					</c:choose>	
+					</c:forEach>
 				</div>
+					<div style=" text-align:center; margin:0 auto;">
+						<a href="project_list?type=2" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
+					</div>
 				<!--/Project section-->
 								</div>
 								<div class="tab-pane" id="tab-4">
 				<!--Project section-->
-					<div class="row">
-					<div class="col-xl-6">
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
+					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
+					<c:forEach items="${pjList}" var="pjList">
+					<c:choose>
+					<c:when test ="${pjList.type_num==3}">
+						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
 							<div class="card-body mx-auto">
 								<div class="item-det row">
 									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-warning fs-12">디자인</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
+										<a href="project_content?pj_num=${pjList.pj_num}" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
+										<c:if test="${pjList.type_num==1}">
+										<span class="badge badge-danger fs-12">
+										개발
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==2}">
+										<span class="badge badge-info fs-12">
+										퍼블리싱
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==3}">
+										<span class="badge badge-warning fs-12">
+										디자인
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==4}">
+										<span class="badge badge-primary fs-12">
+										기획
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==5}">
+										<span class="badge badge-default fs-12">
+										기타
+										</span>
+										</c:if>
+										
+										<fmt:parseDate value="${pjList.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+										
+											<c:if test="${pjList.pj_status==0 && endDate > currentDate}">
+											<span class="badge badge-success fs-12"><b>	D -${endDate - currentDate}</b></span>
+											<c:if test="${endDate - currentDate<6}">
+												<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>
+											</c:if>
+											</c:if>
+											<c:if test="${pjList.pj_status==1 || endDate <= currentDate}">
+											<span class="badge badge-danger fs-12"><b>	마감</b></span>
+											</c:if>
+										<!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
+										<div class="mt-2" >
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> ${pjList.corporation.cor_name}</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 
+												<c:set var = "loc" value="${fn:split(pjList.pj_loc,' ')}"/>
+												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+															<c:if test="${g.count<3}" >
+															 ${pj_loc}
+															</c:if>
+															</c:forEach></a></li>
 															
 											</ul>
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-bulb text-muted mr-1"></i>
+												<c:if test="${pjList.pj_fgrade == 1}" >
+												초급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 2}" >
+												중급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 3}" >
+												고급
+												</c:if>
+												</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> ${pjList.pj_term} 개월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> :
+												<fmt:formatNumber value="${pjList.pj_pay}" pattern="#,###,###,###" />원/<span style="font-size:10px;">전체</span></a></li>
 											</ul>
 										</div>
 									</div>											 
 								</div>
 							</div>
 						</div>
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-warning fs-12">디자인</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-			
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					</div>
-					<div class="col-xl-6">
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					
-					
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-warning fs-12">디자인</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-					</div>
-				
-					<div class style="align:center; margin:0 auto;">
-						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
-					</div>
-					
+					</c:when>
+					</c:choose>	
+					</c:forEach>
 				</div>
+					<div style=" text-align:center; margin:0 auto;">
+						<a href="project_list?type=3" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
+					</div>
 				<!--/Project section-->
 								</div>
 								<div class="tab-pane" id="tab-5">
 				<!--Project section-->
-					<div class="row">
-					<div class="col-xl-6">
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
+					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
+					<c:forEach items="${pjList}" var="pjList">
+					<c:choose>
+					<c:when test ="${pjList.type_num==4}">
+						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
 							<div class="card-body mx-auto">
 								<div class="item-det row">
 									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-primary fs-12">기획</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
+										<a href="project_content?pj_num=${pjList.pj_num}" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
+										<c:if test="${pjList.type_num==1}">
+										<span class="badge badge-danger fs-12">
+										개발
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==2}">
+										<span class="badge badge-info fs-12">
+										퍼블리싱
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==3}">
+										<span class="badge badge-warning fs-12">
+										디자인
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==4}">
+										<span class="badge badge-primary fs-12">
+										기획
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==5}">
+										<span class="badge badge-default fs-12">
+										기타
+										</span>
+										</c:if>
+										
+										<fmt:parseDate value="${pjList.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+										
+											<c:if test="${pjList.pj_status==0 && endDate > currentDate}">
+											<span class="badge badge-success fs-12"><b>	D -${endDate - currentDate}</b></span>
+											<c:if test="${endDate - currentDate<6}">
+												<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>
+											</c:if>
+											</c:if>
+											<c:if test="${pjList.pj_status==1 || endDate <= currentDate}">
+											<span class="badge badge-danger fs-12"><b>	마감</b></span>
+											</c:if>
+										<!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
+										<div class="mt-2" >
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> ${pjList.corporation.cor_name}</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 
+												<c:set var = "loc" value="${fn:split(pjList.pj_loc,' ')}"/>
+												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+															<c:if test="${g.count<3}" >
+															 ${pj_loc}
+															</c:if>
+															</c:forEach></a></li>
 															
 											</ul>
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-bulb text-muted mr-1"></i>
+												<c:if test="${pjList.pj_fgrade == 1}" >
+												초급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 2}" >
+												중급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 3}" >
+												고급
+												</c:if>
+												</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> ${pjList.pj_term} 개월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> :
+												<fmt:formatNumber value="${pjList.pj_pay}" pattern="#,###,###,###" />원/<span style="font-size:10px;">전체</span></a></li>
 											</ul>
 										</div>
 									</div>											 
 								</div>
 							</div>
 						</div>
-					
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					</div>
-					<div class="col-xl-6">
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					
-					
-						
-					</div>
-				
-					<div class style="align:center; margin:0 auto;">
-						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
-					</div>
-					
+					</c:when>
+					</c:choose>	
+					</c:forEach>
 				</div>
+					<div style=" text-align:center; margin:0 auto;">
+						<a href="project_list?type=4" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
+					</div>
 				<!--/Project section-->	
 								</div>
 								<div class="tab-pane" id="tab-6">
 				<!--Project section-->
-					<div class="row">
-					<div class="col-xl-6">
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
+				<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
+					<c:forEach items="${pjList}" var="pjList">
+					<c:choose>
+					<c:when test ="${pjList.type_num==5}">
+						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
 							<div class="card-body mx-auto">
 								<div class="item-det row">
 									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-default fs-12">기타</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
+										<a href="project_content?pj_num=${pjList.pj_num}" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
+										<c:if test="${pjList.type_num==1}">
+										<span class="badge badge-danger fs-12">
+										개발
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==2}">
+										<span class="badge badge-info fs-12">
+										퍼블리싱
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==3}">
+										<span class="badge badge-warning fs-12">
+										디자인
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==4}">
+										<span class="badge badge-primary fs-12">
+										기획
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==5}">
+										<span class="badge badge-default fs-12">
+										기타
+										</span>
+										</c:if>
+										
+										<fmt:parseDate value="${pjList.pj_ddate}" var="PjDdate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${PjDdate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+										
+										<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+										<fmt:parseDate value="${today}" var="NowDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseNumber value="${NowDate.time / (1000*60*60*24)}" integerOnly="true" var="currentDate"></fmt:parseNumber>
+										
+											<c:if test="${pjList.pj_status==0 && endDate > currentDate}">
+											<span class="badge badge-success fs-12"><b>	D -${endDate - currentDate}</b></span>
+											<c:if test="${endDate - currentDate<6}">
+												<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>
+											</c:if>
+											</c:if>
+											<c:if test="${pjList.pj_status==1 || endDate <= currentDate}">
+											<span class="badge badge-danger fs-12"><b>	마감</b></span>
+											</c:if>
+										<!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
+										<div class="mt-2" >
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> ${pjList.corporation.cor_name}</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 
+												<c:set var = "loc" value="${fn:split(pjList.pj_loc,' ')}"/>
+												<c:forEach var = "pj_loc" items="${loc}" varStatus = "g" >
+															<c:if test="${g.count<3}" >
+															 ${pj_loc}
+															</c:if>
+															</c:forEach></a></li>
 															
 											</ul>
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-bulb text-muted mr-1"></i>
+												<c:if test="${pjList.pj_fgrade == 1}" >
+												초급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 2}" >
+												중급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 3}" >
+												고급
+												</c:if>
+												</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> ${pjList.pj_term} 개월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> :
+												<fmt:formatNumber value="${pjList.pj_pay}" pattern="#,###,###,###" />원/<span style="font-size:10px;">전체</span></a></li>
 											</ul>
 										</div>
 									</div>											 
 								</div>
 							</div>
 						</div>
-					
-					
-					<!--총 10개를 보여줄거면 여기까지가 5개, 그 다음부터 새로운 5개-->
-					</div>
-					<div class="col-xl-6">
-					<!--총 10개를 보여줄거면 여기까지가 5개, 그 다음부터 새로운 5개-->
-					
-					
-					</div>
-				
-					<div class style="align:center; margin:0 auto;">
-						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
-					</div>
-					
+					</c:when>
+					</c:choose>	
+					</c:forEach>
 				</div>
+					<div style=" text-align:center; margin:0 auto;">
+						<a href="project_list?type=5" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
+					</div>
 				<!--/Project section-->	
 							</div>
 						</div>
