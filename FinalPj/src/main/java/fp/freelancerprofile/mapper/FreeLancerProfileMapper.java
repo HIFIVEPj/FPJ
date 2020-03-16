@@ -30,6 +30,8 @@ public interface FreeLancerProfileMapper {
 	
 	//게시물 총 갯수
 	public long countProfileList(long free_code);
+	
+	
 	//페이징처리 게시글 조회
 	public List<FreeLancerProfile> selectPageList(Map<String, Object> map);
 	public List<FreeLancerProfileFile> selectFilename();

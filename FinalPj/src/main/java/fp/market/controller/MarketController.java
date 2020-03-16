@@ -9,10 +9,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -295,14 +300,64 @@ public class MarketController {
 
 		return mv;
 	}
+
 	
 	@GetMapping("market-content")
 	public ModelAndView getContent(HttpSession session,@RequestParam long market_num
 			,@RequestParam(value="nowPageQ",required=false)String nowPageQ
 			,@RequestParam(value="cntPerPageQ", required=false)String cntPerPageQ
 			,@RequestParam(value="nowPageR",required=false)String nowPageR
-			,@RequestParam(value="cntPerPageR", required=false)String cntPerPageR) 
-	{
+			,@RequestParam(value="cntPerPageR", required=false)String cntPerPageR
+			//,@CookieValue(value="market_num", required= false)String marketCookie
+			,HttpServletResponse response,HttpServletRequest request) 
+	{		
+		
+		String marketCookie=null;
+		boolean find = false;
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies !=null) {
+			for(int i=0; i < cookies.length; i++){
+	            Cookie c = cookies[i] ; 
+	            // 저장된 쿠키 이름을 가져온다
+	            String cName = c.getName();  
+	            // 쿠키값을 가져온다
+	            String cValue = c.getValue() ;
+	        }
+//			for(Cookie cookie: cookies) {
+//				if("marketCookie1".equals(cookie.getName())) {
+//					find=true;
+//					marketCookie=cookie.getValue();
+//					log.info("!!!marketCookie:"+marketCookie);
+//				}
+//				
+//			}
+		}	
+		log.info("cookies:"+cookies.length);
+		log.info("cookies:"+cookies);
+		log.info("marketCookie:"+marketCookie);
+		
+		if(!find) {
+			marketCookie="없음";
+		}else {
+			try {
+				marketCookie=Long.toString(market_num);
+				log.info("@@@L:"+ marketCookie);
+			}catch(Exception e) {
+				marketCookie="없음오류";
+			}
+		}
+
+		Cookie cookie = new Cookie("marketCookie1",marketCookie);
+		cookie.setMaxAge(60*60*24*365);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		
+		log.info("cookie:"+cookie);
+		log.info("cookies:"+cookies);
+		log.info("marketCookie:"+marketCookie);
+
+		
 		if(nowPageQ ==null &&cntPerPageQ ==null) {//문의 페이징
 			nowPageQ="1";
 			cntPerPageQ ="4";
@@ -378,6 +433,7 @@ public class MarketController {
 		mv.addObject("freeProfile", fP);
 		mv.addObject("marketVORev", marketVORev);//도메인끼리는 정보가 다담기는데 페이징 정보는 안담김 왜냐? 디비에 테이블이 없어서? 같은 도메인 패키지에 없어서?
 		mv.addObject("marketVOQA", marketVOQA);
+		mv.addObject("marketCookie", marketCookie);
 		
 		mv.addObject("mbs", mbs);
 		return mv;

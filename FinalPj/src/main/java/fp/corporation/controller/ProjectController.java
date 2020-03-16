@@ -62,9 +62,8 @@ public class ProjectController {
 		}
 		List<Integer>typeList = new ArrayList<Integer>();
 		Map<String,Object>map = new HashMap<String, Object>();
-		long totalCount = service.getTotalCount(map);
-		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		map.put("ProjectVo", projectVo);
+		
+		
 		if(type==null) {
 			map.put("type",null);
 		}else {
@@ -72,6 +71,9 @@ public class ProjectController {
 			typeList.add(typenum);
 			map.put("type",typeList);
 		}
+		long totalCount = service.getTotalCount(map);
+		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		map.put("ProjectVo", projectVo);
 		List<Project> list = service.list(map);
 		
 		long countDevelop= service.getTotalCount_select(1);
@@ -105,27 +107,21 @@ public class ProjectController {
 		mv.addObject("keyname", keyname);		
 		return mv;
 	}
-	@RequestMapping(value="project_list_sort", method=RequestMethod.GET)
-	@ResponseBody
-	public String project_list_sort(@RequestParam String selectKeyword, @RequestParam(value="mem_email", required=false)String mem_email){
-		if(mem_email != null) {
-			return "mem_email="+mem_email+"&selectKeyword="+selectKeyword;
-		}
-		return selectKeyword;
-	}
 	
 	@RequestMapping(value="project_list_ajax", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList, ProjectVo projectVo ,
 			@RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email 
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage
 			,@RequestParam(value="selectKeyword", required=false)String selectKeyword
 			,@RequestParam(value="pj_fgradeList[]", required=false)List<Integer> pj_fgradeList
 			,@RequestParam(value="pj_placeList[]", required=false)List<Integer> pj_placeList
 			,@RequestParam(value="loc_first", required=false)String loc_first
+			,HttpServletRequest request
 			,@RequestParam(value="loc_second", required=false)String loc_second
 			,@RequestParam(value="searchKey", required=false)String searchKey){
-		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "4";

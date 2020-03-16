@@ -32,6 +32,10 @@ import fp.freelancerprofile.domain.Type;
 		return mapper.countFreeLancer();
 	}
 	@Override
+	public int countFreeLancerPaging(Map<String, Object> map){
+		return mapper.countFreeLancerPaging(map);
+	}
+	@Override
 	public FreeLancerProfile profile_select(String mem_email) {
 		return mapper.profile_select(mem_email);
 	}

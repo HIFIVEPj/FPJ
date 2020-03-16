@@ -22,6 +22,7 @@ public interface FreeLancerListService {
 	//리스트//
 	public FreeLancerProfile profile_select(String mem_email);
 	public int countFreeLancer();
+	public int countFreeLancerPaging(Map<String, Object> map);
 	public List<List_FreeLancer> SelectList(Map<String, Object> map);
 	public List<List_FreeLancerProfile> SelectList2();
 	public List<Project> SelectList3();

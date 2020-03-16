@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.ProjectPick;
 import fp.corporation.service.CorporationService;
+import fp.corporation.vo.ProjectVo;
 import fp.freelancerlist.domain.FreeLancerListVO;
 import fp.freelancerlist.domain.List_FreeLancer;
 import fp.freelancerlist.domain.List_FreeLancerProfile;
@@ -103,7 +104,89 @@ public class FreeLancerListController {
 		return mv;
 		
 	}
-	
+	@RequestMapping(value="freelancer_list_ajax", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList, PagingVO vo,
+			@RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage
+			,@RequestParam(value="selectKeyword", required=false)String selectKeyword
+			,@RequestParam(value="pj_fgradeList[]", required=false)List<Integer> pj_fgradeList
+			,@RequestParam(value="pj_placeList[]", required=false)List<Integer> pj_placeList
+			,@RequestParam(value="loc_first", required=false)String loc_first
+			,HttpServletRequest request
+			,@RequestParam(value="loc_second", required=false)String loc_second
+			,@RequestParam(value="searchKey", required=false)String searchKey){
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "4";
+		}else if (nowPage == null) {
+			nowPage ="1";
+		}else if(cntPerPage == null) {
+			cntPerPage ="4";
+		}
+
+		Map<String,Object>map = new HashMap<String, Object>();
+		//직종 선택 
+		if(typeList==null) {			
+			map.put("type",null);
+		}else {
+			map.put("type",typeList);
+		}
+		//프리랜서 등급선택
+		if(pj_fgradeList==null) {			
+			map.put("fgrade",null);
+		}else {
+			map.put("fgrade",pj_fgradeList);
+		}
+		//검색 ajax
+		if(searchKey != null){
+			map.put("searchKey","%"+searchKey+"%");
+		}else {
+			map.put("searchKey",null);
+		}
+		//셀렉박스 sorting keyword 선택
+		if(selectKeyword != null) {
+			map.put("SortingKey",selectKeyword);
+		}else {
+			map.put("SortingKey",null);
+		}
+		//어디서 일할지 선택
+		if(pj_placeList != null){
+			map.put("pj_place",pj_placeList);
+		}else {
+			map.put("pj_place",null);
+		}
+
+		long totalCount = service.countFreeLancerPaging(map);
+		vo = new PagingVO(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		map.put("PagingVo", vo);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("jsonView");
+		if(mem_email != null) {
+			Corporation cor = corService.mydash_cor_select(mem_email);
+			if(cor != null) {
+				List<FreeLancerPick> freeplist = proService.freepick_list(cor.getCor_code());
+				ArrayList<Long>pronumList  = new ArrayList<Long>();
+				for(int j=0; j<freeplist.size(); j++) {
+					pronumList.add(freeplist.get(j).getPRO_NUM());
+				}
+				mv.addObject("cor", cor);
+				mv.addObject("freeplist",freeplist);
+				mv.addObject("pronumList",pronumList);
+			}
+		}
+		List<List_FreeLancer> freelancerList = service.SelectList(map);		
+		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();
+		List<Project> freelancerList3 = service.SelectList3();
+		mv.addObject("paging", vo);
+		mv.addObject("freelancerList", freelancerList);
+		mv.addObject("freelancerList2", freelancerList2);
+		mv.addObject("freelancerList3", freelancerList3);
+		return mv;
+	}
 	@RequestMapping("freelancercontent") 
 	public ModelAndView FreelnacerContent(@RequestParam long free_code
 											, List_FreeLancerReview freelancerreview, Member member

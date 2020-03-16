@@ -15,50 +15,6 @@
 				<!--  				<h1 class=""><span class="font-weight-bold">12,32,523</span> Books Available</h1>  -->	
 								</div>
 								<div class="search-background mb-0">
-						 <!--			<div class="form row no-gutters">
-											<div class="form-group  col-xl-6 col-lg-5 col-md-12 mb-0">
-											<input type="text" class="form-control input-lg border-right-0" id="text" placeholder="Search Your Book">
-										</div>  
-								  	<div class="form-group col-xl-4 col-lg-4 select2-lg  col-md-12 mb-0">
-											<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
-												<optgroup label="Categories">
-													<option>Category</option>
-													<option value="1">Action and adventure</option>
-													<option value="2">Alternate history</option>
-													<option value="3">Anthology</option>
-													<option value="4">Chick lit</option>
-													<option value="5">Children's literature</option>
-													<option value="6">Comic book</option>
-													<option value="7">Coming-of-age</option>
-													<option value="8">Crime</option>
-													<option value="9">Drama</option>
-													<option value="10">Fairytale</option>
-													<option value="11">Fantasy</option>
-													<option value="12">Graphic novel</option>
-													<option value="13">Historical fiction</option>
-													<option value="14">Mystery</option>
-													<option value="15">Paranormal romance</option>
-													<option value="16">Picture book</option>
-													<option value="17">Poetry</option>
-													<option value="18">Political thriller</option>
-													<option value="19">Romance</option>
-													<option value="20">Satire</option>
-													<option value="21">Science fiction</option>
-													<option value="22">Love</option>
-													<option value="23">Short story</option>
-													<option value="24">Suspense</option>
-													<option value="25">Thriller</option>
-													<option value="26">Art</option>
-													<option value="27">Autobiography</option>
-													<option value="28">Biography</option>
-													<option value="29">Book review</option>
-												</optgroup>
-											</select>
-										</div>   
-										<div class="col-xl-2 col-lg-3 col-md-12 mb-0">
-											<a href="#" class="btn btn-lg btn-block btn-secondary">Search</a>
-										</div>
-									</div>  -->	
 								</div>
 							</div>
 						</div>
@@ -107,7 +63,7 @@
 								<div class="filter-product-checkboxs">
 								
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<input type="checkbox" class="custom-control-input" name="type" value="1">
 										<span class="custom-control-label">
 											개발
 											<span class="label label-secondary float-right">14</span>
@@ -115,28 +71,28 @@
 									</label>
 									
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="2">
 										<span class="custom-control-label">
 											퍼블리싱
 											<span class="label label-secondary float-right">14</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="3">
 										<span class="custom-control-label">
 											디자인
 											<span class="label label-secondary float-right">14</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="4">
 										<span class="custom-control-label">
 											기획
 											<span class="label label-secondary float-right">14</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="type" value="5">
 										<span class="custom-control-label">
 											기타
 											<span class="label label-secondary float-right">14</span>
@@ -150,19 +106,19 @@
 							<div class="card-body">
 								<div class="filter-product-checkboxs">
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<input type="checkbox" class="custom-control-input" name="pro_grade" value="1">
 										<span class="custom-control-label">
 											초급
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pro_grade" value="2">
 										<span class="custom-control-label">
 											중급
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pro_grade" value="3">
 										<span class="custom-control-label">
 											고급
 										</span>
@@ -175,25 +131,25 @@
 							<div class="card-body">
 								<div class="filter-product-checkboxs">
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
+										<input type="checkbox" class="custom-control-input" name="pro_place" value="1">
 										<span class="custom-control-label">
 											상주
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pro_place" value="2">
 										<span class="custom-control-label">
 											반상주
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pro_place" value="0">
 										<span class="custom-control-label">
 											자택
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
+										<input type="checkbox" class="custom-control-input" name="pro_place" value="3">
 										<span class="custom-control-label">
 											상관없음
 										</span>
@@ -217,9 +173,9 @@
 								<div class="d-flex">
 								<!-- <label class="mr-2 mt-1 mb-sm-1">Sort By:</label>  -->	
 									<select name="item" class="form-control select-sm w-90" >
-										<option value="1">최신순</option>
+										<option value="profile_date">최신순</option>
 										<option value="2">평점높은순</option>
-										<option value="3">조회수높은순</option>										
+										<option value="pro_vcnt">조회수높은순</option>										
 									</select>
 								</div>
 							</div>
@@ -380,52 +336,7 @@
 						</div>		
 					 </c:forEach>
 				</div>
-						<!--Add lists-->
-	<!-- 					<div class="card overflow-hidden">
-							 <div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div> 
-					<div class="card-header pt-5 pb-5">
-								<div  class="d-flex">
-							 		<span class="avatar avatar-md  d-block brround cover-image mr-4" data-image-src="../images/faces/male/25.jpg"></span>  
-									<a class="icons"><i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i></a>
-									<div>
-										<a href="employer" class="font-weight-semibold fs-18 text-body">강아지</a><br>
-										<a href="employer"><small>경력 3년</small></a>&nbsp;|
-										<a href="employer.html"><small>디자인</small></a>
-									</div>
-								</div>
-								<div class="item-card2-icons">
-									<a href="" class="item-card9-icons1 wishlist"><i  class="fa fa fa-heart-o"></i></a>
-								</div>
-							</div>
-						<div class="card-body pb-2 hide-details">
-								<ul class="usertab-list mb-0">
-									<h4>수행한 프로젝트</h4>								
-									<i class="fa fa-caret-right mr-2"></i> <span class="font-weight-semibold"></span> Cafe24 app Clic, 비디오 모니터링 시스템, WITbiz IT 여성 채용사이트, 게임물 모니터링 시스템, 아이코다 웹사이트 리뉴얼<br/>									
-									
-								</ul>								
-							</div> 
-
-							<div class="card-footer">
-								<div class="row">
-									<div class="product-filter-desc col">										
-										<div class="rating-stars d-inline-flex mb-2 mr-3">
-												<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value"  value="4">
-		                                       <span class="rated-products-ratings">
-		                                          <i class="fa fa-star text-warning"> </i>
-		                                          <i class="fa fa-star text-warning"> </i>
-		                                          <i class="fa fa-star text-warning"> </i>
-		                                          <i class="fa fa-star text-warning"> </i>
-		                                          <i class="fa fa-star-half-o text-warning"> </i>		                                         
-		                                       </span>	4.5 &nbsp;&nbsp;&nbsp;
-												<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>23,030,042 views</a>
-										</div>
-									</div>
-									<div class="col col-auto dams" >
-										<a class="icons" href="employer"><i class="fa fa-angle-double-right text-muted mr-1"></i>더보기</a>
-									</div>
-								</div>
-							</div>				
-						</div>-->
+					
 						<!-- 페이징 -->
 							<div class="center-block text-center">
                            <ul class="pagination mb-0">			
@@ -462,40 +373,7 @@
 									<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
 								</li>
                               </c:if>         					
-				<!--		<div class="card-body" style="margin:0 auto; align:center;">
-							<ul class="pagination mg-b-0 page-0 ">
-								<li class="page-item">
-									<a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-								</li>
-								<li class="page-item">
-									<a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-								</li>
-		
-								<li class="page-item active">
-									<a class="page-link" href="#">1</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link" href="#">2</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link hidden-xs-down" href="#">3</a>
-								</li>
-								<li class="page-item ">
-									<a class="page-link" href="#">4</a>
-								</li>
-								<li class="page-item">
-									<a class="page-link hidden-xs-down" href="#">5</a>
-								</li>
-						
-								<li class="page-item">
-									<a aria-label="Next" class="page-link" href="freelancerList?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
-								</li>
-								<li class="page-item">
-									<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
-								</li>
-							</ul>
-						</div>-->
-						<!--Add lists-->
+
 					</div>
 				</div>
 			</div>
@@ -554,6 +432,261 @@
 				</div>
 			</div>
 		</div>
+		<script>
+		  var pjtPlace = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주', '기타'];
+		    var pjtSubplace = [];
+		    pjtSubplace['강원'] = ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'];
+		    pjtSubplace['경기'] = ['가평군', '고양시 덕양구', '고양시 일산동구', '고양시 일산서구', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시 분당구', '성남시 수정구', '성남시 중원구', '수원시 권선구', '수원시 영통구', '수원시 장안구', '수원시 팔달구', '시흥시', '안산시 단원구', '안산시 상록구', '안성시', '안양시 동안구', '안양시 만안구', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시 기흥구', '용인시 수지구', '용인시 처인구', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'];
+		    pjtSubplace['경남'] = ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시 마산합포구', '창원시 마산회원구', '창원시 성산구', '창원시 의창구', '창원시 진해구', '통영시', '하동군', '함안군', '함양군', '합천군'];
+		    pjtSubplace['경북'] = ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시 남구', '포항시 북구'];
+		    pjtSubplace['광주'] = ['광산구', '남구', '동구', '북구', '서구'];
+		    pjtSubplace['기타'] = ['미국', '일본', '중국', '캐나다', '영국', '인도', '베트남', '싱가폴', '우크라이나', '헝가리', '아랍에미리트', '사우디'];
+		    pjtSubplace['대구'] = ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'];
+		    pjtSubplace['대전'] = ['대덕구', '동구', '서구', '유성구', '중구'];
+		    pjtSubplace['부산'] = ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'];
+		    pjtSubplace['서울'] = ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'];
+		    pjtSubplace['울산'] = ['남구', '동구', '북구', '울주군', '중구'];
+		    pjtSubplace['인천'] = ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'];
+		    pjtSubplace['전남'] = ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'];
+		    pjtSubplace['전북'] = ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시 덕진구', '전주시 완산구', '정읍시', '진안군'];
+		    pjtSubplace['제주'] = ['서귀포시', '제주시'];
+		    pjtSubplace['충남'] = ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시 동남구', '천안시 서북구', '청양군', '태안군', '홍성군'];
+		    pjtSubplace['충북'] = ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '증평군', '진천군', '청주시 상당구', '청주시 서원구', '청주시 청원구', '청주시 흥덕구', '충주시'];
+		 
+		  var loc_first="";
+		  var loc_second="";
+		  function onkey(){
+			  if(event.keyCode == 13){
+					 search();
+				 }
+		  }
+		 
+		 $("document").ready(function () {
+			
+			for ( var i = 0; i < pjtPlace.length; i++ ) {
+	            $("#pjt_place").append($("<option/>", {value: pjtPlace[i], text: pjtPlace[i]}));
+	        }
+	        // "지역" 상위 <select> 선택에 따른 하위 <select> 내 <option> 항목 변경 처리 (2019.02.28 bestware@naver.com)
+	        $("#pjt_place").on("change", function() {
+	            $("#pjt_subplace option:gt(0)").remove();  // 맨위 "선택해주세요" <option>만 남기고 모두 제거
+	            loc_second="";
+	            if ( $("#pjt_place").val() != "" ) {  // "전체" 이외의 항목 선택 선택
+	            	loc_first =$("#pjt_place").val();
+	            	sortAjax();
+	                var subplace = pjtSubplace[ $("#pjt_place").val() ];
+	                for ( var j = 0; j < subplace.length; j++ )
+	                    $("#pjt_subplace").append( $("<option/>", { value:subplace[j], text:subplace[j] }) );
+	                	
+		                $("#pjt_subplace").on("change", function(){
+				        	loc_second = $("#pjt_subplace").val();
+				        	sortAjax();
+				        })
+	            }else{
+	            	loc_second="";
+	            	loc_first =$("#pjt_place").val();
+	            	sortAjax();
+	            }
+	        });
+		 });
+		
+		var selectkey="";
+		function sortSelectbox(value){
+			selectkey= value;
+			sortAjax();
+		}
+	
+	var type = new Array();
+	var pj_fgrade = new Array();
+	var pj_place = new Array();
+	var nowPage = 1;
+	var mem_email="";
+	var searchKey="";
+	$("form#no_submit input:checkbox[name='type']").on("click",function(){
+		var typeTemp = new Array();
+		var type_cnt = 0;
+		 $('input:checkbox[name="type"]').each(function() {
+				if(this.checked){
+					typeTemp[type_cnt] = this.value;
+					type_cnt++;
+				}
+		});
+		 type=typeTemp;
+		 sortAjax();
+	});
+	$("form#no_submit input:checkbox[name='pj_fgrade']").on("click",function(){
+		var pj_fgradeTemp = new Array();
+		var pj_fgrade_cnt = 0;
+		 $('input:checkbox[name="pj_fgrade"]').each(function() {
+				if(this.checked){
+					pj_fgradeTemp[pj_fgrade_cnt] = this.value;
+					pj_fgrade_cnt++;
+				}
+		});
+		 pj_fgrade=pj_fgradeTemp;
+		 sortAjax();
+	});
+	
+	function search(){
+		searchKey="";
+		searchKey = $("#searchKeyword").val();
+		sortAjax();
+	}
+	
+	$("form#no_submit input:checkbox[name='pj_place']").on("click",function(){
+		var pj_placeTemp = new Array();
+		var pj_place_cnt = 0;
+		 $('input:checkbox[name="pj_place"]').each(function() {
+				if(this.checked){
+					pj_placeTemp[pj_place_cnt] = this.value;
+					pj_place_cnt++;
+				}
+		});
+		 pj_place=pj_placeTemp;
+		 sortAjax();
+	});
+	function sortAjax(){
+		var objParam={
+				"typeList" : type,
+				"nowPage" : nowPage,
+				"selectKeyword" : selectkey,
+				"pj_fgradeList": pj_fgrade,
+				"pj_placeList":pj_place,
+				"loc_first":loc_first,
+				"loc_second":loc_second,
+				"searchKey":searchKey
+		};
+		 $.ajax({ 
+			 type:"get",
+			 url:"<c:url value='project_list_ajax' />",
+			 data:objParam,
+			 dataType: "json",
+			 success:function(data){
+				 var keys = data.keyname;
+				 var keyCnt = keys.length;
+				 var lists=data.list;
+				 var cnt = lists.length;
+				 var pages=data.pa;
+				 var pagesCnt = pages.length;
+				 $(".before_ajax_content").remove();
+				 $(".pagination").remove();
+				 if(cnt == 0){
+					 $("#tab-11").append('<div class="card overflow-hidden before_ajax_content"><span>등록된 프로젝트가 없습니다</span></div>');
+				 }else{
+					 var pageSet="";
+					 var paginationSet="";
+					 for(i=0; i<cnt; i++){
+						var loc= lists[i].pj_loc;
+						var locArray = loc.split(' ');
+						var pj_cont_change = lists[i].pj_cont.replace(/(<([^>]+)>)/gi, "");
+						var pj_pay_comma = lists[i].pj_pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+						var dateFormat = format(lists[i].pj_ddate,'yyyy-MM-dd');
+						var now = new Date();
+						var Dday = lists[i].pj_ddate - now.getTime();
+						Dday = Math.floor(Dday / ((1000 * 60 * 60 * 24))+1);			
+						
+						pageSet+='<div class="card overflow-hidden before_ajax_content"><div class="d-md-flex">'+
+						'<div><div class="item-card9-imgs"><a href="books.html"></a></div></div>'+
+						'<div class="card border-0 mb-0"><div class="card-body" style="padding:30px; padding-bottom:10px;">'+
+						'<div class="item-card9-icons zzim"><a href="javasript:void(0)" class="item-card9-icons wishlist"'+lists[i].pj_num+
+						'style="margin-right:40%" onclick="javascript:onlyFree();">'+
+						'<i class="fa fa fa-heart-o" style=""></i></a></div><div class="item-card9"><i class="fa fa-map-marker"></i>&nbsp;'
+						+locArray[0]+' '+locArray[1]+'<span style="margin-left:10px; margin-right:10px"><i class="fa fa-user" ></i>'
+						if(lists[i].type_num == 1){pageSet+=' 개발&nbsp;|&nbsp;'}
+						else if(lists[i].type_num == 2){pageSet+=' 퍼블리셔&nbsp;|&nbsp;'}
+						else if(lists[i].type_num == 3){pageSet+=' 디자인&nbsp;|&nbsp;'}
+						else if(lists[i].type_num == 4){pageSet+=' 기획&nbsp;|&nbsp;'}
+						else if(lists[i].type_num == 5){pageSet+=' 기타&nbsp;|&nbsp;'}
+						else{pageSet+='&nbsp;없음&nbsp;|&nbsp;'}
+						if(lists[i].pj_fgrade == 1){pageSet+='초급&nbsp;&nbsp;'}
+						else if(lists[i].pj_fgrade == 2){pageSet+='중급&nbsp;&nbsp;'}
+						else if(lists[i].pj_fgrade == 3){pageSet+='고급&nbsp;&nbsp;'}
+						else{pageSet+='&nbsp;'}+'</span>' 
+						for(j=0; j<keyCnt; j++){
+							if(keys[j].pj_num==lists[i].pj_num){
+								if(keys[j].keyword == '[]'){
+									pageSet+='키워드 없음'
+										console.log("키워드없음");
+								}else{
+									if(keys[j].keyword.length>2){
+										for( k=0; k<3; k++){
+											pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
+										}
+									}else{
+										for( k=0; k<keys[j].keyword.length; k++){
+											pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
+										}
+									}
+								}
+							}
+						}
+						pageSet+='<br/><br/><a href="project_content?pj_num='+lists[i].pj_num+'" class="text-dark"><h3 class="font-weight-bold">'+lists[i].pj_sub+'</h3></a>'
+								+'<div style="width:85%"><span id = "content" style="width:10px">'
+								if(lists[i].pj_cont.length> 100){
+									pageSet+=pj_cont_change.substr(0,100)+'....'
+								}else{
+									pageSet+=pj_cont_change
+								}
+								pageSet+='</span></div><br/><p class="mb-0 leading-tight mt-1">급여 :'+pj_pay_comma+'원</p></div></div>'
+								+'<div class="card-footer pt-4 pb-4"><div class="item-card9-footer d-flex"><div class="item-card9-cost" style="padding-left: 10px">'
+								+'<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>'
+								if(Dday>0 && lists[i].pj_status==0){
+									pageSet+= 'D -'+Dday+'</strong></span>&nbsp;&nbsp;&nbsp;'
+								}else{
+									pageSet+='마감</strong></span>&nbsp;&nbsp;&nbsp;'
+								}
+								pageSet+='<span>('+dateFormat+')</span></div></div></div></div></div></div></div></div>';
+					 }
+					 
+					 paginationSet+='<ul class="pagination mb-0">'
+				 			if(pages.nowPage != 1){
+				 				paginationSet+='<li class="page-item page-prev ">'+
+				 					'<a class="page-link mem_prev goFirstPage" href="javascript:void(0)">prev</a>'
+				 					+'</li>'
+				 			}
+					 	for(i=pages.startPage; i<=pages.endPage; i++){
+					 		if(i==pages.nowPage){
+					 			paginationSet+='<li class="page-item active"><a class="page-link">'+i+'</a></li>'
+					 		}else{
+					 			paginationSet+='<li class="page-item"><a class="page-link mem_no_nowPage goPage" href="javascript:void(0)" data-page="'+i+'">'+i+'</a></li>'
+					 		}
+					 	}
+					 	if(pages.nowPage != pages.lastPage){
+					 		paginationSet+='<li class="page-item page-next">'+
+								'<a class="page-link mem_next goNextPage" href="javascript:void(0)">Next</a></li>'
+					 	}
+				 }
+				 
+				 
+				 $("#tab-11").html(pageSet);
+				 $(".paginationDiv").html(paginationSet);
+					$(".goFirstPage").click(function(){
+						nowPage =1;
+						pageFlag =1;
+						sortAjax();
+						pageFlag=0;
+						
+					});
+					$(".goPage").click(function(){
+						nowPage=$(this).attr("data-page");
+						pageFlag=1;
+						sortAjax();
+						pageFlag=0;
+					});
+					$(".goNextPage").click(function(){
+						nowPage = eval(pages.nowPage) + 1;	
+						pageFlag = 1;
+						sortAjax();
+					    pageFlag = 0;
+				    });
+			 
+		 },
+		 error:function(data){
+			 alert("에러발생");
+		 }
+	 });
+	}	
+	</script>
+		</script>
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

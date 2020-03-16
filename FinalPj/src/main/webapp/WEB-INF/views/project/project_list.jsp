@@ -207,23 +207,12 @@
 									  <h6 class="mb-0 mt-2">Showing &nbsp;${pa.nowPage}&nbsp; to &nbsp;${pa.cntPerPage}&nbsp; of &nbsp;${pa.total}&nbsp; entries</h6> 	
 										<ul class="nav item2-gl-menu ml-auto"></ul>
 										<div class="d-flex"> 
-								<!--  		<label class="mr-2 mt-1 mb-sm-1">Sort By:</label>  -->	
-										<c:if test="${empty selectKeyword}">
 											<select name="item" class="form-control select-sm"  style="width:160px;" id="selectbox_cate" onchange="sortSelectbox(this.value)">
 												<option id ="pj_rdate" value="pj_rdate" selected>최신순</option>
 												<option id ="pj_recnum" value="pj_recnum">모집인원순</option>
 												<option id ="pj_pay" value="pj_pay">규모순</option>
 												<option id ="pj_vcnt"  value="pj_vcnt">조회높은순</option>
 											</select>
-										</c:if>
-										<c:if test="${!empty selectKeyword}">
-											<select name="item" class="form-control select-sm"  style="width:160px;" id="selectbox_cate" onchange="sortSelectbox(this.value)">
-												<option id ="pj_rdate" value="pj_rdate" selected>최신순</option>
-												<option id ="pj_recnum" value="pj_recnum">모집인원순</option>
-												<option id ="pj_pay" value="pj_pay">규모순</option>
-												<option id ="pj_vcnt"  value="pj_vcnt">조회높은순</option>
-											</select>
-										</c:if>
 										</div>
 										
 									</div>

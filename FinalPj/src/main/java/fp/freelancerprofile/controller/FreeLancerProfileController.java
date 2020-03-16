@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 
@@ -217,7 +218,7 @@ public class FreeLancerProfileController {
 		mv.addObject("file_name", file_name);
 		return mv;
 	}
-
+	
 	
 	//프로필 컨텐츠//
 	@GetMapping("freelancerProfile_content") 
@@ -281,9 +282,6 @@ public class FreeLancerProfileController {
 			      
 			   return "redirect:freelancerProfile_list?pro_num="+pro_num;
 			 }
-	
-
-
 	
 	//나영 수정---------
 		@RequestMapping(value="payments")	//

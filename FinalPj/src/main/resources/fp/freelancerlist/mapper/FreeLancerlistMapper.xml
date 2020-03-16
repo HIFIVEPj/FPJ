@@ -222,6 +222,39 @@
     </select>	
     <select id="countFreeLancer" resultType="int">
    		select count(*) from FreeLancer_Profile where profile_choice=1
+    </select>    
+    
+    <select id="countFreeLancerPaging" resultType="int" parameterType="map">
+   		select count(*) from FreeLancer_Profile where profile_choice=1
+   		<if test="type != null"> and type_num in
+			<foreach collection ="type" item="type" open="(" separator="," close=")">
+				#{type}
+			</foreach>
+		</if>
+		<if test="mapExp.size()>0">
+			and
+			<foreach collection="mapExp" item="mapExpi" index="index" separator="or">
+				<if test="mapExpi=='exp3'">
+					 pro_exp >=9
+				</if>
+				<if test="mapExpi=='exp2'">
+					pro_exp between 4 and 8
+				</if>
+				<if test="mapExpi=='exp1'">
+					pro_exp between 1 and 3
+				</if>
+			</foreach>
+		</if>	
+		<if test="pro_place!=null">and PRO_PLACE in
+				<foreach collection ="pj_place" item="pj_place" open="(" separator="," close=")">
+					#{pro_place}
+				</foreach>
+		</if>
+		<if test="searchKey != null">
+			<if test ="searchKey != '%%'">
+				and pj_sub like #{searchKey} or pj_cont like #{searchKey}
+			</if>
+		</if>
     </select>
 	<select id="SelectList" resultMap="List_FreeLancerResult" parameterType="map">
 	   	<![CDATA[
@@ -245,10 +278,51 @@
 											on fp.free_code=f.free_code 				
 		                                        right outer join member m
 		                                        on m.mem_email=f.mem_email
-                                                    where profile_choice=1 order by profile_date desc )aa)
-                                                        where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}
-                                                          		
-		  ]]>
+                                                    where profile_choice=1 
+                                                   ]]><!--  
+							<if test="type!=null">
+							and type_num in
+								<foreach collection ="type" item="type" open="(" separator="," close=")">
+									#{type}
+								</foreach>
+							</if>
+							<if test="mapExp.size()>0">
+								and
+								<foreach collection="mapExp" item="mapExpi" index="index" separator="or">
+									<if test="mapExpi=='exp3'">
+										 pro_exp >=9
+									</if>
+									<if test="mapExpi=='exp2'">
+										pro_exp between 4 and 8
+									</if>
+									<if test="mapExpi=='exp1'">
+										pro_exp between 1 and 3
+									</if>
+								</foreach>
+							</if>	
+							<if test=" PRO_PLACE!=null">
+							and PRO_PLACE in
+								<foreach collection ="pro_place" item="pro_place" open="(" separator="," close=")">
+									#{pro_place}
+								</foreach>
+							</if>
+							<if test="searchKey != null">
+								<if test ="searchKey != '%%'">
+									and PROFILE_SUB like #{searchKey} or pj_cont like #{searchKey}
+								</if>
+							</if>
+							<if test="SortingKey == null">
+							order by PROFILE_DATE desc
+							</if>
+							<if test="SortingKey == 'pro_vcnt'">
+							order by PRO_VCNT desc
+							</if>
+							<if test="SortingKey == 'profile_date'">
+							order by  PROFILE_DATE desc
+							</if>-->
+						<![CDATA[
+                             )aa)where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}               		
+						]]>
 	</select>
 	
 		<!-- 리스트페이지 타입 select -->

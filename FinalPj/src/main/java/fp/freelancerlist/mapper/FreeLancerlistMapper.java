@@ -21,6 +21,7 @@ public interface FreeLancerlistMapper {
 
 	//게시물 총 갯수
 	public int countFreeLancer();
+	public int countFreeLancerPaging(Map<String, Object> map);
 	//페이징처리 게시글 리스트
 	public FreeLancerProfile profile_select(String mem_email);
 	public List<List_FreeLancer> SelectList(Map<String, Object> map);
