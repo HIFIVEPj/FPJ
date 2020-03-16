@@ -413,7 +413,7 @@
 	</select>
 <!-- 마켓 프리랜서 정보뽑기 -->
 	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">
-		select f.MEM_EMAIL,f.FREE_NAME, fp.PRO_CV, f.FREE_RDATE rdate, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME
+		select f.MEM_EMAIL,f.FREE_NAME, fp.PRO_CV, fp.PRO_EXP, f.FREE_RDATE rdate, fp.PRO_GRADE,f.FREE_FNAME, f.FREE_OFNAME
 		from FREELANCER f left outer join FREELANCER_PROFILE fp on fp.FREE_CODE=f.FREE_CODE join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
 	</select>
 <!-- 마켓상세보기 -->	

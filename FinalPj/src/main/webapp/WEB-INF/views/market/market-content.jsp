@@ -640,17 +640,16 @@
 									<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
-										경력:
-										<c:choose>
-										<c:when test="${freeProfile.freelancerProfile.pro_exp} !=null">
-											<span class="text-muted">${freeProfile.freelancerProfile.pro_exp}</span>년
-										</c:when>
-										<c:otherwise>
-											<span class="text-muted">프로필을 적어주세요</span>
-										</c:otherwise >
-										</c:choose>
+											<c:if test="${freeProfile.freelancerProfile.pro_exp >= 0}">
+												경력:<span class="text-muted">${freeProfile.freelancerProfile.pro_exp}</span>년
+											</c:if >
+											<c:if test="${freeProfile.freelancerProfile.pro_exp == null}">
+												<span class="text-muted">프로필을 등록해주세요</span>
+											</c:if >
+											
 										
-										<h6 class="mt-2 mb-0"><a href="#" class="btn btn-primary btn-sm">프로필 보기</a></h6>
+										
+										<h6 class="mt-2 mb-0"><a href="javascript:void(0);" class="btn btn-primary btn-sm">프로필 보기</a></h6>
 									</div>
 								</div>
 							</div>
