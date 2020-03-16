@@ -7,7 +7,7 @@ import java.util.List;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.Corporation_account;
 import fp.freelancerprofile.domain.Freelnacer_account;
-import fp.market.domain.Freelancer;
+
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 

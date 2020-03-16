@@ -6,17 +6,17 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import fp.market.domain.Freelancer;
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
-import fp.market.domain.Member;
+
 //@Repository		 
 public interface FreelancerMarketInfoMapper {
 	
 //프로필사진띄우기	
-	public Freelancer getFreefname(String mem_email);
+	public FreeLancer getFreefname(String mem_email);
 //픽리스트	
 	public int getTotalMarketPick(String mem_email);
 	public List<MarketPick> marketPickList (HashMap<String,Object> map);

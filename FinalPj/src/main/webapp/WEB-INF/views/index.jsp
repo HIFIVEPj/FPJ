@@ -188,7 +188,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프로젝트</h1>
-					<p>한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈</p>
+					<p>다양한 카테고리와 세분화된 조건으로  IT프로젝트를 만나실 수 있습니다</p>
 				</div>
 				<div class="business-item Marketplace ">
 					<div class="items-gallery">
@@ -204,240 +204,80 @@
 									<li><a href="#tab-6" data-toggle="tab" class="">기타</a></li>
 								</ul>
 							</div>
+							<style>
+								.projectBack:nth-child(2n-1){
+									margin-left:10%;
+								}
+							</style>
 							<div class="tab-content p-0 pt-3">
 								<div class="tab-pane  active show" id="tab-1">
 					<!--Project section-->
-					<div class="row">
-					<div class="col-xl-6">
-						<div class="card overflow-hidden">
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-danger fs-12">개발</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							
-							<div class="card-body">
-								<div class="item-det row">
-									<div class="col-md-9">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-warning fs-12">디자인</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-danger fs-12">개발</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-info fs-12">퍼블리싱</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
+					<div class="row" style="margin:0 auto; align:center;padding-left:10%;">
+					<c:forEach items="${pjList}" var="pjList">
 					
-					
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					</div>
-					<div class="col-xl-6">
-					<!--총 10개를 보여줄거면 여기까지가 4개, 그 다음부터 새로운 4개-->
-					
-					
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
+						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:1%">
 							<div class="card-body mx-auto">
 								<div class="item-det row">
 									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-primary fs-12">기획</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
+										<a href="jobs.html" class="text-dark"><span style="font-size:18px; margin-right:8px;">${pjList.pj_sub} </span> 
+										<c:if test="${pjList.type_num==1}">
+										<span class="badge badge-danger fs-12">
+										개발
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==2}">
+										<span class="badge badge-info fs-12">
+										퍼블리싱
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==3}">
+										<span class="badge badge-warning fs-12">
+										디자인
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==4}">
+										<span class="badge badge-success fs-12">
+										기획
+										</span>
+										</c:if>
+										<c:if test="${pjList.type_num==5}">
+										<span class="fs-10 label label-danger arrowed-in-right arrowed">
+										기타
+										</span>
+										</c:if>
+										<span class="badge badge-success fs-12"><b>D - 5</b></span><!--<span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span>--></h4></a>
+										<div class="mt-2" >
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> ${pjList.corporation.cor_name}</a></li>
 												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
 															
 											</ul>
 											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-bulb text-muted mr-1"></i>
+												<c:if test="${pjList.pj_fgrade == 1}" >
+												초급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 2}" >
+												중급
+												</c:if>
+												<c:if test="${pjList.pj_fgrade == 3}" >
+												고급
+												</c:if>
+												</a></li>
 												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
+												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/전체</a></li>
 											</ul>
 										</div>
 									</div>											 
 								</div>
 							</div>
 						</div>
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-warning fs-12">디자인</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-default fs-12">기타</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-						<div class="card overflow-hidden">
-							<!-- 
-							<div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
-							-->
-							<!--
-							<div class="ribbon ribbon-top-right text-dark"><span class="bg-danger">마감 임박</span></div>
-							-->
-							<div class="card-body mx-auto">
-								<div class="item-det row">
-									<div class="col-md-12">
-										<a href="jobs.html" class="text-dark"><h4 class="mb-2">프로젝트 테스트 입니다. <span class="badge badge-warning fs-12">디자인</span> <span class="badge badge-success fs-12"><b>D - 5</b></span><span class="fs-10 label label-danger arrowed-in-right arrowed">마감 임박</span></h4></a>
-										<div class="">
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i> 비트캠프 후암점</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> 서울시 | 용산구</a></li>
-															
-											</ul>
-											<ul class="mb-0 d-flex">
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-settings text-muted mr-1"></i> Bootstrap</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-clock text-muted mr-1"></i> 2.4 개월</a></li>
-												<li class="mr-5"><a href="#" class="icons"><i class="si si-diamond text-muted mr-1"></i> 3,000,000 원/월</a></li>
-											</ul>
-										</div>
-									</div>											 
-								</div>
-							</div>
-						</div>
-					</div>
-				
-					<div class style="align:center; margin:0 auto;">
-						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
-					</div>
-					
+					</c:forEach>
 				</div>
+					<div style=" text-align:center; margin:0 auto;">
+						<a href="project_list" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
+					</div>
+					
 				<!--/Project section-->					
 								</div>
 								<div class="tab-pane" id="tab-2">
@@ -506,12 +346,11 @@
 								</div>
 							</div>
 						</div>
+							<div class="" style="text-align:center; margin:0 auto;">
+						<a href="list.do" class="btn btn-primary"><i class="si si-options-vertical mr-1"></i> 더 보기</a>
 					</div>
-				
-					<div class style="align:center; margin:0 auto;">
-						<a href="list.do" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 					</div>
-					
+
 				</div>
 				<!--/Project section-->
 								</div>
@@ -763,6 +602,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</section>
 		<!--/프로젝트-->

@@ -51,7 +51,6 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.service.FreeLancerProfileService;
-import fp.market.domain.Freelancer;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 import fp.market.utils.MarketPagingVO;

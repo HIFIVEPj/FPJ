@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.Corporation_account;
-import fp.market.domain.Freelancer;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;

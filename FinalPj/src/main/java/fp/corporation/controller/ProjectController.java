@@ -60,16 +60,17 @@ public class ProjectController {
 		}else if(cntPerPage == null) {
 			cntPerPage ="4";
 		}
-
+		List<Integer>typeList = new ArrayList<Integer>();
 		Map<String,Object>map = new HashMap<String, Object>();
 		long totalCount = service.getTotalCount(map);
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		map.put("ProjectVo", projectVo);
-		if(type==null) {			
+		if(type==null) {
 			map.put("type",null);
 		}else {
 			int typenum = Integer.parseInt(type);
-			map.put("type",typenum);
+			typeList.add(typenum);
+			map.put("type",typeList);
 		}
 		List<Project> list = service.list(map);
 		

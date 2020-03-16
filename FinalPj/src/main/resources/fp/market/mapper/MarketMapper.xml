@@ -18,13 +18,13 @@
 		<result property="market_state" column="market_state" />
 		<result property="market_pcnt" column="market_pcnt" />
 		<result property="option3" column="option3" />
-		<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+		<association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="mem_email" column ="mem_email" />
 	       <result property="free_name" column ="free_name" />
 	       <result property="free_tel" column ="free_tel" />
 	       <result property="free_point" column ="free_point" />
-	       <result property="rdate" column ="rdate" />
+	       <result property="free_rdate" column ="rdate" />
 	       <result property="free_level" column ="free_level" />
 	       <result property="free_acctox" column ="free_acctox" />
 	       <result property="free_fname" column ="free_fname" />
@@ -61,13 +61,13 @@
          <result property="marketRev_star" column ="marketRev_star" />
 
          <result property="mem_email" column ="mem_email" /> 	
-    	 <association property="freelancer" javaType="mFreelancer" column ="free_code" >
+    	 <association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="free_name" column ="free_name" />
 	       <result property="free_fname" column ="free_fname" />
 	       <result property="free_ofname" column ="free_ofname" />       
 		</association>
-		<association property="corporation" javaType="mCorporation" column ="cor_code" >
+		<association property="corporation" javaType="Corporation" column ="cor_code" >
 	       	<id property="cor_code" column ="cor_code" />
 	        <result property="mem_email" column ="mem_email" />
 	        <result property="cor_mname" column ="cor_mname" />    
@@ -93,13 +93,13 @@
 		<result property="marketQA_sun" column ="marketQA_sun" />
 		<result property="marketQA_ox" column ="marketQA_ox" />   	
 		<result property="mem_email" column ="mem_email" /> 
-	   	<association property="freelancer" javaType="mFreelancer" column ="free_code" >
+	   	<association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="free_name" column ="free_name" />
 	       <result property="free_fname" column ="free_fname" />
 	       <result property="free_ofname" column ="free_ofname" />       
 	   </association>
-	   <association property="corporation" javaType="mCorporation" column ="cor_code" >
+	   <association property="corporation" javaType="Corporation" column ="cor_code" >
 	       	<id property="cor_code" column ="cor_code" />
 	     	<result property="mem_email" column ="mem_email" /> <!-- 빼면 기업의 이메일이 unread로됨 -->
 	     	 <result property="cor_fname" column ="cor_fname" />
@@ -321,10 +321,10 @@
 	<!-- insert 전에 업데이트 먼저 순서숫자 겹치는거 방지하려고-->
  	<!-- 받아온 값의 뒷순서들에 +1씩한 후에 insert하면 순서겹치지않음-->
  	<update id="updateMarketQA"  parameterType="MarketQA">
-		 UPDATE MARKET_QA SET marketQA_sun = marketQA_sun+1 WHERE market_num=#{market_num} AND marketQA_sun>=#{marketQA_sun}
+		 UPDATE MARKET_QA SET marketQA_sun = marketQA_sun+1 WHERE market_num=#{market_num} AND marketQA_prnum=#{marketQA_prnum} and marketQA_sun>=#{marketQA_sun}
 	</update>
 	<insert id="insertMarketQA" parameterType="MarketQA">
-			<!-- prnum이 0일때 즉 댓글또는 첫댓글일때 1 또는 맥스값의 +1 리턴-->
+			<!-- prnum이 0일때 즉 댓글또는 첫댓글일때 1 또는 맥스값의 +1 리턴--><!-- <otherwise>SELECT MAX(MARKETQA_PRNUM) marketQA_prnum FROM MARKET_QA where market_num=#{market_num} </otherwise>-->
 			<!-- 또는 대댓글일때 prnum맥스값을 그대로 리턴 -->
 		<selectKey resultType="long" keyProperty="marketQA_prnum" order="BEFORE">
 			<choose>
@@ -332,7 +332,7 @@
 					SELECT NVL(MAX(MARKETQA_PRNUM),0)+1 marketQA_prnum FROM MARKET_QA where market_num=#{market_num}
 				</when>
 				<otherwise>
-					SELECT MAX(MARKETQA_PRNUM) marketQA_prnum FROM MARKET_QA where market_num=#{market_num}
+					SELECT marketQA_prnum FROM MARKET_QA where market_num=#{market_num} and marketqa_prnum=#{marketQA_prnum} and marketqa_sun=#{marketQA_sun}-1
 				</otherwise>
 			</choose>
 		</selectKey>
@@ -355,11 +355,11 @@
 		select * from MARKET_QAFile where market_num=#{market_num} and marketQA_num=#{marketQA_num}
 	</select>	
 	<select id="marketQAcont" parameterType="hashmap" resultType="MarketQA">
-		select marketQA_cont from market_QA where market_num=#{market_num}  and marketQA_num=#{marketQA_num}
+		select * from market_QA where market_num=#{market_num}  and marketQA_num=#{marketQA_num}
 	</select>	
-<!-- 마켓문의글 삭제 수정 -->
+<!-- 마켓문의글 삭제 수정 -->		<!-- delete market_QA where marketQA_num=#{marketQA_num} and market_num=#{market_num}-->
 	<delete id="deleteMarketQA"  parameterType="hashmap">
-		delete market_QA where marketQA_num=#{marketQA_num} and market_num=#{market_num}
+		  delete market_QA where marketQA_prnum=#{marketQA_prnum} and marketqa_sun>=#{marketQA_sun} and market_num=#{market_num}
 	</delete>
 	<update id="updateMarketQA2" parameterType="hashmap">
 		update market_QA set marketQA_sub=#{marketQA_sub}, marketQA_cont=#{marketQA_cont}, marketQA_ox=#{marketQA_ox} where marketQA_num=#{marketQA_num} and market_num=#{market_num}
@@ -409,7 +409,7 @@
 </select>
 	<!-- 리뷰글쓰기조건주기 -->
 	<select id="writeReview" parameterType="hashmap" resultType="MarketBuysellList">
-		select * from market_buyselllist where mem_email=#{mem_email} and market_num=#{market_num}
+		select * from market_buyselllist where mem_email=#{mem_email,jdbcType=VARCHAR} and market_num=#{market_num}
 	</select>
 <!-- 마켓 프리랜서 정보뽑기 -->
 	<select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">

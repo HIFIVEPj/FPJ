@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import fp.corporation.domain.Corporation;
-import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
