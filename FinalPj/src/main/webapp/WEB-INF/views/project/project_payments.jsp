@@ -261,23 +261,23 @@ m_redirect_url: 'project_payments_end'
 }, function (rsp) {
 console.log(rsp);
 if (rsp.success) {
-	
+   
 $.ajax({
-	url:'project_payments_end?pj_num=${projectCont.pj_num}',
-	async:false,
-	type: 'POST',
-	contentType: 'application/json',
-	data: JSON.stringify(rsp),
-	success: function(data){
-		if(data != null ){
-			location.href="project_pay_end";
-		}
-	},
-	error: function(errorThrown){
-		alert(errorThrown.statusText);
-	}
+   url:'project_payments_end?pj_num=${projectCont.pj_num}',
+   async:false,
+   type: 'POST',
+   contentType: 'application/json',
+   data: JSON.stringify(rsp),
+   success: function(data){
+      if(data != null ){
+         location.href="project_pay_end";
+      }
+   },
+   error: function(errorThrown){
+      alert(errorThrown.statusText);
+   }
 });
-	
+   
 var msg = '결제가 완료되었습니다.';
 msg += '고유ID : ' + rsp.imp_uid;
 msg += '상점 거래ID : ' + rsp.merchant_uid;
