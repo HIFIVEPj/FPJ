@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:JAVA"></property>
-		<property name="username" value="final"></property>
-		<property name="password" value="dongo"></property>
-	</bean>
+   <!-- Root Context: defines shared resources visible to all other web components -->
+   <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+      <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:JAVA"></property>
+      <property name="username" value="final"></property>
+      <property name="password" value="dongo"></property>
+   </bean>
 
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-		<constructor-arg ref="hikariConfig" />
-	</bean>
-	
+   <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+      <constructor-arg ref="hikariConfig" />
+   </bean>
+   
    <!-- 원래 있던거  -->
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
       <property name="dataSource" ref="dataSource"></property>
@@ -41,67 +41,65 @@
        </props>
        </property>
    </bean>
-	<!-- 메일인증 추가 -->
-	   <bean id="mailService" class="fp.member.service.MailServiceImpl">
-	      <property name="mailSender" ref="mailSender" />
-	   </bean>
-	
-	<!-- 승훈 -->
-	<context:component-scan base-package="fp.customer_service.service"/>
-	<context:component-scan base-package="fp.customer_service.mapper"/>
-	<mybatis-spring:scan base-package="fp.customer_service.mapper"/>
+   <!-- 메일인증 추가 -->
+      <bean id="mailService" class="fp.member.service.MailServiceImpl">
+         <property name="mailSender" ref="mailSender" />
+      </bean>
+   
+   <!-- 승훈 -->
+   <context:component-scan base-package="fp.customer_service.service"/>
+   <context:component-scan base-package="fp.customer_service.mapper"/>
+   <mybatis-spring:scan base-package="fp.customer_service.mapper"/>
 
 
-	<!-- 세영 -->
-	<context:component-scan base-package="fp.market.service"/>	
-	<context:component-scan base-package="fp.market.utils"/>
-	<context:component-scan base-package="fp.market.mapper"/>
-	<mybatis-spring:scan base-package="fp.market.mapper"/>
-	
-	<!-- 별 -->
-	<context:component-scan base-package="fp.freelancerprofile.service"/>	
-	<context:component-scan base-package="fp.freelancerprofile.mapper"/>
-	<mybatis-spring:scan base-package="fp.freelancerprofile.mapper"/>
+   <!-- 세영 -->
+   <context:component-scan base-package="fp.market.service"/>   
+   <context:component-scan base-package="fp.market.utils"/>
+   <context:component-scan base-package="fp.market.mapper"/>
+   <mybatis-spring:scan base-package="fp.market.mapper"/>
+   
+   <!-- 별 -->
+   <context:component-scan base-package="fp.freelancerprofile.service"/>   
+   <context:component-scan base-package="fp.freelancerprofile.mapper"/>
+   <mybatis-spring:scan base-package="fp.freelancerprofile.mapper"/>
 
-			<!-- 프리랜서 리스트페이지 추가 -->
-	<context:component-scan base-package="fp.freelancerlist.service"/>	
-	<context:component-scan base-package="fp.freelancerlist.mapper"/>
-	<mybatis-spring:scan base-package="fp.freelancerlist.mapper"/>
-	
+         <!-- 프리랜서 리스트페이지 추가 -->
+   <context:component-scan base-package="fp.freelancerlist.service"/>   
+   <context:component-scan base-package="fp.freelancerlist.mapper"/>
+   <mybatis-spring:scan base-package="fp.freelancerlist.mapper"/>
+   
 
-	<!-- 나영 -->
-	<context:component-scan base-package="fp.corporation.service"/>	
-	<context:component-scan base-package="fp.corporation.mapper"/>	
-	<context:component-scan base-package="fp.corporation.vo"/>	
-	<mybatis-spring:scan base-package="fp.corporation.mapper"/>
+   <!-- 나영 -->
+   <context:component-scan base-package="fp.corporation.service"/>   
+   <context:component-scan base-package="fp.corporation.mapper"/>   
+   <context:component-scan base-package="fp.corporation.vo"/>   
+   <mybatis-spring:scan base-package="fp.corporation.mapper"/>
 
-	<!-- 소담 -->
-	<!-- 메일인증 추가  -->
-	<context:component-scan base-package="fp.member.service"/>
-	<context:component-scan base-package="fp.member.domain"/>
-	<context:component-scan base-package="fp.member.dao"/>				
-	<context:component-scan base-package="fp.member.mapper"/>
-	<mybatis-spring:scan base-package="fp.member.mapper"/>	
-	
-	<context:component-scan base-package="fp.member.aop"/>
-	<context:annotation-config></context:annotation-config>
-	<!--
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	-->
+   <!-- 소담 -->
+   <!-- 메일인증 추가  -->
+   <context:component-scan base-package="fp.member.service"/>
+   <context:component-scan base-package="fp.member.domain"/>
+   <context:component-scan base-package="fp.member.dao"/>            
+   <context:component-scan base-package="fp.member.mapper"/>
+   <mybatis-spring:scan base-package="fp.member.mapper"/>   
+   
+   <context:component-scan base-package="fp.member.aop"/>
+   <context:annotation-config></context:annotation-config>
+   <!--
+   <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+   -->
 
 
-	<!-- 	<property name="mapperLocations" value="classpath*:fp/member/mapper/*.xml" /> -->
-		<!-- 내가 추가해보기  여기는 됨     -->
-		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory"/>
-		</bean> 
+   <!--    <property name="mapperLocations" value="classpath*:fp/member/mapper/*.xml" /> -->
+      <!-- 내가 추가해보기  여기는 됨     -->
+      <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg index="0" ref="sqlSessionFactory"/>
+      </bean> 
 <!-- 트랜잭션 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean>
-	<tx:annotation-driven />
-
+   <bean id="transactionManager"
+      class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   <tx:annotation-driven />
 
 </beans> 
-

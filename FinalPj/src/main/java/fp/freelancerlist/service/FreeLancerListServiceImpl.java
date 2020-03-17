@@ -84,9 +84,15 @@ import fp.freelancerprofile.domain.Type;
 	}
 	//리뷰//	
 	@Override
-	public int countReview() {
-		return mapper.countReview();
+	public long countReview(Map<String, Object> map) {
+		return mapper.countReview(map);
 	}
+
+	@Override
+	public List<FreeLancer> selectFile(String mem_email){
+		return mapper.selectFile(mem_email);
+	}
+
 	@Override
 	public List<List_FreeLancerReview> freelancerReview(List_FreeLancerReview freelancerreview) {
 		return mapper.freelancerReview(freelancerreview);

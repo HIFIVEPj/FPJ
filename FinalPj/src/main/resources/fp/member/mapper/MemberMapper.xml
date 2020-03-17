@@ -55,11 +55,11 @@
 	
 	<!-- 관리자 매출합계 -->
 	<select id="sumFree" resultType="Long" >
-		select SUM(payinfo_price)from pay_information where PAYINFO_UID like 'market_%' group by TO_CHAR (payinfo_rdate, 'MM')
+		select SUM(payinfo_price) from pay_information where PAYINFO_UID like 'market_%' group by TO_CHAR (payinfo_rdate, 'MM')
 	</select>
 	
 	<select id="sumCor" resultType="Long" >
-		select SUM(payinfo_price)from pay_information where PAYINFO_UID like 'project_%' group by TO_CHAR (payinfo_rdate, 'MM')
+		select SUM(payinfo_price) from pay_information where PAYINFO_UID like 'project_%' group by TO_CHAR (payinfo_rdate, 'MM')
 	</select>
 	
 	<select id="month" resultType="Long" >
@@ -120,6 +120,20 @@
 	</sql>
 	
 	<!-- 기업 마켓  -->
+	<select id="sumCountCorN" resultType="String" >
+	<![CDATA[	
+		select payinfo_buyername from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'project_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select> 
+	
+	<select id="sumCountCor" resultType="Long" >
+	<![CDATA[	
+		select * from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'project_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select>
+	
 	<select id="marketListCor" parameterType="MemberVo" resultMap="PayInformationMap" >
 	 	<![CDATA[
 			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'project_%' ]]>
@@ -136,7 +150,21 @@
 		<include refid="searchAll" />
 	</select>
 	
-	<!-- 프리랜서 마켓 -->
+	<!-- 프리랜서 마켓-->
+	<select id="sumCountMarketN" resultType="String" >
+	<![CDATA[	
+		select payinfo_buyername from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'market_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select>  
+	
+	<select id="sumCountMarket" resultType="Long" >
+	<![CDATA[	
+		select * from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'market_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select>
+	
 	<select id="marketListFree" parameterType="MemberVo" resultMap="PayInformationMap" >
 	 	<![CDATA[
 			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'market_%'  ]]>
@@ -161,8 +189,7 @@
 				OR PAYINFO_STATUS like '%'||#{keyword}||'%' OR PAYINFO_PGTID like '%'||#{keyword}||'%' OR PAYINFO_BUYERNAME like '%'||#{keyword}||'%')
 			</if> 
 			<if test="type == 'PI'.toString()"> AND PAYINFO_PAYID like '%'||#{keyword}||'%' </if> 
-			<if test="type == 'P'.toString()"> AND PAYINFO_PRICE like '%'||#{keyword}||'%' </if>
-			<if test="type == 'S'.toString()"> AND PAYINFO_STATUS like '%'||#{keyword}||'%' </if>
+			<if test="type == 'P'.toString()"> AND PAYINFO_PRICE like '%'||#{keyword}||'%' </if>			
 			<if test="type == 'PGI'.toString()"> AND PAYINFO_PGTID like '%'||#{keyword}||'%' </if>
 			<if test="type == 'N'.toString()"> AND PAYINFO_BUYERNAME like '%'||#{keyword}||'%' </if>
 		</if>
