@@ -255,23 +255,35 @@ public class MarketRestController {
 	public List<Object> deleteMarketQA(@RequestParam(value="marketQA_num") String marketQA_numS
 							   			,@RequestParam(value="market_num") String market_numS
 							   			,@RequestParam(value="marketQA_prnum") String marketQA_prnumS
-							   			,@RequestParam(value="marketQA_sun") String marketQA_sunS							   			
+							   			,@RequestParam(value="marketQA_sun") String marketQA_sunS		
+							   			,@RequestParam(value="marketQA_lev") String marketQA_levS
 							   			,@RequestParam(value="nowPageQ",required=false,defaultValue="1")String nowPageQ
 							   			,@RequestParam(value="cntPerPageQ", required=false, defaultValue="4")String cntPerPageQ	) 
 	{
 		HashMap<String,Object>map =new HashMap<String,Object>();
 		long marketQA_num=Long.parseLong(marketQA_numS);
 		long market_num=Long.parseLong(market_numS);
+		int marketQA_lev=Integer.parseInt(marketQA_levS);
 		int marketQA_prnum=Integer.parseInt(marketQA_prnumS);
 		int marketQA_sun=Integer.parseInt(marketQA_sunS);
 		log.info("aaaaaaaaaaaaaaaaaa"+marketQA_prnumS);
 		log.info("aaaaaaaaaaaaaaaaaa"+marketQA_sunS);
 		
+		
+		
 		//map.put("marketQA_num", marketQA_num);
 		map.put("market_num", market_num);
 		map.put("marketQA_prnum", marketQA_prnum);
 		map.put("marketQA_sun", marketQA_sun);
-		marketService.deleteMarketQA(map);
+		map.put("marketQA_lev", marketQA_lev);
+		long maxSun=marketService.maxSun(map);
+		if(maxSun==marketQA_sun) {
+			marketService.deleteMarketQA(map);
+		}else if(maxSun>marketQA_sun) {
+			marketService.delUpdateMarketQA2(map);
+		}
+		
+		//marketService.deleteMarketQA(map);
 		
 		
 		HashMap<String,Object> listqa=marketQAList(market_num,nowPageQ,cntPerPageQ);

@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
@@ -419,8 +421,12 @@ public class MarketController {
 		
 	
 	//	m=marketService.getMarketFreelancer(market_num);이렇게해도되고 메소드 따로 만들어서  아래한줄처럼해도됨 
-		Market fP=getMarketPreePrefile(market_num);//하지만 왜 마켓테이블 정보는 안나오지->왜냐! 변수 m에 매퍼를 뒤집어썼기때문에 다른 변수에 넣어줘야함//리스트로하는이유는 개인당 여러개의 마켓을 가질수있으므로
-	
+		Market fp=getMarketFreePrefile(market_num);//하지만 왜 마켓테이블 정보는 안나오지->왜냐! 변수 m에 매퍼를 뒤집어썼기때문에 다른 변수에 넣어줘야함//리스트로하는이유는 개인당 여러개의 마켓을 가질수있으므로
+		int type_num=0;
+		if(fp.getFreelancerProfile()!=null) {
+			type_num=fp.getFreelancerProfile().getType_num();
+		}
+		List<FreelancerProfile> similarFree = marketService.getSimilarFree(type_num);
 		int mrStar=0;
 		List<MarketRev> mr = marketService.getMarketRev(mapr);	
 		if(mr.size() !=0) {//특정마켓 별점평균을 구하는데 리뷰가 없을시 널이떠서 조건걸어줌
@@ -443,17 +449,17 @@ public class MarketController {
 		mv.addObject("mrStar", mrStar); // 뷰로 보낼 데이터 값
 		mv.addObject("marketQA", mq);
 		mv.addObject("market", m);
-		mv.addObject("freeProfile", fP);
+		mv.addObject("freeProfile", fp);
 		mv.addObject("marketVORev", marketVORev);//도메인끼리는 정보가 다담기는데 페이징 정보는 안담김 왜냐? 디비에 테이블이 없어서? 같은 도메인 패키지에 없어서?
 		mv.addObject("marketVOQA", marketVOQA);
-		mv.addObject("marketCookie", marketCookie);
-		
+	//	mv.addObject("marketCookie", marketCookie);
+		mv.addObject("similarFree", similarFree);
 		mv.addObject("mbs", mbs);
 		return mv;
 		
 	}
 	//마켓에 필요한 프리랜서정보를 리턴하는 메소드 
-	public Market getMarketPreePrefile(long market_num){
+	public Market getMarketFreePrefile(long market_num){
 		Market marketFreelancer;
 		marketFreelancer=marketService.getMarketFreelancer(market_num);
 		return marketFreelancer;

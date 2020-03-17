@@ -6,7 +6,6 @@
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-<jsp:include page="../member/login_check.jsp"/>
 
 <!--/header-->
 		<!--Sliders Section-->
