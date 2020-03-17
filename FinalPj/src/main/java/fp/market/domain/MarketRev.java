@@ -3,6 +3,8 @@ package fp.market.domain;
 
 import java.sql.Date;
 
+import fp.corporation.domain.Corporation;
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;

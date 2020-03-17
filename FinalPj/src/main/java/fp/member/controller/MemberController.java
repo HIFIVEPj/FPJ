@@ -70,8 +70,15 @@ public class MemberController {
        
        String subject = "회원가입 인증 코드 발급 안내 입니다.";
        StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
        sb.append("귀하의 인증 코드는 " + authCode + "입니다.");      
        return mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
+=======
+       sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
+       log.info("!@#$userEmail: "+ userEmail);
+       return mailservice.send(subject, sb.toString(), "하이파이브", userEmail, null);
+
+>>>>>>> d3a9fa726749f8bb9672b8066fdc8eb72078a2f9
     }
     
     @RequestMapping(value="emailAuth.do", method=RequestMethod.GET)

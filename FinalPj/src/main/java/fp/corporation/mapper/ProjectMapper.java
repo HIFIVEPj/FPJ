@@ -16,6 +16,7 @@ public interface ProjectMapper {
 	long getTotalCount(Map<String, Object> map);
 	List<Project> pjKeywords();
 	Project content(long pj_num);
+	void updateProjectVcnt(long pj_num);
 	Corporation corInfo(long pj_num);
 	void deletePj(long pj_num);
 	void deleteKeyword(long pj_num);

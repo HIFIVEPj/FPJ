@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import fp.corporation.domain.Corporation;
-import fp.market.domain.Freelancer;
+import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
@@ -78,6 +78,11 @@ public interface MarketMapper {
 	
 	public int searchButtonMarketCount(String searchWord);
 	public List<Market> searchButtonMarketList(HashMap<String,Object> map);
+	
+	public List<FreelancerProfile> similarFree(int type_num);
+	
+	public long maxSun(HashMap<String,Object> map);
+	public long delUpdateMarketQA2(HashMap<String,Object> map);
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);
 //	public List<Corporation> getMarketRevCor(long market_num);

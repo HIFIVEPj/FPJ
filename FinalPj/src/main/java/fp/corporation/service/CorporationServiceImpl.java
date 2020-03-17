@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import fp.corporation.domain.Corporation;
+import fp.corporation.domain.Corporation_account;
 import fp.corporation.mapper.CorporationMapper;
 import fp.freelancerprofile.mapper.FreelancerMarketInfoMapper;
-import fp.market.domain.Freelancer;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 
@@ -35,7 +35,20 @@ public class CorporationServiceImpl implements CorporationService {
 	public void mydash_cor_update(Corporation corporation) {
 		mapper.mydash_cor_update(corporation);
 	}
-
+	//계좌추가
+	@Override
+	public void addCorACCT(Corporation_account coracct) {
+		mapper.addCorACCT(coracct);
+	}
+	@Override
+	public Corporation_account selectCorACCT(long cor_code) {
+		return mapper.selectCorACCT(cor_code);
+	}
+	@Override
+	public void updateCorACCT(Corporation_account coracct) {
+		mapper.updateCorACCT(coracct);
+	}
+	
 //세영
 //마켓픽리스트	
 	@Override

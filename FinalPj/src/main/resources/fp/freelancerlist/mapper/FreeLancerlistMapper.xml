@@ -56,7 +56,7 @@
 		</collection>
 	</resultMap>
 		
-		<!-- 리스트페이지 프로젝트, 타입 select -->
+		<!-- 리스트페이지  타입 select -->
 		<resultMap type="list_freelancerprofile" id="TypeNpjSub">
 			<id property="free_code" column="free_code"/>
 				<result property="pro_num" column="pro_num"/>
@@ -70,7 +70,7 @@
 			</collection>	 
 		</resultMap>
 
-		<!-- 프로젝트 컨텐츠 1 -->
+		<!-- 프리랜서 컨텐츠 1 -->
 		   <resultMap type="Freelancer_FreeLancerProfile" id="freelancerContent">
 				<id property="free_code" column="free_code"/>
 				  <result property="pro_num" column="pro_num"/>
@@ -196,22 +196,18 @@
 					<result property="pro_num" column="pro_num"/>
 					<result property="free_code" column="free_code"/>
 			 		<result property="mem_email" column="mem_email"/>			
-				<collection property="mMember" javaType="java.util.ArrayList" ofType="mMember" >
-				 	<id property="mem_email" column="mem_email"/>
+				<association javaType="mMember" property="mmember">
+					<id property="mem_email" column="mem_email"/>
 				  	<result property="mem_name" column="mem_name"/>
 				  	<result property="class_num" column="class_num"/>
-				  	<result property="mem_status" column="mem_status"/>		  	
-				</collection>
-				<collection property="FreeLancerProfile" javaType="java.util.ArrayList" ofType="FreeLancerProfile" >
+				  	<result property="mem_status" column="mem_status"/>	
+				</association>
+				<collection property="freeLancerProfile" javaType="java.util.ArrayList" ofType="FreeLancerProfile" >
 				 	<id property="pro_num" column="pro_num"/>	  	
-				</collection>			
+				</collection>				
 			</resultMap>
 					
-			
-			
-			
-			
-			
+
 			
 			
 
@@ -222,6 +218,39 @@
     </select>	
     <select id="countFreeLancer" resultType="int">
    		select count(*) from FreeLancer_Profile where profile_choice=1
+    </select>    
+    
+    <select id="countFreeLancerPaging" resultType="int" parameterType="map">
+   		select count(*) from FreeLancer_Profile where profile_choice=1
+   		<if test="type != null"> and type_num in
+			<foreach collection ="type" item="type" open="(" separator="," close=")">
+				#{type}
+			</foreach>
+		</if>
+		<if test="grade != null">
+			and
+			<foreach collection="grade" item="grade" index="index" separator="or">
+				<if test="grade==3">
+					 pro_exp >=9
+				</if>
+				<if test="grade==2">
+					pro_exp between 4 and 8
+				</if>
+				<if test="grade==1">
+					pro_exp between 1 and 3
+				</if>
+			</foreach>
+		</if>	
+		<if test="pro_place!=null">and PRO_PLACE in
+				<foreach collection ="pro_place" item="pro_place" open="(" separator="," close=")">
+					#{pro_place}
+				</foreach>
+		</if>
+		<if test="searchKey != null">
+			<if test ="searchKey != '%%'">
+				and  PROFILE_SUB like #{searchKey}
+			</if>
+		</if>
     </select>
 	<select id="SelectList" resultMap="List_FreeLancerResult" parameterType="map">
 	   	<![CDATA[
@@ -245,10 +274,51 @@
 											on fp.free_code=f.free_code 				
 		                                        right outer join member m
 		                                        on m.mem_email=f.mem_email
-                                                    where profile_choice=1 order by profile_date desc )aa)
-                                                        where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}
-                                                          		
-		  ]]>
+                                                    where profile_choice=1 
+                                                   ]]> 
+							<if test="type!=null">
+							and type_num in
+								<foreach collection ="type" item="type" open="(" separator="," close=")">
+									#{type}
+								</foreach>
+							</if>
+							<if test="grade!=null">
+								and
+								<foreach collection="grade" item="grade" index="index" separator="or">
+									<if test="grade==3">
+										 pro_exp >=9
+									</if>
+									<if test="grade==2">
+										pro_exp between 4 and 8
+									</if>
+									<if test="grade==1">
+										pro_exp between 1 and 3
+									</if>
+								</foreach>
+							</if>	
+							<if test="pro_place!=null">
+							and PRO_PLACE in
+								<foreach collection ="pro_place" item="pro_place" open="(" separator="," close=")">
+									#{pro_place}
+								</foreach>
+							</if>
+							<if test="searchKey != null">
+								<if test ="searchKey != '%%'">
+									and PROFILE_SUB like #{searchKey}
+								</if>
+							</if>
+							<if test="SortingKey == null">
+							order by PROFILE_DATE desc
+							</if>
+							<if test="SortingKey == 'pro_vcnt'">
+							order by PRO_VCNT desc
+							</if>
+							<if test="SortingKey == 'profile_date'">
+							order by  PROFILE_DATE desc
+							</if>
+						<![CDATA[
+                             )aa)where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}               		
+						]]>
 	</select>
 	
 		<!-- 리스트페이지 타입 select -->
@@ -381,11 +451,11 @@
 	</select>
 	
 	<!-- 프리랜서 리뷰(+페이징) -->
-	<select id="countReview" resultType="int">
-   		select count(*) from freelancer_review
+	<select id="countReview" resultType="long" parameterType="map">
+   		  <![CDATA[select count(*) from freelancer_review where free_code=#{free_code} and pro_num=#{pro_num}]]>	
     </select>
 	<select id="freelancerReview" resultMap="freelancerReview" parameterType="map">
-	  <![CDATA[
+  		<![CDATA[
 			select ROWNUM , fr.freerev_num
 						  , fr.freerev_cont
                           , fr.freerev_star
@@ -394,20 +464,25 @@
                           , fr.free_code
                           , fr.mem_email
                           , m.mem_name
-                          , fp.pro_num
-                          , fr.pro_num 
                           from freelancer_review  fr
                              inner join member m
                              on fr.mem_email = m.mem_email
                                  inner join freelancer_profile fp
                                  on fr.pro_num = fp.pro_num
                                     where fr.free_code=#{free_code}
-                                     and ROWNUM <= #{end}
-                                     and ROWNUM>=#{start} 
+                                     and fr.pro_num=#{pro_num}
+                                     and ROWNUM <=#{end}
+                                     and ROWNUM>=#{start}
                                      order by freerev_rdate desc                             	
 	  ]]>	
-	</select> 
-	
+	  </select>
+	<select id="selectFile" resultType="Freelancer" parameterType="String">
+   		  <![CDATA[select free_fname, mem_email from freelancer where mem_email=#{mem_email}]]>	
+    </select>  
+	  
+	  
+	  
+	 
 	<!-- 리뷰 insert -->
  	<insert id="reviewInsert" parameterType="map" >
 	<![CDATA[

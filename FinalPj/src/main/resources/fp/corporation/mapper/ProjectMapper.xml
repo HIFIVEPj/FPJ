@@ -205,7 +205,9 @@
 		   WHERE pj.PJ_NUM=#{pj_num}
 		  ]]>
 	</select>
-
+	<update id="updateProjectVcnt" parameterType="long">
+		update Project set pj_vcnt=pj_vcnt+1 where PJ_NUM=#{pj_num}
+	</update>	
 	<insert id="insertpj" parameterType="corProject" >
 	<selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
 		select pj_num_seq.nextval from dual
@@ -214,7 +216,7 @@
 		(PJ_NUM, TYPE_NUM, COR_CODE, PJ_SUB, PJ_CONT, PJ_DDATE, PJ_PAY, PJ_TERM, PJ_LOC, pj_postcode,
 		 pj_detailloc, pj_loc_x, pj_loc_y,PJ_RECNUM, PJ_APPNUM, PJ_RDATE, PJ_TOTALP, PJ_PLACE, PJ_HOMEPAGE, PJ_FGRADE)
 		 values(#{pj_num}, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},
-		 #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})		
+		 #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage ,jdbcType=VARCHAR}, #{pj_fgrade})		
 	</insert>
 	
 	 <insert id="insertPjpkeyword" parameterType="map">

@@ -341,12 +341,7 @@
 																		</c:choose>
 																	</c:if>
 																</c:forEach><br/><br/>
-																<c:if test="${!empty sessionScope.email }">
-																<a href="project_content?pj_num=${dto.pj_num}&mem_email=${sessionScope.email}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
-																</c:if>
-																<c:if test="${empty sessionScope.email }">
 																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
-																</c:if>
 																<div style="width:85%">
 																<span id = "content" style="width:10px">
 														          <c:choose>
@@ -398,37 +393,6 @@
 									</div>
 								</div>
 								<div class="paginationDiv">
-								<c:choose>
-								<c:when test="${!empty sessionScope.email}">
-								<div class="center-block text-center ">
-									<ul class="pagination mb-0">
-									<c:if test="${pa.nowPage != 1}">
-														<!--이전 페이지 이동 -->
-										<li class="page-item page-prev">
-											<a class="page-link mem_prev" href="project_list?nowPage=${pa.nowPage-1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">prev</a>
-										</li>
-									</c:if>
-									<!--페이지번호 -->
-									<c:forEach var='p' begin="${pa.startPage}" end="${pa.endPage}">
-										<c:choose>
-											<c:when test="${p == pa.nowPage}">
-												<li class='page-item active'><a class="page-link">${p}</a></li>
-											</c:when>
-											<c:when test = "${p != pa.nowPage }">
-												<li class="page-item"><a class="page-link mem_no_nowPage" href="project_list?nowPage=${p}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">${p}</a></li>
-											</c:when>
-										</c:choose>
-										</c:forEach>
-										<c:if test ="${pa.nowPage != pa.lastPage}">
-											<li class="page-item page-next">
-												<a class="page-link mem_next" href="project_list?nowPage=${pa.nowPage+1}&cntPerPage=${pa.cntPerPage}&mem_email=${sessionScope.email}">Next</a>
-											</li>
-										</c:if>
-										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
-									</ul>
-								</div>
-								</c:when>
-								<c:otherwise>
 									<div class="center-block text-center ">
 									<ul class="pagination mb-0">
 									<c:if test="${pa.nowPage != 1}">
@@ -456,8 +420,6 @@
 										<!--  <div style="margin-left:553px;"><a href="write.do" class="btn btn-primary">글쓰기</a></div>-->
 									</ul>
 								</div>
-								</c:otherwise>
-								</c:choose>
 								</div>
 							</div>
 						</div>
@@ -571,7 +533,6 @@
 		var pj_fgrade = new Array();
 		var pj_place = new Array();
 		var nowPage = 1;
-		var mem_email="";
 		var searchKey="";
 		$("form#no_submit input:checkbox[name='type']").on("click",function(){
 			var typeTemp = new Array();
@@ -618,13 +579,9 @@
 		});
 		function sortAjax(){
 			var flag= ${!empty sessionScope.email};
-			if(flag==true){
-				 var sessionEmail='${sessionScope.email}';
-			}
 			var objParam={
 					"typeList" : type,
 					"nowPage" : nowPage,
-					"mem_email" : sessionEmail,
 					"selectKeyword" : selectkey,
 					"pj_fgradeList": pj_fgrade,
 					"pj_placeList":pj_place,
@@ -633,7 +590,6 @@
 					"searchKey":searchKey
 			};
 			 $.ajax({
-				 
 				 type:"get",
 				 url:"<c:url value='project_list_ajax' />",
 				 data:objParam,
@@ -641,7 +597,6 @@
 				 success:function(data){
 					 var keys = data.keyname;
 					 var keyCnt = keys.length;
-					 if(flag==true){
 						 var lists=data.list;
 						 var cnt = lists.length;
 						 var pages=data.pa;
@@ -692,126 +647,6 @@
 								}
 								
 								pageSet+=locArray[0]+' '+locArray[1]+'<span style="margin-left:10px; margin-right:10px"><i class="fa fa-user" ></i>'
-								if(lists[i].type_num == 1){pageSet+=' 개발&nbsp;|&nbsp;'}
-								else if(lists[i].type_num == 2){pageSet+=' 퍼블리셔&nbsp;|&nbsp;'}
-								else if(lists[i].type_num == 3){pageSet+=' 디자인&nbsp;|&nbsp;'}
-								else if(lists[i].type_num == 4){pageSet+=' 기획&nbsp;|&nbsp;'}
-								else if(lists[i].type_num == 5){pageSet+=' 기타&nbsp;|&nbsp;'}
-								else{pageSet+='&nbsp;없음&nbsp;|&nbsp;'}
-								if(lists[i].pj_fgrade == 1){pageSet+='초급&nbsp;&nbsp;'}
-								else if(lists[i].pj_fgrade == 2){pageSet+='중급&nbsp;&nbsp;'}
-								else if(lists[i].pj_fgrade == 3){pageSet+='고급&nbsp;&nbsp;'}
-								else{pageSet+='&nbsp;'}+'</span>' 
-								for(j=0; j<keyCnt; j++){
-									if(keys[j].pj_num==lists[i].pj_num){
-										if(keys[j].keyword == '[]'){
-											pageSet+='키워드 없음'
-												console.log("키워드없음");
-										}else{
-											if(keys[j].keyword.length>2){
-												for( k=0; k<3; k++){
-													pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
-												}
-											}else{
-												for( k=0; k<keys[j].keyword.length; k++){
-													pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
-												}
-											}
-										}
-									}
-								}
-								pageSet+='<br/><br/><a href="project_content?pj_num='+lists[i].pj_num+'&mem_email=${sessionScope.email}" class="text-dark"><h3 class="font-weight-bold">'+lists[i].pj_sub+'</h3></a>'
-										+'<div style="width:85%"><span id = "content" style="width:10px">'
-										if(lists[i].pj_cont.length> 100){
-											pageSet+=pj_cont_change.substr(0,100)+'....'
-										}else{
-											pageSet+=pj_cont_change
-										}
-										pageSet+='</span></div><br/><p class="mb-0 leading-tight mt-1">급여 :'+pj_pay_comma+'원</p></div></div>'
-										+'<div class="card-footer pt-4 pb-4"><div class="item-card9-footer d-flex"><div class="item-card9-cost" style="padding-left: 10px">'
-										+'<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>'
-										if(Dday>0 && lists[i].pj_status==0){
-											pageSet+= 'D -'+Dday+'</strong></span>&nbsp;&nbsp;&nbsp;'
-										}else{
-											pageSet+='마감</strong></span>&nbsp;&nbsp;&nbsp;'
-										}
-										pageSet+='<span>('+dateFormat+')</span></div></div></div></div></div></div></div></div>';
-							 }
-							 
-							 paginationSet+='<ul class="pagination mb-0">'
-						 			if(pages.nowPage != 1){
-						 				paginationSet+='<li class="page-item page-prev ">'+
-						 					'<a class="page-link mem_prev goFirstPage" href="javascript:void(0)">prev</a>'
-						 					+'</li>'
-						 			}
-							 	for(i=pages.startPage; i<=pages.endPage; i++){
-							 		if(i==pages.nowPage){
-							 			paginationSet+='<li class="page-item active"><a class="page-link">'+i+'</a></li>'
-							 		}else{
-							 			paginationSet+='<li class="page-item"><a class="page-link mem_no_nowPage goPage" href="javascript:void(0)" data-page="'+i+'">'+i+'</a></li>'
-							 		}
-							 	}
-							 	if(pages.nowPage != pages.lastPage){
-							 		paginationSet+='<li class="page-item page-next">'+
-										'<a class="page-link mem_next goNextPage" href="javascript:void(0)">Next</a></li>'
-							 	}
-						 }
-						 
-						 
-						 $("#tab-11").html(pageSet);
-						 $(".paginationDiv").html(paginationSet);
-							$(".goFirstPage").click(function(){
-								nowPage =1;
-								mem_email=sessionEmail;
-								pageFlag =1;
-								sortAjax();
-								pageFlag=0;
-								
-							});
-							$(".goPage").click(function(){
-								nowPage=$(this).attr("data-page");
-								mem_email=sessionEmail;
-								pageFlag=1;
-								sortAjax();
-								pageFlag=0;
-							});
-							$(".goNextPage").click(function(){
-								nowPage = eval(pages.nowPage) + 1;
-								mem_email=sessionEmail;
-								pageFlag = 1;
-								sortAjax();
-							    pageFlag = 0;
-						    });
-				
-					 }else{
-						 var lists=data.list;
-						 var cnt = lists.length;
-						 var pages=data.pa;
-						 var pagesCnt = pages.length;
-						 $(".before_ajax_content").remove();
-						 $(".pagination").remove();
-						 if(cnt == 0){
-							 $("#tab-11").append('<div class="card overflow-hidden before_ajax_content"><span>등록된 프로젝트가 없습니다</span></div>');
-						 }else{
-							 var pageSet="";
-							 var paginationSet="";
-							 for(i=0; i<cnt; i++){
-								var loc= lists[i].pj_loc;
-								var locArray = loc.split(' ');
-								var pj_cont_change = lists[i].pj_cont.replace(/(<([^>]+)>)/gi, "");
-								var pj_pay_comma = lists[i].pj_pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-								var dateFormat = format(lists[i].pj_ddate,'yyyy-MM-dd');
-								var now = new Date();
-								var Dday = lists[i].pj_ddate - now.getTime();
-								Dday = Math.floor(Dday / ((1000 * 60 * 60 * 24))+1);			
-								
-								pageSet+='<div class="card overflow-hidden before_ajax_content"><div class="d-md-flex">'+
-								'<div><div class="item-card9-imgs"><a href="books.html"></a></div></div>'+
-								'<div class="card border-0 mb-0"><div class="card-body" style="padding:30px; padding-bottom:10px;">'+
-								'<div class="item-card9-icons zzim"><a href="javasript:void(0)" class="item-card9-icons wishlist"'+lists[i].pj_num+
-								'style="margin-right:40%" onclick="javascript:onlyFree();">'+
-								'<i class="fa fa fa-heart-o" style=""></i></a></div><div class="item-card9"><i class="fa fa-map-marker"></i>&nbsp;'
-								+locArray[0]+' '+locArray[1]+'<span style="margin-left:10px; margin-right:10px"><i class="fa fa-user" ></i>'
 								if(lists[i].type_num == 1){pageSet+=' 개발&nbsp;|&nbsp;'}
 								else if(lists[i].type_num == 2){pageSet+=' 퍼블리셔&nbsp;|&nbsp;'}
 								else if(lists[i].type_num == 3){pageSet+=' 디자인&nbsp;|&nbsp;'}
@@ -894,12 +729,12 @@
 								pageFlag=0;
 							});
 							$(".goNextPage").click(function(){
-								nowPage = eval(pages.nowPage) + 1;	
+								nowPage = eval(pages.nowPage) + 1;
 								pageFlag = 1;
 								sortAjax();
 							    pageFlag = 0;
 						    });
-					 }
+
 					 
 				 },
 				 error:function(data){

@@ -9,12 +9,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketRev;
 
-import fp.market.domain.Freelancer;
+
 import fp.market.domain.Market;
 import fp.market.mapper.MarketMapper;
 
@@ -27,10 +26,10 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class MarketMapperTests {
 
-	@Autowired
+/*	@Autowired
 	private MarketMapper marketMapper;
 	private Freelancer freelancer;
-
+*/
 /*	@Test
 	private Freelancer freelancer;
 
@@ -100,7 +99,7 @@ public class MarketMapperTests {
 					+", writer: " +market.getMarket_sub()+", 마켓서브: " +market.getMarket_ofname()
 					+", 마켓콘트: " +market.getMarket_num()+", 마켓뷰: " +market.getMarket_state());
 	}*/	
-	@Test
+/*	@Test
 	public void testMarketStar() {
 		//log.info("#boardMapper: " + boardMapper);
 
@@ -110,5 +109,5 @@ public class MarketMapperTests {
 		log.info("#testMarketList()"+marketMapper.getClass().getName());
 		
 	}			
-
+*/
 }

@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 
@@ -217,7 +218,7 @@ public class FreeLancerProfileController {
 		mv.addObject("file_name", file_name);
 		return mv;
 	}
-
+	
 	
 	//프로필 컨텐츠//
 	@GetMapping("freelancerProfile_content") 
@@ -282,9 +283,6 @@ public class FreeLancerProfileController {
 			   return "redirect:freelancerProfile_list?pro_num="+pro_num;
 			 }
 	
-
-
-	
 	//나영 수정---------
 		@RequestMapping(value="payments")	//
 		public ModelAndView payments(HttpServletRequest request) {
@@ -297,7 +295,7 @@ public class FreeLancerProfileController {
 			mv.addObject("freeacct",freeacct);
 			return mv;
 		}
-		@RequestMapping(value="/payments_bankholder",  method = { RequestMethod.GET, RequestMethod.POST })	//
+		@RequestMapping(value="/payments_bankholder",  method = { RequestMethod.GET, RequestMethod.POST })
 		@ResponseBody
 		public JsonNode bank_holder_check(HttpServletRequest request,HttpServletResponse response,String bank_code, String bank_num) {
 			JsonNode node = OpenBankingController.getAccessTokenIMPORT();

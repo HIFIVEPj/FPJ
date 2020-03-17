@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.Project;
+import fp.corporation.service.ProjectService;
+import fp.corporation.vo.ProjectVo;
 import fp.market.controller.MarketController;
 import fp.market.domain.Market;
 import fp.market.domain.MarketPick;
@@ -29,6 +32,8 @@ import lombok.extern.log4j.Log4j;
 public class IndexController {
 	@Autowired
 	MarketService marketService;
+	@Autowired
+	ProjectService pjService;
 	
 	@RequestMapping("construction")
 	public String construction() {
@@ -41,14 +46,22 @@ public class IndexController {
 	}*/
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView marketList(HttpSession session){
-
-		List<Market> list=new ArrayList<Market>();//마켓리스트
+	public ModelAndView index(HttpSession session){
 		HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();//mybatis 쿼리 파라미터
+		//프로젝트 시작
+		ProjectVo projectVo= new ProjectVo();
+		long totalCount= pjService.getTotalCount(Pagingmap);
+		projectVo = new ProjectVo(totalCount, 1,8);
+		Pagingmap.put("ProjectVo", projectVo);
+		List<Project>pjList = pjService.list(Pagingmap);
+		
+		//프로젝트 끝
+		List<Market> list=new ArrayList<Market>();//마켓리스트
+		
 		String mem_email=(String) session.getAttribute("email");
 		
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
-		Pagingmap.put("selectedKey",2);
+		Pagingmap.put("selectedKey",1);
 		Pagingmap.put("start",1);
 		Pagingmap.put("end",10); 
 		log.info("1@#@!#!#@!list"+list);
@@ -72,7 +85,9 @@ public class IndexController {
 		 log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
 		 ModelAndView mv = new ModelAndView("index");
 		 mv.addObject("list", list);
-	     mv.addObject("marketNumList", marketNumList); 
+	     mv.addObject("maㅎrketNumList", marketNumList); 
+	     
+	     mv.addObject("pjList", pjList); //project List
 		return mv;
 	}
 	

@@ -7,18 +7,14 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fp.corporation.domain.Corporation;
-import fp.market.controller.MarketController;
-import fp.market.domain.Freelancer;
+import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
-import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
-import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 @Log4j
@@ -195,6 +191,21 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public List<Market> searchButtonMarketList(HashMap<String,Object> map) {
 		return mapper.searchButtonMarketList(map);	
+	}
+//컨텐트 유사한프리랜서정보	
+	@Override
+	public List<FreelancerProfile> getSimilarFree(int type_num) {
+		return mapper.similarFree(type_num);
+	}
+//마켓문의 삭제
+	@Override
+	public long maxSun(HashMap<String, Object> map) {
+		
+		return mapper.maxSun(map);
+	}
+	@Override
+	public long delUpdateMarketQA2(HashMap<String, Object> map) {
+		return mapper.delUpdateMarketQA2(map);
 	}
 	
 

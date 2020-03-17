@@ -7,14 +7,12 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import fp.freelancerprofile.controller.FreelancerMarketInfoController;
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.mapper.FreelancerMarketInfoMapper;
-import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
-import fp.market.domain.Member;
-import fp.market.mapper.MarketMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 @Log4j
@@ -24,7 +22,7 @@ public class FreelancerMarketInfoServiceImpl implements FreelancerMarketInfoServ
 	private FreelancerMarketInfoMapper mapper;
 //프로필사진띄우기		
 	@Override
-	public Freelancer getFreefname(String mem_email) {
+	public FreeLancer getFreefname(String mem_email) {
 		return mapper.getFreefname(mem_email);
 	}
 //픽리스트	

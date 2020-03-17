@@ -6,7 +6,6 @@ import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,13 +15,13 @@ public class Freelancer {
 	private String free_name;
 	private String free_tel;
 	private String free_point;
-	private Date rdate;
+	private Date free_rdate;
 	private int free_level;
 	private int free_acctox;
 	private String free_fname;
 	private String free_ofname;
 	
 	private Market market;
-	//public FreelancerProfile freeProfile;
+	public FreelancerProfile freeProfile;
 	
 }

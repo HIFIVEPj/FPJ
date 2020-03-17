@@ -2,6 +2,7 @@ package fp.market.domain;
 
 import java.sql.Date;
 
+import fp.freelancerprofile.domain.FreeLancer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,6 @@ public class MarketBuysellList {
 	
 	private Market market;
 	private MarketRev marketRev;
-	private Freelancer freelancer;
+	private FreeLancer freelancer;
 
 }
