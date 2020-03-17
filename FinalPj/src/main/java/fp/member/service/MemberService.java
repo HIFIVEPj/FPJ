@@ -24,6 +24,7 @@ public interface MemberService {
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
 	long getTotalCountMC(MemberVo memberVO);
+	
 	//개인
 	List<PayInformation> marketListFree(MemberVo memberVO);
 	long getTotalCountMF(MemberVo memberVO);
@@ -32,4 +33,10 @@ public interface MemberService {
 	List<Long> sumFree();
 	List<Long> sumCor();
 	List<Long> month();
+	
+	List<String> sumCountCorN();
+	List<Long> sumCountCor();
+	
+	List<String> sumCountMarketN();
+	List<Long> sumCountMarket();
 }

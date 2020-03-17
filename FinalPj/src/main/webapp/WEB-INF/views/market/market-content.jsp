@@ -496,7 +496,7 @@
 		                                        <c:when test="${marketQA.marketQA_ox == 1}">
 			                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 		                                        </c:when>	
-		                                                                              
+
 	                                        </c:choose> 
 	                                        
 			                                  <!-- 모달로 정보보내기
@@ -540,6 +540,7 @@
 							<c:if test="${marketVOQA.nowPage > 1 }">
 								<li class="page-item">
 									<a aria-label="Last" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.startPage},${market.market_num});"><i class="fa fa-angle-double-left"></i></a>
+
 								</li>
 								<li class="page-item">
 									<a aria-label="Next" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.nowPage-1},${market.market_num});"><i class="fa fa-angle-left"></i></a>
@@ -705,7 +706,7 @@
 									<div style="text-align: right; vertical-align:center;">
 										<span style="font-size:20px">결제금액</span></br>
 									<span style="font-size:30px">￦<fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /><span class="fs-16"></span></span>
-										
+
 									</div>
 								</div>
 								<div class="card-footer">	
@@ -1192,6 +1193,7 @@ obShareUrl.value=window.document.location.href;
 </script>
 <!-- 카카오 공유하기 -->		 
 
+
 <!--
 	
 		<div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -1413,6 +1415,7 @@ obShareUrl.value=window.document.location.href;
 			alert("nowPage"+nowPage);
 			alert("cntPerPage"+cntPerPage);
 		    */
+
 		   $('#CommentQA').on('show.bs.modal', function (event) {
 				//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
 				//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..    
@@ -1495,6 +1498,7 @@ obShareUrl.value=window.document.location.href;
 				alert("5="+gg);
 				alert("nowPage="+nowPage1);
 				alert("cntPerPage="+cntPerPage1);*/
+
 			});
 		}
 			
@@ -1544,6 +1548,7 @@ obShareUrl.value=window.document.location.href;
 	}
 
       function Revupdate(revNum,mNum,cont,star,nowPageR,cntPerPageR){
+
    		/*  alert("revNum"+revNum);
    			alert("mNum"+mNum);
    			alert("cont"+cont);

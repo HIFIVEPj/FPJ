@@ -49,6 +49,7 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash.html">프리랜서</a></li>
 												<li><a class="slide-item" href="myprofile.html">프리랜서 프로필</a></li>
+												<li><a class="slide-item" href="mydash_changePW">비밀번호 변경</a></li>
 												<c:if test="${sessionScope.class_num==2 || sessionScope.class_num==3}">
 												<li><a class="slide-item " href="mydash_cor.html">기업</a></li>
 												</c:if>

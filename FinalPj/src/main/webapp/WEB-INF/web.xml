@@ -7,6 +7,7 @@
  	<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/spring/root-context.xml
+
         </param-value>
    	 </context-param> 
 	
@@ -73,7 +74,16 @@
         <session-timeout>20</session-timeout>
     </session-config>
 
-
+	<!-- SSL 설정  
+	<security-constraint>
+	    <web-resource-collection>
+	        <web-resource-name>my-secure-app</web-resource-name>
+	        <url-pattern>/*</url-pattern>
+	    </web-resource-collection>
+	    <user-data-constraint>
+	        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+	    </user-data-constraint>
+	</security-constraint> -->
 
 	<!-- 에러 페이지
 	<error-page>
