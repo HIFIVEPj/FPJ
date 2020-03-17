@@ -195,7 +195,7 @@
 //검색창
 	function searchWord(nowPage,cntPerPage,selectedKey){
 			var searchWord=$("#searchText").val()		
-			alert("searchWord:"+searchWord);			
+			//alert("searchWord:"+searchWord);			
 			window.location.href="market-list?selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage+"&searchWord="+searchWord;
 	}
 //searchBox검색
@@ -212,9 +212,9 @@
 			//alert(index+":"+ $(this).val());
 			checkedExp.push($(this).val());
 		});
-		alert("checkedCate:"+checkedCate);
+		/* alert("checkedCate:"+checkedCate);
 		alert("checkedExp:"+checkedExp);
-		alert($("#price").val());
+		alert($("#price").val()); */
 		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
 	});
 	
@@ -231,9 +231,9 @@
 			//alert(index+":"+ $(this).val());
 			checkedExp.push($(this).val());
 		});
-		alert("checkedCate:"+checkedCate);
+	/* 	alert("checkedCate:"+checkedCate);
 		alert("checkedExp:"+checkedExp);
-		alert($("#price").val());
+		alert($("#price").val()); */
 		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey+"&nowPage="+nowPage+"&cntPerPage="+cntPerPage;
 	}
 	
@@ -489,7 +489,7 @@
 	}
 	
 	function addPick(market_num){
-		alert("marketnum"+market_num);
+		//alert("marketnum"+market_num);
 		$.ajax({
 			type:"get",  
 			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
@@ -503,7 +503,7 @@
 		});
 	}
 	function delPick(market_num){
-		alert("marketnum"+market_num);
+		//alert("marketnum"+market_num);
 		$.ajax({
 			type:"get",  
 			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',
@@ -518,11 +518,11 @@
 	 }
 //selectKey
 	$('#marketOrder').change( function(){
-	    alert($(this).val());
+	   // alert($(this).val());
 	    var selectedKey= $(this).val();
 	    var searchWord=$("#searchText").val();	
 	   
-	    alert("selectedKeyword"+selectedKey);
+	 //   alert("selectedKeyword"+selectedKey);
 	    
 	    var checkedCate = [];
 		var checkedExp = [];

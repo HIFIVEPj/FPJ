@@ -129,10 +129,11 @@
 									<p>${market.market_cont}</p>
 									
 								</div>
-								<h4 class="mb-4">Specifications</h4>
+								<h4 class="mb-4"></h4>
 								<div class="row">
 									<div class="col-xl-6 col-md-12">
 										<ul class="list-unstyled widget-spec mb-0">
+											<!-- 
 											<li class="">
 												<i class="fa fa-bed text-muted w-5"></i> 2 BedRooms
 											</li>
@@ -151,6 +152,7 @@
 											<li class="mb-xl-0">
 												<i class="fa fa-pagelines text-muted w-5"></i> Garden
 											</li>
+											-->
 										</ul>
 									</div>
 									
@@ -159,9 +161,10 @@
 						<c:if test="${sessionScope.class_num!=1}">
 							<div class="card-footer">
 								<div class="icons">
-									<a href="#" class="btn btn-info icons"><i class="si si-share mr-1"></i> Share Ad</a>
+									<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
+
 								<!--<a href="#" class="btn btn-danger icons" data-toggle="modal" data-target="#report"><i class="si si-exclamation mr-1"></i> Report Abuse</a>-->
-									<a href="#" class="btn btn-primary icons"><i class="si si-heart  mr-1"></i> 678</a>
+									<!--<a href="#" class="btn btn-primary icons"><i class="si si-heart  mr-1"></i> 678</a>-->
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<c:if test="${sessionScope.email== freeProfile.freelancer.mem_email}">
@@ -473,6 +476,9 @@
 											 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
 											 
 	                                     	 <c:choose>
+	                                     	   <c:when test="${marketQA.marketQA_sub eq '삭제된 댓글입니다'}">
+			                                        <p class="font-13  mb-2 mt-2"> 삭제된 댓글입니다.</p>
+		                                        </c:when>	  
 		                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
 			                                        <p class="font-13  mb-2 mt-2">
 
@@ -489,7 +495,8 @@
 		                                        </c:when>
 		                                        <c:when test="${marketQA.marketQA_ox == 1}">
 			                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-		                                        </c:when>	                                         
+		                                        </c:when>	
+		                                                                              
 	                                        </c:choose> 
 	                                        
 			                                  <!-- 모달로 정보보내기
@@ -499,7 +506,7 @@
 		                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
 		                                  			<a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}',${marketVOQA.nowPage},${marketVOQA.cntPerPage});" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>
 													<a href="javascript:void(0)" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox},${marketVOQA.nowPage},${marketVOQA.cntPerPage});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
-													<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}',${marketVOQA.nowPage},${marketVOQA.cntPerPage},${marketQA.marketQA_prnum},${marketQA.marketQA_sun});"  ><span class="">삭제</span></a>
+													<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}',${marketVOQA.nowPage},${marketVOQA.cntPerPage},${marketQA.marketQA_prnum},${marketQA.marketQA_sun},${marketQA.marketQA_lev});"  ><span class="">삭제</span></a>
 												</c:when>
 												<c:when test="${empty sessionScope.name}">
 												</c:when>
@@ -640,16 +647,21 @@
 									<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
-											<c:if test="${freeProfile.freelancerProfile.pro_exp >= 0}">
+											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0}">
+												
+											</c:if >
+											<c:if test="${freeProfile.freelancerProfile.pro_exp > 0}">
 												경력:<span class="text-muted">${freeProfile.freelancerProfile.pro_exp}</span>년
+												<h6 class="mt-2 mb-0"><a href="freelancercontent?free_code=${freeProfile.freelancer.free_code}&pro_num=${freeProfile.freelancerProfile.pro_num}" class="btn btn-primary btn-sm">프로필 보기</a></h6>
 											</c:if >
-											<c:if test="${freeProfile.freelancerProfile.pro_exp == null}">
+											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0 && sessionScope.email==freeProfile.freelancer.mem_email}">
 												<span class="text-muted">프로필을 등록해주세요</span>
+												<h6 class="mt-2 mb-0"><a href="freelancerMyprofile_write" class="btn btn-primary btn-sm">프로필 등록</a></h6>							
 											</c:if >
-											${ marketCookie}
+											
 										
 										
-										<h6 class="mt-2 mb-0"><a href="javascript:void(0);" class="btn btn-primary btn-sm">프로필 보기</a></h6>
+										
 									</div>
 								</div>
 							</div>
@@ -880,86 +892,38 @@
 							<div class="card-body pb-3">
 								<div class="rated-products">
 									<ul class="vertical-scroll">
-										<li class="item">
-											<div class="media m-0 mt-0 p-5">
-												<img class="mr-4" src="../images/products/toys.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Kids Toys</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$17 - $29</div>
+										<c:if test="${fn:length(similarFree)>0}">
+											<c:forEach var="similarFree" items="${similarFree}">
+											<li class="item">
+												<div class="media p-5 mt-0">
+													<img class="mr-4" src="../hifiveImages/free_thumb/${similarFree.freelancer.free_fname}" alt="img">
+													<div class="media-body">
+														<h4 class="mt-2 mb-1">${similarFree.freelancer.free_name}</h4>
+														
+														<span class="rated-products-ratings">
+															<c:forEach begin="1" end="${similarFree.freelancerReview.freeRev_star}">
+																<i class="fa fa-star text-warning"> </i>
+															</c:forEach>
+															<c:forEach begin="1" end="${5-similarFree.freelancerReview.freeRev_star}">
+																<i class="fa fa-star-o text-warning"> </i>
+															</c:forEach>
+														</span>
+														
+													<!-- 
+														<div class="h5 mb-0 font-weight-semibold mt-1">$22 - $45</div>
+													 -->
+													</div>
 												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media p-5 mt-0">
-												<img class="mr-4" src="../images/products/1.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Leather Watch</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$22 - $45</div>
+											</li>
+										</c:forEach>
+										</c:if>
+										<c:if test="${fn:length(similarFree)==0}">
+										 	<li class="item">
+												<div class="media p-5 mt-0">
+													프로필 등록안해서 유사한프리랜서안뜸
 												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media p-5 mt-0">
-												<img class=" mr-4" src="../images/products/4.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Digital Watch</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-half-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$35 - $72</div>
-												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media p-5 mt-0">
-												<img class=" mr-4" src="../images/products/6.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Sports Shoe</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-half-o text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$12 - $21</div>
-												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media  mb-0 p-5 mt-0">
-												<img class=" mr-4" src="../images/products/8.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Ladies shoes</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$89 - $97</div>
-												</div>
-											</div>
-										</li>
+											</li>
+										</c:if>
 									</ul>
 								</div>
 							</div>
@@ -1157,7 +1121,76 @@
 					</div>
 				</div>
 			</div>
- 
+<!-- 공유하기Modal -->
+			<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"> <span class="float-right btn btn-icon btn-primary btn-sm mt-3"><i class="si si-share mr-1"></i></span></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body " style="margin:0 auto;">
+							<a id="kakao-link-btn" href="javascript:sendLink()" class="btn btn-icon brround kakao-btn">
+								<span class="fa fa-comment"></span><!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
+							</a>
+						</div>
+						<div class="modal-footer">
+						
+						 <input type="text" id = "shareUrl"  class="form-control">
+               	 <span><button class = "btn btn-secondary" onclick="javascript:copyUrlToClipboard()">URL복사</button></span>
+						</div>
+					</div>
+				</div>
+			</div>
+<script>
+var obShareUrl = document.getElementById("shareUrl");
+obShareUrl.value=window.document.location.href;	
+	function copyUrlToClipboard(){
+		obShareUrl.select();
+		document.execCommand("copy");
+		obShareUrl.blur();
+		alert("URL이 클립보드에 복사되었습니다.")
+	}
+</script>			
+<!-- 카카오 공유하기 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('50e87f1e8bcbb6ac445c4b87fdbcf76e');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    function sendLink() {
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '프로젝트 & 서비스 & IT 프리랜서 플랫폼 - 하이파이브',
+          description: '${market.market_sub}',
+          imageUrl: '../images/brand/logo1.png',
+          link: {
+            mobileWebUrl:'http://127.0.0.1:8090/market-content?${market.market_num}',
+            webUrl:'http://127.0.0.1:8090/market-content?${market.market_num}'
+          }
+        },
+        social: {
+      		viewCount: ${market.market_vcnt},
+       		likeCount: ${market.market_pcnt}
+        },
+        buttons: [
+          {
+            title: '페이지로 바로가기',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com'
+            }
+          }
+        ]
+      });
+    }
+  //]]>
+</script>
+<!-- 카카오 공유하기 -->		 
 
 <!--
 	
@@ -1355,7 +1388,7 @@
 		        return;
 		   		 }
 
-		   alert(prnum);
+		   //alert(prnum);
 		   var url=$("#mqInput").attr("action");
 		   var formData = new FormData($("#mqInput")[0]);
 			$.ajax({
@@ -1374,12 +1407,12 @@
 		}
 //문의 리댓글 만따로빼려면이거씀
 	  function mqajaxRE(prnum,lev,sun,nowPage,cntPerPage){
-			alert("1prnum"+prnum);
+			/*alert("1prnum"+prnum);
 			alert("2lev"+lev);
 			alert("3sun"+sun);
 			alert("nowPage"+nowPage);
 			alert("cntPerPage"+cntPerPage);
-		    
+		    */
 		   $('#CommentQA').on('show.bs.modal', function (event) {
 				//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
 				//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..    
@@ -1410,16 +1443,16 @@
 	   });
 	 
 
-	  function QAdelete(MQ,M,nowPage,cntPerPage,prnum,sun){
+	  function QAdelete(MQ,M,nowPage,cntPerPage,prnum,sun,lev){
 			/* alert(MQ);
-			alert(M); */
+			alert(M); 
 			alert(prnum);
-			alert(sun);
+			alert(sun);*/
 			var marketQA_num=MQ;
 			var market_num=M;
 		   $.ajax({
 			 	type:'GET',
-		    	url:'marketQA-delete?marketQA_num='+marketQA_num+'&market_num='+ market_num+'&nowPageQ='+nowPage+'&cntPerPageQ='+cntPerPage+'&marketQA_prnum='+ prnum+'&marketQA_sun='+ sun,
+		    	url:'marketQA-delete?marketQA_num='+marketQA_num+'&market_num='+ market_num+'&nowPageQ='+nowPage+'&cntPerPageQ='+cntPerPage+'&marketQA_prnum='+ prnum+'&marketQA_sun='+ sun+'&marketQA_lev='+ lev,
 		    	dataType:'json',
 		    	async :false,
 		    	error:onError,
@@ -1433,10 +1466,10 @@
 			alert("MQcont"+MQcont);
 			alert("MQnum"+MQnum);
 			alert("Mnum"+Mnum);
-			alert("ox"+ox); */
+			alert("ox"+ox); 
 			alert("cntPerPage"+cntPerPage);
 			alert("nowPage"+nowPage)
-
+*/
 			$('#MQUpdate').on('show.bs.modal', function (event) {
 				$("#MQUpdate .modal-content #UPmarketQA_sub").val(MQsub);
 				$("#MQUpdate .modal-content #UPmarketQA_cont").val(MQcont);
@@ -1454,14 +1487,14 @@
 				var gg =$("#MQUpdate .modal-content input[name=marketQA_ox]").val();
 				var nowPage1 =$("#MQUpdate .modal-content #UPmarketQA_nowPage").val();
 				var cntPerPage1 =$("#MQUpdate .modal-content #UPmarketQA_cntPerPage").val();
-				
+				/*
 				alert("1="+aa);
 				alert("2="+ss);
 				alert("3="+dd);
 				alert("4="+ff);
 				alert("5="+gg);
 				alert("nowPage="+nowPage1);
-				alert("cntPerPage="+cntPerPage1);
+				alert("cntPerPage="+cntPerPage1);*/
 			});
 		}
 			
@@ -1496,9 +1529,9 @@
 
 	function Revdelete(revNum,mNum,nowPageR,cntPerPageR){
 		/* alert("revNum"+revNum);
-		alert("mNum"+mNum); */
+		alert("mNum"+mNum);
 		alert("cntPerPageR"+cntPerPageR);
-		alert("nowPageR"+nowPageR); 
+		alert("nowPageR"+nowPageR);  */
 		$.ajax({
 			type:'GET',
 	    	url:'marketRev-delete?marketRev_num='+revNum+'&market_num='+mNum+'&cntPerPageR='+cntPerPageR+'&nowPageR='+nowPageR,
@@ -1511,12 +1544,12 @@
 	}
 
       function Revupdate(revNum,mNum,cont,star,nowPageR,cntPerPageR){
-   		  alert("revNum"+revNum);
+   		/*  alert("revNum"+revNum);
    			alert("mNum"+mNum);
    			alert("cont"+cont);
    			alert("star"+star); 
    			alert("nowPageR"+nowPageR); 
-   			alert("cntPerPageR"+cntPerPageR); 
+   			alert("cntPerPageR"+cntPerPageR);  */
    		/*별을 세팅해두면 프레이밍어쩌구오류남 	
    		html=''; 
 				if(star>0){
@@ -1615,18 +1648,23 @@
 				
 	    		if(sessionEmail == null){	
 	    		}
+	    		if(data[0].marketQAList[i].marketQA_sub =='삭제된 댓글입니다'){
+	    		 
+	    			html+='<p class="font-13  mb-2 mt-2"> 삭제된 댓글입니다.</p>';
+            	 
+	    		}
 	    		//공개
-	    		if(data[0].marketQAList[i].marketQA_ox ==0){
+	    		if(data[0].marketQAList[i].marketQA_ox ==0 && data[0].marketQAList[i].marketQA_sub !='삭제된 댓글입니다'){
 	    			html+='<a href="javascript:void(0)" onclick="javascript:QAFile('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+');"  data-toggle="modal" data-target="#exampleModalLong">'+data[0].marketQAList[i].marketQA_sub+'</a><br>';
 	    			html+='<a href="javascript:void(0)" onclick="mqajaxRE('+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_lev+' ,'+data[0].marketQAList[i].marketQA_sun+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>';
 	    			//수정삭제는 글쓴이만
 	    			if(sessionEmail == data[0].marketQAList[i].mem_email){
 			    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAupdate('+ sub +','+cont+' ,'+data[0].marketQAList[i].marketQA_num+' ,'+data[0].marketQAList[i].market_num+' ,'+data[0].marketQAList[i].marketQA_ox+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>';
-			    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+');"><span class="">삭제</span></a>'; 
+			    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+','+data[0].marketQAList[i].marketQA_lev+');"><span class="">삭제</span></a>'; 
 			    	}
 	    		}
 	    		//비밀
-	    		if(data[0].marketQAList[i].marketQA_ox ==1){
+	    		if(data[0].marketQAList[i].marketQA_ox ==1 && data[0].marketQAList[i].marketQA_sub !='삭제된 댓글입니다'){
 	    			html+='<p class="font-13  mb-2 mt-2"> <비밀글 입니다.></p>';
 	    			html+='<a href="javascript:void(0)" onclick="mqajaxRE('+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_lev+' ,'+data[0].marketQAList[i].marketQA_sun+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>';
 		    		
@@ -1638,7 +1676,7 @@
 		    			//html+='</p>';
 		    			if(data[0].marketQAList[i].mem_email == sessionEmail){
 		    				html+='<a href="javascript:void(0)" class="mr-2" onclick="QAupdate('+ sub +','+cont+' ,'+data[0].marketQAList[i].marketQA_num+' ,'+data[0].marketQAList[i].market_num+' ,'+data[0].marketQAList[i].marketQA_ox+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>';
-				    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+');"><span class="">삭제</span></a>'; 
+				    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+','+data[0].marketQAList[i].marketQA_lev+');"><span class="">삭제</span></a>'; 
 				    	
 		    			}
 		    		}

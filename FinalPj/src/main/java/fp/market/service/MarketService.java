@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import fp.corporation.domain.Corporation;
+import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
@@ -71,6 +72,10 @@ public interface MarketService {
 	 int searchButtonMarketCount(String searchWord);
 	 List<Market> searchButtonMarketList(HashMap<String,Object> map);
 	 
+	 List<FreelancerProfile> getSimilarFree(int type_num);
+	 
+	long maxSun(HashMap<String,Object> map);
+	long delUpdateMarketQA2(HashMap<String,Object> map);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 	

@@ -29,11 +29,12 @@
         <typeAlias alias="MarketRevComm" type="fp.market.domain.MarketRevComm"/>
         <typeAlias alias="MarketQA" type="fp.market.domain.MarketQA"/>
         <typeAlias alias="mFreelancerProfile" type="fp.market.domain.FreelancerProfile"/>
-        <!-- 
-        
+         <typeAlias alias="FreelancerReview" type="fp.market.domain.FreelancerReview"/>
+        <!--     
         <typeAlias alias="mCorporation" type="fp.market.domain.Corporation"/>
+      --> 
         <typeAlias alias="mFreelancer" type="fp.market.domain.Freelancer"/>
-         -->
+         
         <typeAlias alias="mMember" type="fp.market.domain.Member"/>
         <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
         <typeAlias alias="MarketPayment" type="fp.market.domain.MarketPayment"/>
