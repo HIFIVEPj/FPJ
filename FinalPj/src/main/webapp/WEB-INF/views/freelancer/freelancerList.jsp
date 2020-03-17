@@ -45,14 +45,16 @@
 					<div class="col-xl-3 col-lg-4 col-md-12">
 						<div class="card">
 							<div class="card-body">
+							<form id="search_form" onsubmit="return false;">
 								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search">
+									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search" id="searchKeyword" onKeyDown="onkey();">
 									<div class="input-group-append ">
-										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
-											Search
+										<button type="button" class="btn btn-primary br-tr-7 br-br-7" onclick="search()">
+											검색
 										</button>
 									</div>
 								</div>
+							</form>
 							</div>
 						</div>
 						<form id="no_submit">
@@ -309,10 +311,9 @@
 					 </c:forEach>
 				</div>
 						<!-- 페이징 -->
-							<div class="center-block text-center">
-                           <ul class="pagination mb-0">			
-								<div class="card-body">
-									<ul class="pagination mg-b-0 page-0 ">
+				<div class="paginationDiv">
+					<div class="center-block text-center">
+						<ul class="pagination mg-b-0 page-0 ">
                           <c:if test ="${paging.nowPage != paging.startPage}">
                            <!--이전 페이지 이동 -->
                             <li class="page-item">
@@ -344,10 +345,11 @@
 									<a aria-label="Last" class="page-link" href="freelancerList?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
 								</li>
                               </c:if>         					
-
+						</ul>
 					</div>
-				</div>
+				</div>	
 			</div>
+		</div>
 		</section>
 		<!--Add Listing-->
 		<!-- Message Modal -->
@@ -459,11 +461,7 @@
 		 
 		  var loc_first="";
 		  var loc_second="";
-		  function onkey(){
-			  if(event.keyCode == 13){
-					 search();
-				 }
-		  }
+		  
 		 
 		 $("document").ready(function () {
 			
@@ -493,6 +491,11 @@
 	        });
 		 });
 		*/
+		function onkey(){
+			  if(event.keyCode == 13){
+					 search();
+				 }
+		  }
 		var selectkey="";
 		function sortSelectbox(value){
 			selectkey= value;
@@ -668,7 +671,7 @@
 							 +'<a class="icons" href="freelancercontent?free_code='+lists[i].free_code+'"><i class="fa fa-angle-double-right text-muted mr-1"></i>더보기</a>'
 							+'</div></div></div></div>'
 				 }
-					 /* paginationSet+='<ul class="pagination mb-0">'
+					 paginationSet+='<ul class="pagination mb-0">'
 			 			if(pages.nowPage != 1){
 			 				paginationSet+='<li class="page-item page-prev ">'+
 			 					'<a class="page-link mem_prev goFirstPage" href="javascript:void(0)">prev</a>'
@@ -684,11 +687,11 @@
 				 	if(pages.nowPage != pages.lastPage){
 				 		paginationSet+='<li class="page-item page-next">'+
 							'<a class="page-link mem_next goNextPage" href="javascript:void(0)">Next</a></li>'
-				 	}*/
+				 	}
 				 
 				 }
 				 $(".listStart").html(pageSet);
-				 /*$(".paginationDiv").html(paginationSet);
+				 $(".paginationDiv").html(paginationSet);
 					$(".goFirstPage").click(function(){
 						nowPage =1;
 						pageFlag =1;
@@ -707,7 +710,7 @@
 						pageFlag = 1;
 						sortAjax();
 					    pageFlag = 0;
-				    });*/
+				    });
 		 },
 		 error:function(data){
 			 alert("에러발생");
