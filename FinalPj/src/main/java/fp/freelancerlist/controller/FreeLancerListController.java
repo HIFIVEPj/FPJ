@@ -110,11 +110,9 @@ public class FreeLancerListController {
 			@RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage
 			,@RequestParam(value="selectKeyword", required=false)String selectKeyword
-			,@RequestParam(value="pj_fgradeList[]", required=false)List<Integer> pj_fgradeList
-			,@RequestParam(value="pj_placeList[]", required=false)List<Integer> pj_placeList
-			,@RequestParam(value="loc_first", required=false)String loc_first
+			,@RequestParam(value="pro_gradeList[]", required=false)List<Integer> pro_gradeList
+			,@RequestParam(value="pro_placeList[]", required=false)List<Integer> pro_placeList
 			,HttpServletRequest request
-			,@RequestParam(value="loc_second", required=false)String loc_second
 			,@RequestParam(value="searchKey", required=false)String searchKey){
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
@@ -134,11 +132,11 @@ public class FreeLancerListController {
 		}else {
 			map.put("type",typeList);
 		}
-		//프리랜서 등급선택
-		if(pj_fgradeList==null) {			
-			map.put("fgrade",null);
+		//프리랜서 등급선택 
+		if(pro_gradeList==null) {			
+			map.put("grade",null);
 		}else {
-			map.put("fgrade",pj_fgradeList);
+			map.put("grade",pro_gradeList);
 		}
 		//검색 ajax
 		if(searchKey != null){
@@ -153,10 +151,10 @@ public class FreeLancerListController {
 			map.put("SortingKey",null);
 		}
 		//어디서 일할지 선택
-		if(pj_placeList != null){
-			map.put("pj_place",pj_placeList);
+		if(pro_placeList != null){
+			map.put("pro_place",pro_placeList);
 		}else {
-			map.put("pj_place",null);
+			map.put("pro_place",null);
 		}
 
 		long totalCount = service.countFreeLancerPaging(map);

@@ -231,28 +231,28 @@
 				#{type}
 			</foreach>
 		</if>
-		<if test="mapExp.size()>0">
+		<if test="grade != null">
 			and
-			<foreach collection="mapExp" item="mapExpi" index="index" separator="or">
-				<if test="mapExpi=='exp3'">
+			<foreach collection="grade" item="grade" index="index" separator="or">
+				<if test="grade==3">
 					 pro_exp >=9
 				</if>
-				<if test="mapExpi=='exp2'">
+				<if test="grade==2">
 					pro_exp between 4 and 8
 				</if>
-				<if test="mapExpi=='exp1'">
+				<if test="grade==1">
 					pro_exp between 1 and 3
 				</if>
 			</foreach>
 		</if>	
 		<if test="pro_place!=null">and PRO_PLACE in
-				<foreach collection ="pj_place" item="pj_place" open="(" separator="," close=")">
+				<foreach collection ="pro_place" item="pro_place" open="(" separator="," close=")">
 					#{pro_place}
 				</foreach>
 		</if>
 		<if test="searchKey != null">
 			<if test ="searchKey != '%%'">
-				and pj_sub like #{searchKey} or pj_cont like #{searchKey}
+				and  PROFILE_SUB like #{searchKey}
 			</if>
 		</if>
     </select>
@@ -279,28 +279,28 @@
 		                                        right outer join member m
 		                                        on m.mem_email=f.mem_email
                                                     where profile_choice=1 
-                                                   ]]><!--  
+                                                   ]]> 
 							<if test="type!=null">
 							and type_num in
 								<foreach collection ="type" item="type" open="(" separator="," close=")">
 									#{type}
 								</foreach>
 							</if>
-							<if test="mapExp.size()>0">
+							<if test="grade!=null">
 								and
-								<foreach collection="mapExp" item="mapExpi" index="index" separator="or">
-									<if test="mapExpi=='exp3'">
+								<foreach collection="grade" item="grade" index="index" separator="or">
+									<if test="grade==3">
 										 pro_exp >=9
 									</if>
-									<if test="mapExpi=='exp2'">
+									<if test="grade==2">
 										pro_exp between 4 and 8
 									</if>
-									<if test="mapExpi=='exp1'">
+									<if test="grade==1">
 										pro_exp between 1 and 3
 									</if>
 								</foreach>
 							</if>	
-							<if test=" PRO_PLACE!=null">
+							<if test="pro_place!=null">
 							and PRO_PLACE in
 								<foreach collection ="pro_place" item="pro_place" open="(" separator="," close=")">
 									#{pro_place}
@@ -319,7 +319,7 @@
 							</if>
 							<if test="SortingKey == 'profile_date'">
 							order by  PROFILE_DATE desc
-							</if>-->
+							</if>
 						<![CDATA[
                              )aa)where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}               		
 						]]>

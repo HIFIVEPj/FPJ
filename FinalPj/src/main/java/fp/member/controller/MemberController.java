@@ -47,7 +47,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import fp.member.service.MailService;
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.service.MailService;
 import fp.member.service.MemberService;
