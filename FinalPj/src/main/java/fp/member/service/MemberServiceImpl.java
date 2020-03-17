@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
 import fp.member.mapper.MemberMapper;

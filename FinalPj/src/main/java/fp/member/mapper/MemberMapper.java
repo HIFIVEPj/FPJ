@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
 

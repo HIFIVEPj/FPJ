@@ -1,8 +1,10 @@
 package fp.member.service;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.logging.Log;
@@ -29,7 +31,8 @@ public class MailServiceImpl implements MailService {
          MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
          helper.setSubject(subject);
          helper.setText(text, true);
-         helper.setFrom(from);
+         helper.setFrom(new InternetAddress("baramoss420@gmail.com", "하이파이브")); // 보내는 사람 지정
+         //helper.setFrom(from);
          helper.setTo(to);
          
          //첨부파일처리
@@ -43,7 +46,9 @@ public class MailServiceImpl implements MailService {
          return true;
       }catch(MessagingException e) {
          e.printStackTrace();
-      }
+      } catch (UnsupportedEncodingException e) {
+		e.printStackTrace();
+	}
       return false;
    }
 

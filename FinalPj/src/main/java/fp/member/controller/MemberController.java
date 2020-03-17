@@ -47,7 +47,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import fp.member.service.MailService;
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.service.MailService;
 import fp.member.service.MemberService;
@@ -72,7 +71,7 @@ public class MemberController {
        StringBuilder sb = new StringBuilder();
        sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
        log.info("!@#$userEmail: "+ userEmail);
-       return mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
+       return mailservice.send(subject, sb.toString(), "하이파이브", userEmail, null);
     }
     
     @RequestMapping(value="emailAuth.do", method=RequestMethod.GET)

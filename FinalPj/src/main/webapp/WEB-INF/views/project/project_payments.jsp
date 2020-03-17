@@ -243,8 +243,9 @@ https://docs.iamport.kr/implementation/payment
 */
 name: '프로젝트 등록 결제',
 //결제창에서 보여질 이름
-amount: '100', 
-	//${pjpaym.pjpaym_fprice},
+amount: 100,
+   //'${pjpaym.pjpaym_fprice}', 
+   //${pjpaym.pjpaym_fprice},
 //가격
 buyer_email: '${corInfo.mem_email}',
 buyer_name: '${corInfo.cor_name}',
@@ -260,23 +261,23 @@ m_redirect_url: 'project_payments_end'
 }, function (rsp) {
 console.log(rsp);
 if (rsp.success) {
-	
+   
 $.ajax({
-	url:'project_payments_end?pj_num=${projectCont.pj_num}',
-	async:false,
-	type: 'POST',
-	contentType: 'application/json',
-	data: JSON.stringify(rsp),
-	success: function(data){
-		if(data != null ){
-			location.href="project_pay_end";
-		}
-	},
-	error: function(errorThrown){
-		alert(errorThrown.statusText);
-	}
+   url:'project_payments_end?pj_num=${projectCont.pj_num}',
+   async:false,
+   type: 'POST',
+   contentType: 'application/json',
+   data: JSON.stringify(rsp),
+   success: function(data){
+      if(data != null ){
+         location.href="project_pay_end";
+      }
+   },
+   error: function(errorThrown){
+      alert(errorThrown.statusText);
+   }
 });
-	
+   
 var msg = '결제가 완료되었습니다.';
 msg += '고유ID : ' + rsp.imp_uid;
 msg += '상점 거래ID : ' + rsp.merchant_uid;

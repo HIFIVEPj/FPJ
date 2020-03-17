@@ -74,7 +74,6 @@
 			   
 		<!-- 소담 -->
    	   <typeAlias alias="Member" type="fp.member.domain.Member"/>
-   	   <typeAlias alias="EmailAuth" type="fp.member.domain.EmailAuth"/>
    	    <typeAlias alias="MemberVo" type="fp.member.domain.MemberVo"/>
    	    <!-- <typeAlias alias="CustomUserDetails" type="fp.password.security.CustomUserDetails"/> -->
 
