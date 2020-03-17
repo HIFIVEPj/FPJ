@@ -2,11 +2,11 @@
 
 
 $(function(){ 
-	 /* $('#emailModal').on('hidden.bs.modal', function (e) {
+	  $('#emailModal').on('hidden.bs.modal', function (e) {
 		  $('#emailMD').val("");
 		  $('#emailAuth').val("");
 		});
-	*/
+	
    	$(function(){	
 		$("#emailMD").blur(function() {
 			if($('#emailMD').val()==''){

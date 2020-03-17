@@ -67,22 +67,17 @@ public class MemberController {
        String authCode = String.valueOf(ran);
        session.setAttribute("authCode", authCode);
        session.setAttribute("random", random);
+       
        String subject = "회원가입 인증 코드 발급 안내 입니다.";
        StringBuilder sb = new StringBuilder();
-       sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
-       log.info("!@#$userEmail: "+ userEmail);
-       log.info("!@#$userEmail: "+ authCode);
-       log.info("!@#$random: "+ random);
+       sb.append("귀하의 인증 코드는 " + authCode + "입니다.");      
        return mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
     }
     
     @RequestMapping(value="emailAuth.do", method=RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> emailAuth(@RequestParam String authCode, @RequestParam String random, HttpSession session){
-    	 log.info("authCode:" + authCode);
-    	log.info("ramdon:" + random);
-    	log.info("오냐? 뭐가오냐 ????????:"+session.getAttribute("random"));
-    	
+    
     	String originalJoinCode = (String) session.getAttribute("authCode");
        String originalRandom = Integer.toString((int) session.getAttribute("random"));
        if(originalJoinCode.equals(authCode) && originalRandom.equals(random))
