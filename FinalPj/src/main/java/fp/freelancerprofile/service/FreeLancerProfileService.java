@@ -3,19 +3,15 @@ package fp.freelancerprofile.service;
 
 import java.util.*;
 
-
 import fp.corporation.domain.PjPickKeyword;
 import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
-import fp.freelancerprofile.domain.PagingVO;
-import fp.freelancerprofile.domain.Project;
-import fp.freelancerprofile.domain.Type;
-import fp.market.domain.FreelancerProfile;
-import fp.market.domain.MarketPick;
+
 
 public interface FreeLancerProfileService {
 	
@@ -79,5 +75,11 @@ public interface FreeLancerProfileService {
 	
 	//profile keyword 전체뽑기
 	List<FreeLancerProfile> selectAllFreeKeywords();
+	
+	//계좌추가
+	void updateACCTOX(long free_code);
+	void addACCT(Freelnacer_account freeacct);
+	Freelnacer_account selectFreeACCT(long free_code);
+	void updateACCT(Freelnacer_account freeacct);
 
 }

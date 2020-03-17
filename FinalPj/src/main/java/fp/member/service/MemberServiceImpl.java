@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fp.market.domain.Market;
-//import fp.member.domain.Criteria;
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
 import fp.member.domain.PayInformation;
@@ -66,8 +64,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public void upMarketS(Market market) {
-		memberMapper.upMarketS(market);
+	public void upMarketS(Map<String,Object> map) {
+		memberMapper.upMarketS(map);
 		
 	}
 	@Override

@@ -55,6 +55,7 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public Project showContent(long pj_num) {
+		mapper.updateProjectVcnt(pj_num);
 		return mapper.content(pj_num);
 	}
 	@Override

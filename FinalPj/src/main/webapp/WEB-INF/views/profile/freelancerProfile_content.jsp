@@ -65,14 +65,15 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html"> 프론젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavorite.html"> 프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite.html"> 마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket"> 마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="manged.html">마켓관리</a></li>
-												<li><a class="slide-item" href="manged.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 												<li class="sub-slide">
 												<!--  <a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>-->	
 													<ul class="child-sub-menu ">
@@ -321,13 +322,11 @@
 						</div>
 							</div>
 							<div class="card-footer" align="right">
-							
 								<a href="freelancerMyprofile_change?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}" class="btn btn-primary icons">수정하기</a>
 								
 								<a href='freelancerProfile_delete?pro_num=${content2.get(0).freelancerprofile.get(0).pro_num}' class="btn btn-secondary icons">삭제하기</a>		
 								
 								<a href="freelancerProfile_list" class="btn btn-primary icons">목록</a>				
-
 							</div>
 						
 						<!-- 	<div class="card-footer" align="right">

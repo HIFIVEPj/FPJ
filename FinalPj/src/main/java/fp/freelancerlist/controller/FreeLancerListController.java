@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.ProjectPick;
 import fp.corporation.service.CorporationService;
+import fp.corporation.vo.ProjectVo;
 import fp.freelancerlist.domain.FreeLancerListVO;
 import fp.freelancerlist.domain.List_FreeLancer;
 import fp.freelancerlist.domain.List_FreeLancerProfile;
@@ -59,6 +60,7 @@ public class FreeLancerListController {
 	public ModelAndView FreelnacerList(PagingVO vo, FreeLancerListVO listVo, FreeLancerProfile freelancerprofile, HttpServletRequest request
 						, @RequestParam(value="nowPage", required=false)String nowPage
 						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
 
@@ -101,7 +103,6 @@ public class FreeLancerListController {
 		return mv;
 		
 	}
-	
 	@RequestMapping("freelancercontent") 
 	@ResponseBody
 	public ModelAndView FreelnacerContent(@RequestParam long free_code, @RequestParam long pro_num
@@ -160,6 +161,74 @@ public class FreeLancerListController {
 		mv.addObject("review", review);	
 		mv.addObject("paging", freelancerreview);
 		return mv;
+	}
+	@RequestMapping(value="freelancercontent_ajax", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView freelancercontent_ajax(@RequestParam long free_code, @RequestParam long pro_num
+			, @RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+
+		
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "1";
+		}else if(nowPage == null) {
+			nowPage="1";
+		}else if(cntPerPage ==null) {
+			cntPerPage="1";
+		}
+		
+		Map<String,Object>map = new HashMap<String, Object>();
+
+		if(free_code == 0) {			
+			map.put("free_code",0);
+		}else {
+			map.put("free_code",free_code);
+		}
+		if(pro_num == 0) {			
+			map.put("pro_num",0);
+		}else {
+			map.put("pro_num",pro_num);
+		}
+		if(nowPage==null) {			
+			map.put("nowPage",null);
+		}else {
+			map.put("nowPage",nowPage);
+		}
+		if(cntPerPage==null) {			
+			map.put("cntPerPage",null);
+		}else {
+			map.put("cntPerPage",cntPerPage);
+		}
+
+		
+		long total =  service.countReview(map);
+		List_FreeLancerReview freelancerreview = new List_FreeLancerReview(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage),free_code,pro_num);	
+		log.info("(((freelancerreview: " + freelancerreview);
+		log.info("(((map: " + map);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("jsonView");
+
+
+		List<List_FreeLancerReview> review_ajax = service.freelancerReview(freelancerreview);
+		
+		Map<String,String> fnames= new HashMap<String,String>();
+		
+		for(int i=0; i<review_ajax.size();i++) {
+			List<FreeLancer> freelancer = service.selectFile(review_ajax.get(i).getMem_email());
+			fnames.put("free_fname",freelancer.get(i).getFree_fname());
+			fnames.put("mem_email",freelancer.get(i).getMem_email());
+		}
+		
+		mv.addObject("fnames", fnames);	
+		mv.addObject("review_ajax", review_ajax);	
+		mv.addObject("freelancerreview", freelancerreview);
+		mv.addObject("paging", map);
+		
+		log.info("**review_ajax: "+review_ajax);
+		log.info("**fnames: "+fnames);
+		return mv;
+
 	}
 	
 	@RequestMapping(value="InsertReview", method=RequestMethod.POST)
@@ -247,5 +316,7 @@ public class FreeLancerListController {
 		map.put("cor_code", cor_code);
 		proService.freepick_del(map);
 	}
+	
+
 
 }

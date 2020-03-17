@@ -48,7 +48,8 @@ public class ProjectController {
 	@RequestMapping(value="/project_list", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request) {
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request,
+			@RequestParam(value="type", required=false)String type) {
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
 		if(nowPage == null && cntPerPage == null) {
@@ -59,10 +60,18 @@ public class ProjectController {
 		}else if(cntPerPage == null) {
 			cntPerPage ="4";
 		}
+		List<Integer>typeList = new ArrayList<Integer>();
 		Map<String,Object>map = new HashMap<String, Object>();
 		long totalCount = service.getTotalCount(map);
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		map.put("ProjectVo", projectVo);
+		if(type==null) {
+			map.put("type",null);
+		}else {
+			int typenum = Integer.parseInt(type);
+			typeList.add(typenum);
+			map.put("type",typeList);
+		}
 		List<Project> list = service.list(map);
 		
 		long countDevelop= service.getTotalCount_select(1);
@@ -107,7 +116,8 @@ public class ProjectController {
 	
 	@RequestMapping(value="project_list_ajax", method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList,ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
+	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList, ProjectVo projectVo ,
+			@RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email 
 			,@RequestParam(value="selectKeyword", required=false)String selectKeyword
 			,@RequestParam(value="pj_fgradeList[]", required=false)List<Integer> pj_fgradeList
@@ -165,8 +175,7 @@ public class ProjectController {
 		}else {
 			map.put("pj_place",null);
 		}
-		
-		
+
 		long totalCount = service.getTotalCount(map);
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		map.put("ProjectVo", projectVo);

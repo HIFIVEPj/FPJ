@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -206,7 +207,7 @@ public class LoginController {
   		if(result == true) { 
   			session.getAttribute("name");
   			session.getAttribute("email");  			
-  			mv.setViewName("index"); 
+  	       return new ModelAndView("redirect:/");
   			
   		}else {
   			mv.setViewName("member/login");  			
@@ -222,15 +223,15 @@ public class LoginController {
 
 	//로그아웃 처리
 	@RequestMapping("logout.do")
-	public ModelAndView logout(HttpSession session) {
+	public String logout(HttpSession session) {
 		
 		loginService.logout(session);
-		ModelAndView mav = new ModelAndView();
+		//ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("index");
+		//mav.setViewName("index");
 
-		mav.addObject("msg", "logout");
+		//mav.addObject("msg", "logout");
 		
-		return mav;
+		return "redirect:/";
 	}
 }

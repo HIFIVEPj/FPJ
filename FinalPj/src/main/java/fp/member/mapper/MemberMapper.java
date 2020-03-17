@@ -1,4 +1,3 @@
-
 package fp.member.mapper;
 
 import java.util.List;
@@ -8,9 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import fp.market.domain.Market;
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
 import fp.member.domain.PayInformation;
@@ -23,11 +20,10 @@ public interface MemberMapper {
 	List<Member> getList(Map<String, Object> map);
 	long getTotalCount(Map<String, Object> map);
 
-
 	//마켓 게시글 
 	long getMarketCount();
 	List<Market> getMarketList(MemberVo memberVO);
-	void upMarketS(Market market);
+	void upMarketS(Map<String, Object> map);
 	
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
@@ -40,6 +36,4 @@ public interface MemberMapper {
 	List<Long> sumCor();
 	List<Long> month();
 
-
 }
-

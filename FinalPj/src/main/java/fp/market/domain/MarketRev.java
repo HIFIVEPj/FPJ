@@ -3,6 +3,8 @@ package fp.market.domain;
 
 import java.sql.Date;
 
+import fp.corporation.domain.Corporation;
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +23,9 @@ public class MarketRev {
 
 //	private MarketRevComm marketRevComm; 없애버려
 //	public MarketPagingVO marketRevVO;
-	private Freelancer freelancer;
+	private FreeLancer freelancer;
 	private Corporation corporation;
 	private Member member;
+
 }
 

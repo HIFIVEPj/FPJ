@@ -263,6 +263,10 @@
                             </li>
                             
 						    <li>	
+                                <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                            </li>
+                            
+						    <li>	
                                 <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
@@ -390,8 +394,9 @@
 							<div class="col-md-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Product List</h3>
+										<h3 class="card-title">마켓 승인 List</h3>
 									</div>
+								<form id="marketA" name="marketA" action="updateMarketState.do" method="post">	
 									<div class="card-body">
 										<div class="table-responsive border-top userprof-tab">
 											<table class="table table-bordered table-hover mb-0">
@@ -434,17 +439,18 @@
 															<c:if test="${dto.market_state eq 0}">
 															<a href="#" class="badge badge-warning">미승인</a>
 															</c:if>
-															<c:if test="${dto.market_state eq 0}">
+															<c:if test="${dto.market_state eq 1}">
 															<a href="#" class="badge badge-success">승인</a>
 															</c:if>
-															<c:if test="${dto.market_state eq 0}">
-															<a href="#" class="badge badge-primary">거절</a>
-															</c:if>
+															<c:if test="${dto.market_state eq 2}">
+															<a href="#" class="badge badge-danger">거절</a>		</c:if>
 															
 														</td>
 														<td>
-															<button id="admitBt" class="btn btn-primary btn-sm"><a href="updateMarketState.do?market_state=1"></a><i class="fa fa-check"></i> 승인하기</button>
-															<button id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i> 거절하기</button>
+															<button type="button" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</button>															
+															<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i>거절하기</button>
+															<input type="hidden" id="market_state" name="market_state" value="">
+															<input type="hidden" id="market_num" name="market_num" value="${dto.market_num}">
 														<!-- <a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
 															<a class="btn btn-danger text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
 															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
@@ -456,9 +462,35 @@
 											</table>
 										</div>
 									</div>
+								</form>	
 								</div>
 							</div>
-						</div>			
+						</div>	
+						
+						<ul class="pagination mb-5">
+							<!--  이전페이지 -->
+						<c:if test="${pamarket.nowPage != 1}">
+							<li class="page-item page-prev">							
+								<a class="page-link" href="admin?nowPage=${pamarket.nowPage-1}&cntPerPage=${pamarket.cntPerPage}" tabindex="-1">Prev</a>
+							</li>
+						</c:if>
+						<c:forEach var='p' begin="${pamarket.startPage}" end="${pamarket.endPage}">
+								<c:choose>
+									<c:when test="${p == pamarket.nowPage}">
+										<li class='page-item active'><a class="page-link">${p}</a></li>
+									</c:when>
+									<c:when test = "${p != pamarket.nowPage }">
+										<li class="page-item"><a class="page-link" href="admin?nowPage=${p}&cntPerPage=${pamarket.cntPerPage}">${p}</a></li>
+									</c:when>
+								</c:choose>
+						</c:forEach>
+						<c:if test ="${pamarket.nowPage != pamarket.lastPage}">
+							<li class="page-item page-next">
+								<a class="page-link" href="admin?nowPage=${pamarket.nowPage+1}&cntPerPage=${pamarket.cntPerPage}">Next</a>
+							</li>
+						</c:if>
+					</ul> 		
+
 											
 					</div>
 				</div>
@@ -535,14 +567,13 @@
 		<!-- Custom Js-->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
-
 	</body>
 <script>
 $(document).ready(function(){
 	/*  도넛차트 적용하기   */
 	var pieData = {
 		      기업: ${totalCountCor},
-		      개인: ${totalCountFree},
+		      개인: ${totalCountFree}
 		 //인증안한개인: 666,
 
 		}
@@ -609,6 +640,30 @@ $(document).ready(function(){
  });
  
 })
+
+$("#admitBtn").on("click",function(){
+	//var market_state=1;
+	$("#market_state").attr("value","1");
+	//alert(market_state);
+	var market_state= $("#market_state").val();
+	alert("마켓 상태 : "+market_state+", 마켓번호: ");
+	
+	marketA.submit();	
+})
+$("#refuseBtn").on("click",function(){
+	//var market_state=1;
+	$("#market_state").attr("value","2");
+	//alert(market_state);
+	var market_state= $("#market_state").val();
+	alert("마켓 상태 : "+market_state+", 마켓번호: ");
+	
+	marketA.submit();	
+})
+/*
+function admitBtn() {	
+	alert("버튼1을 누르셨습니다.");
+}*/
+
 		
 </script>
 </html>

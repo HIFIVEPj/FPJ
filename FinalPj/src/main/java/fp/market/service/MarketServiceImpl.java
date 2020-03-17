@@ -1,4 +1,3 @@
-
 package fp.market.service;
 
 import java.util.HashMap;
@@ -8,18 +7,16 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fp.corporation.domain.Corporation;
-import fp.market.domain.Freelancer;
 import fp.market.domain.Market;
-import fp.market.domain.MarketPayment;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
-import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
-
+import lombok.extern.log4j.Log4j;
+@Log4j
 @Service
 @AllArgsConstructor
 public class MarketServiceImpl implements MarketService {
@@ -40,8 +37,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<Market> getMarketList(MarketPagingVO marketVO) {
-		return mapper.getMarketList(marketVO);
+	public List<Market> getMarketList ( HashMap<String,Object> Pagingmap) {
+		return mapper.getMarketList(Pagingmap);
 	}
 
 	@Override
@@ -90,11 +87,14 @@ public class MarketServiceImpl implements MarketService {
 	public long getFreecode(String mem_email) {
 		return mapper.getFreeCode(mem_email);
 	}
-	
+//marketReview insert		
 	@Override
 	public void insertMarketRev(MarketRev mareketRev) {
 		mapper.insertMarketRev(mareketRev);
-		
+	}
+	@Override
+	public Integer reloadMarketRevAVG(long market_num) {
+		return mapper.reloadMarketRevAVG(market_num);
 	}
 //marketQA insert	
 	@Transactional
@@ -132,21 +132,24 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public void updateMarketRev(HashMap<String, Object> map) {
 		mapper.updateMarketRev(map);
-		
 	}
 //마켓결제
 	@Override
 	public String getFreeName(long market_num) {
 		return mapper.getFreeName(market_num);
 	}
-
+	@Override
 	public void insertPaymentMarket(Map<String,Object> map) {
 		mapper.insertPaymentMarket(map);
 	}
+	@Override
+	public void insertPaymentMarket2(Map<String, Object> map) {
+		mapper.insertPaymentMarket2(map);
+	}
+	
 //마켓리스팅시 하트색깔 여부를위해서
 	public List<MarketPick> pickState(String mem_email) {
-		return mapper.pickState(mem_email);
-		
+		return mapper.pickState(mem_email);	
 	}
 	@Override
 	public void insertMarketPick(HashMap<String,Object> map) {
@@ -162,6 +165,32 @@ public class MarketServiceImpl implements MarketService {
 		mapper.deleteMarketPick(map);
 		mapper.updateMinusMarketPick(market_num);
 	}
+//마켓구매내역insert
+	@Override
+	public void insertMarketBuy(HashMap<String, Object> map) {
+		mapper.insertMarketBuy(map);
+		
+	}
+	public List<MarketBuysellList> writeReview(HashMap<String,Object> map){
+		return mapper.writeReview(map);	
+	}
+	
+	public List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map){
+		return mapper.searchBoxMarketList(map);
+	}
+	public int searchBoxMarketCount(Map<String,Map<String,Object>> map) {
+		log.info("Service-map:"+map);
+		return mapper.searchBoxMarketCount(map);
+	}
+
+	@Override
+	public int searchButtonMarketCount(String searchWord) {
+		return mapper.searchButtonMarketCount(searchWord);	
+	}
+	@Override
+	public List<Market> searchButtonMarketList(HashMap<String,Object> map) {
+		return mapper.searchButtonMarketList(map);	
+	}
+	
 
 }
-

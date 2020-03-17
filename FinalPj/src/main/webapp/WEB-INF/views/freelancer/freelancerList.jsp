@@ -255,21 +255,82 @@
 									</c:forEach>
 									<c:forEach var="exp" items="${list.list_freelancerprofile}" varStatus="status">
 										<small>&nbsp;&nbsp;&nbsp;경력 &nbsp;&nbsp;${exp.pro_exp}&nbsp;&nbsp;년</small>&nbsp;|	
-									</c:forEach>
-
+									</c:forEach>			
 									<c:forEach var="type" items="${freelancerList2}" varStatus="status">
-										<c:forEach var="typename" items="${type.list_type}" varStatus="status">
-											<c:if test="${list.free_code eq type.free_code}">
-												<small>&nbsp;&nbsp;</small>${typename.type_name}
-											</c:if>
-										</c:forEach>
-							 		</c:forEach>					
+									<c:forEach var="typename" items="${type.list_type}" varStatus="status">
+										<c:if test="${list.free_code eq type.free_code}">
+											<small>&nbsp;&nbsp;</small>${typename.type_name}
+										</c:if>
+									</c:forEach>
+						 		</c:forEach>				
+							 
+									</div>
+								
+								
 								</div>
-							</div>
-								<div class="item-card2-icons">
-									<a href="" class="item-card9-icons1 wishlist active"><i  class="fa fa fa-heart-o"></i></a>
+								<input type="hidden" value="${cor.cor_code}" class="cor_codes"/>
+									<c:if test="${empty cor}">
+									<div class="item-card9-icons zzim">
+										<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" onclick="javascript:onlyCor();">
+										 <i class="fa fa fa-heart-o" style=""></i></a>
+									</div>
+								</c:if>
+								<c:if test="${!empty cor}">
+								<c:forEach var="i" begin="0" end="${list.list_freelancerprofile.size()-1}">
+									
+								<c:choose>
+									<c:when test="${pronumList.contains(list.list_freelancerprofile.get(i).pro_num)}">
+										<div class="item-card9-icons"  id="zzim${list.list_freelancerprofile.get(i).pro_num}" >
+											<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${list.list_freelancerprofile.get(i).pro_num})">
+											 <i class="fa fa fa-heart" style="color:white"></i></a>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="item-card9-icons">
+											<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${list.list_freelancerprofile.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${list.list_freelancerprofile.get(i).pro_num})">
+											 <i class="fa fa fa-heart-o" style=""></i></a>
+										</div>
+									</c:otherwise>	
+								</c:choose>
+								<div class="item-card9-icons"  id="zzim${list.list_freelancerprofile.get(i).pro_num}">
+	
 								</div>
+							
+								</c:forEach>
+								</c:if>
+								
 							</div>
+			<script>
+			function onlyCor(){
+				alert("기업 회원만 이용가능한 서비스 입니다.")
+			}
+			function wish(pro_num){	
+				$.ajax({
+					type:"get",  
+					url:"<c:url value='free_wish'/>",
+	    			data:"pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
+					success: function(data){
+						$('#insertwish'+pro_num).remove();
+						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pro_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pro_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
+						alert("프리랜서 프로필이 찜목록에 추가되었습니다.")
+					},
+					error: function(data){
+					alert("에러발생");
+					}
+				});
+			}
+			function del_wish(pro_num){
+				$.ajax({
+					type:"get",
+					url:"<c:url value='free_wish_del'/>",
+					data: "pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
+					success:function(data){
+						$('#delwish'+pro_num).remove();
+						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons wishlist' id='insertwish"+pro_num+"' style='margin-right:40%' onclick='javascript:wish("+pro_num+")'><i class='fa fa fa-heart-o'></i></a>");
+					}
+				})
+			}
+			</script>
 						<div class="card-body pb-2 hide-details">
 									<ul class="usertab-list mb-0">
 										<h4>진행한 프로젝트</h4>				

@@ -2,6 +2,8 @@ package fp.market.domain;
 
 import java.sql.Date;
 
+import fp.corporation.domain.Corporation;
+import fp.freelancerprofile.domain.FreeLancer;
 import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +27,9 @@ public class MarketQA {
 	private int marketQA_option2;//
 	private int marketQA_option3;//
 
-	private MarketPagingVO marketRevVO;
-	private Freelancer freelancer;
+	//private MarketPagingVO marketRevVO;
+	private FreeLancer freelancer;
 	private Corporation corporation;
+	private Member member;
 
 }

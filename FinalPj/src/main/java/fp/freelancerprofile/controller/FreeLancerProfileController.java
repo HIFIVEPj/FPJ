@@ -44,12 +44,14 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
 import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.freelancerprofile.service.FreeLancerProfileServiceImpl;
+import fp.member.controller.OpenBankingController;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -284,16 +286,44 @@ public class FreeLancerProfileController {
 
 	
 	//나영 수정---------
-		@RequestMapping(value="payments",  method = { RequestMethod.GET, RequestMethod.POST })	//
-		public String payments(Model model, HttpServletRequest request,HttpServletResponse response) {
-			log.info("accessToken: "+OpenBankingController.getAccessTokenIMPORT());
+		@RequestMapping(value="payments")	//
+		public ModelAndView payments(HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String mem_email = session.getAttribute("email").toString();
+			FreeLancer freelancer = service.mydash_free_select(mem_email);
+			ModelAndView mv = new ModelAndView("profile/payments");
+			Freelnacer_account freeacct = service.selectFreeACCT(freelancer.getFree_code());
+			mv.addObject("freelancer", freelancer);
+			mv.addObject("freeacct",freeacct);
+			return mv;
+		}
+		@RequestMapping(value="/payments_bankholder",  method = { RequestMethod.GET, RequestMethod.POST })
+		@ResponseBody
+		public JsonNode bank_holder_check(HttpServletRequest request,HttpServletResponse response,String bank_code, String bank_num) {
 			JsonNode node = OpenBankingController.getAccessTokenIMPORT();
+			log.info("accessToken: "+node);
 			JsonNode responseNode = node.get("response");
 			String accessToken = responseNode.get("access_token").asText();
 			
 			log.info("accessToken: "+accessToken);
-			log.info("제발 받아져라 좀: "+OpenBankingController.getBankInfo(accessToken));
-			return "profile/payments";
+			JsonNode holder= OpenBankingController.getBankInfo(accessToken,bank_code, bank_num);
+			if(holder.asInt()==-1) {
+				return holder;
+			}
+			return holder;
+		}
+		@PostMapping("addAccount")
+		public String addAccount(Freelnacer_account freeacct) {
+			log.info("@@freeacct: "+freeacct);
+			service.updateACCTOX(freeacct.getFree_code());
+			service.addACCT(freeacct);
+			return "redirect:payments";
+		}
+		@PostMapping("editAccount")
+		public String editAccount(Freelnacer_account freeacct) {
+			log.info("@@freeacct: "+freeacct);
+			service.updateACCT(freeacct);
+			return "redirect:payments";
 		}
 		@RequestMapping("myfavorite")	//관심있는프로젝트
 		public ModelAndView Myfavorite(HttpServletRequest request,ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage
