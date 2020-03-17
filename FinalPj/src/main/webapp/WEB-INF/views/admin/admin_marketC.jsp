@@ -552,13 +552,8 @@ $(document).ready(function(){
           }
          
      })
-     $("#resetBtn").click(function(){ 
-	   	  $("#type option:selected").val('');    	 
-	   	  $('#keyword').val('');
-	   	  $("#startDate").val('');
-	   	  $("#endDate").val('');
-     }) 
      
+          
      $('#startDate').datepicker();
 	 $('#startDate').datepicker("option", "maxDate", $("#endDate").val());
 	 $('#startDate').datepicker("option", "onClose", function ( selectedDate ) {
@@ -569,7 +564,14 @@ $(document).ready(function(){
 	 $('#endDate').datepicker("option", "minDate", $("#startDate").val());
 	 $('#endDate').datepicker("option", "onClose", function ( selectedDate ) {
 	     $("#startDate").datepicker( "option", "maxDate", selectedDate );
-	 });
+	 })
+	 
+     $("#resetBtn").click(function(){ 
+	   	  $("#type option:selected").val('');    	 
+	   	  $('#keyword').val('');
+	   	  $("#startDate").val('');
+	   	  $("#endDate").val('');
+     }) 
 	 
 })
 /*******바 차트(chart) **************/

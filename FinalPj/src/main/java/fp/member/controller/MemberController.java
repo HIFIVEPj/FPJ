@@ -47,7 +47,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import fp.member.service.MailService;
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.service.MailService;
 import fp.member.service.MemberService;
@@ -72,13 +71,19 @@ public class MemberController {
        StringBuilder sb = new StringBuilder();
        sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
        log.info("!@#$userEmail: "+ userEmail);
+       log.info("!@#$userEmail: "+ authCode);
+       log.info("!@#$random: "+ random);
        return mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
     }
     
     @RequestMapping(value="emailAuth.do", method=RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> emailAuth(@RequestParam String authCode, @RequestParam String random, HttpSession session){
-       String originalJoinCode = (String) session.getAttribute("authCode");
+    	 log.info("authCode:" + authCode);
+    	log.info("ramdon:" + random);
+    	log.info("오냐? 뭐가오냐 ????????:"+session.getAttribute("random"));
+    	
+    	String originalJoinCode = (String) session.getAttribute("authCode");
        String originalRandom = Integer.toString((int) session.getAttribute("random"));
        if(originalJoinCode.equals(authCode) && originalRandom.equals(random))
           return new ResponseEntity<String>("complete", HttpStatus.OK);

@@ -431,13 +431,7 @@ $(document).ready(function(){
         	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
         	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword+"&startDate="+startDate+"&endDate="+endDate;
           }            
-     })       
-  	  $("#resetBtn").click(function(){ 
-  		 	$('#keyword').val('');
-    	  $("#startDate").val('');
-    	  $("#endDate").val('');
-      }) 
-      
+     })   
      $('#startDate').datepicker();
 	 $('#startDate').datepicker("option", "maxDate", $("#endDate").val());
 	 $('#startDate').datepicker("option", "onClose", function ( selectedDate ) {
@@ -448,7 +442,15 @@ $(document).ready(function(){
 	 $('#endDate').datepicker("option", "minDate", $("#startDate").val());
 	 $('#endDate').datepicker("option", "onClose", function ( selectedDate ) {
 	     $("#startDate").datepicker( "option", "maxDate", selectedDate );
-	 }); 
+	 })
+	 
+  	  $("#resetBtn").click(function(){ 
+  		 	$('#keyword').val('');
+    	  $("#startDate").val('');
+    	  $("#endDate").val('');
+      }) 
+      
+    
 })
 
 /*******바 차트(chart) **************/
