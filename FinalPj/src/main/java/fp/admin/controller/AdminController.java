@@ -2,6 +2,7 @@ package fp.admin.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,9 +128,17 @@ public class AdminController {
 	@RequestMapping("admin_marketC")
 	public ModelAndView admin_marketC(MemberVo memberVo,@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
-		
+		List<String> sumCountCorN = new ArrayList<String>();
 		List<Long> sumCor=service.sumCor();
 		List<Long> month=service.month();
+		List<Long> sumCountCor=service.sumCountCor();
+		List<String> beforSumCountCorN=service.sumCountCorN();
+		for(int i=0;i<beforSumCountCorN.size();i++) {
+			String k = "'"+beforSumCountCorN.get(i)+"'";
+			sumCountCorN.add(k);
+		}
+		log.info("sumCountCor: !@#!@#!@#@!#!@#!@#$$@!#@"+sumCountCor);
+		log.info("sumCountCorN: !@#!@#!@#@!#!@#!@#$$@!#@"+sumCountCorN);
 		
 		long totalCount =service.getTotalCountMC(memberVo);	
 		if(nowPage == null && cntPerPage == null) {
@@ -147,16 +156,28 @@ public class AdminController {
 		mv.addObject("list", list);
 		mv.addObject("pac",Vo);
 		mv.addObject("sumCor",sumCor);
-		mv.addObject("month",month);	
+		mv.addObject("month",month);
+		mv.addObject("sumCountCor",sumCountCor);
+		mv.addObject("sumCountCorN",sumCountCorN);
 			return mv;
 	}
 
 	@RequestMapping("admin_marketF")
 	public ModelAndView admin_marketF(MemberVo memberVo, @RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
-		
+		List<String> sumCountMarketN = new ArrayList<String>();
 		List<Long> sumFree=service.sumFree();
 		List<Long> month=service.month();
+		List<Long> sumCountMarket=service.sumCountMarket();
+		List<String> beforSumCountMarketN=service.sumCountMarketN();
+		for(int i=0;i<beforSumCountMarketN.size();i++) {
+			String k = "'"+beforSumCountMarketN.get(i)+"'";
+			sumCountMarketN.add(k);
+		}
+		log.info("sumFree: !@#!@#!@#@!#!@#!@#$$@!#@"+sumFree);
+		log.info("sumCountMarket: !@#!@#!@#@!#!@#!@#$$@!#@"+sumCountMarket);
+		log.info("sumCountMarketN: !@#!@#!@#@!#!@#!@#$$@!#@"+sumCountMarketN);
+		
 		long totalCount =service.getTotalCountMF(memberVo);	
 		if(nowPage == null && cntPerPage == null) {
 			nowPage="1";
@@ -176,6 +197,8 @@ public class AdminController {
 		mv.addObject("paf", Vo);
 		mv.addObject("sumFree",sumFree);
 		mv.addObject("month",month);
+		mv.addObject("sumCountMarket",sumCountMarket);
+		mv.addObject("sumCountMarketN",sumCountMarketN);
 			
 			return mv;
 	}
@@ -184,8 +207,16 @@ public class AdminController {
 	public ModelAndView searchMarketF(MemberVo membeVO, 
 			@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
+		List<String> sumCountMarketN = new ArrayList<String>();
 		List<Long> sumFree=service.sumFree();
-		List<Long> month=service.month();	
+		List<Long> month=service.month();
+		List<Long> sumCountMarket=service.sumCountMarket();
+		List<String> beforSumCountMarketN=service.sumCountMarketN();
+		for(int i=0;i<beforSumCountMarketN.size();i++) {
+			String k = "'"+beforSumCountMarketN.get(i)+"'";
+			sumCountMarketN.add(k);
+		}
+		
 		long totalCount =service.getTotalCountMF(membeVO);	
 		log.info("검색 : " +totalCount);
 		if(nowPage == null && cntPerPage == null) {
@@ -205,7 +236,8 @@ public class AdminController {
 		mv.addObject("paf", Vo);
 		mv.addObject("sumFree",sumFree);
 		mv.addObject("month",month);
-			
+		mv.addObject("sumCountMarket",sumCountMarket);
+		mv.addObject("sumCountMarketN",sumCountMarketN);	
 			return mv;
 	}
 	
@@ -214,6 +246,13 @@ public class AdminController {
 			@RequestParam(value="nowPage", required = false)String nowPage
 			, @RequestParam(value="cntPerPage", required = false)String cntPerPage) {
 		
+		List<String> sumCountCorN = new ArrayList<String>();
+		List<Long> sumCountCor=service.sumCountCor();
+		List<String> beforSumCountCorN=service.sumCountCorN();
+		for(int i=0;i<beforSumCountCorN.size();i++) {
+			String k = "'"+beforSumCountCorN.get(i)+"'";
+			sumCountCorN.add(k);
+		}
 		
 		List<Long> sumCor=service.sumCor();
 		List<Long> month=service.month();
@@ -236,6 +275,8 @@ public class AdminController {
 		mv.addObject("pac", Vo);
 		mv.addObject("sumCor",sumCor);
 		mv.addObject("month",month);	
+		mv.addObject("sumCountCor",sumCountCor);
+		mv.addObject("sumCountCorN",sumCountCorN);
 		
 		return mv;
 	}

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import fp.market.domain.Market;
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
 import fp.member.domain.PayInformation;
@@ -36,5 +35,10 @@ public interface MemberMapper {
 	List<Long> sumFree();
 	List<Long> sumCor();
 	List<Long> month();
+	
+	List<String> sumCountCorN();
+	List<Long> sumCountCor();
+	List<String> sumCountMarketN();
+	List<Long> sumCountMarket();
 
 }

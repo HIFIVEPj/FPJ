@@ -96,7 +96,7 @@
 								<div class="card-pay">
 									<ul class="tabs-menu nav">
 										<li class=""><a href="#tab1" class="active" data-toggle="tab"><i class="fa fa-credit-card"></i> 계좌등록</a></li>
-										<li><a href="#tab2" data-toggle="tab" class=""><i class="fa fa-university"></i> 내 계좌정보</a></li>
+										<c:if test="${!empty freeacct}"><li><a href="#tab2" data-toggle="tab" class=""><i class="fa fa-university"></i> 내 계좌정보</a></li></c:if>
 									</ul>
 									<div class="tab-content">
 									

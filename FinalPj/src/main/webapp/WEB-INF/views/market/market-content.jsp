@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -1272,7 +1271,6 @@ obShareUrl.value=window.document.location.href;
 			    
 
 <script>
-
 	$("#checkMR").on('click', function(){
 		// alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
 		// alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
@@ -1297,8 +1295,6 @@ obShareUrl.value=window.document.location.href;
 		  var marketRev_star = $("#marketRev_starID").val();
 		  var marketRev_cont = $("#marketRev_contID").val();
 		  var arr=[marketRev_cont,marketRev_star,market_num,mem_email]
-
-
 		   var url=$("#mrInputID").attr("action");
 		 //   console.log("url:"+url);
 		//    console.log("queryString:"+queryString);
@@ -1324,9 +1320,7 @@ obShareUrl.value=window.document.location.href;
 	    }
 	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
 	}
-
 	
-
 </script>
 <script>
 //파일선택시 글씨보이게하는 펑션
@@ -1376,7 +1370,6 @@ obShareUrl.value=window.document.location.href;
 			});
 			
 		}
-
 	   function mqajax(prnum,lev,sun){
 		   if ($.trim($("#marketQA_subID ").val()) == "") {
 		        alert("제목을 입력해주세요.");
@@ -1388,7 +1381,6 @@ obShareUrl.value=window.document.location.href;
 		        $("#marketQA_contID").focus();
 		        return;
 		   		 }
-
 		   //alert(prnum);
 		   var url=$("#mqInput").attr("action");
 		   var formData = new FormData($("#mqInput")[0]);
@@ -1465,7 +1457,6 @@ obShareUrl.value=window.document.location.href;
 		   	}); 	    
 	   });
 	 
-
 	  function QAdelete(MQ,M,nowPage,cntPerPage,prnum,sun,lev,sub){
 			/* alert(MQ);
 			alert(M); 
@@ -1535,7 +1526,6 @@ obShareUrl.value=window.document.location.href;
 		    	success: onSuccess
 			});		
 		 });
-
 </script> 
 <script>
 	function reviewList(cntPerPage,nowPage,market_num){
@@ -1549,7 +1539,6 @@ obShareUrl.value=window.document.location.href;
 		});
 	}
 	
-
 	function Revdelete(revNum,mNum,nowPageR,cntPerPageR){
 		/* alert("revNum"+revNum);
 		alert("mNum"+mNum);
@@ -1565,7 +1554,6 @@ obShareUrl.value=window.document.location.href;
 		});
 		
 	}
-
       function Revupdate(revNum,mNum,cont,star,nowPageR,cntPerPageR){
    		/*  alert("revNum"+revNum);
    			alert("mNum"+mNum);
@@ -1600,7 +1588,6 @@ obShareUrl.value=window.document.location.href;
    				$("#REVUpdate .modal-content #RevupdatenowPage").val(nowPageR);
    				$("#REVUpdate .modal-content #RevupdatecntPerPage").val(cntPerPageR);
    				
-
    			});
    		}
       
@@ -1641,7 +1628,6 @@ obShareUrl.value=window.document.location.href;
   			
 		    	 var dateTime = new Date(someTimestamp);
 				 dateTime=dateToYYYYMMDD(dateTime);
-
 	    		html+='<div class="card-body p-0" id="QAajax0">';
 	    		html+='<div class="card-body p-0" id="QAajax1">';
 	    		html+='<div id="htmlQA">';
@@ -1718,10 +1704,8 @@ obShareUrl.value=window.document.location.href;
   		
   		var prev=data[0].marketVOQA.nowPage-1;
 		var next=data[0].marketVOQA.nowPage+1;
-
 		pagingHtml+='<div class="center-block text-center">';
 		pagingHtml+='<ul class="pagination mg-b-0 page-0 ">';
-
 		if(1<data[0].marketVOQA.nowPage){
 		    pagingHtml+='<li class="page-item">';
 			pagingHtml+='<a aria-label="Last" class="page-link" onclick="qaList('+data[0].marketVOQA.cntPerPage+','+data[0].marketVOQA.startPage+','+${market.market_num}+')"><i class="fa fa-angle-double-left"></i></a>';
@@ -1761,7 +1745,6 @@ obShareUrl.value=window.document.location.href;
   		
 		$('#QAajax0').empty();
 		$('#QAajax0').html(html);
-
 		$('#CommentQA ').modal('hide'); 
 		$('#MQUpdate ').modal('hide');
 		
@@ -1769,7 +1752,6 @@ obShareUrl.value=window.document.location.href;
 		$('#pagingQ').html(pagingHtml);
   		
   	}
-
 	function onSuccessReview(data){
 		var html ='';
 		var srarHtml='';
@@ -1874,7 +1856,6 @@ obShareUrl.value=window.document.location.href;
 		for(var i=0;i<(5-data[1]);i++){
 			srarHtml+='<i class="fa fa-star-o text-warning"> </i>';
   		}
-
 		$('#ajaxRev0').empty();
 		$('#ajaxRev0').html(html);
 		
@@ -1886,9 +1867,7 @@ obShareUrl.value=window.document.location.href;
 		$('#paging').empty();
 		$('#paging').html(pagingHtml);
 	}
-
 	//페이징 아작스 
-
 </script>
 
 <!-- 

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fp.market.domain.Market;
-import fp.member.domain.EmailAuth;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
 import fp.member.domain.PayInformation;
@@ -104,5 +103,25 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<Long> month() {
 		return memberMapper.month();
+	}
+	
+	@Override
+	public List<Long> sumCountMarket() {		
+		return memberMapper.sumCountMarket();
+	}
+	
+	@Override
+	public List<String> sumCountCorN() {
+		
+		return memberMapper.sumCountCorN();
+	}
+	@Override
+	public List<Long> sumCountCor() {		
+		return memberMapper.sumCountCor();
+	}
+
+	@Override
+	public List<String> sumCountMarketN() {		
+		return memberMapper.sumCountMarketN();
 	}
 }

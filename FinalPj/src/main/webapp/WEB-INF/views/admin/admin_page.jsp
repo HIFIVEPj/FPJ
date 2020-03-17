@@ -263,23 +263,20 @@
                             </li>
                             
 						    <li>	
-                                <a class="side-menu__item" href="admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
-                            </li>
-                            
-						    <li>	
                                 <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
-      				</ul>
+                                                           
+					</ul>
 
-					<div class="app-sidebar-footer">
+				<!-- 	<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
 						</a>
@@ -295,7 +292,7 @@
 						<a href="chat.html">
 							<span class="fa fa-comment" aria-hidden="true"></span>
 						</a>
-					</div>
+					</div> -->
 				</aside>
 
 				<div class="app-content  my-3 my-md-5">

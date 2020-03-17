@@ -217,25 +217,7 @@
 										<a href="#" class="dropdown-item text-center">View all</a>
 									</div>
 								</div> -->
-								<div class="dropdown ">
-									<a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
-										<img src="../images/faces/male/25.jpg" alt="profile-img" class="avatar avatar-md brround">
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
-										<a class="dropdown-item" href="profile.html">
-											<i class="dropdown-icon si si-user"></i> My Profile
-										</a>
-										<a class="dropdown-item" href="emailservices.html">
-											<i class="dropdown-icon si si-envelope"></i> Inbox
-										</a>
-										<a class="dropdown-item" href="editprofile.html">
-											<i class="dropdown-icon  si si-settings"></i> Account Settings
-										</a>
-										<a class="dropdown-item" href="login.html">
-											<i class="dropdown-icon si si-power"></i> Log out
-										</a>
-									</div>
-								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -277,7 +259,7 @@
 					
 
 	
-					<div class="app-sidebar-footer">
+		<!--		<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
 						</a>
@@ -293,7 +275,7 @@
 						<a href="chat.html">
 							<span class="fa fa-comment" aria-hidden="true"></span>
 						</a>
-					</div>
+					</div> -->
 				</aside>
 
 				<div class="app-content  my-3 my-md-5">
@@ -322,10 +304,11 @@
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Ratings</h3>
+										<h3 class="card-title">Project 매출 Top5</h3>
 									</div>
 									<div class="card-body">
-										<div id="chart-donut3" class="chartsh"></div>
+									<!-- 	<div id="chart-donut3" class="chartsh"></div> -->
+										<div id="chart1" class="chartsh"></div>
 									</div>
 
 								</div>
@@ -353,8 +336,7 @@
 										<select class="form-control" name="type" id="type">
 											<option value="" <c:out value="${pac.type == null?'selected':'' }" />>선택</option>
 											<option value="PI" <c:out value="${pac.type eq 'PI'?'selected':'' }" />>payid</option>
-											<option value="P" <c:out value="${pac.type eq 'P'?'selected':'' }" />>가격</option>
-											<option value="S" <c:out value="${pac.type eq 'S'?'selected':'' }" />>결제상태</option>
+											<option value="P" <c:out value="${pac.type eq 'P'?'selected':'' }" />>가격</option>											
 											<option value="PGI" <c:out value="${pac.type eq 'PGI'?'selected':'' }" />>pgtid</option>
 											<option value="N" <c:out value="${pac.type eq 'N'?'selected':'' }" />>구매자</option>
 										</select>
@@ -406,11 +388,10 @@
 								<th class="text-white font-weight-normal">payid</th>
 								<th class="text-white font-weight-normal">가격(원)</th>
 								<th class="text-white font-weight-normal">uid</th>
-								<th class="text-white font-weight-normal">카드번호</th>
-								<th class="text-white font-weight-normal">status</th>
+								<th class="text-white font-weight-normal">카드번호</th>								
 								<th class="text-white font-weight-normal">카드이름</th>
 								<th class="text-white font-weight-normal">pgtid</th>
-								<th class="text-white font-weight-normal">결제자</th>
+								<th class="text-white font-weight-normal">구매자</th>
 								<th class="text-white font-weight-normal">결제일</th>
 							</tr>
 						</thead>
@@ -425,11 +406,10 @@
 								<td>${dto.payinfo_payid}</td>
 								<td><fmt:formatNumber value="${dto.payinfo_price}" pattern="#,###,###,###" /></td>
 								<td class="text-red">${dto.payinfo_uid}</td>
-								<td class="">${dto.payinfo_cardnum}</td>
-								<td>${dto.payinfo_status}</td>
+								<td class="">${dto.payinfo_cardnum}</td>							
 								<td class="">${dto.payinfo_cardname}</td>
 								<td>${dto.payinfo_pgtid}</td>
-								<td class="text-right">${dto.payinfo_buyername}</td>
+								<td class="">${dto.payinfo_buyername}</td>
 								<td>${dto.payinfo_rdate}</td>
 							</tr>	
 							</c:forEach>											
@@ -552,6 +532,8 @@
 		<!-- Custom Js -->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
+		
+
 	</body>
 	
 <script type="text/javascript">
@@ -570,24 +552,29 @@ $(document).ready(function(){
           }
          
      })
+     
+          
+     $('#startDate').datepicker();
+	 $('#startDate').datepicker("option", "maxDate", $("#endDate").val());
+	 $('#startDate').datepicker("option", "onClose", function ( selectedDate ) {
+	     $("#endDate").datepicker( "option", "minDate", selectedDate );
+	 });
+
+	 $('#endDate').datepicker();
+	 $('#endDate').datepicker("option", "minDate", $("#startDate").val());
+	 $('#endDate').datepicker("option", "onClose", function ( selectedDate ) {
+	     $("#startDate").datepicker( "option", "maxDate", selectedDate );
+	 })
+	 
      $("#resetBtn").click(function(){ 
 	   	  $("#type option:selected").val('');    	 
 	   	  $('#keyword').val('');
 	   	  $("#startDate").val('');
 	   	  $("#endDate").val('');
      }) 
+	 
 })
-/*******바 차트(chart) **************
-var chart = c3.generate({
-    data: {
-        columns: [
-            ['data1', 100, 300, 200, 400, 500],
-            ['data2', 10, 30, 20, 40, 50]
-        ],
-    type: 'bar'
-    }
-});
-************************/
+/*******바 차트(chart) **************/
   var chart = c3.generate({
 	  data:{
 		  json:{
@@ -596,10 +583,42 @@ var chart = c3.generate({
 	      },
 	      x: 'date',
 	    type: 'bar'
-	    }
+	    },
+    bar: {
+   	    width: {
+   	      ratio: 0.2,            
+   	    },
+   }
 });
+  /*******************************/
+ var chart = c3.generate({
+     bindto: '#chart1',
+     padding: {
+         left: 60
+     },
+     data: {
+         json:{
+        	date:${sumCountCorN},
+        	매출: ${sumCountCor}
+         },        
+         x: 'date',
+         type: 'bar'
+     },
+    /* bar: {
+    	    width: {
+    	      ratio: 0.2,            
+    	    },
+    }, */
+     axis: {
+         rotated: true, //x축 y축 회전
+         x: {
+             type: 'category', 
+         }     
+     }     
+    
+ });
 
-
+ 
 </script>
 
 </html>
