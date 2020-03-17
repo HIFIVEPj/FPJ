@@ -479,13 +479,14 @@
 	                                     	   <c:when test="${marketQA.marketQA_sub eq '삭제된 댓글입니다'}">
 			                                        <p class="font-13  mb-2 mt-2"> 삭제된 댓글입니다.</p>
 		                                        </c:when>	  
-		                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
-			                                        <p class="font-13  mb-2 mt-2">
-
-			                                      		 <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-		                                        	</p>
+		                                     	 <c:when test="${marketQA.marketQA_ox == 0 }">
+			                                        <c:if test="${marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
+				                                        <p class="font-13  mb-2 mt-2">
+				                                      		 <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+			                                        	</p>
+		                                        	</c:if>
 		                                        </c:when>
-		                                        <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.email  == freeProfile.freelancer.mem_email}">
+		                                        <c:when test="${marketQA.marketQA_sub ne '삭제된 댓글입니다' &&( marketQA.mem_email == sessionScope.email || sessionScope.email  == freeProfile.freelancer.mem_email)}">
 			                                        <p class="font-13  mb-2 mt-2">
 			                                       		 <비밀글 입니다.> <br>
 			                                            <p class="font-13  mb-2 mt-2">
@@ -493,7 +494,7 @@
 		                                    			</p>
 		                                        	</p>
 		                                        </c:when>
-		                                        <c:when test="${marketQA.marketQA_ox == 1}">
+		                                        <c:when test="${marketQA.marketQA_ox == 1 && marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
 			                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
 		                                        </c:when>	
 		                                                                              
@@ -503,14 +504,14 @@
 			                                   <button type="button"  data-toggle="modal" data-target="#Comment" data-prnum="${marketQA.marketQA_prnum}" data-lev="${marketQA.marketQA_lev}" data-sun="${marketQA.marketQA_sun}" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></button>
 			                                   --> <!-- onclick="mqajax(0,0,0);" -->
 	                                    	<c:choose>
-		                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
+		                                     	<c:when test="${sessionScope.email == marketQA.mem_email && marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
 		                                  			<a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}',${marketVOQA.nowPage},${marketVOQA.cntPerPage});" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>
 													<a href="javascript:void(0)" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox},${marketVOQA.nowPage},${marketVOQA.cntPerPage});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
-													<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}',${marketVOQA.nowPage},${marketVOQA.cntPerPage},${marketQA.marketQA_prnum},${marketQA.marketQA_sun},${marketQA.marketQA_lev});"  ><span class="">삭제</span></a>
+													<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}',${marketVOQA.nowPage},${marketVOQA.cntPerPage},${marketQA.marketQA_prnum},${marketQA.marketQA_sun},${marketQA.marketQA_lev},'${marketQA.marketQA_sub}');"  ><span class="">삭제</span></a>
 												</c:when>
-												<c:when test="${empty sessionScope.name}">
+												<c:when test="${empty sessionScope.name && marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
 												</c:when>
-												<c:when test="${sessionScope.email != marketQA.mem_email}">
+												<c:when test="${sessionScope.email != marketQA.mem_email && !marketQA.marketQA_sub eq '삭제된 댓글입니다'}">
 													<a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}',${marketVOQA.nowPage},${marketVOQA.cntPerPage});" data-toggle="modal" data-target="#CommentQA" class="mr-2" ><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 												</c:when>
 										  </c:choose>
@@ -1413,6 +1414,8 @@ obShareUrl.value=window.document.location.href;
 			alert("nowPage"+nowPage);
 			alert("cntPerPage"+cntPerPage);
 		    */
+		 
+		    
 		   $('#CommentQA').on('show.bs.modal', function (event) {
 				//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
 				//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..    
@@ -1426,6 +1429,26 @@ obShareUrl.value=window.document.location.href;
 		
 		}
 	  $('#submitQARE').click(function(){   
+		   if ($.trim($("#marketQA_subIDM").val()) == "") {
+		        alert("제목을 입력해주세요.");
+		       
+		        jQuery(document).ready(function () {
+		        	$("#CommentQA").show();
+		        	 $("#marketQA_subID").focus();
+		        	});
+		        return;
+		   	}
+		   if ($.trim($("#marketQA_contIDM ").val()) == "") {
+		        alert("내용을 입력해주세요.");
+		        jQuery(document).ready(function () {
+		        	$("#CommentQA").show();
+		        	 $("#marketQA_contID").focus();
+		        	});
+		        
+		        return;
+		   	 }
+		 
+		  
 		  console.log("ddddddddd");
 		  var url=$('#mqModalForm').attr('action');
 		  var QAREqueryString = $('#mqModalForm').serialize();
@@ -1443,7 +1466,7 @@ obShareUrl.value=window.document.location.href;
 	   });
 	 
 
-	  function QAdelete(MQ,M,nowPage,cntPerPage,prnum,sun,lev){
+	  function QAdelete(MQ,M,nowPage,cntPerPage,prnum,sun,lev,sub){
 			/* alert(MQ);
 			alert(M); 
 			alert(prnum);
@@ -1452,7 +1475,7 @@ obShareUrl.value=window.document.location.href;
 			var market_num=M;
 		   $.ajax({
 			 	type:'GET',
-		    	url:'marketQA-delete?marketQA_num='+marketQA_num+'&market_num='+ market_num+'&nowPageQ='+nowPage+'&cntPerPageQ='+cntPerPage+'&marketQA_prnum='+ prnum+'&marketQA_sun='+ sun+'&marketQA_lev='+ lev,
+		    	url:'marketQA-delete?marketQA_num='+marketQA_num+'&market_num='+ market_num+'&nowPageQ='+nowPage+'&cntPerPageQ='+cntPerPage+'&marketQA_prnum='+ prnum+'&marketQA_sun='+ sun+'&marketQA_lev='+ lev+'&marketQA_sub='+ sub,
 		    	dataType:'json',
 		    	async :false,
 		    	error:onError,
@@ -1651,7 +1674,9 @@ obShareUrl.value=window.document.location.href;
 	    		if(data[0].marketQAList[i].marketQA_sub =='삭제된 댓글입니다'){
 	    		 
 	    			html+='<p class="font-13  mb-2 mt-2"> 삭제된 댓글입니다.</p>';
-            	 
+	    			/*if(sessionEmail == data[0].marketQAList[i].mem_email){
+			    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+','+data[0].marketQAList[i].marketQA_lev+');"><span class="">삭제</span></a>'; 
+			    	}*/
 	    		}
 	    		//공개
 	    		if(data[0].marketQAList[i].marketQA_ox ==0 && data[0].marketQAList[i].marketQA_sub !='삭제된 댓글입니다'){
@@ -1660,23 +1685,24 @@ obShareUrl.value=window.document.location.href;
 	    			//수정삭제는 글쓴이만
 	    			if(sessionEmail == data[0].marketQAList[i].mem_email){
 			    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAupdate('+ sub +','+cont+' ,'+data[0].marketQAList[i].marketQA_num+' ,'+data[0].marketQAList[i].market_num+' ,'+data[0].marketQAList[i].marketQA_ox+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>';
-			    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+','+data[0].marketQAList[i].marketQA_lev+');"><span class="">삭제</span></a>'; 
+			    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+','+data[0].marketQAList[i].marketQA_lev+','+sub+');"><span class="">삭제</span></a>'; 
 			    	}
 	    		}
 	    		//비밀
 	    		if(data[0].marketQAList[i].marketQA_ox ==1 && data[0].marketQAList[i].marketQA_sub !='삭제된 댓글입니다'){
 	    			html+='<p class="font-13  mb-2 mt-2"> <비밀글 입니다.></p>';
-	    			html+='<a href="javascript:void(0)" onclick="mqajaxRE('+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_lev+' ,'+data[0].marketQAList[i].marketQA_sun+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>';
-		    		
+	    			
 	    		//마켓주인과 글쓴이만 볼슈있음	
 	    			if(data[0].marketQAList[i].mem_email == sessionEmail|| sessionEmail  == freeEmail){
 		    			html+=' <p class="font-13  mb-2 mt-2">';
 		    			html+='<a href="javascript:void(0)" onclick="javascript:QAFile('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+');"  data-toggle="modal" data-target="#exampleModalLong">'+data[0].marketQAList[i].marketQA_sub+'</a><br>';
 		    			html+='</p>';
+		    			html+='<a href="javascript:void(0)" onclick="mqajaxRE('+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_lev+' ,'+data[0].marketQAList[i].marketQA_sun+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>';
+			    		
 		    			//html+='</p>';
 		    			if(data[0].marketQAList[i].mem_email == sessionEmail){
 		    				html+='<a href="javascript:void(0)" class="mr-2" onclick="QAupdate('+ sub +','+cont+' ,'+data[0].marketQAList[i].marketQA_num+' ,'+data[0].marketQAList[i].market_num+' ,'+data[0].marketQAList[i].marketQA_ox+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>';
-				    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+','+data[0].marketQAList[i].marketQA_lev+');"><span class="">삭제</span></a>'; 
+				    		html+='<a href="javascript:void(0)" class="mr-2" onclick="QAdelete('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+','+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_sun+','+data[0].marketQAList[i].marketQA_lev+','+sub+');"><span class="">삭제</span></a>'; 
 				    	
 		    			}
 		    		}

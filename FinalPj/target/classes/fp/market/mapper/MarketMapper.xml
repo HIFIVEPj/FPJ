@@ -410,6 +410,9 @@
 	<update id="delUpdateMarketQA2" parameterType="hashmap">
 		UPDATE market_QA SET MARKETQA_sub='삭제된 댓글입니다', MARKETQA_cont='삭제된 댓글입니다' where market_num=#{market_num}  AND marketQA_prnum=#{marketQA_prnum} and marketQA_lev =#{marketQA_lev}  and  marketqa_sun=#{marketQA_sun}
 	</update>
+	<select id="deletedQA" resultType="String" parameterType="hashmap">
+		select MARKETQA_sub from market_qa where marketqa_prnum=#{marketQA_prnum}  and marketqa_lev>#{marketQA_lev}
+	</select>
 <!-- deleteQA  -->	
 	
 	<update id="updateMarketQA2" parameterType="hashmap">

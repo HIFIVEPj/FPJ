@@ -197,15 +197,18 @@ public class MarketServiceImpl implements MarketService {
 	public List<FreelancerProfile> getSimilarFree(int type_num) {
 		return mapper.similarFree(type_num);
 	}
-//마켓문의 삭제
+//마켓문의계층형 삭제
 	@Override
 	public long maxSun(HashMap<String, Object> map) {
-		
 		return mapper.maxSun(map);
 	}
 	@Override
 	public long delUpdateMarketQA2(HashMap<String, Object> map) {
 		return mapper.delUpdateMarketQA2(map);
+	}
+	@Override
+	public List<String> deletedQA(HashMap<String, Object> map) {
+		return mapper.deletedQA(map);
 	}
 	
 
