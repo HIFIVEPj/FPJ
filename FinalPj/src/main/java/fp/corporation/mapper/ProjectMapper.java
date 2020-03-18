@@ -39,7 +39,13 @@ public interface ProjectMapper {
 	//결제
 	void payinsert(Map<String, Object> payinfo);
 	void payStatusUpdate(Map<String, Object> payinfo);
-
+	
+	//결제 후 포인트 up
+	void corPointUp(long cor_code);
+	//결제 후 레벨 up
+	void corLevelUp1(long cor_code);
+	void corLevelUp2(long cor_code);
+	
 	//프로젝트 찜
 	List<ProjectPick>pjpick_list(long free_code);
 	void pjpick_insert(Map<String, Object>map);

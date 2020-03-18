@@ -245,7 +245,7 @@
 							<div class="card-body">
 								<div class="item2-gl ">
 									<div class="item2-gl-nav d-flex">
-										<h6 class="mb-0 mt-2">Showing 1 to 10 of 30 entries</h6>
+										<h6 class="mb-0 mt-2">Showing 1 to <c:out value="${paging.cntPerPage}"/> of <c:out value="${paging.total}"/> entries</h6>
 										<ul class="nav item2-gl-menu ml-auto">
 										<!-- <li class=""><a href="#tab-11" class="" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li> 
 											<li><a href="#tab-12" data-toggle="tab" class="active show" title="Grid"><i class="fa fa-th"></i></a></li>-->	

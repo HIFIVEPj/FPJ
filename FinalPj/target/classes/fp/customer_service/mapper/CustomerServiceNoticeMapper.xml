@@ -60,5 +60,6 @@
 	<update id="notice_recommend_update_del" parameterType="map">
 		update notice set notice_recommnum=notice_recommnum-1 where notice_num=#{notice_num}
 	</update>
-
+	
+	
 </mapper>

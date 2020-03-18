@@ -240,5 +240,6 @@
 	<update id="qa_recommend_update_del" parameterType="map">
 		update qa set qa_recommnum=qa_recommnum-1 where qa_num=#{qa_num}
 	</update>
-
+	
+	
 </mapper>

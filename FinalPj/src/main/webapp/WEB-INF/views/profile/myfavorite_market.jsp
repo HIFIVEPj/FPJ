@@ -154,7 +154,7 @@
 														</td>
 														
 														<td class="font-weight-semibold fs-16">
-															${pickList.market.market_price}<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
+															<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 														</td> 
 														
 														

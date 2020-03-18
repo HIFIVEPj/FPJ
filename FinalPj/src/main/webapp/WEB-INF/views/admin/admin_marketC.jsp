@@ -77,151 +77,41 @@
 								</form>
 							</div> -->
 							<div class="d-flex order-lg-2 ml-auto">
-				<!--  			<div class="dropdown d-none d-md-flex" >
-									<a  class="nav-link icon full-screen-link">
-										<i class="fe fe-maximize floating"  id="fullscreen-button"></i>
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="project_list">										
+									프로젝트 
 									</a>
-								</div> -->
-						
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-bell-o"></i>
-										<span class=" nav-unread badge badge-danger  badge-pill">4</span>
+								</div> 	
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="market-list">
+										프리마켓
 									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item text-center">You have 4 notification</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-envelope-o"></i>
-											</div>
-											<div>
-												<strong>2 new Messages</strong>
-												<div class="small text-muted">17:50 Pm</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-calendar"></i>
-											</div>
-											<div>
-												<strong> 1 Event Soon</strong>
-												<div class="small text-muted">19-10-2019</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-comment-o"></i>
-											</div>
-											<div>
-												<strong> 3 new Comments</strong>
-												<div class="small text-muted">05:34 Am</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-exclamation-triangle"></i>
-											</div>
-											<div>
-												<strong> Application Error</strong>
-												<div class="small text-muted">13:45 Pm</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">See all Notification</a>
-									</div>
-								</div>
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-envelope-o "></i>
-										<span class=" nav-unread badge badge-warning  badge-pill">3</span>
+								</div> 
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="freelancerList">
+										프리랜서
 									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/41.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Blake</strong> I've finished it! See you so.......
-												<div class="small text-muted">30 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/1.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Caroline</strong> Just see the my Admin....
-												<div class="small text-muted">12 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Jonathan</strong> Hi! I'am singer......
-												<div class="small text-muted">1 hour ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Emily</strong> Just a reminder that you have.....
-												<div class="small text-muted">45 mins ago</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all Messages</a>
-									</div>
-								</div>
-						<!-- 		<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fe fe-grid"></i>
+								</div> 
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="customer_service_notice">
+										공지사항
 									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow  app-selector">
-										<ul class="drop-icon-wrap">
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-envelope text-dark"></i>
-													<span class="block"> E-mail</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-map text-dark"></i>
-													<span class="block">map</span>
-												</a>
-											</li>
-
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-bubbles text-dark"></i>
-													<span class="block">Messages</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-user-follow text-dark"></i>
-													<span class="block">Followers</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-picture text-dark"></i>
-													<span class="block">Photos</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-settings text-dark"></i>
-													<span class="block">Settings</span>
-												</a>
-											</li>
-										</ul>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all</a>
-									</div>
-								</div> -->
+								</div> 
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="customer_service_qa">
+										문의하기
+									</a>
+								</div> 					
+								<div class="dropdown d-none d-md-flex" >
+									<a href="logout.do" class="dropdown-item">
+										<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
+									</a>
+								</div> 
 								
 							</div>
 						</div>
 					</div>
-				</div> 
+				</div>  
 		<!--  Sidebar menu-->
 				<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 				<aside class="app-sidebar doc-sidebar">
@@ -241,20 +131,21 @@
 					</div> -->
 					<ul class="side-menu">
 							<li>	
-                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">통계</span></a>
+                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon si si-chart"></i><span class="side-menu__label">통계</span></a>
                             </li>
+                            
 						    <li>	
-                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">마켓관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon si si-paypal"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
-                                              
+                                                           
 					</ul>
 					
 
@@ -354,12 +245,12 @@
 											<div class="input-group-text">
 												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 											</div>
-											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="startDate" name="startDate">
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="startDate" name="startDate" value="${pac.startDate}" >
 											<span>&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;</span>
 											<div class="input-group-text">
 												<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 											</div>
-											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="endDate" name="endDate">
+											<input class="form-control fc-datepicker col-md-5 " placeholder="YYYY-MM-DD" type="text" id="endDate" name="endDate" value="${pac.endDate}">
 										</div>
 					
 									</div>									

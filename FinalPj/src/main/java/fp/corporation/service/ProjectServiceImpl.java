@@ -98,6 +98,10 @@ public class ProjectServiceImpl implements ProjectService {
 	public void payinsert(Map<String, Object> payinfo) {
 		mapper.payinsert(payinfo);
 		mapper.payStatusUpdate(payinfo);
+		Corporation cor = mapper.corInfo((long)payinfo.get("pj_num"));
+		mapper.corPointUp(cor.getCor_code());
+		mapper.corLevelUp1(cor.getCor_code());
+		mapper.corLevelUp2(cor.getCor_code());
 	}
 	
 	//프로젝트 찜

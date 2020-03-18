@@ -81,11 +81,11 @@ public class CorporationController {
 		long totalCountfreepick = freeProService.getTotalCountFreep(corporation.getCor_code());
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "5";
+			cntPerPage = "10";
 		}else if (nowPage == null) {
 			nowPage ="1";
 		}else if(cntPerPage == null) {
-			cntPerPage ="5";
+			cntPerPage ="10";
 		}
 		
 		projectVo = new ProjectVo(totalCountfreepick, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
@@ -252,11 +252,11 @@ public class CorporationController {
 		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
-			cntPerPage = "5";
+			cntPerPage = "10";
 		}else if (nowPage == null) {
 			nowPage ="1";
 		}else if(cntPerPage == null) {
-			cntPerPage ="5";
+			cntPerPage ="10";
 		}
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		

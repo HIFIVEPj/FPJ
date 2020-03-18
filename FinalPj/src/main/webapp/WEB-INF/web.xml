@@ -74,7 +74,7 @@
         <session-timeout>20</session-timeout>
     </session-config>
 
-	<!-- SSL 설정  
+	<!-- SSL 설정   
 	<security-constraint>
 	    <web-resource-collection>
 	        <web-resource-name>my-secure-app</web-resource-name>
@@ -83,7 +83,7 @@
 	    <user-data-constraint>
 	        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
 	    </user-data-constraint>
-	</security-constraint> -->
+	</security-constraint>  -->
 
 	<!-- 에러 페이지
 	<error-page>

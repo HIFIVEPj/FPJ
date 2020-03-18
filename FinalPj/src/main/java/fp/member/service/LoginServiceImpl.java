@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import fp.corporation.service.ProjectService;
-import fp.member.dao.MemberDao;
+import fp.member.mapper.MemberDao;
 import fp.member.domain.Member;
 import lombok.extern.log4j.Log4j;
 

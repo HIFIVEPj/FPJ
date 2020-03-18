@@ -87,27 +87,7 @@
 										<li>
 											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
-							<!-- 			<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-basket"></i><span class="side-menu__label">Orders</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="orders.html">Orders-1</a></li>
-												<li><a class="slide-item" href="orders.html">Orders-2</a></li>
-											</ul>
-										</li>
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-game-controller"></i><span class="side-menu__label"> Safety Tips</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="tips.html">Safety Tips-1</a></li>
-												<li><a class="slide-item" href="tips.html">Safety Tips-2</a></li>
-											</ul>
-										</li> 
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-settings"></i><span class="side-menu__label"> Settings </span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="settings.html">Settings-1</a></li>
-												<li><a class="slide-item" href="settings.html">Settings-2</a></li>
-											</ul>
-										</li>-->
+
 										<li>
 											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
@@ -115,59 +95,7 @@
 								</div>
 							</aside>
 						</div>
-				<!--  	<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">Safety Tips For Buyers</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>-->
+
 					</div>
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
@@ -179,7 +107,7 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-										<label class="form-label">직종</label>
+										<label class="form-label">직종<span style="color:red;">*</span></label>
                                  			<select class="form-control" id="type_num" name="type_num">
                                  		<c:choose>		 
                                  			 <c:when test="${profile.type_num eq '1'}">
@@ -225,16 +153,16 @@
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">경력</label>
+											<label class="form-label">경력<span style="color:red;">*</span></label>
 										<c:if test="${profile ne '[]'}">
-											<input type="text" class="form-control"  value="${profile.pro_exp}" name = "pro_exp">
+											<input type="number" class="form-control"  value="${profile.pro_exp}" name = "pro_exp" id="pro_exp" min="1" max="30" numberOnly>
 										</c:if>									
 										</div>
 									</div>
 
 									<div class="col-sm-6 col-md-12">
 										<div class="form-group ">
-											<label class="form-label">키워드</label>		   
+											<label class="form-label">키워드<span style="color:red;">*</span></label>		   
 										</div>
 									</div>							
 							<div class="col-sm-6 col-md-12">
@@ -250,9 +178,8 @@
 											<li><a href="#tab5" <c:if test="${profile.type_num eq 5}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="5">기타</a></li>											
 										</ul>
 						<!-- 담추가 	<input type="hidden" name="type_num" value="" id="type_num" /> -->	
-									</div>
-									
-									<label class="form-label"><b>키워드</b></label>
+									</div>									
+								
 									<c:choose>
 										<c:when test="${profile.keyword ne '[]'}">
 											<c:forEach var="i" begin="0" end="${profile.freePickKeyWord.size()-1}">
@@ -1859,202 +1786,9 @@
 							</div>	
 							</div>
 
-
-					
-							<!-- 																		
-									<div class="col-sm-6 col-md-12">									
-									<div class="form-group ">
-										
-										<div class="row">									
-											<div class="col-md-2">											
-												<label class="form-label">JAVA</label>										
-											</div>
-												
-											<div class="col-md-2">											
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Front-end</span>
-													</label>
-											</div>
-											<div class="col-md-2">											
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Back_End</span>
-												</label>
-											</div>
-											<div class="col-md-2">
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Java</span>
-												</label>
-											</div>
-											<div class="col-md-2">	
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Spring</span>
-												</label>
-											</div>
-											<div class="col-md-2">	
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Xplatform</span>
-												</label>
-											</div>
-										</div>	
-										<div class="row">
-											<div class="col-md-2">											
-												<label class="form-label"></label>										
-											</div>
-										<div class="col-md-2">
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Miplantform</span>
-											</label>
-										</div>
-										<div class="col-md-2">
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Nexacro</span>
-											</label>
-										</div>	
-											
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Proframe</span>
-											</label>
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Maven</span>
-											</label>
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Jenkins</span>
-											</label>
-										</div>	
-									</div>	
-										
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label"></label>										
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Sencha</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Trustform</span>
-											</label>
-											</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Tuxedo</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Gauce</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Pro*C</span>
-											</label>
-										</div>
-									</div>	
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label"></label>										
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">DecOn</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Thymeleaf</span>
-											</label>
-										</div>
-									</div>
-							
-								<div class="row">
-											<div class="col-md-12">											
-												<HR />									
-											</div>	
-								</div>
-										
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label">Mobile App</label>										
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Hybrid</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Android</span>
-											</label>
-											</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">ios(Object-C)</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">ios(Swift)</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">WebView</span>
-											</label>
-										</div>
-									</div>			
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label"></label>										
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">IoT</span>
-											</label>
-										</div>	
-									</div>		
-								</div>
-							</div>
-								
-					      -->
 						
 		
-								<!-- <div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">전화번호</label>
-											<input type="text" class="form-control" placeholder="전화번호">
-										</div>
-									</div> -->								
+										
 
 									<div class="col-md-12">
 										<div class="form-group col-md-12">
@@ -2173,13 +1907,13 @@
 										<div class="col-md-3">
 											<label class="form-label">업무가능여부</label>
 										</div>
-										<div class="col-md-9" name="pro_ox">
+										<div class="col-md-9" >
 											<label class="custom-switch" >
-											<input type="checkbox" name="pro_ox" class="custom-switch-input " 
+											<input type="checkbox" name="pro_ox" class="custom-switch-input "  id="pro_ox"
 												<c:if test="${profile.pro_ox eq 'on'}">
 															checked
 												</c:if>
-												<c:if test="${profile.pro_ox eq 'null'}">
+												<c:if test="${profile.pro_ox eq 'off'}">
 												</c:if>>												
 												<span class="custom-switch-indicator"></span>
 												<span class="custom-switch-description">불가능/가능</span>
@@ -2192,7 +1926,7 @@
 										<div class="form-group ">
 										<div class="row">
 												<div class="col-md-3">
-													<label class="form-label">업무가능일</label>
+													<label class="form-label">업무가능일<span style="color:red;">*</span></label>
 												</div>
 										<div class="col-md-9">
 											<div class="wd-200 mg-b-30">
@@ -2201,7 +1935,7 @@
 														<div class="input-group-text">
 															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 														</div>
-													</div><input class="form-control fc-datepicker" type="text" name="pro_start" value="${profile.pro_start}" >
+													</div><input class="form-control fc-datepicker" type="text" id="pro_start" name="pro_start" value="${profile.pro_start}" >
 												</div>
 											</div>
 										</div>
@@ -2212,11 +1946,11 @@
 									<div class="col-sm-6 col-md-12">	
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">업무형태</label>
+												<label class="form-label">업무형태<span style="color:red;">*</span></label>
 											</div>
 											<div class="col-md-9">
 												
-												<select class="form-control" name="pro_place">
+												<select class="form-control" name="pro_place" id="pro_place">
 	                                    		 <c:choose>	
 	                                    			<c:when test="${profile.pro_place eq '0'}">
 	                                    				<option value="0" selected>상주</option>
@@ -2254,10 +1988,10 @@
 									<div class="col-sm-6 col-md-12">	
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">업무가능지역</label>
+												<label class="form-label">업무가능지역<span style="color:red;">*</span></label>
 											</div>
 											<div class="col-md-9">
-											  <select class="form-control" name="pro_workplace">
+											  <select class="form-control" name="pro_workplace" id="pro_workplace">
 											  	<c:choose>		 
                                 			 		<c:when test="${profile.pro_workplace eq '서울'}">
 		                                    			<option > </option>
@@ -2639,55 +2373,17 @@
 											</div>
 										</div>
 									</div>								
-																			
+																		
 										
-								<!-- 	<div class="col-sm-6 col-md-3">
-										<div class="form-group">
-											<label class="form-label">업무가능일</label>
-											<input type="number" class="form-control" placeholder="업무가능일">
-										</div>
-									</div>
-								-->	
-									<!-- 
-									<div class="col-md-5">
-										<div class="form-group">
-											<label class="form-label">선호지역</label>
-											<select class="form-control select2-show-search border-bottom-0 w-100 select2-show-search" data-placeholder="Select">
-												<optgroup label="Categories">
-													<option>--Select--</option>
-													<option value="1">Germany</option>
-													<option value="2">Real Estate</option>
-													<option value="3">Canada</option>
-													<option value="4">Usa</option>
-													<option value="5">Afghanistan</option>
-													<option value="6">Albania</option>
-													<option value="7">China</option>
-													<option value="8">Denmark</option>
-													<option value="9">Finland</option>
-													<option value="10">India</option>
-													<option value="11">Kiribati</option>
-													<option value="12">Kuwait</option>
-													<option value="13">Mexico</option>
-													<option value="14">Pakistan</option>
-												</optgroup>
-											</select>
-										</div>
-									</div> 
-									-->						
+						
 										
-																	
-				<!-- 					<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">Facebook</label>
-											<input type="text" class="form-control" placeholder="https://www.facebook.com/">
-										</div>
-									</div>    -->
+
 									<br/>
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">제목</label>
-												<input type="text" class="form-control"  name="profile_sub" value="${profile.profile_sub}">
+												<label class="form-label">제목<span style="color:red;">*</span></label>
+												<input type="text" class="form-control"  id="profile_sub" name="profile_sub" value="${profile.profile_sub}">
 											<!-- <input type="text" class="form-control" style="width:804px; margin-left:11px;" name="profile_sub" value="${profile.profile_sub}"> -->
 											</div>
 											
@@ -2697,42 +2393,20 @@
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 											<div class="form-group">
-												<label class="form-label">자기소개</label>
-												<textarea rows="5" class="form-control" name="pro_cv">${profile.pro_cv}</textarea>											
+												<label class="form-label">자기소개<span style="color:red;">*</span></label>
+												<textarea rows="5" class="form-control" id="pro_cv" name="pro_cv">${profile.pro_cv}</textarea>											
 											</div>											
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">학력</label>
-												<input type="text" class="form-control" name="pro_edu" value="${profile.pro_edu}">
+												<label class="form-label">최종학력<span style="color:red;">*</span></label>
+												<input type="text" class="form-control" name="pro_edu" id="pro_edu" value="${profile.pro_edu}">
 											</div>
 										</div>
 									</div>
-							<!-- 	<div class="col-md-12">
-										<div class="form-group mb-0">
-											<label class="form-label">첨부파일</label>
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" name="example-file-input-custom">
-												<label class="custom-file-label">Choose file</label>
-											</div>
-										</div>
-									</div> 
-									<div class="p-2 border mb-4">
-										<div class="upload-images d-flex">
-											<div>
-												<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
-											</div>
-											<div class="ml-3 mt-2">
-												<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
-												<small>4.5kb</small>
-											</div>
-											<div class="float-right ml-auto">
-												<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
-											</div>
-										</div>
-									</div> -->
+							<!--  
 									<div class="col-sm-12 col-md-12">
 										<div class="form-group ">
 											<label class="form-label mt-2">첨부파일</label>
@@ -2760,7 +2434,7 @@
 												</div>
 											</div>	
 										</div>
-									</div>				
+									</div>		-->		
 												<div class="card-footer" align="right" >			
 												<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>	 	
 												<input type="button" onclick="check();" class="btn btn-primary" value="수정하기"></a> 	
@@ -2787,31 +2461,80 @@
 		</section>
 		<!--/User Dashboard-->
 <script>
-	function check(){	
-		//var type_num = $('.active').attr('value'); //타입 버튼
-		var type_num = $("#type_num option:selected").val(); //타입 버튼
+	$("document").ready(function () {
+		$( ".fc-datepicker" ).datepicker({ minDate: 1});
+	});
+
+	function check(){		
 		
-		//document.getElementById('type_num').value = type_num;
-		alert("type_num"+type_num)
-	
-		//var type = document.getElementById('type_name'); //직종
 		var key_num = new Array();
 		var key_cnt = 0;
-		
-		$('input:checkbox[name="key_num"]').each(function() {
-			if(this.checked){
-				key_num[key_cnt] = this.value;
-				key_cnt++; 
+		 if(($('#type_num').val() == "")){
+		        alert("직종을 선택헤주세요.")
+		        return ;
+			  }
+			 
+			 if(($('#pro_exp').val() == "")){
+			        alert("경력을 입력해주세요.")
+			        return ;
 			}
-
-		 });alert("key_num: "+key_num)
-		 if(key_num == ""){
-				alert("키워드는 1개 이상 설정해야합니다.")
-				return;
-		}
-		
-
-		
+			 if(edit_free_profile.pro_exp.value<0){
+			        alert("경력을 0보다 크게 입력해주세요.")
+			        return ;
+			}
+			 
+			 if(($('#address').val() == "")){
+			        alert("주소를 입력해주세요.")
+			        return ;
+			} 
+			 if(($('#detailAddress').val() == "")){
+			        alert("상세주소를 입력해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_start').val() == "")){
+			        alert("업무가능일을 선택해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_place').val() == "")){
+			        alert("업무장소를 선택해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_workplace').val() == "")){
+			        alert("업무가능지역을 선택해주세요.")
+			        return ;
+			} 
+			 if(($('#profile_sub').val() == "")){
+			        alert("제목을 입력해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_cv').val() == "")){
+			        alert("자기소개를 입력해주세요.")
+			        return ;
+			}  
+			 if(($('#pro_edu').val() == "")){
+			        alert("최종학력을 입력해주세요.")
+			        return ;
+			}  
+			 
+		     var pro_ox = $('input:checkbox[id="pro_ox"]:checked').length;
+		     if(pro_ox == 0){  
+		    	 $('#pro_ox').attr('value','off');
+		    	 var z = $('#pro_ox').val();
+		    	 $("#pro_ox").append("<input type='hidden'  name='pro_ox' value='"+z+"'>");     
+		     }
+		     
+			$('input:checkbox[name="key_num"]').each(function() {
+				if(this.checked){
+					key_num[key_cnt] = this.value;
+					key_cnt++; 
+				}
+	
+			 });
+			//alert("key_num: "+key_num)
+			 if(key_num == ""){
+					alert("키워드는 1개 이상 설정해야합니다.")
+					return;
+			}	
 
 		var free_keynum = new Array();
 		var free_cnt=0;
@@ -2819,12 +2542,7 @@
 			 	free_keynum[free_cnt]=this.value;
 			 	free_cnt++;
 		 });
-		//alert("mem_email: "+edit_free_profile.mem_email.value)
-		 //alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
-		// alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
-		 //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
-		 //alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
-		 //alert("pj_loc: "+edit_free_profile.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+		
 		 edit_free_profile.submit();
 		}
 	//});
