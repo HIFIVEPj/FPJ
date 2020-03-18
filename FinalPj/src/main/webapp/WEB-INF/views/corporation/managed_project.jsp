@@ -38,9 +38,16 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
+								<c:if test="${cor.cor_fname eq ''}">
+									<div class="profile-pic-img">
+										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+									</div>
+								</c:if>
+								<c:if test = "${cor.cor_fname ne '' }">
 									<div class="profile-pic-img">
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
 									</div>
+								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>

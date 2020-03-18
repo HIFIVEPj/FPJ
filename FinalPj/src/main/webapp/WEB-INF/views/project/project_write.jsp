@@ -1150,7 +1150,7 @@
 													<div class="input-group-text">
 														<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 													</div>
-													<input class="form-control fc-datepicker" placeholder="YYYY-MM-DD" type="text" name="pj_ddate" readonly >
+													<input class="form-control fc-datepicker" type="text" name="pj_ddate" readonly >
 												</div>
 											</div>
 										</div>
@@ -1161,13 +1161,13 @@
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>모집인원</b><span style="color:red;">*</span></label>
-												<input type="number" class="form-control" name="pj_recnum" numberOnly>
+												<input type="number" class="form-control" name="pj_recnum" min="1" max="30" numberOnly>
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>총 투입인원</b><span style="color:red;">*</span></label>
-												<input type="number" class="form-control" name="pj_totalp" numberOnly>
+												<input type="number" class="form-control" name="pj_totalp"  min="1" max="100" numberOnly>
 											</div>	
 										</div>
 									</div>
@@ -1206,7 +1206,7 @@
 								</div>
 								
 									<div class="card-header ">
-										<h3 class="card-title"><b>회사 정보</b></h3>
+										<h3 class="card-title"><b>회사 정보</b><span style="color:#cdcdcd; font-size:10px;"> &nbsp;(입력이 없을 경우 등록하신 회사정보가 입력됩니다.)</span></h3>
 									</div>
 									<br/>
 										<div class="row">
@@ -1218,7 +1218,7 @@
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
-											<label class="form-label"><b>담당자명</b></label>
+											<label class="form-label"><b>담당자명</b><span style="color:red;">*</span></label>
 											<input type="text" class="form-control" name="cor_mname" value="${cor.cor_mname}">
 
 										</div>	
@@ -1227,13 +1227,13 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
-											<label class="form-label"><b>이메일</b></label>
+											<label class="form-label"><b>이메일</b><span style="color:red;">*</span></label>
 											<input type="email" class="form-control" value="${sessionScope.email}" name="mem_email">
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
-											<label class="form-label"><b>연락처</b></label>
+											<label class="form-label"><b>연락처</b><span style="color:red;">*</span></label>
 											<input type="text" class="form-control" value="${cor.cor_tel}" name="cor_tel">
 										</div>	
 									</div>
@@ -1241,15 +1241,15 @@
 								<!-- 주소 api부분 -->
 								<div class="row">
 									<div class="col-sm-3 col-md-3">
-									<label class="form-label"><b>주소</b></label>
+									<label class="form-label"><b>주소</b><span style="color:red;">*</span></label>
 										<div class="form-group">
-											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode" value="${cor.cor_postcode}">
+											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pj_postcode" value="${cor.cor_postcode}" readOnly>
 										</div>
 									</div>
 									<div class="col-sm-4 col-md-4">
 									<label class="form-label"><br/></label>
 										<div class="form-group">
-											<input type="button" class="btn btn-primary" onclick="execDaumPostcode()" value="우편번호 찾기">
+											<input type="button" class="btn btn-primary" onclick="execDaumPostcode()" value="우편번호 찾기" readOnly>
 										</div>
 											
 										</div>
@@ -1257,7 +1257,7 @@
 									<div class="row">
 									<div class="col-sm-12 col-md-7">
 										<div class="form-group">
-											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc" value="${cor.cor_addr}"><br>
+											<input type="text" class="form-control" id="address" placeholder="주소" name="pj_loc" value="${cor.cor_addr}" readOnly><br>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-5">
@@ -1404,15 +1404,7 @@
 			}).on("keyup", function() {
 			    $(this).val($(this).val().replace(/[^0-9]/g,""));
 			});
-			});
-		//function type_set(){
-		//	var type_num ="1";
-		//	$(document).on(".active",function(){
-		//		type_num= $(this).attr('value');
-		//		document.getElementById('type_num').value= type_num;
-		//		alert(type_num);
-		//	 });
-		//}
+		});
 
 	function check(){
 		var type_num = $('.active').attr('value');
@@ -1427,25 +1419,64 @@
 				key_cnt++;
 			}
 		 });
-		 alert(typeof pj_input.pj_pay.value);
-		/*if(typeof pj_input.pj_pay.value == "String"){
-			alert("숫자만 입력이 가능합니다");
+		 
+		if(pj_input.pj_recnum.value<0){
+			alert("모집인원은 0명 이상이어야 합니다.");
 			return;
-		}*/
+		}
+		if(pj_input.pj_totalp.value <0){
+			alert("총 투입인원은 0명 이상이어야 합니다.");
+			return;
+		}
+		if(pj_input.pj_totalp.value < pj_input.pj_recnum.value){
+			alert("총 투입인력은 모집인력보다 많아야 합니다.");
+			return;
+		}
 		if(key_num == ""){
 			alert("키워드는 1개 이상 설정해야합니다.")
 			return;
 		}
 		if(pj_input.pj_pay.value==""){
-			alert("급여는 필수 입력 사항입니다");
+			alert("급여는 필수 입력 사항입니다.");
 			return;
 		}
-
-		// alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
-		// alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
-		 //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
-		// alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
-		// alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+		if(pj_input.pj_ddate.value ==""){
+			alert("마감기한은 필수 입력사항 입니다.");
+			return;
+		}
+		if(pj_input.pj_sub.value==""){
+			alert("제목은 필수 입력 사항입니다.");
+			return;
+		}
+		if(pj_input.pj_cont.value==""){
+			alert("내용은 필수 입력 사항입니다.");
+			return;
+		}
+		if(pj_input.pj_cont.value==""){
+			alert("내용은 필수 입력 사항입니다.");
+			return;
+		}
+		if(pj_input.pj_detailloc.value=="" && pj_input.pj_loc.value==""){
+			alert("주소는 필수 입력 사항입니다.");
+			return;
+		}
+		if(pj_input.pj_detailloc.value=="" && pj_input.pj_loc.value=="" ){
+			alert("주소는 필수 입력 사항입니다.");
+			return;
+		}
+		if(pj_input.cor_mname.value==""){
+			alert("담당자 이름은 필수 입력 사항입니다.");
+			return;
+		}
+		if(pj_input.cor_tel.value=""){
+			alert("연락처는 필수 입력사항 입니다.");
+			return;
+		}
+		if(pj_input.mem_email.value=""){
+			alert("이메일은 필수 입력사항 입니다.");
+			return;
+		}
+		
 		pj_input.submit();
 		}
 	//});

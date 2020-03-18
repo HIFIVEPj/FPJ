@@ -120,7 +120,7 @@
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">개인활동등급</label>
-											<input type="text" class="form-control" value="새싹" readonly>
+											&nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="13%">&nbsp; <b>Bronze</b>
 										</div>
 									</div>
 
@@ -209,7 +209,11 @@
 								</c:if>
 								<c:if test = "${mydash.free_fname ne null}">
 									<div class="profile-pic-img">
+										
 										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+										<!--
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+										-->
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -310,7 +314,15 @@
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">개인활동등급</label>
-											<input type="text" class="form-control" value="${mydash.free_level}" readonly>
+											<c:if test="${mydash.free_level==0}">
+												&nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="10%">&nbsp; <b>Bronze</b>
+											</c:if> 
+											<c:if test="${mydash.free_level==1}">
+												&nbsp; <img src="../images/photos/silver100.png" alt="실" width="10%"> &nbsp; <b>Silver</b>
+											</c:if>
+											<c:if test="${mydash.free_level==2}"> 
+												&nbsp;<img src="../images/photos/gold100.png" alt="골"  width="10%">&nbsp; <b>Gold</b>
+											</c:if> 	
 										</div>
 									</div>
 

@@ -300,13 +300,13 @@ public class ProjectController {
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
 		//log.info("@#!#@$  map: "+ map);
-		return "redirect:managed_project?mem_email="+mem_email;
+		return "redirect:managed_project";
 	}
 	
 	@RequestMapping("project_delete")
 	public String project_delete(@RequestParam long pj_num) {
 		service.deletePj(pj_num);
-		return "redirect:project_list";
+		return "redirect:managed_project";
 	}
 
 	@RequestMapping("project_payments")
@@ -328,6 +328,8 @@ public class ProjectController {
 		payinfo.put("pj_num", pj_num);
 		log.info("#@$&*^#@&*$payinfo: "+payinfo);
 		service.payinsert(payinfo);
+		Corporation cor = service.corInfo(pj_num);
+		log.info("cor: "+cor);
 		return "project/project_payments_end"; 
 		
 	}
