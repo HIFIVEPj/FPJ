@@ -180,7 +180,7 @@
                               </div>
                               <div class="modal-body " >
                               	<div class="input-group mb-12" id="emailAuth_div1">
-                                 <input type="text" id="emailMD" name="emailMD" placeholder="이메일을 입력하세요" class="form-control" />
+                                 <input type="text" id="emailMD" name="emailMD" placeholder="이메일을 입력하세요" class="form-control" onKeyDown="onkey()" />
                                 <div class="input-group-append">
 									<button class="btn btn-secondary"  id="emailBtn">메일발송</button>
 								</div>
@@ -215,7 +215,7 @@
                               </div>
                               <div class="modal-body " >
                               	<div class="input-group mb-12" id="c_emailAuth_div1">
-                                 <input type="text" id="c_emailMD" name="c_emailMD" placeholder="이메일을 입력하세요" class="form-control" />
+                                 <input type="text" id="c_emailMD" name="c_emailMD" placeholder="이메일을 입력하세요" class="form-control" onKeyDown="onkeyC()" />
                                 <div class="input-group-append">
 									<button class="btn btn-secondary"  id="c_emailBtn">메일발송</button>
 								</div>
