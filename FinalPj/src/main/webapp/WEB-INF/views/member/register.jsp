@@ -188,12 +188,12 @@
                                	</div> 
                                	<div class="emailAuth_div" id="email_check" ></div>
                                	
-                       			<div id='inj' style='margin-top:10px'>
+                       		 <div id='inj' style='margin-top:10px'>
 	                       			<div class='input-group mb-12'>
 		                       			<input type='text' id='emailAuth' name='emailAuth' placeholder='인증번호를 입력하세요' class='form-control'/>
 		                             	<div class='input-group-append'><button class='btn btn-secondary' id='emailAuthBtn' >인증하기</button></div>
 	                             	</div>
-                             	</div>
+                             	</div> 
                              </div> 
                               
                               <div class="modal-footer">

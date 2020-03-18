@@ -75,7 +75,7 @@
  <!-- 승인대기중인 마켓게시글 -->
    <select id="getMarketList" parameterType="MemberVo" resultType="Market">
        select * from (select ROWNUM rnum , aa.* from (
-         select FREE_NAME , MARKET_NUM, MARKET_SUB, MARKET_STATE , MARKET_PRICE ,mem_email from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE ORDER BY MARKET_NUM desc ) aa)
+         select FREE_NAME , MARKET_NUM, MARKET_SUB, MARKET_STATE , MARKET_PRICE ,mem_email from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE ORDER BY MARKET_STATE ) aa)
       <![CDATA[where rnum>#{start} and rnum<=#{end}]]>            
    </select>
    
@@ -193,23 +193,9 @@
 			<if test="type == 'PGI'.toString()"> AND PAYINFO_PGTID like '%'||#{keyword}||'%' </if>
 			<if test="type == 'N'.toString()"> AND PAYINFO_BUYERNAME like '%'||#{keyword}||'%' </if>
 		</if>
-		<if test="startDate != null and endDate != null ">
-			AND PAYINFO_RDATE between #{startDate} and #{endDate}
+		<if test="startDate != null and endDate != null ">			
+			AND PAYINFO_RDATE between #{startDate} AND #{endDate} + 0.99999
 		</if>
 	</sql>
- 	<!--  
-	<sql id="searchFree">
-		<trim  prefix="(" suffix=") AND " prefixOverrides="OR" >
-			<foreach collection="typeArr" item="type">
-				<trim prefix="OR">
-					<choose>
-						<when test="type == 'PI'.toString()"> PAYINFO_PAYID like '%'||#{keyword}||'%' </when>
-						
-					</choose>
-				</trim>
-			</foreach>
-		</trim>
-	</sql>  -->
-	
 
 </mapper>

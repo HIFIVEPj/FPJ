@@ -1,5 +1,5 @@
 
-package fp.login.naver;
+package fp.login.api;
 
 import com.github.scribejava.core.builder.api.DefaultApi20;
 

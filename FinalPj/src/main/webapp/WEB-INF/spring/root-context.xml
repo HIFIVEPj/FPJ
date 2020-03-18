@@ -29,6 +29,7 @@
       <property name="configLocation" value="classpath:/mybatis-config.xml"/>
       <property value="classpath:/fp/customer_service/mapper/*Mapper.xml" name="mapperLocations" />
    </bean>
+   
    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
        <property name="host" value="smtp.gmail.com" />
        <property name="port" value="587" />
@@ -36,10 +37,8 @@
        <property name="password" value="!@song8183()()" />
        <property name="javaMailProperties">
        <props>
-         	<prop key="mail.transport.protocol">smtp</prop>
-            <prop key="mail.smtp.auth">true</prop>
-            <prop key="mail.smtp.starttls.enable">true</prop>
-            <prop key="mail.debug">true</prop>
+         <prop key="mail.smtp.auth">true</prop>
+         <prop key="mail.smtp.starttls.enable">true</prop>
        </props>
        </property>
    </bean>
@@ -79,12 +78,9 @@
 
    <!-- 소담 -->
    <!-- 메일인증 추가  -->
-   <context:component-scan base-package="fp.member.service"/>
-   <context:component-scan base-package="fp.member.domain"/>
-   <context:component-scan base-package="fp.member.dao"/>            
+   <context:component-scan base-package="fp.member.service"/>  
    <context:component-scan base-package="fp.member.mapper"/>
-   <mybatis-spring:scan base-package="fp.member.mapper"/>   
-   
+   <mybatis-spring:scan base-package="fp.member.mapper"/>  
    <context:component-scan base-package="fp.member.aop"/>
    <context:annotation-config></context:annotation-config>
    <!--

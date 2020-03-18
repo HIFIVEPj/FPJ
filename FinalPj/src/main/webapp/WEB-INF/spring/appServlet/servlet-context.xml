@@ -37,8 +37,8 @@
 	 </beans:bean>
    
    <!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-   <beans:bean id="naverLoginController" class="fp.login.naver.NaverLoginController" />
-   <beans:bean id="kakaoController" class="fp.login.naver.KakaoController" />
+   <beans:bean id="naverLoginController" class="fp.login.api.NaverLoginController" />
+   <beans:bean id="kakaoController" class="fp.login.api.KakaoController" />
   	<!-- file Upload 세영 -->
     <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- max upload size in bytes -->
@@ -65,8 +65,7 @@
 	<!-- 소담 -->
 	<context:component-scan base-package="fp.admin.controller" />
 	<context:component-scan base-package="fp.member.controller" />
-	<context:component-scan base-package="fp.community.controller" />
 	<context:component-scan base-package="fp.login.controller" />
-	<context:component-scan base-package="fp.login.naver" />
+	<context:component-scan base-package="fp.login.api" />
 </beans:beans>
 

@@ -1,5 +1,5 @@
 
-package fp.member.dao;
+package fp.member.mapper;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,8 +19,7 @@ public class MemberDao {
 
 	private String ns = "fp.member.mapper.MemberMapper";
 	//로그인 체크
-	public Member loginCheck(Member member) {
-		System.out.println("===> Mybatis로 loginCheck() 기능 처리");
+	public Member loginCheck(Member member) {		
 		Member member1= sqlSession.selectOne(ns+".loginCheck",member);
 		if(member1 ==null) {
 			return null;
@@ -28,8 +27,7 @@ public class MemberDao {
 		return member1;
 	}
 	//로그 아웃
-	public void logout(HttpSession session) {
-		System.out.println("===> 로그아웃 기능 처리");
+	public void logout(HttpSession session) {		
 		session.invalidate();
 	}
 	

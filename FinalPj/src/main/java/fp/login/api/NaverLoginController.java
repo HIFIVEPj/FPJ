@@ -1,5 +1,5 @@
 
-package fp.login.naver;
+package fp.login.api;
 
 import java.io.IOException;
 import java.util.UUID;
