@@ -78,12 +78,9 @@
 
    <!-- 소담 -->
    <!-- 메일인증 추가  -->
-   <context:component-scan base-package="fp.member.service"/>
-   <context:component-scan base-package="fp.member.domain"/>
-   <context:component-scan base-package="fp.member.dao"/>            
+   <context:component-scan base-package="fp.member.service"/>  
    <context:component-scan base-package="fp.member.mapper"/>
-   <mybatis-spring:scan base-package="fp.member.mapper"/>   
-   
+   <mybatis-spring:scan base-package="fp.member.mapper"/>  
    <context:component-scan base-package="fp.member.aop"/>
    <context:annotation-config></context:annotation-config>
    <!--

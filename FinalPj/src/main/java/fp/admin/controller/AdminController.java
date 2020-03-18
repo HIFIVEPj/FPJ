@@ -159,6 +159,8 @@ public class AdminController {
 		mv.addObject("month",month);
 		mv.addObject("sumCountCor",sumCountCor);
 		mv.addObject("sumCountCorN",sumCountCorN);
+		log.info("Vo: !@#!@#!@#@!#!@#pac@#$$@!#@"+Vo);
+		
 			return mv;
 	}
 

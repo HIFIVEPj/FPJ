@@ -154,8 +154,8 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 
-										<label class="form-label">직종</label>
-                                 			<select class="form-control"name="type_num">
+										<label class="form-label">직종<span style="color:red;">*</span></label>
+                                 			<select class="form-control" name="type_num" id="type_num">
                                     			<option selected> </option>
                                     			<option value="1">개발</option>
                                     			<option value="2">퍼블리싱</option>
@@ -168,14 +168,14 @@
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">경력</label> 
-											<input type="text" class="form-control" placeholder="경력" name="pro_exp">
+											<label class="form-label">경력<span style="color:red;">*</span></label> 
+											<input type="number" class="form-control"  id="pro_exp" name="pro_exp" min="1" max="30" numberOnly placeholder="예) 5년이면->5 숫자만 입력">
 										</div>
 									</div>
 
 									<div class="col-sm-6 col-md-12">
 										<div class="form-group ">
-											<label class="form-label">키워드</label>
+											<label class="form-label">키워드<span style="color:red;">*</span></label>
 										</div>
 									</div>	
 									
@@ -197,7 +197,7 @@
                               <input type="hidden" name="free_code"  value="${freelancer.free_code}"/>  
                                 <input type="hidden" name="free_keynum"  value=""/>  
                            </div>
-                           <label class="form-label"><b>키워드</b></label>
+                      <!--      <label class="form-label"><b>키워드</b></label> -->
                            
                            <div class="tab-content">      
                               <!-- tab 개발 시작   -->   
@@ -1211,26 +1211,14 @@
                            <HR />                           
                         </div>      
                      </div>
-								<!-- 	<div class="col-md-12">
-										<div class="form-group">
-											<label class="form-label">주소</label>
-											<div class="row gutters-xs">
-												<div class="col">
-													<input type="text" class="form-control" placeholder="Search for...">
-												</div>
-												<span class="col-auto">
-													<button class="btn btn-secondary" type="button"><i	 class="fe fe-search"></i></button>
-												</span>
-											</div>
-										</div>
-									</div>	 -->	
+								
 									<!-- 주소 API 시작 -->							
 									<div class="col-md-12">
 										<div class="form-group col-md-12">
 									<!--	<label class="form-label">주소</label>  -->	
 									<div class="row">
 									<div class="col-sm-3 col-md-3">
-									<label class="form-label"><b>주소</b></label>
+									<label class="form-label">주소<span style="color:red;">*</span></label>
 										<div class="form-group">
 											<input type="text"  class="form-control" id="postcode" placeholder="우편번호" name="pro_postcode">
 										</div>
@@ -1243,12 +1231,12 @@
 									<div class="row">
 									<div class="col-sm-12 col-md-7">
 										<div class="form-group">
-											<input type="text" class="form-control" id="address" placeholder="주소" name="pro_addr"><br>
+											<input type="text" class="form-control" id="address" placeholder="주소" name="pro_addr" ><br>
 										</div>
 									</div>
 									<div class="col-sm-12 col-md-5">
 										<div class="form-group">	
-											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pro_detailloc">
+											<input type="text" class="form-control" id="detailAddress" placeholder="상세주소" name="pro_detailloc" >
 										</div>
 									</div>
 									</div>
@@ -1358,7 +1346,7 @@
 										<div class="form-group ">
 										<div class="row">
 												<div class="col-md-3">
-													<label class="form-label">업무가능일</label>
+													<label class="form-label">업무가능일<span style="color:red;">*</span></label>
 												</div>
 										<div class="col-md-9">
 											<div class="wd-200 mg-b-30">
@@ -1367,7 +1355,7 @@
 														<div class="input-group-text">
 															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 														</div>
-													</div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="pro_start">
+													</div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" id="pro_start" name="pro_start">
 												</div>
 											</div>
 										</div>
@@ -1378,10 +1366,10 @@
 									<div class="col-sm-6 col-md-12">	
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">업무장소</label>
+												<label class="form-label">업무장소<span style="color:red;">*</span></label>
 											</div>
 											<div class="col-md-9">
-												  <select class="form-control" name="pro_place">
+												  <select class="form-control" name="pro_place" id="pro_place">
 	                                    			<option selected> </option>
 	                                    			<option value=0>상주</option>
 	                                    			<option value=1>반상주</option>
@@ -1394,10 +1382,10 @@
 			
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">업무 가능 지역</label>
+												<label class="form-label">업무 가능 지역<span style="color:red;">*</span></label>
 											</div>
 											<div class="col-md-9">
-												  <select class="form-control" name="pro_workplace">
+												  <select class="form-control" name="pro_workplace" id="pro_workplace">
 	                                    			<option selected> </option>
 	                                    			<option value="서울">서울</option>
 	                                    			<option value="경기">경기</option>
@@ -1422,8 +1410,8 @@
  							 		<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">제목</label>
-												<input type="text" class="form-control" name="profile_sub">
+												<label class="form-label">제목<span style="color:red;">*</span></label>
+												<input type="text" class="form-control" name="profile_sub" id="profile_sub">
 											</div>
 										</div>
 									</div>
@@ -1431,8 +1419,8 @@
 									 <div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label class="form-label">자기소개</label>
-												<textarea rows="5" class="form-control" placeholder="" name="pro_cv"></textarea>
+												<label class="form-label">자기소개<span style="color:red;">*</span></label>
+												<textarea rows="5" class="form-control" placeholder="" name="pro_cv" id="pro_cv"></textarea>
 											</div>
 										</div>
 									</div>
@@ -1440,15 +1428,15 @@
 								 <div class="row">
 										<div class="col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">최종학력</label>
-												<input type="text" class="form-control" name="pro_edu">
+												<label class="form-label">최종학력<span style="color:red;">*</span></label>
+												<input type="text" class="form-control" name="pro_edu" id="pro_edu" placeholder="예)조선대학교">
 											</div>
 										</div>
 									</div>
 								
 								
 
-											<div class="col-md-12">
+								<!--  	<div class="col-md-12">
 											<div class="form-group ">
 												<label class="form-label mt-2">첨부파일</label>
 												<div class="custom-file">
@@ -1476,7 +1464,7 @@
 												</div>
 												</div>	
 											</div>
-											</div>								
+											</div>		-->						
 									</div>
 								</div>
 							</div>
@@ -1497,23 +1485,67 @@
 		<!--/User Dashboard-->
 		   
 <script>
+$("document").ready(function () {
+	$( ".fc-datepicker" ).datepicker({ minDate: 1});
+});
+
 function check(){
-    // var type_num = $('.active').attr('value');
-     // document.getElementById('type_num').value = type_num;
- 	
       var key_num = new Array();
       var key_cnt = 0;
-     
-      
+	    
+	 if(($('#type_num').val() == "")){
+        alert("직종을 선택헤주세요.")
+        return ;
+	  }
+	 
+	 if(($('#pro_exp').val() == "")){
+	        alert("경력을 입력해주세요.")
+	        return ;
+	}
+	 if(free_write.pro_exp.value<0){
+	        alert("경력을 0보다 크게 입력해주세요.")
+	        return ;
+	}
+	 if(($('#address').val() == "")){
+	        alert("주소를 입력해주세요.")
+	        return ;
+	} 
+	 if(($('#detailAddress').val() == "")){
+	        alert("상세주소를 입력해주세요.")
+	        return ;
+	} 
+	 if(($('#pro_start').val() == "")){
+	        alert("업무가능일을 선택해주세요.")
+	        return ;
+	} 
+	 if(($('#pro_place').val() == "")){
+	        alert("업무장소를 선택해주세요.")
+	        return ;
+	} 
+	 if(($('#pro_workplace').val() == "")){
+	        alert("업무가능지역을 선택해주세요.")
+	        return ;
+	} 
+	 if(($('#profile_sub').val() == "")){
+	        alert("제목을 입력해주세요.")
+	        return ;
+	} 
+	 if(($('#pro_cv').val() == "")){
+	        alert("자기소개를 입력해주세요.")
+	        return ;
+	}  
+	 if(($('#pro_edu').val() == "")){
+	        alert("최종학력을 입력해주세요.")
+	        return ;
+	}  
+	 
      var pro_ox = $('input:checkbox[id="pro_ox"]:checked').length;
      if(pro_ox == 0){  
     	 $('#pro_ox').attr('value','off');
     	 var z = $('#pro_ox').val();
-    	 $("#pro_ox").append("<input type='hidden'  name='pro_ox' value='"+z+"'>");      	 
-    	
+    	 $("#pro_ox").append("<input type='hidden'  name='pro_ox' value='"+z+"'>");     
      }
 
-   	 	
       $('input:checkbox[name="key_num"]').each(function() {	
          if(this.checked){
             key_num[key_cnt] = this.value;
@@ -1521,19 +1553,14 @@ function check(){
          }
        });
       
-       //alert("type_num: " +type_num);
-      alert("key_num : "+ key_num);
-    
-	      if(key_num == ""){
-	         alert("키워드는 1개 이상 설정해야합니다.")
-	         return ;
-	      }
-     // alert("free_code: "+free_write1.free_code.value+", pro_num: "+free_write1.pro_num.value+", type_num: "+free_write1.type_num.value+", pro_exp: "+free_write1.pro_exp.value);
-      // alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
-       //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
-      // alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
-      // alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
-      free_write.submit();
+      
+      alert("key_num : "+ key_num);    
+      if(key_num == ""){
+         alert("키워드는 1개 이상 설정해야합니다.")
+         return ;
+      }
+
+      //free_write.submit();
       }
    //});
 </script>

@@ -6,57 +6,56 @@ $(function(){
 		  $('#emailMD').val("");
 		  $('#emailAuth').val("");
 		});
-	
-   	$(function(){	
-		$("#emailMD").blur(function() {
-			if($('#emailMD').val()==''){
-				$('#email_check').text('이메일을 입력하세요.');
-				$('#email_check').css('color', 'red');
-				//$("#emailBtn").attr("disabled", true);
-			} else if(mailJ.test($('#emailMD').val())!=true){
-				$('#email_check').text('이메일 형식으로 입력해주세요.');
-				$('#email_check').css('color', 'red');
-				//$("#emailBtn").attr("disabled", true);
-			} else if($('#emailMD').val()!=''){
-				var email=$('#emailMD').val();
-        		 $.ajax({
-        				 type:"POST",
-        				 url:"id_ck.do",
-        				 data:{
-        						"email":$('#emailMD').val()
-        				 },
-        				 success:function(data){	//data : checkSignup에서 넘겨준 결과값
-        						if($.trim(data)=="YES"){
-        						   if($('#emailMD').val()!=''){ 
-        							   $('#email_check').text('사용가능한 아이디 입니다.');
-        							   $('#email_check').css('font-size', '11px');
-        							   $('#email_check').css('color', 'blue');
-        							  	//$("#emailBtn").attr("disabled", false);
-        							 
-        						   }else if($('#emailMD').val()==''){
-        								$('#email_check').text('아이디를 입력해주세요.');
-        								$('#email_check').css('color', 'red');
-        								//$("#emailBtn").attr("disabled", true);
-        							}else{
-        								$('#email_check').text("이메일 양식을 확인해주세요.");
-        								$('#email_check').css('color', 'red');
-        								//$("#emailBtn").attr("disabled", true);
-        							}
-        						}else{
-        						   if($('#emailMD').val()!=''){		                 
-            							$('#email_check').text('중복된 아이디입니다.');
-            							$('#email_check').css('font-size', '11px');
-            							$('#email_check').css('color', 'red');
-            							//$("#emailBtn").attr("disabled", true);						
-            							
-        						   }
-        						}
-        					 }
-        				}) //ajax
-			}//else if
-		});//blur
-		});//메일function 끝
-	
+	  
+		 $(function(){ 		
+				$("#emailMD").blur(function() {
+					if($('#emailMD').val()==''){
+						$('#email_check').text('이메일을 입력하세요.');
+						$('#email_check').css('color', 'red');
+						$("#emailBtn").attr("disabled", true);
+					} else if(mailJ.test($('#emailMD').val())!=true){
+						$('#email_check').text('이메일 형식으로 입력해주세요.');
+						$('#email_check').css('color', 'red');
+						$("#emailBtn").attr("disabled", true);
+					} else if($('#emailMD').val()!=''){
+						var email=$('#emailMD').val();
+		        		 $.ajax({
+		        				 type:"POST",
+		        				 url:"id_ck.do",
+		        				 data:{
+		        						"email":$('#emailMD').val()
+		        				 },
+		        				 success:function(data){	//data : checkSignup에서 넘겨준 결과값
+		        						if($.trim(data)=="YES"){
+		        						   if($('#emailMD').val()!=''){ 
+		        							   $('#email_check').text('사용가능한 아이디 입니다.');
+		        							   $('#email_check').css('font-size', '11px');
+		        							   $('#email_check').css('color', 'blue');
+		        							  	$("#emailBtn").attr("disabled", false);
+		        							 
+		        						   }else if($('#emailMD').val()==''){
+		        								$('#email_check').text('아이디를 입력해주세요.');
+		        								$('#email_check').css('color', 'red');
+		        								$("#emailBtn").attr("disabled", true);
+		        							}else{
+		        								$('#email_check').text("이메일 양식을 확인해주세요.");
+		        								$('#email_check').css('color', 'red');
+		        								$("#emailBtn").attr("disabled", true);
+		        							}
+		        						}else{
+		        						   if($('#emailMD').val()!=''){		                 
+		            							$('#email_check').text('중복된 아이디입니다.');
+		            							$('#email_check').css('font-size', '11px');
+		            							$('#email_check').css('color', 'red');
+		            							$("#emailBtn").attr("disabled", true);						
+		            							
+		        						   }
+		        						}
+		        					 }
+		        				}) //ajax
+					}//else if
+				});//blur
+			 });//메일function 끝
   /*이메일 인증 버튼 클릭 시 발생하는 이벤트*/
   $(document).on("click","#emailBtn", function(){
 	  if($("#emailMD").val()==""){
@@ -116,13 +115,7 @@ $(function(){
 
 /*개인 끝*/
 /*기업 시작*/
-$(function(){  	
-	  $('#c_emailModal').on('hidden.bs.modal', function (e) {
-		  $('#c_emailMD').val("");
-		  $('#c_emailAuth').val("");
-		});
-	  
-   	$(function(){	
+	$("document").ready(function () {	
 		$("#c_emailMD").blur(function() {
 			if($('#c_emailMD').val()==''){
 				$('#c_email_check').text('이메일을 입력하세요.');
@@ -171,6 +164,12 @@ $(function(){
 			}//else if
 		});//blur
 	});//메일function 끝
+	
+$(function(){  	
+	  $('#c_emailModal').on('hidden.bs.modal', function (e) {
+		  $('#c_emailMD').val("");
+		  $('#c_emailAuth').val("");
+		});
 	
   /*이메일 인증 버튼 클릭 시 발생하는 이벤트*/
   $(document).on("click","#c_emailBtn", function(){

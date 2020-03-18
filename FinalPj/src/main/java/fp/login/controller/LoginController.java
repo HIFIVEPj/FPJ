@@ -39,8 +39,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import fp.login.naver.KakaoController;
-import fp.login.naver.NaverLoginController;
+import fp.login.api.KakaoController;
+import fp.login.api.NaverLoginController;
 import fp.member.domain.Member;
 import fp.member.service.LoginService;
 import fp.member.service.MailService;
