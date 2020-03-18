@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fp.corporation.domain.AppliedProject;
 import fp.corporation.domain.Corporation;
 import fp.corporation.domain.PjPickKeyword;
+import fp.corporation.domain.ProjectPick;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
 
@@ -44,6 +45,7 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
@@ -182,7 +184,7 @@ public class FreeLancerProfileController {
 		 
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
-		 
+		
 		FreeLancer freelancerprofile = service.mydash_free_select(mem_email);
 		long total = service.countProfileList(freelancerprofile.getFree_code()); //글의 총 갯수
 
@@ -211,7 +213,7 @@ public class FreeLancerProfileController {
 		mv.addObject("file_name", file_name);
 		return mv;
 	}
-
+	
 	
 	//프로필 컨텐츠//
 	@GetMapping("freelancerProfile_content") 
@@ -222,15 +224,17 @@ public class FreeLancerProfileController {
 		
 		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
 		List<FreeLancer> content = service.selectProfileContent(pro_num);
+		List<FreeLancerProfile> tel = service.selectTel(pro_num);
 		List<FreeLancerProfile> content2 = service.selectProfileContent2(pro_num);	
 		List<KeyWord> content3 = service.selectProfileContent3(pro_num);
 		List<FreeLancerProfileFile> file_name = service.selectFilename();
 		List<FreeLancer> content4 = service.selectProfileContent4(freelancerprofile.getFree_code());
-		
+	
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile/freelancerProfile_content");
 		mv.addObject("content", content);
+		mv.addObject("tel", tel);	
 		mv.addObject("content2", content2);
 		mv.addObject("content3", content3);
 		mv.addObject("file_name", file_name);
@@ -275,9 +279,6 @@ public class FreeLancerProfileController {
 			      
 			   return "redirect:freelancerProfile_list?pro_num="+pro_num;
 			 }
-	
-
-
 	
 	//나영 수정---------
 		@RequestMapping(value="payments")	//

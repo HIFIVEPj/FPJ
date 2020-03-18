@@ -9,10 +9,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +27,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
@@ -295,14 +302,77 @@ public class MarketController {
 
 		return mv;
 	}
+
 	
 	@GetMapping("market-content")
 	public ModelAndView getContent(HttpSession session,@RequestParam long market_num
 			,@RequestParam(value="nowPageQ",required=false)String nowPageQ
 			,@RequestParam(value="cntPerPageQ", required=false)String cntPerPageQ
 			,@RequestParam(value="nowPageR",required=false)String nowPageR
-			,@RequestParam(value="cntPerPageR", required=false)String cntPerPageR) 
-	{
+			,@RequestParam(value="cntPerPageR", required=false)String cntPerPageR
+			//,@CookieValue(value="market_num", required= false)String marketCookie
+			,HttpServletResponse response,HttpServletRequest request) 
+	{		
+/*		
+		String marketCookie=null;
+		boolean find = false;
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies !=null) {
+			for(Cookie cookie: cookies) {
+				if("marketCookie".equals(cookie.getName())) {
+					find=true;
+					marketCookie=cookie.getValue();
+					log.info("!!!marketCookie:"+marketCookie);
+				}else {
+					
+				}
+			}
+		}	
+		log.info("cookies:"+cookies.length);
+		log.info("cookies:"+cookies);
+		log.info("marketCookie:"+marketCookie);
+		
+		if(!find) {
+			marketCookie="없음";
+		}else {
+			try {
+				marketCookie=Long.toString(market_num);
+				log.info("@@@L:"+ marketCookie);
+			}catch(Exception e) {
+				System.out.println("e:"+e);
+			}
+		}
+
+		Cookie cookie = new Cookie("marketCookie",marketCookie);
+		cookie.setMaxAge(60*60*24*365);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		
+		log.info("cookie:"+cookie);
+		log.info("cookies:"+cookies);
+		log.info("marketCookie:"+marketCookie);
+
+	*/	
+	/*List<String> cookieList = new ArrayList<String>();	
+		// 저장된 쿠키 목록을 가져온다.
+		Cookie[] cookies = request.getCookies();
+		// 쿠키값을 저장할 문자열
+		String mycookie = null;
+		 
+		// 쿠키목록이 있다면
+		if (cookies != null) {
+		    for (int i=0; i<cookies.length; i++) {
+		        // 쿠키의 이름을 취득한다.
+		        String cookieName = cookies[i].getName();
+		            // 이름이 내가 원하는 값일 경우 값을 복사한다.
+		            mycookie = cookies[i].getValue();
+		            // 원하는 값을 찾으면 break;
+		            cookieList.add(mycookie);
+		    }
+		}
+
+		*/
 		if(nowPageQ ==null &&cntPerPageQ ==null) {//문의 페이징
 			nowPageQ="1";
 			cntPerPageQ ="4";
@@ -351,8 +421,12 @@ public class MarketController {
 		
 	
 	//	m=marketService.getMarketFreelancer(market_num);이렇게해도되고 메소드 따로 만들어서  아래한줄처럼해도됨 
-		Market fP=getMarketPreePrefile(market_num);//하지만 왜 마켓테이블 정보는 안나오지->왜냐! 변수 m에 매퍼를 뒤집어썼기때문에 다른 변수에 넣어줘야함//리스트로하는이유는 개인당 여러개의 마켓을 가질수있으므로
-	
+		Market fp=getMarketFreePrefile(market_num);//하지만 왜 마켓테이블 정보는 안나오지->왜냐! 변수 m에 매퍼를 뒤집어썼기때문에 다른 변수에 넣어줘야함//리스트로하는이유는 개인당 여러개의 마켓을 가질수있으므로
+		int type_num=0;
+		if(fp.getFreelancerProfile()!=null) {
+			type_num=fp.getFreelancerProfile().getType_num();
+		}
+		List<FreelancerProfile> similarFree = marketService.getSimilarFree(type_num);
 		int mrStar=0;
 		List<MarketRev> mr = marketService.getMarketRev(mapr);	
 		if(mr.size() !=0) {//특정마켓 별점평균을 구하는데 리뷰가 없을시 널이떠서 조건걸어줌
@@ -375,16 +449,17 @@ public class MarketController {
 		mv.addObject("mrStar", mrStar); // 뷰로 보낼 데이터 값
 		mv.addObject("marketQA", mq);
 		mv.addObject("market", m);
-		mv.addObject("freeProfile", fP);
+		mv.addObject("freeProfile", fp);
 		mv.addObject("marketVORev", marketVORev);//도메인끼리는 정보가 다담기는데 페이징 정보는 안담김 왜냐? 디비에 테이블이 없어서? 같은 도메인 패키지에 없어서?
 		mv.addObject("marketVOQA", marketVOQA);
-		
+	//	mv.addObject("marketCookie", marketCookie);
+		mv.addObject("similarFree", similarFree);
 		mv.addObject("mbs", mbs);
 		return mv;
 		
 	}
 	//마켓에 필요한 프리랜서정보를 리턴하는 메소드 
-	public Market getMarketPreePrefile(long market_num){
+	public Market getMarketFreePrefile(long market_num){
 		Market marketFreelancer;
 		marketFreelancer=marketService.getMarketFreelancer(market_num);
 		return marketFreelancer;

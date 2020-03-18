@@ -148,7 +148,7 @@
 							<div class="card-header">
 								<h3 class="card-title">프로필 등록하기</h3>
 							</div>
-<form  method='post' id='free_write' name='free_write' action="freelancerMyprofile_write?mem_email=${sessionScope.email}">						
+					<form  method='post' id='free_write' name='free_write' action="freelancerMyprofile_write?mem_email=${sessionScope.email}" enctype="multipart/form-data">						
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
@@ -1346,8 +1346,8 @@
 										</div>
 										<div class="col-md-9">
 											<label class="custom-switch">												
-												<input type="checkbox" name="pro_ox" id="pro_ox" class="custom-switch-input">
-												<span class="custom-switch-indicator"></span>
+												<input type="checkbox" name="pro_ox" id="pro_ox" class="custom-switch-input">												
+												 <span class="custom-switch-indicator"></span> 
 												<span class="custom-switch-description">불가능/가능</span>
 											</label>
 										</div>
@@ -1414,8 +1414,7 @@
 	                                   				<option value="광주">광주</option>
 	                                   				<option value="전북">전북</option>
 	                                   				<option value="전남">전남</option>
-	                                   				<option value="제주">제주</option> 	 	 	 
-	                                   				 
+	                                   				<option value="제주">제주</option> 	  
 	                                			 </select>
 											</div>
 										</div>	
@@ -1428,31 +1427,32 @@
 											</div>
 										</div>
 									</div>
-
-									<div class="col-md-12">
-										<div class="form-group">
-											<label class="form-label">자기소개</label>
-											<textarea rows="5" class="form-control" placeholder="" name="pro_cv"></textarea>
+									
+									 <div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="form-label">자기소개</label>
+												<textarea rows="5" class="form-control" placeholder="" name="pro_cv"></textarea>
+											</div>
 										</div>
 									</div>
-								</div>
 								
 								 <div class="row">
-										<div class="col-sm-12 col-md-12">
+										<div class="col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">학력</label>
+												<label class="form-label">최종학력</label>
 												<input type="text" class="form-control" name="pro_edu">
 											</div>
 										</div>
 									</div>
 								
 								
-
+									<!-- 
 											<div class="col-md-12">
 											<div class="form-group ">
 												<label class="form-label mt-2">첨부파일</label>
 												<div class="custom-file">
-													<input type="file" class="custom-file-input" name="example-file-input-custom">
+													<input type="file" class="custom-file-input" name="profile_fname" multiple="multiple" >
 													<label class="custom-file-label">Upload Files</label>
 												</div>
 											</div>
@@ -1476,7 +1476,7 @@
 												</div>
 												</div>	
 											</div>
-											</div>								
+											</div>		-->						
 									</div>
 								</div>
 							</div>
@@ -1498,23 +1498,21 @@
 		   
 <script>
 function check(){
-      var type_num = $('.active').attr('value');
-      document.getElementById('type_num').value = type_num;
+    // var type_num = $('.active').attr('value');
+     // document.getElementById('type_num').value = type_num;
  	
       var key_num = new Array();
       var key_cnt = 0;
      
       
-      var test = $('input:checkbox[id="pro_ox"]').val();
-      alert(test);
-      //for(var i=0; i<key_num_size; i++){
-   	/* $('input:checkbox[name="pro_ox"]')is(":checked") {	
-   	 	var test = $(this).val();
-   	 	var test1 = $(this).val().length;
-   	 	alert("업무가능여부"+test+"업무가능길이:"+test1);
-   	 	});
-   	 	
-   	 	*/
+     var pro_ox = $('input:checkbox[id="pro_ox"]:checked').length;
+     if(pro_ox == 0){  
+    	 $('#pro_ox').attr('value','off');
+    	 var z = $('#pro_ox').val();
+    	 $("#pro_ox").append("<input type='hidden'  name='pro_ox' value='"+z+"'>");      	 
+    	
+     }
+
    	 	
       $('input:checkbox[name="key_num"]').each(function() {	
          if(this.checked){
@@ -1523,8 +1521,8 @@ function check(){
          }
        });
       
-       alert("type_num: " +type_num);
-      // alert("key_num : "+ key_num);
+       //alert("type_num: " +type_num);
+      //alert("key_num : "+ key_num);
     
 	      if(key_num == ""){
 	         alert("키워드는 1개 이상 설정해야합니다.")

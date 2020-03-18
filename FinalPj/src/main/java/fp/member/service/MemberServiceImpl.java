@@ -104,4 +104,24 @@ public class MemberServiceImpl implements MemberService {
 	public List<Long> month() {
 		return memberMapper.month();
 	}
+	
+	@Override
+	public List<Long> sumCountMarket() {		
+		return memberMapper.sumCountMarket();
+	}
+	
+	@Override
+	public List<String> sumCountCorN() {
+		
+		return memberMapper.sumCountCorN();
+	}
+	@Override
+	public List<Long> sumCountCor() {		
+		return memberMapper.sumCountCor();
+	}
+
+	@Override
+	public List<String> sumCountMarketN() {		
+		return memberMapper.sumCountMarketN();
+	}
 }

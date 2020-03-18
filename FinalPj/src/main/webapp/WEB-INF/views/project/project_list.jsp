@@ -341,12 +341,7 @@
 																		</c:choose>
 																	</c:if>
 																</c:forEach><br/><br/>
-																<c:if test="${!empty sessionScope.email }">
 																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
-																</c:if>
-																<c:if test="${empty sessionScope.email }">
-																<a href="project_content?pj_num=${dto.pj_num}" class="text-dark"><h3 class="font-weight-bold">${dto.pj_sub}</h3></a>
-																</c:if>
 																<div style="width:85%">
 																<span id = "content" style="width:10px">
 														          <c:choose>
@@ -538,7 +533,6 @@
 		var pj_fgrade = new Array();
 		var pj_place = new Array();
 		var nowPage = 1;
-		var mem_email="";
 		var searchKey="";
 		$("form#no_submit input:checkbox[name='type']").on("click",function(){
 			var typeTemp = new Array();
@@ -584,6 +578,7 @@
 			 sortAjax();
 		});
 		function sortAjax(){
+			var flag= ${!empty sessionScope.email};
 			var objParam={
 					"typeList" : type,
 					"nowPage" : nowPage,
@@ -594,7 +589,7 @@
 					"loc_second":loc_second,
 					"searchKey":searchKey
 			};
-			 $.ajax({ 
+			 $.ajax({
 				 type:"get",
 				 url:"<c:url value='project_list_ajax' />",
 				 data:objParam,
@@ -602,127 +597,150 @@
 				 success:function(data){
 					 var keys = data.keyname;
 					 var keyCnt = keys.length;
-					 var lists=data.list;
-					 var cnt = lists.length;
-					 var pages=data.pa;
-					 var pagesCnt = pages.length;
-					 $(".before_ajax_content").remove();
-					 $(".pagination").remove();
-					 if(cnt == 0){
-						 $("#tab-11").append('<div class="card overflow-hidden before_ajax_content"><span>등록된 프로젝트가 없습니다</span></div>');
-					 }else{
-						 var pageSet="";
-						 var paginationSet="";
-						 for(i=0; i<cnt; i++){
-							var loc= lists[i].pj_loc;
-							var locArray = loc.split(' ');
-							var pj_cont_change = lists[i].pj_cont.replace(/(<([^>]+)>)/gi, "");
-							var pj_pay_comma = lists[i].pj_pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-							var dateFormat = format(lists[i].pj_ddate,'yyyy-MM-dd');
-							var now = new Date();
-							var Dday = lists[i].pj_ddate - now.getTime();
-							Dday = Math.floor(Dday / ((1000 * 60 * 60 * 24))+1);			
-							
-							pageSet+='<div class="card overflow-hidden before_ajax_content"><div class="d-md-flex">'+
-							'<div><div class="item-card9-imgs"><a href="books.html"></a></div></div>'+
-							'<div class="card border-0 mb-0"><div class="card-body" style="padding:30px; padding-bottom:10px;">'+
-							'<div class="item-card9-icons zzim"><a href="javasript:void(0)" class="item-card9-icons wishlist"'+lists[i].pj_num+
-							'style="margin-right:40%" onclick="javascript:onlyFree();">'+
-							'<i class="fa fa fa-heart-o" style=""></i></a></div><div class="item-card9"><i class="fa fa-map-marker"></i>&nbsp;'
-							+locArray[0]+' '+locArray[1]+'<span style="margin-left:10px; margin-right:10px"><i class="fa fa-user" ></i>'
-							if(lists[i].type_num == 1){pageSet+=' 개발&nbsp;|&nbsp;'}
-							else if(lists[i].type_num == 2){pageSet+=' 퍼블리셔&nbsp;|&nbsp;'}
-							else if(lists[i].type_num == 3){pageSet+=' 디자인&nbsp;|&nbsp;'}
-							else if(lists[i].type_num == 4){pageSet+=' 기획&nbsp;|&nbsp;'}
-							else if(lists[i].type_num == 5){pageSet+=' 기타&nbsp;|&nbsp;'}
-							else{pageSet+='&nbsp;없음&nbsp;|&nbsp;'}
-							if(lists[i].pj_fgrade == 1){pageSet+='초급&nbsp;&nbsp;'}
-							else if(lists[i].pj_fgrade == 2){pageSet+='중급&nbsp;&nbsp;'}
-							else if(lists[i].pj_fgrade == 3){pageSet+='고급&nbsp;&nbsp;'}
-							else{pageSet+='&nbsp;'}+'</span>' 
-							for(j=0; j<keyCnt; j++){
-								if(keys[j].pj_num==lists[i].pj_num){
-									if(keys[j].keyword == '[]'){
-										pageSet+='키워드 없음'
-											console.log("키워드없음");
+						 var lists=data.list;
+						 var cnt = lists.length;
+						 var pages=data.pa;
+						 var pagesCnt = pages.length;
+						 var frees = data.free;
+						 $(".before_ajax_content").remove();
+						 $(".pagination").remove();
+						 if(cnt == 0){
+							 $("#tab-11").append('<div class="card overflow-hidden before_ajax_content"><span>등록된 프로젝트가 없습니다</span></div>');
+						 }else{
+							 var pageSet="";
+							 var paginationSet="";
+							 for(i=0; i<cnt; i++){
+								var loc= lists[i].pj_loc;
+								var locArray = loc.split(' ');
+								var pj_cont_change = lists[i].pj_cont.replace(/(<([^>]+)>)/gi, "");
+								var pj_pay_comma = lists[i].pj_pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+								var dateFormat = format(lists[i].pj_ddate,'yyyy-MM-dd');
+								var now = new Date();
+								var Dday = lists[i].pj_ddate - now.getTime();
+								Dday = Math.floor(Dday / ((1000 * 60 * 60 * 24))+1);			
+								
+								pageSet+='<div class="card overflow-hidden before_ajax_content"><div class="d-md-flex">'+
+								'<div><div class="item-card9-imgs"><a href="books.html"></a></div></div>'+
+								'<div class="card border-0 mb-0"><div class="card-body" style="padding:30px; padding-bottom:10px;">'
+								if(frees==null){
+									pageSet+='<div class="item-card9-icons zzim">'
+										+'<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" onclick="javascript:onlyFree();">'
+									 	+'<i class="fa fa fa-heart-o" style=""></i></a></div><div class="item-card9"><i class="fa fa-map-marker"></i>&nbsp;'
+								}else{
+									pageSet+='<input type="hidden" value="'+frees.free_code+'" class="free_codes"/>'
+									if(frees.free_profileox==0){
+										pageSet+='<div class="item-card9-icons zzim"><a href="javasript:void(0)" class="item-card9-icons wishlist"'+lists[i].pj_num+
+										'style="margin-right:40%" onclick="javascript:profilePlease();">'+
+										'<i class="fa fa fa-heart-o" style=""></i></a></div><div class="item-card9"><i class="fa fa-map-marker"></i>&nbsp;'
 									}else{
-										if(keys[j].keyword.length>2){
-											for( k=0; k<3; k++){
-												pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
-											}
+										if(data.pjnumList.indexOf(lists[i].pj_num)!=-1){
+											pageSet+='<div class="item-card9-icons" id="zzim'+lists[i].pj_num+'"><a href="javasript:void(0)" class="item-card9-icons delwish"'+
+											'style="margin-right:40%; background-color:#e8564a;" onclick="javascript:del_wish('+lists[i].pj_num+');">'+
+											'<i class="fa fa fa-heart" style="color:white"></i></a></div><div class="item-card9"><i class="fa fa-map-marker"></i>&nbsp;'
 										}else{
-											for( k=0; k<keys[j].keyword.length; k++){
-												pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
+											pageSet+='<div class="item-card9-icons"><a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish'
+											+lists[i].pj_num+'"style="margin-right:40%" onclick="javascript:wish('+lists[i].pj_num+');">'
+											 +'<i class="fa fa fa-heart-o" style=""></i></a></div><div class="item-card9"><i class="fa fa-map-marker"></i>&nbsp;'
+										}
+										pageSet+='<div class="item-card9-icons"  id="zzim'+lists[i].pj_num+'"></div>'
+									}
+								}
+								
+								pageSet+=locArray[0]+' '+locArray[1]+'<span style="margin-left:10px; margin-right:10px"><i class="fa fa-user" ></i>'
+								if(lists[i].type_num == 1){pageSet+=' 개발&nbsp;|&nbsp;'}
+								else if(lists[i].type_num == 2){pageSet+=' 퍼블리셔&nbsp;|&nbsp;'}
+								else if(lists[i].type_num == 3){pageSet+=' 디자인&nbsp;|&nbsp;'}
+								else if(lists[i].type_num == 4){pageSet+=' 기획&nbsp;|&nbsp;'}
+								else if(lists[i].type_num == 5){pageSet+=' 기타&nbsp;|&nbsp;'}
+								else{pageSet+='&nbsp;없음&nbsp;|&nbsp;'}
+								if(lists[i].pj_fgrade == 1){pageSet+='초급&nbsp;&nbsp;'}
+								else if(lists[i].pj_fgrade == 2){pageSet+='중급&nbsp;&nbsp;'}
+								else if(lists[i].pj_fgrade == 3){pageSet+='고급&nbsp;&nbsp;'}
+								else{pageSet+='&nbsp;'}+'</span>' 
+								for(j=0; j<keyCnt; j++){
+									if(keys[j].pj_num==lists[i].pj_num){
+										if(keys[j].keyword == '[]'){
+											pageSet+='키워드 없음'
+												console.log("키워드없음");
+										}else{
+											if(keys[j].keyword.length>2){
+												for( k=0; k<3; k++){
+													pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
+												}
+											}else{
+												for( k=0; k<keys[j].keyword.length; k++){
+													pageSet+='&nbsp;<span class="tag tag-gray">'+keys[j].keyword[k].key_name+'</span>'
+												}
 											}
 										}
 									}
 								}
-							}
-							pageSet+='<br/><br/><a href="project_content?pj_num='+lists[i].pj_num+'" class="text-dark"><h3 class="font-weight-bold">'+lists[i].pj_sub+'</h3></a>'
-									+'<div style="width:85%"><span id = "content" style="width:10px">'
-									if(lists[i].pj_cont.length> 100){
-										pageSet+=pj_cont_change.substr(0,100)+'....'
-									}else{
-										pageSet+=pj_cont_change
-									}
-									pageSet+='</span></div><br/><p class="mb-0 leading-tight mt-1">급여 :'+pj_pay_comma+'원</p></div></div>'
-									+'<div class="card-footer pt-4 pb-4"><div class="item-card9-footer d-flex"><div class="item-card9-cost" style="padding-left: 10px">'
-									+'<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>'
-									if(Dday>0 && lists[i].pj_status==0){
-										pageSet+= 'D -'+Dday+'</strong></span>&nbsp;&nbsp;&nbsp;'
-									}else{
-										pageSet+='마감</strong></span>&nbsp;&nbsp;&nbsp;'
-									}
-									pageSet+='<span>('+dateFormat+')</span></div></div></div></div></div></div></div></div>';
+								pageSet+='<br/><br/><a href="project_content?pj_num='+lists[i].pj_num+'" class="text-dark"><h3 class="font-weight-bold">'+lists[i].pj_sub+'</h3></a>'
+										+'<div style="width:85%"><span id = "content" style="width:10px">'
+										if(lists[i].pj_cont.length> 100){
+											pageSet+=pj_cont_change.substr(0,100)+'....'
+										}else{
+											pageSet+=pj_cont_change
+										}
+										pageSet+='</span></div><br/><p class="mb-0 leading-tight mt-1">급여 :'+pj_pay_comma+'원</p></div></div>'
+										+'<div class="card-footer pt-4 pb-4"><div class="item-card9-footer d-flex"><div class="item-card9-cost" style="padding-left: 10px">'
+										+'<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1.5em;"><strong>'
+										if(Dday>0 && lists[i].pj_status==0){
+											pageSet+= 'D -'+Dday+'</strong></span>&nbsp;&nbsp;&nbsp;'
+										}else{
+											pageSet+='마감</strong></span>&nbsp;&nbsp;&nbsp;'
+										}
+										pageSet+='<span>('+dateFormat+')</span></div></div></div></div></div></div></div></div>';
+							 }
+							 
+							 paginationSet+='<ul class="pagination mb-0">'
+						 			if(pages.nowPage != 1){
+						 				paginationSet+='<li class="page-item page-prev ">'+
+						 					'<a class="page-link mem_prev goFirstPage" href="javascript:void(0)">prev</a>'
+						 					+'</li>'
+						 			}
+							 	for(i=pages.startPage; i<=pages.endPage; i++){
+							 		if(i==pages.nowPage){
+							 			paginationSet+='<li class="page-item active"><a class="page-link">'+i+'</a></li>'
+							 		}else{
+							 			paginationSet+='<li class="page-item"><a class="page-link mem_no_nowPage goPage" href="javascript:void(0)" data-page="'+i+'">'+i+'</a></li>'
+							 		}
+							 	}
+							 	if(pages.nowPage != pages.lastPage){
+							 		paginationSet+='<li class="page-item page-next">'+
+										'<a class="page-link mem_next goNextPage" href="javascript:void(0)">Next</a></li>'
+							 	}
 						 }
 						 
-						 paginationSet+='<ul class="pagination mb-0">'
-					 			if(pages.nowPage != 1){
-					 				paginationSet+='<li class="page-item page-prev ">'+
-					 					'<a class="page-link mem_prev goFirstPage" href="javascript:void(0)">prev</a>'
-					 					+'</li>'
-					 			}
-						 	for(i=pages.startPage; i<=pages.endPage; i++){
-						 		if(i==pages.nowPage){
-						 			paginationSet+='<li class="page-item active"><a class="page-link">'+i+'</a></li>'
-						 		}else{
-						 			paginationSet+='<li class="page-item"><a class="page-link mem_no_nowPage goPage" href="javascript:void(0)" data-page="'+i+'">'+i+'</a></li>'
-						 		}
-						 	}
-						 	if(pages.nowPage != pages.lastPage){
-						 		paginationSet+='<li class="page-item page-next">'+
-									'<a class="page-link mem_next goNextPage" href="javascript:void(0)">Next</a></li>'
-						 	}
-					 }
+						 
+						 $("#tab-11").html(pageSet);
+						 $(".paginationDiv").html(paginationSet);
+							$(".goFirstPage").click(function(){
+								nowPage =1;
+								pageFlag =1;
+								sortAjax();
+								pageFlag=0;
+								
+							});
+							$(".goPage").click(function(){
+								nowPage=$(this).attr("data-page");
+								pageFlag=1;
+								sortAjax();
+								pageFlag=0;
+							});
+							$(".goNextPage").click(function(){
+								nowPage = eval(pages.nowPage) + 1;
+								pageFlag = 1;
+								sortAjax();
+							    pageFlag = 0;
+						    });
+
 					 
-					 
-					 $("#tab-11").html(pageSet);
-					 $(".paginationDiv").html(paginationSet);
-						$(".goFirstPage").click(function(){
-							nowPage =1;
-							pageFlag =1;
-							sortAjax();
-							pageFlag=0;
-							
-						});
-						$(".goPage").click(function(){
-							nowPage=$(this).attr("data-page");
-							pageFlag=1;
-							sortAjax();
-							pageFlag=0;
-						});
-						$(".goNextPage").click(function(){
-							nowPage = eval(pages.nowPage) + 1;	
-							pageFlag = 1;
-							sortAjax();
-						    pageFlag = 0;
-					    });
-				 
-			 },
-			 error:function(data){
-				 alert("에러발생");
-			 }
-		 });
+				 },
+				 error:function(data){
+					 alert("에러발생");
+				 }
+			 });
 		}	
 		</script>
 <!--footer-->

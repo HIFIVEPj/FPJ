@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -103,36 +105,120 @@ public class FreeLancerListController {
 		return mv;
 		
 	}
-	@RequestMapping("freelancercontent") 
+	@RequestMapping(value="freelancer_list_ajax", method=RequestMethod.GET)
 	@ResponseBody
+	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList, PagingVO vo,
+			@RequestParam(value="nowPage", required=false)String nowPage
+			,@RequestParam(value="cntPerPage", required=false)String cntPerPage
+			,@RequestParam(value="selectKeyword", required=false)String selectKeyword
+			,@RequestParam(value="pro_gradeList[]", required=false)List<Integer> pro_gradeList
+			,@RequestParam(value="pro_placeList[]", required=false)List<Integer> pro_placeList
+			,HttpServletRequest request
+			,@RequestParam(value="searchKey", required=false)String searchKey){
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "4";
+		}else if (nowPage == null) {
+			nowPage ="1";
+		}else if(cntPerPage == null) {
+			cntPerPage ="4";
+		}
+
+		Map<String,Object>map = new HashMap<String, Object>();
+		//직종 선택 
+		if(typeList==null) {			
+			map.put("type",null);
+		}else {
+			map.put("type",typeList);
+		}
+		//프리랜서 등급선택 
+		if(pro_gradeList==null) {			
+			map.put("grade",null);
+		}else {
+			map.put("grade",pro_gradeList);
+		}
+		//검색 ajax
+		if(searchKey != null){
+			map.put("searchKey","%"+searchKey+"%");
+		}else {
+			map.put("searchKey",null);
+		}
+		//셀렉박스 sorting keyword 선택
+		if(selectKeyword != null) {
+			map.put("SortingKey",selectKeyword);
+		}else {
+			map.put("SortingKey",null);
+		}
+		//어디서 일할지 선택
+		if(pro_placeList != null){
+			map.put("pro_place",pro_placeList);
+		}else {
+			map.put("pro_place",null);
+		}
+
+		long totalCount = service.countFreeLancerPaging(map);
+		vo = new PagingVO(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		map.put("PagingVo", vo);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("jsonView");
+		if(mem_email != null) {
+			Corporation cor = corService.mydash_cor_select(mem_email);
+			if(cor != null) {
+				List<FreeLancerPick> freeplist = proService.freepick_list(cor.getCor_code());
+				ArrayList<Long>pronumList  = new ArrayList<Long>();
+				for(int j=0; j<freeplist.size(); j++) {
+					pronumList.add(freeplist.get(j).getPRO_NUM());
+				}
+				mv.addObject("cor", cor);
+				mv.addObject("freeplist",freeplist);
+				mv.addObject("pronumList",pronumList);
+			}
+		}
+		List<List_FreeLancer> freelancerList = service.SelectList(map);		
+		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();
+		List<Project> freelancerList3 = service.SelectList3();
+		mv.addObject("paging", vo);
+		mv.addObject("freelancerList", freelancerList);
+		mv.addObject("freelancerList2", freelancerList2);
+		mv.addObject("freelancerList3", freelancerList3);
+		return mv;
+	}
+
+	@RequestMapping("freelancercontent") 
 	public ModelAndView FreelnacerContent(@RequestParam long free_code, @RequestParam long pro_num
 											, @RequestParam(value="nowPage", required=false)String nowPage
-											, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+											, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("free_code", free_code);
 		map.put("pro_num", pro_num);
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		
 		List<Freelancer_FreeLancerProfile> content = service.freelancercontent(map);
+		List<Freelancer_FreeLancerProfile> tel = service.selectTel(map);
 		List<Freelancer_FreeLancerProfile> content2 = service.freelancercontent2(free_code);	
 		List<Freelancer_FreeLancerProfile> content3 = service.freelancercontent3(free_code);
 		List<Type> content4 = service.freelancercontent4(free_code);
 		List<Project> content5 = service.freelancercontent5(free_code);
-		
+
 		//프로필 조회수//
 		service.vcnt(pro_num);
 		List<List_FreeLancerReview> review_content = service.selectStar(free_code);
 		
 		ModelAndView mv = new ModelAndView("freelancer/freelancercontent");
-		
+
 		mv.addObject("content", content);
 		mv.addObject("content2", content2);
 		mv.addObject("content3", content3);
 		mv.addObject("content4", content4);	
 		mv.addObject("content5", content5);	
 		mv.addObject("star", review_content);	
+		mv.addObject("tel", tel);	
 		
 		//리뷰//
-		
 		long total =  service.countReview(map);
 		
 		if(nowPage == null && cntPerPage == null) {
@@ -143,7 +229,18 @@ public class FreeLancerListController {
 		}else if(cntPerPage ==null) {
 			cntPerPage="1";
 		}
-	
+		if(mem_email != null) {
+			Corporation cor = corService.mydash_cor_select(mem_email);
+			log.info("#($*(#$*(#$ cor:"+cor);
+			if(cor != null) {
+				List<FreeLancerPick> freeplist = proService.freepick_list(cor.getCor_code());
+				ArrayList<Long>pronumList  = new ArrayList<Long>();
+				for(int j=0; j<freeplist.size(); j++) {
+					pronumList.add(freeplist.get(j).getPRO_NUM());
+					}
+						mv.addObject("cor", cor);
+				}
+			}
 		List_FreeLancerReview freelancerreview = new List_FreeLancerReview(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage),free_code,pro_num);	
 		log.info("(((freelancerreview: " + freelancerreview);
 		
@@ -164,10 +261,12 @@ public class FreeLancerListController {
 	}
 	@RequestMapping(value="freelancercontent_ajax", method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView freelancercontent_ajax(@RequestParam long free_code, @RequestParam long pro_num
+	public ModelAndView freelancercontent_ajax(@RequestParam long free_code, @RequestParam long pro_num, HttpServletRequest request
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
 
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
@@ -211,6 +310,19 @@ public class FreeLancerListController {
 		}
 		List<Map<String,String>> name = new ArrayList<Map<String,String>>(); 
 		name.add(fnames);
+		log.info("#($*(#$*(#$ mem_email:"+mem_email);
+		if(mem_email != null) {
+			Corporation cor = corService.mydash_cor_select(mem_email);
+			log.info("#($*(#$*(#$ cor:"+cor);
+			if(cor != null) {
+				List<FreeLancerPick> freeplist = proService.freepick_list(cor.getCor_code());
+				ArrayList<Long>pronumList  = new ArrayList<Long>();
+				for(int j=0; j<freeplist.size(); j++) {
+					pronumList.add(freeplist.get(j).getPRO_NUM());
+					}
+						mv.addObject("cor", cor);
+				}
+			}
 		
 		mv.addObject("fnames", name);	
 		mv.addObject("review_ajax", review_ajax);	
@@ -219,6 +331,7 @@ public class FreeLancerListController {
 		log.info("**mv: "+mv);
 		log.info("**review_ajax: "+review_ajax);
 		log.info("**fnames: "+fnames);
+		
 		return mv;
 
 	}

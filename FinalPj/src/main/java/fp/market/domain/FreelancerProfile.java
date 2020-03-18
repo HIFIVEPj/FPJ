@@ -3,6 +3,7 @@ package fp.market.domain;
 
 import java.sql.Date;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,7 @@ public class FreelancerProfile {
 	private int pro_pcnt;
 	private int pro_place;
 	
+	private Freelancer freelancer;
+	private FreelancerReview  freelancerReview;
 	
 }

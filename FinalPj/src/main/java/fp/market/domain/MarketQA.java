@@ -28,7 +28,7 @@ public class MarketQA {
 	private int marketQA_option3;//
 
 	//private MarketPagingVO marketRevVO;
-	private FreeLancer freelancer;
+	private Freelancer freelancer;
 	private Corporation corporation;
 	private Member member;
 

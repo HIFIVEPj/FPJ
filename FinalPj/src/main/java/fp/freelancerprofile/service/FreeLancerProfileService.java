@@ -9,6 +9,7 @@ import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 
@@ -27,6 +28,7 @@ public interface FreeLancerProfileService {
 	
 	///프로필 컨텐츠//
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
+	public List<FreeLancerProfile> selectTel(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
 	List<FreeLancer> selectProfileContent4(long free_code);

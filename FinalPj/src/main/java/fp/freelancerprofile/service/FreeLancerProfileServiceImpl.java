@@ -15,6 +15,7 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
@@ -55,7 +56,11 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Override
 	public List<FreeLancer> selectProfileContent(long PRO_NUM){
 		return mapper.selectProfileContent(PRO_NUM);
-	}	
+	}
+	@Override
+	public List<FreeLancerProfile> selectTel(long PRO_NUM) {
+		return mapper.selectTel(PRO_NUM);
+	}
 	@Override
 	public List<FreeLancerProfile> selectProfileContent2(long PRO_NUM){
 		return mapper.selectProfileContent2(PRO_NUM);

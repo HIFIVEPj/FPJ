@@ -58,15 +58,15 @@
 									<i class="fa fa-search"></i>
 								</a>
 							</div>
-						<!--  	<div class="header-navsearch">
-								<a href="#" class=" "></a>
-								<form class="form-inline mr-auto">
-									<div class="nav-search">
-										<input type="search" class="form-control header-search" placeholder="Searchâ¦" aria-label="Search" >
-										<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-									</div>
-								</form>
-							</div> -->
+							
+							<div class="top-bar-right">								
+								<div class="d-flex">		
+									<a href="logout.do" class="d-flex">
+										<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
+									</a>
+								</div>
+							</div>
+
 							<div class="d-flex order-lg-2 ml-auto">
 				<!--  			<div class="dropdown d-none d-md-flex" >
 									<a  class="nav-link icon full-screen-link">
@@ -74,158 +74,7 @@
 									</a>
 								</div> -->
 						
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-bell-o"></i>
-										<span class=" nav-unread badge badge-danger  badge-pill">4</span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item text-center">You have 4 notification</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-envelope-o"></i>
-											</div>
-											<div>
-												<strong>2 new Messages</strong>
-												<div class="small text-muted">17:50 Pm</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-calendar"></i>
-											</div>
-											<div>
-												<strong> 1 Event Soon</strong>
-												<div class="small text-muted">19-10-2019</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-comment-o"></i>
-											</div>
-											<div>
-												<strong> 3 new Comments</strong>
-												<div class="small text-muted">05:34 Am</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-exclamation-triangle"></i>
-											</div>
-											<div>
-												<strong> Application Error</strong>
-												<div class="small text-muted">13:45 Pm</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">See all Notification</a>
-									</div>
-								</div>
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-envelope-o "></i>
-										<span class=" nav-unread badge badge-warning  badge-pill">3</span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/41.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Blake</strong> I've finished it! See you so.......
-												<div class="small text-muted">30 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/1.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Caroline</strong> Just see the my Admin....
-												<div class="small text-muted">12 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Jonathan</strong> Hi! I'am singer......
-												<div class="small text-muted">1 hour ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Emily</strong> Just a reminder that you have.....
-												<div class="small text-muted">45 mins ago</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all Messages</a>
-									</div>
-								</div>
-						<!-- 		<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fe fe-grid"></i>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow  app-selector">
-										<ul class="drop-icon-wrap">
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-envelope text-dark"></i>
-													<span class="block"> E-mail</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-map text-dark"></i>
-													<span class="block">map</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-bubbles text-dark"></i>
-													<span class="block">Messages</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-user-follow text-dark"></i>
-													<span class="block">Followers</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-picture text-dark"></i>
-													<span class="block">Photos</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-settings text-dark"></i>
-													<span class="block">Settings</span>
-												</a>
-											</li>
-										</ul>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all</a>
-									</div>
-								</div> -->
-								<div class="dropdown ">
-									<a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
-										<img src="../images/faces/male/25.jpg" alt="profile-img" class="avatar avatar-md brround">
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
-										<a class="dropdown-item" href="profile.html">
-											<i class="dropdown-icon si si-user"></i> My Profile
-										</a>
-										<a class="dropdown-item" href="emailservices.html">
-											<i class="dropdown-icon si si-envelope"></i> Inbox
-										</a>
-										<a class="dropdown-item" href="editprofile.html">
-											<i class="dropdown-icon  si si-settings"></i> Account Settings
-										</a>
-										<a class="dropdown-item" href="login.html">
-											<i class="dropdown-icon si si-power"></i> Log out
-										</a>
-									</div>
-								</div>
+
 							</div>
 						</div>
 					</div>
@@ -265,7 +114,7 @@
                             
                     </ul>
 <!--  본문 시작 -->	
-					<div class="app-sidebar-footer">
+		<!-- 		<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
 						</a>
@@ -281,7 +130,7 @@
 						<a href="chat.html">
 							<span class="fa fa-comment" aria-hidden="true"></span>
 						</a>
-					</div>
+					</div> -->
 				</aside>
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
@@ -292,7 +141,7 @@
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
 							</ol> 
 						</div>
-						<div class="row">
+				<!--  	<div class="row">
 							<div class="col-lg-3 col-md-12">
 								<div class="card">
 									<div class="card-body text-center">
@@ -337,12 +186,12 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 <!--  -->
 <!-- User-All-->	
 			<div class="">
 				<div class="row">
-					<div class="col-lg-12 users-list">
+					<div class="col-lg-12 users-list">					
 					<form action="admin_member" method="Get"> 					
 						<div class=" col-lg-12 page-header bg-white mb-4 p-4 border" style="margin-left:1px">
 							<select class="form-control page-select" name="class_num" id="class_num" >
@@ -375,8 +224,7 @@
 									<th>이메일</th>
 									<th>소속</th>
 									<th>Membership Status</th>
-									<th>Member Since</th>
-									<th></th>
+									<th>Member Since</th>									
 								</tr>
 								<c:forEach var="dto" items="${pa.list}">								
 								<tr>	
@@ -397,10 +245,7 @@
 										<c:if test="${dto.status eq 1}"><a href="javascript:void(0)" class="badge badge-info">비활성</a></c:if>
 										<c:if test="${dto.status eq 2}"><a href="javascript:void(0)" class="badge badge-danger">탈퇴</a></c:if>
 									</td>
-									<td>${dto.rdate}</td>
-									<td>
-										<a href="userprofile.html" class="btn btn-purple btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a>
-									</td>
+									<td>${dto.rdate}</td>								
 								</tr>						
 								</c:forEach>																					
 							</tbody>

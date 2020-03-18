@@ -23,7 +23,7 @@ public class MarketRev {
 
 //	private MarketRevComm marketRevComm; 없애버려
 //	public MarketPagingVO marketRevVO;
-	private FreeLancer freelancer;
+	private Freelancer freelancer;
 	private Corporation corporation;
 	private Member member;
 

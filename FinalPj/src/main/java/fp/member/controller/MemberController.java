@@ -71,13 +71,18 @@ public class MemberController {
        StringBuilder sb = new StringBuilder();
        sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
        log.info("!@#$userEmail: "+ userEmail);
-       return mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
+       return mailservice.send(subject, sb.toString(), "하이파이브", userEmail, null);
+
     }
     
     @RequestMapping(value="emailAuth.do", method=RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> emailAuth(@RequestParam String authCode, @RequestParam String random, HttpSession session){
-       String originalJoinCode = (String) session.getAttribute("authCode");
+    	 log.info("authCode:" + authCode);
+    	log.info("ramdon:" + random);
+    	log.info("오냐? 뭐가오냐 ????????:"+session.getAttribute("random"));
+    	
+    	String originalJoinCode = (String) session.getAttribute("authCode");
        String originalRandom = Integer.toString((int) session.getAttribute("random"));
        if(originalJoinCode.equals(authCode) && originalRandom.equals(random))
           return new ResponseEntity<String>("complete", HttpStatus.OK);
@@ -122,8 +127,7 @@ public class MemberController {
     	//String password = pwEncoder.encode(member.getPwd());
     	//member.setPwd(password);
     	//member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
-       	memberservice.insertM(member);
-    	System.out.println("member: 꺄아아아아앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + member);
+       	memberservice.insertM(member);    	
     	return "index";
     } 
 }

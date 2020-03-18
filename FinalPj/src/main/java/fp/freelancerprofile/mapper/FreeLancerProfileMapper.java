@@ -9,6 +9,7 @@ import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 
@@ -21,6 +22,7 @@ public interface FreeLancerProfileMapper {
 	
 	
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
+	public List<FreeLancerProfile> selectTel(long PRO_NUM);
 	List<FreeLancerProfile> selectProfileContent2(long PRO_NUM);
 	List<KeyWord> selectProfileContent3(long PRO_NUM);
 	List<FreeLancer> selectProfileContent4(long free_code);
@@ -30,6 +32,8 @@ public interface FreeLancerProfileMapper {
 	
 	//게시물 총 갯수
 	public long countProfileList(long free_code);
+	
+	
 	//페이징처리 게시글 조회
 	public List<FreeLancerProfile> selectPageList(Map<String, Object> map);
 	public List<FreeLancerProfileFile> selectFilename();

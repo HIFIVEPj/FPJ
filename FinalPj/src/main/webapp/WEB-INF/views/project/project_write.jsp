@@ -1123,8 +1123,8 @@
 												<div class="row">
 												<div class="col-md-6">
 													<div class="form-group ">
-														<label class="form-label"><b>급여</b></label>
-														<input type="text" class="form-control" placeholder="전체 기간 동안 지급하는 총 금액을 입력하세요" name="pj_pay">
+														<label class="form-label"><b>급여</b><span style="color:red;">*</span></label>
+														<input type="text" class="form-control" placeholder="전체 기간 동안 지급하는 총 금액을 입력하세요" name="pj_pay" numberOnly>
 													</div>	
 												</div>
 											<div class="col-sm-6 col-md-6">
@@ -1139,18 +1139,18 @@
 									<div class="row">
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
-												<label class="form-label"><b>프로젝트 기간</b></label>
-												<input type="text" class="form-control" placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3" name="pj_term">
+												<label class="form-label"><b>프로젝트 기간</b><span style="color:red;">*</span></label>
+												<input type="text" class="form-control" placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3" name="pj_term" numberOnly>
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group">
-											<label class="form-label"><b>공고 마감기간</b></label>
+											<label class="form-label"><b>공고 마감기간</b><span style="color:red;">*</span></label>
 												<div class="input-group-prepend">
 													<div class="input-group-text">
 														<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 													</div>
-													<input class="form-control fc-datepicker" placeholder="YYYY-MM-DD" type="text" name="pj_ddate">
+													<input class="form-control fc-datepicker" placeholder="YYYY-MM-DD" type="text" name="pj_ddate" readonly >
 												</div>
 											</div>
 										</div>
@@ -1160,14 +1160,14 @@
 									<div class="row">
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
-												<label class="form-label"><b>모집인원</b></label>
-												<input type="number" class="form-control" name="pj_recnum">
+												<label class="form-label"><b>모집인원</b><span style="color:red;">*</span></label>
+												<input type="number" class="form-control" name="pj_recnum" numberOnly>
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
-												<label class="form-label"><b>총 투입인원</b></label>
-												<input type="number" class="form-control" name="pj_totalp">
+												<label class="form-label"><b>총 투입인원</b><span style="color:red;">*</span></label>
+												<input type="number" class="form-control" name="pj_totalp" numberOnly>
 											</div>	
 										</div>
 									</div>
@@ -1176,7 +1176,7 @@
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
-												<label class="form-label text-dark"><b>제목</b></label>
+												<label class="form-label text-dark"><b>제목</b><span style="color:red;">*</span></label>
 												<input type="text" class="form-control" name="pj_sub">
 											</div>
 											</div>
@@ -1385,7 +1385,26 @@
 		</section>
 		<!--/Add posts-section-->
 		<script>
-		
+		$("document").ready(function() {
+			$( ".fc-datepicker" ).datepicker({ minDate: 1});
+			
+			$("input:text[numberOnly]").on("focus", function() {
+			    var x = $(this).val();
+			    x = removeCommas(x);
+			    $(this).val(x);
+			}).on("focusout", function() {
+			    var x = $(this).val();
+			    if(x && x.length > 0) {
+			        if(!$.isNumeric(x)) {
+			            x = x.replace(/[^0-9]/g,"");
+			        }
+			        x = addCommas(x);
+			        $(this).val(x);
+			    }
+			}).on("keyup", function() {
+			    $(this).val($(this).val().replace(/[^0-9]/g,""));
+			});
+			});
 		//function type_set(){
 		//	var type_num ="1";
 		//	$(document).on(".active",function(){
@@ -1394,7 +1413,7 @@
 		//		alert(type_num);
 		//	 });
 		//}
-		
+
 	function check(){
 		var type_num = $('.active').attr('value');
 		//alert(type_num);
@@ -1408,10 +1427,20 @@
 				key_cnt++;
 			}
 		 });
+		 alert(typeof pj_input.pj_pay.value);
+		/*if(typeof pj_input.pj_pay.value == "String"){
+			alert("숫자만 입력이 가능합니다");
+			return;
+		}*/
 		if(key_num == ""){
 			alert("키워드는 1개 이상 설정해야합니다.")
 			return;
 		}
+		if(pj_input.pj_pay.value==""){
+			alert("급여는 필수 입력 사항입니다");
+			return;
+		}
+
 		// alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
 		// alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
 		 //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
