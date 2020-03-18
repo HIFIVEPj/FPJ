@@ -382,24 +382,24 @@
     </select>
 	<select id="freelancerReview" resultMap="freelancerReview" parameterType="map">
   		<![CDATA[
-			select ROWNUM , fr.freerev_num
+		select * from 
+			(select ROWNUM rnum , aa.* from 
+				(select ROWNUM , fr.freerev_num
 						  , fr.freerev_cont
                           , fr.freerev_star
                           , fr.freerev_rdate
                           , fr.pro_num
                           , fr.free_code
                           , fr.mem_email
-                          , m.mem_name
+                          , mem_name
                           from freelancer_review  fr
-                             inner join member m
+                           inner join member m
                              on fr.mem_email = m.mem_email
                                  inner join freelancer_profile fp
                                  on fr.pro_num = fp.pro_num
-                                    where fr.free_code=#{free_code}
-                                     and fr.pro_num=#{pro_num}
-                                     and ROWNUM <=#{end}
-                                     and ROWNUM>=#{start}
-                                     order by freerev_rdate desc                             	
+                                     where fr.fREE_CODE=#{free_code} and fr.pro_num=#{pro_num}
+                                     order by freerev_rdate desc)aa) 
+                                        where rnum>=#{start} and rnum<=#{end}              	
 	  ]]>	
 	  </select>
 	<select id="selectFile" resultType="Freelancer" parameterType="String">

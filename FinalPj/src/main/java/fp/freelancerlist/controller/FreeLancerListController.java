@@ -190,16 +190,6 @@ public class FreeLancerListController {
 		}else {
 			map.put("pro_num",pro_num);
 		}
-		if(nowPage==null) {			
-			map.put("nowPage",null);
-		}else {
-			map.put("nowPage",nowPage);
-		}
-		if(cntPerPage==null) {			
-			map.put("cntPerPage",null);
-		}else {
-			map.put("cntPerPage",cntPerPage);
-		}
 
 		
 		long total =  service.countReview(map);
@@ -219,12 +209,14 @@ public class FreeLancerListController {
 			fnames.put("free_fname",freelancer.get(i).getFree_fname());
 			fnames.put("mem_email",freelancer.get(i).getMem_email());
 		}
+		List<Map<String,String>> name = new ArrayList<Map<String,String>>(); 
+		name.add(fnames);
 		
-		mv.addObject("fnames", fnames);	
+		mv.addObject("fnames", name);	
 		mv.addObject("review_ajax", review_ajax);	
 		mv.addObject("freelancerreview", freelancerreview);
 		mv.addObject("paging", map);
-		
+		log.info("**mv: "+mv);
 		log.info("**review_ajax: "+review_ajax);
 		log.info("**fnames: "+fnames);
 		return mv;
@@ -239,6 +231,7 @@ public class FreeLancerListController {
 										, @RequestParam(value="fcode", required=false) long fcode
 										, @RequestParam(value="pnum", required=false) long pnum
 										, @RequestParam(value="mem_email", required=false) String mem_email) {
+	
 		Map<String,Object>map = new HashMap<String, Object>();
 		if(cont==null) {			
 			map.put("cont",null);

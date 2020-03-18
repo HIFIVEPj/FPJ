@@ -103,12 +103,6 @@ public class FreeLancerProfileController {
 		   return "redirect:freelancerProfile_list";
 		   }
 	
-	//프로필 컨텐츠//
-//	@RequestMapping("freelancerProfile_content")
-//	public String Profile_content() { 
-//		return "profile/freelancerProfile_content";
-//	}
-	
 	//프로필 수정//
 	@GetMapping("freelancerMyprofile_change")
 	public ModelAndView freelancerMyprofile_change(@RequestParam long pro_num) {

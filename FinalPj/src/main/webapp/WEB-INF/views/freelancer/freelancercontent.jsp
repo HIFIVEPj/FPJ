@@ -266,8 +266,8 @@
 								    	</div>		
 									</div>
 								</c:if>		
-							<c:if test="${!empty review}">		
-								<c:forEach items="${review}" var="review_content"  varStatus="status">								
+							<!--<c:if test="${!empty review}">-->		
+								<c:forEach items="${review}" var="review_content"  varStatus="status">							
 									<div class="col-md-12  before_review">
 									<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
 									<div class="media mt-0 p-5">
@@ -283,8 +283,8 @@
 
 			                                 <div class="media-body"> 
 						                          <h5 class="mt-0 mb-1 font-weight-semibold">${review.get(0).mmember.mem_name}
-													<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified" >							
-														<i class="fa fa-check-circle-o text-success"></i></span>
+												<!-- 	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified" >							
+														<i class="fa fa-check-circle-o text-success"></i></span> -->
 													 	&nbsp;&nbsp;&nbsp;<small class="text-muted" name="freerev_rdate" id="freerev_rdate"><i class="fa fa-calendar"></i>&nbsp;${review_content.freerev_rdate}</small>
 													 </h5>
 													<c:forEach items="${review}" var="review_content"  varStatus="status">	
@@ -326,52 +326,55 @@
 							</c:forEach>									
 									
 					<!-- 페이징 -->				
-						 <div class='center-block text-center paginationDiv' id="tab-11"> 
+					<div class='paginationDiv' id="tab-11" style="margin:0 auto; align:center;" >
+						 <div class='center-block text-center'> 
                            <ul class="pagination mb-0">         
                         <div class="card-body" style="margin:0 auto; align:center;" id="review_paging">
                            <ul class="pagination mg-b-0 page-0 ">
-                          <c:if test ="${paging.nowPage != paging.startPage}">
-                          
-                           <!--이전 페이지 이동 -->
-                            <li class="page-item">
-		                       <a aria-label="Last" class="page-link" id="" onclick="reviewList(${paging.get(0).free_code},${paging.get(0).pro_num},${paging.cntPerPage},${paging.nowPage-1})">
+                          <c:if test ="${paging.nowPage != 1}">
+                       <!--이전 페이지 이동 -->
+                           <li class="page-item">
+                           <a class="page-link noMem_prev" href="freelancercontent?nowPage=${paging.firstPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
 		                       <i class="fa fa-angle-double-left"></i></a>
-                    		 </li>   
+                    		 </li>
+                    		    
 		                   <li class="page-item">
-		                       <a aria-label="Next" class="page-link" onclick="reviewList(${paging.get(0).free_code},${paging.get(0).pro_num},${paging.cntPerPage},${paging.nowPage+1})">
+		                        <a aria-label="Next" class="page-link" href="freelancercontent?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
 		                       <i class="fa fa-angle-left"></i></a>
 		                  </li>   
                               
                           </c:if>
-                            
+                         
                            <!--페이지번호 -->
            
- <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+ <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.lastPage}" >
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
                                     <li class='page-item active'><a class="page-link">${p}</a></li>
                                  </c:when>
                                  <c:when test = "${p != paging.nowPage }">
-                                <c:forEach var='code' items="${review}" >
-                                    <li class="page-item"><a class="page-link" >${p}</a></li>
-                                 </c:forEach>
+
+                             <!--     <li class="page-item"><a class="page-link" href="freelancercontent?nowPage=${p}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}"></a></li> -->
                                  </c:when>
                               </c:choose>
                            </c:forEach>
                          <c:if test ="${paging.nowPage != paging.lastPage}">
 	                        <li class="page-item">
-	                           <a aria-label="Next" class="page-link" id="goNextPage"  onclick="reviewList(${paging.free_code},${paging.pro_num},${paging.cntPerPage},${paging.nowPage+1});"><i class="fa fa-angle-right"></i>1212</a>
+	                           <!-- <a aria-label="Next" class="page-link" id="goNextPage"  onclick="reviewList(${paging.free_code},${paging.pro_num},${paging.cntPerPage},${paging.nowPage+1});"> -->
+	                           <a class="page-link" href="freelancercontent?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
+	                           <i class="fa fa-angle-right"></i></a>
 	                         </li>  
 	                        <li class="page-item">
-	                           <a aria-label="Last" class="page-link" ></i></a>
+	                           <a aria-label="Last" class="page-link" href="freelancercontent?nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}"><i class="fa fa-angle-double-right"></i></a>
 	                        </li>
                          </c:if>
                         </ul>
                       </div>
                     </ul>
-                 </div> 				
+                 </div> 
+                 </div>				
 					<!-- 페이징 끝. 리뷰 끝 -->					
-				</c:if>	
+			<!--	</c:if>	 -->		
 			</div>
 				<!--	</div>-->
 		</div>
@@ -419,8 +422,6 @@
 												<input type="hidden" id="free_code" name="free_code" value="${content3.get(0).free_code}" />	
 												<input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.email}" />
 												<input type="hidden" id="pro_num" name="pro_num" value="${content3.get(0).pro_num}" />
-											
-											
 										</div>							
 										<div align="right">
 										 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" style="margin-right:-1px;" >작성하기</button>
@@ -512,10 +513,10 @@
 			 
 			 var free_code ="<c:out value="${paging.free_code}" />";
 			 var pro_num ="<c:out value="${paging.pro_num}" />";
-			 var nowpage ="<c:out value="${paging.nowPage}" />";
-			 var cntpage ="<c:out value="${paging.cntPerPage}" />";
-			 
-			 location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num+"&nowPage="+nowpage+"&cntPerPage="+cntpage);
+			// var nowpage ="<c:out value="${paging.nowPage}" />";
+			// var cntpage ="<c:out value="${paging.cntPerPage}" />";
+			 //onSuccessReview();
+			location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num);
 		 },
 		 error:function(data){
 			 alert("에러발생");
@@ -560,8 +561,8 @@
 				 var cntpage ="<c:out value="${paging.cntPerPage}" />";
 	
 				 
-				 
-				 location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num+"&nowPage="+nowpage+"&cntPerPage="+cntpage);
+				//  onSuccessReview();
+				location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num+"&nowPage="+nowpage+"&cntPerPage="+cntpage);
 				   },
 			 error:function(data){
 				 alert("에러발생2");
@@ -570,17 +571,15 @@
 	 }
 	
 	//리뷰 페이징//
-	function reviewList(free_code, pro_num, cntPerPage, nowPage){
+	function reviewList(free_code, pro_num, nowPage){
 		
-		var cntPerPage ="<c:out value="${paging.cntPerPage}" />";
-		var nowPage ="<c:out value="${paging.nowPage}" />";
-		
+	
+		var nowPage =1;
 	
 		
 		 var objParam={
 					"free_code" : free_code,
 					"pro_num" : pro_num,
-					"cntPerPage" : cntPerPage,
 					"nowPage" : nowPage
 				};
 	
@@ -603,28 +602,37 @@
 	    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	}
 	function onSuccessReview(data){
-
-		var fname = data.fnames;
+		console.log("data:"+data);
 		var list = data.review_ajax;
 		var cnt = list.length;
-		var fcnt = fname.length;
+		
+		var fname = data.fnames[0].free_fname;
+		var fcnt = data.fnames.length;
+		
+		var pages=data.freelancerreview;
+		
+		console.log("data.fnames.length"+data.fnames.length);
+		console.log("data.fnames:"+data.fnames[0].free_fname);
+		console.log("fcnt"+fcnt);
+		console.log("fname"+fname);
+		
+		for(y=0; y<fcnt; y++){	
+			var filename= fname[y];
+		}
+		
+		var filename=data.fnames.free_fname;
+
 		
 		for(i=0; i<cnt; i++){
 			
 				var cont ='';//문자열
 				var name = list[i].mmember.mem_name; 
-				var cont = list[i]; 
 				var star = list[i].freerev_star;
 				var date = list[i].freerev_rdate;
 				var fr_cont = list[i].freerev_cont;
-			
-				for(y=0; y<fcnt; y++){	
-				var filename=fname[i].free_fname;
-				
-				}
-				$(".before_review").remove();
-				
-				
+
+			//	$(".before_review").remove();
+		
 				function getFormatDate(date){
 				    var year = date.getFullYear();             
 				    var month = (1 + date.getMonth());          
@@ -637,32 +645,32 @@
 				date = getFormatDate(date);
 				
 				cont+=
-			//	'<div class="row">'
 				'<div class="col-md-12  before_review">'	
 				+'<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >'
-				+'<div class="media mt-0 p-5">'		
-				+'<div><img src=""alt="X" class="avatar-xxl brround"></div>'	
-			//	+'<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>'	
-				+'</div> &nbsp;&nbsp;&nbsp;'
+				+'<div class="media mt-0 p-5">';		
+				if(fcnt > 0){
+					cont+='<div><img  alt="X" class="avatar-xxl brround" src="../hifiveImages/free_thumb/'+fname+'">';
+				}else{
+					cont+='<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>';	
+				}
+					cont+='</div> &nbsp;&nbsp;&nbsp;'
+					
 				+'<div class="media-body">'
 				+'<h5 class="mt-0 mb-1 font-weight-semibold">'+name
 				+'<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified >'
 				+'<i class="fa fa-check-circle-o text-success"></i></span>'
 				+'&nbsp;&nbsp;&nbsp;<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;'+date+'</small>'
 				+'</h5>'
-				+'<span class="rated-products-ratings">'
-				
-				+'<i class="fa fa-star text-warning"> </i>'
-
-			/*	for(var i=0;i<list[5];i++){
-					cont+='<i class="fa fa-star text-warning></i>';
+				+'<span class="rated-products-ratings">';
+				for(var i=0;i<star;i++){
+					cont+='<i class="fa fa-star text-warning">&nbsp;</i>';
 		  		}
-				for(var i=0;i<(5-list[5]);i++){
-					cont+='<i class="fa fa-star-o text-warning mt-0 mb-1 font-weight-semibold"></i>';
+				for(var i=0;i<(5-star);i++){
+					cont+='<i class="fa fa-star-o text-warning mt-0 mb-1 font-weight-semibold">&nbsp;</i>';
 		  		}
-			*/
-				+'<i class="fa fa-star-o text-warning mt-0 mb-1 font-weight-semibold"></i>'+star+'</span></div>'
-				
+				cont+= 
+				star+'<div class="col-md-6 text-center align-items-center"></div></div>'
+				+'<div class="font-13  mb-2 mt-2" style="margin-left:80px;"></div></div>'
 				+'<div class="col-md-6 text-center align-items-center"></div></div>'
 				+'<div class="font-13  mb-2 mt-2" style="margin-left:80px;">'+fr_cont+'</div></div>'
 				+'<div class="card-body item-user" align="right">'
@@ -673,7 +681,7 @@
 				+'<button type="button" class="btn btn-primary" id="updateReview" onclick="update();">수정</button></form>'
 				+'</div></div></div>'
 			//페이징버튼//
-			+'<div class="center-block text-center paginationDiv" id="tab-11">'
+				+'<div class="center-block text-center paginationDiv" id="tab-11">'
 				+'<ul class="pagination mb-0">'
 				+'<div class="card-body" style="margin:0 auto; align:center;" id="review_paging">'
 				+'<ul class="pagination mg-b-0 page-0 ">'
@@ -684,21 +692,29 @@
 				+'<a aria-label="Last" class="page-link"></a>'
 				+'</li></ul></div> </ul>'//</div></div>'
 				
-				alert("##2323$#$#$"+filename); 
+				alert("#@#:"+filename); 
 			
 		}
 	
 		
-		
+		$(".goNextPage").click(function(){
+			nowPage = eval(pages.nowPage) + 1;	
+			pageFlag = 1;
+			reviewList();
+		    pageFlag = 0;
+		    
+		    alert(nowPage);
+		 
+	    });
 	//	$("#tab-11").html(cont);
-		$(".paginationDiv").html(cont);
+/*		$(".paginationDiv").html(cont);
 		$(".goNextPage").click(function(){
 			nowPage =1;
 			pageFlag =1;
 			reviewList();
 			pageFlag=0;
 			
-		});
+		});*/
 	
 	}
 	
