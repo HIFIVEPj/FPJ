@@ -1,13 +1,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 	function requestPay() {
+		
 		alert("ssssssss");
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp60448504');
@@ -15,14 +16,18 @@
 			pg: 'inicis', // version 1.1.0부터 지원.
 			pay_method: 'card',	
 			merchant_uid: 'market_' + new Date().getTime(),
-			name: '마켓 결제:${market.market_sub}',
+			name: '${market.market_sub}',
 //			amount:'${market.market_price}', 
 			amount:'10', 
 			buyer_email: '${sessionScope.email}',
 			buyer_name: '${sessionScope.name}',
+			market_num: '${market.market_num}',
 			m_redirect_url: 'market-paymentsDone'
 		}, 
+		
+	
 		function (rsp) {
+			var data = JSON.stringify({market_num:"${market.market_num}" ,rsp:rsp, marketPaym_feeRate:"${mPayment.marketPaym_feeRate}"});
 			console.log(rsp);
 			if (rsp.success) {
 				$.ajax({
@@ -30,7 +35,7 @@
 				   async:false,
 				   type: 'POST',
 				   contentType: 'application/json',
-				   data: JSON.stringify(rsp),
+				   data: data,
 				   success: function(data){
 					   console.log("data"+data);
 				      if(data != null ){
@@ -71,8 +76,10 @@
 
 		<!--User dashboard-->
 		<section class="sptb">
-			<div class="container">
-				<div class="row">
+			<div class="container" >
+				<div class="row"  >
+					
+					<!-- 
 					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-header">
@@ -88,40 +95,7 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">me</h4></a>
 								</div>
 							</div>
-							<aside class="app-sidebar doc-sidebar my-dash">
-								<div class="app-sidebar__user clearfix">
-									<ul class="side-menu">
-										<li class="slide">
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">프로필 수정</span></a>
-										
-										</li>
-									
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label"> 찜한 프로젝트</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite.html"> My Favorite-1</a></li>
-												<li><a class="slide-item" href="myfavorite.html"> My Favorite-2</a></li>
-											</ul>
-										</li>
-									
-										
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-basket"></i><span class="side-menu__label">주문내역</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="orders.html">Orders-1</a></li>
-												<li><a class="slide-item" href="orders.html">Orders-2</a></li>
-											</ul>
-										</li>
-										
-										
-										 <li>
-											<a class="side-menu__item active" href="#"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">결제</span></a>
-										</li>
-									
-									
-									</ul>
-								</div>
-							</aside>
+						
 						</div>
 					
 						<div class="card mb-xl-0">
@@ -146,9 +120,9 @@
 							</div>
 						</div>
 					</div>
-				
+				-->
 					<div class="col-xl-9 col-lg-12 col-md-12">
-						<div class="card">
+						<div class="card" >
 								<div class="card-header">
 								<div class="card-title" style="font-size: 18pt"><strong>마켓 결제</strong></div>				
 						</div>	
@@ -177,8 +151,9 @@
 														<div class="product-gallery-data mb-0">
 															<h3 class="mb-3 font-weight-semibold">${market.market_sub}</h3>
 															<div class="mb-3">
-																<span class="font-weight-bold h1 text-danger">${market.market_price}</span>
 																
+																<span class="font-weight-bold h1 text-danger"><fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /></span>
+									
 															</div>
 															<dl class="product-gallery-data1">
 																<dt>프리랜서이름</dt>
@@ -188,11 +163,11 @@
 																<dt>마켓 번호</dt>
 																<dd>${market.market_num}</dd>
 															</dl>
-															<dl class="product-gallery-data1">
+														<!-- <dl class="product-gallery-data1">
 																<dt>수수료율</dt>
-																<dd>${mPayment.marketPaym_freeRate}%</dd>
+																
 															</dl>
-															
+														 -->		
 															<div class="product-gallery-rats">
 																<ul class="product-gallery-rating">
 																	<li>
@@ -228,7 +203,7 @@
 												<span class="card-header"><strong>  </span></h3>
 												<span style="font-size: 20pt"><strong>결제금액</span></h3>
 												<br/>
-												<span style="font-size: 20pt;"><strong> ${market.market_price } 원</strong></span>
+												<span style="font-size: 20pt;"><strong> <fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /> 원</strong></span>
 											</div>
 										</div>	
 									</div>	

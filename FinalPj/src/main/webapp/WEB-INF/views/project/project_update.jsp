@@ -159,7 +159,7 @@
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" name="key_num" value="2"
-														<c:if test="${projectCont.keyname().contains('Back-end')}">
+														<c:if test="${projectCont.keyname().contains('Back-End')}">
 														checked
 													</c:if>>
 														<span class="custom-control-label">Back-end</span>

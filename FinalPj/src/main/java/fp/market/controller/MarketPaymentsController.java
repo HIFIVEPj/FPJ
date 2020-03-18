@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,10 +64,36 @@ public class MarketPaymentsController {
 	} 
 	@ResponseBody 
 	@RequestMapping(value = "market-payments-insert", method = RequestMethod.POST)
-	public String insertMarketPayment(@RequestBody HashMap<String,Object> map) {
+	public String insertMarketPayment(@RequestBody HashMap<String,Object> map,HttpSession session) {
+	//	log.info("!!!!!!!!!!!!!!!map!!!!!!!!!!!!!"+map);
+	//	log.info("!!!!!!!!!!!!!!!rsp!!!!!!!!!!!!!"+map.get("rsp"));
+	//스트링형변환	
+		String mem_emailSession=(String)session.getAttribute("email");
+		String market_numS= (String) map.get("market_num");
+		long market_num=Long.parseLong(market_numS);
+		String marketPaym_feeRateS= (String) map.get("marketPaym_feeRate");
+		float marketPaym_feeRate = Float.parseFloat(marketPaym_feeRateS);
+		
+		Market market =marketService.getMarketFreelancer(market_num);
+		String mem_emailFree=market.getFreelancer().getMem_email();
+	//	log.info("!!!!!!!!!!!!!!market!!!!!!!!!!!!!!"+market);
+		
 		Map<String, Object> payinfoMarket = new HashMap<String, Object>();
-		payinfoMarket.put("map", map);
+	//곻통결제정보insert
+		payinfoMarket.put("map", map.get("rsp"));
 		marketService.insertPaymentMarket(payinfoMarket);
+	//판매자기준내역리스트insert
+		payinfoMarket.put("mem_email", mem_emailFree);
+		payinfoMarket.put("mem_emailBuy", mem_emailSession);
+		payinfoMarket.put("market_num", market_num);
+		payinfoMarket.put("marketPaym_feeRate",  marketPaym_feeRate);
+		marketService.insertPaymentMarket2(payinfoMarket);
+	//구매자기준마켓구매내역insert	
+		HashMap<String, Object> buyinfoMarket = new HashMap<String, Object>();
+		buyinfoMarket.put("mem_email",mem_emailSession);
+		buyinfoMarket.put("market_num",market_num);
+		marketService.insertMarketBuy(buyinfoMarket);
+		
 	//	marketService.insertPaymentMarket(map);바로 맵으로 받아버리면 오류남1111오류
 		return "map";
 	}

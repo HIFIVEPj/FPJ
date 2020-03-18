@@ -20,7 +20,11 @@
       <resources mapping="/video/**" location="/resources/video/" />
       <resources mapping="/summernote/**" location="/WEB-INF/views/summernote/" />
       <resources mapping="/marketThumbnails/**" location="/resources/marketThumbnails/" />
+      
       <resources mapping="/hifiveImages/**" location="file:///C:/hifive/hifiveImages/" />
+      
+      <!-- for aws -->
+      <!-- /for aws -->
    
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -28,6 +32,13 @@
       <beans:property name="suffix" value=".jsp" />
    </beans:bean>
    
+   	<!--  jsonView -->
+	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<beans:property name="contentType" value="text/html;charset=UTF-8"/>
+	</beans:bean>
+    <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+      <beans:property name="order" value="0" />
+	 </beans:bean>
    
    <!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
    <beans:bean id="naverLoginController" class="fp.login.naver.NaverLoginController" />

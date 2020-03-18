@@ -3,7 +3,10 @@ package fp.freelancerlist.domain;
 import java.sql.Date;
 import java.util.List;
 
+import fp.freelancerprofile.domain.Applied_Project;
+import fp.freelancerprofile.domain.List_FreeLancerReview;
 import fp.freelancerprofile.domain.Type;
+import fp.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,9 +28,11 @@ public class List_FreeLancer {
 	private String free_fname; //파일이름
 	private String free_ofname; //오리지널파일이름 
 
-	private List_Type list_type;
+	private List<Member> member;
+	private List<List_Type> list_type;
 	private List<List_FreeLancer> list_freelancer;
 	private List<List_FreeLancerProfile> list_freelancerprofile;
 	private List<List_Project> list_project;
 	private List<List_FreeLancerReview> list_review;
+	private List<Applied_Project> applied_Project;
 }

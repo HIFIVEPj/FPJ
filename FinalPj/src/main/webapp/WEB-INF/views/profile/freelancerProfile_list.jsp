@@ -70,8 +70,8 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
-												<li><a class="slide-item" href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
+												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 											
 											
@@ -80,14 +80,15 @@
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
@@ -100,62 +101,6 @@
 								</div>
 							</aside>
 						</div>
-						<!--  
-						<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">Safety Tips For Buyers</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						-->
 					</div>
 
                <div class="col-xl-9 col-lg-12 col-md-12">
@@ -165,18 +110,7 @@
                      </div>
                      <div class="card-body">
                      <div class="ads-tabs">
-                             <div class="tabs-menus" align="right">
-                           <!--  Tabs --> 
-                              <!--  <ul class="nav panel-tabs">
-                                 <li class=""><a href="#tab1" class="active" data-toggle="tab">등록</a></li> 
-                                 <li><a href="mydash" class="btn btn-secondary icons">등록</a></li>
-                                 <li><a href="#" class="btn btn-secondry icons">삭제</a></li>
-                              </ul> -->
-                           </div>  
-                           
-                        <!-- <a href="mydash" class="btn btn-secondary icons">등록</a>      
-                           <a href="#" class="btn btn-secondary icons">삭제</a>   -->
-                              
+                      <div class="tabs-menus" align="right"></div>  
                         <div class="tab-content">
                         <div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
                            <table class="table table-bordered table-hover mb-0 text-nowrap">
@@ -186,137 +120,115 @@
                                              <input type="checkbox" class="custom-control-input check-all" name="check">
                                              <span class="custom-control-label check-all"></span>
                                           </label>  </th>                                 
-                                       <th >프로필명</th>
-                                    <!--   <th>이메일</th>-->  
+                                       <th >프로필명</th>           
                                        <th>등록일</th>
                                        <th>첨부파일</th>
+                                       <th>프로필 공개</th>  
                                  </tr>
                               </thead>
-
-						 <c:forEach  var="freeLancer" items="${profile_list}" varStatus="status" >
-						  
-								<form id="del_list" method="get" action="freelancerProfile_cehck_delete?mem_email=${sessionScope.email}&pro_num=${freeLancer.pro_num}" name="checkdelete1">
-							</c:forEach>
-						
-                               
-                
-                     <c:forEach  var="freelancer" items="${profile_list}" varStatus="status">
-
-                             <tr>
+			
+							<form id="del_list" method="get" action="freelancerProfile_cehck_delete" name="checkdelete1">
+							
+  								<input type="hidden" name="mem_email" value="${profile_list[0].mem_email}" />
+  								
+  								<!-- input type="hidden" name="pro_num" value="${profile_list[0].pro_num}" />-->
+                    			 <c:forEach  var="freelancer" items="${profile_list}" varStatus="status">
+                            		 <tr>
                                        <td scope="row">
                                           <label class="custom-control custom-checkbox ">                                 			
                                              <input type="checkbox" class="custom-control-input ab" name="pro_num" value="${freelancer.pro_num}" >          
                                              <span class="custom-control-label"> </span>
                                           </label>           
                                        </td>
-                                       
-                                       
-                                          <td><a href='freelancerProfile_content?mem_email=${sessionScope.email}&PRO_NUM=${freelancer.pro_num}'class="btn-link">${freelancer.profile_sub}</a></td>       
+
+                                          <td><a href='freelancerProfile_content?pro_num=${freelancer.pro_num}'class="btn-link">${freelancer.profile_sub}</a></td>       
                                     <!--      <td>${freeLancer.mem_email}</td>-->
                                        <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
-
-				
-								
-                  				
-                                   		
+                           		 
                                    	<c:set var="doneLoop" value="true" />					
                                    	<c:choose>
                                    	   <c:when test="${empty file_name}">
 									   </c:when>
-									
+										
 										<c:otherwise>
 											<c:forEach var="file" items="${file_name}">
 													<c:if test="${file.pro_num eq freelancer.pro_num && doneLoop}">	
 														<c:set var="doneLoop" value="false" />		
-													</c:if>	
-																				
-											</c:forEach>   
-											 	
+													</c:if>										
+											</c:forEach>   					 	
 										</c:otherwise>
 									</c:choose>
 									
 									<c:choose>
 									    <c:when test="${!doneLoop}">
-									   
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
-									     
 									    </c:when>
-									       
-									    
 									    <c:otherwise>
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>
 									    </c:otherwise>
 									</c:choose>
-                                   
-												
-								   				
-									
-									
-                                   	
-                              </tr>
-                  </c:forEach>  	
-                           </table>
-                        </div>
+									 <td style="text-align:center">
+										 <c:if test="${freelancer.profile_choice eq 1}">
+											 공개
+										 </c:if>
+										 <c:if test="${freelancer.profile_choice ne 1}">
+											 비공개
+										 </c:if>
+									 </td>  
+                				</tr>
+                  			</c:forEach> 
+                  		</form>  	
+                       </table>
                      </div>
-                     </div>
-                        <thead>
-       
+                   </div>
+                  </div>
+               <thead>
                      <div class="card">       
                         <div class="card-footer" align="right">
-                        <a href="javascript:void(0)" class="btn btn-secondary icons" onclick="javascript:check();">삭제</a> 
- </form>                                                    
-                         <a href='freelancerMyprofile_write?mem_email=${sessionScope.email}'><button type="submit" class="btn btn-primary">등록</button></a>   
+                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
+                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
+                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#choiceModal">프로필공개</button>			 
                         </div>
-                     
-          
+
                 <div class="center-block text-center">
                            <ul class="pagination mb-0">         
                         <div class="card-body" style="margin:0 auto; align:center;">
                            <ul class="pagination mg-b-0 page-0 ">
-                     
                           <c:if test ="${paging.nowPage != paging.startPage}">
-                          
                            <!--이전 페이지 이동 -->
                             <li class="page-item">
-                        <a aria-label="Last" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
-                        <i class="fa fa-angle-double-left"></i></a>
-                     
-                     </li>   
-                     <li class="page-item">
-                        <a aria-label="Next" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
-                        <i class="fa fa-angle-left"></i></a>
-                     </li>   
-                              
-                           </c:if>
-                            
+	                        <a aria-label="Last" class="page-link" href="freelancerProfile_list?&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
+	                        <i class="fa fa-angle-double-left"></i></a>
+		                     </li>   
+		                     <li class="page-item">
+		                        <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
+		                        <i class="fa fa-angle-left"></i></a>
+		                     </li>   
+                          </c:if>
                            <!--페이지번호 -->
-             
- <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+                            <!-- 시작페이지~끝페이지 -->  
+ 							 <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
                                     <li class='page-item active'><a class="page-link"  >${p}</a></li>
                                  </c:when>
                                  <c:when test = "${p != paging.nowPage }">
-                                    <li class="page-item"><a class="page-link"  href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
+                                    <li class="page-item"><a class="page-link"  href="freelancerProfile_list?&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
                                  </c:when>
                               </c:choose>
                            </c:forEach>
-                           
-                              <c:if test ="${paging.nowPage != paging.lastPage}">
-                                 <li class="page-item">
-                           <a aria-label="Next" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
+                           <c:if test ="${paging.nowPage != paging.lastPage}">
+                               <li class="page-item">
+                           <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
                          </li>  
                         <li class="page-item">
-                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?mem_email=${sessionScope.email}&nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
                         </li>
-                              </c:if>
-                              
-                            
+                           </c:if>
                            </ul>
                            </div>
                            </ul>
-                           </div>
-                                                                       
+                           </div>                                   
 <!--  
                               <li class="page-item">
                                  <a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
@@ -350,7 +262,6 @@
 -->
                         </div>
                         </div>
-
                         <!-- pagination-wrapper -->
                      </div>
                      <!-- section-wrapper -->
@@ -358,11 +269,8 @@
                </div>
             </div>
          </div>
-   
       </section>
       <!--/User Dashboard-->
-
-
 <!--Footer Section-->
 		<section>
 			<footer class="text-white" style="background-color:#0e284c;">
@@ -437,40 +345,119 @@ function check(){
         alert("1개이상 선택해 주세요.");
          return;
       }
-     
-     
-     //  alert("FREE_CODE: "+FREE_CODE.FREE_CODE.value);//+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
-      // alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
-       //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
-      // alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
-      // alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+
       checkdelete1.submit();
+   
       }
-   //});
+      
+function choice(){
+	//alert(pro_num)
+      //var pro_num = $('.pro_num').attr('value');
+     // document.getElementById('pro_num').value = pro_num;
+     
+     
+      var pro_num = new Array();
+      var chk_cnt = 0;
+      //for(var i=0; i<key_num_size; i++){
+       $('input:checkbox[name="pro_num"]').each(function() {
+         if(this.checked){
+        	 pro_num[chk_cnt] = this.value;
+        	 chk_cnt++;
+        	
+        	}  
+        
+       });
+       alert("pro_num:"+pro_num);
+    
+       if(pro_num == ""){
+        alert("1개이상 선택해 주세요.");
+         return;
+      }
+
+       choiceProfile.submit();
+   
+      }
+
+</script>
+<script>    
+	 $("input:checkbox[name='pro_num']").on("click",function(){
+		var pronum ="";
+		$('input:checkbox[name="pro_num"]').each(function() {
+			 if(this.checked){
+			      pronum = this.value;
+			      }
+			 });
+			   $("#profile_open").attr("onclick","choiceAjax("+pronum+")");
+			      });
+			      
+			      function choiceAjax(value){
+			         var flag= ${!empty sessionScope.email};
+			         var objParam={
+			               "pro_numList" : value
+			         };
+			          $.ajax({
+			             type:"get",
+			             url:"choiceProfile",
+			             data:objParam,
+			             dataType: "json",
+			             success:function(data){
+			               alert("성공");  
+			             },
+			             error:function(data){
+			                alert("에러발생");
+			             }
+			          });
+			      }
 </script>
 
-		<!-- Modal -->
-        <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-           <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                       <h5 class="modal-title" id="exampleModalLabel"> <span class=" btn btn-icon btn-primary btn-sm mb-1"><i class="fa fa-envelope"></i> </span> &nbsp; <b>이메일인증</b> </h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      				 <span aria-hidden="true">×</span>
-                           </button>
-                 					 </div>
-              							<div class="modal-body " style="margin:0 auto;">
-                                       <input type="text" id="email" name="email" placeholder="이메일을 입력하세요" class="form-control" style="width:250px; float:left;" />
-                                       <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button>
-                                    </div>
-                                    <div class="modal-footer">
-
-                                    <input type="hidden" path="random" id="random" value="${random}" />
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        <!--Modal 끝-->
+<!-- delete Modal -->   
+      <div id="deleteModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 정말 삭제할까요?</p>
+               </div>
+               <div class="modal-footer">
+               <a href="javascript:void(0)" class="btn btn-primary" style="color:white;" onclick="javascript:check();">네</a> 
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /delete Modal -->
+<!-- open Modal -->   
+      <div id="choiceModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 공개할까요?</p>
+               </div>
+               <div class="modal-footer">
+                <a href="javascript:void(0)" onclick="" class="btn btn-primary" id="profile_open">프로필공개</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /open Modal -->
 
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>

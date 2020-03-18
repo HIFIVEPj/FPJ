@@ -62,14 +62,15 @@
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
@@ -147,7 +148,7 @@
 							<div class="card-header">
 								<h3 class="card-title">프로필 등록하기</h3>
 							</div>
-<form  method='post' id='free_write' name='free_write' action="freelancerMyprofile_write?mem_email=${sessionScope.email}">						
+					<form  method='post' id='free_write' name='free_write' action="freelancerMyprofile_write?mem_email=${sessionScope.email}" enctype="multipart/form-data">						
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
@@ -168,7 +169,7 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
 											<label class="form-label">경력</label> 
-											<input type="text" class="form-control" placeholder="경력" name="pro_ex">
+											<input type="text" class="form-control" placeholder="경력" name="pro_exp">
 										</div>
 									</div>
 
@@ -1321,29 +1322,7 @@
 									                // 우편번호와 주소 정보를 해당 필드에 넣는다.
 									                document.getElementById('postcode').value = data.zonecode;
 									                document.getElementById("address").value = addr+extraAddr;
-									                
-									           //좌표찾기(지도 쓸일 없으면 생략가능)------------ 좌표 2차시작
-									                geocoder.addressSearch(data.address, function(results, status) {
-								                // 정상적으로 검색이 완료됐으면
-								                    if (status === daum.maps.services.Status.OK) {
-								
-								                        var result = results[0]; //첫번째 결과의 값을 활용
-								
-								                    // 해당 주소에 대한 좌표를 받아서 입력
-								                        document.getElementById("address_x").value=result.x;
-								                        document.getElementById("address_y").value=result.y; 
-								                        
-								                        var coords = new daum.maps.LatLng(result.y, result.x);
-								                        // 지도를 보여준다.
-								                        mapContainer.style.display = "block";
-								                        map.relayout();
-								                        // 지도 중심을 변경한다.
-								                        map.setCenter(coords);
-								                        // 마커를 결과값으로 받은 위치로 옮긴다.
-								                        marker.setPosition(coords)
-								                    }
-								                });
-									           //여기까지 삭제-------------- 좌표 2차 끝
+									          
 									                // 커서를 상세주소 필드로 이동한다.
 									                document.getElementById("detailAddress").focus();
 									            }
@@ -1366,9 +1345,9 @@
 											<label class="form-label">업무가능여부</label>
 										</div>
 										<div class="col-md-9">
-											<label class="custom-switch">
-												<input type="checkbox" name="pro_ox" class="custom-switch-input">
-												<span class="custom-switch-indicator"></span>
+											<label class="custom-switch">												
+												<input type="checkbox" name="pro_ox" id="pro_ox" class="custom-switch-input">												
+												 <span class="custom-switch-indicator"></span> 
 												<span class="custom-switch-description">불가능/가능</span>
 											</label>
 										</div>
@@ -1435,8 +1414,7 @@
 	                                   				<option value="광주">광주</option>
 	                                   				<option value="전북">전북</option>
 	                                   				<option value="전남">전남</option>
-	                                   				<option value="제주">제주</option> 	 	 	 
-	                                   				 
+	                                   				<option value="제주">제주</option> 	  
 	                                			 </select>
 											</div>
 										</div>	
@@ -1449,19 +1427,20 @@
 											</div>
 										</div>
 									</div>
-
-									<div class="col-md-12">
-										<div class="form-group">
-											<label class="form-label">자기소개</label>
-											<textarea rows="5" class="form-control" placeholder="" name="pro_cv"></textarea>
+									
+									 <div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="form-label">자기소개</label>
+												<textarea rows="5" class="form-control" placeholder="" name="pro_cv"></textarea>
+											</div>
 										</div>
 									</div>
-								</div>
 								
 								 <div class="row">
-										<div class="col-sm-12 col-md-12">
+										<div class="col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">학력</label>
+												<label class="form-label">최종학력</label>
 												<input type="text" class="form-control" name="pro_edu">
 											</div>
 										</div>
@@ -1473,7 +1452,7 @@
 											<div class="form-group ">
 												<label class="form-label mt-2">첨부파일</label>
 												<div class="custom-file">
-													<input type="file" class="custom-file-input" name="example-file-input-custom">
+													<input type="file" class="custom-file-input" name="profile_fname" multiple="multiple" >
 													<label class="custom-file-label">Upload Files</label>
 												</div>
 											</div>
@@ -1519,14 +1498,22 @@
 		   
 <script>
 function check(){
-      var type_num = $('.active').attr('value');
-      document.getElementById('type_num').value = type_num;
+    // var type_num = $('.active').attr('value');
+     // document.getElementById('type_num').value = type_num;
  	
       var key_num = new Array();
       var key_cnt = 0;
      
-      //for(var i=0; i<key_num_size; i++){
-   
+      
+     var pro_ox = $('input:checkbox[id="pro_ox"]:checked').length;
+     if(pro_ox == 0){  
+    	 $('#pro_ox').attr('value','off');
+    	 var z = $('#pro_ox').val();
+    	 $("#pro_ox").append("<input type='hidden'  name='pro_ox' value='"+z+"'>");      	 
+    	
+     }
+
+   	 	
       $('input:checkbox[name="key_num"]').each(function() {	
          if(this.checked){
             key_num[key_cnt] = this.value;
@@ -1534,8 +1521,8 @@ function check(){
          }
        });
       
-       alert("type_num: " +type_num);
-      // alert("key_num : "+ key_num);
+       //alert("type_num: " +type_num);
+      alert("key_num : "+ key_num);
     
 	      if(key_num == ""){
 	         alert("키워드는 1개 이상 설정해야합니다.")

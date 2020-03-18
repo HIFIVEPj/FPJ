@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import fp.corporation.domain.PjPickKeyword;
 import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerPick;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
+import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
@@ -74,20 +78,48 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 
 	//체크박스 삭제//
 	@Override
-	public void checkdelete1(long PRO_NUM) {
-		 mapper.checkdelete1(PRO_NUM);
+	public void checkdelete1(Map<String, Object> map) {
+		 mapper.checkdelete1(map);
 	}
 	
 	//프로필 작성//
 	@Override
+	@Transactional
 	public void listInsert(FreeLancerProfile freelancerprofile){
 		mapper.listInsert(freelancerprofile);
+		
 	}
-	
+
 	@Override
 	public void insertPjpkeyword(Map<String, Object> map){
 		 mapper.insertPjpkeyword(map);
 	}
+	//프로필 작성페이지 수정//
+	@Override
+	@Transactional
+	public void listUpdate(FreeLancerProfile freelancerprofile){
+		mapper.listUpdate(freelancerprofile);
+		mapper.typeUpdate(freelancerprofile.getType_num());
+	  //  mapper.keyUpdate(map);
+	}
+
+	/*@Override
+	@Transactional
+	public void keyUpdate(Map<String, Object> map) {
+		 mapper.keyDelete(map);
+		 mapper.keyUpdate(map);
+		
+	}*/
+	@Override
+	@Transactional
+	public void keyUpdate(FreePickKeyWord freepickkeyword) {
+		mapper.updateKeyword_Del(freepickkeyword);
+		mapper.updateKeyword_In(freepickkeyword);
+	}
+/*	@Override
+	public void keyDelete(Map<String, Object> map) {
+		 mapper.keyDelete(map);
+	}*/
 
 	@Override
 	public List<FreeLancerProfile> profile_free_select(String mem_email){
@@ -98,10 +130,15 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.getTotalCountFree(free_code);
 	}
 
-	
-	
-	
-	
+	//프로필 수정//
+	@Override
+	public FreeLancerProfile showContent(long pro_num) {
+		return mapper.showContent(pro_num);
+	}
+	@Override	
+	public void choiceProfile(Map<String, Object> map) {
+		mapper.choiceProfile(map);
+	}
 	
 	
 	//나영추가 + mydash_free
@@ -119,8 +156,63 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public void mydash_free_update(FreeLancer freelancer) {
 		mapper.mydash_free_update(freelancer);
 	}
+	@Override
+	public List<FreeLancer>select_pj_applied_free(){
+		return mapper.select_pj_applied_free();
+	}
+	@Override
+	public List<FreeLancer>select_pj_applied_free_paging(long pj_num){
+		return mapper.select_pj_applied_free_paging(pj_num);
+	}
+	//프리랜서 찜
+	@Override
+	public List<FreeLancerPick>freepick_list(long cor_code){
+		return mapper.freepick_list(cor_code);
+	}
+	@Override
+	@Transactional
+	public void freepick_insert(Map<String, Object>map){
+		mapper.freepick_insert(map);
+		mapper.freepick_pro_update_in(map);
+	}
+	@Override
+	@Transactional
+	public void freepick_del(Map<String, Object>map) {
+		mapper.freepick_del(map);
+		mapper.freepick_pro_update_del(map);
+	}
+	@Override
+	public long getTotalCountFreep(long cor_code) {
+		return mapper.getTotalCountFreep(cor_code);
+	}
+	@Override
+	public List<FreeLancerProfile> freepick_cor(Map<String, Object>map){
+		return mapper.freepick_cor(map);
+	}
 	
-
-
-
+	//profile keyword 전체뽑기
+	@Override
+	public List<FreeLancerProfile> selectAllFreeKeywords(){
+		return mapper.selectAllFreeKeywords();
+	}
+	
+	//계좌추가
+	@Override
+	public void updateACCTOX(long free_code) {
+		mapper.updateACCTOX(free_code);
+	}
+	@Override
+	public void addACCT(Freelnacer_account freeacct){
+		mapper.addACCT(freeacct);
+	}
+	
+	@Override
+	public Freelnacer_account selectFreeACCT(long free_code) {
+		return mapper.selectFreeACCT(free_code);
+	}
+	@Override
+	public void updateACCT(Freelnacer_account freeacct) {
+		mapper.updateACCT(freeacct);
+	}
 }
+

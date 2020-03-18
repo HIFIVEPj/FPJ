@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import fp.corporation.domain.Corporation;
-import fp.market.domain.Freelancer;
+import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPayment;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
@@ -25,7 +26,7 @@ public interface MarketMapper {
 	public int getMarketQACount(long market_num);
 	
 	
-	public List<Market> getMarketList(MarketPagingVO marketVO);
+	public List<Market> getMarketList(HashMap<String, Object> pagingmap);
 //마켓 상세보기에 피요한것들	
 	public Market getMarket(long market_num);	
 	public Integer getMarketStar(long market_num);
@@ -45,6 +46,7 @@ public interface MarketMapper {
 	public void insertMarketRev(MarketRev marketRev);	
 	public void deleteMarketRev (HashMap<String, Object> map);
 	public void updateMarketRev (HashMap<String, Object> map);
+	public Integer reloadMarketRevAVG(long market_num);
 	
 	public void insertMarketQA(MarketQA marketQA);
 	public void insertMarketQAFile(HashMap<String, Object> map);
@@ -52,13 +54,14 @@ public interface MarketMapper {
 	
 	public void deleteMarketQA (HashMap<String, Object> map);
 	public void updateMarketQA2 (HashMap<String, Object> map);
-	
+
 	public List<MarketQAFile> marketQAFile(HashMap<String, Object> map);
 	public MarketQA marketQAcont(HashMap<String, Object> map);
 	
 	public String getFreeName(long market_num);
 	
 	public void insertPaymentMarket(Map<String,Object> map);
+	public void insertPaymentMarket2(Map<String,Object> map);
 	
 	public List<MarketPick> pickState(String mem_email);
 	public void insertMarketPick(HashMap<String,Object> map);
@@ -66,6 +69,20 @@ public interface MarketMapper {
 	public void updatePlusMarketPick(long market_num);
 	public void updateMinusMarketPick(long market_num);
 
+	public void insertMarketBuy(HashMap<String,Object> map);
+	
+	public List<MarketBuysellList> writeReview(HashMap<String,Object> map);
+
+	public List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map);
+	public int searchBoxMarketCount(Map<String,Map<String,Object>> map);
+	
+	public int searchButtonMarketCount(String searchWord);
+	public List<Market> searchButtonMarketList(HashMap<String,Object> map);
+	
+	public List<FreelancerProfile> similarFree(int type_num);
+	
+	public long maxSun(HashMap<String,Object> map);
+	public long delUpdateMarketQA2(HashMap<String,Object> map);
 	//마켓컨텐츠의 리뷰기업 프리 정보 따로 빼오기
 	//public List<Freelancer> getMarketRevFree(long market_num);
 //	public List<Corporation> getMarketRevCor(long market_num);

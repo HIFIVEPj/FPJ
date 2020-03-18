@@ -51,25 +51,25 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
+												<li><a class="slide-item " href="mydash_cor">기업</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market">마켓 찜</a></li>
+												<li><a class="slide-item" href="cor-myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="project_write?mem_email=${sessionScope.email}">프로젝트 작성하기</a></li>
-												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
+												<li><a class="slide-item" href="project_write">프로젝트 작성하기</a></li>
+												<li><a class="slide-item" href="managed_project">프로젝트관리</a></li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments_cor"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
 											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
@@ -353,40 +353,6 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							</div>
 							
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
@@ -429,6 +395,196 @@
 		</section>
 		<!--/User Dashboard-->
 
+<style type="text/css">
+	.clickableList {cursor: pointer;}
+	.oddList { background: #F2F2F2;}
+	.evenList { background: #FAFAFA;}
+	.activeList { width:50px; height:50px; font-weight:bold;}
+</style>
+<script src="../js/dateFormat.js"></script>
+<script>
+function page(){ 
+	var reSortColors = function($div) {
+		  $('tbody tr:odd td', $div).removeClass('evenList').removeClass('listtd').addClass('oddList');
+		  $('tbody tr:even td', $div).removeClass('oddList').removeClass('listtd').addClass('evenList');
+		 };
+
+	 $('div.paginated').each(function() {
+	  var pagesu = 6;  //페이지 번호 갯수
+	  var currentPage = 0;
+	  var numPerPage = 6;  //목록의 수
+	  var $div = $(this);    
+	  
+	  //length로 원래 리스트의 전체길이구함
+	  var numRows = $div.find('tbody tr').length;
+	  //Math.ceil를 이용하여 반올림
+	  var numPages = Math.ceil(numRows / numPerPage);
+	  //리스트가 없으면 종료
+	  if (numPages==0) return;
+	  //pager라는 클래스의 div엘리먼트 작성
+	  var $pager = $('<td align="center" id="remo" colspan="10"><div class="pager"></div></td>');
+	  
+	  var nowp = currentPage;
+	  var endp = nowp+10;
+	  
+	  //페이지를 클릭하면 다시 셋팅
+	  $div.bind('repaginate', function() {
+	  //기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
+	  
+	   $div.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+	   $("#remo").html("");
+	   
+	   if (numPages > 1) {     // 한페이지 이상이면
+	    if (currentPage < 3 && numPages-currentPage >= 3) {   // 현재 5p 이하이면
+	     nowp = 0;     // 1부터 
+	     endp = pagesu;    // 10까지
+	    }else{
+	     nowp = currentPage -3;  // 6넘어가면 2부터 찍고
+	     endp = nowp+pagesu;   // 10까지
+	     pi = 1;
+	    }
+	    
+	    if (numPages < endp) {   // 10페이지가 안되면
+	     endp = numPages;   // 마지막페이지를 갯수 만큼
+	     nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
+	    }
+	    if (nowp < 1) {     // 시작이 음수 or 0 이면
+	     nowp = 0;     // 1페이지부터 시작
+	    }
+	   }else{       // 한페이지 이하이면
+	    nowp = 0;      // 한번만 페이징 생성
+	    endp = numPages;
+	   }
+	   // [처음]
+	   $('<br /><span class="page-number" cursor: "pointer">[처음]</span>').bind('click', {newPage: page},function(event) {
+	          currentPage = 0;   
+	          $div.trigger('repaginate');  
+	          $($(".page-number")[2]).addClass('activeList').siblings().removeClass('activeList');
+	      }).appendTo($pager).addClass('clickableList');
+	    // [이전]
+	      $('<span class="page-number" cursor: "pointer">&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+	          if(currentPage == 0) return; 
+	          currentPage = currentPage-1;
+	    $div.trigger('repaginate'); 
+	    $($(".page-number")[(currentPage-nowp)+2]).addClass('activeList').siblings().removeClass('activeList');
+	   }).appendTo($pager).addClass('clickableList');
+	    // [1,2,3,4,5,6,7,8]
+	   for (var page = nowp ; page < endp; page++) {
+	    $('<span class="page-number" cursor: "pointer" style="margin-left: 8px;"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+	     currentPage = event.data['newPage'];
+	     $div.trigger('repaginate');
+	     $($(".page-number")[(currentPage-nowp)+2]).addClass('activeList').siblings().removeClass('activeList');
+	     }).appendTo($pager).addClass('clickableList');
+	   } 
+	    // [다음]
+	      $('<span class="page-number" cursor: "pointer">&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+	    if(currentPage == numPages-1) return;
+	        currentPage = currentPage+1;
+	    $div.trigger('repaginate'); 
+	     $($(".page-number")[(currentPage-nowp)+2]).addClass('activeList').siblings().removeClass('activeList');
+	   }).appendTo($pager).addClass('clickableList');
+	    // [끝]
+	   $('<span class="page-number" cursor: "pointer">&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
+	           currentPage = numPages-1;
+	           $div.trigger('repaginate');
+	           $($(".page-number")[endp-nowp+1]).addClass('activeList').siblings().removeClass('activeList');
+	   }).appendTo($pager).addClass('clickableList');
+	     
+	     $($(".page-number")[2]).addClass('activeList');
+	     reSortColors($div);
+	  });
+	   $pager.insertAfter($div).find('span.page-number:first').next().next().addClass('activeList');   
+	   $pager.appendTo($div);
+	   $div.trigger('repaginate');
+	 });
+	}
+
+function free_list(pj_num){
+	var values = [];
+	$.ajax({
+		type:"GET",
+		url:"<c:url value='appp_pj_freeList' />",
+		dataType:"json",
+		data:"pj_num="+pj_num,
+		cahche:false,
+		headers: { "cache-control": "no-cache" },
+		success:function(data){
+			var temp="<thead><tr><th class='listth' style='width:10px;' ></th>"+
+				"<th class='listth' style='width:200px; font-weight:bold; font-size:14px; text-align:center; line-height: 40px;' >프로필 제목</th>"+
+				"<th class='listth' style='width:160px; font-weight:bold; font-size:14px; text-align:center; ' >지원자 이메일</th>"+
+				"<th class='listth' style='width:100px; font-weight:bold; font-size:14px;text-align:center; ' >업무 가능일</th>"+
+				"<th class='listth' style='width:100px; font-weight:bold; font-size:14px;text-align:center; ' >지원일</th>"+
+				"<th class='listth' style='width:100px; font-weight:bold; font-size:14px;text-align:center; ' >버튼</th></tr></thead>"
+			for(var i=0 in data){
+				for(var j=0 in data[i].freelancerprofile){
+					var apppstatus= data[i].applied_project[j].appp_status;
+					var apppdate = format(data[i].applied_project[j].appp_date, 'yyyy/MM/dd');
+					var startTask = format(data[i].freelancerprofile[j].pro_start, 'yyyy/MM/dd');
+					//alert(apppstatus);
+					//alert(data[i].mem_email+", "+data[i].freelancerprofile[j].profile_sub+ " , "+ data[i].applied_project[j].appp_date);
+					//alert(data[i].free_code);
+					temp += '<tr> <td class="listtd"></td>'+
+					'<td class="listtd" style="height:40px; text-align:center;"> <a href="freelancercontent?free_code='+data[i].free_code+'" class="text-dark font-weight-semibold" target="_blank">' 
+							+data[i].freelancerprofile[j].profile_sub+'</a></td>' +
+					'<td class="listtd"  style="height:50px; text-align:center;">' +data[i].mem_email+'</td>' +
+					'<td class="listtd"  style="height:40px; text-align:center;">' +startTask+'</td>' +
+					'<td class="listtd"  style="height:40px; text-align:center;">' +apppdate+'</td>' +
+					'<td class="listtd"  style="height:40px; text-align:center;" id="selectplace'+data[i].freelancerprofile[j].pro_num+'">'
+					if(apppstatus===1){
+						temp +='<a class="btn btn-warning" style="color:white; height:30px; line-height: 16px;" href="javascript:void(0)">완료</a> </td></tr>';
+					}else{
+						temp +='<a class="btn btn-primary" style="color:white; height:30px; line-height: 16px;" href="javascript:void(0)" id="selectfree'+data[i].freelancerprofile[j].pro_num+'" onclick="selectf('+data[i].freelancerprofile[j].pro_num+','+pj_num+')">'
+						+'선택</a> </td></tr>';
+					}
+				}													
+			}
+			$("#tbl").html(temp);	
+			page();
+			$("#applyList").modal();
+		},
+		error: function(data){
+			var data1 = data;
+			alert("에러발생");
+			alert("data: "+data);
+		}
+	});
+	
+}
+function deletePj(pj_num){
+	$("#deleteYes").attr("href","project_delete?pj_num="+pj_num);
+	$("#deleteModal").modal("show");
+}
+function selectf(pro_num,pj_num){
+	$("#applyList").modal("hide");
+	$("#select").attr("onclick","selectDone("+pro_num+','+pj_num+")");
+	$("#selectModal").modal("show");
+}
+function selectDone(pro_num,pj_num){
+	$("#selectModal").modal("hide");
+	$.ajax({
+		type:"get",
+		url:"<c:url value='select_free_project' />",
+		data:"pro_num="+pro_num+"&pj_num="+pj_num,
+		dataType:"json",
+		success:function(data){
+			$("#selectfree"+pro_num).remove();
+			$("#selectplace"+pro_num).append('<a class="btn btn-warning" style="color:white; height:30px; line-height: 16px;" href="javascript:void(0)">완료</a>');
+			if(data==1){
+				$("#includeING"+pj_num).remove();
+				$("#pj_status"+pj_num).append('<a href="javascript:void(0)" class="badge badge-secondary" id="includeEND'+pj_num+'">마감</a>');
+				$("#applyList").modal("show");
+			}else{$("#applyList").modal("show");}
+			
+		},
+		error:function(data){
+			alert('에러');
+		}
+	});
+}
+function end(){
+	alert("이미 선택한 프리랜서임");
+}
+</script>
 		<!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
