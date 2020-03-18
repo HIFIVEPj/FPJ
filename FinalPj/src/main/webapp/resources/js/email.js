@@ -1,6 +1,5 @@
 /*개인 시작*/
 
-
  function onkey(){ 		
 		$("#emailMD").keyup(function() {
 			if($('#emailMD').val()==''){
@@ -22,13 +21,13 @@
         				 success:function(data){	//data : checkSignup에서 넘겨준 결과값
         						if($.trim(data)=="YES"){
         						   if($('#emailMD').val()!=''){ 
-        							   $('#email_check').text('사용가능한 아이디 입니다.');
+        							   $('#email_check').text('사용가능한 이메일 입니다.');
         							   $('#email_check').css('font-size', '11px');
         							   $('#email_check').css('color', 'blue');
         							  	$("#emailBtn").attr("disabled", false);
         							 
         						   }else if($('#emailMD').val()==''){
-        								$('#email_check').text('아이디를 입력해주세요.');
+        								$('#email_check').text('이메일을 입력해주세요.');
         								$('#email_check').css('color', 'red');
         								$("#emailBtn").attr("disabled", true);
         							}else{
@@ -38,7 +37,7 @@
         							}
         						}else{
         						   if($('#emailMD').val()!=''){		                 
-            							$('#email_check').text('중복된 아이디입니다.');
+            							$('#email_check').text('중복된 이메일입니다.');
             							$('#email_check').css('font-size', '11px');
             							$('#email_check').css('color', 'red');
             							$("#emailBtn").attr("disabled", true);						
@@ -50,12 +49,13 @@
 			}//else if
 		});//blur
 	 };//메일function 끝
-$(function(){ 
-	  $('#emailModal').on('hidden.bs.modal', function (e) {
+$(function(){ 	
+	$('#emailModal').on('hidden.bs.modal', function (e) {
 		  $('#emailMD').val("");
+		  $('#email_check').empty();
 		  $('#emailAuth').val("");
 		});
-	  
+
   /*이메일 인증 버튼 클릭 시 발생하는 이벤트*/
   $(document).on("click","#emailBtn", function(){
 	  if($("#emailMD").val()==""){
@@ -168,6 +168,7 @@ $(function(){
 $(function(){  	
 	  $('#c_emailModal').on('hidden.bs.modal', function (e) {
 		  $('#c_emailMD').val("");
+		  $('#c_email_check').empty();
 		  $('#c_emailAuth').val("");
 		});
 	
