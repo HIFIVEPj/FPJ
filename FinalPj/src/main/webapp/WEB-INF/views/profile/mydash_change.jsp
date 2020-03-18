@@ -209,7 +209,11 @@
 								</c:if>
 								<c:if test = "${mydash.free_fname ne null}">
 									<div class="profile-pic-img">
+										
 										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+										<!--
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+										-->
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>

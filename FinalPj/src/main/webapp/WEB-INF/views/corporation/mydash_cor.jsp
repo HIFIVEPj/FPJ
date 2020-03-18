@@ -392,7 +392,14 @@
 								</c:if>
 								<c:if test = "${cor.cor_fname ne '' }">
 									<div class="profile-pic-img">
+<<<<<<< HEAD
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="media-object brround" alt="user">
+=======
+										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+										<!--
+										<img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+										-->
+>>>>>>> efe1c410b96400337b9b3d175789010408e3f843
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>

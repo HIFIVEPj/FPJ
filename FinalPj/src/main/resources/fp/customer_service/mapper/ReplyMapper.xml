@@ -22,11 +22,12 @@
 		delete from qa_comment where qacomm_num=#{qacomm_num}
 	</delete>
 	
-	<!-- 글 상세보기 들어갈 때 댓글 목록을 불러오기 위함 -->
+	<!-- 글 상세보기 들어갈 때 댓글 목록을 불러오기 위함 + 페이징 -->
 	<select id="getListWithPaging" resultType="ReplyVO">
 		<!--
 		select * from qa_comment where qa_num=#{qa_num} order by qacomm_num asc
 		-->
+		
 		<!--
 		select qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name from qa_comment, member where qa_comment.mem_email=member.mem_email and qa_num=#{qa_num} order by qacomm_num asc
 		-->
