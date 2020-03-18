@@ -270,6 +270,15 @@
 	<update id="payStatusUpdate" parameterType="java.util.Map">
 		update PROJECT set pj_paystatus=1 where pj_num = #{pj_num}
 	</update>
+	<update id="corPointUp" parameterType="long">
+		update CORPORATION set COR_POINT=COR_POINT+1 where cor_code = #{cor_code}
+	</update>
+	<update id="corLevelUp1" parameterType="long">
+		update corporation set cor_level=1 where cor_point in(select cor_point from corporation where cor_point>10 and cor_code=#{cor_code})
+	</update>
+	<update id="corLevelUp2" parameterType="long">
+		update corporation set cor_level=2 where cor_point in(select cor_point from corporation where cor_point>20 and cor_code=#{cor_code})
+	</update>
 	
 	<!-- 프로젝트 찜 -->
 	<select id="pjpick_list" resultType="fp.corporation.domain.ProjectPick" parameterType="long">

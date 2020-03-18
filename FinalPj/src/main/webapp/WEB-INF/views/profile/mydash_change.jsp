@@ -120,7 +120,7 @@
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">개인활동등급</label>
-											<input type="text" class="form-control" value="새싹" readonly>
+											&nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="13%">&nbsp; <b>Bronze</b>
 										</div>
 									</div>
 
@@ -310,7 +310,15 @@
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">개인활동등급</label>
-											<input type="text" class="form-control" value="${mydash.free_level}" readonly>
+											<c:if test="${mydash.free_level==0}">
+												&nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="10%">&nbsp; <b>Bronze</b>
+											</c:if> 
+											<c:if test="${mydash.free_level==1}">
+												&nbsp; <img src="../images/photos/silver100.png" alt="실" width="10%"> &nbsp; <b>Silver</b>
+											</c:if>
+											<c:if test="${mydash.free_level==2}"> 
+												&nbsp;<img src="../images/photos/gold100.png" alt="골"  width="10%">&nbsp; <b>Gold</b>
+											</c:if> 	
 										</div>
 									</div>
 

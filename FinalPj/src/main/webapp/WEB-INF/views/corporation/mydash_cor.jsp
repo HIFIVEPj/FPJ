@@ -9,7 +9,38 @@
 <c:when test="${empty cor}">
       <script>
          function check(){
-            //$("#typeSelect").val();
+        	 if(input_cor.cor_mname.value==""){
+ 				alert("담당자 성명은 필수 입력 사항입니다.");
+ 				return;
+ 			}
+        	if(input_cor.cor_reg.value==""){
+  				alert("사업자 등록번호는 필수 입력 사항입니다.");
+  				return;
+  			}
+        	if(input_cor.cor_name.value==""){
+  				alert("회사이름은 필수 입력 사항입니다.");
+  				return;
+  			}
+        	if(input_cor.cor_detailaddr.value==""){
+  				alert("회사 주소는 필수 입력 사항입니다.");
+  				return;
+  			}
+        	if(input_cor.cor_addr.value==""){
+  				alert("회사 주소는 필수 입력 사항입니다.");
+  				return;
+  			}
+        	if(input_cor.cor_tel.value==""){
+  				alert("연락처는 필수 입력 사항입니다.");
+  				return;
+  			}
+        	if(input_cor.cor_type.value==""){
+  				alert("직종 선택은 필수 사항입니다.");
+  				return;
+  			}
+        	if(input_cor.cor_type.value==""){
+  				alert("직종 선택은 필수 사항입니다.");
+  				return;
+  			}
             input_cor.submit();
          }
       </script>
@@ -107,6 +138,26 @@
 									<input type="text" class="form-control authCorRegNum" placeholder="사업자등록번호" name="cor_reg" value="${cor.cor_reg}" data-target="#regModal" data-toggle="modal" readonly>
 								</div>
 							</div>
+							<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel"> <span class="float-right btn btn-icon btn-primary btn-sm mt-3"><i class="si si-share mr-1"></i></span></h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+												<div class="modal-body " style="margin:0 auto;">
+													 <p style="text-align:center;">사업자 등록번호를 입력하세요</p>
+							                		<input type="text" class="form-control regnum" placeholder="-를 제외한 10자리 숫자" value="${cor.cor_reg}" style="float:left; width:200px;">
+							                		<button type="button" class="btn btn-primary regauth"  onclick="reg_check()">인증</button>
+												</div>
+												<div class="modal-footer">
+						               
+												</div>
+											</div>
+										</div>
+									</div>
                            <div class="col-sm-6 col-md-6">
 								<div class="form-group">
 									<label class="form-label">회사명</label>
@@ -126,7 +177,7 @@
                               </div>
                            <div class="col-sm-12 col-md-7">
                               <div class="form-group">
-                                 <input type="text" class="form-control" id="address" placeholder="주소" name="cor_addr"><br>
+                                 <input type="text" class="form-control" id="address" placeholder="주소" name="cor_addr" readonly><br>
                               </div>
                            </div>
                            <div class="col-sm-12 col-md-5">
@@ -222,7 +273,7 @@
                            <div class="col-sm-6 col-md-3">
                               <div class="form-group">
                                  <label class="form-label">기업활동등급</label>
-                                 <input type="text" class="form-control" value="새싹" readonly>
+                                 &nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="13%">&nbsp; <b>Bronze</b>
                               </div>
                            </div>
                            <div class = "col-sm-6 col-md-6">
@@ -269,10 +320,34 @@
       </section>
       <!--/User Dashboard-->
    <script>
-   function upfile(){
-      var filename = document.getElementById("file").value;
-      document.getElementById("fileName_label").innerHTML=filename;
-   }   
+   function reg_check(){
+		var regnum=$(".regnum").val();
+		$.ajax({
+			type:"GET",
+			url:"<c:url value='getCorRegInfo' />",
+			data:"cor_regnum="+regnum,
+			dataType:"json",
+			success:function(data){
+				if(data == "normal"){ 
+					alert("확인 되었습니다.");
+					$(".authCorRegNum").attr("value",regnum);
+				$(".regauth").attr("disabled","disabled");
+				$("#regModal").modal("hide");
+				}else {
+					alert("잘못 입력하셨습니다. 사업자등록번호를(10자리 숫자) 확인해주세요");
+					$(".regnum").attr("value","");
+				}
+			},
+			error:function(data){
+				alert(data);
+			}
+		});
+	}
+  
+  function upfile(){
+     var filename = document.getElementById("file").value;
+     document.getElementById("fileName_label").innerHTML=filename;
+ 	 }   
    </script>
    </c:when>
    <c:otherwise>
@@ -312,12 +387,12 @@
 								<div class="profile-pic">
 								<c:if test="${cor.cor_fname eq ''}">
 									<div class="profile-pic-img">
-										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+										<img src="../images/faces/male/25.jpg" class="media-object brround" alt="user">
 									</div>
 								</c:if>
 								<c:if test = "${cor.cor_fname ne '' }">
 									<div class="profile-pic-img">
-										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="media-object brround" alt="user">
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -534,7 +609,15 @@
 									<div class="col-sm-6 col-md-3">
 										<div class="form-group">
 											<label class="form-label">기업활동등급</label>
-											<input type="text" class="form-control"  value="${cor.cor_level}" readonly>
+											<c:if test="${cor.cor_level==0}">
+												&nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="13%">&nbsp; <b>Bronze</b>
+											</c:if> 
+											<c:if test="${cor.cor_level==1}">
+												&nbsp; <img src="../images/photos/silver100.png" alt="실" width="13%"> &nbsp; <b>Silver</b>
+											</c:if>
+											<c:if test="${cor.cor_level==2}"> 
+												&nbsp;<img src="../images/photos/gold100.png" alt="골"  width="13%">&nbsp; <b>Gold</b>
+											</c:if> 	
 										</div>
 									</div>
 									<div class = "col-sm-6 col-md-6">
