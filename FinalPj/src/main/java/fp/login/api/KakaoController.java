@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoController {
 		 private final static String K_CLIENT_ID = "f07c6ec422b1d9826d801eb9e9c78e91";
-	      //이런식으로 REDIRECT_URI를 써넣는다.                                                                                                  //                                                //
-		private final static String K_REDIRECT_URI = "http://13.209.113.112:8090/kakaologin";
+	      //이런식으로 REDIRECT_URI를 써넣는다.                                      
+		private final static String K_REDIRECT_URI = "http://www.hifive.store/kakaologin";
 		
 		public static String getAuthorizationUrl(HttpSession session) {
 		String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + K_CLIENT_ID + "&redirect_uri="
