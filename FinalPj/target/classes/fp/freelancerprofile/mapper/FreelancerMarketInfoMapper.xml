@@ -40,7 +40,7 @@
 		<result property="market_ofname" column="market_ofname" />
 		<result property="market_state" column="market_state" />
 		<result property="market_pcnt" column="market_pcnt" />
-		<association property="freelancer" javaType="Freelancer" column ="free_code" >
+		<association property="freelancer" javaType="mFreelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
 	       <result property="mem_email" column ="mem_email" />  
 		</association>

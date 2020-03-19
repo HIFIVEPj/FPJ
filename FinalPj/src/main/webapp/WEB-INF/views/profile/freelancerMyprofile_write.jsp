@@ -1560,7 +1560,7 @@ function check(){
          return ;
       }
 
-      //free_write.submit();
+      free_write.submit();
       }
    //});
 </script>

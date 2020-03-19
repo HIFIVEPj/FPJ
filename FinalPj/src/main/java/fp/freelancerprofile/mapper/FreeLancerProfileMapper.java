@@ -38,6 +38,8 @@ public interface FreeLancerProfileMapper {
 
 	//프로필 작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
+	//프로필 작성 후 프리랜서의 프로필 등록 여부 update
+	public void free_profileoxUpdate(FreeLancerProfile freelancerprofile);
 	
 	//프로필 작성페이지 수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);

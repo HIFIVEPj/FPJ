@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.Flags.Flag;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -257,6 +259,7 @@ public class MarketRestController {
 							   			,@RequestParam(value="marketQA_prnum") String marketQA_prnumS
 							   			,@RequestParam(value="marketQA_sun") String marketQA_sunS		
 							   			,@RequestParam(value="marketQA_lev") String marketQA_levS
+							   			,@RequestParam(value="marketQA_sub") String marketQA_sub
 							   			,@RequestParam(value="nowPageQ",required=false,defaultValue="1")String nowPageQ
 							   			,@RequestParam(value="cntPerPageQ", required=false, defaultValue="4")String cntPerPageQ	) 
 	{
@@ -265,24 +268,44 @@ public class MarketRestController {
 		long market_num=Long.parseLong(market_numS);
 		int marketQA_lev=Integer.parseInt(marketQA_levS);
 		int marketQA_prnum=Integer.parseInt(marketQA_prnumS);
+		
 		int marketQA_sun=Integer.parseInt(marketQA_sunS);
 		log.info("aaaaaaaaaaaaaaaaaa"+marketQA_prnumS);
 		log.info("aaaaaaaaaaaaaaaaaa"+marketQA_sunS);
 		
-		
-		
+		log.info("aaaaaaaaaamarketQA_sub"+marketQA_sub);
+boolean sub= false;		
 		//map.put("marketQA_num", marketQA_num);
 		map.put("market_num", market_num);
 		map.put("marketQA_prnum", marketQA_prnum);
 		map.put("marketQA_sun", marketQA_sun);
 		map.put("marketQA_lev", marketQA_lev);
 		long maxSun=marketService.maxSun(map);
-		if(maxSun==marketQA_sun) {
-			marketService.deleteMarketQA(map);
-		}else if(maxSun>marketQA_sun) {
-			marketService.delUpdateMarketQA2(map);
-		}
+		List<String> deletedQA = marketService.deletedQA(map);
+
+		log.info("deletedQA"+deletedQA);
 		
+		if(maxSun==marketQA_sun) {//가장끝댓글일때 바로지움
+				marketService.deleteMarketQA(map);
+			
+		}else if(maxSun>marketQA_sun) {//가장끝댓글이 아닐때
+			for(int i=0;deletedQA.size()>i;i++) {//그 밑 댓글들이 다 '삭제된 댓글입니다' 일때 
+				String sub2= deletedQA.get(i);
+				if(sub2.equals("삭제된 댓글입니다")) {
+					sub=true;
+				}else {
+					sub=false;
+					break;
+				}
+			}
+			if(sub) {//삭제함
+				marketService.deleteMarketQA(map);
+			}else if(!sub) {
+				marketService.delUpdateMarketQA2(map);
+			}
+			
+		}
+		log.info("@@@@@@@@@sub"+sub);
 		//marketService.deleteMarketQA(map);
 		
 		

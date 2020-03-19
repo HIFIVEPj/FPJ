@@ -76,6 +76,8 @@ public interface MarketService {
 	 
 	long maxSun(HashMap<String,Object> map);
 	long delUpdateMarketQA2(HashMap<String,Object> map);
+	
+	List<String> deletedQA(HashMap<String,Object> map);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 	

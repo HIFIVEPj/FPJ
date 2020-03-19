@@ -163,7 +163,7 @@ $(document).ready(function() {
 																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${mySellMarket.market.market_vcnt}
 																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${mySellMarket.market.market_pcnt }
 																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mySellMarket.marketRev.marketRev_num}
-																		<a href="mailto:${mySellMarket.mem_emailBuy}">메일보내기</a>
+																		
 															
 															
 															</div>
@@ -184,11 +184,12 @@ $(document).ready(function() {
 											<td class="font-weight-semibold fs-16">
 												${mySellMarket.marketPaym_rdate}
 											</td>
-											<td class="font-weight-semibold fs-16">
+											<td class="font-weight-semibold fs-16" align="center">
 											
 												<c:forEach items="${member}" var="entry" varStatus="status">
 													<c:if test="${fn:contains(entry, mySellMarket.mem_emailBuy) }">
-														<c:out value="${entry.NAME}"/>
+														<c:out value="${entry.NAME}"/></br>
+														<a href="mailto:${mySellMarket.mem_emailBuy}"  class="btn btn-info btn-sm text-white" >메일보내기</a>
 													</c:if>
 												</c:forEach>
 

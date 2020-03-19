@@ -87,7 +87,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Transactional
 	public void listInsert(FreeLancerProfile freelancerprofile){
 		mapper.listInsert(freelancerprofile);
-		
+		mapper.free_profileoxUpdate(freelancerprofile);
 	}
 
 	@Override

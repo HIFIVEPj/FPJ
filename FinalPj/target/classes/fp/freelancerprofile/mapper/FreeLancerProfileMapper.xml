@@ -355,7 +355,9 @@
 		 </foreach>) A
 		 </if>
 	 </insert>
- 
+ 	<update id="free_profileoxUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile">
+ 		update freelancer set free_profileox = 1 where free_code=#{free_code}
+ 	</update>
 	<!-- 프로필 update -->
  	<update id="listUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
 
