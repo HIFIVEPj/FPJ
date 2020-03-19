@@ -7,24 +7,31 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
-      <!--Sliders Section-->
-      <div>
-         <div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
-            <div class="header-text1 mb-0">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
-                        <div class="text-center text-white ">
-                           <h1 class=""><span class="font-weight-bold">60,85,965</span> Ads Available in Pinlist</h1>
-                        </div>
-
-                     </div>
-                  </div>
-               </div>
-            </div><!-- /header-text -->
-         </div>
-      </div>
-      <!--/Sliders Section-->
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">마켓 상세보기</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
 
       <!--Breadcrumb-->
       <div class="bg-white border-bottom">
@@ -592,299 +599,296 @@
                                 <input type="hidden" id="mem_emailQAID" name="mem_email" value= "${sessionScope.email}">
                                 <input type="hidden" id="cntPerPageQAID" name="cntPerPageQ" value="${marketVOQA.cntPerPage}">
                                 <input type="hidden" id="nowPageQAID" name="nowPageQ" value= "${marketVOQA.nowPage}">
-
-                              <div class="form-group">
-                                 <input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
-                              </div>
-                              <div class="form-group">
-                                 <textarea class="form-control" name="marketQA_cont" id="marketQA_contID" rows="6" placeholder="Comment"></textarea>
-                              </div><br>
-                              <div class="custom-file">
-                                 <input  type="file" multiple="multiple" class="custom-file-input" name="fname" id="file" onchange="upfile()">
-                                 <label class="custom-file-label" id="cor_fname_label">file upload</label>
-                              </div><br>
-                              
-                              <button type="button"  id="ididi" onclick="mqajax(0,0,0);" class="btn btn-primary" >Send Reply</button>
-                              
-                              &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
-                              &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
-                              &emsp; &emsp; &emsp; &emsp;
-                              <input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
-                              <input type="radio"  name="marketQA_ox" value="0" checked="">공개글
-                           </c:if>
-                           
-                           <c:if test="${sessionScope.email ==null}" >
-                              <div class="form-group">
-                                 <textarea class="form-control" name="marketQA_cont"  rows="6" placeholder="로그인 후 이용해주세요"></textarea>
-                              </div>
-                           </c:if>
-                           
-                           <!--
-                              <div class="d-md-flex ad-post-details">
-                                 <label class="custom-control custom-radio mb-2 mr-4">
-                                    <input type="radio" class="custom-control-input" name="radios2" value="option1" checked="">
-                                    <span class="custom-control-label"><a href="#" class="text-muted">비밀글 </a></span>
-                                 </label>
-                                 <label class="custom-control custom-radio  mb-2">
-                                    <input type="radio" class="custom-control-input" name="radios2" value="option2" >
-                                    <span class="custom-control-label"><a href="#" class="text-muted">공개글</a></span>
-                                 </label>
-                              </div>
-                             -->
-                        </div>
-                     </div>
-                  </div>
-               </form>
-               </div>
-               <!--Right Side Content-->
-               <div class="col-xl-4 col-lg-4 col-md-12">
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">Posted By</h3>
-                     </div>
-                     <div class="card-body  item-user">
-                        <div class="profile-pic mb-0">
-                           <img src="hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
-                           <div class="">
-                              <a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
-                                 <c:if test="${freeProfile.freelancerProfile.pro_exp == 0}">
-                                    
-                                 </c:if >
-                                 <c:if test="${freeProfile.freelancerProfile.pro_exp > 0}">
-                                    경력:<span class="text-muted">${freeProfile.freelancerProfile.pro_exp}</span>년
-                                    <h6 class="mt-2 mb-0"><a href="freelancercontent?free_code=${freeProfile.freelancer.free_code}&pro_num=${freeProfile.freelancerProfile.pro_num}" class="btn btn-primary btn-sm">프로필 보기</a></h6>
-                                 </c:if >
-                                 <c:if test="${freeProfile.freelancerProfile.pro_exp == 0 && sessionScope.email==freeProfile.freelancer.mem_email}">
-                                    <span class="text-muted">프로필을 등록해주세요</span>
-                                    <h6 class="mt-2 mb-0"><a href="freelancerMyprofile_write" class="btn btn-primary btn-sm">프로필 등록</a></h6>                     
-                                 </c:if >
-                                 
-                              
-                              
-                              
-                           </div>
-                        </div>
-                     </div>
-                  <!--   
-                     <div class="card-body item-user">
-                        <h4 class="mb-4">Contact Info</h4>
-                        <div>
-                           <h6><span class="font-weight-semibold"><i class="fa fa-envelope mr-2 mb-2"></i></span><a href="#" class="text-body"> robert123@gmail.com</a></h6>
-                           <h6><span class="font-weight-semibold"><i class="fa fa-phone mr-2  mb-2"></i></span><a href="#" class="text-primary"> 0-235-657-24587</a></h6>
-                           <h6><span class="font-weight-semibold"><i class="fa fa-link mr-2 "></i></span><a href="#" class="text-primary">http://spruko.com/</a></h6>
-                        </div>
-                        
-                        <div class=" item-user-icons mt-4">
-                           <a href="#" class="facebook-bg mt-0"><i class="fa fa-facebook"></i></a>
-                           <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                           <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                           <a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
-                        </div>
-                          
-                     </div>
-                  -->   
-   <!--////////////////////// 결제넘기는 폼////////////////////////////////////// -->
-                     <form id="paymentsForm" action="market-payments" method="post">
-                        <input type="hidden" value="${market.market_sub}" name="marketPaym_pdName">
-                        <input type="hidden" value="${market.market_num}" name="market_num">
-                        <input type="hidden" value="${sessionScope.email}" name="mem_email">
-                        <input type="hidden" value="${market.market_price}" name="marketPaym_price">
-                        <c:choose>
-                           <c:when test="${market.market_price<=500000}">
-                              <input type="hidden" value=20 name="marketPaym_feeRate">
-                           </c:when>
-                           <c:when test="${market.market_price<=2000000}">
-                              <input type="hidden" value=12 name="marketPaym_feeRate">
-                           </c:when>
-                           <c:otherwise>
-                              <input type="hidden" value=6 name="marketPaym_feeRate">
-                           </c:otherwise>
-                        </c:choose>
-                        
-                        <div class="card-footer">
-                           <div style="text-align: right; vertical-align:center;">
-                              <span style="font-size:20px">결제금액</span></br>
-                           <span style="font-size:30px">￦<fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /><span class="fs-16"></span></span>
-                              
-                           </div>
-                        </div>
-                        <div class="card-footer">   
-                           <div style="text-align: right;">
-                        
-                        <!--   <a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
-                              <a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-                              <button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
-                           </div>
-                        </div>
-                     </form>
-                  </div>
-            <!--      
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">Keywords</h3>
-                     </div>
-                     <div class="card-body product-filter-desc">
-                        <div class="product-tags clearfix">
-                           <ul class="list-unstyled mb-0">
-                              <li><a href="#">Home</a></li>
-                              <li><a href="#">Real estate</a></li>
-                              <li><a href="#">2BHK</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-            -->      
-                  <!--
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">Shares</h3>
-                     </div>
-                     <div class="card-body product-filter-desc">
-                        <div class="product-filter-icons text-center">
-                           <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                           <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                           <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                           <a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
-                           <a href="#" class="pinterest-bg"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                     </div>
-                  </div>
-                    -->
-               <!--
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">Map location</h3>
-                     </div>
-                     <div class="card-body">
-                        <div class="map-header">
-                           <div class="map-header-layer" id="map2"></div>
-                        </div>
-                     </div>
-                  </div>
-               
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">Search Ads</h3>
-                     </div>
-                     <div class="card-body">
-                        <div class="form-group">
-                           <input type="text" class="form-control" id="text2" placeholder="What are you looking for?">
-                        </div>
-                        <div class="form-group">
-                           <select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-                              <option value="1" selected>All Categories</option>
-                              <option value="2">RealEstate</option>
-                              <option value="3">Restaurant</option>
-                              <option value="4">Beauty</option>
-                              <option value="5">Jobs</option>
-                              <option value="6">Services</option>
-                              <option value="7">Vehicle</option>
-                              <option value="8">Education</option>
-                              <option value="9">Electronics</option>
-                              <option value="10">Pets & Animals</option>
-                              <option value="11">Computer</option>
-                              <option value="12">Mobile</option>
-                              <option value="13">Events</option>
-                              <option value="14">Travel</option>
-                              <option value="15">Clothing</option>
-                           </select>
-                        </div>
-                        <div class="">
-                           <a href="#" class="btn  btn-primary">Search</a>
-                        </div>
-                     </div>
-                  </div>
-               -->
-               <!--
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">Popular Tags</h3>
-                     </div>
-                     <div class="card-body">
-                        <div class="product-tags clearfix">
-                           <ul class="list-unstyled mb-0">
-                              <li><a href="#">RealEstate</a></li>
-                              <li><a href="#">Vehicles</a></li>
-                              <li><a href="#">Events</a></li>
-                              <li><a href="#">Health& Beauty</a></li>
-                              <li><a href="#">Services</a></li>
-                              <li><a href="#">Restaurant</a></li>
-                              <li><a href="#">Events</a></li>
-                              <li><a href="#">Jobs</a></li>
-                              <li><a href="#">Automobiles</a></li>
-                              <li><a href="#">Computer</a></li>
-                              <li><a href="#" class="mb-0">Electronics</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-               -->   
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">확인한 게시물들</h3>
-                     </div>
-                     <div class="card-body pb-3">
-                        <ul class="vertical-scroll">
-                           <li class="news-item">
-                              <table cellpadding="4">
-                                 <tr>
-                                    <td><img src="../images/products/1.png"  class="w-8 bg-secondary border"/></td>
-                                    <td><h5 class="mb-1 ">Best New Model Watch</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
-                                 </tr>
-                              </table>
-                           </li>
-                           <li class="news-item">
-                              <table cellpadding="4">
-                                 <tr>
-                                    <td><img src="../images/products/2.png" class="w-8 bg-secondary border"/></td>
-                                    <td><h5 class="mb-1 ">Trending New Model Watches</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
-                                 </tr>
-                              </table>
-                           </li>
-                           <li class="news-item">
-                              <table cellpadding="4">
-                                 <tr>
-                                    <td><img src="../images/products/3.png" class="w-8 bg-secondary border" /></td>
-                                    <td><h5 class="mb-1 ">Best New Model Watch</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
-                                 </tr>
-                              </table>
-                           </li>
-                           <li class="news-item">
-                              <table cellpadding="4">
-                                 <tr>
-                                    <td><img src="../images/products/4.png"  class="w-8 bg-secondary border" /></td>
-                                    <td><h5 class="mb-1 ">Trending New Model Watches</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
-                                 </tr>
-                              </table>
-                           </li>
-                           <li class="news-item">
-                              <table cellpadding="4">
-                                 <tr>
-                                    <td><img src="../images/products/5.png"  class="w-8 bg-secondary border" /></td>
-                                    <td><h5 class="mb-1 ">Best New Model Watch</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
-                                 </tr>
-                              </table>
-                           </li>
-                           <li class="news-item">
-                              <table cellpadding="4">
-                                 <tr>
-                                    <td><img src="../images/products/6.png" class="w-8 bg-secondary border" /></td>
-                                    <td><h5 class="mb-1 ">Best New Model Shoes</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
-                                 </tr>
-                              </table>
-                           </li>
-                           <li class="news-item">
-                              <table cellpadding="4">
-                                 <tr>
-                                    <td><img src="../images/products/7.png"  class="w-8 bg-secondary border" /></td>
-                                    <td><h5 class="mb-1 ">Trending New Model Shoes</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
-                                 </tr>
-                              </table>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-
+										<div class="form-group">
+											<input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" name="marketQA_cont" id="marketQA_contID" rows="6" placeholder="Comment"></textarea>
+										</div><br>
+										<div class="custom-file">
+											<input  type="file" multiple="multiple" class="custom-file-input" name="fname" id="file" onchange="upfile()">
+											<label class="custom-file-label" id="cor_fname_label">file upload</label>
+										</div><br>
+										
+										<button type="button"  id="ididi" onclick="mqajax(0,0,0);" class="btn btn-primary" >Send Reply</button>
+										
+										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 
+										&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+										&emsp; &emsp; &emsp; &emsp;
+										<input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
+										<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
+									</c:if>
+									
+									<c:if test="${sessionScope.email ==null}" >
+										<div class="form-group">
+											<textarea class="form-control" name="marketQA_cont"  rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+										</div>
+									</c:if>
+									
+									<!--
+										<div class="d-md-flex ad-post-details">
+											<label class="custom-control custom-radio mb-2 mr-4">
+												<input type="radio" class="custom-control-input" name="radios2" value="option1" checked="">
+												<span class="custom-control-label"><a href="#" class="text-muted">비밀글 </a></span>
+											</label>
+											<label class="custom-control custom-radio  mb-2">
+												<input type="radio" class="custom-control-input" name="radios2" value="option2" >
+												<span class="custom-control-label"><a href="#" class="text-muted">공개글</a></span>
+											</label>
+										</div>
+									  -->
+								</div>
+							</div>
+						</div>
+					</form>
+					</div>
+					<!--Right Side Content-->
+					<div class="col-xl-4 col-lg-4 col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Posted By</h3>
+							</div>
+							<div class="card-body  item-user">
+								<div class="profile-pic mb-0">
+									<img src="hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									<div class="">
+										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
+											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0}">
+												
+											</c:if >
+											<c:if test="${freeProfile.freelancerProfile.pro_exp > 0}">
+												경력:<span class="text-muted">${freeProfile.freelancerProfile.pro_exp}</span>년
+												<h6 class="mt-2 mb-0"><a href="freelancercontent?free_code=${freeProfile.freelancer.free_code}&pro_num=${freeProfile.freelancerProfile.pro_num}" class="btn btn-primary btn-sm">프로필 보기</a></h6>
+											</c:if >
+											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0 && sessionScope.email==freeProfile.freelancer.mem_email}">
+												<span class="text-muted">프로필을 등록해주세요</span>
+												<h6 class="mt-2 mb-0"><a href="freelancerMyprofile_write" class="btn btn-primary btn-sm">프로필 등록</a></h6>							
+											</c:if >
+											
+										
+										
+										
+									</div>
+								</div>
+							</div>
+						<!--	
+							<div class="card-body item-user">
+								<h4 class="mb-4">Contact Info</h4>
+								<div>
+									<h6><span class="font-weight-semibold"><i class="fa fa-envelope mr-2 mb-2"></i></span><a href="#" class="text-body"> robert123@gmail.com</a></h6>
+									<h6><span class="font-weight-semibold"><i class="fa fa-phone mr-2  mb-2"></i></span><a href="#" class="text-primary"> 0-235-657-24587</a></h6>
+									<h6><span class="font-weight-semibold"><i class="fa fa-link mr-2 "></i></span><a href="#" class="text-primary">http://spruko.com/</a></h6>
+								</div>
+								
+								<div class=" item-user-icons mt-4">
+									<a href="#" class="facebook-bg mt-0"><i class="fa fa-facebook"></i></a>
+									<a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+									<a href="#" class="google-bg"><i class="fa fa-google"></i></a>
+									<a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
+								</div>
+							  	
+							</div>
+						-->	
+	<!--////////////////////// 결제넘기는 폼////////////////////////////////////// -->
+							<form id="paymentsForm" action="market-payments" method="post">
+								<input type="hidden" value="${market.market_sub}" name="marketPaym_pdName">
+								<input type="hidden" value="${market.market_num}" name="market_num">
+								<input type="hidden" value="${sessionScope.email}" name="mem_email">
+								<input type="hidden" value="${market.market_price}" name="marketPaym_price">
+								<c:choose>
+									<c:when test="${market.market_price<=500000}">
+										<input type="hidden" value=20 name="marketPaym_feeRate">
+									</c:when>
+									<c:when test="${market.market_price<=2000000}">
+										<input type="hidden" value=12 name="marketPaym_feeRate">
+									</c:when>
+									<c:otherwise>
+										<input type="hidden" value=6 name="marketPaym_feeRate">
+									</c:otherwise>
+								</c:choose>
+								
+								<div class="card-footer">
+									<div style="text-align: right; vertical-align:center;">
+										<span style="font-size:20px">결제금액</span></br>
+									<span style="font-size:30px">￦<fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /><span class="fs-16"></span></span>
+										
+									</div>
+								</div>
+								<c:if test="${sessionScope.class_num==1||sessionScope.class_num==2||sessionScope.class_num==3 }">
+									<div class="card-footer">	
+										<div style="text-align: right;">
+												<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+										</div>
+									</div>
+								</c:if>
+							</form>
+						</div>
+				<!--		
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Keywords</h3>
+							</div>
+							<div class="card-body product-filter-desc">
+								<div class="product-tags clearfix">
+									<ul class="list-unstyled mb-0">
+										<li><a href="#">Home</a></li>
+										<li><a href="#">Real estate</a></li>
+										<li><a href="#">2BHK</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+				-->		
+						<!--
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Shares</h3>
+							</div>
+							<div class="card-body product-filter-desc">
+								<div class="product-filter-icons text-center">
+									<a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+									<a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+									<a href="#" class="google-bg"><i class="fa fa-google"></i></a>
+									<a href="#" class="dribbble-bg"><i class="fa fa-dribbble"></i></a>
+									<a href="#" class="pinterest-bg"><i class="fa fa-pinterest"></i></a>
+								</div>
+							</div>
+						</div>
+						  -->
+					<!--
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Map location</h3>
+							</div>
+							<div class="card-body">
+								<div class="map-header">
+									<div class="map-header-layer" id="map2"></div>
+								</div>
+							</div>
+						</div>
+					
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Search Ads</h3>
+							</div>
+							<div class="card-body">
+								<div class="form-group">
+									<input type="text" class="form-control" id="text2" placeholder="What are you looking for?">
+								</div>
+								<div class="form-group">
+									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
+										<option value="1" selected>All Categories</option>
+										<option value="2">RealEstate</option>
+										<option value="3">Restaurant</option>
+										<option value="4">Beauty</option>
+										<option value="5">Jobs</option>
+										<option value="6">Services</option>
+										<option value="7">Vehicle</option>
+										<option value="8">Education</option>
+										<option value="9">Electronics</option>
+										<option value="10">Pets & Animals</option>
+										<option value="11">Computer</option>
+										<option value="12">Mobile</option>
+										<option value="13">Events</option>
+										<option value="14">Travel</option>
+										<option value="15">Clothing</option>
+									</select>
+								</div>
+								<div class="">
+									<a href="#" class="btn  btn-primary">Search</a>
+								</div>
+							</div>
+						</div>
+					-->
+					<!--
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Popular Tags</h3>
+							</div>
+							<div class="card-body">
+								<div class="product-tags clearfix">
+									<ul class="list-unstyled mb-0">
+										<li><a href="#">RealEstate</a></li>
+										<li><a href="#">Vehicles</a></li>
+										<li><a href="#">Events</a></li>
+										<li><a href="#">Health& Beauty</a></li>
+										<li><a href="#">Services</a></li>
+										<li><a href="#">Restaurant</a></li>
+										<li><a href="#">Events</a></li>
+										<li><a href="#">Jobs</a></li>
+										<li><a href="#">Automobiles</a></li>
+										<li><a href="#">Computer</a></li>
+										<li><a href="#" class="mb-0">Electronics</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					-->	
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">확인한 게시물들</h3>
+							</div>
+							<div class="card-body pb-3">
+								<ul class="vertical-scroll">
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="../images/products/1.png"  class="w-8 bg-secondary border"/></td>
+												<td><h5 class="mb-1 ">Best New Model Watch</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
+											</tr>
+										</table>
+									</li>
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="../images/products/2.png" class="w-8 bg-secondary border"/></td>
+												<td><h5 class="mb-1 ">Trending New Model Watches</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
+											</tr>
+										</table>
+									</li>
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="../images/products/3.png" class="w-8 bg-secondary border" /></td>
+												<td><h5 class="mb-1 ">Best New Model Watch</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
+											</tr>
+										</table>
+									</li>
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="../images/products/4.png"  class="w-8 bg-secondary border" /></td>
+												<td><h5 class="mb-1 ">Trending New Model Watches</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
+											</tr>
+										</table>
+									</li>
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="../images/products/5.png"  class="w-8 bg-secondary border" /></td>
+												<td><h5 class="mb-1 ">Best New Model Watch</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
+											</tr>
+										</table>
+									</li>
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="../images/products/6.png" class="w-8 bg-secondary border" /></td>
+												<td><h5 class="mb-1 ">Best New Model Shoes</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
+											</tr>
+										</table>
+									</li>
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="../images/products/7.png"  class="w-8 bg-secondary border" /></td>
+												<td><h5 class="mb-1 ">Trending New Model Shoes</h5><a href="#" class="btn-link">View Details</a><span class="float-right font-weight-bold">$17</span></td>
+											</tr>
+										</table>
+									</li>
+								</ul>
+							</div>
+						</div>
                   <div class="card mb-0">
                      <div class="card-header">
                         <h3 class="card-title">유사한 프리랜서</h3>

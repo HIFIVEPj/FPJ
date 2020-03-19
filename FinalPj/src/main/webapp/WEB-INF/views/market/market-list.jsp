@@ -8,42 +8,23 @@
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
-		<!--Sliders Section-->
+	<!--Sliders Section-->
 		<div>
-			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class=""><span class="font-weight-bold">60,85,965</span> Ads Available in Pinlist</h1>
-								</div>
-								<div class="search-background mb-0">
-									<div class="form row no-gutters">
-										<div class="form-group  col-xl-6 col-lg-5 col-md-12 mb-0">
-											<input type="text" class="form-control input-lg border-right-0" id="text" placeholder="Search Products">
-										</div>
-										<div class="form-group col-xl-4 col-lg-4 select2-lg  col-md-12 mb-0">
-											<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
-												<optgroup label="Categories">
-													<option>Select</option>
-													<option value="1">Vehicle</option>
-													<option value="2">Real Estate</option>
-													<option value="3">Computer</option>
-													<option value="4">Clothing</option>
-													<option value="5">Job</option>
-													<option value="6">Services</option>
-													<option value="7">Electronics</option>
-													<option value="8">Mobile</option>
-													<option value="9">Events</option>
-													<option value="10">Constructions</option>
-												</optgroup>
-											</select>
-										</div>
-										<div class="col-xl-2 col-lg-3 col-md-12 mb-0">
-											<a href="#" class="btn btn-lg btn-block btn-secondary">Search</a>
-										</div>
-									</div>
+									<h1 class="" style="margin-bottom:0rem;">프리마켓</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
 								</div>
 							</div>
 						</div>
@@ -340,7 +321,7 @@
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    	
-																<img src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
+																<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
 															</div>
 															<div class="item-card9-icons" id="heartDivID${list.market_num}">
 																<c:if test="${fn:length(marketNumList) > 0}">	

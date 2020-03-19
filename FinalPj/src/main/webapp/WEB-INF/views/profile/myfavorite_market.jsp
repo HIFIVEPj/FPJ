@@ -8,19 +8,32 @@
 
 		<!--Breadcrumb-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Favorite Ads</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Favorite Ads</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">찜한 마켓</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		
 			</div>
 		</section>
 		<!--/Breadcrumb-->
@@ -153,46 +166,22 @@
 															</div>			
 														</td>
 														
-														<td class="font-weight-semibold fs-16">
+														<td class="font-weight-semibold fs-16" align="center">
 															<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 														</td> 
 														
 														
 														
 														<c:if test="${pickList.market.market_state==1}">
-															<td>
+															<td align="center">
 																<a href="#" class="badge badge-warning">판매중</a>
 															</td>
 														</c:if>
-														<td>
+														<td align="center">
 															<a href="deleteMarketPick?marketP_num=${pickList.marketP_num}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-															<a href="javascript:void(0);" onclick="paymentFormSubmit()" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
-		
-														<form id="paymentsForm" action="market-payments" method="post">
-															<input type="hidden" value="${pickList.market.market_sub}" name="marketPaym_pdName">
-															<input type="hidden" value="${pickList.market.market_num}" name="market_num">
-															<input type="hidden" value="${sessionScope.email}" name="mem_email">
-															<input type="hidden" value="${pickList.market.market_price}" name="marketPaym_price">
-															<c:choose>
-																<c:when test="${pickList.market.market_price<=500000}">
-																	<input type="hidden" value=20 name="marketPaym_feeRate">
-																</c:when>
-																<c:when test="${pickList.market.market_price<=2000000}">
-																	<input type="hidden" value=12 name="marketPaym_feeRate">
-																</c:when>
-																<c:otherwise>
-																	<input type="hidden" value=6 name="marketPaym_feeRate">
-																</c:otherwise>
-															</c:choose>
-														</form>
-																		
-														<script>
-															function paymentFormSubmit(){
-																//document.paymentsForm.submit(); 
-																document.getElementById("paymentsForm").submit();
-															}
-														</script>
-																		
+															<a href="javascript:void(0);" onclick="paymentFormSubmit('${pickList.market.market_sub}',${pickList.market.market_num},'${sessionScope.email}',${pickList.market.market_price});" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
+												
+													
 														</td>
 													</tr>
 												</tbody>
@@ -206,6 +195,43 @@
 													</div>
 												</div>
 											</c:if>
+											<script type="text/javascript">
+											    function paymentFormSubmit(sub,num,email,price){
+													console.log(sub+num,email,price);
+													var marketPaym_feeRate=0;
+													if(price>2000000){
+														marketPaym_feeRate=6;
+													}
+													if(price<=500000){
+														marketPaym_feeRate=20;
+													}
+													if(price<=2000000 && price>500000){
+														marketPaym_feeRate=12;
+													}
+													var a=document.getElementById("marketPaym_pdNameID").value = sub
+													//var a=$('.paymentsFormID .marketPaym_pdNameID').val(sub);
+													var s=document.getElementById("market_numID").value = num
+													var d=document.getElementById("mem_emailID").value = email
+													var f=document.getElementById("marketPaym_priceID").value = price
+													var g=document.getElementById("marketPaym_feeRateID").value = marketPaym_feeRate
+	
+													console.log("111111"+a);
+													console.log("111111"+s);
+													console.log("111111"+f);
+													console.log("111111"+g);
+													
+													
+													document.getElementById("paymentsFormID").submit();
+												}
+											</script>
+											<form id="paymentsFormID" action="market-payments" method="post">
+												<input type="hidden" name="marketPaym_pdName" id="marketPaym_pdNameID">
+												<input type="hidden" name="market_num" id="market_numID">
+												<input type="hidden"  name="mem_emailBuy" id="mem_emailID">
+												<input type="hidden"  name="marketPaym_price" id="marketPaym_priceID">
+												<input type="hidden"  name="marketPaym_feeRate" id="marketPaym_feeRateID">
+											</form>		
+											
 										 <!-- 페이징 -->
 										 <c:if test="${fn:length(mPickList)>0 }">
 											<div class="card">

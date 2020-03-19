@@ -159,10 +159,12 @@ public class MarketServiceImpl implements MarketService {
 	}
 	
 //마켓리스팅시 하트색깔 여부를위해서
+	@Override
 	public List<MarketPick> pickState(String mem_email) {
 		return mapper.pickState(mem_email);	
 	}
 	@Override
+	@Transactional
 	public void insertMarketPick(HashMap<String,Object> map) {
 		mapper.insertMarketPick(map);	
 		Long market_num=(Long) map.get("market_num");
@@ -170,6 +172,7 @@ public class MarketServiceImpl implements MarketService {
 		mapper.updatePlusMarketPick(market_num);
 	}
 	@Override
+	@Transactional
 	public void deleteMarketPick(HashMap<String, Object> map) {
 		Long market_num=(Long) map.get("market_num");
 

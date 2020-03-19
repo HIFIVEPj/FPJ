@@ -110,7 +110,9 @@
 		
 		<!-- 카카오맵 -->
 		<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script> 
-
+		
+		<!-- 커스텀css 로드 -->
+		<link href="../css/custom.css" rel="stylesheet" />
 	</head>
 	<body>
 

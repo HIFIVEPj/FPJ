@@ -59,83 +59,94 @@
       });
    };
 </script>
-      <!--Breadcrumb-->
-      <section>
-         <div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-            <div class="header-text mb-0">
-               <div class="container">
-                  <div class="text-center text-white ">
-                     <h1 class="">Payments</h1>
-                     
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!--/Breadcrumb-->
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">결제창</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
 
-      <!--User dashboard-->
-      <section class="sptb">
-         <div class="container" >
-            <div class="row"  >
-               
-               <!-- 
-               <div class="col-xl-3 col-lg-12 col-md-12">
-                  <div class="card">
-                     <div class="card-header">
-                        <h3 class="card-title">My Dashboard</h3>
-                     </div>
-                     <div class="card-body text-center item-user">
-                        <div class="profile-pic">
-                           <div class="profile-pic-img">
-                              <span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="online"></span>
-                              <img src="../images/faces/male/25.jpg" class="brround" alt="user">
-                           </div>
-                           <br/>
-                           <a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">me</h4></a>
-                        </div>
-                     </div>
-                  
-                  </div>
-               
-                  <div class="card mb-xl-0">
-                     <div class="card-header">
-                        <h3 class="card-title">결제시 주의사항</h3>
-                     </div>
-                     <div class="card-body">
-                        <ul class="list-unstyled widget-spec  mb-0">
-                           <li class="">
-                              <i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-                           </li>
-                           <li class="">
-                              <i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-                           </li>
-                           <li class="">
-                              <i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-                           </li>
-                           <li class="ml-5 mb-0">
-                              <a href="tips.html"> View more..</a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-            -->
-               <div class="col-xl-9 col-lg-12 col-md-12">
-                  <div class="card" >
-                        <div class="card-header">
-                        <div class="card-title" style="font-size: 18pt"><strong>마켓 결제</strong></div>            
-                  </div>   
-                     <div class="card-body">
-                        <div class="card-pay">
-                     
-                           <div class="tab-content">
-                              <div class="tab-pane active show" id="tab1">
-                                 <div class="form-group">
-               
-                              <div class="card-body">
-                              <div class="item-card7-desc">
-                              <!--auction Description-->
+		<!--User dashboard-->
+		<section class="sptb">
+			<div class="container" >
+				<div class="row"  >
+					
+					<!-- 
+					<div class="col-xl-3 col-lg-12 col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">My Dashboard</h3>
+							</div>
+							<div class="card-body text-center item-user">
+								<div class="profile-pic">
+									<div class="profile-pic-img">
+										<span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="online"></span>
+										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+									</div>
+									<br/>
+									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">me</h4></a>
+								</div>
+							</div>
+						
+						</div>
+					
+						<div class="card mb-xl-0">
+							<div class="card-header">
+								<h3 class="card-title">결제시 주의사항</h3>
+							</div>
+							<div class="card-body">
+								<ul class="list-unstyled widget-spec  mb-0">
+									<li class="">
+										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
+									</li>
+									<li class="">
+										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
+									</li>
+									<li class="">
+										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
+									</li>
+									<li class="ml-5 mb-0">
+										<a href="tips.html"> View more..</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				-->
+					<div class="col-xl-9 col-lg-12 col-md-12 fcenter">
+						<div class="card" >
+								<div class="card-header">
+								<div class="card-title" style="font-size: 18pt"><strong>마켓 결제</strong></div>				
+						</div>	
+							<div class="card-body">
+								<div class="card-pay">
+							
+									<div class="tab-content">
+										<div class="tab-pane active show" id="tab1">
+											<div class="form-group">
+					
+										<div class="card-body">
+										<div class="item-card7-desc">
+										<!--auction Description-->
 
                                  <div class="single-productslide">
                                     <div class="row no-gutter">

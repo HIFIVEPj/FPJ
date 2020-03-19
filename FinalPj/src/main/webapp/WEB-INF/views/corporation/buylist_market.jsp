@@ -123,9 +123,15 @@ $(document).ready(function() {
 								<h3 class="card-title"><b>나의 구매마켓</b></h3>
 							</div>
 							<div class="card-body">
-								<div class="tab-content">					
-									<button aria-haspopup="true" class="btn btn-primary"><a href="cor-myfavoriteMarket" style="color:white">찜 마켓</a></button>
-									<button aria-haspopup="true" class="btn btn-primary"><a href="#" style="color:white">구매 마켓</a></button>
+								<div class="tab-content">
+									<div class="sytab">
+										<div class="sytab_unactived">
+											<p style="margin-top:9px;"><a href="cor-myfavoriteMarket">찜 목록</a></p>
+										</div>
+										<div class="sytab_actived">
+											<p style="margin-top:9px; color:white;">구매한 마켓</p>
+										</div>
+									</div>
 								</br></br>
 						<!-- 탭2 -->			
 							<c:if test="${fn:length(corBuyList)>0 }">
@@ -168,7 +174,7 @@ $(document).ready(function() {
 																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${BuyList.market.market_vcnt}
 																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${BuyList.market.market_pcnt }
 																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${BuyList.marketRev.marketRev_num}
-																	 <a href="mailto:${BuyList.freelancer.mem_email}">메일보내기</a>
+																	 </br><a href="mailto:${mySellMarket.mem_emailBuy}"  class="btn btn-info btn-sm text-white" >메일보내기</a>
 																	
 																</div>
 															</div>
@@ -176,10 +182,10 @@ $(document).ready(function() {
 													</div>
 												</td>
 												
-												<td class="font-weight-semibold fs-16">
+												<td class="font-weight-semibold fs-16" align="center">
 													<fmt:formatNumber value="${BuyList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 												</td> 
-												<td>
+												<td align="center">
 													<c:if test="${BuyList.mbuysell_state==0 }">
 														<a href="#" class="badge badge-secondary">거래중</a>
 													</c:if>
@@ -190,7 +196,7 @@ $(document).ready(function() {
 														<a href="#" class="badge badge-secondary">거래취소</a>
 													</c:if>
 												</td>
-												<td class="font-weight-semibold fs-16">
+												<td class="font-weight-semibold fs-16" align="center">
 													${BuyList.mbuysell_date}
 												</td>
 												</tr>

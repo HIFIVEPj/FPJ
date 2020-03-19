@@ -48,7 +48,7 @@ public class IndexController {
 		return "index";
 
 	}*/
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(HttpSession session){
 		
@@ -95,7 +95,7 @@ public class IndexController {
 		 }		 
 		 ModelAndView mv = new ModelAndView("index");
 		 mv.addObject("list", list);
-	     mv.addObject("maㅎrketNumList", marketNumList); 	    
+	     mv.addObject("marketNumList", marketNumList); 
 	     mv.addObject("pjList", pjList); //project List
 	     mv.addObject("totalCount", totalCount);
 	     mv.addObject("marketTotal", marketTotal);

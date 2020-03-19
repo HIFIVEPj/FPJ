@@ -808,7 +808,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프리마켓</h1>
-					<p>한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈</p>
+					<p>다양한 카테고리와 세분화된 조건으로 IT프리랜서를 만나실 수 있습니다</p>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
@@ -830,7 +830,8 @@
 												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image">
 											</div>
 									<!-- 즐겨찾기 설정 상태 -->
-											<div class="item-card9-icons" id="heartDivID${list.market_num}">
+										 <!-- 
+										 	<div class="item-card9-icons" id="heartDivID${list.market_num}">
 												<c:if test="${fn:length(marketNumList) > 0}">	
 													<c:choose>
 														<c:when test="${marketNumList.contains(list.market_num)}">
@@ -852,6 +853,7 @@
 													</c:otherwise>
 												</c:choose>
 											</div>										
+									 -->
 										<!-- 즐겨찾기 설정 상태 -->
 											<div class="card-body">
 												<div class="item-card2">
@@ -1290,12 +1292,12 @@
 		</section>
 		<!--프리랜서-->
 <script>
-	function loginCheck(){
+	/*function loginCheck(){
 		alert("로그인 후 이용해주세요");
 	}
 	
 	function addPick(market_num){
-		alert("marketnum"+market_num);
+		//alert("marketnum"+market_num);
 		$.ajax({
 			type:"get",  
 			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
@@ -1309,7 +1311,7 @@
 		});
 	}
 	function delPick(market_num){
-		alert("marketnum"+market_num);
+		//alert("marketnum"+market_num);
 		$.ajax({
 			type:"get",  
 			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',
@@ -1321,7 +1323,7 @@
 				 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
-	 }
+	 }*/
 </script>
 
 

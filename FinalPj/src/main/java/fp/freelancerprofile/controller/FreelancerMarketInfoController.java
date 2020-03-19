@@ -209,8 +209,9 @@ public class FreelancerMarketInfoController {
 		for(int i=0;i<mySellMarket.size();i++) {
 			String email=mySellMarket.get(i).getMem_emailBuy();
 			memberMap =service.paymentDetailsGetBuyerName(email);
+			member.add(memberMap);
 		}
-		member.add(memberMap);
+		
 		log.info("!!!!!!!@@@@@@@@@@@@@@@@@member"+member);
 		FreeLancer free = getFreefname(mem_email);
 		mv.setViewName("profile/myMarket2");
@@ -242,7 +243,7 @@ public class FreelancerMarketInfoController {
 		map.put("end",end);
 		
 		List<MarketBuysellList> mbuy=service.myBuyMarket(map);
-		
+		log.info("!!!!!!!!!!!mbuy"+mbuy);
 		FreeLancer free = getFreefname(mem_email);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("profile/myMarket3");

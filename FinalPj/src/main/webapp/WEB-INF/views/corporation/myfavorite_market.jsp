@@ -92,9 +92,16 @@
 							</div>
 							<div class="card-body">
 								<div class="tab-content">					
-									<button aria-haspopup="true" class="btn btn-primary"><a href="#" style="color:white">찜 목록</a></button>
-									<button aria-haspopup="true" class="btn btn-primary"><a href="cor-myBuyMarket" style="color:white">구매한 마켓</a></button>
-								
+								<!--<button aria-haspopup="true" class="btn btn-secondory"><a href="#" style="color:white">찜 목록</a></button>
+									<button aria-haspopup="true" class="btn btn-primary"><a href="cor-myBuyMarket" style="color:white">구매한 마켓</a></button> -->
+									<div class="sytab">
+										<div class="sytab_active">
+											<p style="margin-top:9px;">찜 목록</p>
+										</div>
+										<div class="sytab_unactive">
+											<p style="margin-top:9px;"><a href="cor-myBuyMarket">구매한 마켓</a></p>
+										</div>
+									</div>
 									</br></br>
 									<!-- 탭1 -->				 
 										<c:if test="${fn:length(corPickList)>0 }">
@@ -109,6 +116,7 @@
 													</tr>
 												</thead>
 											<c:forEach items="${corPickList }" var="pickList">	
+											
 												<tbody>
 													<tr>
 														<td>
@@ -148,51 +156,22 @@
 																</div>
 															</div>			
 														</td>
-														<td class="font-weight-semibold fs-16">
+														<td class="font-weight-semibold fs-16" align="center">
 															<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 														</td> 
 
-														<c:if test="${pickList.market.market_state==1}">
-															<td>
+														<c:if test="${pickList.market.market_state==1}" >
+															<td align="center">
 																<a href="#" class="badge badge-warning">판매중</a>
 															</td>
 														</c:if>
-														<td>
+														<td align="center">
 															<a href="deleteMarketPick?marketP_num=${pickList.marketP_num}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-															 <a href="javascript:void(0);" onclick="paymentFormSubmit()"class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
-							 
-							
-																<form id="paymentsForm" action="market-payments" method="post">
-																	<input type="hidden" value="${pickList.market.market_sub}" name="marketPaym_pdName">
-																	<input type="hidden" value="${pickList.market.market_num}" name="market_num">
-																	<input type="hidden" value="${sessionScope.email}" name="mem_email">
-																	<input type="hidden" value="${pickList.market.market_price}" name="marketPaym_price">
-																	<c:choose>
-																		<c:when test="${pickList.market.market_price<=500000}">
-																			<input type="hidden" value=20 name="marketPaym_feeRate">
-																		</c:when>
-																		<c:when test="${pickList.market.market_price<=2000000}">
-																			<input type="hidden" value=12 name="marketPaym_feeRate">
-																		</c:when>
-																		<c:otherwise>
-																			<input type="hidden" value=6 name="marketPaym_feeRate">
-																		</c:otherwise>
-																	</c:choose>
-														
-																</form>
-																
-															<script>
-																function paymentFormSubmit(){
-																	//document.paymentsForm.submit(); 
-																	document.getElementById("paymentsForm").submit();
-																}
-															</script>						
-							
-							
-							
+															<a href="javascript:void(0);" onclick="paymentFormSubmit('${pickList.market.market_sub}',${pickList.market.market_num},'${sessionScope.email}',${pickList.market.market_price});" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
 														</td>
 													</tr>
 												</tbody>
+												
 											</c:forEach>	
 											</table>
 											</c:if>
@@ -203,6 +182,45 @@
 													</div>
 												</div>
 											</c:if>
+										<script type="text/javascript">
+										    function paymentFormSubmit(sub,num,email,price){
+												console.log(sub+num,email,price);
+												var marketPaym_feeRate=0;
+												if(price>2000000){
+													marketPaym_feeRate=6;
+												}
+												if(price<=500000){
+													marketPaym_feeRate=20;
+												}
+												if(price<=2000000 && price>500000){
+													marketPaym_feeRate=12;
+												}
+												var a=document.getElementById("marketPaym_pdNameID").value = sub
+												//var a=$('.paymentsFormID .marketPaym_pdNameID').val(sub);
+												var s=document.getElementById("market_numID").value = num
+												var d=document.getElementById("mem_emailID").value = email
+												var f=document.getElementById("marketPaym_priceID").value = price
+												var g=document.getElementById("marketPaym_feeRateID").value = marketPaym_feeRate
+
+												console.log("111111"+a);
+												console.log("111111"+s);
+												console.log("111111"+f);
+												console.log("111111"+g);
+												
+												
+												document.getElementById("paymentsFormID").submit();
+											}
+										</script>	
+											
+											
+										<form id="paymentsFormID" action="market-payments" method="post">
+											<input type="hidden" name="marketPaym_pdName" id="marketPaym_pdNameID">
+											<input type="hidden" name="market_num" id="market_numID">
+											<input type="hidden"  name="mem_emailBuy" id="mem_emailID">
+											<input type="hidden"  name="marketPaym_price" id="marketPaym_priceID">
+											<input type="hidden"  name="marketPaym_feeRate" id="marketPaym_feeRateID">
+										</form>		
+											
 										 <!-- 페이징 -->
 											<div class="card">
 												<div class="card-body" style="margin:0 auto; align:center;">
@@ -283,7 +301,11 @@
             }
         });
     });
+    
+   
 </script>
+
+					
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

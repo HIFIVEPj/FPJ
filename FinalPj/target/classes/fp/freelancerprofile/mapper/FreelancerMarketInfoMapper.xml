@@ -145,7 +145,7 @@
 	 -->	
 	 <![CDATA[	
 			select * from (select ROWNUM rnum , aa.* from (select A.*, B.marketRev_num, B.marketRev_star  from
-				(select mem_emailBuy,marketPaym_num,MARKETPAYM_FEERATE, MARKETPAYM_PRICE, m.market_num, m.market_sub, m.market_vcnt,m.market_fname,marketPaym_rdate from MARKET_PAYMENT mp join MARKET m on m.market_num=mp.market_num where mp.mem_email=#{mem_email} ) A
+				(select mem_emailBuy,marketPaym_num,MARKETPAYM_FEERATE, MARKETPAYM_PRICE, m.market_num, m.market_sub, m.market_vcnt, m.market_pcnt, m.market_fname,marketPaym_rdate from MARKET_PAYMENT mp join MARKET m on m.market_num=mp.market_num where mp.mem_email=#{mem_email} ) A
 			left outer join
 				(select m.MARKET_NUM, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM group by m.MARKET_NUM) B
 				on A.MARKET_NUM=B.MARKET_NUM 
@@ -201,10 +201,10 @@
                 (select * from
                    (select *from market_buyselllist)mb 
                    left outer join
-                    (select f.mem_email,m.MARKET_NUM ,market_fname,market_sub,market_price, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
+                    (select f.mem_email,m.MARKET_NUM ,market_fname, m.market_sub, m.market_price, m.market_vcnt, market_pcnt, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
                     right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM 
                     join FREELANCER f on f.free_code=m.free_code
-                    group by m.MARKET_NUM,market_fname,market_sub,market_price, f.mem_email) m on mb.market_num=m.market_num where mb.mem_email=#{mem_email}
+                    group by m.MARKET_NUM,market_fname,market_sub,market_price, f.mem_email,market_vcnt,market_pcnt) m on mb.market_num=m.market_num where mb.mem_email=#{mem_email}
                 order by m.market_num desc 
                  ) aa 
             )where rnum>#{start} and rnum<=#{end}

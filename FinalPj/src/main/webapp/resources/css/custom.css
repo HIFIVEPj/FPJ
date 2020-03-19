@@ -1,0 +1,11 @@
+
+
+/*------ Widths, Margins & Paddings -------*/
+
+/* 세영 커스텀 */
+.fcenter{margin:0 auto !important; float:left !important;} /*가운데정렬 */
+.sytab {max-width:100%; float:left; margin:-5px 20px 18px 0;} /*마이페이지 탭관련 */
+.sytab_active {width:90px; float:left; height:40px; border:solid #f2f2f2 2px; background-color:#1e709a; color:#fff; text-align:center; margin-right:12px !important;}
+.sytab_unactive {width:120px; float:left; height:40px; border:solid #f2f2f2 2px; background-color:#fff; color:#666; text-align:center;}
+.sytab_actived {width:120px; float:left; height:40px; border:solid #f2f2f2 2px; background-color:#1e709a; color:#fff; text-align:center;}
+.sytab_unactived {width:90px; float:left; height:40px; border:solid #f2f2f2 2px; background-color:#fff; color:#666; text-align:center; margin-right:12px !important;}
