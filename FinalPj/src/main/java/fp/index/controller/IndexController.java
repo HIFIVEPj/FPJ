@@ -44,7 +44,7 @@ public class IndexController {
 		return "index";
 
 	}*/
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(HttpSession session){
 		HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();//mybatis 쿼리 파라미터
@@ -85,7 +85,7 @@ public class IndexController {
 		 log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
 		 ModelAndView mv = new ModelAndView("index");
 		 mv.addObject("list", list);
-	     mv.addObject("maㅎrketNumList", marketNumList); 
+	     mv.addObject("marketNumList", marketNumList); 
 	     
 	     mv.addObject("pjList", pjList); //project List
 		return mv;

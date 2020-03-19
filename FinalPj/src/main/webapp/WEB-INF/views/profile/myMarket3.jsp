@@ -155,21 +155,19 @@ $(document).ready(function() {
 																				</c:forEach>	
 																			</c:if>
 																		</span>|
-																			<i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${mBuyList.market.market_vcnt}
-																			 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${mBuyList.market.market_pcnt }
-																			 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mBuyList.marketRev.marketRev_num}
-																		
-																	
+																			<i class="fa fa-eye" data-toggle="tooltip" title="조회수"></i> ${mBuyList.market.market_vcnt}
+																			<i class="fa fa-gratipay" data-toggle="tooltip" title="찜수"></i> ${mBuyList.market.market_pcnt}
+																			<i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mBuyList.marketRev.marketRev_num}
 																</div>
 															</div>
 														</div>
 													</div>
 												</td>
 												
-												<td class="font-weight-semibold fs-16">
+												<td class="font-weight-semibold fs-16" align="center">
 													<fmt:formatNumber value="${mBuyList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 												</td> 
-												<td>
+												<td align="center">
 													<c:if test="${mBuyList.mbuysell_state==0 }">
 														<a href="#" class="badge badge-secondary">거래중</a>
 													</c:if>
@@ -180,7 +178,7 @@ $(document).ready(function() {
 														<a href="#" class="badge badge-secondary">거래취소</a>
 													</c:if>
 												</td>
-												<td class="font-weight-semibold fs-16">
+												<td class="font-weight-semibold fs-16" align="center">
 													${mBuyList.mbuysell_date}
 												</td>
 												</tr>

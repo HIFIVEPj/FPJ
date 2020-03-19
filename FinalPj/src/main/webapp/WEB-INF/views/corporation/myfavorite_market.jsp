@@ -156,16 +156,16 @@
 																</div>
 															</div>			
 														</td>
-														<td class="font-weight-semibold fs-16">
+														<td class="font-weight-semibold fs-16" align="center">
 															<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 														</td> 
 
-														<c:if test="${pickList.market.market_state==1}">
-															<td>
+														<c:if test="${pickList.market.market_state==1}" >
+															<td align="center">
 																<a href="#" class="badge badge-warning">판매중</a>
 															</td>
 														</c:if>
-														<td>
+														<td align="center">
 															<a href="deleteMarketPick?marketP_num=${pickList.marketP_num}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
 															<a href="javascript:void(0);" onclick="paymentFormSubmit('${pickList.market.market_sub}',${pickList.market.market_num},'${sessionScope.email}',${pickList.market.market_price});" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>
 														</td>

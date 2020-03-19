@@ -174,7 +174,7 @@ $(document).ready(function() {
 																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${BuyList.market.market_vcnt}
 																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${BuyList.market.market_pcnt }
 																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${BuyList.marketRev.marketRev_num}
-																	 <a href="mailto:${BuyList.freelancer.mem_email}">메일보내기</a>
+																	 </br><a href="mailto:${mySellMarket.mem_emailBuy}"  class="btn btn-info btn-sm text-white" >메일보내기</a>
 																	
 																</div>
 															</div>
@@ -182,10 +182,10 @@ $(document).ready(function() {
 													</div>
 												</td>
 												
-												<td class="font-weight-semibold fs-16">
+												<td class="font-weight-semibold fs-16" align="center">
 													<fmt:formatNumber value="${BuyList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 												</td> 
-												<td>
+												<td align="center">
 													<c:if test="${BuyList.mbuysell_state==0 }">
 														<a href="#" class="badge badge-secondary">거래중</a>
 													</c:if>
@@ -196,7 +196,7 @@ $(document).ready(function() {
 														<a href="#" class="badge badge-secondary">거래취소</a>
 													</c:if>
 												</td>
-												<td class="font-weight-semibold fs-16">
+												<td class="font-weight-semibold fs-16" align="center">
 													${BuyList.mbuysell_date}
 												</td>
 												</tr>

@@ -28,20 +28,32 @@ $(document).ready(function() {
 
 		<!--Breadcrumb-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Favorite Ads</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Favorite Ads</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">판매마켓</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
 			</div>
+		</div>
+		<!--/Sliders Section-->
+		
 		</section>
 		<!--/Breadcrumb-->
 
@@ -163,28 +175,25 @@ $(document).ready(function() {
 																		 <i class="fa fa-eye"   data-toggle="tooltip" title="조회수"></i> ${mySellMarket.market.market_vcnt}
 																		 <i class="fa fa-gratipay"  data-toggle="tooltip" title="찜수"></i> ${mySellMarket.market.market_pcnt }
 																		 <i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mySellMarket.marketRev.marketRev_num}
-																		
-															
-															
 															</div>
 														</div>
 													</div>
 												</div>
 											</td>
 											
-											<td class="font-weight-semibold fs-16">
+											<td class="font-weight-semibold fs-16" align="center">
 												<fmt:formatNumber value="${mySellMarket.marketPaym_price}" pattern="#,###,###,###" /><span class="fs-16">원</span> </br>
 												<small>수수료율:${mySellMarket.marketPaym_feeRate}%</small>
 											</td> 
 											
 											
-											<td>
+											<td align="center">
 												<a href="#" class="badge badge-secondary">진행중</a>
 											</td>
-											<td class="font-weight-semibold fs-16">
+											<td class="font-weight-semibold fs-16" align="center">
 												${mySellMarket.marketPaym_rdate}
 											</td>
-											<td class="font-weight-semibold fs-16" align="center">
+											<td class="font-weight-semibold fs-16" align="center" >
 											
 												<c:forEach items="${member}" var="entry" varStatus="status">
 													<c:if test="${fn:contains(entry, mySellMarket.mem_emailBuy) }">
@@ -197,7 +206,7 @@ $(document).ready(function() {
 
 											
 											</td>
-											<td class="font-weight-semibold fs-16">
+											<td class="font-weight-semibold fs-16" align="center">
 												<a href="javascript:void(0)" onclick="deleteCheck(${mySellMarket.marketPaym_num})"  data-toggle="modal" data-target="#smallModal1"   class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="거절하기"><i class="fa fa-trash"></i></a>
 												<a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="완료"><i class="fa fa-shopping-cart"></i></a>
 											</td>

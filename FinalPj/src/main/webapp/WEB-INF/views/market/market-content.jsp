@@ -9,15 +9,22 @@
 
 		<!--Sliders Section-->
 		<div>
-			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class=""><span class="font-weight-bold">60,85,965</span> Ads Available in Pinlist</h1>
+									<h1 class="" style="margin-bottom:0rem;">마켓 상세보기</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
 								</div>
-
 							</div>
 						</div>
 					</div>
