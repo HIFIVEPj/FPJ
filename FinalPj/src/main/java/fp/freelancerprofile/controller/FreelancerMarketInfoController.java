@@ -243,7 +243,7 @@ public class FreelancerMarketInfoController {
 		map.put("end",end);
 		
 		List<MarketBuysellList> mbuy=service.myBuyMarket(map);
-		
+		log.info("!!!!!!!!!!!mbuy"+mbuy);
 		FreeLancer free = getFreefname(mem_email);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("profile/myMarket3");

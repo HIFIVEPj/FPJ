@@ -1286,7 +1286,7 @@
 	}
 	
 	function addPick(market_num){
-		alert("marketnum"+market_num);
+		//alert("marketnum"+market_num);
 		$.ajax({
 			type:"get",  
 			url:'marketPick-add?market_num='+market_num+'&mem_email=${sessionScope.email}',
@@ -1300,7 +1300,7 @@
 		});
 	}
 	function delPick(market_num){
-		alert("marketnum"+market_num);
+		//alert("marketnum"+market_num);
 		$.ajax({
 			type:"get",  
 			url:'marketPick-del?market_num='+market_num+'&mem_email=${sessionScope.email}',

@@ -708,14 +708,13 @@
 										
 									</div>
 								</div>
-								<div class="card-footer">	
-									<div style="text-align: right;">
-								
-								<!--	<a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
-										<a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-										<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+								<c:if test="${sessionScope.class_num==1||sessionScope.class_num==2||sessionScope.class_num==3 }">
+									<div class="card-footer">	
+										<div style="text-align: right;">
+												<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+										</div>
 									</div>
-								</div>
+								</c:if>
 							</form>
 						</div>
 				<!--		
