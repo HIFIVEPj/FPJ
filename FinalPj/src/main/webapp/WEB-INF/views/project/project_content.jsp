@@ -573,8 +573,10 @@ obShareUrl.value=window.document.location.href;
           description: '${projectCont.pj_sub}',
           imageUrl: '../images/brand/logo1.png',
           link: {
-            mobileWebUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}',
-            webUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}'
+            //mobileWebUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}',
+            mobileWebUrl: 'http://www.hifive.store/project_content?pj_num=${projectCont.pj_num}',
+            //webUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}'
+            webUrl: 'http://www.hifive.store/project_content?pj_num=${projectCont.pj_num}'
           }
         },
         social: {

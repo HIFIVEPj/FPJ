@@ -159,6 +159,9 @@
 							qa_cont like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'W'.toString()">
+							mem_name like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'E'.toString()">
 							mem_email like '%'||#{keyword}||'%'
 						</when>
 						<when test="type== 'G'.toString()">
@@ -192,11 +195,12 @@
   where rn > (#{pageNum} -1) * #{amount}   
   ]]>
   -->
-  <![CDATA[ 
+
+  <![CDATA[
   select * from (select rownum rn, aa.* from (select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, replycnt, qa.option2, qa.option3, mem_name from qa, member where qa.mem_email=member.mem_email order by qa_num desc) aa
       where
   ]]>
-  
+
   <include refid="criteria"></include>
       
   <![CDATA[    
@@ -205,9 +209,19 @@
   where rn > (#{pageNum} -1) * #{amount}   
   ]]>
 	</select>
-
+	
+	<!--
 	<select id="qa_count" resultType="int">
 		select count(*) from qa where 
+		
+		<include refid="criteria"></include> 
+		
+		qa_num > 0
+		
+	</select>
+	-->
+	<select id="qa_count" resultType="int">
+		select count(*) from (select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, replycnt, qa.option2, qa.option3, mem_name from qa, member where qa.mem_email=member.mem_email order by qa_num desc) where 
 		
 		<include refid="criteria"></include> 
 		

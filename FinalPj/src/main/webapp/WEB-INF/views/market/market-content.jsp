@@ -1169,8 +1169,10 @@ obShareUrl.value=window.document.location.href;
           description: '${market.market_sub}',
           imageUrl: '../images/brand/logo1.png',
           link: {
-            mobileWebUrl:'http://127.0.0.1:8090/market-content?${market.market_num}',
-            webUrl:'http://127.0.0.1:8090/market-content?${market.market_num}'
+            //mobileWebUrl:'http://127.0.0.1:8090/market-content?${market.market_num}',
+            mobileWebUrl:'http://www.hifive.store/market-content?${market.market_num}',	
+            //webUrl:'http://127.0.0.1:8090/market-content?${market.market_num}'
+        	webUrl:'http://www.hifive.store/market-content?${market.market_num}'
           }
         },
         social: {
