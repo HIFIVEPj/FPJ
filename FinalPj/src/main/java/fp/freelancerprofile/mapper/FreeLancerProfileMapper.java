@@ -59,7 +59,9 @@ public interface FreeLancerProfileMapper {
 	
 	//프로필 수정//
 	public FreeLancerProfile showContent(long pro_num);
+	//프로필 공개, 비공개//
 	void choiceProfile(Map<String, Object> map);
+	void closeProfile(Map<String, Object> map);
 	
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);
@@ -87,4 +89,5 @@ public interface FreeLancerProfileMapper {
 	void addACCT(Freelnacer_account freeacct);
 	Freelnacer_account selectFreeACCT(long free_code);
 	void updateACCT(Freelnacer_account freeacct);
+
 }

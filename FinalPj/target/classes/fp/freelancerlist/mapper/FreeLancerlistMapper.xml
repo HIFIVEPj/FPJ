@@ -264,12 +264,9 @@
       								, PRO_EXP 
     								, PRO_VCNT
     							    , profile_choice
-    							    , FREEREV_STAR
                        				, m.class_num
                        				, pro_pcnt
                        	              from FREELANCER_PROFILE fp
-                                        full outer join FREELANCER_REVIEW fr
-										on fp.FREE_CODE= fr.FREE_CODE
 											left outer join FREELANCER f
 											on fp.free_code=f.free_code 				
 		                                        right outer join member m
@@ -325,14 +322,16 @@
 	<select id="SelectList2" resultMap="List_FreeLancerResult" parameterType="long">
 	  <![CDATA[
 			select fp.free_code
-						, fp.PRO_NUM
-    					, profile_choice
-                        , t.TYPE_NUM
-                        , t.TYPE_NAME        
-                           from FREELANCER_PROFILE fp      
-                              right outer join type t
-                              on fp.type_num=t.type_num
-                                 where profile_choice=1
+					, fp.PRO_NUM
+    				, profile_choice
+                    , t.TYPE_NUM
+                    , t.TYPE_NAME  
+                        from FREELANCER_PROFILE fp      
+                         inner join FREELANCER_REVIEW fr
+                         on FP.FREE_CODE = FR.FREE_CODE
+                           right outer join type t
+                           on fp.type_num=t.type_num
+                             where profile_choice=1
 	   ]]>			
 	</select> 
 	
@@ -392,7 +391,7 @@
 						and fp.pro_num=#{pro_num}		
        ]]>
    </select>
-   
+
 
 	<!--프로필 조회수-->
 	<update id="vcnt" parameterType="map">
@@ -456,8 +455,15 @@
 	  ]]>		
 	</select> 
 	
-	<select id="selectStar" resultType="List_FreeLancerReview" parameterType="long">
-	select freerev_star from freelancer_review where pro_num=#{pro_num}
+	<!-- 별점 -->
+	<select id="selectStar" resultType="List_FreeLancerReview" parameterType="map">
+		<![CDATA[select round(avg(FREEREV_STAR),0) as freerev_star from freelancer_review where free_code=#{free_code}]]>	
+	</select>
+	<select id="selectReviewCount" resultMap="freelancerReview">
+   		select * from freelancer_review
+    </select>  
+   	<select id="selectStar_list" resultMap="freelancerReview">
+		<![CDATA[select fp.free_code,round(avg(FREEREV_STAR),0) as freerev_star from freelancer_review fr join freelancer_profile fp on fr.free_code = fp.free_code group by fp.free_code]]>	
 	</select>
 	
 	<!-- 프리랜서 리뷰(+페이징) -->
@@ -470,7 +476,7 @@
 			(select ROWNUM rnum , aa.* from 
 				(select ROWNUM , fr.freerev_num
 						  , fr.freerev_cont
-                          , fr.freerev_star
+                          , fr.FREEREV_STAR
                           , fr.freerev_rdate
                           , fr.pro_num
                           , fr.free_code

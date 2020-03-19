@@ -34,7 +34,6 @@ public interface FreeLancerProfileService {
 	List<FreeLancer> selectProfileContent4(long free_code);
 	//삭제//
 	public void listDelete(long PRO_NUM);
-
 	
 	//작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
@@ -46,7 +45,6 @@ public interface FreeLancerProfileService {
 	public void keyUpdate(FreePickKeyWord freepickkeyword);
 	//public void keyDelete(Map<String, Object> map);
 
-
 	//체크박스 삭제//
 	void checkdelete1(Map<String, Object> map);
 
@@ -55,10 +53,9 @@ public interface FreeLancerProfileService {
 	//프로필 수정//
 	public FreeLancerProfile showContent(long pro_num);
 	List<FreeLancerProfile> profile_free_select(String mem_email);
-
+	//프로필 공개, 비공개//
 	void choiceProfile(Map<String, Object> map);
-	
-	
+	void closeProfile(Map<String, Object> map);
 
 	//나영추가 + mydash_free
 	public FreeLancer mydash_free_select(String mem_email);

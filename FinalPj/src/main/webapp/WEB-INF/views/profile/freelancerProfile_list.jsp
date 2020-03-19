@@ -136,7 +136,7 @@
                                        <td scope="row">
                                           <label class="custom-control custom-checkbox ">                                 			
                                              <input type="checkbox" class="custom-control-input ab" name="pro_num" value="${freelancer.pro_num}" >          
-                                             <span class="custom-control-label"> </span>
+                                             <span class="custom-control-label"></span>
                                           </label>           
                                        </td>
 
@@ -166,13 +166,16 @@
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>
 									    </c:otherwise>
 									</c:choose> -->
-									 <td style="text-align:center" id="openOX">
-										 <c:if test="${freelancer.profile_choice eq 1}">
+									 <td style="text-align:center"  >
+									 <span class="custom-control-label" class="openOX" id="openOX"> 
+						
+									 	<c:if test="${freelancer.profile_choice eq 1}">
 											 공개
 										 </c:if>
 										 <c:if test="${freelancer.profile_choice ne 1}">
 											 비공개
 										 </c:if>
+									 </span>	
 									 </td>  
                 				</tr>
                   			</c:forEach> 
@@ -186,7 +189,16 @@
                         <div class="card-footer" align="right">
                          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
                          <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
-                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#choiceModal">프로필공개</button>			 
+                         
+                         <c:choose>
+	                         <c:when test="${ox.contains(1)}">
+								 <button type="button" class="btn btn-secondary profile_close" data-toggle="modal" data-target="#choiceCloseModal">프로필비공개</button>
+	               			 </c:when>
+	               			<c:otherwise>
+	                         	<button type="button" class="btn btn-secondary profile_open" data-toggle="modal" data-target="#choiceModal">프로필공개</button>
+	                        </c:otherwise>
+               			</c:choose>	
+               					 
                         </div>
 
                 <div class="center-block text-center">
@@ -368,6 +380,30 @@
          </div>      
       </div>
 <!-- /open Modal -->
+<!-- close Modal -->   
+      <div id="choiceCloseModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 비공개할까요?</p>
+               </div>
+               <div class="modal-footer">
+                 <a href="javascript:void(0)" class="btn btn-primary" id="profile_close" onclick="closeAjax();">프로필 비공개</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /close Modal -->
 
 <script>
 function check(){
@@ -378,10 +414,8 @@ function check(){
          if(this.checked){
         	 pro_num[chk_cnt] = this.value;
         	 chk_cnt++;
-        	
         	}  
        });
-    
        if(pro_num == ""){
         alert("1개이상 선택해 주세요.");
          return;
@@ -390,7 +424,7 @@ function check(){
       }
 </script> 
 <script> 
-      var pronum = new Array();
+     var pronum = new Array();
 	 $("input:checkbox[name='pro_num']").on("click",function(){
 		 var chk_cnt = 0;
 		 var pronumTemp = new Array();
@@ -402,36 +436,25 @@ function check(){
 			      }
 			 });
 			pronum=pronumTemp;
-			choiceAjax(pronum);
+			
 		 });
-				
-
 			       
-    	function choiceAjax(value){
-    
-    		 var ox ="<c:out value="${profile_list.get(0)}" />";
-    		 
-    		 console.log("ox:"+ox);
-    	
-    		 
+    	function choiceAjax(){
+    		
     			var flag= ${!empty sessionScope.email};
 			      var objParam={
-			               "pro_numList" : value
+			               "pro_numList" : pronum
 			         };
 	            		
-	           		console.log("size:"+objParam.pro_numList.length);
-	           		console.log("size2:"+objParam.length);
-	            		if(objParam.pro_numList.length != 1){
+	           		if(objParam.pro_numList.length != 1){
 	        					alert("한개만 선택해 주세요.");	        					
 	            		}else{
-	            		
 				          $.ajax({
 				             type:"get",
 				             url:"choiceProfile",
 				             data:objParam,
 				             dataType: "html",
 				             success:function(data){
-					            	
 				            	 location.replace("freelancerProfile_list");
 				             },
 				             error:function(data){
@@ -439,7 +462,31 @@ function check(){
 				             }
 			          });
 			      }
-    	}
+    		}
+    	function closeAjax(){
+    		
+			var flag= ${!empty sessionScope.email};
+		      var objParam={
+		               "pro_numList" : pronum
+		         };
+            		
+           		if(objParam.pro_numList.length != 1){
+        					alert("한개만 선택해 주세요.");	        					
+            		}else{
+			          $.ajax({
+			             type:"get",
+			             url:"closeAjax",
+			             data:objParam,
+			             dataType: "html",
+			             success:function(data){
+			            	 location.replace("freelancerProfile_list");
+			             },
+			             error:function(data){
+			           		alert("error");
+			             }
+		          });
+		      }
+		}
 
 </script>
 

@@ -140,12 +140,15 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public FreeLancerProfile showContent(long pro_num) {
 		return mapper.showContent(pro_num);
 	}
+	//프로필 공개, 비공개//
 	@Override	
 	public void choiceProfile(Map<String, Object> map) {
 		mapper.choiceProfile(map);
 	}
-	
-	
+	@Override	
+	public void closeProfile(Map<String, Object> map) {
+		mapper.closeProfile(map);
+	}
 	//나영추가 + mydash_free
 	@Override
 	public FreeLancer mydash_free_select(String mem_email) {

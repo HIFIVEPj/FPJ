@@ -414,6 +414,13 @@
 			profile_choice=1 where pro_num=#{pronum}
 		  ]]>
 	</update> 
+	 <!-- 프로필 비공개 -->	
+	<update id="closeProfile" parameterType="map"> 
+		<![CDATA[
+		update freelancer_profile set
+			profile_choice=0 where pro_num=#{pronum}
+		  ]]>
+	</update> 
  	 <!-- 프로필 update(키워드 delete) 
    <delete id="keyDelete" parameterType="long">
 	   <![CDATA[

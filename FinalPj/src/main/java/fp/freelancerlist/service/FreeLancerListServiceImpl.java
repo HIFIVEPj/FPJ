@@ -77,7 +77,7 @@ import fp.freelancerprofile.domain.Type;
 		return mapper.freelancercontent5(free_code);
 	}
 
-	//프로필 조회수//
+	//프로필 조회수 및 별점//
 	@Override
 	public void vcnt(long pro_num) {
 		mapper.vcnt(pro_num);
@@ -86,6 +86,16 @@ import fp.freelancerprofile.domain.Type;
 	public List<List_FreeLancerReview> selectStar(long free_code) {
 		return mapper.selectStar(free_code);
 	}
+	@Override
+	public List<List_FreeLancerReview> selectReviewCount() {
+		return mapper.selectReviewCount();
+	}
+
+	@Override
+	public int selectStar_list() {
+		return mapper.selectStar_list();
+	}
+
 	//리뷰//	
 	@Override
 	public long countReview(Map<String, Object> map) {

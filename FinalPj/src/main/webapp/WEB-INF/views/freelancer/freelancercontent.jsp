@@ -71,7 +71,7 @@
 											 	
 											 	
 											 	
-											 	
+											
 												<c:forEach items="${content}" var="list"  varStatus="status">
 												<div class="ml-4">
 													<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
@@ -81,7 +81,7 @@
 													<span class="text-muted">${list.pro_exp}&nbsp;년</span><br>
 												<c:forEach items="${content3}" var="key"  varStatus="status">
 												<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
-													<span class="text-muted">${keyword.key_name} </span> / 
+													<span class="text-muted">${keyword.key_name} </span> &nbsp;
 												</c:forEach>
 												</c:forEach>
 												<br/>
@@ -92,7 +92,7 @@
 													<!-- 별점 -->
 														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
 															<div class="rating-stars d-inline-flex mb-2 mr-3">
-															<c:if test="${empty review}">
+															<c:if test="${empty star}">
 																<span class="rated-products-ratings">
 																	 <i class="fa fa-star-o text-warning"></i>
 																	 <i class="fa fa-star-o text-warning"></i>
@@ -100,25 +100,23 @@
 																	 <i class="fa fa-star-o text-warning"></i>
 																	 <i class="fa fa-star-o text-warning"><span class="text-muted">&nbsp;0</span></i>
 																</span>
-															</c:if>
-														<c:forEach items="${review}" var="review_content"  varStatus="status">	
+															</c:if> 	
+															<c:forEach items="${star}" var="avg_star"  varStatus="status">	
 															<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
 												 		    <span class="rated-products-ratings">
-					                        		        <c:if test="${review_content.freerev_star >= 0}">
-						                                        <c:forEach var="1" begin="1" end="${review_content.freerev_star}">
+					                        		        <c:if test="${avg_star.freerev_star >= 0}">
+						                                        <c:forEach var="1" begin="1" end="${avg_star.freerev_star}">
 						                                          <i class="fa fa-star text-warning"> </i>
 						                                         </c:forEach>
 					                                         
-						                                        <c:forEach var="1" begin="1" end="${5-review_content.freerev_star}">
+						                                        <c:forEach var="1" begin="1" end="${5-avg_star.freerev_star}">
 																  <i class="fa fa-star-o text-warning"> </i>
 																</c:forEach>
-															</c:if>    			
-														</c:forEach>
+															</c:if>    	
 															</div>
 															<!-- 별점표시 텍스트 -->	
-															<c:forEach items="${review}" var="review_content"  varStatus="status">	
-																<c:if test="${review_content.freerev_star ne null}">
-																${review_content.freerev_star}
+																<c:if test="${avg_star.freerev_star ne null}">
+																${avg_star.freerev_star}
 																</c:if>
 															</c:forEach>	 
 															<!-- 별점표시 텍스트 위치 끝 -->	
@@ -179,7 +177,7 @@
 									<li><span class="font-weight-semibold">사용기술 :</span>
 								<c:forEach items="${content3}" var="key"  varStatus="status">
 								<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
-									${keyword.key_name}
+									${keyword.key_name}&nbsp;
 								</c:forEach>
 								</c:forEach>
 									</li>																	
@@ -407,7 +405,7 @@
 					<!-- 페이징 끝. 리뷰 끝 -->					
 			<!--	</c:if>	 -->		
 			</div>
-				<!--	</div>-->	${content.get(0).mem_email}#@@@####
+				<!--	</div>-->	
 		</div>
 			<!-- 리뷰작성 -->
 		<c:if test="${sessionScope.email ne null}">

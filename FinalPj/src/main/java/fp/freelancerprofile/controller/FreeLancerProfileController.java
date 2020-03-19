@@ -161,20 +161,37 @@ public class FreeLancerProfileController {
 	//프로필 공개//
 	@RequestMapping(value="choiceProfile", method=RequestMethod.GET)
 	@ResponseBody
-	public void choiceProfile(@RequestParam(value="pro_numList") long pro_numList){ 
+	public void choiceProfile(@RequestParam(value="pro_numList[]")List<Long> pro_numList){ 
 		 
 		 Map<String, Object> map = new HashMap<String, Object>();
 		 log.info("dfdfsdssdf: "+pro_numList);
 		
-		if(pro_numList==0) {
+		if(pro_numList.size()==0) {
 			 map.put("pronum", null);
 		 }else {
-			 map.put("pronum", pro_numList);
+			 long pronum = pro_numList.get(0);
+			 map.put("pronum", pronum);
 		 }
 		 service.choiceProfile(map);
 
 	}
+	//프로필 비공개//
+	@RequestMapping(value="closeAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public void closeProfile(@RequestParam(value="pro_numList[]")List<Long> pro_numList){ 
+		 
+		 Map<String, Object> map = new HashMap<String, Object>();
+		 log.info("dfdfsdssdf: "+pro_numList);
+		
+		if(pro_numList.size()==0) {
+			 map.put("pronum", null);
+		 }else {
+			 long pronum = pro_numList.get(0);
+			 map.put("pronum", pronum);
+		 }
+		 service.closeProfile(map);
 
+	}
 
 	//프로필 리스트//
 	@RequestMapping("freelancerProfile_list")
@@ -207,10 +224,16 @@ public class FreeLancerProfileController {
 		List<FreeLancerProfileFile> file_name = service.selectFilename();
 		ModelAndView mv = new ModelAndView("profile/freelancerProfile_list");
 		log.info(")(#*$()#Q*$()map: "+map);
+		List<Long>pro_oxList = new ArrayList<Long>();
 		
+		for( int i = 0; i<profile_list.size(); i++) {
+			pro_oxList.add(profile_list.get(i).getProfile_choice());
+		}
+		mv.addObject("ox",pro_oxList);
 		mv.addObject("paging", vo);
 		mv.addObject("profile_list", profile_list);
 		mv.addObject("file_name", file_name);
+		log.info("/////////"+pro_oxList);
 		return mv;
 	}
 	
