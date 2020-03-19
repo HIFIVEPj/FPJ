@@ -77,7 +77,7 @@
 					<form>
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Categories</h3>
+								<h3 class="card-title">직종</h3>
 							</div>
 							<div class="card-body">
 								<div class="" id="">
@@ -110,8 +110,9 @@
 								</div>
 							</div>
 							<div class="card-header border-top">
-								<h3 class="card-title">Price Range</h3>
+								<h3 class="card-title">가격</h3>
 							</div>
+							<!-- 
 							<div class="card-body">
 								<h6>
 								   <label for="price">Price Range:</label>
@@ -119,8 +120,17 @@
 								</h6>
 								<div id="mySlider"></div>
 							</div>
+							-->
+							<!-- 교체 -->
+							<div class="card-body">
+								<h6>
+								   <input type="text" id="price1" value="<c:out value='${mapPrice.price1}'/>" >~<input type="text" id="price2" value="<c:out value='${mapPrice.price2}'/>" >
+								</h6>
+								
+							</div>
+							<!-- 교체 -->
 							<div class="card-header border-top">
-								<h3 class="card-title">Condition</h3>
+								<h3 class="card-title">경력</h3>
 							</div>
 							<div class="card-body">
 								<div class="filter-product-checkboxs" id="expCheckbox">
@@ -183,7 +193,9 @@
 	$("#marketSearchBox").click(function (){
 		var checkedCate = [];
 		var checkedExp = [];
-		var marketPrice=$("#price").val()
+	//	var marketPrice=$("#price").val()
+		var marketPrice1=$("#price1").val()
+		var marketPrice2=$("#price2").val()
 		var selectedKey= $("#marketOrder option:selected").val();
 		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
 			//alert(index+":"+ $(this).val());
@@ -196,7 +208,7 @@
 		/* alert("checkedCate:"+checkedCate);
 		alert("checkedExp:"+checkedExp);
 		alert($("#price").val()); */
-		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
+		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice1="+marketPrice1+"&marketPrice2="+marketPrice2+"&selectedKey="+selectedKey;
 	});
 	
 	function checkedPage(nowPage,cntPerPage,selectedKey){

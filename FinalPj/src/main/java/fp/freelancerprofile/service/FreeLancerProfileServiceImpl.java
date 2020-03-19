@@ -15,6 +15,7 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
@@ -55,7 +56,11 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Override
 	public List<FreeLancer> selectProfileContent(long PRO_NUM){
 		return mapper.selectProfileContent(PRO_NUM);
-	}	
+	}
+	@Override
+	public List<FreeLancerProfile> selectTel(long PRO_NUM) {
+		return mapper.selectTel(PRO_NUM);
+	}
 	@Override
 	public List<FreeLancerProfile> selectProfileContent2(long PRO_NUM){
 		return mapper.selectProfileContent2(PRO_NUM);
@@ -87,7 +92,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Transactional
 	public void listInsert(FreeLancerProfile freelancerprofile){
 		mapper.listInsert(freelancerprofile);
-		
+		mapper.free_profileoxUpdate(freelancerprofile);
 	}
 
 	@Override
@@ -135,12 +140,15 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public FreeLancerProfile showContent(long pro_num) {
 		return mapper.showContent(pro_num);
 	}
+	//프로필 공개, 비공개//
 	@Override	
 	public void choiceProfile(Map<String, Object> map) {
 		mapper.choiceProfile(map);
 	}
-	
-	
+	@Override	
+	public void closeProfile(Map<String, Object> map) {
+		mapper.closeProfile(map);
+	}
 	//나영추가 + mydash_free
 	@Override
 	public FreeLancer mydash_free_select(String mem_email) {

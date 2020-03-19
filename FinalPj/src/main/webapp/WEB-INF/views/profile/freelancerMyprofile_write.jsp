@@ -100,10 +100,10 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payment"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -1459,8 +1459,6 @@
 											</div>
 										</div>
 									</div>
-								
-								
 
 								<!--  	<div class="col-md-12">
 											<div class="form-group ">
@@ -1579,14 +1577,19 @@ function check(){
          }
        });
       
-      
-      alert("key_num : "+ key_num);    
-      if(key_num == ""){
-         alert("키워드는 1개 이상 설정해야합니다.")
-         return ;
-      }
-
-      //free_write.submit();
+       //alert("type_num: " +type_num);
+      //alert("key_num : "+ key_num);
+    
+	      if(key_num == ""){
+	         alert("키워드는 1개 이상 설정해야합니다.")
+	         return ;
+	      }
+     // alert("free_code: "+free_write1.free_code.value+", pro_num: "+free_write1.pro_num.value+", type_num: "+free_write1.type_num.value+", pro_exp: "+free_write1.pro_exp.value);
+      // alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
+       //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
+      // alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
+      // alert("pj_loc: "+pj_input.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+      free_write.submit();
       }
    //});
 </script>

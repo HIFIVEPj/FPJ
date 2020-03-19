@@ -25,6 +25,10 @@ public interface MemberMapper {
 	List<Market> getMarketList(MemberVo memberVO);
 	void upMarketS(Map<String, Object> map);
 	
+	//Index 
+	long sumCountCorIndex();
+	long countFree();
+	
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
 	long getTotalCountMC(MemberVo memberVO);

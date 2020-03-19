@@ -264,12 +264,9 @@
       								, PRO_EXP 
     								, PRO_VCNT
     							    , profile_choice
-    							    , FREEREV_STAR
                        				, m.class_num
                        				, pro_pcnt
                        	              from FREELANCER_PROFILE fp
-                                        full outer join FREELANCER_REVIEW fr
-										on fp.FREE_CODE= fr.FREE_CODE
 											left outer join FREELANCER f
 											on fp.free_code=f.free_code 				
 		                                        right outer join member m
@@ -325,14 +322,16 @@
 	<select id="SelectList2" resultMap="List_FreeLancerResult" parameterType="long">
 	  <![CDATA[
 			select fp.free_code
-						, fp.PRO_NUM
-    					, profile_choice
-                        , t.TYPE_NUM
-                        , t.TYPE_NAME        
-                           from FREELANCER_PROFILE fp      
-                              right outer join type t
-                              on fp.type_num=t.type_num
-                                 where profile_choice=1
+					, fp.PRO_NUM
+    				, profile_choice
+                    , t.TYPE_NUM
+                    , t.TYPE_NAME  
+                        from FREELANCER_PROFILE fp      
+                         inner join FREELANCER_REVIEW fr
+                         on FP.FREE_CODE = FR.FREE_CODE
+                           right outer join type t
+                           on fp.type_num=t.type_num
+                             where profile_choice=1
 	   ]]>			
 	</select> 
 	
@@ -365,7 +364,6 @@
 		<![CDATA[
 			select distinct fp.free_code 
 							, free_name 
-							, free_tel 
 							, fp.mem_email
 							, free_fname 
 							, pro_exp 
@@ -384,6 +382,17 @@
 									and fp.pro_num=#{pro_num}		
 		 ]]>		
 	</select>	
+	<select id="selectTel"  resultMap="freelancerContent" parameterType="map">
+      <![CDATA[
+		SELECT REGEXP_REPLACE(free_tel, '(.{3})(.+)(.{4})', '\1-\2-\3') as free_tel
+			from freelancer f, freelancer_profile fp 
+					where fp.free_code=f.free_code 
+						and fp.free_code=#{free_code}
+						and fp.pro_num=#{pro_num}		
+       ]]>
+   </select>
+
+
 	<!--프로필 조회수-->
 	<update id="vcnt" parameterType="map">
 	update freelancer_profile set pro_vcnt= pro_vcnt+1 where pro_num=#{pro_num}
@@ -446,8 +455,15 @@
 	  ]]>		
 	</select> 
 	
-	<select id="selectStar" resultType="List_FreeLancerReview" parameterType="long">
-	select freerev_star from freelancer_review where pro_num=#{pro_num}
+	<!-- 별점 -->
+	<select id="selectStar" resultType="List_FreeLancerReview" parameterType="map">
+		<![CDATA[select round(avg(FREEREV_STAR),0) as freerev_star from freelancer_review where free_code=#{free_code}]]>	
+	</select>
+	<select id="selectReviewCount" resultMap="freelancerReview">
+   		select * from freelancer_review
+    </select>  
+   	<select id="selectStar_list" resultMap="freelancerReview">
+		<![CDATA[select fp.free_code,round(avg(FREEREV_STAR),0) as freerev_star from freelancer_review fr join freelancer_profile fp on fr.free_code = fp.free_code group by fp.free_code]]>	
 	</select>
 	
 	<!-- 프리랜서 리뷰(+페이징) -->
@@ -456,24 +472,24 @@
     </select>
 	<select id="freelancerReview" resultMap="freelancerReview" parameterType="map">
   		<![CDATA[
-			select ROWNUM , fr.freerev_num
+		select * from 
+			(select ROWNUM rnum , aa.* from 
+				(select ROWNUM , fr.freerev_num
 						  , fr.freerev_cont
-                          , fr.freerev_star
+                          , fr.FREEREV_STAR
                           , fr.freerev_rdate
                           , fr.pro_num
                           , fr.free_code
                           , fr.mem_email
-                          , m.mem_name
+                          , mem_name
                           from freelancer_review  fr
-                             inner join member m
+                           inner join member m
                              on fr.mem_email = m.mem_email
                                  inner join freelancer_profile fp
                                  on fr.pro_num = fp.pro_num
-                                    where fr.free_code=#{free_code}
-                                     and fr.pro_num=#{pro_num}
-                                     and ROWNUM <=#{end}
-                                     and ROWNUM>=#{start}
-                                     order by freerev_rdate desc                             	
+                                     where fr.fREE_CODE=#{free_code} and fr.pro_num=#{pro_num}
+                                     order by freerev_rdate desc)aa) 
+                                        where rnum>=#{start} and rnum<=#{end}              	
 	  ]]>	
 	  </select>
 	<select id="selectFile" resultType="Freelancer" parameterType="String">

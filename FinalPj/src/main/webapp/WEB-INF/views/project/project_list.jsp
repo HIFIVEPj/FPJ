@@ -19,6 +19,7 @@
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
 									<h1 class="" style="margin-bottom:0rem;">프로젝트</h1>
+<<<<<<< HEAD
 									<!--
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="../">Home</a></li>
@@ -26,6 +27,11 @@
 										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
 									</ol>
 									-->
+=======
+								</div>
+								<div class="search-background mb-0">
+									
+>>>>>>> c1264c8ef15092d800dd48f8c135cf5272de93bb
 								</div>
 							</div>
 						</div>
@@ -43,9 +49,11 @@
 				<div class="page-header">
 					<h4 class="page-title">Project</h4>
 					<ol class="breadcrumb">
+
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
 						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+
 					</ol>
 				</div>
 			</div>

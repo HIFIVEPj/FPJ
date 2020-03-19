@@ -30,8 +30,13 @@
 		<result property="option2" column="OPTION2"/>
 		<result property="option3" column="OPTION3"/>	
 	</resultMap>
+	
 	<select id = "idCheck" parameterType = "String" resultType = "int">
     	SELECT COUNT(*) FROM MEMBER WHERE MEM_EMAIL = #{email}
+	</select>
+	
+	<select id = "countFree"  resultType ="Long">
+    	SELECT COUNT(*) FROM MEMBER WHERE CLASS_NUM=2 or CLASS_NUM=3
 	</select>
 	
 	<select id="loginCheck" resultType="Member" resultMap="MemberMap">
@@ -120,6 +125,12 @@
 	</sql>
 	
 	<!-- 기업 마켓  -->
+	<select id="sumCountCorIndex" resultType="Long" >
+	<![CDATA[	
+		select SUM(payinfo_price) from pay_information 
+		where PAYINFO_UID like 'project_%']]>
+	</select> 
+	
 	<select id="sumCountCorN" resultType="String" >
 	<![CDATA[	
 		select payinfo_buyername from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 

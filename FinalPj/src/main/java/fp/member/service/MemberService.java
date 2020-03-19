@@ -21,6 +21,10 @@ public interface MemberService {
 	long getMarketCount();
 	List<Market> getMarketList(MemberVo memberVO);
 	
+	//Index 
+	long sumCountCorIndex();
+	long countFree();
+	
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
 	long getTotalCountMC(MemberVo memberVO);

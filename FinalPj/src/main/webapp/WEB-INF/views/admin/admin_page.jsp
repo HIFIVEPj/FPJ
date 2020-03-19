@@ -76,7 +76,7 @@
 									</div>
 								</form>
 							</div> -->
-							<div class="d-flex order-lg-2 ml-auto">
+							<div class="d-flex order-lg-2 ml-auto" style="line-height: 35px;">
 				 				<div class="dropdown d-none d-md-flex" >
 									<a  class="dropdown-item" href="project_list">										
 									프로젝트 
@@ -108,24 +108,7 @@
 									</a>
 								</div> 
 						
-
-						<!-- 		<div class="dropdown ">									
-									<a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
-										<img src="../images/faces/male/25.jpg" alt="profile-img" class="avatar avatar-md brround">
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
-										<a class="dropdown-item" href="profile.html">
-											<i class="dropdown-icon si si-user"></i> My Profile
-										</a>
-										<a href="logout.do" class="dropdown-item">
-											<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
-										</a>
-										<a class="dropdown-item" href="editprofile.html">
-											<i class="dropdown-icon  si si-settings"></i> Account Settings
-										</a>
-									</div>
-								</div> -->
-								
+							
 							</div>
 						</div>
 					</div>
@@ -324,28 +307,28 @@
 														<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.market_price}" pattern="#,###,###,###" /></td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
-															<a href="#" class="badge badge-warning">미승인</a>
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-warning">미승인</a>
 															</c:if>
 															<c:if test="${dto.market_state eq 1}">
-															<a href="#" class="badge badge-success">승인</a>
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-success">승인</a>
 															</c:if>
 															<c:if test="${dto.market_state eq 2}">
-															<a href="#" class="badge badge-danger">거절</a>		
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-danger">거절</a>		
 															</c:if>
 															
 														</td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
-																<button type="button" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</button>															
-																<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i>거절하기</button>
+																<button type="button" id="admitBtn" class="btn btn-primary btn-sm admitBtn" ><i class="fa fa-check"></i>승인하기</button>															
+																<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm refuseBtn"><i class="fa fa-close"></i>거절하기</button>
 																<input type="hidden" id="market_state" name="market_state" value="">
 																<input type="hidden" id="market_num" name="market_num" value="${dto.market_num}">
 															</c:if>						
 															<c:if test="${dto.market_state eq 1}">
-																<a href="#" class="tag tag-gray">결재완료</a>
+																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>
 															</c:if>
 															<c:if test="${dto.market_state eq 2}">
-																<a href="#" class="tag tag-gray">결재완료</a>		
+																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>		
 															</c:if>
 														<!-- <a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
 															<a class="btn btn-danger text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
@@ -538,12 +521,12 @@ $(document).ready(function(){
  
 })
 
-$("#admitBtn").on("click",function(){	
+$(".admitBtn").on("click",function(){	
 	$("#market_state").attr("value","1");	
-	var market_state= $("#market_state").val();	
+	var market_state= $("#market_state").val();		
 	marketA.submit();	
 })
-$("#refuseBtn").on("click",function(){	
+$(".refuseBtn").on("click",function(){	
 	$("#market_state").attr("value","2");	
 	var market_state= $("#market_state").val();	
 	marketA.submit();	

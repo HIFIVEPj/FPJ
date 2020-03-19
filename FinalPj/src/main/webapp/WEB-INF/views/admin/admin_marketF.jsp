@@ -77,7 +77,7 @@
 									</div>
 								</form>
 							</div> -->
-							<div class="d-flex order-lg-2 ml-auto">
+							<div class="d-flex order-lg-2 ml-auto" style="line-height: 35px;">
 								<div class="dropdown d-none d-md-flex" >
 									<a  class="dropdown-item" href="project_list">										
 									프로젝트 
@@ -431,10 +431,10 @@ $(document).ready(function(){
 	    var startDate=  $("#startDate").val();
 	    var endDate = $("#endDate").val();
           if(startDate.length ==0 ||endDate .length == 0 ){
-        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  //alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
         	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword;
           }else{
-        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  //alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
         	  window.location.href="searchFree.do?type="+type+"&keyword="+keyword+"&startDate="+startDate+"&endDate="+endDate;
           }            
      })   
@@ -451,9 +451,9 @@ $(document).ready(function(){
 	 })
 	 
   	  $("#resetBtn").click(function(){ 
-  		 	$('#keyword').val('');
-    	  $("#startDate").val('');
-    	  $("#endDate").val('');
+  		 	$('#keyword').val("");
+    	  $("#startDate").val("");
+    	  $("#endDate").val("");
       }) 
       
     
@@ -476,40 +476,6 @@ $(document).ready(function(){
     },
  });
  
-/************************
-  var sumCountMarketN="''"+${sumCountMarketN}+"'";
- 
- var options = {
-        series: [{
-        data: ${sumCountMarket}//[400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
-        	       		
-      }],
-        chart: {
-        type: 'bar',
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: [sumCountMarketN],//${sumCountMarketN},//['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-         // 'United States', 'China', 'Germany'
-        //],
-      }
-      };
-
-      var chart = new ApexCharts(document.querySelector("#chart1"), options);
-      chart.render();/
-/***********************************/
-
- //var sumCountMarketN=${sumCountMarketN}
-// var sumCountMarket=${sumCountMarket};
-/*******************************/
  
 
  var chart = c3.generate({
@@ -523,24 +489,16 @@ $(document).ready(function(){
         	date:${sumCountMarketN},
         	매출: ${sumCountMarket}
          },
-         /*   columns:
-         [
-             [sumCountMarketN],
-             [sumCountMarket]
-         ],*/
+
          x: 'date',
          type: 'bar'
      },
-    /* bar: {
-    	    width: {
-    	      ratio: 0.2,            
-    	    },
-    }, */
+
      axis: {
          rotated: true, //x축 y축 회전
          x: {
              type: 'category',
-            //categories: ['이지아', '윤지민', '이세빈', '성빈', '신진오']
+
          }
      }
 	}

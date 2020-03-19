@@ -55,7 +55,10 @@ import fp.freelancerprofile.domain.Type;
 	@Override
 	public List<Freelancer_FreeLancerProfile> freelancercontent(Map<String, Object> map){
 		return mapper.freelancercontent(map);
-		
+	}
+	@Override
+	public List<Freelancer_FreeLancerProfile> selectTel(Map<String, Object> map) {
+		return mapper.selectTel(map);
 	}
 	@Override
 	public List<Freelancer_FreeLancerProfile> freelancercontent2(long free_code){
@@ -73,7 +76,8 @@ import fp.freelancerprofile.domain.Type;
 	public List<Project> freelancercontent5(long free_code){
 		return mapper.freelancercontent5(free_code);
 	}
-	//프로필 조회수//
+
+	//프로필 조회수 및 별점//
 	@Override
 	public void vcnt(long pro_num) {
 		mapper.vcnt(pro_num);
@@ -82,6 +86,16 @@ import fp.freelancerprofile.domain.Type;
 	public List<List_FreeLancerReview> selectStar(long free_code) {
 		return mapper.selectStar(free_code);
 	}
+	@Override
+	public List<List_FreeLancerReview> selectReviewCount() {
+		return mapper.selectReviewCount();
+	}
+
+	@Override
+	public int selectStar_list() {
+		return mapper.selectStar_list();
+	}
+
 	//리뷰//	
 	@Override
 	public long countReview(Map<String, Object> map) {
@@ -121,5 +135,8 @@ import fp.freelancerprofile.domain.Type;
 	public long getTotalCountFree(long free_code) {
 		return getTotalCountFree(free_code);
 	}
+
+
+
 
 }

@@ -30,13 +30,13 @@
 									<div class="tab-content index-search-select">
 										<div class="tab-pane active" id="tab1">
 											<div class="search-background">
-
+											<form name="no_submitPj">
 												<div class="form row no-gutters">
 													<div class="form-group  col-xl-6 col-lg-6 col-md-12 mb-0">
-														<input type="text" class="form-control" id="Course-text" placeholder="프로젝트 검색">
+														<input type="text" class="form-control pjSearch" id="Course-text" placeholder="프로젝트 검색">
 													</div>
 													<div class="form-group col-xl-4 col-lg-4 col-md-12 mb-0">
-														<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
+														<select class="form-control select2-show-search border-bottom-0 w-100 pjType" data-placeholder="Select">
 															<optgroup label="Categories">
 																<option value="0">All</option>
 																<option value="1">개발</option>
@@ -55,13 +55,22 @@
 															</div>
 															 -->
 															<div class="col-xl-12 col-lg-12 col-md-12 mb-0">
-																<a href="construction" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> Search</a>
+																<a href="javascript:void(0)" class="btn btn-block btn-secondary fs-14" onclick="pjSearch();"><i class="fa fa-search"></i> Search</a>
 															</div>
 														</div>
 													</div>
 												</div>
+											</form>
 											</div>
 										</div>
+										<script type="text/javascript">
+											function pjSearch(){
+												var type= $(".pjType").val();
+												var searchKey=$(".pjSearch").val();
+												
+												location.href="project_list?type="+type+"&searchKey="+searchKey;
+											}
+										</script>
 										<div class="tab-pane" id="tab2">
 											<div class="search-background">
 												<div class="form row no-gutters">
@@ -147,7 +156,7 @@
 									<!-- <i class="si si-screen-desktop"></i> -->
 								</div>
 								<h5>총 프로젝트 수</h5>
-								<h2 class="counter mb-0">869</h2>건
+								<h2 class="counter mb-0">${totalCount}</h2>건
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
@@ -156,7 +165,7 @@
 									<i class="fa fa-diamond" style="font-size: 1.1rem;"></i>
 								</div>
 								<h5>총 프로젝트 금액</h5>
-								<h2 class="counter mb-0">984,345,000</h2>원
+								<h2 class="counter mb-0"><fmt:formatNumber value="${sumCountCorIndex}" pattern="#,###,###,###" /></h2>원
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
@@ -165,7 +174,7 @@
 									<i class="ti-shopping-cart-full"></i>
 								</div>
 								<h5>총 프리마켓 서비스 수</h5>
-								<h2 class="counter mb-0">514</h2>건
+								<h2 class="counter mb-0">${marketTotal}</h2>건
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
@@ -174,7 +183,7 @@
 									<i class="fa fa-drivers-license-o"></i>
 								</div>
 								<h5>총 프리랜서 수</h5>
-								<h2 class="counter mb-0">753</h2>명
+								<h2 class="counter mb-0">${countFree}</h2>명
 							</div>
 						</div>
 					</div>

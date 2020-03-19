@@ -7,6 +7,12 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fp.corporation.domain.Corporation;
+import fp.corporation.mapper.CorporationMapper;
+import fp.corporation.mapper.ProjectMapper;
+import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.mapper.FreeLancerProfileMapper;
 import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
 import fp.market.domain.MarketBuysellList;
@@ -21,7 +27,11 @@ import lombok.extern.log4j.Log4j;
 @Service
 @AllArgsConstructor
 public class MarketServiceImpl implements MarketService {
+	private ProjectMapper pjMapper;
+	private CorporationMapper corMapper;
+	private FreeLancerProfileMapper freeMapper;
 	private MarketMapper mapper;
+	
 	@Override
 	public int getMarketCount() {
 		return mapper.getMarketCount();
@@ -171,8 +181,22 @@ public class MarketServiceImpl implements MarketService {
 	}
 //마켓구매내역insert
 	@Override
+	@Transactional
 	public void insertMarketBuy(HashMap<String, Object> map) {
 		mapper.insertMarketBuy(map);
+		//기업
+			Corporation cor = corMapper.mydash_cor_select((String)map.get("mem_email"));
+			if(cor!=null) {
+			pjMapper.corPointUp(cor.getCor_code());
+			pjMapper.corLevelUp1(cor.getCor_code());
+			pjMapper.corLevelUp2(cor.getCor_code());
+		}else {
+		//프리랜서
+			FreeLancer free = freeMapper.mydash_free_select((String)map.get("mem_email"));
+			freeMapper.freePointUp(free.getFree_code());
+			freeMapper.freeLevelUp1(free.getFree_code());
+			freeMapper.freeLevelUp2(free.getFree_code());
+		}
 		
 	}
 	public List<MarketBuysellList> writeReview(HashMap<String,Object> map){

@@ -25,6 +25,8 @@ import fp.market.domain.Market;
 import fp.market.domain.MarketPick;
 import fp.market.service.MarketService;
 import fp.market.utils.MarketPagingVO;
+import fp.member.domain.MemberVo;
+import fp.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -34,6 +36,8 @@ public class IndexController {
 	MarketService marketService;
 	@Autowired
 	ProjectService pjService;
+	@Autowired	
+	MemberService memberService;
 	
 	@RequestMapping("construction")
 	public String construction() {
@@ -47,6 +51,13 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(HttpSession session){
+		
+		//마켓총결제금액		
+		long sumCountCorIndex =memberService.sumCountCorIndex();	//Index 
+	    long countFree=memberService.countFree();
+		int marketTotal = marketService.getMarketCount();		
+		
+		
 		HashMap<String,Object> Pagingmap = new  HashMap<String,Object>();//mybatis 쿼리 파라미터
 		//프로젝트 시작
 		ProjectVo projectVo= new ProjectVo();
@@ -81,13 +92,16 @@ public class IndexController {
 			 }
 		 }else {
 			//세션이메일이 존재하지 않을 때	 
-		 }
-		 log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
+		 }		 
 		 ModelAndView mv = new ModelAndView("index");
 		 mv.addObject("list", list);
 	     mv.addObject("marketNumList", marketNumList); 
-	     
 	     mv.addObject("pjList", pjList); //project List
+	     mv.addObject("totalCount", totalCount);
+	     mv.addObject("marketTotal", marketTotal);
+	     mv.addObject("sumCountCorIndex", sumCountCorIndex);
+	     mv.addObject("countFree", countFree);
+	     
 		return mv;
 	}
 	

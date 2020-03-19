@@ -20,7 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class KakaoController {
+public class GoogleController {
 	 private final static String K_CLIENT_ID = "f9abd56563cc935d79995fa0b56f3127";
      //이런식으로 REDIRECT_URI를 써넣는다.                                                                                                  //                                                //
 	private final static String K_REDIRECT_URI = "http://127.0.0.1:8090/kakaologin";
@@ -31,16 +31,13 @@ public class KakaoController {
 	return kakaoUrl;
 	}
 		
+		
 		public static JsonNode getAccessToken(String autorize_code) {
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "f9abd56563cc935d79995fa0b56f3127")); // REST API KEY
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://127.0.0.1:8090/kakaologin")); // 리다이렉트 URI
-		//
-		//postParams.add(new BasicNameValuePair("client_id", "f07c6ec422b1d9826d801eb9e9c78e91")); // REST API KEY
-		//postParams.add(new BasicNameValuePair("redirect_uri", "http://www.hifive.store/kakaologin")); // 리다이렉트 URI          
-		//
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://127.0.0.1:8090/kakaologin")); // 리다이렉트 URI                                                              
 		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻은 code 값
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);

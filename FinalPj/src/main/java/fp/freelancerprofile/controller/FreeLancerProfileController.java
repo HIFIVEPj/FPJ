@@ -45,6 +45,7 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
 import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
@@ -104,12 +105,6 @@ public class FreeLancerProfileController {
 		   return "redirect:freelancerProfile_list";
 		   }
 	
-	//프로필 컨텐츠//
-//	@RequestMapping("freelancerProfile_content")
-//	public String Profile_content() { 
-//		return "profile/freelancerProfile_content";
-//	}
-	
 	//프로필 수정//
 	@GetMapping("freelancerMyprofile_change")
 	public ModelAndView freelancerMyprofile_change(@RequestParam long pro_num) {
@@ -166,20 +161,37 @@ public class FreeLancerProfileController {
 	//프로필 공개//
 	@RequestMapping(value="choiceProfile", method=RequestMethod.GET)
 	@ResponseBody
-	public void choiceProfile(@RequestParam(value="pro_numList") long pro_numList){ 
+	public void choiceProfile(@RequestParam(value="pro_numList[]")List<Long> pro_numList){ 
 		 
 		 Map<String, Object> map = new HashMap<String, Object>();
 		 log.info("dfdfsdssdf: "+pro_numList);
 		
-		if(pro_numList==0) {
+		if(pro_numList.size()==0) {
 			 map.put("pronum", null);
 		 }else {
-			 map.put("pronum", pro_numList);
+			 long pronum = pro_numList.get(0);
+			 map.put("pronum", pronum);
 		 }
 		 service.choiceProfile(map);
 
 	}
+	//프로필 비공개//
+	@RequestMapping(value="closeAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public void closeProfile(@RequestParam(value="pro_numList[]")List<Long> pro_numList){ 
+		 
+		 Map<String, Object> map = new HashMap<String, Object>();
+		 log.info("dfdfsdssdf: "+pro_numList);
+		
+		if(pro_numList.size()==0) {
+			 map.put("pronum", null);
+		 }else {
+			 long pronum = pro_numList.get(0);
+			 map.put("pronum", pronum);
+		 }
+		 service.closeProfile(map);
 
+	}
 
 	//프로필 리스트//
 	@RequestMapping("freelancerProfile_list")
@@ -189,7 +201,7 @@ public class FreeLancerProfileController {
 		 
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
-		 
+		
 		FreeLancer freelancerprofile = service.mydash_free_select(mem_email);
 		long total = service.countProfileList(freelancerprofile.getFree_code()); //글의 총 갯수
 
@@ -212,10 +224,16 @@ public class FreeLancerProfileController {
 		List<FreeLancerProfileFile> file_name = service.selectFilename();
 		ModelAndView mv = new ModelAndView("profile/freelancerProfile_list");
 		log.info(")(#*$()#Q*$()map: "+map);
+		List<Long>pro_oxList = new ArrayList<Long>();
 		
+		for( int i = 0; i<profile_list.size(); i++) {
+			pro_oxList.add(profile_list.get(i).getProfile_choice());
+		}
+		mv.addObject("ox",pro_oxList);
 		mv.addObject("paging", vo);
 		mv.addObject("profile_list", profile_list);
 		mv.addObject("file_name", file_name);
+		log.info("/////////"+pro_oxList);
 		return mv;
 	}
 	
@@ -229,15 +247,17 @@ public class FreeLancerProfileController {
 		
 		FreeLancer freelancerprofile = service.mydash_free_select(mem_email); //프리랜서 정보를 불러옴
 		List<FreeLancer> content = service.selectProfileContent(pro_num);
+		List<FreeLancerProfile> tel = service.selectTel(pro_num);
 		List<FreeLancerProfile> content2 = service.selectProfileContent2(pro_num);	
 		List<KeyWord> content3 = service.selectProfileContent3(pro_num);
 		List<FreeLancerProfileFile> file_name = service.selectFilename();
 		List<FreeLancer> content4 = service.selectProfileContent4(freelancerprofile.getFree_code());
-		
+	
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile/freelancerProfile_content");
 		mv.addObject("content", content);
+		mv.addObject("tel", tel);	
 		mv.addObject("content2", content2);
 		mv.addObject("content3", content3);
 		mv.addObject("file_name", file_name);

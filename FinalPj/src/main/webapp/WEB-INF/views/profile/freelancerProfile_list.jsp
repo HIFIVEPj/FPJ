@@ -117,10 +117,10 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -147,7 +147,6 @@
                                           </label>  </th>                                 
                                        <th >프로필명</th>           
                                        <th>등록일</th>
-                                       <th>첨부파일</th>
                                        <th>프로필 공개</th>  
                                  </tr>
                               </thead>
@@ -162,7 +161,7 @@
                                        <td scope="row">
                                           <label class="custom-control custom-checkbox ">                                 			
                                              <input type="checkbox" class="custom-control-input ab" name="pro_num" value="${freelancer.pro_num}" >          
-                                             <span class="custom-control-label"> </span>
+                                             <span class="custom-control-label"></span>
                                           </label>           
                                        </td>
 
@@ -170,7 +169,7 @@
                                     <!--      <td>${freeLancer.mem_email}</td>-->
                                        <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
                            		 
-                                   	<c:set var="doneLoop" value="true" />					
+                               <!-- <c:set var="doneLoop" value="true" />					
                                    	<c:choose>
                                    	   <c:when test="${empty file_name}">
 									   </c:when>
@@ -191,14 +190,17 @@
 									    <c:otherwise>
 									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>
 									    </c:otherwise>
-									</c:choose>
-									 <td style="text-align:center">
-										 <c:if test="${freelancer.profile_choice eq 1}">
+									</c:choose> -->
+									 <td style="text-align:center"  >
+									 <span class="custom-control-label" class="openOX" id="openOX"> 
+						
+									 	<c:if test="${freelancer.profile_choice eq 1}">
 											 공개
 										 </c:if>
 										 <c:if test="${freelancer.profile_choice ne 1}">
 											 비공개
 										 </c:if>
+									 </span>	
 									 </td>  
                 				</tr>
                   			</c:forEach> 
@@ -212,7 +214,16 @@
                         <div class="card-footer" align="right">
                          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
                          <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
-                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#choiceModal">프로필공개</button>			 
+                         
+                         <c:choose>
+	                         <c:when test="${ox.contains(1)}">
+								 <button type="button" class="btn btn-secondary profile_close" data-toggle="modal" data-target="#choiceCloseModal">프로필비공개</button>
+	               			 </c:when>
+	               			<c:otherwise>
+	                         	<button type="button" class="btn btn-secondary profile_open" data-toggle="modal" data-target="#choiceModal">프로필공개</button>
+	                        </c:otherwise>
+               			</c:choose>	
+               					 
                         </div>
 
                 <div class="center-block text-center">
@@ -345,97 +356,7 @@
 			</footer>
 		</section>
 		<!--Footer Section-->
-
-<script>
-function check(){
-	//alert(pro_num)
-      //var pro_num = $('.pro_num').attr('value');
-     // document.getElementById('pro_num').value = pro_num;
-     
-     
-      var pro_num = new Array();
-      var chk_cnt = 0;
-      //for(var i=0; i<key_num_size; i++){
-       $('input:checkbox[name="pro_num"]').each(function() {
-         if(this.checked){
-        	 pro_num[chk_cnt] = this.value;
-        	 chk_cnt++;
-        	
-        	}  
-        
-       });
-       alert("pro_num:"+pro_num);
-    
-       if(pro_num == ""){
-        alert("1개이상 선택해 주세요.");
-         return;
-      }
-
-      checkdelete1.submit();
-   
-      }
-      
-function choice(){
-	//alert(pro_num)
-      //var pro_num = $('.pro_num').attr('value');
-     // document.getElementById('pro_num').value = pro_num;
-     
-     
-      var pro_num = new Array();
-      var chk_cnt = 0;
-      //for(var i=0; i<key_num_size; i++){
-       $('input:checkbox[name="pro_num"]').each(function() {
-         if(this.checked){
-        	 pro_num[chk_cnt] = this.value;
-        	 chk_cnt++;
-        	
-        	}  
-        
-       });
-       alert("pro_num:"+pro_num);
-    
-       if(pro_num == ""){
-        alert("1개이상 선택해 주세요.");
-         return;
-      }
-
-       choiceProfile.submit();
-   
-      }
-
-</script>
-<script>    
-	 $("input:checkbox[name='pro_num']").on("click",function(){
-		var pronum ="";
-		$('input:checkbox[name="pro_num"]').each(function() {
-			 if(this.checked){
-			      pronum = this.value;
-			      }
-			 });
-			   $("#profile_open").attr("onclick","choiceAjax("+pronum+")");
-			      });
-			      
-			      function choiceAjax(value){
-			         var flag= ${!empty sessionScope.email};
-			         var objParam={
-			               "pro_numList" : value
-			         };
-			          $.ajax({
-			             type:"get",
-			             url:"choiceProfile",
-			             data:objParam,
-			             dataType: "json",
-			             success:function(data){
-			               alert("성공");  
-			             },
-			             error:function(data){
-			                alert("에러발생");
-			             }
-			          });
-			      }
-</script>
-
-<!-- delete Modal -->   
+		<!-- delete Modal -->   
       <div id="deleteModal" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -476,13 +397,125 @@ function choice(){
                   <p>프로필을 공개할까요?</p>
                </div>
                <div class="modal-footer">
-                <a href="javascript:void(0)" onclick="" class="btn btn-primary" id="profile_open">프로필공개</a>
+                 <a href="javascript:void(0)" class="btn btn-primary" id="profile_open" onclick="choiceAjax();">프로필공개</a>
+               <!--  <a href="javascript:void(0)"  class="btn btn-primary" onclick="choiceError();" id="profile_open">프로필공개</a>-->
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
                </div>
             </div>
          </div>      
       </div>
 <!-- /open Modal -->
+<!-- close Modal -->   
+      <div id="choiceCloseModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 비공개할까요?</p>
+               </div>
+               <div class="modal-footer">
+                 <a href="javascript:void(0)" class="btn btn-primary" id="profile_close" onclick="closeAjax();">프로필 비공개</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /close Modal -->
+
+<script>
+function check(){
+     
+      var pro_num = new Array();
+      var chk_cnt = 0;
+       $('input:checkbox[name="pro_num"]').each(function() {
+         if(this.checked){
+        	 pro_num[chk_cnt] = this.value;
+        	 chk_cnt++;
+        	}  
+       });
+       if(pro_num == ""){
+        alert("1개이상 선택해 주세요.");
+         return;
+      }
+      checkdelete1.submit();
+      }
+</script> 
+<script> 
+     var pronum = new Array();
+	 $("input:checkbox[name='pro_num']").on("click",function(){
+		 var chk_cnt = 0;
+		 var pronumTemp = new Array();
+ 
+		$('input:checkbox[name="pro_num"]').each(function() {
+			 if(this.checked){
+				 pronumTemp[chk_cnt] = this.value;
+			      chk_cnt++;
+			      }
+			 });
+			pronum=pronumTemp;
+			
+		 });
+			       
+    	function choiceAjax(){
+    		
+    			var flag= ${!empty sessionScope.email};
+			      var objParam={
+			               "pro_numList" : pronum
+			         };
+	            		
+	           		if(objParam.pro_numList.length != 1){
+	        					alert("한개만 선택해 주세요.");	        					
+	            		}else{
+				          $.ajax({
+				             type:"get",
+				             url:"choiceProfile",
+				             data:objParam,
+				             dataType: "html",
+				             success:function(data){
+				            	 location.replace("freelancerProfile_list");
+				             },
+				             error:function(data){
+				           		alert("error");
+				             }
+			          });
+			      }
+    		}
+    	function closeAjax(){
+    		
+			var flag= ${!empty sessionScope.email};
+		      var objParam={
+		               "pro_numList" : pronum
+		         };
+            		
+           		if(objParam.pro_numList.length != 1){
+        					alert("한개만 선택해 주세요.");	        					
+            		}else{
+			          $.ajax({
+			             type:"get",
+			             url:"closeAjax",
+			             data:objParam,
+			             dataType: "html",
+			             success:function(data){
+			            	 location.replace("freelancerProfile_list");
+			             },
+			             error:function(data){
+			           		alert("error");
+			             }
+		          });
+		      }
+		}
+
+</script>
+
+
 
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>

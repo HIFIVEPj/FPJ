@@ -177,13 +177,12 @@
 									</select>
 									-->
 									<select class="form-control select2" id="type">
-										<option value="TWCG" ${pageMaker.cri.type eq 'TWCG' ? "selected" : ''}>전체</option>
+										<option value="TWECG" ${pageMaker.cri.type eq 'TWECG' ? "selected" : ''}>전체</option>
 					                    <option value="G" ${pageMaker.cri.type eq 'G' ? "selected" : ''}>분류</option>
 					                    <option value="T" ${pageMaker.cri.type eq 'T' ? "selected" : ''}>제목</option>
 					                    <option value="C" ${pageMaker.cri.type eq 'C' ? "selected" : ''}>내용</option>
 					                    <option value="TC" ${pageMaker.cri.type eq 'TC' ? 'selected' : ''}>제목+내용</option>
 					                    <option value="W" ${pageMaker.cri.type eq 'W' ? "selected" : ''}>작성자</option>
-					                    
 					                </select>
 									
 										<span>(으)로 검색&nbsp;:&nbsp;</span>
@@ -251,7 +250,7 @@
 												<th class="font-weight-bold">번호</th>
 												<th class="font-weight-bold">분류</th>
 												<th class="font-weight-bold">제목</th>
-												<th class="font-weight-bold">글쓴이</th>
+												<th class="font-weight-bold">작성자</th>
 												<th class="font-weight-bold">날짜</th>
 												<th class="font-weight-bold">조회</th>
 												<th class="font-weight-bold">추천</th>
@@ -525,7 +524,7 @@
 					
 									<c:if test="${sessionScope.class_num > 0}">
 									<div class="col-md-4 text-right">
-										<a href="customer_service_qa_test" class="btn btn-primary"><i class="fa fa-user-circle"></i>&nbsp;내 문의</a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=TWECG&keyword=${sessionScope.email}" class="btn btn-primary"><i class="fa fa-user-circle"></i>&nbsp;내 문의</a>
 										<a href="customer_service_qa_write#" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
 									</div>
 									</c:if>
@@ -584,7 +583,7 @@
 											<option value="제목">제목</option>
 											<option value="내용">내용</option>
 											<option value="제목+내용">제목+내용</option>
-											<option value="글쓴이">글쓴이</option>
+											<option value="작성자">작성자</option>
 										
 										<!--
 										</optgroup>
@@ -634,7 +633,7 @@
 												<th class="font-weight-bold">번호</th>
 												<th class="font-weight-bold">분류</th>
 												<th class="font-weight-bold">제목</th>
-												<th class="font-weight-bold">글쓴이</th>
+												<th class="font-weight-bold">작성자</th>
 												<th class="font-weight-bold">날짜</th>
 												<th class="font-weight-bold">조회</th>
 												<th class="font-weight-bold">추천</th>

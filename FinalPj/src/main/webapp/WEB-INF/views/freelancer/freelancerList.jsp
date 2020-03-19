@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -232,12 +231,10 @@
 											<small>&nbsp;&nbsp;</small>${typename.type_name}
 										</c:if>
 									</c:forEach>
-						 		</c:forEach>				
-							 
+						 		</c:forEach>	
 									</div>
-								
-								
 								</div>
+								
 								<input type="hidden" value="${cor.cor_code}" class="cor_codes"/>
 									<c:if test="${empty cor}">
 									<div class="item-card9-icons zzim">
@@ -263,11 +260,9 @@
 									</c:otherwise>	
 								</c:choose>
 								<div class="item-card9-icons"  id="zzim${list.list_freelancerprofile.get(i).pro_num}">
-	
-								</div>
-							
-								</c:forEach>
-								</c:if>
+							</div>
+						</c:forEach>
+						</c:if>
 								
 							</div>
 						<div class="card-body pb-2 hide-details">
@@ -289,19 +284,31 @@
 								<div class="row">
 									<div class="product-filter-desc col">										
 										<div class="rating-stars d-inline-flex mb-2 mr-3">
-										<c:forEach  var="star" items="${list.list_review}" varStatus="status">	
-												<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
-									 		    <span class="rated-products-ratings">
-		                        		      <c:if test="${star.freerev_star >= 0}">
-			                                        <c:forEach var="1" begin="1" end="${star.freerev_star}">
-			                                          <i class="fa fa-star text-warning"> </i>
-			                                        </c:forEach>
-			                                        <c:forEach var="1" begin="1" end="${5-star.freerev_star}">
-													  <i class="fa fa-star-o text-warning"> </i>
-													</c:forEach>
-											  </c:if>      
-		                                      	 </span>&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;							
-										</c:forEach>
+							
+							
+						${fr.get(0).freerev_star}
+					
+			
+													<c:forEach  var="star_avg" items="${fr}" varStatus="status">
+									
+												${fr}
+											
+													<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
+												 		 
+												 		  <c:if test="${star.freerev_star >= 0}">
+						                                        <c:forEach var="1" begin="1" end="${star.freerev_star}">
+						                                          <i class="fa fa-star text-warning"> </i>
+						                                        </c:forEach>
+						                                        <c:forEach var="1" begin="1" end="${5-star.freerev_star}">
+																  <i class="fa fa-star-o text-warning"> </i>
+																</c:forEach>
+					                                      	  <span class="rated-products-ratings">&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;	</span>
+					                                      </c:if>
+					                        
+					                         
+					                           </c:forEach>		
+			
+										
 												 <c:forEach  var="views" items="${list.list_freelancerprofile}" varStatus="status">	
 													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>${views.pro_vcnt}&nbsp;Views</a>
 												 </c:forEach>
@@ -313,11 +320,11 @@
 										</div>
 									<div class="col col-auto dams" >
 										<a class="icons" href="freelancercontent?free_code=${list.free_code}"><i class="fa fa-angle-double-right text-muted mr-1"></i>더보기</a>
-									</div>							
+									</div>						
 								</div>
 							</div>		
 						</div>		
-					 </c:forEach>
+					 </c:forEach>	
 				</div>
 						<!-- 페이징 -->
 				<div class="paginationDiv">

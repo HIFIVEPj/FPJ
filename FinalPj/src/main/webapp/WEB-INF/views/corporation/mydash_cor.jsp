@@ -379,6 +379,38 @@
    <c:otherwise>
          <script>
          function check(){
+        	 if(input_cor.cor_mname.value==""){
+  				alert("담당자 성명은 필수 입력 사항입니다.");
+  				return;
+  			}
+         	if(input_cor.cor_reg.value==""){
+   				alert("사업자 등록번호는 필수 입력 사항입니다.");
+   				return;
+   			}
+         	if(input_cor.cor_name.value==""){
+   				alert("회사이름은 필수 입력 사항입니다.");
+   				return;
+   			}
+         	if(input_cor.cor_detailaddr.value==""){
+   				alert("회사 주소는 필수 입력 사항입니다.");
+   				return;
+   			}
+         	if(input_cor.cor_addr.value==""){
+   				alert("회사 주소는 필수 입력 사항입니다.");
+   				return;
+   			}
+         	if(input_cor.cor_tel.value==""){
+   				alert("연락처는 필수 입력 사항입니다.");
+   				return;
+   			}
+         	if(input_cor.cor_type.value==""){
+   				alert("직종 선택은 필수 사항입니다.");
+   				return;
+   			}
+         	if(input_cor.cor_type.value==""){
+   				alert("직종 선택은 필수 사항입니다.");
+   				return;
+   			}
             //$("#typeSelect").val();
             input_cor.submit();
          }
@@ -418,12 +450,20 @@
 								</c:if>
 								<c:if test = "${cor.cor_fname ne '' }">
 									<div class="profile-pic-img">
+<<<<<<< HEAD
+										
+=======
 
+>>>>>>> ba86c2928fd9281108d99b3ea044fce612a75131
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+										
 										<!--
 										<img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
 										-->
+<<<<<<< HEAD
+=======
 
+>>>>>>> ba86c2928fd9281108d99b3ea044fce612a75131
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
