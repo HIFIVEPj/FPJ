@@ -312,9 +312,10 @@
 	<select id="getTotalCountPickPj" resultType="long" >
 		select count(pj.PJ_NUM) from PROJECT pj join project_pick pjp on pj.pj_num=pjp.pj_num where free_code=#{free_code}  
 	</select>
-	<!-- 프로젝트 지원 -->
+	
+		<!-- 프로젝트 지원 -->
 	<insert id="applied_pj" parameterType="map">
-		insert into APPLIED_PROJECT(free_code, pj_num, appp_date) values(#{free_code},#{pj_num}, sysdate)
+		insert into APPLIED_PROJECT(free_code, pro_num,pj_num, appp_date) values(#{free_code},#{pro_num},#{pj_num}, sysdate)
 	</insert>
 	<select id="select_applied_pj" parameterType="map" resultType="fp.corporation.domain.AppliedProject">
 		select * from  APPLIED_PROJECT where free_code=#{free_code} and pj_num=#{pj_num}
@@ -330,5 +331,14 @@
 		where free_code=#{free_code} order by pj.pj_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
 		 ]]>
 	</select>
+	<update id ="appp_status_update" parameterType="map">
+		update applied_project set appp_status=1 where pro_num=#{pro_num} and pj_num=#{pj_num}
+	</update>
+	<select id="appp_count" resultType="int" parameterType="long">
+		select count(pro_num) from applied_project where pj_num=#{pj_num} and appp_status=1
+	</select>
+	<update id ="pj_status_update" parameterType="long">
+		update project set pj_status=1 where pj_num=#{pj_num}
+	</update>
 	
 </mapper>

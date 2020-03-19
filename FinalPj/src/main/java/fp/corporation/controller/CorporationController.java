@@ -275,11 +275,14 @@ public class CorporationController {
 					freeList_pjnum.add(freeList.get(i).getApplied_project().get(j).getPj_num());
 			}
 		}
-		log.info("#&*$#@&*$( 프리랜서 수1 "+freeList_pjnum);
+		log.info("#&*$#@&*$( 프리랜서 수1 "+freeList);
 		mv.addObject("cor",corporation);
 		mv.addObject("list", listMydashCor);
 		mv.addObject("pa",projectVo);
 		mv.addObject("freeList_pjnum",freeList_pjnum);
+		//log.info("#@#^#$%^#$ projectVO: "+ projectVo);
+		//log.info("#@#^#$%^#$ map: "+ corporation);
+		//log.info("#@#^#$%^#$ map: "+ map);
 		List<Project> keyname = pjService.keywords();
 		mv.addObject("keyname", keyname);
 		return mv;
@@ -413,6 +416,7 @@ public class CorporationController {
 		Corporation cor=service.getCorfname(mem_email);
 		return cor;
 	}
+	
 	//구매마켓
 	@RequestMapping("cor-myBuyMarket")
 	public ModelAndView getMyMarket3(HttpSession session
