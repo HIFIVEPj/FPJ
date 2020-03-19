@@ -20,7 +20,7 @@ import org.apache.http.message.BasicNameValuePair;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class KakaoController {
+public class GoogleController {
 	 private final static String K_CLIENT_ID = "f9abd56563cc935d79995fa0b56f3127";
      //이런식으로 REDIRECT_URI를 써넣는다.                                                                                                  //                                                //
 	private final static String K_REDIRECT_URI = "http://127.0.0.1:8090/kakaologin";

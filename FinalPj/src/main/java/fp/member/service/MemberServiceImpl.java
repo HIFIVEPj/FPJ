@@ -65,8 +65,16 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void upMarketS(Map<String,Object> map) {
-		memberMapper.upMarketS(map);
-		
+	}
+	
+	//index
+	@Override
+	public long sumCountCorIndex() {		
+		return memberMapper.sumCountCorIndex();
+	}
+	@Override
+	public long countFree() {		
+		return memberMapper.countFree();
 	}
 	@Override
 	public List<PayInformation> marketListCor(MemberVo memberVO) {
