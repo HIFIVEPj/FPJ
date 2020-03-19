@@ -123,9 +123,15 @@ $(document).ready(function() {
 								<h3 class="card-title"><b>나의 구매마켓</b></h3>
 							</div>
 							<div class="card-body">
-								<div class="tab-content">					
-									<button aria-haspopup="true" class="btn btn-primary"><a href="cor-myfavoriteMarket" style="color:white">찜 마켓</a></button>
-									<button aria-haspopup="true" class="btn btn-primary"><a href="#" style="color:white">구매 마켓</a></button>
+								<div class="tab-content">
+									<div class="sytab">
+										<div class="sytab_unactived">
+											<p style="margin-top:9px;"><a href="cor-myfavoriteMarket">찜 목록</a></p>
+										</div>
+										<div class="sytab_actived">
+											<p style="margin-top:9px; color:white;">구매한 마켓</p>
+										</div>
+									</div>
 								</br></br>
 						<!-- 탭2 -->			
 							<c:if test="${fn:length(corBuyList)>0 }">

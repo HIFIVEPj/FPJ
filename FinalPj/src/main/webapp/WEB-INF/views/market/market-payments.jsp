@@ -121,7 +121,7 @@
 						</div>
 					</div>
 				-->
-					<div class="col-xl-9 col-lg-12 col-md-12">
+					<div class="col-xl-9 col-lg-12 col-md-12 fcenter">
 						<div class="card" >
 								<div class="card-header">
 								<div class="card-title" style="font-size: 18pt"><strong>마켓 결제</strong></div>				

@@ -644,7 +644,7 @@
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
-									<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									<img src="hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
 											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0}">

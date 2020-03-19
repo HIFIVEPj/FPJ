@@ -1,22 +1,16 @@
 package fp.market.controller;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,11 +29,16 @@ public class MarketPaymentsController {
 	
 	@RequestMapping(value = "market-payments", method = RequestMethod.POST)
 	public ModelAndView market_payments(MarketPayment marketPayment) {
-		//String email=marketPayment.getMem_email();
-		//float mp=marketPayment.getMarketPaym_freeRate();
-		//long mpp=marketPayment.getMarketPaym_price();
-		//log.info("@@@@@@@@@결제수수료:"+mp);
-		//log.info("@@@@@@@@@결제금액:"+mpp);
+		log.info("1111@@@@@@@@marketPayment"+marketPayment);
+	//판매자메일 세팅	
+		Market market=marketService.getMarketFreelancer(marketPayment.getMarket_num());
+		marketPayment.setMem_email(market.getFreelancer().getMem_email());
+		log.info("2222@@@@@@@@marketPayment"+marketPayment);
+	//	String email=marketPayment.getMem_email();
+		float mp=marketPayment.getMarketPaym_feeRate();
+		long mpp=marketPayment.getMarketPaym_price();
+		log.info("@@@@@@@@@결제수수료:"+mp);
+		log.info("@@@@@@@@@결제금액:"+mpp);
 		String freeName=marketService.getFreeName(marketPayment.getMarket_num());
 		Market marketInfo=marketService.getMarket(marketPayment.getMarket_num());
 		long revCount=marketService.getMarketRevCount(marketPayment.getMarket_num());
