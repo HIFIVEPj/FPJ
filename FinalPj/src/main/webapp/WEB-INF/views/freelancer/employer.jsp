@@ -6,23 +6,32 @@
 <!--/header-->
   
 	 	<!--Sliders Section-->
+		<!--Sliders Section-->
 		<div>
-			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h2 class=""><span class="font-weight-bold"></span> Freelancer</h2>
-									<h6>56,868개의 클라이언트 기업과 73,392개의 개발회사 & 프리랜서가 함께하는 위시켓</h6>
+									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
 			</div>
 		</div>
+		<!--/Sliders Section-->
+		
 		<!--/Sliders Section--> 
 		 
 	
@@ -30,11 +39,11 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Job List</h4>
+					<h4 class="page-title">Freelancer</h4>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Job List</li>
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
 					</ol>
 				</div>
 			</div>

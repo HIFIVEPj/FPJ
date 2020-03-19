@@ -14,7 +14,7 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="">한나영 김소담 윤별 김세영 송승훈</h1>
+									<h1 class="">고객센터</h1>
 								</div>
 								<div class=" search-background">
 									<div class="form row no-gutters">

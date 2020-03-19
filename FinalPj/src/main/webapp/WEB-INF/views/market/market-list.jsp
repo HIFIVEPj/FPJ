@@ -38,11 +38,11 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Ad List Right</h4>
+					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Ad List Right</li>
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
 					</ol>
 				</div>
 			</div>

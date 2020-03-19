@@ -16,7 +16,7 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">마켓 상세보기</h1>
+									<h1 class="" style="margin-bottom:0rem;">프리마켓</h1>
 									<!--
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="../">Home</a></li>
@@ -37,11 +37,11 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Ad Details</h4>
+					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Ad Details</li>
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
 					</ol>
 				</div>
 			</div>

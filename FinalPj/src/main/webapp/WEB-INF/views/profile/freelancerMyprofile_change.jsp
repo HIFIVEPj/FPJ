@@ -36,6 +36,19 @@
 		
 		</section>
 		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Freelacer Profile</h4>
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
 
 		<!--User Dashboard-->
 		<section class="sptb">
