@@ -241,6 +241,9 @@
 							function notMine(){
 								alert("타인의 게시물만 추천 가능합니다.")
 							}
+							function noQa(){
+								alert("게시물이 존재하지 않습니다.")
+							}
 							function add_recomm(qa_num){
 								//alert("mem_email : " + mem_email)
 								//alert("qa_num : " + qa_num)
@@ -322,7 +325,12 @@
 		                        		<c:if test="${qa_content.class_num == 2 or qa_content.class_num == 3}">
 		                        			<c:choose>
 			                            		<c:when test="${qa_content.free_fname ne null}">
+			                            			
 													<a href="#"><img src="../hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
+													
+													<!--
+													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
+													-->
 												</c:when>
 												<c:otherwise>
 													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
@@ -332,7 +340,12 @@
 		                            	<c:if test="${qa_content.class_num == 4}">
 		                            		<c:choose>
 			                            		<c:when test="${qa_content.cor_fname ne null}">
+			                            			
 													<a href="#"><img src="../hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
+													
+													<!--
+													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
+													-->
 												</c:when>
 												<c:otherwise>
 													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
@@ -619,8 +632,8 @@
 									
 									<div class="col col-auto">
 
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num+1}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num-1}" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num-1}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
+										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num+1}" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
 										<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 										-->
@@ -1139,12 +1152,14 @@
 			       }else if(list[i].class_num == 2 || list[i].class_num == 3){
 			       		if(list[i].free_fname != null){
 			       str +="			<a href='#'><img src='../hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+			       //str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
 			       		}else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";		
 			       		}    	
 			       }else if(list[i].class_num == 4){
 			    	    if(list[i].cor_fname != null){
 			       str +="			<a href='#'><img src='../hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+			       //str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
 			    	    }else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";    	
 			    	    }

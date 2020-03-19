@@ -23,8 +23,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class KakaoController {
 		 private final static String K_CLIENT_ID = "f07c6ec422b1d9826d801eb9e9c78e91";
 	      //이런식으로 REDIRECT_URI를 써넣는다.                                                                                                  //                                                //
-		private final static String K_REDIRECT_URI = "http://13.209.113.112:8090/kakaologin";
-		
+		//private final static String K_REDIRECT_URI = "http://13.209.113.112:8090/kakaologin";
+		 private final static String K_REDIRECT_URI = "http://www.hifive.store/kakaologin";
+		 
 		public static String getAuthorizationUrl(HttpSession session) {
 		String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + K_CLIENT_ID + "&redirect_uri="
 		+ K_REDIRECT_URI + "&response_type=code";
@@ -37,7 +38,7 @@ public class KakaoController {
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "f07c6ec422b1d9826d801eb9e9c78e91")); // REST API KEY
-		postParams.add(new BasicNameValuePair("redirect_uri", ",,")); // 리다이렉트 URI                                                              
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://www.hifive.store/kakaologin")); // 리다이렉트 URI                                                              
 		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻은 code 값
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);

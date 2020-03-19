@@ -77,7 +77,7 @@
 											<th class="font-weight-bold">번호</th>
 											<th class="font-weight-bold">분류</th>
 											<th class="font-weight-bold">제목</th>
-											<th class="font-weight-bold">글쓴이</th>
+											<th class="font-weight-bold">작성자</th>
 											<th class="font-weight-bold">날짜</th>
 											<th class="font-weight-bold">조회</th>
 											<th class="font-weight-bold">추천</th>

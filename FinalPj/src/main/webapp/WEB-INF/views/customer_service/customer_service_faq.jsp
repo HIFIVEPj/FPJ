@@ -178,6 +178,7 @@
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
 																</c:if>
 															</a>
 														</h4>
@@ -236,6 +237,7 @@
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
 																</c:if>
 															</a>
 														</h4>
@@ -294,6 +296,7 @@
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
 																</c:if>
 															</a>
 														</h4>
@@ -352,6 +355,7 @@
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
 																</c:if>
 															</a>
 														</h4>
@@ -410,6 +414,7 @@
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
 																</c:if>
 															</a>
 														</h4>
@@ -468,6 +473,7 @@
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
 																</c:if>
 															</a>
 														</h4>
@@ -526,6 +532,7 @@
 															<a class="accordion-toggle collapsed border" data-toggle="collapse" data-parent="#accordion2" href='#collapse${faq_list.faq_num}' aria-expanded="false">${faq_list.faq_sub}&nbsp;&nbsp;
 																<c:if test="${sessionScope.class_num == 1}">
 																	<input type="button" class="btn btn-primary btn-xs" value="수정" onclick="location.href='customer_service_faq_modify?faq_num=${faq_list.faq_num}';">
+																	<button class='btn btn-danger btn-xs' onclick="deleteFaq(${faq_list.faq_num})">삭제</button>
 																</c:if>
 															</a>
 														</h4>
