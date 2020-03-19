@@ -307,13 +307,13 @@
 														<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.market_price}" pattern="#,###,###,###" /></td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
-															<a href="#" class="badge badge-warning">미승인</a>
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-warning">미승인</a>
 															</c:if>
 															<c:if test="${dto.market_state eq 1}">
-															<a href="#" class="badge badge-success">승인</a>
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-success">승인</a>
 															</c:if>
 															<c:if test="${dto.market_state eq 2}">
-															<a href="#" class="badge badge-danger">거절</a>		
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-danger">거절</a>		
 															</c:if>
 															
 														</td>
@@ -325,10 +325,10 @@
 																<input type="hidden" id="market_num" name="market_num" value="${dto.market_num}">
 															</c:if>						
 															<c:if test="${dto.market_state eq 1}">
-																<a href="#" class="tag tag-gray">결재완료</a>
+																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>
 															</c:if>
 															<c:if test="${dto.market_state eq 2}">
-																<a href="#" class="tag tag-gray">결재완료</a>		
+																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>		
 															</c:if>
 														<!-- <a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
 															<a class="btn btn-danger text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>

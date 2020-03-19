@@ -156,7 +156,7 @@
 									<!-- <i class="si si-screen-desktop"></i> -->
 								</div>
 								<h5>총 프로젝트 수</h5>
-								<h2 class="counter mb-0">869</h2>건
+								<h2 class="counter mb-0">${totalCount}</h2>건
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
@@ -165,7 +165,7 @@
 									<i class="fa fa-diamond" style="font-size: 1.1rem;"></i>
 								</div>
 								<h5>총 프로젝트 금액</h5>
-								<h2 class="counter mb-0">984,345,000</h2>원
+								<h2 class="counter mb-0"><fmt:formatNumber value="${sumCountCorIndex}" pattern="#,###,###,###" /></h2>원
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
@@ -174,7 +174,7 @@
 									<i class="ti-shopping-cart-full"></i>
 								</div>
 								<h5>총 프리마켓 서비스 수</h5>
-								<h2 class="counter mb-0">514</h2>건
+								<h2 class="counter mb-0">${marketTotal}</h2>건
 							</div>
 						</div>
 						<div class="col-lg-3 col-md-6 col-sm-6">
@@ -183,7 +183,7 @@
 									<i class="fa fa-drivers-license-o"></i>
 								</div>
 								<h5>총 프리랜서 수</h5>
-								<h2 class="counter mb-0">753</h2>명
+								<h2 class="counter mb-0">${countFree}</h2>명
 							</div>
 						</div>
 					</div>

@@ -435,10 +435,10 @@ $(document).ready(function(){
           var startDate=  $("#startDate").val();
           var endDate = $("#endDate").val();
           if(startDate.length ==0 ||endDate .length == 0 ){
-        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  //alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
         	  window.location.href="searchCor.do?type="+type+"&keyword="+keyword;
           }else{
-        	  alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
+        	  //alert("타입 : "+type+",키워드 : "+keyword+", 시작일: "+startDate+",종료일 :"+endDate); 
         	  window.location.href="searchCor.do?type="+type+"&keyword="+keyword+"&startDate="+startDate+"&endDate="+endDate;
           }
          
@@ -459,9 +459,9 @@ $(document).ready(function(){
 	 
      $("#resetBtn").click(function(){ 
 	   	  $("#type option:selected").val('');    	 
-	   	  $('#keyword').val('');
-	   	  $("#startDate").val('');
-	   	  $("#endDate").val('');
+	   	  $('#keyword').val("");
+	   	  $("#startDate").val("");
+	   	  $("#endDate").val("");
      }) 
 	 
 })

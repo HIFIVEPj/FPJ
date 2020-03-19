@@ -39,6 +39,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import fp.login.api.GoogleController;
 import fp.login.api.KakaoController;
 import fp.login.api.NaverLoginController;
 import fp.member.domain.Member;
@@ -86,7 +87,7 @@ public class LoginController {
 		for(int i=1; i<=6; i++) {
 			repwd+=st[r.nextInt(26)];			
 		}
-		log.info("!!!!!!!!!!!!!!!!!!!!******************8"+member.getEmail()+"!@#@!##@#!#!@"+repwd);
+		
 		 String subject = "회원가입 인증 코드 발급 안내 입니다.";
 	     StringBuilder sb = new StringBuilder();
 	     sb.append("임시비밀번호는 " + repwd + "입니다.");
@@ -103,7 +104,7 @@ public class LoginController {
 		
 		try {
 			if(result>=1) {
-				log.info("비번체크성공");
+				
 			}else {
 				return "member/forgot-pwd";
 			}
@@ -124,11 +125,10 @@ public class LoginController {
     	
     String naverAuthUrl = naverLoginController.getAuthorizationUrl(session);
     String kakaoUrl = KakaoController.getAuthorizationUrl(session);
-
-    
-
+    String googleUrl=GoogleController.getAuthorizationUrl(session);
       model.addAttribute("url", naverAuthUrl);
       model.addAttribute("kakao_url", kakaoUrl);
+      model.addAttribute("google_url", googleUrl);
     return "member/login";
     }
     
@@ -158,20 +158,19 @@ public class LoginController {
     System.out.println(email);
     //4.파싱 닉네임 세션으로 저장
     session.setAttribute("name",name); //세션 생성
-    model.addAttribute("result", apiResult);
-    log.info("여기오나나나나나ㅏㄴ로그이이니ㅣ니잉니ㅣ니 네이버네이버네이:"+ email);
+    model.addAttribute("result", apiResult);    
     return "index";
     }
     
     @RequestMapping(value = "/kakaologin", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST }) 
 	public ModelAndView kakaoLogin(@RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception { 
-	
+    	
 		ModelAndView mav = new ModelAndView(); 
 		// 결과값을 node에 담아줌 
 		JsonNode node = KakaoController.getAccessToken(code); // accessToken에 사용자의 로그인한 모든 정보가 들어있음 JsonNode accessToken = node.get("access_token"); 
 		// 사용자의 정보 JsonNode 
-		JsonNode accessToken = node.get("access_token");	
-		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken); 
+		JsonNode accessToken = node.get("access_token");			
+		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);		
 		String kemail = null; 
 		String name = null; 
 		String kgender = null; 
@@ -192,7 +191,8 @@ public class LoginController {
 		session.setAttribute("kimage", kimage); 
 		session.setAttribute("kgender", kgender); 
 		session.setAttribute("kbirthday", kbirthday); 
-		session.setAttribute("kage", kage); 
+		session.setAttribute("kage", kage); 		
+		
 		mav.setViewName("index"); 
 		return mav; 
 	}// end kakaoLogin()
@@ -223,15 +223,8 @@ public class LoginController {
 
 	//로그아웃 처리
 	@RequestMapping("logout.do")
-	public String logout(HttpSession session) {
-		
+	public String logout(HttpSession session) {		
 		loginService.logout(session);
-		//ModelAndView mav = new ModelAndView();
-
-		//mav.setViewName("index");
-
-		//mav.addObject("msg", "logout");
-		
 		return "redirect:/";
 	}
 }
