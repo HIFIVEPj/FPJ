@@ -67,7 +67,7 @@
 									</div>
 								</form>
 							</div> -->
-							<div class="d-flex order-lg-2 ml-auto">
+							<div class="d-flex order-lg-2 ml-auto" style="line-height: 35px;">
 								<div class="dropdown d-none d-md-flex" >
 									<a  class="dropdown-item" href="project_list">										
 									프로젝트 

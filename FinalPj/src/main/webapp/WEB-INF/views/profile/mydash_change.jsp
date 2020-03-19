@@ -9,6 +9,10 @@
 <c:when test="${empty mydash}">
 		<script>
 			function check(){
+				 if(input_free.free_tel.value==""){
+		 				alert("연락처는 필수 입력 사항입니다.");
+		 				return;
+		 			}
 				input_free.submit();
 			}
 			function notice(){
@@ -59,7 +63,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -168,7 +172,11 @@
 <c:otherwise>
 		<script>
 			function check(){
-				input_free.submit();
+				 if(update_free.free_tel.value==""){
+		 				alert("연락처는 필수 입력 사항입니다.");
+		 				return;
+		 			}
+				 update_free.submit();
 			}
 			function writeProfile(){
 				location.href="freelancerProfile_list?mem_email=${sessionScope.email}"
@@ -248,7 +256,7 @@
 											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -261,7 +269,7 @@
 							<div class="card-header">
 								<h3 class="card-title"><b>회원정보</b></h3>
 							</div>
-							<form name="input_free" method="post" action="mydash_free_update" enctype="multiPART/form-data">
+							<form name="update_free" method="post" action="mydash_free_update" enctype="multiPART/form-data">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
@@ -348,7 +356,7 @@
 							<input type="hidden" class="form-control" value="${mydash.free_code}"  name="free_code">
 								<div class="col-md-12">
 									<div class="card-footer" style="text-align:center;">
-										<button type="submit" class="btn btn-primary" id="edit_ok">수정완료</button>
+										<button type="button" class="btn btn-primary" id="edit_ok" onclick="check();">수정완료</button>
 										<a href="javascript:void(0)" class="btn btn-primary" id="edit_update" onclick="writeProfile()"><span>프로필 쓰러가기</span></a>
 									</div>
 								</div>

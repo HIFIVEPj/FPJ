@@ -49,7 +49,8 @@ public class ProjectController {
 	@ResponseBody
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request,
-			@RequestParam(value="type", required=false)String type) {
+			@RequestParam(value="type", required=false)String type
+			,@RequestParam(value="searchKey", required=false)String searchKey) {
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
 		if(nowPage == null && cntPerPage == null) {
@@ -64,12 +65,17 @@ public class ProjectController {
 		Map<String,Object>map = new HashMap<String, Object>();
 		
 		
-		if(type==null) {
+		if(type==null || type.equals("0")) {
 			map.put("type",null);
 		}else {
 			int typenum = Integer.parseInt(type);
 			typeList.add(typenum);
 			map.put("type",typeList);
+		}
+		if(searchKey != null){
+			map.put("searchKey","%"+searchKey+"%");
+		}else {
+			map.put("searchKey",null);
 		}
 		long totalCount = service.getTotalCount(map);
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));

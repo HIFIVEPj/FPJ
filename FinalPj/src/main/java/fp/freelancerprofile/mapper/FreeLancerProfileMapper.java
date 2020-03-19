@@ -87,4 +87,10 @@ public interface FreeLancerProfileMapper {
 	void addACCT(Freelnacer_account freeacct);
 	Freelnacer_account selectFreeACCT(long free_code);
 	void updateACCT(Freelnacer_account freeacct);
+	
+	//프리랜서 활동점수 & 레벨
+	void freePointUp(long free_code);
+	void freeLevelUp1(long free_code);
+	void freeLevelUp2(long free_code);
+	
 }

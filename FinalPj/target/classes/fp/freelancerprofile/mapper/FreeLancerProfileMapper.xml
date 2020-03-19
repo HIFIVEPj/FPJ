@@ -523,5 +523,15 @@
 	<update id="updateACCT" parameterType="fp.freelancerprofile.domain.Freelnacer_account">
 	update FREELANCER_ACCOUNT set freeac_acct=#{freeac_acct},freeac_bank=#{freeac_bank},freeac_holder=#{freeac_holder} where free_code=#{free_code}
 	</update>
+	
+	<update id="freePointUp" parameterType="long">
+		update freelancer set FREE_POINT=FREE_POINT+1 where free_code = #{free_code}
+	</update>
+	<update id="freeLevelUp1" parameterType="long">
+		update freelancer set free_level=1 where FREE_POINT in(select FREE_POINT from freelancer where FREE_POINT>10 and free_code=#{free_code})
+	</update>
+	<update id="freeLevelUp2" parameterType="long">
+		update freelancer set free_level=2 where FREE_POINT in(select FREE_POINT from freelancer where FREE_POINT>20 and free_code=#{free_code})
+	</update>
 	<!--/////////////////////////// -->
 </mapper>

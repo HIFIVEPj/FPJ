@@ -138,9 +138,4 @@
 		select cor_fname from corporation where mem_email=#{mem_email}
 	</select>	
 
-	<update id='corPoint_update' parameterType="Corporation">
-		update CORPORATION set cor_point+1 where cor_name= #{cor_name}
-
-	</update>
-
 </mapper>

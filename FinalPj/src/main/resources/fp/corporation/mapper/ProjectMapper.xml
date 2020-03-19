@@ -270,6 +270,7 @@
 	<update id="payStatusUpdate" parameterType="java.util.Map">
 		update PROJECT set pj_paystatus=1 where pj_num = #{pj_num}
 	</update>
+	
 	<update id="corPointUp" parameterType="long">
 		update CORPORATION set COR_POINT=COR_POINT+1 where cor_code = #{cor_code}
 	</update>

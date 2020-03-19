@@ -114,13 +114,13 @@ $(document).ready(function() {
 													<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" >
 												</div>
 						
-												<div class="form-group">
+											<!-- <div class="form-group">
 													<label class="custom-control custom-checkbox">
 														<a href="forgot-pwd.html" class="float-right small text-dark mt-1 font-12" class="color-hover-sign">비밀번호 찾기</a>
 														<input type="checkbox" class="custom-control-input">
 														<span class="custom-control-label text-dark font-12">자동로그인</span>
 													</label>
-												</div>
+												</div> -->
 												<div class="form-footer mt-2">
 													<!-- <a href="index.html" class="btn btn-primary btn-block">SignIn</a> -->	
 													<input type="submit" class="btn btn-primary btn-block" id="login_bt" value="로그인">
