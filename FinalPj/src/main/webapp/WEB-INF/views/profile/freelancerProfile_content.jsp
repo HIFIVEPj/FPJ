@@ -106,41 +106,79 @@
 												<td><strong>이름 :</strong> ${content[0].free_name}</td>
 											</tr>
 											
-											<c:forEach  var="contentdata" items="${content}" varStatus="status">
-											<c:forEach  var="place" items="${contentdata.freelancerprofile}" varStatus="status">
-											<tr>
-												<td><strong>업무가능지역 : </strong>${place.pro_workplace}</td>
-											</tr>
-											</c:forEach>
-											</c:forEach>
-											
-											
-											
-											<tr>
-												<td><strong>사용기술 : </strong>
-											<c:forEach  var="key" items="${content3}" varStatus="status" begin="0" end="2">	
-											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">	
-												 ${keyname.key_name} / 
-											</c:forEach>
-											</c:forEach>
-										</td></tr>
-										</tbody>
-										<tbody class="col-lg-12 col-xl-6 p-0">
-											
-										
-											<tr><td><strong>직종 : </strong>
-												
+													<tr><td><strong>직종 : </strong>
 											<c:forEach  var="typenum" items="${content2}" varStatus="status" begin="0" end="0">	
 												${typenum.type_name}
 											</tr>
 											</c:forEach>
 											
 											<tr>
-												<td><strong>Email : </strong>${content[0].mem_email}</td>
+												<td><strong>주소 : </strong>${content[0].freelancerprofile[0].pro_addr}</td>
 											</tr>
 											<tr>
-												<td><strong>연락처 : </strong>${content[0].free_tel}</td>
+												<td><strong>Email : </strong>${content[0].mem_email}</td>
 											</tr>
+										
+											<tr>
+												<td><strong>최종학력 : </strong>${content[0].freelancerprofile[0].pro_edu}</td>
+											</tr>
+											
+											<tr>
+												<td><strong>선호근무형태 : </strong>
+												<c:choose> 
+													<c:when test="${content[0].freelancerprofile[0].pro_place eq 0}">
+														비상주
+													</c:when>
+													<c:when test="${content[0].freelancerprofile[0].pro_place eq 1}">
+														상주
+													</c:when>
+													<c:when test="${content[0].freelancerprofile[0].pro_place eq 2}">
+														반상주
+													</c:when>
+													<c:otherwise>
+														상관없음
+													</c:otherwise>
+												</c:choose>
+												</td>
+											</tr>
+							
+											
+										</tbody>
+										
+										<tbody class="col-lg-12 col-xl-6 p-0">
+											
+											<tr><td><strong>경력 : </strong>${content2[0].freelancerprofile[0].pro_exp}&nbsp;년</td>
+									
+											<tr>
+												<td><strong>사용기술 : </strong>
+											<c:forEach  var="key" items="${content3}" varStatus="status" begin="0" end="2">	
+											<c:forEach  var="keyname" items="${key.keyword}" varStatus="status">	
+												 ${keyname.key_name} &nbsp; 
+											</c:forEach>
+											</c:forEach>
+												</td>
+											</tr>
+											
+											<c:forEach  var="contentdata" items="${content}" varStatus="status">
+											<c:forEach  var="place" items="${contentdata.freelancerprofile}" varStatus="status">
+												<tr>
+													<td><strong>업무가능지역 : </strong>${place.pro_workplace}</td>
+												</tr>
+											</c:forEach>
+											</c:forEach>
+											
+											<tr>
+												<td><strong>연락처 : </strong>${tel[0].free_tel}</td>
+											</tr>
+											
+											<tr><td><strong>현재 근무가능여부 : </strong>
+											<c:if test ="${content[0].freelancerprofile[0].pro_ox == 'on'}">가능</c:if>
+											<c:if test ="${content[0].freelancerprofile[0].pro_ox == 'off'}">불가능</c:if>
+											
+											<tr><td><strong>업무 가능일 : </strong>${content[0].freelancerprofile[0].pro_start}</td>
+										
+										
+									
 										</tbody>
 									</table>
 								</div>
@@ -156,7 +194,7 @@
 									</c:forEach>
 									</div>
 									
-									<div class="col-md-12">			
+							<!-- 	<div class="col-md-12">			
 										<div class="media-heading">
 										<br/><br/>
 										<h5><strong>첨부파일</strong></h5>
@@ -213,7 +251,7 @@
 									
 										</tr></tr>
 													
-										<!--  			<tr>
+										 			<tr>
 														<td><a href="store.html" class="text-inherit">Untrammelled prevents</a></td>
 														<td>12 June 2019</td>
 														<td><a href="#"><i class="fa fa-save"></i>파일</a></td>										
@@ -228,13 +266,13 @@
 														<td><a href="store.html" class="text-inherit">Untrammelled prevents</a></td>
 														<td>14 June 2019</td>
 														<td><a href="#"><i class="fa fa-save"></i>파일</a></td>													
-													</tr>		-->											
+													</tr>												
 												</tbody>
 											</table>
 										</div>
 									</div>
 								
-									</div>
+									</div>-->
 								</div>
 							</div>
 						</div>

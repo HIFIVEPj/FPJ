@@ -239,6 +239,7 @@
     	]]>
    </select>
    
+   
      <!-- 프리랜서 프로필 컨텐츠 1-->
      <select id="selectProfileContent"  parameterType="long" resultMap="FreeLancerResult">
       <![CDATA[
@@ -246,13 +247,25 @@
 				 , free_name
 		         , fp.mem_email
 		         , pro_workplace
-		         , free_tel
 		         , pro_cv
 		         , profile_date
+		         , pro_ox
+		         , pro_start
+		         , pro_addr
+		         , pro_edu
+		         , pro_place
 			from FREELANCER_PROFILE fp
 				inner join FREELANCER f 
 					on fp.free_code = f.free_code
 							where fp.pro_num=#{pro_num}
+       ]]>
+   </select>
+   	<select id="selectTel" parameterType="long" resultMap="FreeLancerResult">
+      <![CDATA[
+		SELECT REGEXP_REPLACE(free_tel, '(.{3})(.+)(.{4})', '\1-\2-\3') as free_tel
+			from freelancer f, freelancer_profile fp 
+					where fp.free_code=f.free_code 
+						and fp.pro_num=#{pro_num}		
        ]]>
    </select>
    
@@ -262,6 +275,7 @@
 		select p.pj_sub
 			   , t.type_name
 			   , fp.pro_num
+			   , pro_exp
 			from Type t
 				full outer join FREELANCER_PROFILE fp
 				on t.type_num = fp.type_num 
@@ -400,6 +414,13 @@
 		<![CDATA[
 		update freelancer_profile set
 			profile_choice=1 where pro_num=#{pronum}
+		  ]]>
+	</update> 
+	 <!-- 프로필 비공개 -->	
+	<update id="closeProfile" parameterType="map"> 
+		<![CDATA[
+		update freelancer_profile set
+			profile_choice=0 where pro_num=#{pronum}
 		  ]]>
 	</update> 
  	 <!-- 프로필 update(키워드 delete) 
