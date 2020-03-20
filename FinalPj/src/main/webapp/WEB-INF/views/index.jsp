@@ -8,6 +8,8 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
+
+
 		<!--Sliders Section-->
 		<section>
 			<div class="banner-2 cover-image sptb-2 sptb-tab bg-background2" data-image-src="../images/banners/education.jpg">
@@ -827,7 +829,7 @@
 											
 											<div class="item-card-img">
 												<a href="market-content?market_num=${list.market_num}"></a>
-												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image">
+												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
 											</div>
 									<!-- 즐겨찾기 설정 상태 -->
 										 <!-- 
@@ -1325,6 +1327,28 @@
 		});
 	 }*/
 </script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5e74822feec7650c33215c87/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+
+
+
+  		                            
+
+
+
 
 
 <!--footer-->

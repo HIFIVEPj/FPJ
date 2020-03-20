@@ -18148,6 +18148,11 @@ footer .border-top{
 /*--home2 category effect--*/
 .item-card-img{
 	overflow:hidden;
+	height:200px;
+}
+.item-card-img img{
+	min-width:100%;
+	min-height:200px;
 }
 .item-card  .item-card-desc img{
 	-webkit-transform: scale(1);
@@ -18171,6 +18176,8 @@ footer .border-top{
 	transform: scale(1.1);
 }
 .item-card9-imgs{
+	width:auto;
+	height:200px;
 	overflow:hidden;
 }
 .item-card9-imgs img{
@@ -18178,6 +18185,8 @@ footer .border-top{
 	transform: scale(1.1);
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
+	width:100%;
+	min-height:200px;
 }
 .item-card9 p.leading-tight, .item-card2 p.leading-tight{
 	display: block;
@@ -19779,8 +19788,12 @@ a.typewrite{
 	::-ms-backdrop, .item-card9-img{
 		height:inherit !important;
 	}
-	::-ms-backdrop, .item-card9-imgs {
+	 /*.item-card9-imgs ㅜㅜ */
+	::-ms-backdrop,{
 		height:100% !important;
+	}
+	.item-card9-img, .item-card9-imgs{
+	height:250px !important;
 	}
 }
 .Marketplace .item-card7-imgs img{
@@ -19797,11 +19810,16 @@ a.typewrite{
 		width: 100% !important;
 	}
 }
-
 .card-bodySY {
 	-ms-flex: 1 1 auto;
 	flex: 1 1 auto;
 	margin: 0;
 	padding:0rem 1.5rem;
 	position: relative;
+}
+
+@media (min-width: 767px) and (max-width: 991px){
+	.item-card9-img, .item-card9-imgs{
+	height:400px !important;
+	}
 }

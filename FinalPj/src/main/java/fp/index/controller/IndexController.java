@@ -73,7 +73,7 @@ public class IndexController {
 		
 		log.info("1@#@!#!#@!mem_mail"+mem_email);
 		Pagingmap.put("selectedKey",1);
-		Pagingmap.put("start",1);
+		Pagingmap.put("start",0);
 		Pagingmap.put("end",10); 
 		log.info("1@#@!#!#@!list"+list);
 		list = marketService.getMarketList(Pagingmap);

@@ -122,13 +122,12 @@
 							</div>
 							-->
 							<!-- 교체 -->
-							<div class="card-body">
-								<h6>
-								   ￦ <input type="text" class="form-control br-tl-7 br-bl-7" id="price1" value="<c:out value='${mapPrice.price1}'/>" >
-								   <i class="ion-minus-round"></i>
-								   <input type="text" class="form-control br-tl-7 br-bl-7" id="price2" value="<c:out value='${mapPrice.price2}'/>" >
-								</h6>
-								
+							<div class="card-body fcenter">
+							   <p>
+								   <input type="text" class="price_form" id="price1" value="<c:out value='${mapPrice.price1}'/>" numberOnly>
+								   -
+								   <input type="text" class="price_form" id="price2" value="<c:out value='${mapPrice.price2}'/>" numberOnly>
+								</p>
 							</div>
 							<!-- 교체 -->
 							<div class="card-header border-top">
@@ -335,7 +334,8 @@
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    	
-																<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
+															<!--	<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100">  width="가로 길이" height="세로 길이" alt="그림 설명" -->
+															<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
 															</div>
 															<div class="item-card9-icons" id="heartDivID${list.market_num}">
 																<c:if test="${fn:length(marketNumList) > 0}">	
@@ -550,6 +550,36 @@
 	})
 	*/
 </script>
+<script>
+//3자리 단위마다 콤마 생성
+function addCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+ 
+//모든 콤마 제거
+function removeCommas(x) {
+    if(!x || x.length == 0) return "";
+    else return x.split(",").join("");
+}
+ </script>
+ <script>
+ $("input:text[numberOnly]").on("focus", function() {
+	    var x = $(this).val();
+	    x = removeCommas(x);
+	    $(this).val(x);
+	}).on("focusout", function() {
+	    var x = $(this).val();
+	    if(x && x.length > 0) {
+	        if(!$.isNumeric(x)) {
+	            x = x.replace(/[^0-9]/g,"");
+	        }
+	        x = addCommas(x);
+	        $(this).val(x);
+	    }
+	}).on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+	</script>
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
