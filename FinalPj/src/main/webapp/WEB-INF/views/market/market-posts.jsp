@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -163,13 +163,13 @@
 							<div class="card-body">
 								<ul class="list-unstyled widget-spec  mb-0">
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>500000 이하 &nbsp;<b>20%</b>
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="500000" pattern="#,###,###,###" /> 이하 &nbsp;<b>20%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>2000000 이하 &nbsp;<b>12%</b>
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="2000000" pattern="#,###,###,###" /> 이하 &nbsp;<b>12%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>2000000 초과 &nbsp;<b>6%</b>
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="2000000" pattern="#,###,###,###" /> 초과 &nbsp;<b>6%</b>
 									</li>
 									
 								</ul>

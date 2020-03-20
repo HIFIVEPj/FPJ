@@ -121,20 +121,14 @@
          <id property="pro_addr" column="pro_addr" />
          <id property="pro_edu" column="pro_edu" />
          <id property="pro_start" column="pro_start" />
-         <id property="pro_ox" column="pro_ox" />
          <id property="pro_grade" column="pro_grade" />
          <id property="pro_vcnt" column="pro_vcnt" />
          <id property="pro_pcnt" column="pro_pcnt" />   
-         <id property="pro_place" column="pro_place" />
       <association property="freelancer" javaType="mFreelancer" column ="free_code" >
           <id property="free_code" column ="free_code" />
           <result property="mem_email" column ="mem_email" />
           <result property="free_name" column ="free_name" />
-          <result property="free_tel" column ="free_tel" />
-          <result property="free_point" column ="free_point" />
           <result property="free_rdate" column ="free_rdate" />
-          <result property="free_level" column ="free_level" />
-          <result property="free_acctox" column ="free_acctox" />
           <result property="free_fname" column ="free_fname" />
           <result property="free_ofname" column ="free_ofname" />       
       </association>
@@ -532,10 +526,21 @@
    <select id="similarFree" resultMap="resultSimilarFree" parameterType="Integer">
       <![CDATA[
          select * from (
-            select free_name,free_fname, type_num, fp.PRO_NUM, avg(FREEREV_STAR)FreeRev_star from freelancer f left outer join freelancer_profile fp on fp.free_code = f.free_code 
+            select free_name,free_fname,fp.free_code, fp.pro_exp,type_num, fp.PRO_NUM, avg(FREEREV_STAR)FreeRev_star from freelancer f left outer join freelancer_profile fp on fp.free_code = f.free_code 
               left outer join FREELANCER_REVIEW fr on fr.PRO_NUM=fp.PRO_NUM
-              where type_num=#{type_num} group by free_name,type_num,fp.PRO_NUM, free_fname order by DBMS_RANDOM.RANDOM
-           ) where rownum <10
+              where type_num=#{type_num} group by free_name,type_num,fp.PRO_NUM, free_fname,fp.pro_exp,fp.free_code order by DBMS_RANDOM.RANDOM
+           ) where rownum <=10
            ]]>
    </select>
+    <select id="similarMarket" resultMap="resultMarket" parameterType="Integer">
+     <![CDATA[
+	       select rownum ,m.*,mr.* from
+           (select MARKET_NUM,CATE_NUM,market_price,MARKET_FNAME,MARKET_SUB from market)m
+           left outer join 
+            (select avg(MARKETREV_STAR) marketRev_star,market_num from market_review group by market_num)mr
+           on m.market_num=mr.market_num where cate_num=#{cate_num} and rownum <=10 order by DBMS_RANDOM.RANDOM 
+   	]]>
+   </select>
+   
+   
 </mapper>   

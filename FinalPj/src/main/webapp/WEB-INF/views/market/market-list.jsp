@@ -124,7 +124,9 @@
 							<!-- 교체 -->
 							<div class="card-body">
 								<h6>
-								   <input type="text" id="price1" value="<c:out value='${mapPrice.price1}'/>" >~<input type="text" id="price2" value="<c:out value='${mapPrice.price2}'/>" >
+								   ￦ <input type="text" class="form-control br-tl-7 br-bl-7" id="price1" value="<c:out value='${mapPrice.price1}'/>" >
+								   <i class="ion-minus-round"></i>
+								   <input type="text" class="form-control br-tl-7 br-bl-7" id="price2" value="<c:out value='${mapPrice.price2}'/>" >
 								</h6>
 								
 							</div>
@@ -324,7 +326,7 @@
 										<div class="tab-pane active" id="tab-12">
 											<div class="row">
 											<c:if test="${fn:length(list) == 0}">	
-											검색한 마켓이 없습니다
+												<p >검색한 마켓이 없습니다</p>
 											</c:if>
 											<c:forEach items="${list}" var="list"  varStatus="status">	
 												<div class="col-lg-6 col-md-12 col-xl-4">

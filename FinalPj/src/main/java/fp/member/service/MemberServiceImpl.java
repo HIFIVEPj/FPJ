@@ -65,6 +65,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void upMarketS(Map<String,Object> map) {
+		memberMapper.upMarketS(map);
 	}
 	
 	//index

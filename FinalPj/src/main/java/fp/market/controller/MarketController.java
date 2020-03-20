@@ -10,14 +10,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -164,7 +162,8 @@ public class MarketController {
         mv.addObject("searchWord", searchWord); 
       return mv;
    }
-/*   @GetMapping("market-searchButtonList")
+/*   
+ * @GetMapping("market-searchButtonList")
    public ModelAndView getSearchButtonList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
                               ,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
                               ,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS
@@ -205,7 +204,8 @@ public class MarketController {
         mv.addObject("searchWord", searchWord); 
       return mv;
       
-   }*/
+   }
+ */
    //searchBox 검색 리스팅 
    @GetMapping("market-searchBoxList")
    public ModelAndView getSearchBoxList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
@@ -236,9 +236,18 @@ public class MarketController {
 
       log.info("#####price1:"+price1);
       log.info("#####price2"+price2);
-*/  
-      int price1=Integer.parseInt(marketPrice1);
-      int price2=Integer.parseInt(marketPrice2);
+*/   if(marketPrice1=="") {
+		marketPrice1="0";
+	 }
+	 if(marketPrice2=="") {
+		marketPrice2=""+Long.MAX_VALUE;
+	 }
+    
+      marketPrice2 = marketPrice2.replaceAll("[^0-9]", "");
+	  marketPrice1 = marketPrice1.replaceAll("[^0-9]", "");
+
+      long price1=Long.parseLong(marketPrice1);
+      long price2=Long.parseLong(marketPrice2);
       Map<String,Object> mapCate = new HashMap<String,Object>();
       Map<String,Object> mapExp = new HashMap<String,Object>();
       Map<String,Object> mapPrice = new HashMap<String,Object>();
@@ -318,66 +327,7 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
          //,@CookieValue(value="market_num", required= false)String marketCookie
          ,HttpServletResponse response,HttpServletRequest request) 
    {      
-/*      
-      String marketCookie=null;
-      boolean find = false;
-      Cookie[] cookies = request.getCookies();
-      
-      if(cookies !=null) {
-         for(Cookie cookie: cookies) {
-            if("marketCookie".equals(cookie.getName())) {
-               find=true;
-               marketCookie=cookie.getValue();
-               log.info("!!!marketCookie:"+marketCookie);
-            }else {
-               
-            }
-         }
-      }   
-      log.info("cookies:"+cookies.length);
-      log.info("cookies:"+cookies);
-      log.info("marketCookie:"+marketCookie);
-      
-      if(!find) {
-         marketCookie="없음";
-      }else {
-         try {
-            marketCookie=Long.toString(market_num);
-            log.info("@@@L:"+ marketCookie);
-         }catch(Exception e) {
-            System.out.println("e:"+e);
-         }
-      }
 
-      Cookie cookie = new Cookie("marketCookie",marketCookie);
-      cookie.setMaxAge(60*60*24*365);
-      cookie.setPath("/");
-      response.addCookie(cookie);
-      
-      log.info("cookie:"+cookie);
-      log.info("cookies:"+cookies);
-      log.info("marketCookie:"+marketCookie);
-
-   */   
-   /*List<String> cookieList = new ArrayList<String>();   
-      // 저장된 쿠키 목록을 가져온다.
-      Cookie[] cookies = request.getCookies();
-      // 쿠키값을 저장할 문자열
-      String mycookie = null;
-       
-      // 쿠키목록이 있다면
-      if (cookies != null) {
-          for (int i=0; i<cookies.length; i++) {
-              // 쿠키의 이름을 취득한다.
-              String cookieName = cookies[i].getName();
-                  // 이름이 내가 원하는 값일 경우 값을 복사한다.
-                  mycookie = cookies[i].getValue();
-                  // 원하는 값을 찾으면 break;
-                  cookieList.add(mycookie);
-          }
-      }
-
-      */
       if(nowPageQ ==null &&cntPerPageQ ==null) {//문의 페이징
          nowPageQ="1";
          cntPerPageQ ="4";
@@ -432,6 +382,25 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
          type_num=fp.getFreelancerProfile().getType_num();
       }
       List<FreelancerProfile> similarFree = marketService.getSimilarFree(type_num);
+    //유사한 프리랜서에 자신은 제외하는 for문
+      for(int i=0;similarFree.size()>i;i++) {
+    	  long similarfree=similarFree.get(i).getFree_code();
+    	  long marketfree=fp.getFreelancer().getFree_code();
+    	 if(similarfree==marketfree) {
+    		 similarFree.remove(i);
+    		 break;
+    	 }
+      }
+      List<Market> similarMarket =marketService.similarMarket(m.getCate_num());
+      for(int i=0;similarMarket.size()>i;i++) {
+    	  long similarmarket=similarMarket.get(i).getMarket_num();
+    	  long marketNum=m.getMarket_num();
+    	 if(similarmarket==marketNum) {
+    		 similarMarket.remove(i);
+    		 break;
+    	 }
+      }
+      
       int mrStar=0;
       List<MarketRev> mr = marketService.getMarketRev(mapr);   
       if(mr.size() !=0) {//특정마켓 별점평균을 구하는데 리뷰가 없을시 널이떠서 조건걸어줌
@@ -459,6 +428,7 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
       mv.addObject("marketVOQA", marketVOQA);
    //   mv.addObject("marketCookie", marketCookie);
       mv.addObject("similarFree", similarFree);
+      mv.addObject("similarMarket", similarMarket);
       mv.addObject("mbs", mbs);
       return mv;
       
@@ -524,6 +494,7 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
       
    }
    public List<String> doFileupload(MultipartHttpServletRequest mtfRequest) {
+	   log.info("22222222mtfRequest"+mtfRequest);
       //String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
       String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
       //String path  = "/home/ubuntu/hifive/hifiveImages/marketThumbnails/"; // for aws
