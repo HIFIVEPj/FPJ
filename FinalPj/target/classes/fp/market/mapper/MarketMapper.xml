@@ -399,13 +399,13 @@
        delete market_QA where marketQA_prnum=#{marketQA_prnum} and marketqa_sun>=#{marketQA_sun} and market_num=#{market_num} 
    </delete>
    <select id="maxSun" resultType="long" parameterType="hashmap">
-      select max(marketqa_sun) from market_qa where marketqa_prnum=#{marketQA_prnum} 
+      select max(marketqa_sun) from market_qa where marketqa_prnum=#{marketQA_prnum} and market_num=#{market_num}
    </select><!--  and marketqa_lev=#{marketQA_lev} -->
    <update id="delUpdateMarketQA2" parameterType="hashmap">
       UPDATE market_QA SET MARKETQA_sub='삭제된 댓글입니다', MARKETQA_cont='삭제된 댓글입니다' where market_num=#{market_num}  AND marketQA_prnum=#{marketQA_prnum} and marketQA_lev =#{marketQA_lev}  and  marketqa_sun=#{marketQA_sun}
    </update>
    <select id="deletedQA" resultType="String" parameterType="hashmap">
-      select MARKETQA_sub from market_qa where marketqa_prnum=#{marketQA_prnum}  and marketqa_lev>#{marketQA_lev}
+      select MARKETQA_sub from market_qa where marketqa_prnum=#{marketQA_prnum}  and marketQA_sun>#{marketQA_sun} and market_num=#{market_num} 
    </select>
 <!-- deleteQA  -->   
    
