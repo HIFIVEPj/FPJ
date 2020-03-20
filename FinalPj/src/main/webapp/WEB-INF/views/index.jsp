@@ -7,9 +7,11 @@
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
+   
 
 		<!--Sliders Section-->
 		<section>
+        <div id="output"></div>
 			<div class="banner-2 cover-image sptb-2 sptb-tab bg-background2" data-image-src="../images/banners/education.jpg">
 				<div class="header-text mb-0">
 					<div class="container">
