@@ -267,7 +267,7 @@
 </script>		
 <script>
 	   function insertCheck(){
-		   alert("insertForm.cate_num."+insertForm.ofname.value);
+		//   alert("insertForm.cate_num."+insertForm.ofname.value);
 		   if(insertForm.market_sub.value=="" ){
 			   alert("제목을 적어주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
@@ -291,9 +291,9 @@
 		  if(insertForm.ofname.value==""){		   
 			   alert("썸네일파일을 선택해주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
-			   return false;
-			   
+			   return false;   
 		   }
+		  alert("포스팅 검사 후 등록이 완료됩니다.(1~2일 정도 소요)");
 		  insertForm.submit();
 	   }
 </script>		
