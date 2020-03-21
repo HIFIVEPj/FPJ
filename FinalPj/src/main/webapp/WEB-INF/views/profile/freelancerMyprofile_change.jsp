@@ -215,24 +215,22 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${profile.keyword.size()-1}">																												
+																																						
 														<input type="checkbox" class="custom-control-input" name="key_num" value="2"
 															<c:if test="${profile.keyname().contains('Back_End')}">
 															checked
 															</c:if>>	
-													</c:forEach>												
+																							
 														<span class="custom-control-label">Back-End</span>	
 													</label>
 												</div>
 												
 												<div class="col-md-2">
-													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${profile.keyword.size()-1}">							
+													<label class="custom-control custom-checkbox">																				
 														<input type="checkbox" class="custom-control-input" name="key_num" value="3"
 															<c:if test="${profile.keyname().contains('Java')}">
 															checked
-															</c:if>>
-														</c:forEach>
+															</c:if>>														
 														<span class="custom-control-label">Java</span>
 													</label>
 												</div>

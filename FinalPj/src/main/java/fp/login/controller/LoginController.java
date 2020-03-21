@@ -88,9 +88,9 @@ public class LoginController {
 			repwd+=st[r.nextInt(26)];			
 		}
 		
-		 String subject = "회원가입 인증 코드 발급 안내 입니다.";
+		 String subject = "임시비밀번호 발급 안내 입니다.";
 	     StringBuilder sb = new StringBuilder();
-	     sb.append("임시비밀번호는 " + repwd + "입니다.");
+	     sb.append("임시비밀번호는 " + repwd + " 입니다.");
 	     sb.append(" 로그인 후 비밀번호 변경 부탁드립니다.");
 	     mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
 	       
@@ -197,6 +197,44 @@ public class LoginController {
 		return mav; 
 	}// end kakaoLogin()
 
+    
+    @RequestMapping(value = "/google", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public ModelAndView googleLogin(@RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception { 
+    	
+		ModelAndView mav = new ModelAndView(); 
+		// 결과값을 node에 담아줌 
+		log.info("code :"+code);
+		JsonNode node = GoogleController.getAccessToken(code); // accessToken에 사용자의 로그인한 모든 정보가 들어있음 JsonNode accessToken = node.get("access_token"); 
+		
+		// 사용자의 정보 JsonNode 
+		JsonNode accessToken = node.get("access_token");			
+		JsonNode userInfo = GoogleController.getGoogleUserInfo(accessToken);
+		log.info("구글 : "+userInfo);
+		String kemail = null; 
+		String name = null; 
+		String kgender = null; 
+		String kbirthday = null; 
+		String kage = null; 
+		String kimage = null; 
+		// 유저정보 카카오에서 가져오기 Get properties 
+		JsonNode properties = userInfo.path("properties"); 
+		JsonNode kakao_account = userInfo.path("kakao_account"); 
+		kemail = kakao_account.path("email").asText(); 
+		name = properties.path("nickname").asText(); 
+		kimage = properties.path("profile_image").asText(); 
+		kgender = kakao_account.path("gender").asText(); 
+		kbirthday = kakao_account.path("birthday").asText(); 
+		kage = kakao_account.path("age_range").asText(); 
+		session.setAttribute("email", kemail); 
+		session.setAttribute("name", name); 
+		session.setAttribute("kimage", kimage); 
+		session.setAttribute("kgender", kgender); 
+		session.setAttribute("kbirthday", kbirthday); 
+		session.setAttribute("kage", kage); 		
+		
+		mav.setViewName("index"); 
+		return mav; 
+	}// end kakaoLogin()
 
   //로그인 처리
   	@RequestMapping(value="/login_check")

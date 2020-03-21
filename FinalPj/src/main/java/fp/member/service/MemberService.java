@@ -19,7 +19,9 @@ public interface MemberService {
 	void upMarketS(Map<String,Object> map);
 	//마켓 게시글 
 	long getMarketCount();
+	long getMarketCountSys();
 	List<Market> getMarketList(MemberVo memberVO);
+	long getMarketListState();
 	
 	//Index 
 	long sumCountCorIndex();
@@ -28,6 +30,7 @@ public interface MemberService {
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
 	long getTotalCountMC(MemberVo memberVO);
+	long getProjectCountSys();
 	
 	//개인
 	List<PayInformation> marketListFree(MemberVo memberVO);

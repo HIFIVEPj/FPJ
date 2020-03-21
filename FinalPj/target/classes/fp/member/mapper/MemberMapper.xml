@@ -77,13 +77,27 @@
       SELECT COUNT(*) FROM MARKET 
    </select>
    
- <!-- 승인대기중인 마켓게시글 -->
+   <!-- 마켓 총 게시글 갯수 오늘날짜 출력 -->
+   <select id="getMarketCountSys" resultType="Long">
+      SELECT COUNT(*) FROM MARKET WHERE MARKET_RDATE=SYSDATE
+   </select>
+   <!-- 마켓 미승인건 -->
+   	<select id="getMarketListState" resultType="Long">
+      SELECT COUNT(*) FROM MARKET WHERE MARKET_STATE=0
+   </select>
+      <!-- 프로젝트 결제된 게시글 갯수 오늘날짜 출력 -->
+   <select id="getProjectCountSys" resultType="Long">
+      SELECT COUNT(*) FROM PROJECT WHERE PJ_RDATE=SYSDATE AND PJ_PAYSTATUS=1
+   </select>
+   
+ 	<!-- 마켓게시글 -->
    <select id="getMarketList" parameterType="MemberVo" resultType="Market">
        select * from (select ROWNUM rnum , aa.* from (
-         select FREE_NAME , MARKET_NUM, MARKET_SUB, MARKET_STATE , MARKET_PRICE ,mem_email from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE ORDER BY MARKET_STATE ) aa)
+         select FREE_NAME , MARKET_NUM, MARKET_SUB, MARKET_STATE , MARKET_PRICE ,MARKET_RDATE from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE ORDER BY MARKET_STATE ) aa)
       <![CDATA[where rnum>#{start} and rnum<=#{end}]]>            
    </select>
    
+   <!-- 마켓 state update -->
    	<update id="upMarketS"  parameterType="Map">
 		UPDATE MARKET SET MARKET_STATE=#{market_state} WHERE MARKET_NUM=#{market_num}  
 	</update>

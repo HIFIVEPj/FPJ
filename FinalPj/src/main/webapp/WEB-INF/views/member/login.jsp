@@ -47,12 +47,7 @@ $(document).ready(function() {
 				<div class="header-text mb-0">
 					<div class="container">
 						<div class="text-center text-white ">
-							<h1 class="">Login</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">Pages</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">Login</li>
-							</ol>
+							<h1 class="">로그인</h1>
 						</div>
 					</div>
 				</div>
@@ -72,7 +67,7 @@ $(document).ready(function() {
 									<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 										<div class="card mb-0">
 											<div class="card-header">
-												<h3 class="card-title">Login to your Account</h3>
+												<h3 class="card-title">로그인</h3>
 											</div>
 											
 											<div class="card-body">
@@ -114,13 +109,13 @@ $(document).ready(function() {
 													<input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" >
 												</div>
 						
-											<!-- <div class="form-group">
+											 <div class="form-group">
 													<label class="custom-control custom-checkbox">
-														<a href="forgot-pwd.html" class="float-right small text-dark mt-1 font-12" class="color-hover-sign">비밀번호 찾기</a>
+														<a href="forgot-pwd" class="float-right small text-dark mt-1 font-12" class="color-hover-sign">비밀번호 찾기</a>
 														<input type="checkbox" class="custom-control-input">
-														<span class="custom-control-label text-dark font-12">자동로그인</span>
+												<!--  	<span class="custom-control-label text-dark font-12">자동로그인</span> -->
 													</label>
-												</div> -->
+												</div> 
 												<div class="form-footer mt-2">
 													<!-- <a href="index.html" class="btn btn-primary btn-block">SignIn</a> -->	
 													<input type="submit" class="btn btn-primary btn-block" id="login_bt" value="로그인">

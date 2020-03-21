@@ -117,15 +117,18 @@
 
 		<!--Loader-->
 		<div id="global-loader">
-			<img src="../images/other/loader.svg" class="loader-img floating" alt="">
+			<img src="../images/other/loader.svg" class="loader-img floating" alt="" >
 		</div>
+<!-- >		
+		<div class="loaderAdd" id="global-loader" style="background-color:rgb(255, 255, 255,0.2);">
+			<img src="../images/other/loader.svg" class="loader-img floating" alt="" >
+		</div> -->
+
 		<!--
 		<div class="dimmer active">
 			<div class="lds-hourglass"></div>
 		</div>
-		-->
-
-
+		
 		<!--Topbar-->
 		<div class="header-main">
 			<div class="top-bar" style="background-color:#fff;">

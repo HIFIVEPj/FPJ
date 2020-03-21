@@ -35,10 +35,6 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.insertMem(member);
 
 	}
-	/*@Override
-	public List<Member> list(Map<String,Object> map){
-		return memberMapper.list(map);
-	} */
 	@Override
 	public long getTotalCount(Map<String,Object> map) {
 		return memberMapper.getTotalCount(map);
@@ -57,7 +53,16 @@ public class MemberServiceImpl implements MemberService {
 	public long getMarketCount() {		
 		return memberMapper.getMarketCount();
 	}
-	
+	@Override
+	public long getMarketCountSys() {
+		
+		return memberMapper.getMarketCountSys();
+	}
+	@Override
+	public long getMarketListState() {
+		
+		return memberMapper.getMarketListState();
+	}
 	@Override
 	public List<Market> getMarketList(MemberVo memberVO) {		
 		return memberMapper.getMarketList(memberVO);
@@ -65,6 +70,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void upMarketS(Map<String,Object> map) {
+		 memberMapper.upMarketS(map);
 	}
 	
 	//index
@@ -86,7 +92,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getTotalCountMC(memberVO);
 	}
 
-
+	@Override
+	public long getProjectCountSys() {		
+		return memberMapper.getProjectCountSys();
+	}
 	@Override
 	public List<PayInformation> marketListFree(MemberVo memberVO) {
 		return memberMapper.marketListFree(memberVO);

@@ -16,12 +16,7 @@
 				<div class="header-text mb-0">
 					<div class="container">
 						<div class="text-center text-white ">
-							<h1 class="">Register</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">Pages</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">Register</li>
-							</ol>
+							<h1 class="">회원가입</h1>
 						</div>
 					</div>
 				</div>
