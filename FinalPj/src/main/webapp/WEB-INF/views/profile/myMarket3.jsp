@@ -179,7 +179,7 @@ $(document).ready(function() {
 																					<i class="fa fa-star-o text-warning"> </i>
 																				</c:forEach>	
 																			</c:if>
-																		</span>|
+																		</span>|${mBuyList.freelancer.mem_email}
 																			<i class="fa fa-eye" data-toggle="tooltip" title="조회수"></i> ${mBuyList.market.market_vcnt}
 																			<i class="fa fa-gratipay" data-toggle="tooltip" title="찜수"></i> ${mBuyList.market.market_pcnt}
 																			<i class="fa fa-comment-o" data-toggle="tooltip" title="리뷰"></i> ${mBuyList.marketRev.marketRev_num}

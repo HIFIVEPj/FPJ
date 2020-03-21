@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
@@ -194,100 +194,25 @@
 <!--/↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 서버로 보내는 폼 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑-->	
 					
 					</div>
-					<div class="col-lg-4 col-md-12">
+					
+						
+						<div class="col-lg-4 col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">조건</h3>
+								<h3 class="card-title">수수료율</h3>
 							</div>
 							<div class="card-body">
 								<ul class="list-unstyled widget-spec  mb-0">
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Money Not Refundable
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="500000" pattern="#,###,###,###" /> 이하 &nbsp;<b>20%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>You can renew your Premium ad after experted.
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="2000000" pattern="#,###,###,###" /> 이하 &nbsp;<b>12%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads are active for depend on package.
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="2000000" pattern="#,###,###,###" /> 초과 &nbsp;<b>6%</b>
 									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">프리미엄 광고의 이익</h3>
-							</div>
-							<div class="card-body pb-2">
-								<ul class="list-unstyled widget-spec vertical-scroll mb-0">
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium Ads Active
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads are displayed on top
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads will be Show in Google results
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium Ads Active
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads are displayed on top
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads will be Show in Google results
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium Ads Active
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads are displayed on top
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads will be Show in Google results
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium Ads Active
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads are displayed on top
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads will be Show in Google results
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium Ads Active
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads are displayed on top
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads will be Show in Google results
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="card mb-0">
-							<div class="card-header">
-								<h3 class="card-title">서비스 구매시 주의사항</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
+									
 								</ul>
 							</div>
 						</div>

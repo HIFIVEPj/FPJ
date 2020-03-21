@@ -438,7 +438,7 @@ public class CorporationController {
 		map.put("end",end);
 		
 		List<MarketBuysellList> corBuy=service.myBuyMarket(map);
-		
+		log.info("@@@@@@@@@@corBuy"+corBuy);
 		Corporation cor = getCorfname(mem_email);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("corporation/buylist_market");

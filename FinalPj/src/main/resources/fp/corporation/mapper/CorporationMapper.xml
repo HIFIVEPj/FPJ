@@ -52,7 +52,7 @@
     	</association>
 		<association property="freelancer" javaType="Freelancer" column ="free_code" >
 	       <id property="free_code" column ="free_code" />
-	       <result property="mem_email" column ="mem_email" />
+	       <result property="mem_email" column ="mEamil" />
 		</association>
 	</resultMap>
 	
@@ -124,7 +124,7 @@
                 (select * from
                    (select *from market_buyselllist)mb 
                    left outer join
-                    (select f.mem_email,m.MARKET_NUM ,market_fname,market_sub,market_price, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
+                    (select f.mem_email mEamil,m.MARKET_NUM ,market_fname,market_sub,market_price, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
                     right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM 
                     join FREELANCER f on f.free_code=m.free_code
                     group by m.MARKET_NUM,market_fname,market_sub,market_price, f.mem_email) m on mb.market_num=m.market_num where mb.mem_email=#{mem_email}

@@ -247,6 +247,7 @@
 										</form>		
 											
 										 <!-- 페이징 -->
+										 <c:if test="${paging.total>0}">
 											<div class="card">
 												<div class="card-body" style="margin:0 auto; align:center;">
 													<ul class="pagination mg-b-0 page-0 ">
@@ -284,6 +285,7 @@
 													</ul>
 												</div>
 											</div>
+											</c:if>
 									<!-- 페이징 -->	
 										
 					<!-- 
