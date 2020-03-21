@@ -598,7 +598,7 @@ function free_list(pj_num){
 					//alert(data[i].mem_email+", "+data[i].freelancerprofile[j].profile_sub+ " , "+ data[i].applied_project[j].appp_date);
 					//alert(data[i].free_code);
 					temp += '<tr> <td class="listtd"></td>'+
-					'<td class="listtd" style="height:40px; text-align:center;"> <a href="freelancercontent?free_code='+data[i].free_code+'" class="text-dark font-weight-semibold" target="_blank">' 
+					'<td class="listtd" style="height:40px; text-align:center;"> <a href="freelancercontent?free_code='+data[i].free_code+'&pro_num='+data[i].freelancerprofile[j].pro_num+'" class="text-dark font-weight-semibold" target="_blank">' 
 							+data[i].freelancerprofile[j].profile_sub+'</a></td>' +
 					'<td class="listtd"  style="height:50px; text-align:center;">' +data[i].mem_email+'</td>' +
 					'<td class="listtd"  style="height:40px; text-align:center;">' +startTask+'</td>' +

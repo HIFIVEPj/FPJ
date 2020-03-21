@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import fp.market.domain.Market;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
+import fp.member.domain.Notification;
 import fp.member.domain.PayInformation;
 import fp.member.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j;
@@ -131,5 +132,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<String> sumCountMarketN() {		
 		return memberMapper.sumCountMarketN();
+	}
+	//알람
+	@Override
+	public List<Notification>selectNotification(String mem_email){
+		return memberMapper.selectNotification(mem_email);
+	}
+	@Override
+	public void addNotification(Notification not) {
+		memberMapper.addNotification(not);
+	}
+	@Override
+	public int countNotification(String mem_email) {
+		return memberMapper.countNotification(mem_email);
 	}
 }

@@ -21,11 +21,15 @@ import fp.freelancerprofile.domain.FreeLancer;
 import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.member.domain.Member;
+import fp.member.domain.Notification;
+import fp.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
 @Log4j
 public class EchoHandler extends TextWebSocketHandler {
 	@Autowired
 	private FreeLancerProfileService freeService;
+	@Autowired
+	private MemberService memService;
 	
 	//로그인 한 전체
 	List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
@@ -47,21 +51,26 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("Message!!!!!!!!!!!!!!!!!: "+message);
+		Notification not = new Notification();
+		
 		String msg = message.getPayload();
 		String strs[] = msg.split(",");
-		
+		log.info("$$$$접속되어있는 세션: "+userSessionsMap);
 		// 1. 프리랜서가 프로젝트에 지원했을 때 해당 기업한테 알림
 		if(strs != null && strs[1].equals("apply")) {
 			String senderEmail = getEmail(session);
 			FreeLancer free = freeService.mydash_free_select(senderEmail);
-			String corPjEmail= message.getPayload().toString();
-			if(userSessionsMap.containsKey(corPjEmail)) {
+			TextMessage notSetMessage = new TextMessage(free.getFree_name() +"님이 프로젝트에 지원하셨습니다");
+			
+			not.setMem_email_from(senderEmail);
+			not.setMem_email_to(strs[0]);
+			not.setNot_cate(strs[1]);
+			not.setNot_message(notSetMessage.getPayload().toString());
+			memService.addNotification(not);
+			if(userSessionsMap.containsKey(strs[0])) {
 				//기업이 접속되어 있을 때
-				session = userSessionsMap.get(corPjEmail);
-				session.sendMessage(new TextMessage(free.getFree_name() +"님이 프로젝트에 지원하셨습니다"));
-			}else {
-				//접속 안되어 있을 때
-				//DB 만들어서 추가해주기
+				session = userSessionsMap.get(strs[0]);
+				session.sendMessage(new TextMessage("apply]"+free.getFree_name() +"님이 프로젝트에 지원하셨습니다"));
 			}
 		}
 		//2. 프리랜서 나 기업이 마켓에서 구매했을때 마켓 글쓴사람한테 알림

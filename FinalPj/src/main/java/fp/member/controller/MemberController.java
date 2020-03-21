@@ -50,6 +50,7 @@ import fp.member.service.MailService;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.market.domain.Freelancer;
 import fp.member.domain.Member;
+import fp.member.domain.Notification;
 import fp.member.service.MailService;
 import fp.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
@@ -124,5 +125,16 @@ public class MemberController {
        	
     	return "member/login";
     } 
+    
+    @RequestMapping(value="alarmAdd",  method=RequestMethod.GET)
+    public ModelAndView alarm(@RequestParam String mem_email) {
+    	ModelAndView mv = new ModelAndView();
+    	List<Notification> nots = memberservice.selectNotification(mem_email);
+    	int countNots = memberservice.countNotification(mem_email);
+    	mv.setViewName("jsonView");
+    	mv.addObject("nots", nots);
+    	mv.addObject("countNots", countNots);
+    	return mv;
+    }
 }
 

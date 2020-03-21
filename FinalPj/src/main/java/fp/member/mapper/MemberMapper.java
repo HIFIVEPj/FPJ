@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import fp.market.domain.Market;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
+import fp.member.domain.Notification;
 import fp.member.domain.PayInformation;
 
 @Repository
@@ -44,5 +45,9 @@ public interface MemberMapper {
 	List<Long> sumCountCor();
 	List<String> sumCountMarketN();
 	List<Long> sumCountMarket();
-
+	
+	//알람관련
+	List<Notification>selectNotification(String mem_email);
+	void addNotification(Notification not);
+	int countNotification(String mem_email);
 }

@@ -112,23 +112,88 @@
 		
 		<!-- 커스텀css 로드 -->
 		<link href="../css/custom.css" rel="stylesheet" />
+			<!-- Notifications js -->
+		<script src="../plugins/notify/js/rainbow.js"></script>
+		<script src="../plugins/notify/js/sample.js"></script>
+		<script src="../plugins/notify/js/jquery.growl.js"></script>
 		<!-- 웹소켓 sockJs -->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+		<script src="../js/dateFormat.js"></script>
 		<script type="text/javascript">
 	   //전역변수 선언-모든 홈페이지에서 사용 할 수 있게 index에 저장
 	   var socket = null;
-	 
+	   var session = "${sessionScope.email}";
 	   $(document).ready(function (){
-		   connectWs();
-		   
- 		   $('#btnSend').on('click',function(evt){
-			   evt.preventDefault();
-			   if(socket.readyState !== 1)return;
-			   	let msg = $('input#msg').val();
-			   	socket.send(msg);
-		   }) 
+		   if (session !=''){
+			   connectWs(); 
+				$.ajax({
+					url : '/alarmAdd',
+					data: "mem_email="+session,
+					type : 'GET',
+					dataType: 'json',
+					success : function(data) {
+						var noReadNotice = data.countNots;
+						var lists = data.nots;
+						 var cnt = lists.length;
+						 var alarmSet="";
+						if(noReadNotice == '0'){
+							alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+							+'<div class="dropdown-divider"></div><a href="#" class="dropdown-item d-flex pb-3"><div><strong>새로운 알람이 없습니다.</strong><br>'
+							$('#alarmDIV').html(alarmSet);
+						}else{
+							$('.fa-bell-o').after('<span class="badge badge-primary badge-pill bellCount">'+noReadNotice+'</span>');
+							alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+							+'<div class="dropdown-divider"></div>'
+							if(cnt>5){
+								for(i=0; i<5; i++){
+									var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+									var cate = lists[i].not_cate;
+									if(cate=='apply'){
+										alarmSet+='<a href="#" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'+lists[i].mem_email_from+'</span>'
+									}
+									
+									alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+								}
+								alarmSet+='<div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center">....</a>'
+							}else{
+								for(i=0; i<cnt; i++){
+									var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+									var cate = lists[i].not_cate;
+									if(cate=='apply'){
+										alarmSet+='<a href="#" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'+lists[i].mem_email_from+'</span>'
+									}
+									alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+								}
+							}
+							$('#alarmDIV').html(alarmSet);
+						}
+					},
+					error : function(err){
+						alert('err');
+					}
+			   	});
+		   }
 	   });
-	 
+	  function alarmUpdate(){
+		   	$.ajax({
+				url : '/alarmAdd',
+				data: "mem_email="+session,
+				type : 'GET',
+				dataType: 'json',
+				success : function(data) {
+					var noReadNotice = data.countNots;
+					if(noReadNotice == '0'){
+					}else{
+						$('.bellCount').remove();
+						$('.fa-bell-o').after('<span class="badge badge-primary badge-pill">'+noReadNotice+'</span>')
+						$('#alarmCountSpan').text(data);
+					}
+				},
+				error : function(err){
+					alert('err');
+				}
+		   	});
+	  }
 	   function connectWs(){
 	   	sock = new SockJS( "<c:url value="/echo"/>" );
 	   	//sock = new SockJS('/replyEcho');
@@ -140,38 +205,20 @@
 	 
 	    sock.onmessage = function(evt) {
 		 	var data = evt.data;
-		   	console.log("ReceivMessage : " + data + "\n");
-		   	alert(data);
-	 
-		   /* 	$.ajax({
-				url : '/mentor/member/countAlarm',
-				type : 'POST',
-				dataType: 'text',
-				success : function(data) {
-					if(data == '0'){
-					}else{
-						$('#alarmCountSpan').addClass('bell-badge-danger bell-badge')
-						$('#alarmCountSpan').text(data);
-					}
-				},
-				error : function(err){
-					alert('err');
-				}
-		   	});
-	 
-		   	// 모달 알림
-		   	var toastTop = app.toast.create({
-	            text: "알림 : " + data + "\n",
-	            position: 'top',
-	            closeButton: true,
-	          });
-	          toastTop.open(); */
+		 	console.log("ReceivMessage : " + data + "\n");
+		 	var dataSplit = data.split(']');
+			if(dataSplit[0]=="apply"){
+				alarmUpdate();
+				return $.growl.notice({
+					message:dataSplit[1]
+				});
+			}
 	    };
 	 
-	    //sock.onclose = function() {
-	     // 	console.log('connect close');
+	    sock.onclose = function() {
+	      	console.log('connect close');
 	      	/* setTimeout(function(){conntectWs();} , 1000); */
-	  //  };
+	    };
 	 
 	    sock.onerror = function (err) {console.log('Errors : ' , err);};
 	 
@@ -191,8 +238,6 @@
 			<div class="lds-hourglass"></div>
 		</div>
 		-->
-
-
 		<!--Topbar-->
 		<div class="header-main">
 			<div class="top-bar" style="background-color:#fff;">
@@ -227,11 +272,10 @@
 									</li>
 									</c:when>
 									<c:otherwise>
-										<h>${sessionScope.name} 님 환영합니다. </h>														
+										<h>${sessionScope.name} 님 환영합니다.&nbsp;</h>														
 
 									<li class="dropdown">
-									
-										<a href="#" class="text-dark" data-toggle="dropdown">  &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
+										<a href="#" class="text-dark" data-toggle="dropdown"> &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 											<c:if test="${sessionScope.class_num==1}">
 											<a href="admin" class="dropdown-item" >
@@ -263,6 +307,11 @@
 												<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
 											</a>
 										</div>
+									</li>
+									<li class="dropdown">
+										<a href="#" class="text-dark" data-toggle="dropdown"><i class="fa fa-bell-o "></i>
+										</a>
+										<div id="alarmDIV"></div>
 									</li>
 									</c:otherwise>
 									</c:choose>

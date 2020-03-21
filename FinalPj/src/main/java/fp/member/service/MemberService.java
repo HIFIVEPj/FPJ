@@ -7,6 +7,7 @@ import java.util.Map;
 import fp.market.domain.Market;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
+import fp.member.domain.Notification;
 import fp.member.domain.PayInformation;
 
 public interface MemberService {
@@ -43,4 +44,9 @@ public interface MemberService {
 	
 	List<String> sumCountMarketN();
 	List<Long> sumCountMarket();
+	
+	//알람
+	List<Notification>selectNotification(String mem_email);
+	void addNotification(Notification not);
+	int countNotification(String mem_email);
 }

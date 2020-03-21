@@ -209,4 +209,15 @@
 		</if>
 	</sql>
 
+<!-- 알람관련 mapper -->
+	<select id ="selectNotification" resultType="fp.member.domain.Notification" parameterType="String">
+		select * from NOTIFICATION  where mem_email_to=#{mem_email} and not_read_datetime is null order by not_dateTime desc
+	</select>
+	<select id ="countNotification" resultType="int"  parameterType="String">
+		select count(not_num) from NOTIFICATION where mem_email_to=#{mem_email} and not_read_datetime is null 
+	</select>
+	<insert id="addNotification" parameterType="fp.member.domain.Notification">
+		insert into Notification(not_num,not_cate,mem_email_to,mem_email_from,not_message, not_datetime) values 
+		(NOT_NUM_SEQ.nextval, #{not_cate}, #{mem_email_to}, #{mem_email_from}, #{not_message}, sysdate)
+	</insert>
 </mapper>
