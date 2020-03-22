@@ -23,10 +23,14 @@ public interface FreeLancerListService {
 	public FreeLancerProfile profile_select(String mem_email);
 	public int countFreeLancer();
 	public int countFreeLancerPaging(Map<String, Object> map);
-	public List<List_FreeLancer> SelectList(Map<String, Object> map);
+	public List<List_FreeLancer> SelectList(Map<String, Object> map);	
 	public List<List_FreeLancerProfile> SelectList2();
 	public List<Project> SelectList3();
-	
+	public List<List_FreeLancerReview> selectStar_list();
+	public long count_type(int i);
+	//인덱스//
+	public List<List_FreeLancer> index_select();
+	public List<Freelancer_FreeLancerProfile> keyname_select();
 	//컨텐츠//
 	public List<Freelancer_FreeLancerProfile> freelancercontent(Map<String, Object> map);
 	public List<Freelancer_FreeLancerProfile> selectTel(Map<String, Object> map);
@@ -38,8 +42,6 @@ public interface FreeLancerListService {
 	//프로필 조회수 및 별점//
 	public void vcnt(long pro_num);
 	public List<List_FreeLancerReview> selectStar(long free_code);
-	public List<List_FreeLancerReview> selectReviewCount();
-	public int selectStar_list();
 	//리뷰//
 	public long countReview(Map<String, Object> map);
 	public List<List_FreeLancerReview> freelancerReview(List_FreeLancerReview freelancerreview);
@@ -53,7 +55,9 @@ public interface FreeLancerListService {
 	public void reviewDelete(long freerev_num);
 	public void reviewUpdate(Map<String, Object> map);
 	public List<FreeLancer> selectFile(String mem_email);
+	
 
+	
 
 
 

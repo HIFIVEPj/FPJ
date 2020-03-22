@@ -18,8 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fp.corporation.domain.Project;
+import fp.corporation.service.CorporationService;
 import fp.corporation.service.ProjectService;
 import fp.corporation.vo.ProjectVo;
+import fp.freelancerlist.domain.List_FreeLancer;
+import fp.freelancerlist.domain.List_FreeLancerProfile;
+import fp.freelancerlist.service.FreeLancerListService;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
+import fp.freelancerprofile.domain.List_FreeLancerReview;
+import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.market.controller.MarketController;
 import fp.market.domain.Market;
 import fp.market.domain.MarketPick;
@@ -38,6 +45,14 @@ public class IndexController {
 	ProjectService pjService;
 	@Autowired	
 	MemberService memberService;
+	@Autowired
+    FreeLancerListService freeService;
+    @Autowired
+    FreeLancerProfileService free_pro_service;
+    @Autowired
+    CorporationService corService;
+    @Autowired
+    FreeLancerProfileService proService;
 	
 	@RequestMapping("construction")
 	public String construction() {
@@ -101,7 +116,20 @@ public class IndexController {
 	     mv.addObject("marketTotal", marketTotal);
 	     mv.addObject("sumCountCorIndex", sumCountCorIndex);
 	     mv.addObject("countFree", countFree);
-	     
+	     /////프리랜서/////
+         List<List_FreeLancer> freelancerList = freeService.index_select();      
+         List<List_FreeLancerProfile> freelancerList2 = freeService.SelectList2();
+         List<fp.freelancerprofile.domain.Project> freelancerList3 = freeService.SelectList3();
+         List<List_FreeLancerReview> list_star = freeService.selectStar_list();
+         List<Freelancer_FreeLancerProfile> list_key = freeService.keyname_select();    
+      
+         mv.addObject("freelancerList", freelancerList);
+         mv.addObject("freelancerList2", freelancerList2);
+         mv.addObject("freelancerList3", freelancerList3);
+         mv.addObject("list_star", list_star);    
+         mv.addObject("list_key", list_key);      
+         log.info("!!!!!!!!!@"+list_key);
+         
 		return mv;
 	}
 

@@ -49,8 +49,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class FreeLancerListController {
-		
-	//List_FreeLancerProfile lifp;
+
 	@Autowired
 	private FreeLancerListService service;
 	
@@ -60,9 +59,11 @@ public class FreeLancerListController {
 	private FreeLancerProfileService proService;
 	
 	@GetMapping("freelancerList")
-	public ModelAndView FreelnacerList(PagingVO vo, FreeLancerListVO listVo, FreeLancerProfile freelancerprofile, HttpServletRequest request
+	public ModelAndView FreelnacerList(PagingVO vo, FreeLancerListVO listVo, HttpServletRequest request
 						, @RequestParam(value="nowPage", required=false)String nowPage
-						, @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+						, @RequestParam(value="cntPerPage", required=false)String cntPerPage
+						,@RequestParam(value="type", required=false)String type
+						,@RequestParam(value="searchKey", required=false)String searchKey){
 
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
@@ -79,7 +80,23 @@ public class FreeLancerListController {
 		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));	
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("PagingVo", vo);
-		map.put("free_code", freelancerprofile.getFree_code());
+		
+		List<Integer>typeList = new ArrayList<Integer>();
+		//직종 선택 
+		if(type==null || type.equals("0")) {
+			map.put("type",null);
+		}else {
+			int typenum = Integer.parseInt(type);
+			typeList.add(typenum);
+			map.put("type",typeList);
+		}
+		
+		long countDevelop= service.count_type(1);
+		long countPublishing= service.count_type(2);
+		long countDesign= service.count_type(3);
+		long countPlan= service.count_type(4);
+		long countEtc= service.count_type(5);
+		
 		   
 		List<List_FreeLancer> freelancerList = service.SelectList(map);		
 		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();
@@ -99,24 +116,20 @@ public class FreeLancerListController {
 			}
 		}
 		
-		int list_star=0;
-		//List<List_FreeLancerReview> fr = service.selectReviewCount();	
-		List<List_FreeLancerReview> fr =new ArrayList<List_FreeLancerReview>();
-		if(service.selectReviewCount().size() != 0) {
-			fr=service.selectReviewCount();
-			for(int i=0; i<fr.size(); i++) {
-			//list_star = service.selectStar_list();
-				fr.get(1);
-			
-			}
-		}
+		List<List_FreeLancerReview> list_star = service.selectStar_list();
+		
 		
 		mv.addObject("paging", vo);
 		mv.addObject("freelancerList", freelancerList);
 		mv.addObject("freelancerList2", freelancerList2);
 		mv.addObject("freelancerList3", freelancerList3);
-		mv.addObject("fr", fr);
 		mv.addObject("list_star", list_star);
+		
+		mv.addObject("countDevelop", countDevelop);
+		mv.addObject("countPublishing", countPublishing);
+		mv.addObject("countDesign", countDesign);
+		mv.addObject("countPlan", countPlan);
+		mv.addObject("countEtc", countEtc);
 		
 		return mv;
 		
@@ -130,6 +143,7 @@ public class FreeLancerListController {
 			,@RequestParam(value="pro_gradeList[]", required=false)List<Integer> pro_gradeList
 			,@RequestParam(value="pro_placeList[]", required=false)List<Integer> pro_placeList
 			,HttpServletRequest request
+			,@RequestParam(value="type", required=false)String type
 			,@RequestParam(value="searchKey", required=false)String searchKey){
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
@@ -194,14 +208,6 @@ public class FreeLancerListController {
 			}
 		}
 		
-		int list_star=0;
-		List<List_FreeLancerReview> fr = service.selectReviewCount();	
-		if(fr.size() !=0) {
-			list_star = service.selectStar_list();
-		}
-		log.info("###list_star:"+list_star);
-		log.info("###fr:"+fr);
-		
 		List<List_FreeLancer> freelancerList = service.SelectList(map);		
 		List<List_FreeLancerProfile> freelancerList2 = service.SelectList2();
 		List<Project> freelancerList3 = service.SelectList3();
@@ -209,8 +215,7 @@ public class FreeLancerListController {
 		mv.addObject("freelancerList", freelancerList);
 		mv.addObject("freelancerList2", freelancerList2);
 		mv.addObject("freelancerList3", freelancerList3);
-		mv.addObject("fr", fr);
-		mv.addObject("list_star", list_star);
+
 		return mv;
 	}
 
@@ -245,7 +250,7 @@ public class FreeLancerListController {
 		mv.addObject("star", star);
 		mv.addObject("tel", tel);	
 		
-		log.info("@@@star:"+star);
+		log.info("@@@content:"+content);
 		//리뷰//
 		long total =  service.countReview(map);
 		
@@ -275,7 +280,7 @@ public class FreeLancerListController {
 		List<List_FreeLancerReview> review = service.freelancerReview(freelancerreview);
 	
 		Map<String,String> fnames= new HashMap<String,String>();
-		
+		/*
 		for(int i=0; i<review.size();i++) {
 			List<FreeLancer> freelancer = service.selectFile(review.get(i).getMem_email());
 			fnames.put("free_fname",freelancer.get(i).getFree_fname());
@@ -283,6 +288,7 @@ public class FreeLancerListController {
 		}
 		log.info("@#@#@#@#@#"+fnames);
 		mv.addObject("fnames", fnames);	
+		*/
 		mv.addObject("review", review);	
 		mv.addObject("paging", freelancerreview);
 		return mv;

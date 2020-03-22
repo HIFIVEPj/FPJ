@@ -48,8 +48,8 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.selectPageList(map);
 	}
 	@Override
-	public List<FreeLancerProfileFile> selectFilename(){
-		return mapper.selectFilename();
+	public FreeLancerProfile selectProflie(){
+		return mapper.selectProflie();
 	}
 	
 	//프로필컨텐츠//

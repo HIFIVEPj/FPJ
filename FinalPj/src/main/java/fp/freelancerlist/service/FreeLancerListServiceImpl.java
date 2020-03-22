@@ -43,14 +43,34 @@ import fp.freelancerprofile.domain.Type;
 	public List<List_FreeLancer> SelectList(Map<String, Object> map) {
 		return mapper.SelectList(map);
 	}
+
 	@Override
 	public List<List_FreeLancerProfile> SelectList2(){
 		return mapper.SelectList2();
 	}
 	@Override
+	public List<List_FreeLancerReview> selectStar_list(){
+		return mapper.selectStar_list();
+	}
+	@Override
 	public List<Project> SelectList3(){
 		return mapper.SelectList3();
 	}
+	@Override
+	public long count_type(int i) {
+		return mapper.count_type(i);
+	}
+	//인덱스//
+	@Override
+	public List<List_FreeLancer> index_select(){
+		return mapper.index_select();
+	}
+	@Override
+	public List<Freelancer_FreeLancerProfile> keyname_select() {
+		return mapper.keyname_select();
+	}
+
+	
 	//컨텐츠//
 	@Override
 	public List<Freelancer_FreeLancerProfile> freelancercontent(Map<String, Object> map){
@@ -85,15 +105,6 @@ import fp.freelancerprofile.domain.Type;
 	@Override
 	public List<List_FreeLancerReview> selectStar(long free_code) {
 		return mapper.selectStar(free_code);
-	}
-	@Override
-	public List<List_FreeLancerReview> selectReviewCount() {
-		return mapper.selectReviewCount();
-	}
-
-	@Override
-	public int selectStar_list() {
-		return mapper.selectStar_list();
 	}
 
 	//리뷰//	
@@ -135,6 +146,7 @@ import fp.freelancerprofile.domain.Type;
 	public long getTotalCountFree(long free_code) {
 		return getTotalCountFree(free_code);
 	}
+
 
 
 

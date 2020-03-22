@@ -17,9 +17,7 @@
         } );
       } );
     </script>
-
 <!--/header-->
-
 		<!--Breadcrumb-->
       <section>
        <!--Sliders Section-->
@@ -32,13 +30,6 @@
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
 									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
 								</div>
 							</div>
 						</div>
@@ -47,27 +38,13 @@
 			</div>
 		</div>
 		<!--/Sliders Section-->
-		
       </section>
-      <!--Breadcrumb-->
-		<div class="bg-white border-bottom">
-			<div class="container">
-				<div class="page-header">
-					<h4 class="page-title">Freelacer Profile</h4>
-					<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-		<!--/Breadcrumb-->
+      <!--/Breadcrumb-->
 
       <!--User Dashboard-->
       <section class="sptb">
          <div class="container">
-            <div class="row">
+            <div class="row">	
              					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-header">
@@ -75,15 +52,15 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${mydash.free_fname eq null}">
-									<div class="profile-pic-img">
+								<c:if test="${getFileName.get(0).free_fname eq null}">
+									<div class="avatar-xxl brround" style="margin:0 auto;">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
 									
-								<c:if test = "${mydash.free_fname ne null}">
-									<div class="profile-pic-img">
-										<img src="../images/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+								<c:if test = "${getFileName.get(0).free_fname ne null}">
+									<div class="avatar-xxl brround" style="margin:0 auto;">
+										<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -98,14 +75,13 @@
 												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
 												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
-										</li>
-										<li>
-											<a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+											
+											
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
@@ -151,11 +127,8 @@
                                        <th>프로필 공개</th>  
                                  </tr>
                               </thead>
-			
 							<form id="del_list" method="get" action="freelancerProfile_cehck_delete" name="checkdelete1">
-							
   								<input type="hidden" name="mem_email" value="${profile_list[0].mem_email}" />
-  								
   								<!-- input type="hidden" name="pro_num" value="${profile_list[0].pro_num}" />-->
                     			 <c:forEach  var="freelancer" items="${profile_list}" varStatus="status">
                             		 <tr>
@@ -165,67 +138,39 @@
                                              <span class="custom-control-label"></span>
                                           </label>           
                                        </td>
-
                                           <td><a href='freelancerProfile_content?pro_num=${freelancer.pro_num}'class="btn-link">${freelancer.profile_sub}</a></td>       
-                                    <!--      <td>${freeLancer.mem_email}</td>-->
-                                       <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
-                           		 
-                               <!-- <c:set var="doneLoop" value="true" />					
-                                   	<c:choose>
-                                   	   <c:when test="${empty file_name}">
-									   </c:when>
-										
-										<c:otherwise>
-											<c:forEach var="file" items="${file_name}">
-													<c:if test="${file.pro_num eq freelancer.pro_num && doneLoop}">	
-														<c:set var="doneLoop" value="false" />		
-													</c:if>										
-											</c:forEach>   					 	
-										</c:otherwise>
-									</c:choose>
-									
-									<c:choose>
-									    <c:when test="${!doneLoop}">
-									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
-									    </c:when>
-									    <c:otherwise>
-									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>
-									    </c:otherwise>
-									</c:choose> -->
-									 <td style="text-align:center"  >
-									 <span class="custom-control-label" class="openOX" id="openOX"> 
-						
-									 	<c:if test="${freelancer.profile_choice eq 1}">
-											 공개
-										 </c:if>
-										 <c:if test="${freelancer.profile_choice ne 1}">
-											 비공개
-										 </c:if>
-									 </span>	
-									 </td>  
-                				</tr>
+                                     		  <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
+										 <td style="text-align:center"  >
+										 	<span class="" class="openOX" id="openOX"> 
+											 	<c:if test="${freelancer.profile_choice eq 1}">
+													 공개
+												</c:if>
+												<c:if test="${freelancer.profile_choice ne 1}">
+													 비공개
+												</c:if>
+											</span>	
+										</td>  
+                					</tr>
                   			</c:forEach> 
                   		</form>  	
-                       </table>
-                     </div>
+                     </table>
                    </div>
-                  </div>
-               <thead>
+                 </div>
+                </div>
+             <thead>
                      <div class="card">       
                         <div class="card-footer" align="right">
-                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
-                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
-                         
-                         <c:choose>
-	                         <c:when test="${ox.contains(1)}">
-								 <button type="button" class="btn btn-secondary profile_close" data-toggle="modal" data-target="#choiceCloseModal">프로필비공개</button>
-	               			 </c:when>
-	               			<c:otherwise>
-	                         	<button type="button" class="btn btn-secondary profile_open" data-toggle="modal" data-target="#choiceModal">프로필공개</button>
-	                        </c:otherwise>
-               			</c:choose>	
-               					 
-                        </div>
+	                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
+	                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
+	                         <c:choose>
+		                         <c:when test="${ox.contains(1)}">
+									 <button type="button" class="btn btn-secondary profile_close" data-toggle="modal" data-target="#choiceCloseModal">프로필비공개</button>
+		               			 </c:when>
+		               			<c:otherwise>
+		                         	<button type="button" class="btn btn-secondary profile_open" data-toggle="modal" data-target="#choiceModal">프로필공개</button>
+		                        </c:otherwise>
+	               			</c:choose>	
+                       </div>
 
                 <div class="center-block text-center">
                            <ul class="pagination mb-0">         
@@ -266,37 +211,7 @@
                            </div>
                            </ul>
                            </div>                                   
-<!--  
-                              <li class="page-item">
-                                 <a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-                              </li>
-                              <li class="page-item">
-                                 <a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                              </li>
-            
-                              <li class="page-item active">
-                                 <a class="page-link" href="#">1</a>
-                              </li>
-                              <li class="page-item">
-                                 <a class="page-link" href="#">2</a>
-                              </li>
-                              <li class="page-item">
-                                 <a class="page-link hidden-xs-down" href="#">3</a>
-                              </li>
-                              <li class="page-item ">
-                                 <a class="page-link" href="#">4</a>
-                              </li>
-                              <li class="page-item">
-                                 <a class="page-link hidden-xs-down" href="#">5</a>
-                              </li>
-                        
-                              <li class="page-item">
-                                 <a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                              </li>
-                              <li class="page-item">
-                                 <a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-                              </li>
--->
+
                         </div>
                         </div>
                         <!-- pagination-wrapper -->
@@ -357,7 +272,7 @@
 			</footer>
 		</section>
 		<!--Footer Section-->
-		<!-- delete Modal -->   
+<!-- delete Modal -->   
       <div id="deleteModal" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -450,6 +365,7 @@ function check(){
       }
 </script> 
 <script> 
+
      var pronum = new Array();
 	 $("input:checkbox[name='pro_num']").on("click",function(){
 		 var chk_cnt = 0;
@@ -469,11 +385,12 @@ function check(){
     		
     			var flag= ${!empty sessionScope.email};
 			      var objParam={
-			               "pro_numList" : pronum
+			               "pro_numList" : pronum, 
 			         };
-	            		
+			   //   alert("objParam.pro_numList"+objParam.pro_numList);
 	           		if(objParam.pro_numList.length != 1){
-	        					alert("한개만 선택해 주세요.");	        					
+	        					alert("한개만 선택해 주세요.");	 
+	        					
 	            		}else{
 				          $.ajax({
 				             type:"get",
@@ -482,6 +399,7 @@ function check(){
 				             dataType: "html",
 				             success:function(data){
 				            	 location.replace("freelancerProfile_list");
+				            	 
 				             },
 				             error:function(data){
 				           		alert("error");

@@ -906,6 +906,7 @@
 		<!--/프리마켓-->
 
 		<!--프리랜서-->
+
 		<section class="sptb">
 			<div class="container">
 				<div class="section-title center-block text-center">
@@ -913,383 +914,128 @@
 					<p>한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈</p>
 				</div>
 				<div id="myCarousel1" class="owl-carousel owl-carousel-icons2">
-					<div class="item">
-						<div class="card mb-0">
+					<c:forEach  var="freelancer" items="${freelancerList}" varStatus="status">
+						<div class="item">
+							<div class="card mb-0">
 						
-						
-							<!-- 즐겨찾기 설정 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
+					<!-- 즐겨찾기 설정 상태 -->${zzim_map}
+					<!-- 	<input type="hidden" value="${cor.cor_code}" class="cor_codes"/>
+							<c:if test="${empty cor}">
+							<div class="item-card9-icons zzim">
+								<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" onclick="javascript:onlyCor();">
+								 <i class="fa fa fa-heart-o" style=""></i></a>
 							</div>
+							</c:if>
+						<c:if test="${!empty cor}">
+						<c:forEach var="i" begin="0" end="${content.size()-1}">
+								
+						<c:choose>
+							<c:when test="${pronumList.contains(list.list_freelancerprofile.get(i).pro_num)}">
+								<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}" >
+									<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${content.get(i).pro_num})">
+									 <i class="fa fa fa-heart" style="color:white"></i></a>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="item-card9-icons">
+									<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${content.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${content.get(i).pro_num})">
+									 <i class="fa fa fa-heart-o" style=""></i></a>
+								</div>
+						</c:otherwise>	
+						</c:choose>
+						
+						<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}"></div>
+						</c:forEach>
+						</c:if>
+						 -->	
+
+			
+						<div class="card-body">
+							<c:choose>
+                                <c:when test="${freelancer.free_fname != null}">
+									<img src="../hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto"> 
+								</c:when>
+								<c:otherwise>
+								 <center><i class="fa fa-user-circle text-muted mr-1 fa-5x avatar-xxl brround mx-auto"></i></center>
+								</c:otherwise>
+							</c:choose>
 							
-							<!-- 즐겨찾기 해제 상태
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							 -->
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
 								<div class="item-card2">
 									<div class="item-card2-desc text-center">
 										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
+											<c:forEach  var="free_free_code" items="${freelancer.list_freelancerprofile}" varStatus="status">
+												<a href="freelancercontent?free_code=${free_free_code.free_code}&pro_num=${free_free_code.pro_num}" class="text-dark"><h4 class="font-weight-bold">${freelancer.free_name}</h4></a>
+											</c:forEach>
 										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
+										<c:forEach  var="type" items="${freelancerList2}" varStatus="status">
+										<c:forEach  var="type_list" items="${type.list_type}" varStatus="status">
+											<c:if test="${freelancer.free_code eq type.free_code}">
+												<p>${type_list.type_name}</p>
+											</c:if>
+										</c:forEach>
+										</c:forEach>
+									<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+									<p style="background-color:#eae8ed;">
+											<c:forEach  var="key" items="${list_key}" varStatus="status">
+												<c:if test="${freelancer.free_code eq key.free_code}">
+												<c:forEach  var="i"  begin="0" end="0" varStatus="status">
+												<!--  ${key.frKeyWord.get(i).key_name}-->
+												<c:set var = "keyname" value="${fn:split(key.frKeyWord.get(i).key_name,' ')}"/>
+												<c:forEach var = "keynames" items="${keyname}" varStatus = "g" >
+													<c:if test="${g.count<2}" >
+													 ${keynames}
+													</c:if>
+												</c:forEach>
+											</c:forEach> 
+												</c:if>
+											</c:forEach>
+									
+									</p>
+								
+										
+										<c:forEach  var="free_free_code" items="${freelancer.list_freelancerprofile}" varStatus="status">
+											<a href="freelancercontent?free_code=${free_free_code.free_code}&pro_num=${free_free_code.pro_num}" class="btn btn-white btn-sm ">자세히 보기</a>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
 							<div class="card-footer">
 								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
+								<c:forEach  var="exp" items="${freelancer.list_freelancerprofile}" varStatus="status">
+								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 ${exp.pro_exp}&nbsp;년
+								</c:forEach>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="card mb-0">
-						
-						
-							<!-- 즐겨찾기 설정 상태 
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							-->
-							<!-- 즐겨찾기 해제 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-						
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
-								<div class="item-card2">
-									<div class="item-card2-desc text-center">
-										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
-										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="card mb-0">
-						
-						
-							<!-- 즐겨찾기 설정 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
 							
-							<!-- 즐겨찾기 해제 상태 
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							-->
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
-								<div class="item-card2">
-									<div class="item-card2-desc text-center">
-										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
-										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
-									</div>
+								 <c:forEach  var="star" items="${list_star}" varStatus="status">	
+									<c:if test="${freelancer.free_code eq star.free_code}">
+										  <c:if test="${star.freerev_star >= 0}">
+						                     <c:forEach var="1" begin="1" end="${star.freerev_star}">
+						                        <i class="fa fa-star text-warning"> </i>
+						                     </c:forEach>
+						                     <c:forEach var="1" begin="1" end="${5-star.freerev_star}">
+												<i class="fa fa-star-o text-warning"> </i>
+											 </c:forEach>
+					                            <span class="rated-products-ratings">&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;	</span>
+					                       </c:if>
+									 </c:if>
+								  </c:forEach>
 								</div>
-							</div>
-							<div class="card-footer">
-								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="card mb-0">
-						
-						
-							<!-- 즐겨찾기 설정 상태 
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							-->
-							<!-- 즐겨찾기 해제 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-						
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
-								<div class="item-card2">
-									<div class="item-card2-desc text-center">
-										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
-										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="card mb-0">
-						
-						
-							<!-- 즐겨찾기 설정 상태 
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							-->
-							<!-- 즐겨찾기 해제 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-						
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
-								<div class="item-card2">
-									<div class="item-card2-desc text-center">
-										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
-										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="card mb-0">
-						
-						
-							<!-- 즐겨찾기 설정 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							
-							<!-- 즐겨찾기 해제 상태 
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							-->
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
-								<div class="item-card2">
-									<div class="item-card2-desc text-center">
-										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
-										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="card mb-0">
-						
-						
-							<!-- 즐겨찾기 설정 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							
-							<!-- 즐겨찾기 해제 상태 
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							-->
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
-								<div class="item-card2">
-									<div class="item-card2-desc text-center">
-										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
-										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="card mb-0">
-						
-						
-							<!-- 즐겨찾기 설정 상태 
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist active"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-							-->
-							<!-- 즐겨찾기 해제 상태 -->
-							<div class="item-card2-icons">
-								<a href="#" class="item-card9-icons1 wishlist"> <i class="fa fa fa-heart-o"></i></a>
-							</div>
-						
-						
-							<div class="card-body">
-								<img src="../images/faces/female/test5.png" alt="img" class=" avatar avatar-xxl brround mx-auto">
-								<div class="item-card2">
-									<div class="item-card2-desc text-center">
-										<div class="item-card2-text mt-3">
-											<a href="employer-list.html" class="text-dark"><h4 class="font-weight-bold">한나영</h4></a>
-										</div>
-										<p class="">개발자</p>
-										<p style="background-color:#eae8ed;">JAVA, SPRING, ORACLE DB</p>
-										<a href="employer.html" class="btn btn-white btn-sm ">자세히 보기</a>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="product-filter-desc">
-								
-								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 3년
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="icons">
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star text-warning"></i>
-									<i class="fa fa-star-half-o text-warning mr-1"></i>&nbsp;4.7
-								</a>
-								</div>
-
-								</div>
-							</div>
+							</div>	
 						</div>
 					</div>
 				</div>
-				
+			</c:forEach>
+		</div>
+	</div>
+</div>
+			
 				<br/>
 				<div class="text-center">
-						<a href="employer-list-right" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
+					<a href="freelancerList" class="btn btn-primary">　　<i class="si si-options-vertical mr-1"></i> 더 보기　　</a>
 				</div>
-				
 			</div>
 		</section>
+
 		<!--프리랜서-->
 <script>
 	/*function loginCheck(){

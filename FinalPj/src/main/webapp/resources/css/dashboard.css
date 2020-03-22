@@ -13527,8 +13527,14 @@ svg {
 #back-to-top {
 	color: #fff;
 	position: fixed;
+	/*
 	bottom: 20px;
+	*/
+	bottom: 90px;
+	/*
 	right: 20px;
+	*/
+	right: 26px;
 	z-index: 99;
 	display: none;
 	text-align: center;
