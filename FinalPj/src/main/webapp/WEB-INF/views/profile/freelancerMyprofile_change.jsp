@@ -2407,10 +2407,10 @@
 		var key_num = new Array();
 		var key_cnt = 0;
 		
-		var exp_size = $('#pro_exp').val();
-		exp_size = exp_size.toString();
-		expDigit = exp_size.length;
-		
+		  var exp_size = $('#pro_exp').val();
+		  exp_size = exp_size.toString();
+		  expDigit = exp_size.length;
+		  
 		 if(($('#type_num').val() == "")){
 		        alert("직종을 선택헤주세요.")
 		        return ;
