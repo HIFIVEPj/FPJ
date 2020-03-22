@@ -8,21 +8,47 @@
 
 		<!--Breadcrumb-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Favorite Ads</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Favorite Ads</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">새로 온 알림</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		
 			</div>
 		</section>
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Freelacer Profile</h4>
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="mydash_free">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">새로 온 알림</li>
+					</ol>
+				</div>
+			</div>
+		</div>
 		<!--/Breadcrumb-->
 
 		<!--User Dashboard-->
@@ -36,14 +62,14 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${cor.cor_fname eq ''}">
+								<c:if test="${free.free_fname eq ''}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
-								<c:if test = "${cor.cor_fname ne '' }">
+								<c:if test = "${free.free_fname ne '' }">
 									<div class="profile-pic-img">
-										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+										<img src="../hifiveImages/cor_thumb/${free.free_fname}" class="brround" alt="user">
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -60,7 +86,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="myNotification_cor"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+											<a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
@@ -113,14 +139,14 @@
 										<c:if test="${not empty list}">
 											<c:forEach var="dto" items="${list}">
 											<tr>
-											<c:if test="${dto.not_cate == 'apply'}">
-												<td class="text-primary"><b>프로젝트 지원</b></td>
+											<c:if test="${dto.not_cate eq 'market'}">
+												<td class="text-primary"><b>마켓 상품 구매자</b></td>
 											</c:if>
 												<td><a href="managed_project">${dto.not_message}</a></td>
 												<td>${dto.not_datetime}</td>
 									
 												<td>
-													<a href="confirm_Notification_cor?not_num=${dto.not_num}" class="badge badge-primary">확인하기</a>
+													<a href="confirm_Notification?not_num=${dto.not_num}" class="badge badge-primary">확인하기</a>
 												</td>
 											</tr>
 											</c:forEach>

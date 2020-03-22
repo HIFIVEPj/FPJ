@@ -9,6 +9,8 @@
 <!--/header-->
    
 
+
+
 		<!--Sliders Section-->
 		<section>
         <div id="output"></div>
@@ -73,38 +75,34 @@
 												location.href="project_list?type="+type+"&searchKey="+searchKey;
 											}
 										</script>
+										<!-- 프리마켓검색 -->
 										<div class="tab-pane" id="tab2">
 											<div class="search-background">
 												<div class="form row no-gutters">
 													<div class="form-group  col-xl-10 col-lg-10 col-md-12 mb-0">
-														<input type="text" class="form-control" id="certificate-text" placeholder="프리마켓 검색">
+														<input type="text" class="form-control searchWord" id="certificate-text" placeholder="프리마켓 검색">
 													</div>
-													<!--
-													<div class="form-group col-xl-4 col-lg-4 col-md-12 mb-0">
-														<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
-															<optgroup label="Categories">
-																<option value="0">All</option>
-																<option value="1">개발</option>
-																<option value="2">디자인</option>
-															</optgroup>
-														</select>
-													</div>
-													-->
+													
 													<div class="form-group col-xl-2 col-lg-2  col-md-12 mb-0 location">
 														<div class="row no-gutters bg-white br-2">
-															<!-- 
-															<div class="form-group  col-xl-8 col-lg-7 col-md-12 mb-0">
-																<input type="text" class="form-control border" id="certificate-location" placeholder="Location">
-															</div>
-															 -->
+															
 															<div class="col-xl-12 col-lg-12 col-md-12 mb-0">
-																<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> Search</a>
+																<a href="javascript:void(0)" class="btn btn-block btn-secondary fs-14" onclick="marketSearch();"><i class="fa fa-search"></i> Search</a>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
+										<script>
+										function marketSearch(){
+											var searchWord=$(".searchWord").val();
+											
+											location.href="market-list?searchWord="+searchWord;
+										}
+										</script>
+										<!-- 프리마켓검색 -->
+										
 										<div class="tab-pane" id="tab3">
 											<div class="search-background">
 												<div class="form row no-gutters">
@@ -829,7 +827,7 @@
 											
 											<div class="item-card-img">
 												<a href="market-content?market_num=${list.market_num}"></a>
-												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image">
+												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
 											</div>
 									<!-- 즐겨찾기 설정 상태 -->
 										 <!-- 
@@ -1327,6 +1325,28 @@
 		});
 	 }*/
 </script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5e74822feec7650c33215c87/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+
+
+
+  		                            
+
+
+
 
 
 <!--footer-->

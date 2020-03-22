@@ -10,21 +10,46 @@
 
 		<!--Breadcrumb-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Favorite Ads</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Favorite Ads</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">내 프로젝트 관리</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		
+		</section>
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Corporation Profile</h4>
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">내 프로젝트 관리</li>
+					</ol>
 				</div>
 			</div>
-		</section>
+		</div>
 		<!--/Breadcrumb-->
 
 		<!--User Dashboard-->
@@ -101,8 +126,6 @@
 										<ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">작성한 프로젝트</a></li>
 											<li class=""><a href="#tab2" data-toggle="tab">결제대기 프로젝트</a></li>
-											<li><a href="#tab3" data-toggle="tab">모집중인 공고</a></li>
-											<li><a href="#tab4" data-toggle="tab">마감된 공고</a></li>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -367,38 +390,6 @@
 								</c:choose>
 											</c:forEach>
 											</c:if>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
 										</tbody>
 									</table>
 								</div>

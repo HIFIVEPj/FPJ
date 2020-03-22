@@ -9,7 +9,6 @@
 <script>
    function requestPay() {
       
-      alert("ssssssss");
       var IMP = window.IMP; // 생략가능
       IMP.init('imp60448504');
       IMP.request_pay({
@@ -57,7 +56,6 @@
             var msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
          }
-         alert(msg);
       });
    };
    function contactServer(email){
@@ -74,7 +72,7 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">결제창</h1>
+									<h1 class="" style="margin-bottom:0rem;">결제하기</h1>
 									<!--
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="../">Home</a></li>
@@ -90,7 +88,20 @@
 			</div>
 		</div>
 		<!--/Sliders Section-->
-
+<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">FreeMarket</h4>
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="market-list">프리마켓</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프리마켓</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
 		<!--User dashboard-->
 		<section class="sptb">
 			<div class="container" >

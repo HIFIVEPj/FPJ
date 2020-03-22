@@ -6,20 +6,48 @@
 <!--/header-->
 		<!--Sliders Section-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">		
-							<ol class="breadcrumb text-center">
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">프로젝트 수정</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
 			</div>
+		</div>
+		<!--/Sliders Section-->
 		
 		</section>
 		<!--/Sliders Section-->
-
+<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Project</h4>
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="mydash_cor">프로젝트</a></li>
+						<li class="breadcrumb-item" aria-current="page">프로젝트 수정</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+<!--/Breadcrumb-->
 		<!--Add posts-section-->
 		<section class="sptb">
 		
@@ -1603,13 +1631,13 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label "><b>회사명</b></label>
-											<input type="text" class="form-control" value="${corInfo.cor_name}">
+											<input type="text" class="form-control"  value="${corInfo.cor_name}" readOnly>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6 ">
 										<div class="form-group ">
 											<label class="form-label "><b>담당자명</b><span style="color:red;">*</span></label>
-											<input type="text" class="form-control" value="${corInfo.cor_mname}">
+											<input type="text" class="form-control" name="cor_mname" value="${corInfo.cor_mname}">
 										</div>	
 									</div>
 								</div>
@@ -1617,13 +1645,13 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>이메일</b><span style="color:red;">*</span></label>
-											<input type="email" class="form-control" value="${corInfo.mem_email}">
+											<input type="email" class="form-control" name="mem_email" value="${corInfo.mem_email}" readOnly>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group ">
 											<label class="form-label"><b>연락처</b><span style="color:red;">*</span></label>
-											<input type="number" class="form-control" value="${corInfo.cor_tel}">
+											<input type="text" class="form-control" value="${corInfo.cor_tel}">
 										</div>	
 									</div>
 								</div>	
@@ -1862,10 +1890,6 @@ $("document").ready(function() {
 			}
 			if(edit_list.cor_mname.value==""){
 				alert("담당자 이름은 필수 입력 사항입니다.");
-				return;
-			}
-			if(edit_list.cor_tel.value=""){
-				alert("연락처는 필수 입력사항 입니다.");
 				return;
 			}
 			if(edit_list.mem_email.value=""){

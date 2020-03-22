@@ -10,14 +10,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -141,21 +139,22 @@ public class MarketController {
          //log.info("@@@@@@@@@@total:"+total);
          //log.info("@@@@marketVO.getStartPage()"+marketVO.getStartPage());
          //log.info("@@@@@@@@@@searchWord:"+searchWord);
-       List<MarketPick> pickState=new ArrayList<MarketPick>();
-       ArrayList<Long> marketNumList = new ArrayList<Long>();
-       //세션이메일이 존재할때
-       if(mem_email != null) {
-          if(marketService.pickState(mem_email).size() != 0) {
-             pickState = marketService.pickState(mem_email);
-             for(int i=0;i<pickState.size();i++) {
-               long marketNum=pickState.get(i).getMarket_num();
-               marketNumList.add(marketNum);
-             }
-          }
-       }else {
-         //세션이메일이 존재하지 않을 때    
-       }
-       log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
+/*   List<MarketPick> pickState=new ArrayList<MarketPick>();
+   ArrayList<Long> marketNumList = new ArrayList<Long>();
+   //세션이메일이 존재할때
+   if(mem_email != null) {
+      if(marketService.pickState(mem_email).size() != 0) {
+         pickState = marketService.pickState(mem_email);
+         for(int i=0;i<pickState.size();i++) {
+           long marketNum=pickState.get(i).getMarket_num();
+           marketNumList.add(marketNum);
+         }
+      }
+   }else {
+     //세션이메일이 존재하지 않을 때    
+   }*/
+       ArrayList<Long> marketNumList = pickList(mem_email);
+      // log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
        ModelAndView mv = new ModelAndView("market/market-list");
        mv.addObject("list", list);
         mv.addObject("paging", marketVO);  
@@ -164,7 +163,10 @@ public class MarketController {
         mv.addObject("searchWord", searchWord); 
       return mv;
    }
-/*   @GetMapping("market-searchButtonList")
+//픽리스트 메소드   
+
+/*   
+ * @GetMapping("market-searchButtonList")
    public ModelAndView getSearchButtonList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
                               ,@RequestParam(value="cntPerPage", required=false, defaultValue="9")String cntPerPage
                               ,@RequestParam(value="selectedKey",required=false, defaultValue="1")String selectedKeyS
@@ -205,7 +207,8 @@ public class MarketController {
         mv.addObject("searchWord", searchWord); 
       return mv;
       
-   }*/
+   }
+ */
    //searchBox 검색 리스팅 
    @GetMapping("market-searchBoxList")
    public ModelAndView getSearchBoxList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
@@ -214,26 +217,40 @@ public class MarketController {
                                  ,HttpSession session
                                  ,@RequestParam(value="checkedCate",required=false)List<Integer> checkedCate
                                  ,@RequestParam(value="checkedExp",required=false)List<String> checkedExp
-                                 ,@RequestParam(value="marketPrice",required=false)String marketPrice){
+                                 //,@RequestParam(value="marketPrice",required=false)String marketPrice
+                                 ,@RequestParam(value="marketPrice1",required=false)String marketPrice1
+                                 ,@RequestParam(value="marketPrice2",required=false)String marketPrice2){
 
       String mem_email=(String) session.getAttribute("email");
       int selectedKey=Integer.parseInt(selectedKeyS);
       
       log.info("1111111checkedCate[]"+checkedCate);
       log.info("22222222checkedExp[]"+checkedExp);
-      log.info("3333333333marketPrice"+marketPrice);
-      
-      
+//슬라이더 디자인
+/* 
+    * log.info("3333333333marketPrice"+marketPrice); 
       //오류range String result1 = marketPrice.substring(marketPrice.indexOf('￦')+1,marketPrice.indexOf(' ')+1);
       String result1 = marketPrice.substring(marketPrice.indexOf('￦')+1,marketPrice.indexOf('-')-1);
       result1 = result1.trim();
       String result2 = marketPrice.substring(marketPrice.lastIndexOf('￦')+1);
-      result2 = result2.trim();
-      int price1=Integer.parseInt(result1);
+     result2 = result2.trim();
+     int price1=Integer.parseInt(result1);
       int price2=Integer.parseInt(result2);
 
       log.info("#####price1:"+price1);
       log.info("#####price2"+price2);
+*/   if(marketPrice1=="") {
+		marketPrice1="0";
+	 }
+	 if(marketPrice2=="") {
+		marketPrice2=""+Long.MAX_VALUE;
+	 }
+    
+      marketPrice2 = marketPrice2.replaceAll("[^0-9]", "");
+	  marketPrice1 = marketPrice1.replaceAll("[^0-9]", "");
+
+      long price1=Long.parseLong(marketPrice1);
+      long price2=Long.parseLong(marketPrice2);
       Map<String,Object> mapCate = new HashMap<String,Object>();
       Map<String,Object> mapExp = new HashMap<String,Object>();
       Map<String,Object> mapPrice = new HashMap<String,Object>();
@@ -247,7 +264,6 @@ public class MarketController {
             mapCate.put("cate"+i,cate);
          }
       }
-
       if(checkedExp.size()!=0) {
          for(int i=0 ; checkedExp.size()>i ; i++) {
             String exp=checkedExp.get(i);
@@ -290,7 +306,7 @@ public class MarketController {
        }else {
          //세션이메일이 존재하지 않을 때    
        }
-
+log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
        ModelAndView mv = new ModelAndView("market/market-list");
        mv.addObject("list", list);
         mv.addObject("paging", marketVO);  
@@ -299,6 +315,7 @@ public class MarketController {
         
         mv.addObject("mapCate", mapCate);
         mv.addObject("mapExp", mapExp);
+        mv.addObject("mapPrice", mapPrice);
 
       return mv;
    }
@@ -313,66 +330,7 @@ public class MarketController {
          //,@CookieValue(value="market_num", required= false)String marketCookie
          ,HttpServletResponse response,HttpServletRequest request) 
    {      
-/*      
-      String marketCookie=null;
-      boolean find = false;
-      Cookie[] cookies = request.getCookies();
-      
-      if(cookies !=null) {
-         for(Cookie cookie: cookies) {
-            if("marketCookie".equals(cookie.getName())) {
-               find=true;
-               marketCookie=cookie.getValue();
-               log.info("!!!marketCookie:"+marketCookie);
-            }else {
-               
-            }
-         }
-      }   
-      log.info("cookies:"+cookies.length);
-      log.info("cookies:"+cookies);
-      log.info("marketCookie:"+marketCookie);
-      
-      if(!find) {
-         marketCookie="없음";
-      }else {
-         try {
-            marketCookie=Long.toString(market_num);
-            log.info("@@@L:"+ marketCookie);
-         }catch(Exception e) {
-            System.out.println("e:"+e);
-         }
-      }
 
-      Cookie cookie = new Cookie("marketCookie",marketCookie);
-      cookie.setMaxAge(60*60*24*365);
-      cookie.setPath("/");
-      response.addCookie(cookie);
-      
-      log.info("cookie:"+cookie);
-      log.info("cookies:"+cookies);
-      log.info("marketCookie:"+marketCookie);
-
-   */   
-   /*List<String> cookieList = new ArrayList<String>();   
-      // 저장된 쿠키 목록을 가져온다.
-      Cookie[] cookies = request.getCookies();
-      // 쿠키값을 저장할 문자열
-      String mycookie = null;
-       
-      // 쿠키목록이 있다면
-      if (cookies != null) {
-          for (int i=0; i<cookies.length; i++) {
-              // 쿠키의 이름을 취득한다.
-              String cookieName = cookies[i].getName();
-                  // 이름이 내가 원하는 값일 경우 값을 복사한다.
-                  mycookie = cookies[i].getValue();
-                  // 원하는 값을 찾으면 break;
-                  cookieList.add(mycookie);
-          }
-      }
-
-      */
       if(nowPageQ ==null &&cntPerPageQ ==null) {//문의 페이징
          nowPageQ="1";
          cntPerPageQ ="4";
@@ -390,7 +348,8 @@ public class MarketController {
       }else if(cntPerPageR == null) {
          cntPerPageR = "4";
       }
-
+      String mem_email=(String)session.getAttribute("email");
+      
       HashMap<String,Object> mapr=new HashMap<String,Object>();
       HashMap<String,Object> mapq=new HashMap<String,Object>();
       MarketRev marketRev = new MarketRev();
@@ -427,6 +386,25 @@ public class MarketController {
          type_num=fp.getFreelancerProfile().getType_num();
       }
       List<FreelancerProfile> similarFree = marketService.getSimilarFree(type_num);
+    //유사한 프리랜서에 자신은 제외하는 for문
+      for(int i=0;similarFree.size()>i;i++) {
+    	  long similarfree=similarFree.get(i).getFree_code();
+    	  long marketfree=fp.getFreelancer().getFree_code();
+    	 if(similarfree==marketfree) {
+    		 similarFree.remove(i);
+    		 break;
+    	 }
+      }
+      List<Market> similarMarket =marketService.similarMarket(m.getCate_num());
+      for(int i=0;similarMarket.size()>i;i++) {
+    	  long similarmarket=similarMarket.get(i).getMarket_num();
+    	  long marketNum=m.getMarket_num();
+    	 if(similarmarket==marketNum) {
+    		 similarMarket.remove(i);
+    		 break;
+    	 }
+      }
+      
       int mrStar=0;
       List<MarketRev> mr = marketService.getMarketRev(mapr);   
       if(mr.size() !=0) {//특정마켓 별점평균을 구하는데 리뷰가 없을시 널이떠서 조건걸어줌
@@ -440,9 +418,10 @@ public class MarketController {
       //마켓리뷰쓰는조건
       HashMap<String,Object> mapMbs=new HashMap<String,Object>();
       mapMbs.put("market_num",market_num);
-      mapMbs.put("mem_email",(String)session.getAttribute("email"));
+      mapMbs.put("mem_email",mem_email);
       List<MarketBuysellList> mbs =marketService.writeReview(mapMbs);
-      
+
+
       ModelAndView mv = new ModelAndView();
       mv.setViewName("market/market-content"); // 뷰의 이름
       mv.addObject("marketRev", mr); // 뷰로 보낼 데이터 값
@@ -454,6 +433,7 @@ public class MarketController {
       mv.addObject("marketVOQA", marketVOQA);
    //   mv.addObject("marketCookie", marketCookie);
       mv.addObject("similarFree", similarFree);
+      mv.addObject("similarMarket", similarMarket);
       mv.addObject("mbs", mbs);
       return mv;
       
@@ -514,11 +494,29 @@ public class MarketController {
       }else {
          return "redirect:market-list";
          }
-      
-      
-      
+
+   }
+   public ArrayList<Long> pickList(String mem_email){
+	   log.info("1111mem_email"+mem_email);
+	   List<MarketPick> pickState=new ArrayList<MarketPick>();
+       ArrayList<Long> marketNumList = new ArrayList<Long>();
+       //세션이메일이 존재할때
+       if(mem_email != null) {
+          if(marketService.pickState(mem_email).size() != 0) {
+             pickState = marketService.pickState(mem_email);
+             for(int i=0;i<pickState.size();i++) {
+               long marketNum=pickState.get(i).getMarket_num();
+               marketNumList.add(marketNum);
+             }
+          }
+       }else {
+         //세션이메일이 존재하지 않을 때    
+       }
+       log.info("!!!!!!marketNumList"+marketNumList);
+       return marketNumList;
    }
    public List<String> doFileupload(MultipartHttpServletRequest mtfRequest) {
+	   log.info("22222222mtfRequest"+mtfRequest);
       //String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
       String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
       //String path  = "/home/ubuntu/hifive/hifiveImages/marketThumbnails/"; // for aws

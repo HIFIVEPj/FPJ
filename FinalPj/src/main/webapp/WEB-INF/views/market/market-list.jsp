@@ -38,11 +38,11 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Ad List Right</h4>
+					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Ad List Right</li>
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="market-list">프리마켓</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프리마켓</li>
 					</ol>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 					<form>
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Categories</h3>
+								<h3 class="card-title">직종</h3>
 							</div>
 							<div class="card-body">
 								<div class="" id="">
@@ -110,8 +110,9 @@
 								</div>
 							</div>
 							<div class="card-header border-top">
-								<h3 class="card-title">Price Range</h3>
+								<h3 class="card-title">가격</h3>
 							</div>
+							<!-- 
 							<div class="card-body">
 								<h6>
 								   <label for="price">Price Range:</label>
@@ -119,8 +120,18 @@
 								</h6>
 								<div id="mySlider"></div>
 							</div>
+							-->
+							<!-- 교체 -->
+							<div class="card-body fcenter">
+							   <p>
+								   <input type="text" class="price_form" id="price1" value="<c:out value='${mapPrice.price1}'/>" numberOnly>
+								   -
+								   <input type="text" class="price_form" id="price2" value="<c:out value='${mapPrice.price2}'/>" numberOnly>
+								</p>
+							</div>
+							<!-- 교체 -->
 							<div class="card-header border-top">
-								<h3 class="card-title">Condition</h3>
+								<h3 class="card-title">경력</h3>
 							</div>
 							<div class="card-body">
 								<div class="filter-product-checkboxs" id="expCheckbox">
@@ -183,7 +194,9 @@
 	$("#marketSearchBox").click(function (){
 		var checkedCate = [];
 		var checkedExp = [];
-		var marketPrice=$("#price").val()
+	//	var marketPrice=$("#price").val()
+		var marketPrice1=$("#price1").val()
+		var marketPrice2=$("#price2").val()
 		var selectedKey= $("#marketOrder option:selected").val();
 		$("input:checkbox[name='cate_num']:checked").each(function (index, item) {
 			//alert(index+":"+ $(this).val());
@@ -196,7 +209,7 @@
 		/* alert("checkedCate:"+checkedCate);
 		alert("checkedExp:"+checkedExp);
 		alert($("#price").val()); */
-		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice="+marketPrice+"&selectedKey="+selectedKey;
+		window.location.href="market-searchBoxList?checkedCate="+checkedCate+"&checkedExp="+checkedExp+"&marketPrice1="+marketPrice1+"&marketPrice2="+marketPrice2+"&selectedKey="+selectedKey;
 	});
 	
 	function checkedPage(nowPage,cntPerPage,selectedKey){
@@ -312,7 +325,7 @@
 										<div class="tab-pane active" id="tab-12">
 											<div class="row">
 											<c:if test="${fn:length(list) == 0}">	
-											검색한 마켓이 없습니다
+												<p >검색한 마켓이 없습니다</p>
 											</c:if>
 											<c:forEach items="${list}" var="list"  varStatus="status">	
 												<div class="col-lg-6 col-md-12 col-xl-4">
@@ -321,7 +334,8 @@
 														<!--<div class="arrow-ribbon bg-primary">NEW</div>  -->	
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    	
-																<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100"><!-- width="가로 길이" height="세로 길이" alt="그림 설명" -->
+															<!--	<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100">  width="가로 길이" height="세로 길이" alt="그림 설명" -->
+															<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
 															</div>
 															<div class="item-card9-icons" id="heartDivID${list.market_num}">
 																<c:if test="${fn:length(marketNumList) > 0}">	
@@ -536,6 +550,36 @@
 	})
 	*/
 </script>
+<script>
+//3자리 단위마다 콤마 생성
+function addCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+ 
+//모든 콤마 제거
+function removeCommas(x) {
+    if(!x || x.length == 0) return "";
+    else return x.split(",").join("");
+}
+ </script>
+ <script>
+ $("input:text[numberOnly]").on("focus", function() {
+	    var x = $(this).val();
+	    x = removeCommas(x);
+	    $(this).val(x);
+	}).on("focusout", function() {
+	    var x = $(this).val();
+	    if(x && x.length > 0) {
+	        if(!$.isNumeric(x)) {
+	            x = x.replace(/[^0-9]/g,"");
+	        }
+	        x = addCommas(x);
+	        $(this).val(x);
+	    }
+	}).on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
+	</script>
 <!--footer-->
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

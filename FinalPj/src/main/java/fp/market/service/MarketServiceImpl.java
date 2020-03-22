@@ -219,11 +219,7 @@ public class MarketServiceImpl implements MarketService {
 	public List<Market> searchButtonMarketList(HashMap<String,Object> map) {
 		return mapper.searchButtonMarketList(map);	
 	}
-//컨텐트 유사한프리랜서정보	
-	@Override
-	public List<FreelancerProfile> getSimilarFree(int type_num) {
-		return mapper.similarFree(type_num);
-	}
+
 //마켓문의계층형 삭제
 	@Override
 	public long maxSun(HashMap<String, Object> map) {
@@ -236,6 +232,16 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public List<String> deletedQA(HashMap<String, Object> map) {
 		return mapper.deletedQA(map);
+	}
+//컨텐트 유사한프리랜서정보	
+	@Override
+	public List<FreelancerProfile> getSimilarFree(int type_num) {
+		return mapper.similarFree(type_num);
+	}
+//컨텐트 유사한마켓정보		
+	@Override
+	public List<Market> similarMarket(int cate_num) {
+		return mapper.similarMarket(cate_num);
 	}
 	
 

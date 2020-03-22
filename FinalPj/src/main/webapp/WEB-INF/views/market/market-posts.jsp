@@ -1,14 +1,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
 		<!--Sliders Section-->
 		<section>
-		<!--Sliders Section-->
+
 		<div>
 			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
@@ -32,11 +32,24 @@
 				</div><!-- /header-text -->
 			</div>
 		</div>
-		<!--/Sliders Section-->
+
 		
 		</section>
 		<!--/Sliders Section-->
-
+<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">FreeMarket</h4>
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="market-list">프리마켓</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프리마켓</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
 		<!--Add posts-section-->
 		<section class="sptb">
 			<div class="container">
@@ -150,13 +163,13 @@
 							<div class="card-body">
 								<ul class="list-unstyled widget-spec  mb-0">
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>500000 이하 &nbsp;<b>20%</b>
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="500000" pattern="#,###,###,###" /> 이하 &nbsp;<b>20%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>2000000 이하 &nbsp;<b>12%</b>
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="2000000" pattern="#,###,###,###" /> 이하 &nbsp;<b>12%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>2000000 초과 &nbsp;<b>6%</b>
+										<i class="fa fa-check text-success" aria-hidden="true"></i><fmt:formatNumber value="2000000" pattern="#,###,###,###" /> 초과 &nbsp;<b>6%</b>
 									</li>
 									
 								</ul>
@@ -254,7 +267,7 @@
 </script>		
 <script>
 	   function insertCheck(){
-		   alert("insertForm.cate_num."+insertForm.ofname.value);
+		//   alert("insertForm.cate_num."+insertForm.ofname.value);
 		   if(insertForm.market_sub.value=="" ){
 			   alert("제목을 적어주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
@@ -278,9 +291,9 @@
 		  if(insertForm.ofname.value==""){		   
 			   alert("썸네일파일을 선택해주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
-			   return false;
-			   
+			   return false;   
 		   }
+		  alert("포스팅 검사 후 등록이 완료됩니다.(1~2일 정도 소요)");
 		  insertForm.submit();
 	   }
 </script>		

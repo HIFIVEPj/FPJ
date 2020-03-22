@@ -46,21 +46,47 @@
       </script>
       <!--Breadcrumb-->
       <section>
-         <div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-            <div class="header-text mb-0">
-               <div class="container">
-                  <div class="text-center text-white ">
-                     <h1 class="">My Page</h1>
-                     <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">My Page</li>
-                     </ol>
-                  </div>
-               </div>
-            </div>
-         </div>
+         <!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">나의 정보</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		
       </section>
       <!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Corporation Profile</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">나의 정보</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
 
       <!--User Dashboard-->
       <section class="sptb">
@@ -389,23 +415,49 @@
             input_cor.submit();
          }
       </script>
-      <!--Breadcrumb-->
+        <!--Breadcrumb-->
       <section>
-         <div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-            <div class="header-text mb-0">
-               <div class="container">
-                  <div class="text-center text-white ">
-                     <h1 class="">My Page</h1>
-                     <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">My Page</li>
-                     </ol>
-                  </div>
-               </div>
-            </div>
-         </div>
+     <div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">나의 정보</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		
       </section>
       <!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Corporation Profile</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">나의 정보</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
+
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
@@ -430,6 +482,7 @@
 										<!--
 										<img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
 										-->
+
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>

@@ -286,8 +286,8 @@ public class ProjectController {
 	@PostMapping("project_write")
 	public String project_write(Project project, HttpServletRequest request) {
 		//String type_num = request.getParameter("type_num");
-		log.info("!@!#(@#*@&$(&*(@!#&&(*@#");
-		String mem_email = request.getParameter("mem_email");
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		log.info("!@*@#&(*#&(*&@# mem_email: "+mem_email);
 
 		String[] ListKeyNum = request.getParameterValues("key_num");

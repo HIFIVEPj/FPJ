@@ -72,6 +72,7 @@ public class CorporationController {
 	@Autowired
     private MemberService memberservice; 
 	
+	//알림확인
 	@RequestMapping("confirm_Notification_cor")
 	public String confirm_Notification_cor(long not_num) {
 		memberservice.confirm_Notification(not_num);
@@ -458,7 +459,7 @@ public class CorporationController {
 		map.put("end",end);
 		
 		List<MarketBuysellList> corBuy=service.myBuyMarket(map);
-		
+		log.info("@@@@@@@@@@corBuy"+corBuy);
 		Corporation cor = getCorfname(mem_email);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("corporation/buylist_market");
