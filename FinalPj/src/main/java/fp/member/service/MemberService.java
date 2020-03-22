@@ -49,4 +49,5 @@ public interface MemberService {
 	List<Notification>selectNotification(String mem_email);
 	void addNotification(Notification not);
 	int countNotification(String mem_email);
+	void confirm_Notification(long not_num);
 }

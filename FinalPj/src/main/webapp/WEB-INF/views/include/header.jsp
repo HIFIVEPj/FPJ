@@ -1,3 +1,4 @@
+<!-- hifive / nyoung -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -123,6 +124,7 @@
 	   //전역변수 선언-모든 홈페이지에서 사용 할 수 있게 index에 저장
 	   var socket = null;
 	   var session = "${sessionScope.email}";
+	   var classNum = "${sessionScope.class_num}";
 	   $(document).ready(function (){
 		   if (session !=''){
 			   connectWs(); 
@@ -149,18 +151,26 @@
 									var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
 									var cate = lists[i].not_cate;
 									if(cate=='apply'){
-										alarmSet+='<a href="#" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'+lists[i].mem_email_from+'</span>'
+										alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+									}else if(cate=='market'){
+										alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
 									}
-									
 									alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
 								}
-								alarmSet+='<div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center">....</a>'
+								if(classNum==4){
+									alarmSet+='<div class="dropdown-divider"></div><a href="myNotification_cor" class="dropdown-item text-center">....</a>'
+								}else if(classNum==3 || classNum==2){
+									alarmSet+='<div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center">....</a>'
+								}
+								
 							}else{
 								for(i=0; i<cnt; i++){
 									var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
 									var cate = lists[i].not_cate;
 									if(cate=='apply'){
-										alarmSet+='<a href="#" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'+lists[i].mem_email_from+'</span>'
+										alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+									}else if(cate=='market'){
+										alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
 									}
 									alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
 								}
@@ -182,11 +192,48 @@
 				dataType: 'json',
 				success : function(data) {
 					var noReadNotice = data.countNots;
+					var lists = data.nots;
+					 var cnt = lists.length;
+					 var alarmSet="";
 					if(noReadNotice == '0'){
+						alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+						+'<div class="dropdown-divider"></div><a href="#" class="dropdown-item d-flex pb-3"><div><strong>새로운 알람이 없습니다.</strong><br>'
+						$('#alarmDIV').html(alarmSet);
 					}else{
 						$('.bellCount').remove();
-						$('.fa-bell-o').after('<span class="badge badge-primary badge-pill">'+noReadNotice+'</span>')
-						$('#alarmCountSpan').text(data);
+						$('.fa-bell-o').after('<span class="badge badge-primary badge-pill bellCount">'+noReadNotice+'</span>');
+						alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+						+'<div class="dropdown-divider"></div>'
+						if(cnt>5){
+							for(i=0; i<5; i++){
+								var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+								var cate = lists[i].not_cate;
+								if(cate=='apply'){
+									alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+								}else if(cate=='market'){
+									alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
+								}
+								alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+							}
+							if(classNum==4){
+								alarmSet+='<div class="dropdown-divider"></div><a href="myNotification_cor" class="dropdown-item text-center">....</a>'
+							}else if(classNum==3 || classNum==2){
+								alarmSet+='<div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center">....</a>'
+							}
+							
+						}else{
+							for(i=0; i<cnt; i++){
+								var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+								var cate = lists[i].not_cate;
+								if(cate=='apply'){
+									alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+								}else if(cate=='market'){
+									alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
+								}
+								alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+							}
+						}
+						$('#alarmDIV').html(alarmSet);
 					}
 				},
 				error : function(err){
@@ -212,14 +259,22 @@
 				return $.growl.notice({
 					message:dataSplit[1]
 				});
+			}else if(dataSplit[0]=="market"){
+				alarmUpdate();
+				return $.growl.warning({
+					message:dataSplit[1]
+				});
 			}
 	    };
 	 
 	    sock.onclose = function() {
 	      	console.log('connect close');
-	      	/* setTimeout(function(){conntectWs();} , 1000); */
+	      	setTimeout(function(){conntectWs();} , 180000);
 	    };
 	 
+	    if(session==''){
+	    	sock.onclose();
+	    }
 	    sock.onerror = function (err) {console.log('Errors : ' , err);};
 	 
 	   }

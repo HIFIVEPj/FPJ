@@ -303,7 +303,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var settings;
     settings = {
-      title: "Warning!",
+      title: "Notice!",
       style: "warning"
     };
     return $.growl($.extend(settings, options));

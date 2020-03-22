@@ -146,4 +146,8 @@ public class MemberServiceImpl implements MemberService {
 	public int countNotification(String mem_email) {
 		return memberMapper.countNotification(mem_email);
 	}
+	@Override
+	public void confirm_Notification(long not_num) {
+		memberMapper.confirm_Notification(not_num);
+	}
 }

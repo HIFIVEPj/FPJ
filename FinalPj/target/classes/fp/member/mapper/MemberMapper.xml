@@ -220,4 +220,7 @@
 		insert into Notification(not_num,not_cate,mem_email_to,mem_email_from,not_message, not_datetime) values 
 		(NOT_NUM_SEQ.nextval, #{not_cate}, #{mem_email_to}, #{mem_email_from}, #{not_message}, sysdate)
 	</insert>
+	<update id="confirm_Notification" parameterType="long">
+		update Notification set not_read_datetime=sysdate where not_num=#{not_num}
+	</update>
 </mapper>

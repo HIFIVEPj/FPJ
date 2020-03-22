@@ -56,51 +56,37 @@
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
-							<aside class=" doc-sidebar my-dash">
+							<aside class="doc-sidebar my-dash">
 								<div class="app-sidebar__user clearfix">
 									<ul class="side-menu">
 										<li class="slide">
-											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원목록</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
 												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
-								<!-- 		<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-diamond"></i><span class="side-menu__label"> My Ads</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="myads.html"> My Ads-1</a></li>
-												<li><a class="slide-item" href="myads.html"> My Ads-2</a></li>
-											</ul>
-										</li> -->
+										<li>
+											<a class="side-menu__item" href="myNotification_cor"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜목록</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash.html">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="mydash.html">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="mydash.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓 관리</span><i class="angle fa fa-angle-right"></i></a>
+											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-													<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
-													<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
-													<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
-											
-										<!--  		<li class="sub-slide">
-													<a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>
-													<ul class="child-sub-menu ">
-														<li><a class="slide-item" href="manged.html">Managed Ads-3</a></li>
-														<li><a class="slide-item" href="manged.html">Managed Ads-4</a></li>
-													</ul>
-												</li>-->
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payment"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
-
 										<li>
 											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>

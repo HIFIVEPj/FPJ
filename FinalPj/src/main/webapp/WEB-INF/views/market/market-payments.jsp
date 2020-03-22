@@ -36,9 +36,11 @@
                type: 'POST',
                contentType: 'application/json',
                data: data,
+               dataType:'html',
                success: function(data){
                   console.log("data"+data);
                   if(data != null ){
+                	 contactServer(data);
                      location.href="market-paymentsDone";
                    }
                   },
@@ -58,6 +60,10 @@
          alert(msg);
       });
    };
+   function contactServer(email){
+	   if(socket.readyState !== 1)return
+	   	socket.send(email+",market");
+ };
 </script>
 		<!--Sliders Section-->
 		<div>

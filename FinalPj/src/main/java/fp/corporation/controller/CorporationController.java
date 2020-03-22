@@ -55,6 +55,8 @@ import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 import fp.market.utils.MarketPagingVO;
 import fp.member.controller.OpenBankingController;
+import fp.member.domain.Notification;
+import fp.member.service.MemberService;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -67,8 +69,26 @@ public class CorporationController {
 	private ProjectService pjService;
 	@Autowired
 	private FreeLancerProfileService freeProService;
-
+	@Autowired
+    private MemberService memberservice; 
 	
+	@RequestMapping("confirm_Notification_cor")
+	public String confirm_Notification_cor(long not_num) {
+		memberservice.confirm_Notification(not_num);
+		return "redirect:myNotification_cor";
+	}
+	//내게온 알림
+	@RequestMapping("myNotification_cor")
+	public ModelAndView myNotification_cor(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
+		Corporation corporation = service.mydash_cor_select(mem_email);
+		List<Notification> nots = memberservice.selectNotification(mem_email);
+		ModelAndView mv = new ModelAndView("corporation/myNotification_cor");
+		mv.addObject("list", nots);
+		mv.addObject("cor", corporation);
+		return mv;
+	}
 	// 프리랜서 찜하기 목록보기
 	@RequestMapping("myfavorite_cor")	//관심있는프로젝트
 	public ModelAndView Myfavorite_cor(ProjectVo projectVo,  @RequestParam(value="nowPage", required=false)String nowPage

@@ -4,6 +4,7 @@ package fp.member.controller;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -131,6 +132,7 @@ public class MemberController {
     	ModelAndView mv = new ModelAndView();
     	List<Notification> nots = memberservice.selectNotification(mem_email);
     	int countNots = memberservice.countNotification(mem_email);
+    	
     	mv.setViewName("jsonView");
     	mv.addObject("nots", nots);
     	mv.addObject("countNots", countNots);
