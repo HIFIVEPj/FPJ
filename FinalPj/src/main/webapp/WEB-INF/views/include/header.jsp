@@ -286,13 +286,8 @@
 
 		<!--Loader-->
 		<div id="global-loader">
-			<img src="../images/other/loader.svg" class="loader-img floating" alt="">
+			<img src="../images/other/loader.svg" class="loader-img floating" alt="" >
 		</div>
-		<!--
-		<div class="dimmer active">
-			<div class="lds-hourglass"></div>
-		</div>
-		-->
 		<!--Topbar-->
 		<div class="header-main">
 			<div class="top-bar" style="background-color:#fff;">

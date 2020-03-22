@@ -132,7 +132,7 @@
 					</div> -->
 					<ul class="side-menu">
 							<li>	
-                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon si si-chart"></i><span class="side-menu__label">통계</span></a>
+                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon si si-chart"></i><span class="side-menu__label">통계/결재목록</span></a>
                             </li>
                             
 						    <li>	
