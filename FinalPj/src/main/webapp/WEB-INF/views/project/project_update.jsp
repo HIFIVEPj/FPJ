@@ -38,7 +38,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Project</h4>
+					<h4 class="page-title" >Project</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item"><a href="mydash_cor">프로젝트</a></li>
