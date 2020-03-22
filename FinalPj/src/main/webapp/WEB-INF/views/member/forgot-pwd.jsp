@@ -6,7 +6,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
-
+<!-- 0322 최종 소담 -->
 <script>
 function onkey(){ 		
 	$("#emailMD").keyup(function() {
