@@ -4,23 +4,16 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 		<!--Sliders Section-->
-	<!--Sliders Section-->
 		<div>
-			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner7.jpg">
 				<div class="header-text1 mb-0">
-					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
+				<!--  				<h1 class=""><span class="font-weight-bold">12,32,523</span> Books Available</h1>  -->	
+								</div>
+								<div class="search-background mb-0">
 								</div>
 							</div>
 						</div>
@@ -29,17 +22,15 @@
 			</div>
 		</div>
 		<!--/Sliders Section-->
-		
-		<!--/Sliders Section-->
-			<!--Breadcrumb-->
+		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Freelancer</h4>
+					<h4 class="page-title">Freelancer List</h4>
 					<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="#">Pages</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Users List</li>
 					</ol>
 				</div>
 			</div>
@@ -63,7 +54,7 @@
 									</div>
 								</div>
 							</form>
-							</div>
+							</div> 
 						</div>
 						<form id="no_submit">
 						<div class="card">
@@ -77,7 +68,7 @@
 										<input type="checkbox" class="custom-control-input" name="type" value="1">
 										<span class="custom-control-label">
 											개발
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countDevelop}</span>
 										</span>
 									</label>
 									
@@ -85,28 +76,28 @@
 										<input type="checkbox" class="custom-control-input" name="type" value="2">
 										<span class="custom-control-label">
 											퍼블리싱
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countPublishing}</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
 										<input type="checkbox" class="custom-control-input" name="type" value="3">
 										<span class="custom-control-label">
 											디자인
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countDesign}</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
 										<input type="checkbox" class="custom-control-input" name="type" value="4">
 										<span class="custom-control-label">
 											기획
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countPlan}</span>
 										</span>
 									</label>
 									<label class="custom-control custom-checkbox mb-2">
 										<input type="checkbox" class="custom-control-input" name="type" value="5">
 										<span class="custom-control-label">
 											기타
-											<span class="label label-secondary float-right">14</span>
+											<span class="label label-secondary float-right">${countEtc}</span>
 										</span>
 									</label>
 								</div>
@@ -177,7 +168,7 @@
 					<div class="col-xl-9 col-lg-8 col-md-12">
 						<div class="card item2-gl ">
 							<div class="item2-gl-nav d-flex">
-								<h6 class="mb-0 mt-2">Showing &nbsp;${paging.nowPage}&nbsp; to 10 of &nbsp;${paging.endPage}&nbsp;entries</h6>
+								<h6 class="mb-0 mt-2">Showing &nbsp;${paging.nowPage}&nbsp; to 4 of &nbsp;${paging.total}&nbsp;entries</h6>
 								<ul class="nav item2-gl-menu ml-auto">
 								<!-- 	<li class=""><a href="#tab-11" class="active show" data-toggle="tab" title="List style"><i class="fa fa-list"></i></a></li>
 									<li><a href="#tab-12" data-toggle="tab" class="" title="Grid"><i class="fa fa-th"></i></a></li>-->
@@ -186,7 +177,7 @@
 								<!-- <label class="mr-2 mt-1 mb-sm-1">Sort By:</label>  -->	
 									<select name="item" class="form-control select-sm w-90" id="selectbox_cate" onchange="sortSelectbox(this.value)">
 										<option value="profile_date">최신순</option>
-										<option value="2">평점높은순</option>
+										<!-- <option value="2">평점높은순</option> -->
 										<option value="pro_vcnt">조회수높은순</option>										
 									</select>
 								</div>
@@ -267,7 +258,7 @@
 							</div>
 						<div class="card-body pb-2 hide-details">
 									<ul class="usertab-list mb-0">
-										<h4>진행한 프로젝트</h4>				
+										<h4>수행한 프로젝트</h4>				
 									<c:forEach items="${freelancerList3}" var="project" >
 										<c:forEach items="${project.list_freelancerprofile}" var="profile" >								
 											<c:if test="${list.free_code eq profile.free_code}">							
@@ -284,17 +275,11 @@
 								<div class="row">
 									<div class="product-filter-desc col">										
 										<div class="rating-stars d-inline-flex mb-2 mr-3">
-							
-							
-						${fr.get(0).freerev_star}
-					
-			
-													<c:forEach  var="star_avg" items="${fr}" varStatus="status">
-									
-												${fr}
-											
+
+				
+								 <c:forEach  var="star" items="${list_star}" varStatus="status">	
+												<c:if test="${list.free_code eq star.free_code}">
 													<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
-												 		 
 												 		  <c:if test="${star.freerev_star >= 0}">
 						                                        <c:forEach var="1" begin="1" end="${star.freerev_star}">
 						                                          <i class="fa fa-star text-warning"> </i>
@@ -304,11 +289,9 @@
 																</c:forEach>
 					                                      	  <span class="rated-products-ratings">&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;	</span>
 					                                      </c:if>
-					                        
-					                         
-					                           </c:forEach>		
-			
-										
+												</c:if>
+									 </c:forEach>
+						
 												 <c:forEach  var="views" items="${list.list_freelancerprofile}" varStatus="status">	
 													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i>${views.pro_vcnt}&nbsp;Views</a>
 												 </c:forEach>
@@ -318,8 +301,9 @@
 												 </c:forEach>
 											</div>
 										</div>
-									<div class="col col-auto dams" >
-										<a class="icons" href="freelancercontent?free_code=${list.free_code}"><i class="fa fa-angle-double-right text-muted mr-1"></i>더보기</a>
+									<div class="col col-auto dams" > 
+										<a class="icons" href="freelancercontent?free_code=${list.free_code}&pro_num=<c:forEach  var="num" items="${list.list_freelancerprofile}" varStatus="status">${num.pro_num}</c:forEach>">
+										<i class="fa fa-angle-double-right text-muted mr-1"></i>더보기</a>
 									</div>						
 								</div>
 							</div>		
@@ -422,25 +406,27 @@
 			</div>
 		</div>
 		<script src="../js/dateFormat.js"></script>
-			<script>
-			function onlyCor(){
-				alert("기업 회원만 이용가능한 서비스 입니다.")
+	<script>
+	<script src="../js/dateFormat.js"></script>
+	<script>
+	function onlyCor(){
+		alert("기업 회원만 이용가능한 서비스 입니다.")
+	}
+	function wish(pro_num){	
+		$.ajax({
+			type:"get",  
+			url:"<c:url value='free_wish'/>",
+			data:"pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
+			success: function(data){
+				$('#insertwish'+pro_num).remove();
+				$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pro_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pro_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
+				alert("프리랜서 프로필이 찜목록에 추가되었습니다.")
+			},
+			error: function(data){
+			alert("에러발생");
 			}
-			function wish(pro_num){	
-				$.ajax({
-					type:"get",  
-					url:"<c:url value='free_wish'/>",
-	    			data:"pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
-					success: function(data){
-						$('#insertwish'+pro_num).remove();
-						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pro_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pro_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
-						alert("프리랜서 프로필이 찜목록에 추가되었습니다.")
-					},
-					error: function(data){
-					alert("에러발생");
-					}
-				});
-			}
+		});
+	}
 			function del_wish(pro_num){
 				$.ajax({
 					type:"get",
@@ -452,61 +438,8 @@
 					}
 				})
 			}
-			</script>
+	</script>
 		<script>
-		/*
-		  var pjtPlace = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주', '기타'];
-		    var pjtSubplace = [];
-		    pjtSubplace['강원'] = ['강릉시', '고성군', '동해시', '삼척시', '속초시', '양구군', '양양군', '영월군', '원주시', '인제군', '정선군', '철원군', '춘천시', '태백시', '평창군', '홍천군', '화천군', '횡성군'];
-		    pjtSubplace['경기'] = ['가평군', '고양시 덕양구', '고양시 일산동구', '고양시 일산서구', '과천시', '광명시', '광주시', '구리시', '군포시', '김포시', '남양주시', '동두천시', '부천시', '성남시 분당구', '성남시 수정구', '성남시 중원구', '수원시 권선구', '수원시 영통구', '수원시 장안구', '수원시 팔달구', '시흥시', '안산시 단원구', '안산시 상록구', '안성시', '안양시 동안구', '안양시 만안구', '양주시', '양평군', '여주시', '연천군', '오산시', '용인시 기흥구', '용인시 수지구', '용인시 처인구', '의왕시', '의정부시', '이천시', '파주시', '평택시', '포천시', '하남시', '화성시'];
-		    pjtSubplace['경남'] = ['거제시', '거창군', '고성군', '김해시', '남해군', '밀양시', '사천시', '산청군', '양산시', '의령군', '진주시', '창녕군', '창원시 마산합포구', '창원시 마산회원구', '창원시 성산구', '창원시 의창구', '창원시 진해구', '통영시', '하동군', '함안군', '함양군', '합천군'];
-		    pjtSubplace['경북'] = ['경산시', '경주시', '고령군', '구미시', '군위군', '김천시', '문경시', '봉화군', '상주시', '성주군', '안동시', '영덕군', '영양군', '영주시', '영천시', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군', '포항시 남구', '포항시 북구'];
-		    pjtSubplace['광주'] = ['광산구', '남구', '동구', '북구', '서구'];
-		    pjtSubplace['기타'] = ['미국', '일본', '중국', '캐나다', '영국', '인도', '베트남', '싱가폴', '우크라이나', '헝가리', '아랍에미리트', '사우디'];
-		    pjtSubplace['대구'] = ['남구', '달서구', '달성군', '동구', '북구', '서구', '수성구', '중구'];
-		    pjtSubplace['대전'] = ['대덕구', '동구', '서구', '유성구', '중구'];
-		    pjtSubplace['부산'] = ['강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구'];
-		    pjtSubplace['서울'] = ['강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'];
-		    pjtSubplace['울산'] = ['남구', '동구', '북구', '울주군', '중구'];
-		    pjtSubplace['인천'] = ['강화군', '계양구', '남동구', '동구', '미추홀구', '부평구', '서구', '연수구', '옹진군', '중구'];
-		    pjtSubplace['전남'] = ['강진군', '고흥군', '곡성군', '광양시', '구례군', '나주시', '담양군', '목포시', '무안군', '보성군', '순천시', '신안군', '여수시', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군'];
-		    pjtSubplace['전북'] = ['고창군', '군산시', '김제시', '남원시', '무주군', '부안군', '순창군', '완주군', '익산시', '임실군', '장수군', '전주시 덕진구', '전주시 완산구', '정읍시', '진안군'];
-		    pjtSubplace['제주'] = ['서귀포시', '제주시'];
-		    pjtSubplace['충남'] = ['계룡시', '공주시', '금산군', '논산시', '당진시', '보령시', '부여군', '서산시', '서천군', '아산시', '예산군', '천안시 동남구', '천안시 서북구', '청양군', '태안군', '홍성군'];
-		    pjtSubplace['충북'] = ['괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '제천시', '증평군', '진천군', '청주시 상당구', '청주시 서원구', '청주시 청원구', '청주시 흥덕구', '충주시'];
-		 
-		  var loc_first="";
-		  var loc_second="";
-		  
-		 
-		 $("document").ready(function () {
-			
-			for ( var i = 0; i < pjtPlace.length; i++ ) {
-	            $("#pjt_place").append($("<option/>", {value: pjtPlace[i], text: pjtPlace[i]}));
-	        }
-	        // "지역" 상위 <select> 선택에 따른 하위 <select> 내 <option> 항목 변경 처리 (2019.02.28 bestware@naver.com)
-	        $("#pjt_place").on("change", function() {
-	            $("#pjt_subplace option:gt(0)").remove();  // 맨위 "선택해주세요" <option>만 남기고 모두 제거
-	            loc_second="";
-	            if ( $("#pjt_place").val() != "" ) {  // "전체" 이외의 항목 선택 선택
-	            	loc_first =$("#pjt_place").val();
-	            	sortAjax();
-	                var subplace = pjtSubplace[ $("#pjt_place").val() ];
-	                for ( var j = 0; j < subplace.length; j++ )
-	                    $("#pjt_subplace").append( $("<option/>", { value:subplace[j], text:subplace[j] }) );
-	                	
-		                $("#pjt_subplace").on("change", function(){
-				        	loc_second = $("#pjt_subplace").val();
-				        	sortAjax();
-				        })
-	            }else{
-	            	loc_second="";
-	            	loc_first =$("#pjt_place").val();
-	            	sortAjax();
-	            }
-	        });
-		 });
-		*/
 		function onkey(){
 			  if(event.keyCode == 13){
 					 search();

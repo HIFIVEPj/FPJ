@@ -16,6 +16,7 @@ public class KeyWord {
 	//사용언어//
 	private int key_num;
 	private String key_name;
+	private List<FreePickKeyWord> freePick;
 	//private List<FreeLancerProfile> freelancerprofile;
 	//private  List<KeyWord> frKeyWord;
 

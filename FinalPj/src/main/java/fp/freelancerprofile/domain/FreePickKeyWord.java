@@ -23,4 +23,6 @@ public class FreePickKeyWord {
 
 	private List<Long> freepickkeyword;
 	private List<Integer> key_numList;
+	private List<KeyWord> frKeyWord;
+	private List<FreePickKeyWord> freeLancerProfile;
 }

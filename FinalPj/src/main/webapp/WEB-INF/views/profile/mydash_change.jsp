@@ -30,7 +30,7 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">정보 수정</h1>
+									<h1 class="" style="margin-bottom:0rem;">마이대쉬</h1>
 									<!--
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="../">Home</a></li>
@@ -49,19 +49,6 @@
 		
 		</section>
 		<!--Breadcrumb-->
-		<div class="bg-white border-bottom">
-			<div class="container">
-				<div class="page-header">
-					<h4 class="page-title">Freelacer Profile</h4>
-					<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-		<!--/Breadcrumb-->
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
@@ -85,7 +72,7 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
+												<li><a class="slide-item" href="mydash_free?mem_email=${sessionScope.email}">프리랜서</a></li>
 											</ul>
 										</li>
 										<li>
@@ -210,48 +197,21 @@
 		</script>
 		<!--Breadcrumb-->
 		<section>
-			<div>
-			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
-				<div class="header-text1 mb-0">
-					<div id="particles-js" ></div>
+			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
+				<div class="header-text mb-0">
 					<div class="container">
-						<div class="row">
-							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
-								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">정보 수정</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
-								</div>
-							</div>
+						<div class="text-center text-white ">
+							<h1 class="">My Page</h1>
+							<ol class="breadcrumb text-center">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active text-white" aria-current="page">My Page</li>
+							</ol>
 						</div>
 					</div>
-				</div><!-- /header-text -->
-			</div>
-		</div>
-		</section>
-		<!--Breadcrumb-->
-		
-		<!--Breadcrumb-->
-		<div class="bg-white border-bottom">
-			<div class="container">
-				<div class="page-header">
-					<h4 class="page-title">Freelacer Profile</h4>
-					<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-					</ol>
 				</div>
 			</div>
-		</div>
-		<!--/Breadcrumb-->
-		
-		
+		</section>
+		<!--Breadcrumb-->
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
@@ -269,9 +229,8 @@
 									</div>
 								</c:if>
 								<c:if test = "${mydash.free_fname ne null}">
-									<div class="profile-pic-img">
-										
-										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+									<div class="avatar-xxl brround" style="margin:0 auto;">
+										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="avatar-xxl brround" alt="user">
 										<!--
 										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
 										-->
@@ -289,9 +248,6 @@
 												<li><a class="slide-item" href="mydash_free">프리랜서</a></li>
 												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
-										</li>
-										<li>
-											<a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>

@@ -35,4 +35,6 @@ public class FreeLancer {
 	private List<Project> projcet;
 	private Member member;
 	private List<Applied_Project> applied_project;
+
+	
 }

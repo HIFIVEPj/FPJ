@@ -1,47 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--header-->
+<!-- hifive -->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
   
 	 	<!--Sliders Section-->
-		<!--Sliders Section-->
 		<div>
-			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
-					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
+									<h2 class=""><span class="font-weight-bold"></span> Freelancer</h2>
+									<h6>56,868개의 클라이언트 기업과 73,392개의 개발회사 & 프리랜서가 함께하는 sdfdsfdsfdsfsdfds</h6>
 								</div>
+
 							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
 			</div>
 		</div>
-		<!--/Sliders Section-->
-		
 		<!--/Sliders Section--> 
 		
-			<!--Breadcrumb-->
+		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
 					<h4 class="page-title">Freelancer</h4>
 					<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
+						<li class="breadcrumb-item"><a href="#">Pages</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Job List</li>
 					</ol>
 				</div>
 			</div>
@@ -84,12 +76,12 @@
 												<c:forEach items="${content}" var="list"  varStatus="status">
 												<div class="ml-4">
 													<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
-														<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">${profile.free_name}</h4></a>
+														<p class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">${profile.free_name}</h4></p>
 													</c:forEach>
 													<span class="text-gray"></span>&nbsp;
 													<span class="text-muted">${list.pro_exp}&nbsp;년</span><br>
 												<c:forEach items="${content3}" var="key"  varStatus="status">
-												<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
+												<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="0" end="3">
 													<span class="text-muted">${keyword.key_name} </span> &nbsp;
 												</c:forEach>
 												</c:forEach>
@@ -135,11 +127,7 @@
 											</div>
 										</div>
 									</div>
-							<!-- 			<div class="item-card2-icons">
-									<a href="" class="item-card9-icons1 wishlist active"><i  class="fa fa fa-heart-o"></i></a>
-								</div> -->
-											
-											
+									
 								<input type="hidden" value="${cor.cor_code}" class="cor_codes"/>
 									<c:if test="${empty cor}">
 									<div class="item-card9-icons zzim">
@@ -149,27 +137,24 @@
 								</c:if>
 								<c:if test="${!empty cor}">
 								<c:forEach var="i" begin="0" end="${content.size()-1}">
-									
-								<c:choose>
-									<c:when test="${pronumList.contains(list.list_freelancerprofile.get(i).pro_num)}">
-										<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}" >
-											<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${content.get(i).pro_num})">
-											 <i class="fa fa fa-heart" style="color:white"></i></a>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<div class="item-card9-icons">
-											<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${content.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${content.get(i).pro_num})">
-											 <i class="fa fa fa-heart-o" style=""></i></a>
-										</div>
-									</c:otherwise>	
-								</c:choose>
-								<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}">
-								</div>
+									<c:choose>
+										<c:when test="${pronumList.contains(list.list_freelancerprofile.get(i).pro_num)}">
+											<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}" >
+												<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${content.get(i).pro_num})">
+												 <i class="fa fa fa-heart" style="color:white"></i></a> 
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="item-card9-icons">
+												<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${content.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${content.get(i).pro_num})">
+												 <i class="fa fa fa-heart-o" style=""></i></a>
+											</div>
+										</c:otherwise>	
+									</c:choose>
+										<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}"></div>
 								</c:forEach>
 							</c:if>
 						</div> 
-					
 								<h4 class="pb-3 border-bottom mt-4">Profile</h4>
 								<c:forEach items="${content}" var="list"  varStatus="status">
 									<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
@@ -184,13 +169,13 @@
 							<c:forEach items="${content}" var="list"  varStatus="status" >
 								
 									<li><span class="font-weight-semibold">사용기술 :</span>
-								<c:forEach items="${content3}" var="key"  varStatus="status">
-								<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
-									${keyword.key_name}&nbsp;
-								</c:forEach>
-								</c:forEach>
+										<c:forEach items="${content3}" var="key"  varStatus="status">
+											<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="0" end="2">
+												${keyword.key_name}&nbsp;
+											</c:forEach>
+										</c:forEach>
 									</li>																	
-									<li><span class="font-weight-semibold">주소 :</span> ${list.pro_addr} </li>
+									<!-- <li><span class="font-weight-semibold">주소 :</span> ${list.pro_addr} </li> -->
 									<li><span class="font-weight-semibold">선호지역 :</span> ${list.pro_workplace}</li>														
 									<li><span class="font-weight">Email :</span> ${list.mem_email} </li>
 									<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
@@ -264,13 +249,6 @@
 										</td>
 									</c:forEach>
 								</c:forEach>		
-										<!--		<c:forEach items="${content}" var="list"  varStatus="status">
-												<tr>
-											<c:forEach items="${list.freelancerprofilefile}" var="file"  varStatus="status">
-												<td><a href="#"><i class="fa fa-save"></i>${file.profile_ofname}</td>
-												</c:forEach>
-													</c:forEach>
-											</tr>-->
 										</tbody>	
 									</table>
 								</div>
@@ -278,19 +256,20 @@
 							<div class="card-body" align="right">
 								<div class="icons">
 							<!-- 	<span><a href="freelancerdelete?free_code=${list.free_code}" class="btn btn-secondary icons">삭제</a></span> -->
-									<a href="freelancerList" class="btn btn-secondary icons">목록</a>
+									<a href="freelancerList" class="btn btn-primary icons">목록</a>
 								</div>
 							</div>
 						</div>
 					<br/>
 						<!--Add lists-->
-							<div class="card">
+						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">리뷰</h3>
 							</div>
 							<!--  <div class="card-body">-->
 								<div class="row">
 							<!-- 리뷰 -->
+							${review}
 								<c:if test="${empty review}">
 									<div class="col-md-12">
 										<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
@@ -302,7 +281,7 @@
 								    	</div>		
 									</div>
 								</c:if>		
-							<!--<c:if test="${!empty review}">-->		
+							<c:if test="${!empty review}">	
 								<c:forEach items="${review}" var="review_content"  varStatus="status">							
 									<div class="col-md-12  before_review">
 									<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
@@ -350,19 +329,20 @@
 								<c:if test="${sessionScope.email eq review.get(0).mmember.mem_email}">
 									<div class="card-body item-user" align="right">
 										<div class="icons"> 
-								   	 		<form method="get" action="review_del" name="DeleteReview" style="padding-right:58px;">						
+								   	 		<!-- <form method="get" action="review_del" name="DeleteReview" style="padding-right:58px;">-->
+								   	 		<form method="get" action="review_del" name="DeleteReview" style="margin-right;">						
 								   				 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
 								   				 
 								   			</form>
-								   			<form method="post" action="review_update" name="review_update" style="margin-top:-38px;">								    		
+								   		<!-- <form method="post" action="review_update" name="review_update" style="margin-top:-38px;">								    		
 								   				<button type="button" class="btn btn-primary" id="updateReview" onclick="update();">수정</button>
-								   		    </form>	
+								   		    </form> -->		
 								   	 	</div>
 								    </div>	
 								 </c:if>   
 								</div>		
 							</c:forEach>									
-									
+								
 					<!-- 페이징 -->				
 					<div class='paginationDiv' id="tab-11" style="margin:0 auto; align:center;" >
 						 <div class='center-block text-center'> 
@@ -385,14 +365,20 @@
                          
                            <!--페이지번호 -->
            
- <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.lastPage}" >
+ <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="1" end="${paging.lastPage}" >	 
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
-                                    <li class='page-item active'><a class="page-link">${p}</a></li>
+                                  <c:if test ="${paging.nowPage != 1}">
+	                                  <c:forEach var='p' begin="${paging.startPage}" end="${p}" >
+	                                  	<li class='page-item active'><a class="page-link">${p}</a></li>
+	                                  </c:forEach>
+                                  </c:if>
+                                  <!--  <li class='page-item active'><a class="page-link">${p}</a></li> --> 
+                                    
                                  </c:when>
                                  <c:when test = "${p != paging.nowPage }">
-
-                             <!--     <li class="page-item"><a class="page-link" href="freelancercontent?nowPage=${p}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}"></a></li> -->
+									
+                                  <li class="page-item"><a class="page-link" href="freelancercontent?nowPage=${p}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">${p}</a></li> 
                                  </c:when>
                               </c:choose>
                            </c:forEach>
@@ -411,8 +397,8 @@
                     </ul>
                  </div> 
                  </div>				
-					<!-- 페이징 끝. 리뷰 끝 -->					
-			<!--	</c:if>	 -->		
+							
+				</c:if>			
 			</div>
 				<!--	</div>-->	
 		</div>
@@ -449,11 +435,6 @@
 										</div>
 									</div>									
 									<div class="col-md-6 text-center align-items-center"></div>
-									<!--
-									<div class="form-group">
-										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
-									</div>
-									  -->
 										<div class="form-group">
 											<textarea class="form-control" id="freerev_cont" name="freerev_cont" rows="6"></textarea>
 											<c:if test="${!empty review}">
@@ -462,10 +443,10 @@
 												<input type="hidden" id="free_code" name="free_code" value="${content3.get(0).free_code}" />	
 												<input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.email}" />
 												<input type="hidden" id="pro_num" name="pro_num" value="${content3.get(0).pro_num}" />
+												
 										</div>							
-										<div align="right">
-										 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" style="margin-right:-1px;" >작성하기</button>
-   										<!-- <button type="button" class="btn btn-primary" id="checkMR" style="margin-right:-1px;" onclick="inreview();">작성하기</button>  -->
+											<div align="right">
+											 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" style="margin-right:-1px;" >작성하기</button>
    									</form>
    								 </div>
 								</div>
@@ -548,9 +529,6 @@
 			
 			 var free_code ="<c:out value="${paging.free_code}" />";
 			 var pro_num ="<c:out value="${paging.pro_num}" />";
-			// var nowpage ="<c:out value="${paging.nowPage}" />";
-			// var cntpage ="<c:out value="${paging.cntPerPage}" />";
-			 //onSuccessReview();
 			 
 			location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num);
 			
