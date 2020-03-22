@@ -3,7 +3,12 @@ package fp.customer_service.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,17 +19,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fp.corporation.domain.ProjectPick;
 import fp.customer_service.domain.BoardAttachVO;
 import fp.customer_service.domain.Criteria;
 import fp.customer_service.domain.CustomerServiceQa;
 import fp.customer_service.domain.PagingInfo;
+import fp.customer_service.domain.Qa_recommend;
 import fp.customer_service.service.CustomerServiceQaService;
 import lombok.extern.log4j.Log4j;
+
 
 @Log4j
 @Controller
@@ -79,11 +88,105 @@ public class CustomerServiceQaController {
 
 	
 	@GetMapping("customer_service_qa_content")
-	public String customer_service_qa_content(Model model, @RequestParam("qa_num") long qa_num) {
-		customerServiceQaService.qa_vcntS(qa_num);
-		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
+	public String customer_service_qa_content(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false) String mem_email_writer, HttpSession session) {
+		//중간에 자기 게시글 조회수 증가 방지를 위해서 코드 추가했다가 꼬여서 아래와 같이 처리
+		//jsp에서 받아온 mem_email은 글쓴이의 mem_email이어서 controller에서 mem_email_writer의 이름으로 씀
+		//session - email은 mem_email로 씀
+		//log.info("mem_email_writer : " + mem_email_writer);
+		String mem_email = (String)session.getAttribute("email");
+		//log.info("%%%%%sessionEmail : " + mem_email);
+		if(mem_email != null) {
+			List<Qa_recommend>qa_recommend_list = customerServiceQaService.qa_recommend_listS(mem_email);
+			ArrayList<Long>qa_recommend_num_list  = new ArrayList<Long>();
+			for(int j = 0; j < qa_recommend_list.size(); j++) {
+				//pjnumList.add(pjplist.get(j).getPj_num());
+				qa_recommend_num_list.add(qa_recommend_list.get(j).getQa_num());
+			}
+			//log.info("#####qa_recommend_list : " + qa_recommend_list);
+			//log.info("#####qa_recommend_num_list : " + qa_recommend_num_list);	
+			model.addAttribute("qa_recommend_list", qa_recommend_list);
+			model.addAttribute("qa_recommend_num_list", qa_recommend_num_list);
+		}		
+		//mem_email_writer = mem_email_writer.trim();
+		//log.info("%%%%%mem_email_writer : " + mem_email_writer);	
+	
+		if(mem_email == null) {
+			customerServiceQaService.qa_vcntS(qa_num);
+		}else if(!mem_email.equals(mem_email_writer)) { //자기 게시글 조회수 증가 방지
+			customerServiceQaService.qa_vcntS(qa_num);
+		}else {
+		}
+		
+		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));	
+		
 		return "customer_service/customer_service_qa_content";
 	}
+	
+	@RequestMapping(value="qa_recommend_insert", method=RequestMethod.GET)
+	@ResponseBody
+	public CustomerServiceQa qa_recommend_insert(@RequestParam long qa_num, @RequestParam String mem_email) {
+		//log.info("!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("qa_num", qa_num);
+		//map.put("qa_recommnum", qa_recommnum);
+		map.put("mem_email", mem_email);
+		customerServiceQaService.qa_recommend_insertS(map);
+		//customerServiceQaService.qa_contentS(qa_num);
+		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
+		//log.info("!!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
+		return customerServiceQaService.qa_contentS(qa_num);
+		//long qa_recommnum = customerServiceQa.getQa_recommnum();
+		//log.info("!!!!!qa_recommnum : " + qa_recommnum);
+		//return qa_recommnum;
+	}
+		
+	@RequestMapping(value="qa_recommend_del", method=RequestMethod.GET)
+	@ResponseBody
+	public CustomerServiceQa qa_recommend_del(@RequestParam long qa_num, @RequestParam String mem_email) {
+		//log.info("$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("qa_num", qa_num);
+		//map.put("qa_recommnum", qa_recommnum);
+		map.put("mem_email", mem_email);
+		customerServiceQaService.qa_recommend_delS(map);
+		//customerServiceQaService.qa_contentS(qa_num);
+		//customerServiceQaService.qa_recommend_update_delS(map);
+		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
+		//log.info("$$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
+		return customerServiceQaService.qa_contentS(qa_num);
+		//long qa_recommnum = customerServiceQa.getQa_recommnum();
+		//log.info("@@@@@qa_recommnum : " + qa_recommnum);
+		//return qa_recommnum;
+		
+	}
+	
+	/*
+	@RequestMapping(value="qa_recommend_insert", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> qa_recommend_insert(@RequestParam long qa_num, @RequestParam long qa_recommnum, @RequestParam String mem_email) {
+		log.info("!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("qa_num", qa_num);
+		map.put("qa_recommnum", qa_recommnum);
+		map.put("mem_email", mem_email);
+		return customerServiceQaService.qa_recommend_insertS(map);
+		//log.info("!!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+	}
+		
+	@RequestMapping(value="qa_recommend_del", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> qa_recommend_del(@RequestParam long qa_num, @RequestParam long qa_recommnum, @RequestParam String mem_email) {
+		log.info("$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("qa_num", qa_num);
+		map.put("qa_recommnum", qa_recommnum);
+		map.put("mem_email", mem_email);
+		return customerServiceQaService.qa_recommend_delS(map);
+		//log.info("$$qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
+	}
+	*/
 	
 	@GetMapping("customer_service_qa_write")
 	public String customer_service_qa_write() {
@@ -106,7 +209,7 @@ public class CustomerServiceQaController {
 		}
 		log.info("-------------------------------------------------");
 		customerServiceQaService.qa_writeS(customerServiceQa);
-		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num();
+		return "redirect:customer_service_qa_content?qa_num="+customerServiceQa.getQa_num()+"&mem_email="+customerServiceQa.getMem_email();
 	}
 	
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -148,6 +251,7 @@ public class CustomerServiceQaController {
 	    attachList.forEach(attach -> {
 	      try {
 	    	String file_path_else = "C:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName();
+	    	//String file_path_else = "/home/ubuntu/hifive/upload/"+attach.getUploadPath()+"/" + attach.getUuid()+"_"+ attach.getFileName();  
 	    	file_path_else = file_path_else.replace(" ", "");
 	        Path file  = Paths.get(file_path_else);
 	        log.info("*****file : " + file);
@@ -155,6 +259,7 @@ public class CustomerServiceQaController {
 	        
 	        if(Files.probeContentType(file).startsWith("image")) {
 	          String file_path_image = "C:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName();
+	          //String file_path_image = "/home/ubuntu/hifive/upload/"+attach.getUploadPath()+"/s_" + attach.getUuid()+"_"+ attach.getFileName();
 	          file_path_image = file_path_image.replace(" ", "");
 	          Path thumbNail = Paths.get(file_path_image);
 	          log.info("*****thumbNail" + thumbNail);
@@ -170,7 +275,7 @@ public class CustomerServiceQaController {
 	
 	
 	@GetMapping("customer_service_qa_modify")
-	public String customer_service_qa_modify(Model model, @RequestParam("qa_num") long qa_num) {
+	public String customer_service_qa_modify(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false)String mem_email) {
 		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
 		return "customer_service/customer_service_qa_modify";
 	}
@@ -178,6 +283,6 @@ public class CustomerServiceQaController {
 	@PostMapping("customer_service_qa_modify")
 	public String customer_service_qa_modify(CustomerServiceQa customerServiceQa) {
 		customerServiceQaService.qa_modifyS(customerServiceQa);
-		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num();
+		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num() + "&mem_email=" + customerServiceQa.getMem_email();
 	}
 }

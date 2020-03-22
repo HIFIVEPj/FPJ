@@ -38,9 +38,16 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
+								<c:if test="${cor.cor_fname eq ''}">
+									<div class="profile-pic-img">
+										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+									</div>
+								</c:if>
+								<c:if test = "${cor.cor_fname ne '' }">
 									<div class="profile-pic-img">
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
 									</div>
+								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
@@ -51,25 +58,25 @@
 										<li class="slide">
 											<a class="side-menu__item active" data-toggle="slide" href="#"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원정보</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item " href="mydash_cor?mem_email=${sessionScope.email}">기업</a></li>
+												<li><a class="slide-item " href="mydash_cor">기업</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite_cor">프리랜서 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market">마켓 찜</a></li>
+												<li><a class="slide-item" href="cor-myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">내 프로젝트관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="project_write?mem_email=${sessionScope.email}">프로젝트 작성하기</a></li>
-												<li><a class="slide-item" href="managed_project?mem_email=${sessionScope.email}">프로젝트관리</a></li>
+												<li><a class="slide-item" href="project_write">프로젝트 작성하기</a></li>
+												<li><a class="slide-item" href="managed_project">프로젝트관리</a></li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments_cor?mem_email=${sessionScope.email}"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments_cor"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
 											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
@@ -107,6 +114,7 @@
 												<th><b>회사이름</b></th>
 												<th><b>급여</b></th>
 												<th><b>결제상태</b></th>
+												<th><b>진행상태</b></th>
 												<th><b>버튼</b></th>
 											</tr>
 										</thead>
@@ -144,7 +152,7 @@
 																<c:if test="${dto.pj_fgrade==2}"><c:out value="고급" /></c:if>
 																
 																&nbsp;|&nbsp;
-																<i class="fa fa-clock-o mr-1"></i> ${dto.pj_term} 개월
+																<i class="fa fa-clock-o mr-1"></i> ${dto.pj_term} 개월 
 																&nbsp;|&nbsp;
 																<b style="text-align:right;">														
 																<span class="text-dark font-weight-semibold mb-0 mt-0" style="font-size:1em;"><strong>
@@ -177,37 +185,48 @@
 													</c:if>
 													<c:if test="${dto.pj_paystatus==1}">
 														<a href="#" class="badge badge-primary">
-															결제완료
+															결제완료 
 														</a>
 													</c:if>
 												</td>
+												<td id="pj_status${dto.pj_num}">
+													<c:if test="${dto.pj_status==0 && endDate > currentDate}"><a href="javascript:void(0)" class="badge badge-success" id="includeING${dto.pj_num}">모집중</a></c:if>
+													<c:if test="${dto.pj_status==1 || endDate <= currentDate}"><a href="javascript:void(0)" class="badge badge-secondary" id="includeEND${dto.pj_num}">마감</a></c:if>
+												</td>
 												<td>
-													<a href="#" class="btn btn-info btn-sm text-white" data-target="#deleteModal" data-toggle="modal" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<a href="javascript:void(0)" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기" onclick="deletePj(${dto.pj_num})"><i class="fa fa-trash"></i></a>
 													<c:if test="${dto.pj_paystatus==0}"> 
 													<a href="project_payments?pj_num=${dto.pj_num}" class="btn btn-red btn-sm text-white" data-toggle="tooltip" data-original-title="결제하기"><i class="fa fa-credit-card"></i></a>
 													</c:if>
+													<c:if test="${!empty freeList_pjnum}">
+														<c:if test="${freeList_pjnum.contains(dto.pj_num)}">
+														<a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="지원자 보기" onclick="free_list(${dto.pj_num})">
+														<i class="fa fa-eye"></i></a>
+														</c:if>
+													</c:if>
 												</td>
-											</tr>
-								<!-- small Modal -->   
-							      <div id="deleteModal" class="modal fade">
+											</tr>	
+							      <!-- small Modal -->   
+							      <div id="selectModal" class="modal fade">
 							         <div class="modal-dialog modal-sm" role="document">
 							            <div class="modal-content">
 							               <div class="modal-header">
 							                  <!--
 							                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
 							                  -->
-							                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+							                  <div class="float-right btn btn-icon btn-success btn-sm mt-3"><i class="fa fa-check"></i></div>
 							                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							                     <span aria-hidden="true">&times;</span>
 							                  </button>
 							               </div>
-							               <div class="modal-body">
-							                  <p>글을 정말 삭제할까요?</p>
+							               <div class="modal-body selectFreelancer" style="margin:0 auto;">
+							               <h5>해당 프리랜서를 선택하시겠습니까?</h5>
+							                  <p style="font-size:12px; text-align:center;">[확인을 누르실 경우 취소할 수 없습니다.]</p>
 							               </div>
 							               
 							               <div class="modal-footer">
 							               
-							                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num=${dto.pj_num}">네</a> 
+							                 <a class="btn btn-primary" style="color:white;" href="javascript:void(0)" onclick="" id="select">확인</a> 
 							                  
 							                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
 							               </div>
@@ -215,6 +234,28 @@
 							         </div>      
 							      </div>
 							      <!-- /small Modal -->
+		            			<!-- Modal -->
+									<div class="modal fade" id="applyList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header pd-x-20">
+													<h5 class="modal-title" id="exampleModalLabel"> <span class=" btn btn-info btn-sm"><i class="fa fa-envelope-open"></i></span>
+													&nbsp;지원자 리스트</h5>
+													
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+												<div class="modal-body paginated" id="tbl" style="margin:0 auto;">
+												
+												</div>
+												<div class="modal-footer">
+												
+												</div>
+											</div>
+										</div>
+									</div>
+						      <!--Modal 끝-->
 											</c:forEach>
 											</c:if>
 										</tbody>
@@ -306,7 +347,7 @@
 													</c:if>
 												</td>
 												<td>
-													<a href="#" class="btn btn-info btn-sm text-white" data-target="#deleteModal" data-toggle="modal" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
+													<a href="javascript:void(0)" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기" onclick="deletePj(${dto.pj_num})"><i class="fa fa-trash"></i></a>
 													<c:if test="${dto.pj_paystatus==0}"> 
 													<a href="project_payments?pj_num=${dto.pj_num}" class="btn btn-red btn-sm text-white" data-toggle="tooltip" data-original-title="결제하기"><i class="fa fa-credit-card"></i></a>
 													</c:if>
@@ -321,38 +362,45 @@
 										</tr>
 									</c:when>
 								</c:choose>
-								<!-- small Modal -->   
-							      <div id="deleteModal" class="modal fade">
-							         <div class="modal-dialog modal-sm" role="document">
-							            <div class="modal-content">
-							               <div class="modal-header">
-							                  <!--
-							                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
-							                  -->
-							                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
-							                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							                     <span aria-hidden="true">&times;</span>
-							                  </button>
-							               </div>
-							               <div class="modal-body">
-							                  <p>글을 정말 삭제할까요?</p>
-							               </div>
-							               
-							               <div class="modal-footer">
-							               
-							                 <a class="btn btn-primary" style="color:white;" href="project_delete?pj_num=${dto.pj_num}">네</a> 
-							                  
-							                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
-							               </div>
-							            </div>
-							         </div>      
-							      </div>
-							      <!-- /small Modal -->
 											</c:forEach>
 											</c:if>
 										</tbody>
 									</table>
 								</div>
+								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
+									<table class="table table-bordered table-hover mb-0 text-nowrap">
+										<thead style="text-align:center;">
+											<tr>
+												<th></th>
+												<th><b>프로젝트</b></th>
+												<th><b>회사이름</b></th>
+												<th><b>급여</b></th>
+												<th><b>상태</b></th>
+												<th><b>버튼</b></th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
+									<table class="table table-bordered table-hover mb-0 text-nowrap">
+										<thead style="text-align:center;">
+											<tr>
+												<th></th>
+												<th><b>프로젝트</b></th>
+												<th><b>회사이름</b></th>
+												<th><b>급여</b></th>
+												<th><b>상태</b></th>
+												<th><b>버튼</b></th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							</div>
 							
 							<div class="card">
 								<div class="card-body" style="margin:0 auto; align:center;">
@@ -391,7 +439,33 @@
 					</div>
 				</div>
 			</div>
-	
+				<!-- small Modal -->   
+		      <div id="deleteModal" class="modal fade">
+		         <div class="modal-dialog modal-sm" role="document">
+		            <div class="modal-content">
+		               <div class="modal-header">
+		                  <!--
+		                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+		                  -->
+		                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+		                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                     <span aria-hidden="true">&times;</span>
+		                  </button>
+		               </div>
+		               <div class="modal-body deleteProject">
+		                  <p>글을 정말 삭제할까요?</p>
+		               </div>
+		               
+		               <div class="modal-footer">
+		               
+		                 <a class="btn btn-primary" style="color:white;" href="#" id="deleteYes">네</a> 
+		                  
+		                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+		               </div>
+		            </div>
+		         </div>      
+		      </div>
+		      <!-- /small Modal -->
 		</section>
 		<!--/User Dashboard-->
 
@@ -585,7 +659,6 @@ function end(){
 	alert("이미 선택한 프리랜서임");
 }
 </script>
->>>>>>> cc09c192e01534b826e9dac2490799fd21c6a9d8:FinalPj/src/main/webapp/WEB-INF/views/corporation/managed_project.jsp
 		<!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->

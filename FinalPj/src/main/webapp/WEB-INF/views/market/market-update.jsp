@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,20 +7,32 @@
 
 		<!--Sliders Section-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1>마켓 등록</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">Pages</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">Ad Post</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">마켓 업데이트</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
 			</div>
+		</div>
+		<!--/Sliders Section-->
+		
 		</section>
 		<!--/Sliders Section-->
 
@@ -31,7 +42,8 @@
 				<div class="row ">
 					<div class="col-lg-8 col-md-12 col-md-12">
 <!-- /////////////////////////서버로 보내는 폼 ///////////////////////////-->		
-					<form name="updateForm" method="post" action="market-update2?market_num=${market.market_num}" enctype="multipart/form-data">		
+					<form name="updateForm" method="post"  enctype="multipart/form-data">		
+						<input type="hidden" class="form-control" name="market_state" id="market_state"value="${market.market_state}">
 						<div class="card mb-lg-0">
 							<div class="card-header">
 								<h3 class="card-title">마켓수정</h3>
@@ -311,7 +323,15 @@
 			   return false;
 			   
 		   }
-		   updateForm.submit();
+
+		  if($("#market_state").val()==1){
+			  updateForm.action="market-update2?market_num=${market.market_num}";
+		   		updateForm.submit();
+		   	}
+		  if($("#market_state").val()==0){
+			  updateForm.action ="market-updateRefusalMarket2?market_num=${market.market_num}";
+		   		updateForm.submit();
+		   	}
 	   }
 </script>
 <!--footer-->

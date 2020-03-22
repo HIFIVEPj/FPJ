@@ -1,3 +1,4 @@
+
 package fp.member.service;
 
 import java.util.List;
@@ -15,14 +16,19 @@ public interface MemberService {
 	int idCheck(String email);
 	void insertM(Member member);		
 	
-	void upMarketS(Market market);
+	void upMarketS(Map<String,Object> map);
 	//마켓 게시글 
 	long getMarketCount();
 	List<Market> getMarketList(MemberVo memberVO);
 	
+	//Index 
+	long sumCountCorIndex();
+	long countFree();
+	
 	//기업
 	List<PayInformation> marketListCor(MemberVo memberVO);
 	long getTotalCountMC(MemberVo memberVO);
+	
 	//개인
 	List<PayInformation> marketListFree(MemberVo memberVO);
 	long getTotalCountMF(MemberVo memberVO);
@@ -31,4 +37,10 @@ public interface MemberService {
 	List<Long> sumFree();
 	List<Long> sumCor();
 	List<Long> month();
+	
+	List<String> sumCountCorN();
+	List<Long> sumCountCor();
+	
+	List<String> sumCountMarketN();
+	List<Long> sumCountMarket();
 }

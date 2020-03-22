@@ -47,7 +47,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import fp.member.service.MailService;
-import fp.member.domain.EmailAuth;
+import fp.freelancerprofile.service.FreeLancerProfileService;
+import fp.market.domain.Freelancer;
 import fp.member.domain.Member;
 import fp.member.service.MailService;
 import fp.member.service.MemberService;
@@ -59,6 +60,9 @@ public class MemberController {
     @Autowired
    @org.springframework.beans.factory.annotation.Qualifier("mailService")
     private MailService mailservice;
+    
+    @Autowired
+    MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
 
     @RequestMapping(value="createEmailCheck.do", method=RequestMethod.GET)
     @ResponseBody
@@ -68,17 +72,20 @@ public class MemberController {
        String authCode = String.valueOf(ran);
        session.setAttribute("authCode", authCode);
        session.setAttribute("random", random);
+       
        String subject = "회원가입 인증 코드 발급 안내 입니다.";
        StringBuilder sb = new StringBuilder();
-       sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
+
+       sb.append("귀하의 인증 코드는  " + authCode + " 입니다.");
        log.info("!@#$userEmail: "+ userEmail);
-       return mailservice.send(subject, sb.toString(), "hifive@hifive.com", userEmail, null);
+       return mailservice.send(subject, sb.toString(), "하이파이브", userEmail, null);
     }
     
     @RequestMapping(value="emailAuth.do", method=RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> emailAuth(@RequestParam String authCode, @RequestParam String random, HttpSession session){
-       String originalJoinCode = (String) session.getAttribute("authCode");
+    
+    	String originalJoinCode = (String) session.getAttribute("authCode");
        String originalRandom = Integer.toString((int) session.getAttribute("random"));
        if(originalJoinCode.equals(authCode) && originalRandom.equals(random))
           return new ResponseEntity<String>("complete", HttpStatus.OK);
@@ -86,9 +93,8 @@ public class MemberController {
     }
     
     
-    @Autowired
-    MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
-  
+
+   
 	@RequestMapping("register")
 	public ModelAndView reg() {
 		ModelAndView mv=new ModelAndView("member/register");
@@ -112,20 +118,11 @@ public class MemberController {
     
     @RequestMapping(value = "signup.do" , method=RequestMethod.POST )
     public String signUp (Member member) throws IOException {
-    	String bcpwd=member.getPwd();
-    	
-    	
-    	log.info("#입력비번: " + bcpwd);
-    	
-    	member.setPwd(BCrypt.hashpw(bcpwd, BCrypt.gensalt(10)));
-    	
-    	//BCryptPasswordEncoder pwEncoder =new BCryptPasswordEncoder();
-    	//String password = pwEncoder.encode(member.getPwd());
-    	//member.setPwd(password);
-    	//member.setPwd(BCrypt.hashpw(member.getPwd(), BCrypt.gensalt()));
-       	memberservice.insertM(member);
-    	System.out.println("member: 꺄아아아아앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ" + member);
-    	return "index";
+    	String bcpwd=member.getPwd();  	
+    	member.setPwd(BCrypt.hashpw(bcpwd, BCrypt.gensalt(10)));  
+       	memberservice.insertM(member);    
+       	
+    	return "member/login";
     } 
 }
 

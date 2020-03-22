@@ -41,7 +41,7 @@ public class Freelancer_FreeLancerProfile {
 	private List<List_FreeLancerReview> list_freeLancerReview;
 	private List<Applied_Project> applied_project;
 	private List<KeyWord> frKeyWord;
-	private List<FreePickKeyWord> FreePick;
+	private List<FreePickKeyWord> freePick;
 	
 	
 }

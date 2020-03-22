@@ -110,7 +110,9 @@
 		
 		<!-- 카카오맵 -->
 		<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script> 
-
+		
+		<!-- 커스텀css 로드 -->
+		<link href="../css/custom.css" rel="stylesheet" />
 	</head>
 	<body>
 
@@ -243,11 +245,11 @@
 								<li aria-haspopup="true"><a href="./" class="active">프로젝트 <span class="fa fa-caret-down m-0"></span></a>
 								-->
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="#">개발</a></li>
-										<li aria-haspopup="true"><a href="#">퍼블리싱</a></li>
-										<li aria-haspopup="true"><a href="#">디자인</a></li>
-										<li aria-haspopup="true"><a href="#">기획</a></li>
-										<li aria-haspopup="true"><a href="#">기타</a></li>
+										<li aria-haspopup="true"><a href="project_list?type=1">개발</a></li>
+										<li aria-haspopup="true"><a href="project_list?type=2">퍼블리싱</a></li>
+										<li aria-haspopup="true"><a href="project_list?type=3">디자인</a></li>
+										<li aria-haspopup="true"><a href="project_list?type=4">기획</a></li>
+										<li aria-haspopup="true"><a href="project_list?type=5">기타</a></li>
 									</ul>
 								</li>							
 								<li aria-haspopup="true"><a href="market-list">프리마켓</a></li>
@@ -260,8 +262,8 @@
 									</c:otherwise>
 								</c:choose>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="#">개발</a></li>
-										<li aria-haspopup="true"><a href="#">디자인</a></li>
+										<li aria-haspopup="true"><a href="freelancerList?type=1">개발</a></li>
+										<li aria-haspopup="true"><a href="freelancerList?type=3">디자인</a></li>
 									</ul>	
 								</li>
 								<li aria-haspopup="true"><a href="customer_service_list">고객센터 <span class="fa fa-caret-down m-0"></span></a>
@@ -329,6 +331,7 @@
 															<a href="#">　</a>
 														</li>
 													</ul>
+													
 													<ul class="col link-list">
 														<li class="title"><a href="freelancerList">프리랜서</a></li>
 														<li>

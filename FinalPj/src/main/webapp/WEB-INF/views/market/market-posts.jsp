@@ -8,20 +8,32 @@
 
 		<!--Sliders Section-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1>마켓 등록</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">Pages</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">Ad Post</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">마켓 등록</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
 			</div>
+		</div>
+		<!--/Sliders Section-->
+		
 		</section>
 		<!--/Sliders Section-->
 
@@ -128,30 +140,29 @@
 		      </div>
 	 <!-- /small Modal -->
 <!--▲ △▲ △▲ △▲ △▲ △▲ △서버로 보내는 폼▲ △▲ △▲ △▲ △▲ △▲ △▲ △▲ △▲ △/-->	
-					
+				
 					</div>
 					<div class="col-lg-4 col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">조건</h3>
+								<h3 class="card-title">수수료율</h3>
 							</div>
 							<div class="card-body">
 								<ul class="list-unstyled widget-spec  mb-0">
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Money Not Refundable
+										<i class="fa fa-check text-success" aria-hidden="true"></i>500000 이하 &nbsp;<b>20%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>You can renew your Premium ad after experted.
+										<i class="fa fa-check text-success" aria-hidden="true"></i>2000000 이하 &nbsp;<b>12%</b>
 									</li>
 									<li>
-										<i class="fa fa-check text-success" aria-hidden="true"></i>Premium ads are active for depend on package.
+										<i class="fa fa-check text-success" aria-hidden="true"></i>2000000 초과 &nbsp;<b>6%</b>
 									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
+									
 								</ul>
 							</div>
 						</div>
+						<!-- 
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">프리미엄 광고의 이익</h3>
@@ -227,6 +238,7 @@
 								</ul>
 							</div>
 						</div>
+						-->
 					</div>
 
 				</div>

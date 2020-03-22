@@ -222,14 +222,15 @@
 	background-color: #f7f7f7 !important;
 }
 .user-tabs ul li a.active{
-	background: #5a54f8;
+	background: #1f719a;
 	color:#fff;
 }
 .user-tabs ul li:first-child {
     border-left: 0;
 }
 .user-tabs ul li a {
-    padding: 4px 15px;
+    /*padding: 4px 15px;*/
+    padding: 4px 9px;
     font-size: 15px;
     margin: 2px;
     display: block;
@@ -347,3 +348,4 @@
     background: linear-gradient(to right, rgba(59, 162, 255, 0.9), rgba(105, 99, 255, 0.8)) !important;
 	color: #fff !important;
 }
+

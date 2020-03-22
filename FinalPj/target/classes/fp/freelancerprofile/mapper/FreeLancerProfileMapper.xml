@@ -233,11 +233,12 @@
 	  ]]> 
    </select>
    
-    <select id="selectFilename" parameterType="long" resultType="FreeLancerProfilefile">
+    <select id="selectProflie" parameterType="long" resultType="FreeLancerProfile">
      <![CDATA[
-    select profile_num, profile_ofname, pro_num, free_code from freelancer_profilefile
+    select * from freelancer_profile
     	]]>
    </select>
+   
    
      <!-- 프리랜서 프로필 컨텐츠 1-->
      <select id="selectProfileContent"  parameterType="long" resultMap="FreeLancerResult">
@@ -246,13 +247,26 @@
 				 , free_name
 		         , fp.mem_email
 		         , pro_workplace
-		         , free_tel
 		         , pro_cv
 		         , profile_date
+		         , pro_ox
+		         , pro_start
+		         , pro_addr
+		         , pro_edu
+		         , pro_place
+		         , free_fname
 			from FREELANCER_PROFILE fp
 				inner join FREELANCER f 
 					on fp.free_code = f.free_code
 							where fp.pro_num=#{pro_num}
+       ]]>
+   </select>
+   	<select id="selectTel" parameterType="long" resultMap="FreeLancerResult">
+      <![CDATA[
+		SELECT REGEXP_REPLACE(free_tel, '(.{3})(.+)(.{4})', '\1-\2-\3') as free_tel
+			from freelancer f, freelancer_profile fp 
+					where fp.free_code=f.free_code 
+						and fp.pro_num=#{pro_num}		
        ]]>
    </select>
    
@@ -262,6 +276,7 @@
 		select p.pj_sub
 			   , t.type_name
 			   , fp.pro_num
+			   , pro_exp
 			from Type t
 				full outer join FREELANCER_PROFILE fp
 				on t.type_num = fp.type_num 
@@ -335,9 +350,9 @@
 	 </selectKey>
 
 	<![CDATA[
-		insert into freelancer_profile (pro_num, free_code, type_num, mem_email, pro_exp, pro_cv, pro_addr, pro_postcode, pro_detailloc, pro_edu, pro_start, pro_ox, pro_grade, pro_place, pro_workplace, profile_sub, profile_date)
+		insert into freelancer_profile (pro_num, free_code, mem_email, type_num, pro_exp, pro_cv, pro_addr, pro_postcode, pro_detailloc, pro_edu, pro_start, pro_ox, pro_grade, pro_place, pro_workplace, profile_sub, profile_date)
 	values
-		(#{pro_num}, #{free_code}, #{type_num}, #{mem_email} , #{pro_exp}, #{pro_cv}, #{pro_addr}, #{pro_postcode}, #{pro_detailloc},#{pro_edu}, #{pro_start}, #{pro_ox}, #{pro_grade}, #{pro_place}, #{pro_workplace}, #{profile_sub}, sysdate)
+		(#{pro_num}, #{free_code}, #{mem_email}, #{type_num}, #{pro_exp}, #{pro_cv}, #{pro_addr}, #{pro_postcode}, #{pro_detailloc},#{pro_edu}, #{pro_start}, #{pro_ox}, #{pro_grade}, #{pro_place}, #{pro_workplace}, #{profile_sub}, sysdate)
 		   ]]>
 	</insert> 
 
@@ -355,7 +370,9 @@
 		 </foreach>) A
 		 </if>
 	 </insert>
- 
+ 	<update id="free_profileoxUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile">
+ 		update freelancer set free_profileox = 1 where free_code=#{free_code}
+ 	</update>
 	<!-- 프로필 update -->
  	<update id="listUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
 
@@ -374,7 +391,7 @@
 	 </delete>
 	 <insert id="updateKeyword_In" parameterType="fp.freelancerprofile.domain.FreePickKeyWord">
 		  	<foreach collection ="key_numList" item="key_num" separator=";" open="DECLARE BEGIN " close="; END;">
-			 	insert into FREE_PICK_KEYWORD(free_keynum, key_num, pro_num) values(FREE_KEYNUM_SEQ.nextval, #{key_num}, #{pro_num})
+			 	insert into FREE_PICK_KEYWORD(free_keynum, key_num, pro_num, free_code) values(FREE_KEYNUM_SEQ.nextval, #{key_num}, #{pro_num}, #{free_code})
 			 </foreach>
 	 </insert>
 	
@@ -400,7 +417,13 @@
 			profile_choice=1 where pro_num=#{pronum}
 		  ]]>
 	</update> 
-
+	 <!-- 프로필 비공개 -->	
+	<update id="closeProfile" parameterType="map"> 
+		<![CDATA[
+		update freelancer_profile set
+			profile_choice=0 where pro_num=#{pronum}
+		  ]]>
+	</update> 
  	 <!-- 프로필 update(키워드 delete) 
    <delete id="keyDelete" parameterType="long">
 	   <![CDATA[
@@ -510,5 +533,27 @@
 		order by A.pro_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
 	 ]]>
 	</select>
+	<update id="updateACCTOX" parameterType="long">
+	update freelancer set free_acctox=1 where free_code=#{free_code}
+	</update>
+	<insert id="addACCT" parameterType="fp.freelancerprofile.domain.Freelnacer_account">
+	 insert into FREELANCER_ACCOUNT(free_code,freeac_acct,freeac_bank,freeac_holder) values(#{free_code},#{freeac_acct},#{freeac_bank},#{freeac_holder})
+	</insert>
+	<select id="selectFreeACCT" parameterType="long" resultType="fp.freelancerprofile.domain.Freelnacer_account">
+	select * from FREELANCER_ACCOUNT where free_code=#{free_code}
+	</select>
+	<update id="updateACCT" parameterType="fp.freelancerprofile.domain.Freelnacer_account">
+	update FREELANCER_ACCOUNT set freeac_acct=#{freeac_acct},freeac_bank=#{freeac_bank},freeac_holder=#{freeac_holder} where free_code=#{free_code}
+	</update>
+	
+	<update id="freePointUp" parameterType="long">
+		update freelancer set FREE_POINT=FREE_POINT+1 where free_code = #{free_code}
+	</update>
+	<update id="freeLevelUp1" parameterType="long">
+		update freelancer set free_level=1 where FREE_POINT in(select FREE_POINT from freelancer where FREE_POINT>10 and free_code=#{free_code})
+	</update>
+	<update id="freeLevelUp2" parameterType="long">
+		update freelancer set free_level=2 where FREE_POINT in(select FREE_POINT from freelancer where FREE_POINT>20 and free_code=#{free_code})
+	</update>
 	<!--/////////////////////////// -->
 </mapper>

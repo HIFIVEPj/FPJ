@@ -9,6 +9,10 @@
 <c:when test="${empty mydash}">
 		<script>
 			function check(){
+				 if(input_free.free_tel.value==""){
+		 				alert("연락처는 필수 입력 사항입니다.");
+		 				return;
+		 			}
 				input_free.submit();
 			}
 			function notice(){
@@ -17,19 +21,32 @@
 		</script>
 		<!--Breadcrumb-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Page</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Page</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">마이대쉬</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
 			</div>
+		</div>
+		<!--/Sliders Section-->
+		
 		</section>
 		<!--Breadcrumb-->
 		<!--User Dashboard-->
@@ -59,7 +76,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -120,7 +137,7 @@
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">개인활동등급</label>
-											<input type="text" class="form-control" value="새싹" readonly>
+											&nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="13%">&nbsp; <b>Bronze</b>
 										</div>
 									</div>
 
@@ -168,7 +185,11 @@
 <c:otherwise>
 		<script>
 			function check(){
-				input_free.submit();
+				 if(update_free.free_tel.value==""){
+		 				alert("연락처는 필수 입력 사항입니다.");
+		 				return;
+		 			}
+				 update_free.submit();
 			}
 			function writeProfile(){
 				location.href="freelancerProfile_list?mem_email=${sessionScope.email}"
@@ -208,8 +229,11 @@
 									</div>
 								</c:if>
 								<c:if test = "${mydash.free_fname ne null}">
-									<div class="profile-pic-img">
-										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+									<div class="avatar-xxl brround" style="margin:0 auto;">
+										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="avatar-xxl brround" alt="user">
+										<!--
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+										-->
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -235,15 +259,16 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
 											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
@@ -256,7 +281,7 @@
 							<div class="card-header">
 								<h3 class="card-title"><b>회원정보</b></h3>
 							</div>
-							<form name="input_free" method="post" action="mydash_free_update" enctype="multiPART/form-data">
+							<form name="update_free" method="post" action="mydash_free_update" enctype="multiPART/form-data">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
@@ -309,7 +334,15 @@
 									<div class="col-sm-6 col-md-4">
 										<div class="form-group">
 											<label class="form-label">개인활동등급</label>
-											<input type="text" class="form-control" value="${mydash.free_level}" readonly>
+											<c:if test="${mydash.free_level==0}">
+												&nbsp;<img src="../images/photos/bronze100.png" alt="브"  width="10%">&nbsp; <b>Bronze</b>
+											</c:if> 
+											<c:if test="${mydash.free_level==1}">
+												&nbsp; <img src="../images/photos/silver100.png" alt="실" width="10%"> &nbsp; <b>Silver</b>
+											</c:if>
+											<c:if test="${mydash.free_level==2}"> 
+												&nbsp;<img src="../images/photos/gold100.png" alt="골"  width="10%">&nbsp; <b>Gold</b>
+											</c:if> 	
 										</div>
 									</div>
 
@@ -335,7 +368,7 @@
 							<input type="hidden" class="form-control" value="${mydash.free_code}"  name="free_code">
 								<div class="col-md-12">
 									<div class="card-footer" style="text-align:center;">
-										<button type="submit" class="btn btn-primary" id="edit_ok">수정완료</button>
+										<button type="button" class="btn btn-primary" id="edit_ok" onclick="check();">수정완료</button>
 										<a href="javascript:void(0)" class="btn btn-primary" id="edit_update" onclick="writeProfile()"><span>프로필 쓰러가기</span></a>
 									</div>
 								</div>

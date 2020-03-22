@@ -14,10 +14,29 @@
 		<result property="option1" column="OPTION1"/>
 		<result property="option2" column="OPTION2"/>
 		<result property="option3" column="OPTION3"/>	
-		
 	</resultMap>
+	 <resultMap id="PayInformationMap" type="PayInformation">	 	
+	 	<id property="payinfo_num" column="PAYINFO_NUM"/>
+	 	<result property="payinfo_payid" column="PAYINFO_PAYID"/>		
+		<result property="payinfo_uid" column="PAYINFO_UID"/>
+		<result property="payinfo_price" column="PAYINFO_PRICE"/>
+		<result property="payinfo_cardnum" column="PAYINFO_CARDNUM"/>
+		<result property="payinfo_status" column="PAYINFO_STATUS"/>
+		<result property="payinfo_cardname" column="PAYINFO_CARDNAME"/>
+		<result property="payinfo_pgtid" column="PAYINFO_PGTID"/>
+		<result property="payinfo_buyername" column="PAYINFO_BUYERNAME"/>	
+		<result property="payinfo_rdate" column="PAYINFO_RDATE"/>	
+		<result property="option1" column="OPTION1"/>
+		<result property="option2" column="OPTION2"/>
+		<result property="option3" column="OPTION3"/>	
+	</resultMap>
+	
 	<select id = "idCheck" parameterType = "String" resultType = "int">
     	SELECT COUNT(*) FROM MEMBER WHERE MEM_EMAIL = #{email}
+	</select>
+	
+	<select id = "countFree"  resultType ="Long">
+    	SELECT COUNT(*) FROM MEMBER WHERE CLASS_NUM=2 or CLASS_NUM=3
 	</select>
 	
 	<select id="loginCheck" resultType="Member" resultMap="MemberMap">
@@ -39,29 +58,155 @@
 		UPDATE MEMBER SET MEM_PWD=#{pwd} WHERE MEM_EMAIL=#{email} 
 	</update>
 	
+	<!-- 관리자 매출합계 -->
+	<select id="sumFree" resultType="Long" >
+		select SUM(payinfo_price) from pay_information where PAYINFO_UID like 'market_%' group by TO_CHAR (payinfo_rdate, 'MM')
+	</select>
+	
+	<select id="sumCor" resultType="Long" >
+		select SUM(payinfo_price) from pay_information where PAYINFO_UID like 'project_%' group by TO_CHAR (payinfo_rdate, 'MM')
+	</select>
+	
+	<select id="month" resultType="Long" >
+		SELECT  TO_CHAR(payinfo_rdate, 'MM') FROM pay_information where PAYINFO_UID like 'market_%' 
+		group by TO_CHAR (payinfo_rdate, 'MM')
+	</select>
+	
+	<!-- 마켓 총 게시글 갯수 출력 -->
+   <select id="getMarketCount" resultType="Long">
+      SELECT COUNT(*) FROM MARKET 
+   </select>
+   
+ <!-- 승인대기중인 마켓게시글 -->
+   <select id="getMarketList" parameterType="MemberVo" resultType="Market">
+       select * from (select ROWNUM rnum , aa.* from (
+         select FREE_NAME , MARKET_NUM, MARKET_SUB, MARKET_STATE , MARKET_PRICE ,mem_email from FREELANCER f join MARKET m on m.FREE_CODE=f.FREE_CODE ORDER BY MARKET_STATE ) aa)
+      <![CDATA[where rnum>#{start} and rnum<=#{end}]]>            
+   </select>
+   
+   	<update id="upMarketS"  parameterType="Map">
+		UPDATE MARKET SET MARKET_STATE=#{market_state} WHERE MARKET_NUM=#{market_num}  
+	</update>
+	
 	<!-- 관리자 멤버리스트  -->
 	<select id="getList" parameterType="Map" resultMap="MemberMap">
 	 	<![CDATA[
 			 select * from (select ROWNUM rnum , aa.* from (select * from Member ]]>
-			 <choose> 
-			 	<when test="class_num == 4"> WHERE CLASS_NUM =#{class_num}</when>
-			 	<when test="class_num == 2"> WHERE CLASS_NUM=2 OR CLASS_NUM=3 </when>
-			 	<otherwise> where CLASS_NUM>1 </otherwise>			 
-			 </choose>
+			 <include refid="paging" />	
+			 <include refid="search" />
 			 <![CDATA[
-			 order by MEM_RDATE desc) aa)
+			 	) aa)
 				 where rnum>#{MemberVo.start} and rnum<=#{MemberVo.end}
-	    ]]>
+	  		  ]]>
 	</select>
 	
 	<select id="getTotalCount" parameterType="Map" resultType="long" >
 		select count(MEM_EMAIL) from MEMBER 
-		<choose>
-				<when test="class_num == 4"> WHERE CLASS_NUM =#{class_num}</when>
-			 	<when test="class_num == 2"> WHERE CLASS_NUM=2 OR CLASS_NUM=3 </when>
-			 	<otherwise> where CLASS_NUM>1 </otherwise>	
-		</choose>		
+		<include refid="paging" />
+		<include refid="search" />	
 	</select>
 	
+	<sql id="paging">
+			<choose> 
+			 	<when test="class_num == 4"> WHERE CLASS_NUM =#{class_num}</when>
+			 	<when test="class_num == 2"> WHERE (CLASS_NUM=2 OR CLASS_NUM=3) </when>
+			 	<otherwise> where CLASS_NUM>1 </otherwise>			 
+			 </choose>
+	
+	</sql>
+	<sql id="search">
+		<choose>
+			<when test="keyword != null and keyword != ''">
+				AND (MEM_NAME LIKE '%'||#{keyword}||'%' 
+				OR MEM_EMAIL LIKE '%'||#{keyword}||'%'  
+				OR MEM_RDATE LIKE '%'||#{keyword}||'%') 
+			</when>			
+		</choose>
+	</sql>
+	
+	<!-- 기업 마켓  -->
+	<select id="sumCountCorIndex" resultType="Long" >
+	<![CDATA[	
+		select SUM(payinfo_price) from pay_information 
+		where PAYINFO_UID like 'project_%']]>
+	</select> 
+	
+	<select id="sumCountCorN" resultType="String" >
+	<![CDATA[	
+		select payinfo_buyername from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'project_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select> 
+	
+	<select id="sumCountCor" resultType="Long" >
+	<![CDATA[	
+		select * from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'project_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select>
+	
+	<select id="marketListCor" parameterType="MemberVo" resultMap="PayInformationMap" >
+	 	<![CDATA[
+			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'project_%' ]]>
+			 <include refid="searchAll" />
+		<![CDATA[	
+		 order by PAYINFO_RDATE desc ) aa) where rnum>#{start} and rnum<=#{end} 
+	  	]]>
+	</select>
+	
+	<select id="getTotalCountMC"  resultType="long" >
+	<![CDATA[
+		select count(PAYINFO_NUM) from PAY_INFORMATION where PAYINFO_UID like 'project_%'
+	]]>	
+		<include refid="searchAll" />
+	</select>
+	
+	<!-- 프리랜서 마켓-->
+	<select id="sumCountMarketN" resultType="String" >
+	<![CDATA[	
+		select payinfo_buyername from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'market_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select>  
+	
+	<select id="sumCountMarket" resultType="Long" >
+	<![CDATA[	
+		select * from (select aa.* from (select SUM(payinfo_price),payinfo_buyername from pay_information 
+		where PAYINFO_UID like 'market_%' 
+		group by payinfo_buyername order by SUM(payinfo_price) desc) aa) where ROWNUM <6]]>
+	</select>
+	
+	<select id="marketListFree" parameterType="MemberVo" resultMap="PayInformationMap" >
+	 	<![CDATA[
+			 select * from (select ROWNUM rnum , aa.* from (select * from PAY_INFORMATION where PAYINFO_UID like 'market_%'  ]]>
+			 <include refid="searchAll" />	
+		<![CDATA[ 
+			order by PAYINFO_RDATE desc ) aa) where rnum>#{start} and rnum<=#{end} 
+	  	]]>
+	</select>
+	
+	<select id="getTotalCountMF" resultType="long" >
+		<![CDATA[
+			select count(PAYINFO_PAYID) from PAY_INFORMATION where PAYINFO_UID like 'market_%'
+		]]>		
+			<include refid="searchAll" />
+	</select>
+	
+	<!-- 결제정보 검색 -->
+	<sql id="searchAll">
+		<if test="type != null">
+			<if test="type == 'ALL'.toString()"> 
+				AND (PAYINFO_PAYID like '%'||#{keyword}||'%' OR PAYINFO_PRICE like '%'||#{keyword}||'%'
+				OR PAYINFO_STATUS like '%'||#{keyword}||'%' OR PAYINFO_PGTID like '%'||#{keyword}||'%' OR PAYINFO_BUYERNAME like '%'||#{keyword}||'%')
+			</if> 
+			<if test="type == 'PI'.toString()"> AND PAYINFO_PAYID like '%'||#{keyword}||'%' </if> 
+			<if test="type == 'P'.toString()"> AND PAYINFO_PRICE like '%'||#{keyword}||'%' </if>			
+			<if test="type == 'PGI'.toString()"> AND PAYINFO_PGTID like '%'||#{keyword}||'%' </if>
+			<if test="type == 'N'.toString()"> AND PAYINFO_BUYERNAME like '%'||#{keyword}||'%' </if>
+		</if>
+		<if test="startDate != null and endDate != null ">			
+			AND PAYINFO_RDATE between #{startDate} AND #{endDate} + 0.99999
+		</if>
+	</sql>
 
 </mapper>

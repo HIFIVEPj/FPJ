@@ -7,7 +7,6 @@
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <jsp:include page="../member/login_check.jsp"/>
-
 <!--/header-->
 		<!--Sliders Section-->
 		<div>
@@ -189,12 +188,19 @@
 								
 							</div>
 							<span class="card-footer icons" id="btns">
+							<c:choose>
+							<c:when test="${projectCont.pj_status==1 or endDate < currentDate}">
+								<a href="javascript:apply_closed();" class="btn btn-info icons"> 지원하기</a>
+							</c:when>
+							<c:otherwise>
 								<c:if test="${empty appp}">
 									<a href="#" class="btn btn-info icons" data-toggle="modal" data-target="#apply" id="app_btn"> 지원하기</a>
 								</c:if>
 								<c:if test="${!empty appp}">
 									<a href="javascript:apply_done();" class="btn btn-info icons" > 지원하기</a>
 								</c:if>
+							</c:otherwise>
+							</c:choose>
 								<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
 
 								<a href="javascript:void(0)" onclick="javascript:print();" class="btn btn-secondary icons"><i class="si si-printer  mr-1"></i> 인쇄</a>
@@ -206,242 +212,6 @@
 							</c:if>
 							</span>
 						</div>
-			<!--Jobs Description-->
-					<h3 class="mb-5 mt-4">비슷한 프로젝트</h3>
-						<!--Related Posts-->
-						<div id="myCarousel2" class="owl-carousel owl-carousel-icons3">
-							<div class="item">
-								<div class="card">
-							<!--<div class="arrow-ribbon bg-purple">new</div><br/> -->
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-										
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs </a>
-											<h4  class="font-weight-semibold mb-0">$389</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">Hard ware Technician</h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="card">
-									
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-										
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs</a>
-											<h4  class="font-weight-semibold mb-0">$854</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">Hair dresser-Beauticia</h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="card">
-								<!-- <div class="arrow-ribbon bg-info">긴급</div><br/><br/> -->
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-									
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs</a>
-											<h4  class="font-weight-semibold mb-0">$786</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">System Operator</h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="card">
-									
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-										
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs</a>
-											<h4  class="font-weight-semibold mb-0">$539</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">HR Executive</h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="card">
-							<!-- <div class="arrow-ribbon bg-purple">긴급</div><br/><br/> -->
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-											
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs</a>
-											<h4  class="font-weight-semibold mb-0">$925</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">Delivery Boys Jobs </h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="card">
-									
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-											
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs</a>
-											<h4  class="font-weight-semibold mb-0">$925</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">Wanted Sales Men</h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="card">
-								<!-- 	<div class="arrow-ribbon bg-info">new</div><br/><br/> -->
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-											
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs</a>
-											<h4  class="font-weight-semibold mb-0">$378</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-										
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">Female Receptionist</h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="card">
-									<div class="item-card7-img">
-										<div class="item-card7-imgs">
-											<a href="jobs.html"></a>
-								
-										</div>
-										<div class="item-card7-overlaytext">
-											<a href="jobs.html" class="text-white"> Jobs</a>
-											<h4  class="font-weight-semibold mb-0">$836</h4>
-										</div>
-									</div>
-									<div class="card-body">
-										<div class="item-card7-desc">
-											<a href="jobs.html" class="text-dark"><h4 class="font-weight-semibold">Play school teacher</h4></a>
-										</div>
-										<div class="item-card7-text">
-											<ul class="icon-card mb-0">
-												<li class=""><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i>  Los Angles</a></li>
-												<li><a href="#" class="icons"><i class="si si-event text-muted mr-1"></i> 5 hours ago</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-user text-muted mr-1"></i> Sally Peake</a></li>
-												<li class="mb-0"><a href="#" class="icons"><i class="si si-phone text-muted mr-1"></i> 5-67987608</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--/Related Posts-->
-
-						<!--Comments-->
-	
-						<!--Comments-->
-
-				
 					</div>
 
 					<!--Right Side Content-->
@@ -449,7 +219,6 @@
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">회사정보</h3>
-
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
@@ -461,9 +230,6 @@
 										<span class="text-gray"> ${corInfo.cor_type}</span><br/>
 										<!--  <span class="text-gray"> IT솔루션 채널영업 및 영업관리 </span><br/>-->
 										<span class="text-muted">${corInfo.cor_profile}</span>
-										
-										<br/><br/>
-										<h6 class="mt-2 mb-0"><a href="#" class="btn btn-primary btn-sm">이 기업의 다른공고</a></h6>
 									</div>
 
 								</div>
@@ -511,38 +277,7 @@
 									// marker.setMap(null);    
 									</script>
 						</div>
-				<!-- 	<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="search-text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected>All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets & Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div> -->
+
 					</div>
 					<!--/Right Side Content-->
 				</div>
@@ -665,11 +400,14 @@
 						<div class="row">
 							<div class="col-sm-6 col-md-6">
 								<div class="form-group">
-									
-									<label class="form-label">지원하시겠습니까?</label>
+									<label class="form-label">지원할 프로필 선택</label>
 									<c:forEach var="profile_dto" items="${profile_select}">
-										<input type="radio" class="custom-control-input" name="example-radios" value="${profile_dto.pro_num}" checked>
-										<span>${profile_dto.profile_sub}</span>
+										<div class="custom-controls-stacked">
+											<label class="custom-control custom-radio">
+												<input type="radio" class="custom-control-input" name="pro_num" value="${profile_dto.pro_num}" checked>
+												<span class="custom-control-label">${profile_dto.profile_sub}</span>
+											</label>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -695,6 +433,10 @@
 			</div>
 		</div>
 			<script>
+			function apply_closed(){
+				alert("마감된 프로젝트 입니다");
+				return;
+			}
 			function freeolny(){
 				alert("프리랜서 회원만 이용할 수 있습니다.")
 				$("#apply").modal('hide');
@@ -703,16 +445,18 @@
 				alert("프로필을 등록하셔야 이용할 수 있습니다.")
 				$("#apply").modal('hide');
 			}
-			function apply(){	
+			function apply(){
+				var pro_num = $('input:radio[name="pro_num"]:checked').val();
+				
 				$.ajax({
 					type:"get",  
 					url:"<c:url value='apply'/>",
-	    			data:"pj_num=${projectCont.pj_num}+&free_code=${free.free_code}",
+	    			data:"pj_num=${projectCont.pj_num}&free_code=${free.free_code}&pro_num="+pro_num,
 					success: function(data){
-						alert("성공");
 						$('#app_btn').remove();
 						$('#btns').prepend("<a href='javascript:apply_done();' class='btn btn-info icons' > 지원하기</a>")
 						$("#apply").modal('hide');
+						$("#apply_done").modal();
 					},
 					error: function(data){
 					alert("에러발생");
@@ -754,20 +498,23 @@
       <!-- /small Modal -->
 
     <!-- small Modal -->   
-      <div id="" class="modal fade">
+      <div id="apply_done" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-               <div class="modal-header">
+  			 <div class="modal-header">
                   <!--
                   <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
                   -->
-                 
+                  <div class="float-right btn btn-icon btn-info btn-sm mt-3"><i class="fa fa-send"></i></div>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                   </button>
                </div>
-               <div class="modal-body">
-               
+               <div class="modal-body" class="center" style="margin:0 auto; text-align:center;">
+               		<h4>지원이 완료되었습니다.</h4>
+               	<a href="myfavorite?mem_email=${sessionScope.email}#tab2" class="btn btn-primary" style="margin-top:10px;">
+					지원한 프로젝트 목록 바로가기
+				</a>
                </div>
             </div>
          </div>      
@@ -810,7 +557,6 @@ obShareUrl.value=window.document.location.href;
 		obShareUrl.blur();
 		alert("URL이 클립보드에 복사되었습니다.")
 	}
-
 </script>
 <!-- 카카오 공유하기 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -827,8 +573,10 @@ obShareUrl.value=window.document.location.href;
           description: '${projectCont.pj_sub}',
           imageUrl: '../images/brand/logo1.png',
           link: {
-            mobileWebUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}',
-            webUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}'
+            //mobileWebUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}',
+            mobileWebUrl: 'http://www.hifive.store/project_content?pj_num=${projectCont.pj_num}',
+            //webUrl: 'http://127.0.0.1:8090/project_content?pj_num=${projectCont.pj_num}'
+            webUrl: 'http://www.hifive.store/project_content?pj_num=${projectCont.pj_num}'
           }
         },
         social: {
@@ -852,9 +600,7 @@ obShareUrl.value=window.document.location.href;
 
 <!-- 프린트 특정영역 인쇄  
 <script type="text/javascript">
-
 var initBody;
-
 function beforePrint() {
  printareas = document.body.innerHTML;
  document.body.innerHTML = printarea.innerHTML;
@@ -865,9 +611,7 @@ function afterPrint() {
 function printArea() {
  window.print();
 }
-
 window.onbeforeprint = beforePrint;
 window.onafterprint = afterPrint;
-
 </script>
 -->

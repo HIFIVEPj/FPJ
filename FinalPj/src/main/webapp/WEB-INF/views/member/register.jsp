@@ -84,11 +84,11 @@
 										<div class="form-group" style="font-size:12px; line-height:25px;">
 											<label class="custom-control custom-checkbox">
 												<input type="checkbox" class="custom-control-input" id="tos">
-												<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+												<span class="custom-control-label text-dark"><a href="javascript:void(window.open('customer_service_terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
 											</label>
 											<label class="custom-control custom-checkbox">
 												<input type="checkbox" class="custom-control-input" id="topi">
-												<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+												<span class="custom-control-label text-dark"><a href="javascript:void(window.open('customer_service_terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
 											</label>
 										</div>
 										<div class="form-footer mt-2">
@@ -180,14 +180,20 @@
                               </div>
                               <div class="modal-body " >
                               	<div class="input-group mb-12" id="emailAuth_div1">
-                                 <input type="text" id="emailMD" name="emailMD" placeholder="이메일을 입력하세요" class="form-control" />
+                                 <input type="text" id="emailMD" name="emailMD" placeholder="이메일을 입력하세요" class="form-control" onKeyDown="onkey()" />
                                 <div class="input-group-append">
 									<button class="btn btn-secondary"  id="emailBtn">메일발송</button>
 								</div>
                         <!--          <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button> -->
                                	</div> 
                                	<div class="emailAuth_div" id="email_check" ></div>
-                       
+                               	
+                       		 <div id='inj' style='margin-top:10px'>
+	                       			<div class='input-group mb-12'>
+		                       			<input type='text' id='emailAuth' name='emailAuth' placeholder='인증번호를 입력하세요' class='form-control'/>
+		                             	<div class='input-group-append'><button class='btn btn-secondary' id='emailAuthBtn' >인증하기</button></div>
+	                             	</div>
+                             	</div> 
                              </div> 
                               
                               <div class="modal-footer">
@@ -209,14 +215,19 @@
                               </div>
                               <div class="modal-body " >
                               	<div class="input-group mb-12" id="c_emailAuth_div1">
-                                 <input type="text" id="c_emailMD" name="c_emailMD" placeholder="이메일을 입력하세요" class="form-control" />
+                                 <input type="text" id="c_emailMD" name="c_emailMD" placeholder="이메일을 입력하세요" class="form-control" onKeyDown="onkeyC()" />
                                 <div class="input-group-append">
 									<button class="btn btn-secondary"  id="c_emailBtn">메일발송</button>
 								</div>
                         <!--          <button type="button" class="btn btn-info" id="emailBtn" style="margin-left:10px;">이메일 발송</button> -->
                                	</div> 
                                	<div class="c_emailAuth_div" id="c_email_check" ></div>
-                       
+                       			<div id='c_inj' style='margin-top:10px'>
+	                       			<div class='input-group mb-12'>
+		                       			<input type='text' id='c_emailAuth' name='c_emailAuth' placeholder='인증번호를 입력하세요' class='form-control'/>
+										<div class='input-group-append'><button class='btn btn-secondary' id='c_emailAuthBtn' >인증하기</button></div>
+									</div>
+								</div>                             
                              </div> 
                               
                               <div class="modal-footer">

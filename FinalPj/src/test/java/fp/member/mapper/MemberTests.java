@@ -18,8 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import fp.member.dao.MemberDao;
-import fp.member.domain.EmailAuth;
+import fp.member.mapper.MemberDao;
 import fp.member.domain.Member;
 import fp.member.mapper.MemberMapper;
 

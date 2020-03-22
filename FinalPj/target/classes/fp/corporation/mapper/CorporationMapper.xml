@@ -3,6 +3,59 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fp.corporation.mapper.CorporationMapper">
+	
+	<resultMap type="MarketPick" id="resultMarketPick">
+		<id property="marketP_num" column="marketP_num" />
+			<result property="market_num" column="market_nump" />
+			<result property="mem_email" column="mem_email" />
+		<association property="market" javaType="Market" column ="market_num" >
+			<result property="market_num" column="market_num" />
+			<result property="free_code" column="free_code" />
+			<result property="cate_num" column="cate_num" />
+			<result property="market_price" column="market_price" />
+			<result property="market_sub" column="market_sub" />
+			<result property="market_cont" column="market_cont" />
+			<result property="market_vcnt" column="market_vcnt" />
+			<result property="market_fname" column="market_fname" />
+			<result property="market_ofname" column="market_ofname" />
+			<result property="market_state" column="market_state" />
+			<result property="market_pcnt" column="market_pcnt" />
+		</association>
+			<association property="marketRev" javaType="MarketRev" column ="marketRev_num">
+	        <id property="marketRev_num" column ="marketRev_num" />
+	        <result property="marketRev_star" column ="marketRev_star" />
+    	</association>
+	</resultMap>
+
+		<resultMap type="MarketBuysellList" id="resultMarketBuysellList">
+		<id property="mbuysell_num" column="mbuysell_num" />
+			<result property="market_num" column="market_num" />
+			<result property="mem_email" column="mem_email" />
+			<result property="mbuysell_state" column="mbuysell_state" />
+			<result property="mbuysell_date" column="mbuysell_date" />
+		<association property="market" javaType="Market" column ="market_num" >
+			<result property="market_num" column="market_num" />
+			<result property="free_code" column="free_code" />
+			<result property="cate_num" column="cate_num" />
+			<result property="market_price" column="market_price" />
+			<result property="market_sub" column="market_sub" />
+			<result property="market_cont" column="market_cont" />
+			<result property="market_vcnt" column="market_vcnt" />
+			<result property="market_fname" column="market_fname" />
+			<result property="market_ofname" column="market_ofname" />
+			<result property="market_state" column="market_state" />
+			<result property="market_pcnt" column="market_pcnt" />
+		</association>
+		<association property="marketRev" javaType="MarketRev" column ="marketRev_num">
+	       <id property="marketRev_num" column ="marketRev_num" />
+	        <result property="marketRev_star" column ="marketRev_star" />
+    	</association>
+		<association property="freelancer" javaType="Freelancer" column ="free_code" >
+	       <id property="free_code" column ="free_code" />
+	       <result property="mem_email" column ="mem_email" />
+		</association>
+	</resultMap>
+	
 	<insert id="insert" parameterType="Corporation">
 		insert into CORPORATION
 		(cor_code, mem_email, cor_reg, cor_name, cor_mname, cor_tel, cor_rdate, cor_postcode, cor_addr, cor_detailaddr, cor_addr_x, cor_addr_y, cor_profile, cor_type, cor_fname, cor_ofname)
@@ -21,6 +74,68 @@
 		update CORPORATION set 
 		cor_reg = #{cor_reg}, cor_name=#{cor_name}, cor_addr=#{cor_addr}, cor_postcode=#{cor_postcode}, cor_detailaddr=#{cor_detailaddr}, cor_addr_x=#{cor_addr_x}, cor_addr_y=#{cor_addr_y}, cor_profile=#{cor_profile}, cor_type=#{cor_type}, cor_fname=#{cor_fname, jdbcType=VARCHAR}, cor_ofname=#{cor_ofname, jdbcType=VARCHAR}
 		where cor_code= #{cor_code}
-
 	</update>
+	
+	<!-- 기업 계좌 추가 -->
+	<insert id="addCorACCT" parameterType="fp.corporation.domain.Corporation_account">
+	 insert into Corporation_account(cor_code,corac_acct,corac_bank,corac_holder) values(#{cor_code},#{corac_acct},#{corac_bank},#{corac_holder})
+	</insert>
+	<select id="selectCorACCT" parameterType="long" resultType="fp.corporation.domain.Corporation_account">
+	select * from Corporation_account where cor_code=#{cor_code}
+	</select>
+	<update id="updateCorACCT" parameterType="fp.corporation.domain.Corporation_account">
+	update Corporation_account set corac_acct=#{corac_acct},corac_bank=#{corac_bank},corac_holder=#{corac_holder} where cor_code=#{cor_code}
+	</update>
+
+<!-- 찜한마켓리스트 -->
+	<select id="getTotalMarketPick" parameterType="String" resultType="int">
+		select count(*) from market_pick where mem_email=#{mem_email}
+	</select>
+	<select id="marketPickList" parameterType="hashmap" resultMap="resultMarketPick" >
+	<![CDATA[
+	
+	select * from (select rownum rnum , aa.* from ( select * from 
+			(select marketP_num,market_num market_nump,mem_email from market_pick where mem_email=#{mem_email})mp 
+		left outer join
+			(select market_price, market_fname ,market_state, market_sub, cate_num, m.market_num, market_pcnt, market_vcnt, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
+        right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM  group by m.MARKET_NUM,market_fname,market_sub,market_price,market_state,cate_num,market_pcnt,market_vcnt) m 
+		on mp.market_nump = m.market_num order by m.market_num desc ) aa )where rnum>#{start} and rnum<=#{end} 
+	]]>
+	
+	<!--select * from (select rownum rnum , aa.* from ( select * from 
+			(select marketP_num,market_num market_nump,mem_email from market_pick where mem_email=#{mem_email})mp 
+		left outer join
+			(select market_price, market_fname ,market_state, market_sub, cate_num, market_num, market_pcnt, market_vcnt from market) m 
+		on mp.market_nump = m.market_num order by m.market_num desc ) aa )where rnum>#{start} and rnum<=#{end} 
+	-->
+<!-- select * from (select rownum rnum , aa.* from (select * from market_pick where mem_email=#{mem_email} order by marketp_num desc ) aa )where rnum>#{start} and rnum<=#{end} -->
+	</select>
+<!-- 마켓찜삭제 -->	
+	<delete id="deleteMarketPick" parameterType="hashmap">
+		delete market_pick where marketp_num=#{marketP_num} and mem_email=#{mem_email}
+	</delete>
+<!-- 내가구매한마켓리스트 -->
+	<select id="getTotalBuyMarket" parameterType="String" resultType="int">
+		select count(*) from market_buyselllist where mem_email=#{mem_email}
+	</select>
+	<select id="myBuyMarket" parameterType="hashmap" resultMap="resultMarketBuysellList">
+	<![CDATA[	
+		 select * from (select rownum rnum , aa.* from 
+                (select * from
+                   (select *from market_buyselllist)mb 
+                   left outer join
+                    (select f.mem_email,m.MARKET_NUM ,market_fname,market_sub,market_price, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
+                    right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM 
+                    join FREELANCER f on f.free_code=m.free_code
+                    group by m.MARKET_NUM,market_fname,market_sub,market_price, f.mem_email) m on mb.market_num=m.market_num where mb.mem_email=#{mem_email}
+                order by m.market_num desc 
+                 ) aa 
+            )where rnum>#{start} and rnum<=#{end}
+	]]>
+	</select>		
+<!-- 프로필사진띄우는쿼리 -->	
+	<select id="getCorfname" parameterType="String" resultType="Corporation">
+		select cor_fname from corporation where mem_email=#{mem_email}
+	</select>	
+
 </mapper>

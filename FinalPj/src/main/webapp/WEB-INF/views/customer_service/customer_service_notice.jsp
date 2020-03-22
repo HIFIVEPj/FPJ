@@ -77,7 +77,7 @@
 											<th class="font-weight-bold">번호</th>
 											<th class="font-weight-bold">분류</th>
 											<th class="font-weight-bold">제목</th>
-											<th class="font-weight-bold">글쓴이</th>
+											<th class="font-weight-bold">작성자</th>
 											<th class="font-weight-bold">날짜</th>
 											<th class="font-weight-bold">조회</th>
 											<th class="font-weight-bold">추천</th>
@@ -88,7 +88,7 @@
 										<tr class="border-bottom">
 											<td class="text-center">${notice_list.notice_num}</td>
 											<td class="text-center">${notice_list.notice_cate}</td>
-											<td><a href='customer_service_notice_content?notice_num=${notice_list.notice_num}'>${notice_list.notice_sub}</a></td>
+											<td><a href='customer_service_notice_content?notice_num=${notice_list.notice_num}&mem_email=${notice_list.mem_email}'>${notice_list.notice_sub}</a></td>
 											<td class="text-center">${notice_list.mem_name}</td>
 											<td class="text-center"><fmt:formatDate value="${notice_list.notice_rdate}" pattern="yyyy.MM.dd"/></td>
 											<td class="text-center">${notice_list.notice_vcnt}</td>

@@ -17,32 +17,34 @@
         } );
       } );
     </script>
-
 <!--/header-->
-
 		<!--Breadcrumb-->
       <section>
-         <div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-            <div class="header-text mb-0">
-               <div class="container">
-                  <div class="text-center text-white ">
-                     <h1 class="">My Favorite Ads</h1>
-                     <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">My Favorite Ads</li>
-                     </ol>
-                  </div>
-               </div>
-            </div>
-         </div>
+       <!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
       </section>
       <!--/Breadcrumb-->
 
       <!--User Dashboard-->
       <section class="sptb">
          <div class="container">
-            <div class="row">
+            <div class="row">	
              					<div class="col-xl-3 col-lg-12 col-md-12">
 						<div class="card">
 							<div class="card-header">
@@ -50,15 +52,15 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${mydash.free_fname eq null}">
-									<div class="profile-pic-img">
+								<c:if test="${getFileName.get(0).free_fname eq null}">
+									<div class="avatar-xxl brround" style="margin:0 auto;">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
 									
-								<c:if test = "${mydash.free_fname ne null}">
-									<div class="profile-pic-img">
-										<img src="../images/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+								<c:if test = "${getFileName.get(0).free_fname ne null}">
+									<div class="avatar-xxl brround" style="margin:0 auto;">
+										<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -80,82 +82,27 @@
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavorite_market.html">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
 							</aside>
 						</div>
-						<!--  
-						<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">Safety Tips For Buyers</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						-->
 					</div>
 
                <div class="col-xl-9 col-lg-12 col-md-12">
@@ -165,18 +112,7 @@
                      </div>
                      <div class="card-body">
                      <div class="ads-tabs">
-                             <div class="tabs-menus" align="right">
-                           <!--  Tabs --> 
-                              <!--  <ul class="nav panel-tabs">
-                                 <li class=""><a href="#tab1" class="active" data-toggle="tab">등록</a></li> 
-                                 <li><a href="mydash" class="btn btn-secondary icons">등록</a></li>
-                                 <li><a href="#" class="btn btn-secondry icons">삭제</a></li>
-                              </ul> -->
-                           </div>  
-                           
-                        <!-- <a href="mydash" class="btn btn-secondary icons">등록</a>      
-                           <a href="#" class="btn btn-secondary icons">삭제</a>   -->
-                              
+                      <div class="tabs-menus" align="right"></div>  
                         <div class="tab-content">
                         <div class="tab-pane active table-responsive border-top userprof-tab" id="tab1">
                            <table class="table table-bordered table-hover mb-0 text-nowrap">
@@ -188,73 +124,53 @@
                                           </label>  </th>                                 
                                        <th >프로필명</th>           
                                        <th>등록일</th>
-                                       <th>첨부파일</th>
                                        <th>프로필 공개</th>  
                                  </tr>
                               </thead>
-			
 							<form id="del_list" method="get" action="freelancerProfile_cehck_delete" name="checkdelete1">
-							
   								<input type="hidden" name="mem_email" value="${profile_list[0].mem_email}" />
-  								
   								<!-- input type="hidden" name="pro_num" value="${profile_list[0].pro_num}" />-->
                     			 <c:forEach  var="freelancer" items="${profile_list}" varStatus="status">
                             		 <tr>
                                        <td scope="row">
                                           <label class="custom-control custom-checkbox ">                                 			
                                              <input type="checkbox" class="custom-control-input ab" name="pro_num" value="${freelancer.pro_num}" >          
-                                             <span class="custom-control-label"> </span>
+                                             <span class="custom-control-label"></span>
                                           </label>           
                                        </td>
-
                                           <td><a href='freelancerProfile_content?pro_num=${freelancer.pro_num}'class="btn-link">${freelancer.profile_sub}</a></td>       
-                                    <!--      <td>${freeLancer.mem_email}</td>-->
-                                       <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
-                           		 
-                                   	<c:set var="doneLoop" value="true" />					
-                                   	<c:choose>
-                                   	   <c:when test="${empty file_name}">
-									   </c:when>
-										
-										<c:otherwise>
-											<c:forEach var="file" items="${file_name}">
-													<c:if test="${file.pro_num eq freelancer.pro_num && doneLoop}">	
-														<c:set var="doneLoop" value="false" />		
-													</c:if>										
-											</c:forEach>   					 	
-										</c:otherwise>
-									</c:choose>
-									
-									<c:choose>
-									    <c:when test="${!doneLoop}">
-									         <td><i class="fa fa-save"></i><a href="#">&nbsp;</a>${file_name[0].profile_ofname}</td>
-									    </c:when>
-									    <c:otherwise>
-									         <td><i class="fa fa-save"></i><a href="#">&nbsp;등록된 파일이 없습니다.</a></td>
-									    </c:otherwise>
-									</c:choose>
-									 <td style="text-align:center">
-										 <c:if test="${freelancer.profile_choice eq 1}">
-											 공개
-										 </c:if>
-										 <c:if test="${freelancer.profile_choice ne 1}">
-											 비공개
-										 </c:if>
-									 </td>  
-                				</tr>
+                                     		  <td class="text-center"><fmt:formatDate value="${freelancer.profile_date}" pattern="yyyy.MM.dd"></fmt:formatDate></td>
+										 <td style="text-align:center"  >
+										 	<span class="" class="openOX" id="openOX"> 
+											 	<c:if test="${freelancer.profile_choice eq 1}">
+													 공개
+												</c:if>
+												<c:if test="${freelancer.profile_choice ne 1}">
+													 비공개
+												</c:if>
+											</span>	
+										</td>  
+                					</tr>
                   			</c:forEach> 
                   		</form>  	
-                       </table>
-                     </div>
+                     </table>
                    </div>
-                  </div>
-               <thead>
+                 </div>
+                </div>
+             <thead>
                      <div class="card">       
                         <div class="card-footer" align="right">
-                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
-                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
-                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#choiceModal">프로필공개</button>			 
-                        </div>
+	                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
+	                         <a href='freelancerMyprofile_write'><button type="submit" class="btn btn-primary">작성</button></a>
+	                         <c:choose>
+		                         <c:when test="${ox.contains(1)}">
+									 <button type="button" class="btn btn-secondary profile_close" data-toggle="modal" data-target="#choiceCloseModal">프로필비공개</button>
+		               			 </c:when>
+		               			<c:otherwise>
+		                         	<button type="button" class="btn btn-secondary profile_open" data-toggle="modal" data-target="#choiceModal">프로필공개</button>
+		                        </c:otherwise>
+	               			</c:choose>	
+                       </div>
 
                 <div class="center-block text-center">
                            <ul class="pagination mb-0">         
@@ -295,37 +211,7 @@
                            </div>
                            </ul>
                            </div>                                   
-<!--  
-                              <li class="page-item">
-                                 <a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-left"></i></a>
-                              </li>
-                              <li class="page-item">
-                                 <a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                              </li>
-            
-                              <li class="page-item active">
-                                 <a class="page-link" href="#">1</a>
-                              </li>
-                              <li class="page-item">
-                                 <a class="page-link" href="#">2</a>
-                              </li>
-                              <li class="page-item">
-                                 <a class="page-link hidden-xs-down" href="#">3</a>
-                              </li>
-                              <li class="page-item ">
-                                 <a class="page-link" href="#">4</a>
-                              </li>
-                              <li class="page-item">
-                                 <a class="page-link hidden-xs-down" href="#">5</a>
-                              </li>
-                        
-                              <li class="page-item">
-                                 <a aria-label="Next" class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                              </li>
-                              <li class="page-item">
-                                 <a aria-label="Last" class="page-link" href="#"><i class="fa fa-angle-double-right"></i></a>
-                              </li>
--->
+
                         </div>
                         </div>
                         <!-- pagination-wrapper -->
@@ -386,96 +272,6 @@
 			</footer>
 		</section>
 		<!--Footer Section-->
-
-<script>
-function check(){
-	//alert(pro_num)
-      //var pro_num = $('.pro_num').attr('value');
-     // document.getElementById('pro_num').value = pro_num;
-     
-     
-      var pro_num = new Array();
-      var chk_cnt = 0;
-      //for(var i=0; i<key_num_size; i++){
-       $('input:checkbox[name="pro_num"]').each(function() {
-         if(this.checked){
-        	 pro_num[chk_cnt] = this.value;
-        	 chk_cnt++;
-        	
-        	}  
-        
-       });
-       alert("pro_num:"+pro_num);
-    
-       if(pro_num == ""){
-        alert("1개이상 선택해 주세요.");
-         return;
-      }
-
-      checkdelete1.submit();
-   
-      }
-      
-function choice(){
-	//alert(pro_num)
-      //var pro_num = $('.pro_num').attr('value');
-     // document.getElementById('pro_num').value = pro_num;
-     
-     
-      var pro_num = new Array();
-      var chk_cnt = 0;
-      //for(var i=0; i<key_num_size; i++){
-       $('input:checkbox[name="pro_num"]').each(function() {
-         if(this.checked){
-        	 pro_num[chk_cnt] = this.value;
-        	 chk_cnt++;
-        	
-        	}  
-        
-       });
-       alert("pro_num:"+pro_num);
-    
-       if(pro_num == ""){
-        alert("1개이상 선택해 주세요.");
-         return;
-      }
-
-       choiceProfile.submit();
-   
-      }
-
-</script>
-<script>    
-	 $("input:checkbox[name='pro_num']").on("click",function(){
-		var pronum ="";
-		$('input:checkbox[name="pro_num"]').each(function() {
-			 if(this.checked){
-			      pronum = this.value;
-			      }
-			 });
-			   $("#profile_open").attr("onclick","choiceAjax("+pronum+")");
-			      });
-			      
-			      function choiceAjax(value){
-			         var flag= ${!empty sessionScope.email};
-			         var objParam={
-			               "pro_numList" : value
-			         };
-			          $.ajax({
-			             type:"get",
-			             url:"choiceProfile",
-			             data:objParam,
-			             dataType: "json",
-			             success:function(data){
-			               alert("성공");  
-			             },
-			             error:function(data){
-			                alert("에러발생");
-			             }
-			          });
-			      }
-</script>
-
 <!-- delete Modal -->   
       <div id="deleteModal" class="modal fade">
          <div class="modal-dialog modal-sm" role="document">
@@ -517,13 +313,128 @@ function choice(){
                   <p>프로필을 공개할까요?</p>
                </div>
                <div class="modal-footer">
-                <a href="javascript:void(0)" onclick="" class="btn btn-primary" id="profile_open">프로필공개</a>
+                 <a href="javascript:void(0)" class="btn btn-primary" id="profile_open" onclick="choiceAjax();">프로필공개</a>
+               <!--  <a href="javascript:void(0)"  class="btn btn-primary" onclick="choiceError();" id="profile_open">프로필공개</a>-->
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
                </div>
             </div>
          </div>      
       </div>
 <!-- /open Modal -->
+<!-- close Modal -->   
+      <div id="choiceCloseModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!--
+                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                  -->
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 비공개할까요?</p>
+               </div>
+               <div class="modal-footer">
+                 <a href="javascript:void(0)" class="btn btn-primary" id="profile_close" onclick="closeAjax();">프로필 비공개</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /close Modal -->
+
+<script>
+function check(){
+     
+      var pro_num = new Array();
+      var chk_cnt = 0;
+       $('input:checkbox[name="pro_num"]').each(function() {
+         if(this.checked){
+        	 pro_num[chk_cnt] = this.value;
+        	 chk_cnt++;
+        	}  
+       });
+       if(pro_num == ""){
+        alert("1개이상 선택해 주세요.");
+         return;
+      }
+      checkdelete1.submit();
+      }
+</script> 
+<script> 
+
+     var pronum = new Array();
+	 $("input:checkbox[name='pro_num']").on("click",function(){
+		 var chk_cnt = 0;
+		 var pronumTemp = new Array();
+ 
+		$('input:checkbox[name="pro_num"]').each(function() {
+			 if(this.checked){
+				 pronumTemp[chk_cnt] = this.value;
+			      chk_cnt++;
+			      }
+			 });
+			pronum=pronumTemp;
+			
+		 });
+			       
+    	function choiceAjax(){
+    		
+    			var flag= ${!empty sessionScope.email};
+			      var objParam={
+			               "pro_numList" : pronum, 
+			         };
+			   //   alert("objParam.pro_numList"+objParam.pro_numList);
+	           		if(objParam.pro_numList.length != 1){
+	        					alert("한개만 선택해 주세요.");	 
+	        					
+	            		}else{
+				          $.ajax({
+				             type:"get",
+				             url:"choiceProfile",
+				             data:objParam,
+				             dataType: "html",
+				             success:function(data){
+				            	 location.replace("freelancerProfile_list");
+				            	 
+				             },
+				             error:function(data){
+				           		alert("error");
+				             }
+			          });
+			      }
+    		}
+    	function closeAjax(){
+    		
+			var flag= ${!empty sessionScope.email};
+		      var objParam={
+		               "pro_numList" : pronum
+		         };
+            		
+           		if(objParam.pro_numList.length != 1){
+        					alert("한개만 선택해 주세요.");	        					
+            		}else{
+			          $.ajax({
+			             type:"get",
+			             url:"closeAjax",
+			             data:objParam,
+			             dataType: "html",
+			             success:function(data){
+			            	 location.replace("freelancerProfile_list");
+			             },
+			             error:function(data){
+			           		alert("error");
+			             }
+		          });
+		      }
+		}
+
+</script>
+
+
 
 		<!-- Back to top -->
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>

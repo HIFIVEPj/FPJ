@@ -1,4 +1,3 @@
-
 package fp.market.service;
 
 import java.util.HashMap;
@@ -9,21 +8,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fp.corporation.domain.Corporation;
-import fp.market.domain.Freelancer;
+import fp.corporation.mapper.CorporationMapper;
+import fp.corporation.mapper.ProjectMapper;
+import fp.freelancerprofile.domain.FreeLancer;
+import fp.freelancerprofile.domain.FreeLancerProfile;
+import fp.freelancerprofile.mapper.FreeLancerProfileMapper;
+import fp.market.domain.FreelancerProfile;
 import fp.market.domain.Market;
-import fp.market.domain.MarketPayment;
+import fp.market.domain.MarketBuysellList;
 import fp.market.domain.MarketPick;
 import fp.market.domain.MarketQA;
 import fp.market.domain.MarketQAFile;
 import fp.market.domain.MarketRev;
 import fp.market.mapper.MarketMapper;
-import fp.market.utils.MarketPagingVO;
 import lombok.AllArgsConstructor;
-
+import lombok.extern.log4j.Log4j;
+@Log4j
 @Service
 @AllArgsConstructor
 public class MarketServiceImpl implements MarketService {
+	private ProjectMapper pjMapper;
+	private CorporationMapper corMapper;
+	private FreeLancerProfileMapper freeMapper;
 	private MarketMapper mapper;
+	
 	@Override
 	public int getMarketCount() {
 		return mapper.getMarketCount();
@@ -40,8 +48,8 @@ public class MarketServiceImpl implements MarketService {
 	}
 
 	@Override
-	public List<Market> getMarketList(MarketPagingVO marketVO) {
-		return mapper.getMarketList(marketVO);
+	public List<Market> getMarketList ( HashMap<String,Object> Pagingmap) {
+		return mapper.getMarketList(Pagingmap);
 	}
 
 	@Override
@@ -90,11 +98,14 @@ public class MarketServiceImpl implements MarketService {
 	public long getFreecode(String mem_email) {
 		return mapper.getFreeCode(mem_email);
 	}
-	
+//marketReview insert		
 	@Override
 	public void insertMarketRev(MarketRev mareketRev) {
 		mapper.insertMarketRev(mareketRev);
-		
+	}
+	@Override
+	public Integer reloadMarketRevAVG(long market_num) {
+		return mapper.reloadMarketRevAVG(market_num);
 	}
 //marketQA insert	
 	@Transactional
@@ -132,23 +143,28 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public void updateMarketRev(HashMap<String, Object> map) {
 		mapper.updateMarketRev(map);
-		
 	}
 //마켓결제
 	@Override
 	public String getFreeName(long market_num) {
 		return mapper.getFreeName(market_num);
 	}
-
+	@Override
 	public void insertPaymentMarket(Map<String,Object> map) {
 		mapper.insertPaymentMarket(map);
 	}
+	@Override
+	public void insertPaymentMarket2(Map<String, Object> map) {
+		mapper.insertPaymentMarket2(map);
+	}
+	
 //마켓리스팅시 하트색깔 여부를위해서
+	@Override
 	public List<MarketPick> pickState(String mem_email) {
-		return mapper.pickState(mem_email);
-		
+		return mapper.pickState(mem_email);	
 	}
 	@Override
+	@Transactional
 	public void insertMarketPick(HashMap<String,Object> map) {
 		mapper.insertMarketPick(map);	
 		Long market_num=(Long) map.get("market_num");
@@ -156,12 +172,71 @@ public class MarketServiceImpl implements MarketService {
 		mapper.updatePlusMarketPick(market_num);
 	}
 	@Override
+	@Transactional
 	public void deleteMarketPick(HashMap<String, Object> map) {
 		Long market_num=(Long) map.get("market_num");
 
 		mapper.deleteMarketPick(map);
 		mapper.updateMinusMarketPick(market_num);
 	}
+//마켓구매내역insert
+	@Override
+	@Transactional
+	public void insertMarketBuy(HashMap<String, Object> map) {
+		mapper.insertMarketBuy(map);
+		//기업
+			Corporation cor = corMapper.mydash_cor_select((String)map.get("mem_email"));
+			if(cor!=null) {
+			pjMapper.corPointUp(cor.getCor_code());
+			pjMapper.corLevelUp1(cor.getCor_code());
+			pjMapper.corLevelUp2(cor.getCor_code());
+		}else {
+		//프리랜서
+			FreeLancer free = freeMapper.mydash_free_select((String)map.get("mem_email"));
+			freeMapper.freePointUp(free.getFree_code());
+			freeMapper.freeLevelUp1(free.getFree_code());
+			freeMapper.freeLevelUp2(free.getFree_code());
+		}
+		
+	}
+	public List<MarketBuysellList> writeReview(HashMap<String,Object> map){
+		return mapper.writeReview(map);	
+	}
+	
+	public List<Market> searchBoxMarketList(Map<String,Map<String,Object>> map){
+		return mapper.searchBoxMarketList(map);
+	}
+	public int searchBoxMarketCount(Map<String,Map<String,Object>> map) {
+		log.info("Service-map:"+map);
+		return mapper.searchBoxMarketCount(map);
+	}
+
+	@Override
+	public int searchButtonMarketCount(String searchWord) {
+		return mapper.searchButtonMarketCount(searchWord);	
+	}
+	@Override
+	public List<Market> searchButtonMarketList(HashMap<String,Object> map) {
+		return mapper.searchButtonMarketList(map);	
+	}
+//컨텐트 유사한프리랜서정보	
+	@Override
+	public List<FreelancerProfile> getSimilarFree(int type_num) {
+		return mapper.similarFree(type_num);
+	}
+//마켓문의계층형 삭제
+	@Override
+	public long maxSun(HashMap<String, Object> map) {
+		return mapper.maxSun(map);
+	}
+	@Override
+	public long delUpdateMarketQA2(HashMap<String, Object> map) {
+		return mapper.delUpdateMarketQA2(map);
+	}
+	@Override
+	public List<String> deletedQA(HashMap<String, Object> map) {
+		return mapper.deletedQA(map);
+	}
+	
 
 }
-

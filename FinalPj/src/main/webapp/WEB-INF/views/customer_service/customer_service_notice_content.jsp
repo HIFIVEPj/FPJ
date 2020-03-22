@@ -123,33 +123,116 @@
 							<div class="card-body text-justify">	
 								<p>${notice_content.notice_cont}</p>
 							</div>
+							<!-- 좋아요 이전 -->
+							<!--
 							<div class="card-footer mx-auto" style="border-top: #fff;">	
 								<a class="btn btn-app">
 									<span class="badge badge-pill bg-blue">5</span>
 									<i class="fa fa-thumbs-o-up"></i>
 								</a>
-								
-								<!--
-								<div class="icons">
-									<a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a>
-								</div>
-								
-								<div class="product-tags clearfix">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#" class="btn btn-primary icons"><i class="fa fa-thumbs-o-up"></i> 345</a></li>
-									</ul>
-								</div>
-								-->
-							</div>
-							<!--
-							<div class="card-body product-filter-desc">
-								<div class="product-tags clearfix">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#">좋아요 버튼 이걸로 할까?</a></li>
-									</ul>
-								</div>
 							</div>
 							-->
+							<!-- 좋아요 이전 -->
+							
+							<!-- 좋아요 -->
+							<!--
+							<div class="card-footer mx-auto" style="border-top: #fff;">
+							-->
+							<div class="card-header mx-auto" style="border-top: #fff; border-bottom: 0px;">
+							
+							<input type="hidden" value="${sessionScope.email}" class="mem_email"/>
+
+							<c:if test="${empty sessionScope.email}">
+								<a class="btn btn-app" href="javasript:void(0)" onclick="javascript:needtoLogin()">
+									<span class="badge badge-pill bg-blue">${notice_content.notice_recommnum}</span>
+									<i class="fa fa-thumbs-o-up"></i>
+								</a>
+							</c:if>							
+							
+							<c:if test="${!empty sessionScope.email}">
+								<c:choose>
+									
+									<c:when test="${notice_content.mem_email eq sessionScope.email}">
+										<a class="btn btn-app" href="javasript:void(0)" onclick="javascript:notMine()">
+											<span class="badge badge-pill bg-blue">${notice_content.notice_recommnum}</span>
+											<i class="fa fa-thumbs-o-up"></i>
+										</a>
+									</c:when>
+									
+									<c:when test="${notice_recommend_num_list.contains(notice_content.notice_num)}">
+										<div id="recomm${notice_content.notice_num}">
+											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${notice_content.notice_num})" id="del_recomm${notice_content.notice_num}">
+												<span class="badge badge-pill bg-blue">${notice_content.notice_recommnum}</span>
+
+												<i class="fa fa-thumbs-up" style="color:#e8564a"></i>
+											</a>
+										</div>									
+									</c:when>
+									<c:otherwise>
+										<div id="recomm${notice_content.notice_num}">
+											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${notice_content.notice_num})" id="insert_recomm${notice_content.notice_num}">
+												<span class="badge badge-pill bg-blue">${notice_content.notice_recommnum}</span>
+												<i class="fa fa-thumbs-o-up"></i>
+											</a>
+										</div>									
+									</c:otherwise>	
+								</c:choose>
+								
+								<div id="recomm${notice_content.notice_num}">
+								
+								</div>
+					
+							</c:if>
+							
+							
+							<script>
+							function needtoLogin(){
+								alert("로그인 후 사용 가능한 서비스 입니다.")
+							}
+							
+							function notMine(){
+								alert("타인의 게시물만 추천 가능합니다.")
+							}
+							
+							function add_recomm(notice_num){
+								$.ajax({
+									url:"notice_recommend_insert",
+									type:"GET",
+									//async: true,
+									cache: false,
+									dataType:"json",
+					    			data:"notice_num="+notice_num+"&mem_email="+$(".mem_email").val(),
+									success: function(data){
+										$('#insert_recomm'+notice_num).remove();
+										$('#recomm'+notice_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+notice_num+")' id='del_recomm"+notice_num+"'><span class='badge badge-pill bg-blue'>"+data.notice_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
+									},
+									error: function(data){
+										alert("실패1");
+									}
+								});
+							}
+							function del_recomm(notice_num){
+								$.ajax({
+									url:"notice_recommend_del",
+									type:"GET",
+									//async: true,
+									cache: false,
+									dataType:"json",
+									data:"notice_num="+notice_num+"&mem_email="+$(".mem_email").val(),
+									success:function(data){
+										$('#del_recomm'+notice_num).remove();
+										$('#recomm'+notice_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+notice_num+")' id='insert_recomm"+notice_num+"'><span class='badge badge-pill bg-blue'>"+data.notice_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+									},
+									error: function(data){
+										alert("실패2");
+									}
+								});
+							}
+							</script>
+					
+							</div>
+							<!-- /좋아요 -->
+							
 							
 							<div class="card-footer text-right">
 						

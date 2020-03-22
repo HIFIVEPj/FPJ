@@ -37,8 +37,16 @@
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
 									<div class="profile-pic-img">
-										<!-- <span class="bg-success dots" data-toggle="tooltip" data-placement="top" title="" data-original-title="online"></span> -->
-										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+										<c:if test="${getFileName.get(0).free_fname eq null}">
+											<div class="profile-pic-img">
+												<img src="../images/faces/male/25.jpg" class="brround" alt="user">
+											</div>
+										</c:if>
+										<c:if test = "${getFileName.get(0).free_fname ne null}">
+											<div class="avatar-xxl brround" style="margin:0 auto;">
+												<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
+											</div>
+										</c:if>
 									</div>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
@@ -71,8 +79,9 @@
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓 관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-													<li><a class="slide-item" href="mydash.html">마켓관리</a></li>
-													<li><a class="slide-item" href="mydash.html">구매관리</a></li>
+													<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+													<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+													<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											
 										<!--  		<li class="sub-slide">
 													<a class="side-menu__item border-top-0 slide-item" href="#" data-toggle="sub-slide"><span class="side-menu__label">Managed Ads-2</span> <i class="sub-angle fa fa-angle-right"></i></a>
@@ -86,27 +95,7 @@
 										<li>
 											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
-							<!-- 			<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-basket"></i><span class="side-menu__label">Orders</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="orders.html">Orders-1</a></li>
-												<li><a class="slide-item" href="orders.html">Orders-2</a></li>
-											</ul>
-										</li>
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-game-controller"></i><span class="side-menu__label"> Safety Tips</span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="tips.html">Safety Tips-1</a></li>
-												<li><a class="slide-item" href="tips.html">Safety Tips-2</a></li>
-											</ul>
-										</li> 
-										<li class="slide">
-											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-settings"></i><span class="side-menu__label"> Settings </span><i class="angle fa fa-angle-right"></i></a>
-											<ul class="slide-menu">
-												<li><a class="slide-item" href="settings.html">Settings-1</a></li>
-												<li><a class="slide-item" href="settings.html">Settings-2</a></li>
-											</ul>
-										</li>-->
+
 										<li>
 											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
@@ -114,59 +103,7 @@
 								</div>
 							</aside>
 						</div>
-				<!--  	<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">Safety Tips For Buyers</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>-->
+
 					</div>
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
@@ -178,7 +115,7 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-										<label class="form-label">직종</label>
+										<label class="form-label">직종<span style="color:red;">*</span></label>
                                  			<select class="form-control" id="type_num" name="type_num">
                                  		<c:choose>		 
                                  			 <c:when test="${profile.type_num eq '1'}">
@@ -224,16 +161,16 @@
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="form-group">
-											<label class="form-label">경력</label>
+											<label class="form-label">경력<span style="color:red;">*</span></label>
 										<c:if test="${profile ne '[]'}">
-											<input type="text" class="form-control"  value="${profile.pro_exp}" name = "pro_exp">
+											<input type="number" class="form-control"  value="${profile.pro_exp}" name = "pro_exp" id="pro_exp" min="1" max="30" numberOnly>
 										</c:if>									
 										</div>
 									</div>
 
 									<div class="col-sm-6 col-md-12">
 										<div class="form-group ">
-											<label class="form-label">키워드</label>		   
+											<label class="form-label">키워드<span style="color:red;">*</span></label>		   
 										</div>
 									</div>							
 							<div class="col-sm-6 col-md-12">
@@ -249,9 +186,8 @@
 											<li><a href="#tab5" <c:if test="${profile.type_num eq 5}"> class ="active" </c:if> data-toggle="tab" name="type_num" value="5">기타</a></li>											
 										</ul>
 						<!-- 담추가 	<input type="hidden" name="type_num" value="" id="type_num" /> -->	
-									</div>
-									
-									<label class="form-label"><b>키워드</b></label>
+									</div>									
+								
 									<c:choose>
 										<c:when test="${profile.keyword ne '[]'}">
 											<c:forEach var="i" begin="0" end="${profile.freePickKeyWord.size()-1}">
@@ -287,24 +223,24 @@
 												
 												<div class="col-md-2">											
 													<label class="custom-control custom-checkbox">
-													<c:forEach var="i" begin="0" end="${profile.keyword.size()-1}">																												
+																																					
 														<input type="checkbox" class="custom-control-input" name="key_num" value="2"
 															<c:if test="${profile.keyname().contains('Back_End')}">
 															checked
 															</c:if>>	
-													</c:forEach>												
+																								
 														<span class="custom-control-label">Back-End</span>	
 													</label>
 												</div>
 												
 												<div class="col-md-2">
 													<label class="custom-control custom-checkbox">
-														<c:forEach var="i" begin="0" end="${profile.keyword.size()-1}">							
+																			
 														<input type="checkbox" class="custom-control-input" name="key_num" value="3"
 															<c:if test="${profile.keyname().contains('Java')}">
 															checked
 															</c:if>>
-														</c:forEach>
+													
 														<span class="custom-control-label">Java</span>
 													</label>
 												</div>
@@ -1858,202 +1794,9 @@
 							</div>	
 							</div>
 
-
-					
-							<!-- 																		
-									<div class="col-sm-6 col-md-12">									
-									<div class="form-group ">
-										
-										<div class="row">									
-											<div class="col-md-2">											
-												<label class="form-label">JAVA</label>										
-											</div>
-												
-											<div class="col-md-2">											
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Front-end</span>
-													</label>
-											</div>
-											<div class="col-md-2">											
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Back_End</span>
-												</label>
-											</div>
-											<div class="col-md-2">
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Java</span>
-												</label>
-											</div>
-											<div class="col-md-2">	
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Spring</span>
-												</label>
-											</div>
-											<div class="col-md-2">	
-												<label class="custom-control custom-checkbox">
-													<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-													<span class="custom-control-label">Xplatform</span>
-												</label>
-											</div>
-										</div>	
-										<div class="row">
-											<div class="col-md-2">											
-												<label class="form-label"></label>										
-											</div>
-										<div class="col-md-2">
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Miplantform</span>
-											</label>
-										</div>
-										<div class="col-md-2">
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Nexacro</span>
-											</label>
-										</div>	
-											
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Proframe</span>
-											</label>
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Maven</span>
-											</label>
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Jenkins</span>
-											</label>
-										</div>	
-									</div>	
-										
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label"></label>										
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Sencha</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Trustform</span>
-											</label>
-											</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Tuxedo</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Gauce</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Pro*C</span>
-											</label>
-										</div>
-									</div>	
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label"></label>										
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">DecOn</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Thymeleaf</span>
-											</label>
-										</div>
-									</div>
-							
-								<div class="row">
-											<div class="col-md-12">											
-												<HR />									
-											</div>	
-								</div>
-										
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label">Mobile App</label>										
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Hybrid</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">Android</span>
-											</label>
-											</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">ios(Object-C)</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">ios(Swift)</span>
-											</label>
-										</div>
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">WebView</span>
-											</label>
-										</div>
-									</div>			
-									<div class="row">
-										<div class="col-md-2">											
-											<label class="form-label"></label>										
-										</div>	
-										<div class="col-md-2">	
-											<label class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-												<span class="custom-control-label">IoT</span>
-											</label>
-										</div>	
-									</div>		
-								</div>
-							</div>
-								
-					      -->
 						
 		
-								<!-- <div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">전화번호</label>
-											<input type="text" class="form-control" placeholder="전화번호">
-										</div>
-									</div> -->								
+										
 
 									<div class="col-md-12">
 										<div class="form-group col-md-12">
@@ -2099,7 +1842,6 @@
 								            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
 								            level: 5 // 지도의 확대 레벨
 								        };
-
 								    //지도를 미리 생성
 								    var map = new daum.maps.Map(mapContainer, mapOption);
 								    //주소-좌표 변환 객체를 생성
@@ -2172,13 +1914,13 @@
 										<div class="col-md-3">
 											<label class="form-label">업무가능여부</label>
 										</div>
-										<div class="col-md-9" name="pro_ox">
+										<div class="col-md-9" >
 											<label class="custom-switch" >
-											<input type="checkbox" name="pro_ox" class="custom-switch-input " 
+											<input type="checkbox" name="pro_ox" class="custom-switch-input "  id="pro_ox"
 												<c:if test="${profile.pro_ox eq 'on'}">
 															checked
 												</c:if>
-												<c:if test="${profile.pro_ox eq 'null'}">
+												<c:if test="${profile.pro_ox eq 'off'}">
 												</c:if>>												
 												<span class="custom-switch-indicator"></span>
 												<span class="custom-switch-description">불가능/가능</span>
@@ -2191,7 +1933,7 @@
 										<div class="form-group ">
 										<div class="row">
 												<div class="col-md-3">
-													<label class="form-label">업무가능일</label>
+													<label class="form-label">업무가능일<span style="color:red;">*</span></label>
 												</div>
 										<div class="col-md-9">
 											<div class="wd-200 mg-b-30">
@@ -2200,7 +1942,7 @@
 														<div class="input-group-text">
 															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 														</div>
-													</div><input class="form-control fc-datepicker" type="text" name="pro_start" value="${profile.pro_start}" >
+													</div><input class="form-control fc-datepicker" type="text" id="pro_start" name="pro_start" value="${profile.pro_start}" >
 												</div>
 											</div>
 										</div>
@@ -2211,11 +1953,11 @@
 									<div class="col-sm-6 col-md-12">	
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">업무형태</label>
+												<label class="form-label">업무형태<span style="color:red;">*</span></label>
 											</div>
 											<div class="col-md-9">
 												
-												<select class="form-control" name="pro_place">
+												<select class="form-control" name="pro_place" id="pro_place">
 	                                    		 <c:choose>	
 	                                    			<c:when test="${profile.pro_place eq '0'}">
 	                                    				<option value="0" selected>상주</option>
@@ -2253,132 +1995,347 @@
 									<div class="col-sm-6 col-md-12">	
 										<div class="row">
 											<div class="col-md-3">
-												<label class="form-label">업무가능지역</label>
+												<label class="form-label">업무가능지역<span style="color:red;">*</span></label>
 											</div>
 											<div class="col-md-9">
-												  <select class="form-control" name="pro_workplace">
-	                                    			<option selected> </option>
-	                                    			<option value="서울">서울</option>
-	                                    			<option value="경기">경기</option>
-	                                    			<option value="인천">인천</option>
-	                                    			<option value="강원">강원</option>
-	                                    			<option value="충남">충남</option>
-	                                    			<option value="충북">충북</option>
-	                                   				<option value="대전">대전</option>
-	                                   				<option value="대구">대구</option>
-	                                   				<option value="울산">울산</option>
-	                                   				<option value="부산">부산</option>
-	                                   				<option value="경북">경북</option>
-	                                   				<option value="경남">경남</option>
-	                                   				<option value="광주">광주</option>
-	                                   				<option value="전북">전북</option>
-	                                   				<option value="전남">전남</option>
-	                                   				<option value="제주">제주</option> 	 	 	 
-	                                   				 
-	                                			 </select>
+											  <select class="form-control" name="pro_workplace" id="pro_workplace">
+											  	<c:choose>		 
+                                			 		<c:when test="${profile.pro_workplace eq '서울'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" selected>서울</option>
+		                                    			<option value="경기">경기</option>
+		                                    			<option value="인천">인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남">충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '경기'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" selected>경기</option>
+		                                    			<option value="인천">인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남">충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '인천'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" selected>인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남">충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '강원'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원" selected>강원</option>
+		                                    			<option value="충남">충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '충남'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" selected>충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '충북'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" selected>충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '대전'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전" selected>대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '대구'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구" selected>대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '울산'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산" selected>울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '부산'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산" selected>부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '경북'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북" selected>경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '경남'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남" selected>경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '광주'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주" selected>광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '전북'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주" selected>광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '전북'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북" selected>전북</option>
+		                                   				<option value="전남">전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '전남'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남" selected>전남</option>	                                   				
+		                                   				<option value="제주">제주</option>  
+	                                   				</c:when>
+	                                   				<c:when test="${profile.pro_workplace eq '제주'}">
+		                                    			<option > </option>
+		                                    			<option value="서울" >서울</option>
+		                                    			<option value="경기" >경기</option>
+		                                    			<option value="인천" >인천</option>
+		                                    			<option value="강원">강원</option>
+		                                    			<option value="충남" >충남</option>
+		                                    			<option value="충북">충북</option>
+		                                   				<option value="대전">대전</option>
+		                                   				<option value="대구">대구</option>
+		                                   				<option value="울산">울산</option>
+		                                   				<option value="부산">부산</option>
+		                                   				<option value="경북">경북</option>
+		                                   				<option value="경남">경남</option>
+		                                   				<option value="광주">광주</option>
+		                                   				<option value="전북">전북</option>
+		                                   				<option value="전남" >전남</option>	                                   				
+		                                   				<option value="제주" selected>제주</option>  
+	                                   				</c:when>
+	                                   				
+	                                   			</c:choose>
+                                			 </select>
 											</div>
-												<!-- 근무가능지역 select 박스 							
-												<script type="text/javascript">
-												$('document').ready(function() {
-												 var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
-												  var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
-												   var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
-												   var area3 = ["대덕구","동구","서구","유성구","중구"];
-												   var area4 = ["광산구","남구","동구",     "북구","서구"];
-												   var area5 = ["남구","달서구","동구","북구","서구","수성구","중구","달성군"];
-												   var area6 = ["남구","동구","북구","중구","울주군"];
-												   var area7 = ["강서구","금정구","남구","동구","동래구","부산진구","북구","사상구","사하구","서구","수영구","연제구","영도구","중구","해운대구","기장군"];
-												   var area8 = ["고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"];
-												   var area9 = ["강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"];
-												   var area10 = ["제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"];
-												   var area11 = ["계룡시","공주시","논산시","보령시","서산시","아산시","천안시","금산군","당진군","부여군","서천군","연기군","예산군","청양군","태안군","홍성군"];
-												   var area12 = ["군산시","김제시","남원시","익산시","전주시","정읍시","고창군","무주군","부안군","순창군","완주군","임실군","장수군","진안군"];
-												   var area13 = ["광양시","나주시","목포시","순천시","여수시","강진군","고흥군","곡성군","구례군","담양군","무안군","보성군","신안군","영광군","영암군","완도군","장성군","장흥군","진도군","함평군","해남군","화순군"];
-												   var area14 = ["경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"];
-												   var area15 = ["거제시","김해시","마산시","밀양시","사천시","양산시","진주시","진해시","창원시","통영시","거창군","고성군","남해군","산청군","의령군","창녕군","하동군","함안군","함양군","합천군"];
-												   var area16 = ["서귀포시","제주시","남제주군","북제주군"];
-												
-												 // 시/도 선택 박스 초기화
-												 $("select[name^=pro_workplace]").each(function() {
-												  $selsido = $(this);
-												  $.each(eval(area0), function() {
-												   $selsido.append("<option value='"+this+"'>"+this+"</option>");
-												  });
-												  $selsido.next().append("<option value=''>구/군 선택</option>");
-												 });
-												
-												 // 시/도 선택시 구/군 설정
-												 $("select[name^=pro_workplace]").change(function() {
-												  var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
-												  var $gugun = $(this).next(); // 선택영역 군구 객체
-												  $("option",$gugun).remove(); // 구군 초기화
-												
-												  if(area == "area0")
-												   $gugun.append("<option value=''>구/군 선택</option>");
-												  else {
-												   $.each(eval(area), function() {
-												    $gugun.append("<option value='"+this+"'>"+this+"</option>");
-												   });
-												  }
-												 });
-												
-												});
-												</script>
-												
-											<select class="form-control" style="width:300px; margin-left:11px;" name="pro_workplace" id="sido1"></select> &nbsp;&nbsp;
-										 	<select class="form-control" style="width:300px; margin-left:10px;" name="gugun1" id="gugun1"></select>  -->
 											</div>
 										</div>
-									</div>								
-																			
-										
-								<!-- 	<div class="col-sm-6 col-md-3">
-										<div class="form-group">
-											<label class="form-label">업무가능일</label>
-											<input type="number" class="form-control" placeholder="업무가능일">
-										</div>
-									</div>
-								-->	
-									<!-- 
-									<div class="col-md-5">
-										<div class="form-group">
-											<label class="form-label">선호지역</label>
-											<select class="form-control select2-show-search border-bottom-0 w-100 select2-show-search" data-placeholder="Select">
-												<optgroup label="Categories">
-													<option>--Select--</option>
-													<option value="1">Germany</option>
-													<option value="2">Real Estate</option>
-													<option value="3">Canada</option>
-													<option value="4">Usa</option>
-													<option value="5">Afghanistan</option>
-													<option value="6">Albania</option>
-													<option value="7">China</option>
-													<option value="8">Denmark</option>
-													<option value="9">Finland</option>
-													<option value="10">India</option>
-													<option value="11">Kiribati</option>
-													<option value="12">Kuwait</option>
-													<option value="13">Mexico</option>
-													<option value="14">Pakistan</option>
-												</optgroup>
-											</select>
-										</div>
-									</div> 
-									-->						
-										
-																	
-				<!-- 					<div class="col-sm-6 col-md-6">
-										<div class="form-group">
-											<label class="form-label">Facebook</label>
-											<input type="text" class="form-control" placeholder="https://www.facebook.com/">
-										</div>
-									</div>    -->
+									</div>	
 									<br/>
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">제목</label>
-												<input type="text" class="form-control"  name="profile_sub" value="${profile.profile_sub}">
+												<label class="form-label">제목<span style="color:red;">*</span></label>
+												<input type="text" class="form-control"  id="profile_sub" name="profile_sub" value="${profile.profile_sub}">
 											<!-- <input type="text" class="form-control" style="width:804px; margin-left:11px;" name="profile_sub" value="${profile.profile_sub}"> -->
 											</div>
 											
@@ -2388,137 +2345,149 @@
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 											<div class="form-group">
-												<label class="form-label">자기소개</label>
-												<textarea rows="5" class="form-control" name="pro_cv">${profile.pro_cv}</textarea>											
+												<label class="form-label">자기소개<span style="color:red;">*</span></label>
+												<textarea rows="5" class="form-control" id="pro_cv" name="pro_cv">${profile.pro_cv}</textarea>											
 											</div>											
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12 col-md-12">
 							 				<div class="form-group">
-												<label class="form-label">학력</label>
-												<input type="text" class="form-control" name="pro_edu" value="${profile.pro_edu}">
+												<label class="form-label">최종학력<span style="color:red;">*</span></label>
+												<input type="text" class="form-control" name="pro_edu" id="pro_edu" value="${profile.pro_edu}">
 											</div>
 										</div>
 									</div>
-							<!-- 	<div class="col-md-12">
-										<div class="form-group mb-0">
-											<label class="form-label">첨부파일</label>
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" name="example-file-input-custom">
-												<label class="custom-file-label">Choose file</label>
-											</div>
-										</div>
-									</div> 
-									<div class="p-2 border mb-4">
-										<div class="upload-images d-flex">
-											<div>
-												<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
-											</div>
-											<div class="ml-3 mt-2">
-												<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
-												<small>4.5kb</small>
-											</div>
-											<div class="float-right ml-auto">
-												<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
-											</div>
-										</div>
-									</div> -->
-									<div class="col-sm-12 col-md-12">
-										<div class="form-group ">
-											<label class="form-label mt-2">첨부파일</label>
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" name="example-file-input-custom">
-												<label class="custom-file-label">Upload Files</label>
-											</div>
-										</div>
-									</div>		
-
-									<div class="col-sm-12 col-md-12">
-										<div class="form-group ">
-											<div class="p-2 border mb-4">
-												<div class="upload-images d-flex">
-													<div>
-														<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
-													</div>
-													<div class="ml-3 mt-2">
-														<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
-														<small>4.5kb</small>
-													</div>
-													<div class="float-right ml-auto">
-														<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
-													</div>
-												</div>
-											</div>	
-										</div>
-									</div>				
-												<div class="card-footer" align="right" >			
-												<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>	 	
-												<input type="button" onclick="check();" class="btn btn-primary" value="수정하기"></a> 	
-												</div>
-											</form>							
-										</div>										
+									<div class="card-footer" align="right" >			
+									<a href="freelancerProfile_list" class="btn btn-primary icons">목록</a>	 	
+									<input type="button" class="btn btn-secondary" value="수정하기" data-toggle="modal" data-target="#editModal"></a> 	
 									</div>
-								</div>
-							</div>								
+								</form>						
+							</div>										
 						</div>
 					</div>
-
-						<!-- 	<div class="card-footer" align="right">
-								<div class="icons">
-									<a href="employer-list-right" class="btn btn-secondary icons">목록</a>
-								</div>
-							</div> -->	
-							
-						</div>
-					</div>
-				</div>
-		
+				</div>								
 			</div>
-		</section>
+		</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- edit Modal -->   
+      <div id="editModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 수정 할까요?</p>
+               </div>
+               <div class="modal-footer">
+                 <a href="javascript:void(0)" class="btn btn-primary" id="profile_close" onclick="check();">수정하기</a>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /edit Modal -->
+
+</section>
 		<!--/User Dashboard-->
 <script>
-	function check(){	
-		//var type_num = $('.active').attr('value'); //타입 버튼
-		var type_num = $("#type_num option:selected").val(); //타입 버튼
+	$("document").ready(function () {
+		$( ".fc-datepicker" ).datepicker({ minDate: 1});
+	});
+
+	function check(){		
 		
-		//document.getElementById('type_num').value = type_num;
-		alert("type_num"+type_num)
-	
-		//var type = document.getElementById('type_name'); //직종
 		var key_num = new Array();
 		var key_cnt = 0;
 		
-		$('input:checkbox[name="key_num"]').each(function() {
-			if(this.checked){
-				key_num[key_cnt] = this.value;
-				key_cnt++; 
+		var exp_size = $('#pro_exp').val();
+		exp_size = exp_size.toString();
+		expDigit = exp_size.length;
+		
+		 if(($('#type_num').val() == "")){
+		        alert("직종을 선택헤주세요.")
+		        return ;
+			  }
+			 
+			 if(expDigit>3){
+				 alert("2글자까지 입력 가능합니다.")
+				 return ;
+			 }else if($('#pro_exp').val()== ""){ 
+				 alert("경력을 입력해주세요.")
+			     return ;
 			}
-
-		 });alert("key_num: "+key_num)
-		 if(key_num == ""){
-				alert("키워드는 1개 이상 설정해야합니다.")
-				return;
-		}
-		
-
-		
-
+			 if(edit_free_profile.pro_exp.value<0){
+			        alert("경력을 0보다 크게 입력해주세요.")
+			        return ;
+			}
+			 
+			 if(($('#address').val() == "")){
+			        alert("주소를 입력해주세요.")
+			        return ;
+			} 
+			 if(($('#detailAddress').val() == "")){
+			        alert("상세주소를 입력해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_start').val() == "")){
+			        alert("업무가능일을 선택해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_place').val() == "")){
+			        alert("업무장소를 선택해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_workplace').val() == "")){
+			        alert("업무가능지역을 선택해주세요.")
+			        return ;
+			} 
+			 if(($('#profile_sub').val() == "")){
+			        alert("제목을 입력해주세요.")
+			        return ;
+			} 
+			 if(($('#pro_cv').val() == "")){
+			        alert("자기소개를 입력해주세요.")
+			        return ;
+			}  
+			 if(($('#pro_edu').val() == "")){
+			        alert("최종학력을 입력해주세요.")
+			        return ;
+			}  
+			 
+		     var pro_ox = $('input:checkbox[id="pro_ox"]:checked').length;
+		     if(pro_ox == 0){  
+		    	 $('#pro_ox').attr('value','off');
+		    	 var z = $('#pro_ox').val();
+		    	 $("#pro_ox").append("<input type='hidden'  name='pro_ox' value='"+z+"'>");     
+		     }
+		     
+			$('input:checkbox[name="key_num"]').each(function() {
+				if(this.checked){
+					key_num[key_cnt] = this.value;
+					key_cnt++; 
+				}
+	
+			 });
+			 if(key_num == ""){
+					alert("키워드는 1개 이상 설정해야합니다.")
+					return;
+			}	
 		var free_keynum = new Array();
 		var free_cnt=0;
 		 $('input[name=free_keynum]').each(function(){
 			 	free_keynum[free_cnt]=this.value;
 			 	free_cnt++;
 		 });
-		//alert("mem_email: "+edit_free_profile.mem_email.value)
-		 //alert("pj_place: "+pj_input.pj_place.value+", pj_fgrade: "+pj_input.pj_fgrade.value+", pj_cont: "+pj_input.pj_cont.value+", key_num: "+key_num);
-		// alert("pj_pay: "+pj_input.pj_pay.value+", pj_homepage: "+pj_input.pj_homepage.value+", pj_term: "+pj_input.pj_term.value+", pj_ddate: "+pj_input.pj_ddate.value);
-		 //alert("pj_recnum: "+pj_input.pj_recnum.value+", pj_totalp: "+pj_input.pj_totalp.value+", pj_sub: "+pj_input.pj_sub.value+", cor_name: "+pj_input.cor_name.value);
-		 //alert("mem_email: "+pj_input.mem_email.value+", cor_tel: "+pj_input.cor_tel.value+", pj_postcode: "+pj_input.pj_postcode.value+", cor_mname: "+pj_input.cor_mname.value);
-		 //alert("pj_loc: "+edit_free_profile.pj_loc.value+", pj_detailloc: "+pj_input.pj_detailloc.value+", pj_loc_x: "+pj_input.pj_loc_x.value+", pj_loc_y: "+pj_input.pj_loc_y.value);
+		
 		 edit_free_profile.submit();
 		}
-	//});
 </script>	
 
 <!--footer-->

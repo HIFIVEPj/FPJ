@@ -32,6 +32,10 @@ import fp.freelancerprofile.domain.Type;
 		return mapper.countFreeLancer();
 	}
 	@Override
+	public int countFreeLancerPaging(Map<String, Object> map){
+		return mapper.countFreeLancerPaging(map);
+	}
+	@Override
 	public FreeLancerProfile profile_select(String mem_email) {
 		return mapper.profile_select(mem_email);
 	}
@@ -39,19 +43,42 @@ import fp.freelancerprofile.domain.Type;
 	public List<List_FreeLancer> SelectList(Map<String, Object> map) {
 		return mapper.SelectList(map);
 	}
+
 	@Override
 	public List<List_FreeLancerProfile> SelectList2(){
 		return mapper.SelectList2();
 	}
 	@Override
+	public List<List_FreeLancerReview> selectStar_list(){
+		return mapper.selectStar_list();
+	}
+	@Override
 	public List<Project> SelectList3(){
 		return mapper.SelectList3();
 	}
+	@Override
+	public long count_type(int i) {
+		return mapper.count_type(i);
+	}
+	//인덱스//
+	@Override
+	public List<List_FreeLancer> index_select(){
+		return mapper.index_select();
+	}
+	@Override
+	public List<Freelancer_FreeLancerProfile> keyname_select() {
+		return mapper.keyname_select();
+	}
+
+	
 	//컨텐츠//
 	@Override
 	public List<Freelancer_FreeLancerProfile> freelancercontent(Map<String, Object> map){
 		return mapper.freelancercontent(map);
-		
+	}
+	@Override
+	public List<Freelancer_FreeLancerProfile> selectTel(Map<String, Object> map) {
+		return mapper.selectTel(map);
 	}
 	@Override
 	public List<Freelancer_FreeLancerProfile> freelancercontent2(long free_code){
@@ -69,7 +96,8 @@ import fp.freelancerprofile.domain.Type;
 	public List<Project> freelancercontent5(long free_code){
 		return mapper.freelancercontent5(free_code);
 	}
-	//프로필 조회수//
+
+	//프로필 조회수 및 별점//
 	@Override
 	public void vcnt(long pro_num) {
 		mapper.vcnt(pro_num);
@@ -78,11 +106,18 @@ import fp.freelancerprofile.domain.Type;
 	public List<List_FreeLancerReview> selectStar(long free_code) {
 		return mapper.selectStar(free_code);
 	}
+
 	//리뷰//	
 	@Override
-	public int countReview() {
-		return mapper.countReview();
+	public long countReview(Map<String, Object> map) {
+		return mapper.countReview(map);
 	}
+
+	@Override
+	public List<FreeLancer> selectFile(String mem_email){
+		return mapper.selectFile(mem_email);
+	}
+
 	@Override
 	public List<List_FreeLancerReview> freelancerReview(List_FreeLancerReview freelancerreview) {
 		return mapper.freelancerReview(freelancerreview);
@@ -111,5 +146,9 @@ import fp.freelancerprofile.domain.Type;
 	public long getTotalCountFree(long free_code) {
 		return getTotalCountFree(free_code);
 	}
+
+
+
+
 
 }

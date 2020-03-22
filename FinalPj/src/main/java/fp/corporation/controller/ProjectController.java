@@ -48,7 +48,9 @@ public class ProjectController {
 	@RequestMapping(value="/project_list", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView project_list(ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request) {
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, HttpServletRequest request,
+			@RequestParam(value="type", required=false)String type
+			,@RequestParam(value="searchKey", required=false)String searchKey) {
 		HttpSession session = request.getSession();
 		String mem_email= (String)session.getAttribute("email");
 		if(nowPage == null && cntPerPage == null) {
@@ -59,7 +61,22 @@ public class ProjectController {
 		}else if(cntPerPage == null) {
 			cntPerPage ="4";
 		}
+		List<Integer>typeList = new ArrayList<Integer>();
 		Map<String,Object>map = new HashMap<String, Object>();
+		
+		
+		if(type==null || type.equals("0")) {
+			map.put("type",null);
+		}else {
+			int typenum = Integer.parseInt(type);
+			typeList.add(typenum);
+			map.put("type",typeList);
+		}
+		if(searchKey != null){
+			map.put("searchKey","%"+searchKey+"%");
+		}else {
+			map.put("searchKey",null);
+		}
 		long totalCount = service.getTotalCount(map);
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		map.put("ProjectVo", projectVo);
@@ -96,26 +113,21 @@ public class ProjectController {
 		mv.addObject("keyname", keyname);		
 		return mv;
 	}
-	@RequestMapping(value="project_list_sort", method=RequestMethod.GET)
-	@ResponseBody
-	public String project_list_sort(@RequestParam String selectKeyword, @RequestParam(value="mem_email", required=false)String mem_email){
-		if(mem_email != null) {
-			return "mem_email="+mem_email+"&selectKeyword="+selectKeyword;
-		}
-		return selectKeyword;
-	}
 	
 	@RequestMapping(value="project_list_ajax", method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList,ProjectVo projectVo , @RequestParam(value="nowPage", required=false)String nowPage
-			, @RequestParam(value="cntPerPage", required=false)String cntPerPage, @RequestParam(value="mem_email", required=false)String mem_email 
+	public ModelAndView project_list_ajax(@RequestParam(value="typeList[]", required=false)List<Integer>typeList, ProjectVo projectVo ,
+			@RequestParam(value="nowPage", required=false)String nowPage
+			, @RequestParam(value="cntPerPage", required=false)String cntPerPage
 			,@RequestParam(value="selectKeyword", required=false)String selectKeyword
 			,@RequestParam(value="pj_fgradeList[]", required=false)List<Integer> pj_fgradeList
 			,@RequestParam(value="pj_placeList[]", required=false)List<Integer> pj_placeList
 			,@RequestParam(value="loc_first", required=false)String loc_first
+			,HttpServletRequest request
 			,@RequestParam(value="loc_second", required=false)String loc_second
 			,@RequestParam(value="searchKey", required=false)String searchKey){
-		
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		if(nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "4";
@@ -165,8 +177,7 @@ public class ProjectController {
 		}else {
 			map.put("pj_place",null);
 		}
-		
-		
+
 		long totalCount = service.getTotalCount(map);
 		projectVo = new ProjectVo(totalCount, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		map.put("ProjectVo", projectVo);
@@ -295,13 +306,13 @@ public class ProjectController {
 		//log.info("@#!#@$  arraykeynum: "+ arraykeynum);
 		//log.info("@#!#@$  project: " +project);
 		//log.info("@#!#@$  map: "+ map);
-		return "redirect:managed_project?mem_email="+mem_email;
+		return "redirect:managed_project";
 	}
 	
 	@RequestMapping("project_delete")
 	public String project_delete(@RequestParam long pj_num) {
 		service.deletePj(pj_num);
-		return "redirect:project_list";
+		return "redirect:managed_project";
 	}
 
 	@RequestMapping("project_payments")
@@ -323,6 +334,8 @@ public class ProjectController {
 		payinfo.put("pj_num", pj_num);
 		log.info("#@$&*^#@&*$payinfo: "+payinfo);
 		service.payinsert(payinfo);
+		Corporation cor = service.corInfo(pj_num);
+		log.info("cor: "+cor);
 		return "project/project_payments_end"; 
 		
 	}

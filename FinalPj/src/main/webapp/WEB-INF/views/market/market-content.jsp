@@ -1,8 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -10,15 +9,22 @@
 
 		<!--Sliders Section-->
 		<div>
-			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class=""><span class="font-weight-bold">60,85,965</span> Ads Available in Pinlist</h1>
+									<h1 class="" style="margin-bottom:0rem;">마켓 상세보기</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -27,639 +33,572 @@
 		</div>
 		<!--/Sliders Section-->
 
-		<!--Breadcrumb-->
-		<div class="bg-white border-bottom">
-			<div class="container">
-				<div class="page-header">
-					<h4 class="page-title">Ad Details</h4>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Ad Details</li>
-					</ol>
-				</div>
-			</div>
-		</div>
-		<!--/Breadcrumb-->
+      <!--Breadcrumb-->
+      <div class="bg-white border-bottom">
+         <div class="container">
+            <div class="page-header">
+               <h4 class="page-title">Ad Details</h4>
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Ad Details</li>
+               </ol>
+            </div>
+         </div>
+      </div>
+      <!--/Breadcrumb-->
 
-		<!--Add listing-->
-		<section class="sptb">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-8 col-lg-8 col-md-12">
+      <!--Add listing-->
+      <section class="sptb">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-8 col-lg-8 col-md-12">
 
 <!--Add Description-->
-					<form name="market-del-edit" method="post" action="market-update?market_num=${market.market_num}">
-						<div class="card overflow-hidden">
-							<div class="card-body h-100">
-								<div class="item-det mb-4">
-									<a href="#" class="text-dark"><h3 class="">${market.market_sub}</h3></a>
-									<ul class="d-flex">
-										<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i>${market.market_pcnt}</a></li>
-									<!--<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> USA</a></li>
-										<li class="mr-5"><a href="#" class="icons"><i class="si si-calendar text-muted mr-1"></i> 5 hours ago</a></li>  -->
-										<li class="mr-5"><a href="#" class="icons"><i class="si si-eye text-muted mr-1"></i> ${market.market_vcnt}</a></li>
-								<!--    <li class=""><a href="#" class="icons">
-										<i class="fa fa-star text-warning"></i>
-										<i class="fa fa-star text-warning"></i>
-										<i class="fa fa-star text-warning"></i>
-										<i class="fa fa-star text-warning"></i>
-										<i class="fa fa-star-half-o text-warning mr-1"></i>4.5</a></li>-->		
-									</ul>
-								</div>
-								<div class="product-slider">
-									<div id="carousel" class="carousel slide" data-ride="carousel">
-										<!--<div class="arrow-ribbon2 bg-primary">$539</div>-->
-										<div class="carousel-inner">
-											<div class="carousel-item active"> <img src="../hifiveImages/marketThumbnails/${market.market_fname}" alt="img"> </div>
-										<!--
-											<div class="carousel-item"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h1.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h2.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
-											<div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
-										-->
-										</div>
-									<!-- <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-											<i class="fa fa-angle-left" aria-hidden="true"></i>
-										</a>
-										<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-											<i class="fa fa-angle-right" aria-hidden="true"></i>
-										</a>-->
-									</div>
-									<div class="clearfix">
-								<!--	<div id="thumbcarousel" class="carousel slide" data-interval="false">
-											<div class="carousel-inner">
-												<div class="carousel-item active">
-													<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="../images/products/h3.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="1" class="thumb"><img src="../images/products/h2.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="2" class="thumb"><img src="../images/products/h6.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="3" class="thumb"><img src="../images/products/h5.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="4" class="thumb"><img src="../images/products/h4.png" alt="img"></div>
-												</div>
-												<div class="carousel-item">
-													<div data-target="#carousel" data-slide-to="0" class="thumb"><img src="../images/products/h1.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="1" class="thumb"><img src="../images/products/h2.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="2" class="thumb"><img src="../images/products/h3.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="3" class="thumb"><img src="../images/products/h4.png" alt="img"></div>
-													<div data-target="#carousel" data-slide-to="4" class="thumb"><img src="../images/products/h5.png" alt="img"></div>
-												</div>
-											</div>
-											<a class="carousel-control-prev" href="#thumbcarousel" role="button" data-slide="prev">
-												<i class="fa fa-angle-left" aria-hidden="true"></i>
-											</a>
-											<a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
-												<i class="fa fa-angle-right" aria-hidden="true"></i>
-											</a>
-										</div>  -->
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">${market.market_sub}</h3>
-							</div>
-							<div class="card-body">
-								<div class="mb-4">
-									<p>${market.market_cont}</p>
-									
-								</div>
-								<h4 class="mb-4">Specifications</h4>
-								<div class="row">
-									<div class="col-xl-6 col-md-12">
-										<ul class="list-unstyled widget-spec mb-0">
-											<li class="">
-												<i class="fa fa-bed text-muted w-5"></i> 2 BedRooms
-											</li>
-											<li class="">
-												<i class="fa fa-bath text-muted w-5"></i> 2 BathRooms
-											</li>
-											<li class="">
-												<i class="fa fa-life-ring text-muted w-5"></i> Unfurnished
-											</li>
-											<li class="">
-												<i class="fa fa-car text-muted w-5"></i> 2 Car Parking
-											</li>
-											<li class="">
-												<i class="fa fa-globe text-muted w-5"></i> East East face
-											</li>
-											<li class="mb-xl-0">
-												<i class="fa fa-pagelines text-muted w-5"></i> Garden
-											</li>
-										</ul>
-									</div>
-									
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="icons">
-									<a href="#" class="btn btn-info icons"><i class="si si-share mr-1"></i> Share Ad</a>
-								<!--<a href="#" class="btn btn-danger icons" data-toggle="modal" data-target="#report"><i class="si si-exclamation mr-1"></i> Report Abuse</a>-->
-									<a href="#" class="btn btn-primary icons"><i class="si si-heart  mr-1"></i> 678</a>
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<!-- 세션일치시에만보이는거 --> 
-									<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
-									<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
-								<!--// 세션일치시에만보이는거 -->
-								</div>
-							</div>
-						</div>
-					</form>
-					<!-- small Modal -->   
-				      <div id="smallModal1" class="modal fade">
-				         <div class="modal-dialog modal-sm" role="document">
-				            <div class="modal-content">
-				               <div class="modal-header">
-				                  <!--
-				                  <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
-				                  -->
-				                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
-				                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				                     <span aria-hidden="true">&times;</span>
-				                  </button>
-				               </div>
-				               <div class="modal-body">
-				                  <p>글을 정말 삭제할까요?</p>
-				               </div>
-				               <div class="modal-footer">
-				                 <a class="btn btn-primary" style="color:white;" href="market-delete?market_num=${market.market_num}">네</a> 			                  
-				                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
-				               </div>
-				            </div>
-				         </div>      
-				      </div>
-				      <!-- /small Modal -->
-					
+               <form name="market-del-edit" method="post" action="market-update?market_num=${market.market_num}">
+                  <div class="card overflow-hidden">
+                     <div class="card-body h-100">
+                        <div class="item-det mb-4">
+                           <a href="#" class="text-dark"><h3 class="">${market.market_sub}</h3></a>
+                           <ul class="d-flex">
+                              <li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i>${market.market_pcnt}</a></li>
+                           <!--<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> USA</a></li>
+                              <li class="mr-5"><a href="#" class="icons"><i class="si si-calendar text-muted mr-1"></i> 5 hours ago</a></li>  -->
+                              <li class="mr-5"><a href="#" class="icons"><i class="si si-eye text-muted mr-1"></i> ${market.market_vcnt}</a></li>
+                        <!--    <li class=""><a href="#" class="icons">
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star text-warning"></i>
+                              <i class="fa fa-star-half-o text-warning mr-1"></i>4.5</a></li>-->      
+                           </ul>
+                        </div>
+                        <div class="product-slider">
+                           <div id="carousel" class="carousel slide" data-ride="carousel">
+                              <!--<div class="arrow-ribbon2 bg-primary">$539</div>-->
+                              <div class="carousel-inner">
+                                 <div class="carousel-item active"> <img src="../hifiveImages/marketThumbnails/${market.market_fname}" alt="img"> </div>
+                              <!--
+                                 <div class="carousel-item"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h1.jpg" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h2.jpg" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h5.jpg" alt="img"> </div>
+                                 <div class="carousel-item"> <img src="../images/products/products/h4.jpg" alt="img"> </div>
+                              -->
+                              </div>
+                           <!-- <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                                 <i class="fa fa-angle-left" aria-hidden="true"></i>
+                              </a>
+                              <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                                 <i class="fa fa-angle-right" aria-hidden="true"></i>
+                              </a>-->
+                           </div>
+                           <div class="clearfix">
+                        <!--   <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                                 <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                       <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="../images/products/h3.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="../images/products/h2.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="../images/products/h6.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="../images/products/h5.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="4" class="thumb"><img src="../images/products/h4.png" alt="img"></div>
+                                    </div>
+                                    <div class="carousel-item">
+                                       <div data-target="#carousel" data-slide-to="0" class="thumb"><img src="../images/products/h1.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="1" class="thumb"><img src="../images/products/h2.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="2" class="thumb"><img src="../images/products/h3.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="3" class="thumb"><img src="../images/products/h4.png" alt="img"></div>
+                                       <div data-target="#carousel" data-slide-to="4" class="thumb"><img src="../images/products/h5.png" alt="img"></div>
+                                    </div>
+                                 </div>
+                                 <a class="carousel-control-prev" href="#thumbcarousel" role="button" data-slide="prev">
+                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                 </a>
+                                 <a class="carousel-control-next" href="#thumbcarousel" role="button" data-slide="next">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                 </a>
+                              </div>  -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="card">
+                     <div class="card-header">
+                        <h3 class="card-title">${market.market_sub}</h3>
+                     </div>
+                     <div class="card-body">
+                        <div class="mb-4">
+                           <p>${market.market_cont}</p>
+                           
+                        </div>
+                        <h4 class="mb-4"></h4>
+                        <div class="row">
+                           <div class="col-xl-6 col-md-12">
+                              <ul class="list-unstyled widget-spec mb-0">
+                                 <!-- 
+                                 <li class="">
+                                    <i class="fa fa-bed text-muted w-5"></i> 2 BedRooms
+                                 </li>
+                                 <li class="">
+                                    <i class="fa fa-bath text-muted w-5"></i> 2 BathRooms
+                                 </li>
+                                 <li class="">
+                                    <i class="fa fa-life-ring text-muted w-5"></i> Unfurnished
+                                 </li>
+                                 <li class="">
+                                    <i class="fa fa-car text-muted w-5"></i> 2 Car Parking
+                                 </li>
+                                 <li class="">
+                                    <i class="fa fa-globe text-muted w-5"></i> East East face
+                                 </li>
+                                 <li class="mb-xl-0">
+                                    <i class="fa fa-pagelines text-muted w-5"></i> Garden
+                                 </li>
+                                 -->
+                              </ul>
+                           </div>
+                           
+                        </div>
+                     </div>
+                  <c:if test="${sessionScope.class_num!=1}">
+                     <div class="card-footer">
+                        <div class="icons">
+                           <button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
+
+                        <!--<a href="#" class="btn btn-danger icons" data-toggle="modal" data-target="#report"><i class="si si-exclamation mr-1"></i> Report Abuse</a>-->
+                           <!--<a href="#" class="btn btn-primary icons"><i class="si si-heart  mr-1"></i> 678</a>-->
+                           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                           &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           <c:if test="${sessionScope.email== freeProfile.freelancer.mem_email}">
+                              <button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
+                              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
+                           </c:if>
+                        </div>
+                     </div>
+                  </c:if>
+                     <c:if test="${sessionScope.class_num==1 && (market.market_state==0 ||market.market_state==2)}">
+                        <button type="button" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</button>                                             
+                        <button type="button" id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i>거절하기</button>
+                     </c:if>
+                  </div>
+               </form>
+               <!-- small Modal -->   
+                  <div id="smallModal1" class="modal fade">
+                     <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <!--
+                              <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                              -->
+                              <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <p>글을 정말 삭제할까요?</p>
+                           </div>
+                           <div class="modal-footer">
+                             <a class="btn btn-primary" style="color:white;" href="market-delete?market_num=${market.market_num}">네</a>                            
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+                           </div>
+                        </div>
+                     </div>      
+                  </div>
+                  <!-- /small Modal -->
+                  
+                <!-- 관리자small Modal -->   
+                  <div id="smallModal2" class="modal fade">
+                     <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <!--
+                              <h5 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold"><b>글 삭제</b></h5>
+                              -->
+                              <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                              </button>
+                           </div>
+                           <div class="modal-body">
+                              <p>글을 정말 거절하시겠습니까?</p>
+                           </div>
+                           <div class="modal-footer">
+                             <a class="btn btn-primary" style="color:white;" href="">네</a>                            
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+                           </div>
+                        </div>
+                     </div>      
+                  </div>
+              <!-- /small Modal -->
+               
 <!--/Add Description-->
 
-						<!--Comments-->
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">리뷰</h3>
-							</div>
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="badge badge-default mb-2">${mrStar}<i class="fa fa-star"></i></div>
-										
-										<!--
-										<div class="progress progress-md mb-4">
-											<div class="progress-bar bg-success w-100">6,532</div>
-										</div>-->
-										<span class="rated-products-ratings">
-										<c:if test="${mrStar >= 0}">
-											<c:forEach var="1" begin="1" end="${mrStar}">
-												<i class="fa fa-star text-warning"> </i>
-											</c:forEach>
-											<c:forEach var="1" begin="1" end="${5-mrStar}">
-												<i class="fa fa-star-o text-warning"> </i>
-											</c:forEach>
-										</c:if>
-										</span>
-									</div>
-									<div class="col-md-6 text-center align-items-center">
+                  <!--Comments-->
+                  <div class="card">
+                     <div class="card-header">
+                        <h3 class="card-title">리뷰</h3>
+                     </div>
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="badge badge-default mb-2">${mrStar}<i class="fa fa-star"></i></div>
 
-									</div>
-								</div>
-							</div>
+                              <span class="rated-products-ratings" id="changeStar">
+                              <c:if test="${mrStar >= 0}">
+                                 <c:forEach var="1" begin="1" end="${mrStar}">
+                                    <i class="fa fa-star text-warning"> </i>
+                                 </c:forEach>
+                                 <c:forEach var="1" begin="1" end="${5-mrStar}">
+                                    <i class="fa fa-star-o text-warning"> </i>
+                                 </c:forEach>
+                              </c:if>
+                              </span>
+                           </div>
+                           <div class="col-md-6 text-center align-items-center">
 
-					
-						<!-- 댓글 -->		
-																			
-					<c:if test="${fn:length(marketRev) > 0}">	
-						<c:forEach var="marketRev" items="${marketRev}">
-							<div class="card-body p-0" id="ajaxRev">
-                                    	<c:choose>
-	                                    	<c:when test="${marketRev.freelancer != null}">
-					                            <div class="media mt-0 p-5" >
-			                                    	<div class="d-flex mr-3">
-			                                      		  <a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
-			                                    	</div>
-			                                   		 <div class="media-body">
-				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">${marketRev.freelancer.free_name}
-				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
-														</h5>														
-														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
-			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>			
-													<c:choose>
-				                                     	<c:when test="${sessionScope.email == marketRev.mem_email}">
-															<a href="" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate(${marketRev.marketRev_num},${marketRev.market_num},'${marketRev.marketRev_cont}',${marketRev.marketRev_star});" ><span class="">수정</span></a>
-															<a href="" class="mr-2" data-toggle="modal" onclick="Revdelete(${marketRev.marketRev_num},${marketRev.market_num});" ><span class="">삭제</span></a>
-														</c:when>
-														<c:when test="${empty sessionScope.name}">
-														</c:when>
-												  	</c:choose>	
-													</div>
-												</div>
-	                                     	</c:when>
-	                                     	<c:when test="${marketRev.freelancer == null && marketRev.corporation!=null}">
-				                            	<div class="media mt-0 p-5">
-			                                    	<div class="d-flex mr-3">
-			                                      		 <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
-			                                    	</div>
-			                                   		 <div class="media-body">
-				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="cor_mname" id="cor_mnameR">${marketRev.corporation.cor_mname}
-				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
-														</h5>
-														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
-			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>		
-													<c:choose>
-				                                     	<c:when test="${sessionScope.email == marketRev.mem_email}">
-															<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
-															<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
-														</c:when>
-														<c:when test="${empty sessionScope.name}">
-														</c:when>
-												  	</c:choose>
-													</div>
-												</div>
-	                                     	</c:when>
-	                                    
-	                                     	<c:otherwise>
-	                                     		<div class="media mt-0 p-5">
-			                                    	<div class="d-flex mr-3">
-			                                      		<a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a>
-			                                    	</div>
-			                                   		<div class="media-body">
-				                                       	<h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">${marketRev.mem_email}
-				                                       	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-														<span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
-														</h5>
-														<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
-			                                       		<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>	
-													</div>
-													
-													<c:choose>
-				                                     	<c:when test="${sessionScope.email == marketRev.mem_email}">
-															<a href="" class="mr-2" data-toggle="modal" data-target="Upload"><span class="">수정</span></a>
-															<a href="" class="mr-2" data-toggle="modal"><span class="">삭제</span></a>
-														</c:when>
-														<c:when test="${empty sessionScope.name}">
-														</c:when>
-												  	</c:choose>													
-													
-												</div>
-	                                     	</c:otherwise>                                     	
+                           </div>
+                        </div>
+                     </div>
+
+               
+                  <!-- 댓글 -->      
+                                                         
+               <c:if test="${fn:length(marketRev) > 0}">   
+               <div class="card-body p-0" id="ajaxRev0">
+                  <c:forEach var="marketRev" items="${marketRev}">
+                     <div class="card-body p-0" id="ajaxRev">              
+                               <div class="media mt-0 p-5"  id="ajaxRev2">
+                                      <div class="d-flex mr-3">
+                                         <c:choose>
+                                            <c:when test="${marketRev.member.class_num==2||marketRev.member.class_num==3}">
+                                                   <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
+                                            </c:when>
+                                            <c:when test="${marketRev.member.class_num==4}">
+                                                   <a href="#"><img class="media-object brround"  alt="64x64" src="../hifiveImages/cor_thumb/${marketRev.corporation.cor_fname}"> </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                               <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+                                            </c:otherwise>
+                                         </c:choose>
+                                      </div>
+                                         <div class="media-body">
+                                          <h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">${marketRev.member.mem_name}
+                                          <span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+                              <span class="fs-14 ml-2" name="marketRev_star" id="starR" > ${marketRev.marketRev_star}</span>  <i class="fa fa-star text-yellow"></i>
+                              </h5>                                          
+                              <small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> ${marketRev.marketRev_rdate} </small>
+                                            <p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> ${marketRev.marketRev_cont}</p>         
+                           <c:choose>
+                                        <c:when test="${sessionScope.email == marketRev.mem_email}">
+                                 <a href="" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate(${marketRev.marketRev_num},${marketRev.market_num},'${marketRev.marketRev_cont}',${marketRev.marketRev_star},${marketVORev.nowPage},${marketVORev.cntPerPage});" ><span class="">수정</span></a>
+                                 <a href="" class="mr-2" data-toggle="modal" onclick="Revdelete(${marketRev.marketRev_num},${marketRev.market_num},${marketVORev.nowPage},${marketVORev.cntPerPage});" ><span class="">삭제</span></a>
+                              </c:when>
+                              <c:when test="${empty sessionScope.name}">
+                              </c:when>
+                             </c:choose>   
+                           </div>
+                        </div>
+                     </div>
+                  </c:forEach>   
+         </div>
+               </c:if>      
+               
+               
+               <c:if test="${fn:length(marketRev) == 0}">   
+                  <div class="card-body p-0" id="ajaxRev0">   
+                     <div class="card-body p-0" id="ajaxRev">
+                        <div class="media mt-0 p-5">
+                              <div class="media-body"><text align="center"> 등록된 리뷰가 없습니다</text></div>
+                        </div>
+                     </div>
+                  </div>
+               </c:if>      
+                              
+            </div>
+            <div id="paging">      
+            <!--마켓리뷰페이징  -->      
+            <c:if test="${fn:length(marketRev) > 0}">   
+                  <div class="center-block text-center">
+                  <ul class="pagination mg-b-0 page-0 ">
+                  
+                  <c:if test="${marketVORev.nowPage>1}">
+                     <li class="page-item">
+                        <a aria-label="Last" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},1,${market.market_num})"><i class="fa fa-angle-double-left"></i></a>
+                     </li>
+                     <li class="page-item">
+                        <a aria-label="Next" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${marketVORev.nowPage-1},${market.market_num})"><i class="fa fa-angle-left"></i></a>
+                     </li>
+                  </c:if>   
+                     
+                  <c:forEach begin="${marketVORev.startPage}" end="${marketVORev.endPage}" var="p">   
+                     <c:choose>
+                        <c:when test="${p==0}">
+                           
+                        </c:when>
+                        <c:when test="${p==marketVORev.nowPage}">
+                           <li class="page-item active">
+                              <a class="page-link" href="javascript:void(0)">${p}</a>
+                           </li>
+                        </c:when>
+                        
+                        <c:when test="${p!=marketVORev.nowPage}">
+                           <li class="page-item">
+                              <a class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${p},${market.market_num})">${p}</a>
+                           </li>
+                        </c:when>
+                     </c:choose>   
+                  </c:forEach>   
+                  <c:if test="${marketVORev.nowPage != marketVORev.lastPage}">   
+                     <li class="page-item">
+                        <a aria-label="Next" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${marketVORev.nowPage+1},${market.market_num})" ><i class="fa fa-angle-right"></i></a>
+                     </li><!-- href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.nowPage+1}&market_num=${market.market_num}" 
+                            href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.lastPage}&market_num=${market.market_num}"-->
+                     <li class="page-item">
+                        <a aria-label="Last" class="page-link" onclick="reviewList(${marketVORev.cntPerPage},${marketVORev.lastPage},${market.market_num})"><i class="fa fa-angle-double-right"></i></a>
+                     </li>
+                  </c:if>
+                  </ul>
+                  </div>
+               </c:if>   
+               </div>   
+            <!--/마켓리뷰페이징-->   
+            
+            
+                  <br/><br/>
+                  <!--/Comments-->
+               <form name="mrInput" id="mrInputID" action="marketRev-insert" >
+                  <input type="hidden" id="mem_emailREID" name="mem_email" value="${sessionScope.email}"><!-- value="hyunbin@naver.com" -->
+               <!--<input type="hidden" id="marketRev_num" name="marketRev_num" value="${marketRev_num}"> -->
+               <!--<input type="hidden" id="marketRev_rdate" name="marketRev_rdate" value="${marketRev_rdate}"> -->
+               <input type="hidden" id="RcntPerPage" name="cntPerPageR" value="${marketVORev.cntPerPage}">
+               <input type="hidden" id="RnowPage" name="nowPageR" value="${marketVORev.nowPage}">
+               
+                   <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
+                  <div class="card mb-lg-0">
+                     <div class="card-header">
+                        <h3 class="card-title">리뷰 남기기</h3>
+                     </div>
+                     <div class="card-body">
+                        <div>
+                           <div class="ml-auto">
+                              <div class="rating-stars block">
+                                 <input id="marketRev_starID" type="number" readonly="readonly" class="rating-value star"  name="marketRev_star"  value="${marketRev_star}"><!-- name="rating-stars-value" -->
+                                 <div class="rating-stars-container">
+                                    <div class="rating-star sm">
+                                       <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="rating-star sm">
+                                       <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="rating-star sm">
+                                       <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="rating-star sm">
+                                       <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="rating-star sm">
+                                       <i class="fa fa-star"></i>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>                           
+                           <div class="col-md-6 text-center align-items-center"></div>
+                           <!--
+                           <div class="form-group">
+                              <input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
+                           </div>
+                             -->
+                            <c:if test="${sessionScope.email ==null}" >
+                              <div class="form-group">
+                                 <textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+                              </div>   
+                           </c:if>      
+                           <c:if test="${fn:length(mbs)>0}" >
+                              <c:if test="${sessionScope.email!=null||market.market_num ==mbs.market_num}" >
+                                 <div class="form-group">
+                                    <textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="이용 후기를 남겨주세요">${marketRev_cont}</textarea>
+                                 </div>   
+                                 <button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
+                              </c:if>      
+                           </c:if>      
+                           <c:if test="${fn:length(mbs)==0}" >
+                              <c:if test="${sessionScope.email!=null}" >
+                                 <div class="form-group">
+                                    <textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="마켓 구매 후 이용하실 수 있습니다"></textarea>
+                                 </div>   
+                              </c:if>      
+                           </c:if>      
+                           
+                           
+                           
+                           
+                           
+                        </div>
+                     </div>
+                  </div>
+               </form>
+                  <br/><br/>
+   
+                  <!--Comments-->
+                  <div class="card">
+                     <div class="card-header">
+                        <h3 class="card-title">문의</h3>
+                     </div>
+                     
+                  <c:if test="${fn:length(marketQA) > 0}">            
+                      <div class="card-body p-0" id="QAajax0">                            
+                        <c:forEach var="marketQA" items="${marketQA}">
+                        <div id="htmlQA">
+                           <input type="hidden" name="marketQA_prnum" id="marketQA_prnumID" value="${marketQA.marketQA_prnum} "/>
+                           <input type="hidden" name="marketQA_lev" id="marketQA_levID" value="${marketQA.marketQA_lev} "/>
+                           <input type="hidden" name="marketQA_sun" id="marketQA_sunID" value="${marketQA.marketQA_sun} "/>
+
+                           <div  id="replyItem<c:out value="${marketQA.marketQA_lev}"/>" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: <c:out value="${40*marketQA.marketQA_lev}"/>px; display: inline-block">
+                           <div class="media mt-0 p-5">
+                                       <div class="d-flex mr-3">
+                                       
+                                          <c:choose>
+                                               <c:when test="${marketQA.member.class_num==2||marketQA.member.class_num==3}">
+                                                      <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
+                                               </c:when>
+                                               <c:when test="${marketQA.member.class_num==4}">
+                                                      <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/cor_thumb/${marketQA.corporation.cor_fname}"> </a>
+                                               </c:when>
+                                               <c:otherwise>
+                                                  <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+                                               </c:otherwise>
+                                            </c:choose>
+                                       
+                                         </div>
+                                         <div class="media-body"> 
+                                         <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.member.mem_name}
+                                    <span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
+                                  </h5>
+                                  <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
+                                  
+                                            <c:choose>
+                                              <c:when test="${marketQA.marketQA_sub eq '삭제된 댓글입니다'}">
+                                                 <p class="font-13  mb-2 mt-2"> 삭제된 댓글입니다.</p>
+                                              </c:when>     
+                                               <c:when test="${marketQA.marketQA_ox == 0 }">
+                                                 <c:if test="${marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
+                                                    <p class="font-13  mb-2 mt-2">
+                                                         <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+                                                    </p>
+                                                 </c:if>
+                                              </c:when>
+                                              <c:when test="${marketQA.marketQA_sub ne '삭제된 댓글입니다' &&( marketQA.mem_email == sessionScope.email || sessionScope.email  == freeProfile.freelancer.mem_email)}">
+                                                 <p class="font-13  mb-2 mt-2">
+                                                       <비밀글 입니다.> <br>
+                                                     <p class="font-13  mb-2 mt-2">
+                                                         <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong">${marketQA.marketQA_sub}</a><br>
+                                                   </p>
+                                                 </p>
+                                              </c:when>
+                                              <c:when test="${marketQA.marketQA_ox == 1 && marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
+                                                 <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
+                                              </c:when>   
+                                                                                    
+                                           </c:choose> 
+                                           
+                                           <!-- 모달로 정보보내기
+                                            <button type="button"  data-toggle="modal" data-target="#Comment" data-prnum="${marketQA.marketQA_prnum}" data-lev="${marketQA.marketQA_lev}" data-sun="${marketQA.marketQA_sun}" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></button>
+                                            --> <!-- onclick="mqajax(0,0,0);" -->
+                                          <c:choose>
+                                              <c:when test="${sessionScope.email == marketQA.mem_email && marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
+                                                 <a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}',${marketVOQA.nowPage},${marketVOQA.cntPerPage});" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>
+                                       <a href="javascript:void(0)" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox},${marketVOQA.nowPage},${marketVOQA.cntPerPage});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
+                                       <a href="javascript:void(0)" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}',${marketVOQA.nowPage},${marketVOQA.cntPerPage},${marketQA.marketQA_prnum},${marketQA.marketQA_sun},${marketQA.marketQA_lev},'${marketQA.marketQA_sub}');"  ><span class="">삭제</span></a>
+                                    </c:when>
+                                    <c:when test="${empty sessionScope.name && marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
+                                    </c:when>
+                                    <c:when test="${sessionScope.email != marketQA.mem_email && !marketQA.marketQA_sub eq '삭제된 댓글입니다'}">
+                                       <a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}',${marketVOQA.nowPage},${marketVOQA.cntPerPage});" data-toggle="modal" data-target="#CommentQA" class="mr-2" ><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
+                                    </c:when>
                                 </c:choose>
-							</div>
-						</c:forEach>	
-					</c:if>		
-					
-					
-					<c:if test="${fn:length(marketRev) == 0}">		
-							<div class="card-body p-0">
-								<div class="media mt-0 p-5">
-					               <div class="media-body"><text align="center"> 등록된 리뷰가 없습니다</text></div>
-								</div>
-							</div>
-					</c:if>		
-										
-				</div>
-						
-				<!--마켓리뷰페이징  -->		
-				<c:if test="${fn:length(marketRev) > 0}">	
-						<div class="center-block text-center">
-						<ul class="pagination mg-b-0 page-0 ">
-						
-						<c:if test="${marketVORev.nowPage>1}">
-							<li class="page-item">
-								<a aria-label="Last" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.startPage}&market_num=${market.market_num}"><i class="fa fa-angle-double-left"></i></a>
-							</li>
-							<li class="page-item">
-								<a aria-label="Next" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.nowPage+1}&market_num=${market.market_num}"><i class="fa fa-angle-left"></i></a>
-							</li>
-						</c:if>	
-							
-						<c:forEach begin="${marketVORev.startPage}" end="${marketVORev.endPage}" var="p">	
-							<c:choose>
-								<c:when test="${p==0}">
-									
-								</c:when>
-								<c:when test="${p==marketVORev.nowPage}">
-									<li class="page-item active">
-										<a class="page-link" href="#">${p}</a>
-									</li>
-								</c:when>
-								
-								<c:when test="${p!=marketVORev.nowPage}">
-									<li class="page-item">
-										<a class="page-link" href="market-content?nowPageR=${p}&cntPerPageR=${marketVORev.cntPerPage}&market_num=${market.market_num}">${p}</a>
-									</li>
-								</c:when>
-							</c:choose>	
-						</c:forEach>	
-						<c:if test="${marketVORev.nowPage != marketVORev.lastPage}">	
-							<li class="page-item">
-								<a aria-label="Next" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.nowPage+1}&market_num=${market.market_num}"><i class="fa fa-angle-right"></i></a>
-							</li>
-							<li class="page-item">
-								<a aria-label="Last" class="page-link" href="market-content?cntPerPageR=${marketVORev.cntPerPage}&nowPageR=${marketVORev.lastPage}&market_num=${market.market_num}"><i class="fa fa-angle-double-right"></i></a>
-							</li>
-						</c:if>
-						</ul>
-						</div>
-					</c:if>		
-				<!--/마켓리뷰페이징-->	
-				
-				
-						<br/><br/>
-						<!--/Comments-->
-					<form name="mrInput" id="mrInputID" action="marketRev-insert" >
-						<input type="hidden" id="mem_emailREID" name="mem_email" value="${sessionScope.email}"><!-- value="hyunbin@naver.com" -->
-					<!--<input type="hidden" id="marketRev_num" name="marketRev_num" value="${marketRev_num}"> -->
-					<!--<input type="hidden" id="marketRev_rdate" name="marketRev_rdate" value="${marketRev_rdate}"> -->
-					    <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
-						<div class="card mb-lg-0">
-							<div class="card-header">
-								<h3 class="card-title">리뷰 남기기</h3>
-							</div>
-							<div class="card-body">
-								<div>
-									<div class="ml-auto">
-										<div class="rating-stars block">
-											<input id="marketRev_starID" type="number" readonly="readonly" class="rating-value star"  name="marketRev_star"  value="${marketRev_star}"><!-- name="rating-stars-value" -->
-											<div class="rating-stars-container">
-												<div class="rating-star sm">
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="rating-star sm">
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="rating-star sm">
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="rating-star sm">
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="rating-star sm">
-													<i class="fa fa-star"></i>
-												</div>
-											</div>
-										</div>
-									</div>									
-									<div class="col-md-6 text-center align-items-center"></div>
-									<!--
-									<div class="form-group">
-										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
-									</div>
-									  -->
-									 <c:if test="${sessionScope.email !=null}" >
-										<div class="form-group">
-											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="Comment">${marketRev_cont}</textarea>
-										</div>	
-										<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
-									</c:if>		
-									<c:if test="${sessionScope.email ==null}" >
-										<div class="form-group">
-											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
-										</div>	
-									</c:if>		
-									
-								</div>
-							</div>
-						</div>
-					</form>
-						<br/><br/>
-	
-						<!--Comments-->
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">문의</h3>
-							</div>
-						<c:if test="${fn:length(marketQA) > 0}">				
-							 <div class="card-body p-0">									 
-								<c:forEach var="marketQA" items="${marketQA}">
-								<div id="htmlQA">
-									<input type="hidden" name="marketQA_prnum" id="marketQA_prnumID" value="${marketQA.marketQA_prnum} "/>
-									<input type="hidden" name="marketQA_lev" id="marketQA_levID" value="${marketQA.marketQA_lev} "/>
-									<input type="hidden" name="marketQA_sun" id="marketQA_sunID" value="${marketQA.marketQA_sun} "/>
-																	
-									
-									<div  id="replyItem<c:out value="${marketQA.marketQA_lev}"/>" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: <c:out value="${40*marketQA.marketQA_lev}"/>px; display: inline-block">
-									<div class="media mt-0 p-5">
-	                                   <c:choose>
-	                                   
-		                                    <c:when test="${marketQA.freelancer != null}">
-			                      	    		 <div class="d-flex mr-3">
-			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
-			                                      </div>
-			                                      <div class="media-body"> 
-						                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.freelancer.free_name}
-														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-													 </h5>
-													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
-													 
-			                                     	 <c:choose>
-				                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
-					                                        <p class="font-13  mb-2 mt-2">
+                               </div>                                                   
+                           </div>   
+                           </div>
+                        </div>
+                        </c:forEach>
+                     </div>
+                  </c:if>   
+               
+                  <c:if test="${fn:length(marketQA) == 0}">      
+                     <div class="card-body p-0" id="QAajax0">
+                        <div class="card-body p-0">
+                           <div class="media mt-0 p-5">
+                                 <div class="media-body"><text align="center"> 등록된 문의가 없습니다</text></div>
+                           </div>
+                        </div>
+                     </div>
+                  </c:if>      
+                  </div>
+               <div id="pagingQ">   
+               <c:if test="${fn:length(marketQA) > 0}">                     
+                  <div class="center-block text-center">
+                     <ul class="pagination mg-b-0 page-0 ">
+                     
+                     <c:if test="${marketVOQA.nowPage > 1 }">
+                        <li class="page-item">
+                           <a aria-label="Last" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.startPage},${market.market_num});"><i class="fa fa-angle-double-left"></i></a>
+                        </li>
+                        <li class="page-item">
+                           <a aria-label="Next" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.nowPage-1},${market.market_num});"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                     </c:if>
+                     <c:forEach begin="${marketVOQA.startPage}" end="${marketVOQA.endPage }" var="p" >
+                        <c:choose>      
+                           <c:when test="${p==0}">
+               
+                           </c:when>
+                           <c:when test="${marketVOQA.nowPage == p}">
+                              <li class="page-item active">
+                                 <a class="page-link" href="javascipt:void(0);">${p}</a>
+                              </li>
+                           </c:when>
+                           <c:when test="${marketVOQA.nowPage != p }">
+                              <li class="page-item">
+                                 <a class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${p},${market.market_num});">${p}</a>
+                              </li>
+                           </c:when>
+                        </c:choose>
+                     </c:forEach>
+                     
+                     <c:if test="${marketVOQA.nowPage != marketVOQA.lastPage }">
+                        <li class="page-item">
+                           <a aria-label="Next" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.nowPage+1},${market.market_num});"><i class="fa fa-angle-right"></i></a>
+                        </li>
+                        <li class="page-item">
+                           <a aria-label="Last" class="page-link" onclick="qaList(${marketVOQA.cntPerPage},${marketVOQA.endPage},${market.market_num});"><i class="fa fa-angle-double-right"></i></a>
+                        </li>
+                     </c:if>
+                     </ul>
+                  </div>
+               </c:if>
+               </div>
+      
+                  <br/><br/>
+                  <!--/Comments-->
+                  
+               <form name="mqInput" id="mqInput" action="marketQA-insert"  method="post"  enctype="multipart/form-data" >
+                  <div class="card mb-lg-0">
+                     <div class="card-header">
+                        <h3 class="card-title">문의 남기기</h3>
+                     </div>
+                     <div class="card-body">
+                        <div>
 
-					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-				                                        	</p>
-				                                        </c:when>
-				                                        <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.name  == freeProfile.freelancer.free_fname}">
-					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.> <br>
-					                                            <p class="font-13  mb-2 mt-2">
-					                                      		 	<a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-				                                        		</p>
-				                                        	</p>
-				                                        </c:when>
-				                                         <c:when test="${marketQA.marketQA_ox == 1}">
-					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-				                                        </c:when>
-				                                         
-
-			                                        </c:choose> 
-			                                        
-			                                  <!-- 모달로 정보보내기
-			                                   <button type="button"  data-toggle="modal" data-target="#Comment" data-prnum="${marketQA.marketQA_prnum}" data-lev="${marketQA.marketQA_lev}" data-sun="${marketQA.marketQA_sun}" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></button>
-			                                   --> 
-			                                    <c:choose>
-			                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
-			                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>
-														<a href="#" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
-														<a href="#" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}');"><span class="">삭제</span></a>
-													</c:when>
-													<c:when test="${empty sessionScope.name}">
-													</c:when>
-													<c:when test="${sessionScope.email != marketQA.mem_email}">
-														<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" ><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-													</c:when>
-												  </c:choose>
-												 </div>                        
-		                                    </c:when>
-		                                    
-		                                     <c:when test="${marketQA.freelancer == null && marketQA.corporation.cor_mname== null}">
-		                                  		  <div class="d-flex mr-3">
-			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
-			                                      </div>
-			                                      <div class="media-body"> 
-						                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.mem_email}
-														 <span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-													 </h5>
-													 <small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
-			                                     	 <c:choose>
-				                                     	<c:when test="${marketQA.marketQA_ox == 0}">
-
-					                                       <p class="font-13  mb-2 mt-2">
-					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-				                                        	</p>
-				                                        </c:when>
-				                                        <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.name  == freeProfile.freelancer.free_fname}">
-					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.> <br>
-					                                           <p class="font-13  mb-2 mt-2">
-					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-				                                        	</p>
-				                                        	</p>
-				                                        </c:when>
-				                                         <c:when test="${marketQA.marketQA_ox == 1}">
-					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-				                                        </c:when>
-				                                         
-			                                        </c:choose> 
-													 <c:choose>
-			                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
-			                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-														<a href="#" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
-														<a href="#" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}');"><span class="">삭제</span></a>
-													</c:when>
-													<c:when test="${empty sessionScope.name}">
-													</c:when>
-													<c:when test="${!sessionScope.email != marketQA.mem_email}">
-														<a href="#" onclick="QA('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-													</c:when>
-												  </c:choose>
-												 </div>                         
-		                                    </c:when>
-		                                    
-		                                    <c:otherwise>
-					                            <div class="d-flex mr-3">
-			                                        <a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
-			                                    </div>
-			                                    <div class="media-body"> 
-						                            <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.corporation.cor_mname}
-														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
-												    </h5>
-													<small class="text-muted"><i class="fa fa-calendar"></i> ${marketQA.marketQA_rdate} </small>
-			                                     	<c:choose>
-				                                     	 <c:when test="${marketQA.marketQA_ox == 0}">
-					                                        <p class="font-13  mb-2 mt-2">
-
-					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-				                                        	</p>
-				                                        </c:when>
-				                                         <c:when test="${marketQA.mem_email == sessionScope.email || sessionScope.mail  == freeProfile.freelancer.mem_email}">
-
-					                                        <p class="font-13  mb-2 mt-2">
-					                                       		 <비밀글 입니다.> <br>
-					                                           <p class="font-13  mb-2 mt-2">
-					                                      		 <a href="#" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
-				                                        	</p>
-				                                        	</p>
-				                                        </c:when>
-
-				                                         <c:when test="${marketQA.marketQA_ox == 1}">
-					                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-				                                        </c:when>
-
-			                                      	</c:choose> 
-													<c:choose>
-				                                     	<c:when test="${sessionScope.email == marketQA.mem_email}">
-				                                  			<a href="#" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-															<a href="#" class="mr-2" onclick="QAupdate('${marketQA.marketQA_sub}','${marketQA.marketQA_cont}',${marketQA.marketQA_num},${marketQA.market_num},${marketQA.marketQA_ox});"  data-toggle="modal" data-target="#MQUpdate" ><span class="">수정</span></a>
-															<a href="#" class="mr-2" onclick="QAdelete('${marketQA.marketQA_num}','${marketQA.market_num}');"><span class="">삭제</span></a>
-														</c:when>
-														<c:when test="${empty sessionScope.name}">
-														</c:when>
-														<c:when test="${!sessionScope.email != marketQA.mem_email}">
-																<a href="#" onclick="QA('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}');" data-toggle="modal" data-target="#Comment" class="mr-2" "><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
-														</c:when>
-												  	</c:choose>
-												</div>
-		                                    </c:otherwise>
-		                                </c:choose>						
-									</div>	
-									</div>
-								</div>
-								</c:forEach>
-							</div>
-						</c:if>	
-						<c:if test="${fn:length(marketQA) == 0}">		
-							<div class="card-body p-0">
-								<div class="media mt-0 p-5">
-					               <div class="media-body"><text align="center"> 등록된 문의가 없습니다</text></div>
-								</div>
-							</div>
-						</c:if>		
-						</div>
-
-					<c:if test="${fn:length(marketQA) > 0}">							
-						<div class="center-block text-center">
-							<ul class="pagination mg-b-0 page-0 ">
-							
-							<c:if test="${marketVOQA.nowPage > 1 }">
-								<li class="page-item">
-									<a aria-label="Last" class="page-link" href="market-content?cntPerPageQ=${marketVOQA.cntPerPage}&nowPageQ=${marketVOQA.startPage}&market_num=${market.market_num}"><i class="fa fa-angle-double-left"></i></a>
-								</li>
-								<li class="page-item">
-									<a aria-label="Next" class="page-link" href="market-content?cntPerPageQ=${marketVOQA.cntPerPage}&nowPageQ=${marketVOQA.nowPage-1}&market_num=${market.market_num}"><i class="fa fa-angle-left"></i></a>
-								</li>
-							</c:if>
-							<c:forEach begin="${marketVOQA.startPage}" end="${marketVOQA.endPage }" var="p" >
-								<c:choose>		
-									<c:when test="${p==0}">
-					
-									</c:when>
-									<c:when test="${marketVOQA.nowPage == p}">
-										<li class="page-item active">
-											<a class="page-link" href="#">${p}</a>
-										</li>
-									</c:when>
-									<c:when test="${marketVOQA.nowPage != p }">
-										<li class="page-item">
-											<a class="page-link" href="market-content?cntPerPageQ=${marketVOQA.cntPerPage}&nowPageQ=${p}&market_num=${market.market_num}">${p}</a>
-										</li>
-									</c:when>
-								</c:choose>
-							</c:forEach>
-							
-							<c:if test="${marketVOQA.nowPage != marketVOQA.lastPage }">
-								<li class="page-item">
-									<a aria-label="Next" class="page-link" href="market-content?cntPerPageQ=${marketVOQA.cntPerPage}&nowPageQ=${marketVOQA.nowPage+1}&market_num=${market.market_num}"><i class="fa fa-angle-right"></i></a>
-								</li>
-								<li class="page-item">
-									<a aria-label="Last" class="page-link" href="market-content?cntPerPageQ=${marketVOQA.cntPerPage}&nowPageQ=${marketVOQA.lastPage}&market_num=${market.market_num}"><i class="fa fa-angle-double-right"></i></a>
-								</li>
-							</c:if>
-							</ul>
-						</div>
-					</c:if>
-					
-		
-						<br/><br/>
-						<!--/Comments-->
-						
-					<form name="mqInput" id="mqInput" action="marketQA-insert"  method="post"  enctype="multipart/form-data" >
-						<div class="card mb-lg-0">
-							<div class="card-header">
-								<h3 class="card-title">문의 남기기</h3>
-							</div>
-							<div class="card-body">
-								<div>
-
-									<c:if test="${sessionScope.name !=null}" >
-										<input type="hidden" id="market_numQAID" name="market_num" value="${market.market_num}">
-								    	 <input type="hidden" id="mem_emailQAID" name="mem_email" value= "${sessionScope.email}">
-
+                           <c:if test="${sessionScope.name !=null}" >
+                              <input type="hidden" id="market_numQAID" name="market_num" value="${market.market_num}">
+                                <input type="hidden" id="mem_emailQAID" name="mem_email" value= "${sessionScope.email}">
+                                <input type="hidden" id="cntPerPageQAID" name="cntPerPageQ" value="${marketVOQA.cntPerPage}">
+                                <input type="hidden" id="nowPageQAID" name="nowPageQ" value= "${marketVOQA.nowPage}">
 										<div class="form-group">
 											<input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
 										</div>
@@ -711,20 +650,24 @@
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
-									<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									<img src="hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
-										경력:
-										<c:choose>
-										<c:when test="${freeProfile.freelancerProfile.pro_exp} !=null">
-											<span class="text-muted">${freeProfile.freelancerProfile.pro_exp}</span>년
-										</c:when>
-										<c:otherwise>
-											<span class="text-muted">프로필을 적어주세요</span>
-										</c:otherwise >
-										</c:choose>
+											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0}">
+												
+											</c:if >
+											<c:if test="${freeProfile.freelancerProfile.pro_exp > 0}">
+												경력:<span class="text-muted">${freeProfile.freelancerProfile.pro_exp}</span>년
+												<h6 class="mt-2 mb-0"><a href="freelancercontent?free_code=${freeProfile.freelancer.free_code}&pro_num=${freeProfile.freelancerProfile.pro_num}" class="btn btn-primary btn-sm">프로필 보기</a></h6>
+											</c:if >
+											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0 && sessionScope.email==freeProfile.freelancer.mem_email}">
+												<span class="text-muted">프로필을 등록해주세요</span>
+												<h6 class="mt-2 mb-0"><a href="freelancerMyprofile_write" class="btn btn-primary btn-sm">프로필 등록</a></h6>							
+											</c:if >
+											
 										
-										<h6 class="mt-2 mb-0"><a href="#" class="btn btn-primary btn-sm">프로필 보기</a></h6>
+										
+										
 									</div>
 								</div>
 							</div>
@@ -754,30 +697,30 @@
 								<input type="hidden" value="${market.market_price}" name="marketPaym_price">
 								<c:choose>
 									<c:when test="${market.market_price<=500000}">
-										<input type="hidden" value=20 name="marketPaym_freeRate">
+										<input type="hidden" value=20 name="marketPaym_feeRate">
 									</c:when>
 									<c:when test="${market.market_price<=2000000}">
-										<input type="hidden" value=12 name="marketPaym_freeRate">
+										<input type="hidden" value=12 name="marketPaym_feeRate">
 									</c:when>
 									<c:otherwise>
-										<input type="hidden" value=6 name="marketPaym_freeRate">
+										<input type="hidden" value=6 name="marketPaym_feeRate">
 									</c:otherwise>
 								</c:choose>
 								
 								<div class="card-footer">
 									<div style="text-align: right; vertical-align:center;">
 										<span style="font-size:20px">결제금액</span></br>
-										<span style="font-size:30px" >${market.market_price}</span>
+									<span style="font-size:30px">￦<fmt:formatNumber value="${market.market_price}" pattern="#,###,###,###" /><span class="fs-16"></span></span>
+										
 									</div>
 								</div>
-								<div class="card-footer">	
-									<div style="text-align: right;">
-								
-								<!--	<a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
-										<a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-										<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+								<c:if test="${sessionScope.class_num==1||sessionScope.class_num==2||sessionScope.class_num==3 }">
+									<div class="card-footer">	
+										<div style="text-align: right;">
+												<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+										</div>
 									</div>
-								</div>
+								</c:if>
 							</form>
 						</div>
 				<!--		
@@ -946,753 +889,553 @@
 								</ul>
 							</div>
 						</div>
+                  <div class="card mb-0">
+                     <div class="card-header">
+                        <h3 class="card-title">유사한 프리랜서</h3>
+                     </div>
+                     <div class="card-body pb-3">
+                        <div class="rated-products">
+                           <ul class="vertical-scroll">
+                              <c:if test="${fn:length(similarFree)>0}">
+                                 <c:forEach var="similarFree" items="${similarFree}">
+                                 <li class="item">
+                                    <div class="media p-5 mt-0">
+                                       <img class="mr-4" src="../hifiveImages/free_thumb/${similarFree.freelancer.free_fname}" alt="img">
+                                       <div class="media-body">
+                                          <h4 class="mt-2 mb-1">${similarFree.freelancer.free_name}</h4>
+                                          
+                                          <span class="rated-products-ratings">
+                                             <c:forEach begin="1" end="${similarFree.freelancerReview.freeRev_star}">
+                                                <i class="fa fa-star text-warning"> </i>
+                                             </c:forEach>
+                                             <c:forEach begin="1" end="${5-similarFree.freelancerReview.freeRev_star}">
+                                                <i class="fa fa-star-o text-warning"> </i>
+                                             </c:forEach>
+                                          </span>
+                                          
+                                       <!-- 
+                                          <div class="h5 mb-0 font-weight-semibold mt-1">$22 - $45</div>
+                                        -->
+                                       </div>
+                                    </div>
+                                 </li>
+                              </c:forEach>
+                              </c:if>
+                              <c:if test="${fn:length(similarFree)==0}">
+                                  <li class="item">
+                                    <div class="media p-5 mt-0">
+                                       프로필 등록안해서 유사한프리랜서안뜸
+                                    </div>
+                                 </li>
+                              </c:if>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!--Right Side Content-->
+            </div>
+         </div>
+      </section>
+      <!--/Add listing-->
 
-						<div class="card mb-0">
-							<div class="card-header">
-								<h3 class="card-title">유사한 프리랜서</h3>
-							</div>
-							<div class="card-body pb-3">
-								<div class="rated-products">
-									<ul class="vertical-scroll">
-										<li class="item">
-											<div class="media m-0 mt-0 p-5">
-												<img class="mr-4" src="../images/products/toys.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Kids Toys</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$17 - $29</div>
-												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media p-5 mt-0">
-												<img class="mr-4" src="../images/products/1.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Leather Watch</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$22 - $45</div>
-												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media p-5 mt-0">
-												<img class=" mr-4" src="../images/products/4.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Digital Watch</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-half-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$35 - $72</div>
-												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media p-5 mt-0">
-												<img class=" mr-4" src="../images/products/6.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Sports Shoe</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-half-o text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$12 - $21</div>
-												</div>
-											</div>
-										</li>
-										<li class="item">
-											<div class="media  mb-0 p-5 mt-0">
-												<img class=" mr-4" src="../images/products/8.png" alt="img">
-												<div class="media-body">
-													<h4 class="mt-2 mb-1">Ladies shoes</h4>
-													<span class="rated-products-ratings">
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-														<i class="fa fa-star-o text-warning"> </i>
-													</span>
-													<div class="h5 mb-0 font-weight-semibold mt-1">$89 - $97</div>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--Right Side Content-->
-				</div>
-			</div>
-		</section>
-		<!--/Add listing-->
-
-		<!-- Message Modal -->
+      <!-- Message Modal -->
 
 <!--Comment Modal -->
 <!-- REVIEW UPDATE -->
-	<form name="revUPModal" id="revUPModal" action="marketRev-update" method="post">
+   <form name="revUPModalN" id="revUPModalForm" action="marketRev-update" method="post">
+      
        <div class="modal fade" id="REVUpdate" tabindex="-1" role="dialog"  aria-hidden="true">
-	        <div class="modal-dialog" role="document">
-	           <div class="modal-content">
-			
-	              <div class="modal-header">
-	                 <h5 class="modal-title">리뷰수정</h5>
-	                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                   <span aria-hidden="true">&times;</span>
-	                 </button>
-	              </div>         
-	              <div class="modal-body">
-	               	 	 <div class="ml-auto">
-							<div class="rating-stars block">
-								<input id="Revupdate_star" type="number" readonly="readonly" class="rating-value star"  name="marketRev_star"  ><!-- name="rating-stars-value" value="${marketRev_star}"-->
-								<div class="rating-stars-container">
-									<div class="rating-star sm">
-										<i class="fa fa-star"></i>
-									</div>
-									<div class="rating-star sm">
-										<i class="fa fa-star"></i>
-									</div>
-									<div class="rating-star sm">
-										<i class="fa fa-star"></i>
-									</div>
-									<div class="rating-star sm">
-										<i class="fa fa-star"></i>
-									</div>
-									<div class="rating-star sm">
-										<i class="fa fa-star"></i>
-									</div>
-								</div>
-							</div>
-						</div>								
-	                 <div class="form-group mb-0">
-	                  	<textarea class="form-control" name="marketRev_cont" id="Revupdate_cont"  rows="6" placeholder="메세지 입력"></textarea>
-	                 </div>
-	              </div>
-	              <div class="modal-footer">
-	                 <div class="col">
-						<input type="hidden" id="Revupdate_num" name="marketRev_num" >
-			           	 <input type="hidden" id="Marketupdate_num" name="market_num"> 
-	                 </div>   
-	                 <div class="col col-auto">
-	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-	                    <button type="button" id="submitREVUPdate" class="btn btn-primary">확인</button>
-	                 </div>
-	              </div>
-	           </div>
-	           
-	        </div>
-	    </div>
-	</form>
+           <div class="modal-dialog" role="document">
+              <div class="modal-content">
+              <input type="hidden" id="RevupdatecntPerPage" name="cntPerPageR" value="${marketVORev.cntPerPage}">
+              <input type="hidden" id="RevupdatenowPage" name="nowPageR" value="${marketVORev.nowPage}">
+                 <div class="modal-header">
+                    <h5 class="modal-title">리뷰수정</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                 </div>         
+                 <div class="modal-body">                     
+                          <div class="ml-auto">
+                     <div class="rating-stars block">
+                        <input id="Revupdate_star" type="number" readonly="readonly" class="rating-value star"  name="marketRev_star"  ><!-- name="rating-stars-value" value="${marketRev_star}"-->
+                        <div class="rating-stars-container" id ="reviewUpdateStar">
+                           <div class="rating-star sm">
+                              <i class="fa fa-star"></i>
+                           </div>
+                           <div class="rating-star sm">
+                              <i class="fa fa-star"></i>
+                           </div>
+                           <div class="rating-star sm">
+                              <i class="fa fa-star"></i>
+                           </div>
+                           <div class="rating-star sm">
+                              <i class="fa fa-star"></i>
+                           </div>
+                           <div class="rating-star sm">
+                              <i class="fa fa-star"></i>
+                           </div>
+                        </div>
+                     </div>
+                  </div>                        
+                    <div class="form-group mb-0">
+                        <textarea class="form-control" name="marketRev_cont" id="Revupdate_cont"  rows="6" placeholder="메세지 입력"></textarea>
+                    </div>
+                 </div>
+                 <div class="modal-footer">
+                    <div class="col">
+                  <input type="hidden" id="Revupdate_num" name="marketRev_num" >
+                        <input type="hidden" id="Marketupdate_num" name="market_num"> 
+                    </div>   
+                    <div class="col col-auto">
+                       <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+                       <button type="button" id="submitREVUPdate" class="btn btn-primary">확인</button>
+                    </div>
+                 </div>
+              </div>
+              
+           </div>
+       </div>
+   </form>
 
 
 
 
 <!-- 문의 모달창 -->
-	 <form name="mqModal" id="mqModal" action="marketQARE-insert" method="post">
-       <div class="modal fade" id="Comment" tabindex="-1" role="dialog"  aria-hidden="true">
-	        <div class="modal-dialog" role="document">
-	       
-	           <div class="modal-content">
-   
-	         	 <input type="hidden" id="REmarketQA_prnum" name="marketQA_prnum" >
-	          	 <input type="hidden" id="REmarketQA_lev" name="marketQA_lev">
-	             <input type="hidden" id="REmarketQA_sun" name="marketQA_sun">
-		  	    	 
-				 <input type="hidden" id="market_numModalQAID" name="market_num" value="${market.market_num}">
-			     <input type="hidden" id="mem_emailModalQAID" name="mem_email" value= "${sessionScope.email}">
+    <form name="mqModalN" id="mqModalForm" action="marketQARE-insert" method="post">
+       <div class="modal fade" id="CommentQA" tabindex="-1" role="dialog"  aria-hidden="true">
+           <div class="modal-dialog" role="document"> 
+              <div class="modal-content">
+                <input type="hidden" id="REmarketQA_prnum" name="marketQA_prnum" >
+                 <input type="hidden" id="REmarketQA_lev" name="marketQA_lev">
+                <input type="hidden" id="REmarketQA_sun" name="marketQA_sun">
+                   
+             <input type="hidden" id="market_numModalQAID" name="market_num" value="${market.market_num}">
+              <input type="hidden" id="mem_emailModalQAID" name="mem_email" value= "${sessionScope.email}">
+              
+              <input type="hidden" id="REmarketQA_nowPage" name="nowPageQ" >
+                <input type="hidden" id="REmarketQA_cntPerPage" name="cntPerPageQ">
 
-	              <div class="modal-header">
-	                 <h5 class="modal-title">댓글쓰기</h5>
-	                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                   <span aria-hidden="true">&times;</span>
-	                 </button>
-	              </div>         
-	              <div class="modal-body">
-	               	 <div class="form-group mb-0">
-	                   <input type="text" class="form-control" name="marketQA_sub" id="marketQA_subIDM" rows="6" placeholder="제목 입력">
-	                 </div>
-	                 <div class="form-group mb-0">
-	                  	<textarea class="form-control" name="marketQA_cont" id="marketQA_contIDM"  rows="6" placeholder="메세지 입력"></textarea>
-	                 </div>
-	              </div>
-	              <div class="modal-footer">
-	                 <div class="col">
-	                    <label class="custom-control custom-checkbox mb-0">
-		                    <input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
-							<input type="radio"  name="marketQA_ox" value="0" checked="">공개글
-	        <!--	     
-	        			  <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
-	                       <span class="custom-control-label" name="marketQA_ox"  value="1" checked="" >비밀글</span>
-	                  -->       
-	                    </label>
-	                 </div>   
-	                 <div class="col col-auto">
-	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-	                    <button type="button" id="submitQARE" class="btn btn-primary">확인</button>
-	                 </div>
-	              </div>
-	           </div>
-	           
-	        </div>
-	    </div>
-	</form>
+                 <div class="modal-header">
+                    <h5 class="modal-title">댓글쓰기</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                 </div>         
+                 <div class="modal-body">
+                      <div class="form-group mb-0">
+                      <input type="text" class="form-control" name="marketQA_sub" id="marketQA_subIDM" rows="6" placeholder="제목 입력">
+                    </div>
+                    <div class="form-group mb-0">
+                        <textarea class="form-control" name="marketQA_cont" id="marketQA_contIDM"  rows="6" placeholder="메세지 입력"></textarea>
+                    </div>
+                 </div>
+                 <div class="modal-footer">
+                    <div class="col">
+                       <label class="custom-control custom-checkbox mb-0">
+                          <input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
+                     <input type="radio"  name="marketQA_ox" value="0" checked="">공개글
+           <!--        
+                      <input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
+                          <span class="custom-control-label" name="marketQA_ox"  value="1" checked="" >비밀글</span>
+                     -->       
+                       </label>
+                    </div>   
+                    <div class="col col-auto">
+                       <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+                       <button type="button" id="submitQARE" class="btn btn-primary">확인</button>
+                    </div>
+                 </div>
+              </div>
+              
+           </div>
+       </div>
+   </form>
 <!-- QAUPDATE -->
-	<form name="mqUPModal" id="mqUPModalID" action="marketQA-update" method="post">
+   <form name="mqUPModalN" id="mqUPModalForm" action="marketQA-update" method="post">
        <div class="modal fade" id="MQUpdate" tabindex="-1" role="dialog"  aria-hidden="true">
-	        <div class="modal-dialog" role="document">
-	           <div class="modal-content">
-			
-	              <div class="modal-header">
-	                 <h5 class="modal-title">댓글수정</h5>
-	                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                   <span aria-hidden="true">&times;</span>
-	                 </button>
-	              </div>         
-	              <div class="modal-body">
-	               	 <div class="form-group mb-0">
-	                   <input type="text" class="form-control" name="marketQA_sub" id="UPmarketQA_sub" rows="6" placeholder="제목 입력">
-	                 </div>
-	                 <div class="form-group mb-0">
-	                  	<textarea class="form-control" name="marketQA_cont" id="UPmarketQA_cont"  rows="6" placeholder="메세지 입력"></textarea>
-	                 </div>
-	              </div>
-	              <div class="modal-footer">
-	                 <div class="col">
-	                    <label class="custom-control custom-checkbox mb-0">
-		                    <input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
-							<input type="radio"  name="marketQA_ox"  value="0" checked="">공개글
-						
-						<input type="hidden" id="UPmarketQA_qnum" name="marketQA_num" >
-			           	 <input type="hidden" id="UPmarketQA_mnum" name="market_num"> 
+           <div class="modal-dialog" role="document">
+              <div class="modal-content">
+               
+                 <div class="modal-header">
+                    <h5 class="modal-title">댓글수정</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                 </div>         
+                 <div class="modal-body">
+                      <div class="form-group mb-0">
+                      <input type="text" class="form-control" name="marketQA_sub" id="UPmarketQA_sub" rows="6" placeholder="제목 입력">
+                    </div>
+                    <div class="form-group mb-0">
+                        <textarea class="form-control" name="marketQA_cont" id="UPmarketQA_cont"  rows="6" placeholder="메세지 입력"></textarea>
+                    </div>
+                 </div>
+                 <div class="modal-footer">
+                    <div class="col">
+                       <label class="custom-control custom-checkbox mb-0">
+                          <input type="radio"  name="marketQA_ox" value="1" checked="">비밀글
+                     <input type="radio"  name="marketQA_ox"  value="0" checked="">공개글
+                  
+                  <input type="hidden" id="UPmarketQA_qnum" name="marketQA_num" >
+                        <input type="hidden" id="UPmarketQA_mnum" name="market_num"> 
+                        <input type="hidden" id="UPmarketQA_nowPage" name="nowPageQ" >
+                     <input type="hidden" id="UPmarketQA_cntPerPage" name="cntPerPageQ">
 
-							    
-	                    </label>
-	                 </div>   
-	                 <div class="col col-auto">
-	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-	                    <button type="button" id="submitQAUPdate" class="btn btn-primary">확인</button>
-	                 </div>
-	              </div>
-	           </div>
-	           
-	        </div>
-	    </div>
-	</form>
-<!-- 문의 모달창 -->		
+                         
+                       </label>
+                    </div>   
+                    <div class="col col-auto">
+                       <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+                       <button type="button" id="submitQAUPdate" class="btn btn-primary">확인</button>
+                    </div>
+                 </div>
+              </div>
+              
+           </div>
+       </div>
+   </form>
+<!-- 문의 모달창 -->      
 
 
 
 
 
 <!--Scrolling Modal-->
-			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					  <div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					  </div>
-					   <div class="modal-body">
-						<p id="cont"><text id="mqcont"></text></p>
-					   </div>
-					   <div class="carousel-inner">
-						<div class="carousel-item active"></div>
-					   </div>				  
-					  <div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					  </div>
-					</div>
-				</div>
-			</div>
-<!--  -->
 
+         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                 <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                 </div>
+                  <div class="modal-body">
+                  <p id="cont"><text id="mqcont"></text></p>
+                  </div>
+                  <div class="carousel-inner">
+                  <div class="carousel-item active"></div>
+                  </div>              
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 </div>
+               </div>
+            </div>
+         </div>
+<!-- 공유하기Modal -->
+         <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel"> <span class="float-right btn btn-icon btn-primary btn-sm mt-3"><i class="si si-share mr-1"></i></span></h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                     </button>
+                  </div>
+                  <div class="modal-body " style="margin:0 auto;">
+                     <a id="kakao-link-btn" href="javascript:sendLink()" class="btn btn-icon brround kakao-btn">
+                        <span class="fa fa-comment"></span><!-- <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/> -->
+                     </a>
+                  </div>
+                  <div class="modal-footer">
+                  
+                   <input type="text" id = "shareUrl"  class="form-control">
+                   <span><button class = "btn btn-secondary" onclick="javascript:copyUrlToClipboard()">URL복사</button></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+<script>
+var obShareUrl = document.getElementById("shareUrl");
+obShareUrl.value=window.document.location.href;   
+   function copyUrlToClipboard(){
+      obShareUrl.select();
+      document.execCommand("copy");
+      obShareUrl.blur();
+      alert("URL이 클립보드에 복사되었습니다.")
+   }
+</script>         
+<!-- 카카오 공유하기 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('50e87f1e8bcbb6ac445c4b87fdbcf76e');
+    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+    function sendLink() {
+      Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '프로젝트 & 서비스 & IT 프리랜서 플랫폼 - 하이파이브',
+          description: '${market.market_sub}',
+          imageUrl: '../images/brand/logo1.png',
+          link: {
+            //mobileWebUrl:'http://127.0.0.1:8090/market-content?${market.market_num}',
+            mobileWebUrl:'http://www.hifive.store/market-content?${market.market_num}',	
+            //webUrl:'http://127.0.0.1:8090/market-content?${market.market_num}'
+        	webUrl:'http://www.hifive.store/market-content?${market.market_num}'
+          }
+        },
+        social: {
+            viewCount: ${market.market_vcnt},
+             likeCount: ${market.market_pcnt}
+        },
+        buttons: [
+          {
+            title: '페이지로 바로가기',
+            link: {
+              mobileWebUrl: 'https://developers.kakao.com',
+              webUrl: 'https://developers.kakao.com'
+            }
+          }
+        ]
+      });
+    }
+  //]]>
+</script>
+<!-- 카카오 공유하기 -->       
 
+<!--
+   
+      <div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="customername" placeholder="Your Name">
+                  </div>
+                  <div class="form-group">
+                     <input type="email" class="form-control" id="customeremail" placeholder="Email Address">
+                  </div>
+                  <div class="form-group mb-0">
+                     <textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success">Send</button>
+               </div>
+            </div>
+         </div>
+      </div>
+    -->   
+      <!--Comment Modal -->
 
-	
-		<div class="modal fade" id="contact" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Send Message</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input type="text" class="form-control" id="customername" placeholder="Your Name">
-						</div>
-						<div class="form-group">
-							<input type="email" class="form-control" id="customeremail" placeholder="Email Address">
-						</div>
-						<div class="form-group mb-0">
-							<textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-success">Send</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!--Comment Modal -->
-
-		<!-- Report Modal -->
-		<div class="modal fade" id="report" tabindex="-1" role="dialog"  aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="examplereportLongTitle">Report Abuse</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<input type="text" class="form-control" id="report-name" placeholder="Enter url">
-						</div>
-						<div class="form-group">
-							<select name="country" id="select-countries2" class="form-control custom-select">
-								<option value="1" selected>Categories</option>
-								<option value="2">Spam</option>
-								<option value="3">Identity Theft</option>
-								<option value="4">Online Shopping Fraud</option>
-								<option value="5">Service Providers</option>
-								<option value="6">Phishing</option>
-								<option value="7">Spyware</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<input type="email" class="form-control" id="report-email" placeholder="Email Address">
-						</div>
-						<div class="form-group mb-0">
-							<textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-success" >Submit</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
+      <!-- Report Modal -->
+   <!--    <div class="modal fade" id="report" tabindex="-1" role="dialog"  aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="examplereportLongTitle">Report Abuse</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="form-group">
+                     <input type="text" class="form-control" id="report-name" placeholder="Enter url">
+                  </div>
+                  <div class="form-group">
+                     <select name="country" id="select-countries2" class="form-control custom-select">
+                        <option value="1" selected>Categories</option>
+                        <option value="2">Spam</option>
+                        <option value="3">Identity Theft</option>
+                        <option value="4">Online Shopping Fraud</option>
+                        <option value="5">Service Providers</option>
+                        <option value="6">Phishing</option>
+                        <option value="7">Spyware</option>
+                     </select>
+                  </div>
+                  <div class="form-group">
+                     <input type="email" class="form-control" id="report-email" placeholder="Email Address">
+                  </div>
+                  <div class="form-group mb-0">
+                     <textarea class="form-control" name="example-textarea-input" rows="6" placeholder="Message"></textarea>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-success" >Submit</button>
+               </div>
+            </div>
+         </div>
+      </div>
+-->
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
 
-			    
+             
 
 <script>
-
-	$("#checkMR").on('click', function(){
-		// alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
-		// alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
-		// console.log("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
-		// console.log("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
-	 
-	    if ($.trim($("#marketRev_contID").val()) == "") {
-	        alert("글 내용을 입력해주세요.");
-	        $("#marketRev_contID").focus();
-	        return;
-	   		 }
-	    if (document.getElementById('marketRev_starID')){//별점이 존재한다면 밑에 실행
-		    if ($.trim($("#marketRev_starID").val()) == ""){
-		        alert("별점을 선택해주세요.");
-		        $("#marketRev_starID").focus();
-		        return;
-		    }
-	    } 
-		  var queryString = $("#mrInputID").serialize();
-		  var mem_email = $("#mem_emailID").val();
-		  var market_num = $("#market_numID").val();
-		  var marketRev_star = $("#marketRev_starID").val();
-		  var marketRev_cont = $("#marketRev_contID").val();
-		  var arr=[marketRev_cont,marketRev_star,market_num,mem_email]
-
-
-		   var url=$("#mrInputID").attr("action");
-		 //   console.log("url:"+url);
-		//    console.log("queryString:"+queryString);
-	    $.ajax({ //free_name,content,star,rdate
-	    	type:'post',
-	    	url:url,
-	    	data:queryString,
-	    	dataType:'json',
-	    	async :false,
-	    	error:onError,
-	    //	beforeSend:{},
-	    	success:function onSuccess(data){
-	 
-    	//	for(var i=0; i<1; i++){ 
-				 console.log(data);	
-    			 console.log("1"+data[0].marketRev_cont);	
-    			 console.log("2"+data[0].marketRev_star);	
-    			 console.log("3"+data[0].corporation.cor_name);	
-    			 console.log("4"+data[0].freelancer.free_name);	
-    			 console.log("5"+data[0].mem_email);	
-    			 console.log("6"+data[0].marketRev_rdate);	
-    			 console.log("7"+data[0].corporation.cor_fname);	 
-    			 console.log("8"+data[0].freelancer.free_fname);
-    			 //서버로부터 받은 날짜데이터를 포맷에맞게 바꾸기
-    			 
-    			 var cor=data[0].corporation.cor_name;
-    			 var free=data[0].freelancer.free_name;
-    			// console.log("cor"+cor); console.log("free"+free);
-    			 var someTimestamp = Number(data[0].marketRev_rdate);
-    			 var dateTime = new Date(someTimestamp);
-    			 dateTime=dateToYYYYMMDD(dateTime);
-	
-    			 revfree='';
-    			 revcor ='';
-    			 revmem='';
-    			 rev='';
-	 			revfree +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].freelancer.free_fname+'"> </a></div>';
-	 			revfree +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].freelancer.free_name; 
-   	   			revfree +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
-   	   			revfree +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
-   	   			revfree +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
-   	   			revfree +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
-   	   			
-	 			revcor +='<div class="media mt-0 p-5" ><div class="d-flex mr-3"><a href="#"><img class="media-object brround" id="freefnameR" alt="64x64" src="../hifiveImages/cor_thumb/'+data[0].corporation.cor_fname+'"> </a></div>';
-	 			revcor +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="free_name" id="free_nameR">'+data[0].corporation.cor_mname;
-	 			revcor +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
-   	   			revcor +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
-   	   			revcor +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
-   	   			revcor +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
-   	   			 
-   	   			revmem +='<c:if test="${marketRev[0].freelancer== null && marketRev[0].corporation==null }"> <a href="#"><img class="media-object brround"  alt="64x64" src="../images/faces/male/1.jpg"> </a></div>';
-   	   			revmem +='<div class="media-body"><h5 class="mt-0 mb-1 font-weight-semibold" name="mem_email"  id="mem_emailR">'+data[0].mem_email+'</c:if>';
-   	   			revmem +='<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>';
-   	   			revmem +='<span class="fs-14 ml-2" name="marketRev_star" id="starR" >'+data[0].marketRev_star+'</span>  <i class="fa fa-star text-yellow"></i>';
-   	   			revmem +='</h5><small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate">'+dateTime+ '</small>';
-   	   			revmem +='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR">'+ data[0].marketRev_cont+'</p></div></div>'
-	   	   		if(cor !=null){
-	   	   			rev=revcor;
-	   	 		}else if(free != null){
-	   	 			rev=revfree;
-	   	 		}else{
-	   	 			rev=revmem;
-	   	 		}
-   	   			var eleCount='';
-	  			//오류 댓글 4개쓰면 2페이지로 넘어가면서 댓글이 사라짐, 리로드 = 다시생김
-
-			    if (document.getElementById('ajaxRev')){//별점이 존재한다면 밑에 실행
-					console.log("ssssssss");
-			    	eleCount = 0;
-			    }else{
-			    }
-				console.log("eleCount__"+eleCount);
-				console.log("22eleCount__"+"${fn:length(marketRev)}");
-	  			if("${fn:length(marketRev)}" == 0){		
-  				//	$('#ajaxRev').html(html);
-	  				location.reload();
-	  			}else if("${fn:length(marketRev)}" >3){
-	  				$("#ajaxRev:last-child").remove();	
-  					$('#ajaxRev').prepend(rev);
-	  			}else if("${fn:length(marketRev)}" > 0){
-	  				$('#ajaxRev').prepend(rev);
-	  			}
-
-	    	}
-	    });
-	});
-	function onError(request,status,error){
-	    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	}
-		
-	function dateToYYYYMMDD(date){
-	    function pad(num) {
-	        num = num + '';
-	        return num.length < 2 ? '0' + num : num;
-	    }
-	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
-	}
-
-	
-
+   $("#checkMR").on('click', function(){
+      // alert("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
+      // alert("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+      // console.log("mrInput.marketRev_star.value:" +mrInput.marketRev_star.value);
+      // console.log("mrInput.marketRev_cont.value:" +mrInput.marketRev_cont.value);
+    
+       if ($.trim($("#marketRev_contID").val()) == "") {
+           alert("글 내용을 입력해주세요.");
+           $("#marketRev_contID").focus();
+           return;
+             }
+       if (document.getElementById('marketRev_starID')){//별점이 존재한다면 밑에 실행
+          if ($.trim($("#marketRev_starID").val()) == ""){
+              alert("별점을 선택해주세요.");
+              $("#marketRev_starID").focus();
+              return;
+          }
+       } 
+        var queryString = $("#mrInputID").serialize();
+        var mem_email = $("#mem_emailID").val();
+        var market_num = $("#market_numID").val();
+        var marketRev_star = $("#marketRev_starID").val();
+        var marketRev_cont = $("#marketRev_contID").val();
+        var arr=[marketRev_cont,marketRev_star,market_num,mem_email]
+         var url=$("#mrInputID").attr("action");
+       //   console.log("url:"+url);
+      //    console.log("queryString:"+queryString);
+       $.ajax({ //free_name,content,star,rdate
+          type:'post',
+          url:url,
+          data:queryString,
+          dataType:'json',
+          async :false,
+          error:onError,
+       //   beforeSend:{},
+          success:onSuccessReview
+       });
+   });
+   function onError(request,status,error){
+       console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   }
+      
+   function dateToYYYYMMDD(date){
+       function pad(num) {
+           num = num + '';
+           return num.length < 2 ? '0' + num : num;
+       }
+       return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
+   }
+   
 </script>
 <script>
 //파일선택시 글씨보이게하는 펑션
-	   function upfile(){
-	      var filename = document.getElementById("file").value;
-	      document.getElementById("cor_fname_label").innerHTML="파일 선택됨";
-	   }   
-	   
-//문의파일보는 ajax
-		function QAFile(Qn,MN){
-			var marketQA_num=Qn;
-			var market_num=MN;
-			var images='';
-		   $.ajax({
-			   	type:'get',
-		    	url:'marketQAFile_show?marketQA_num='+marketQA_num+'&market_num='+market_num,
-		    	dataType:'json',
-		    	async :true,
-		    	error:onError,
-		    	success:function onSuccess(marketQA){
-		    		console.log("0000"+marketQA.marketQA.marketQA_cont);
-		    		//console.log("111111"+marketQA.marketQAFile[1].marketQAFile_fname);
-		    		if(marketQA.marketQAFile.length>0){
-			    		for(i=0;i<marketQA.marketQAFile.length;i++){	    			
-			    			images +='<div class="carousel-inner">';
-			    			images +='<div class="carousel-item active"> <img src="../hifiveImages/marketQAFiles/'+marketQA.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
-			    			images +='</div>';	
-			    		}
-			    		$("#exampleModalLong .carousel-inner").html(images);
-		    		}
-		    		$("#exampleModalLong #mqcont").text(marketQA.marketQA.marketQA_cont); 
-		    	}	
-		   	}); 	    	
-	   	}
-//문의글파일포함 insert후 Listing하는 AJAX
-	   function mqajax(prnum,lev,sun){
-		   if ($.trim($("#marketQA_subID ").val()) == "") {
-		        alert("제목을 입력해주세요.");
-		        $("#marketQA_subID").focus();
-		        return;
-		   		 }
-		   if ($.trim($("#marketQA_contID ").val()) == "") {
-		        alert("내용을 입력해주세요.");
-		        $("#marketQA_contID").focus();
-		        return;
-		   		 }
-
-		   alert(prnum);
-		   var url=$("#mqInput").attr("action");
-		   var formData = new FormData($("#mqInput")[0]);
-			$.ajax({
-			 	type:'POST',
-		    	url: url,
-		    	dataType:'json',
-		    	data: formData,
-		    	processData: false,
-		    	cache:false,
-		    	contentType: false,
-		    	async :false,
-		    	error:onError,
-		    	success:function onSuccess(marketQAList){
-		    		location.reload();
-		    		for(i=0; i<marketQAList.length; i++){//프리네임, 날짜 ,제목
-		    		//	console.log("11111marketQAList"+marketQAList);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_cont);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].marketQA_rdate);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_name);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].freelancer.free_fname);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_mname);
-		    		//	console.log("222222marketQAList[i].marketQA_num"+marketQAList[i].corporation.cor_fname);
-		    		}
-		    	}	
-		   	}); 
-			return false;
-		}
-//문의 리댓글 만따로빼려면이거씀
-	  function mqajaxRE(prnum,lev,sun){
-			alert(prnum);
-			alert(lev);
-			alert(sun);
-		    
-		   $('#Comment').on('show.bs.modal', function (event) {
-				//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
-				//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..    
-				$(".modal-content #REmarketQA_prnum").val( prnum );
-				$(".modal-content #REmarketQA_lev").val( lev );
-				$(".modal-content #REmarketQA_sun").val( sun );
-        	});           	
-		
-		}
-		
-		
-	  $('#submitQARE').click(function(){   
-		  console.log("ddddddddd");
-		  var url=$('#mqModal').attr('action');
-		  var QAREqueryString = $('#mqModal').serialize();
-		  
-		   $.ajax({
-			 	type:'POST',
-		    	url: url,
-		    	dataType:'json',
-		    	async :false,
-		    	data:QAREqueryString,
-		    	error:onError,
-		    	success:function onSuccess(marketQAList){
-			    	console.log("11111marketQAList");
-		    		 var QA='';
-		    		 for(i=0; i<marketQAList.length; i++){
-    					var freeName=marketQAList[i].freelancer.free_name;
-    					var freeFname=marketQAList[i].freelancer.free_fname;
-    					var corMName=marketQAList[i].corporation.cor_mname;
-    					var corFname=marketQAList[i].corporation.cor_fname;
-    					var subject=marketQAList[i].marketQA_sub;
-    					var content=marketQAList[i].marketQA_cont;
-    					var rdate=marketQAList[i].marketQA_rdate;
-    					var email=marketQAList[i].mem_email;
-    					var ox=marketQAList[i].marketQA_ox;
-	    			 }
-			     }	
-		   	}); 	    
-	   });
-	 
-
-	  function QAdelete(MQ,M){
-			alert(MQ);
-			alert(M);
-			var marketQA_num=MQ;
-			var market_num=M;
-		   $.ajax({
-			 	type:'GET',
-		    	url:'marketQA-delete?marketQA_num='+marketQA_num+'&market_num='+ market_num,
-		    	dataType:'json',
-		    	async :false,
-		    	error:onError,
-		    	success:function onSuccess(marketQAList){
-		    		history.go(); 
-		    	}
-			}); 	    				
-		}
-			
-		function QAupdate(MQsub,MQcont,MQnum,Mnum,ox){
-		 	alert("MQsub"+MQsub);
-			alert("MQcont"+MQcont);
-			alert("MQnum"+MQnum);
-			alert("Mnum"+Mnum);
-			alert("ox"+ox);
-
-
-			$('#MQUpdate').on('show.bs.modal', function (event) {
-				$("#MQUpdate .modal-content #UPmarketQA_sub").val(MQsub);
-				$("#MQUpdate .modal-content #UPmarketQA_cont").val(MQcont);
-				$("#MQUpdate .modal-content #UPmarketQA_qnum").val(MQnum);
-				$("#MQUpdate .modal-content #UPmarketQA_mnum").val(Mnum);
-				$("#MQUpdate .modal-content input[name=marketQA_ox]").val(ox);
-				
-				
-				var aa =$("#MQUpdate .modal-content #UPmarketQA_sub").val();
-				var ss =$("#MQUpdate .modal-content #UPmarketQA_cont").val();
-				var dd =$("#MQUpdate .modal-content #UPmarketQA_qnum").val();
-				var ff =$("#MQUpdate .modal-content #UPmarketQA_mnum").val();
-				var gg =$("#MQUpdate .modal-content input[name=marketQA_ox]").val();
-				
-				alert("1="+aa);
-				alert("2="+ss);
-				alert("3="+dd);
-				alert("4="+ff);
-				alert("5="+gg);
-			});
-		}
-			
-		  	
-			$('#submitQAUPdate').click(function(){    
-				var mqUPurl=$('#mqUPModalID').attr('action');
-		  		var queryString=$('#mqUPModalID').serialize();
-				jQuery.ajax({
-					type:'POST',
-			    	url:mqUPurl,
-			    	dataType:'json',
-			    	data:queryString,
-			    	async :true,
-			    	error:onError,
-			    	success: function onSuccessss(marketQAList){
-			    		history.go(); 
-			    	}
-				});		
-			 });
-
-</script> 
-<script>
-	function Revdelete(revNum,mNum){
-		alert("revNum"+revNum);
-		alert("mNum"+mNum);
-		$.ajax({
-			type:'GET',
-	    	url:'marketRev-delete?marketRev_num='+revNum+'&market_num='+mNum,
-	    	dataType:'json',
-	    	async :true,
-	    	error:onError,
-	    	success: function onSuccessss(marketRevList){
-	    		history.go(); 
-	    	}	
-		});
-		
-	}
-
-      function Revupdate(revNum,mNum,cont,star){
-   		 	alert("revNum"+revNum);
-   			alert("mNum"+mNum);
-   			alert("cont"+cont);
-   			alert("star"+star);
-
-   			$('#REVUpdate').on('show.bs.modal', function (event) {
-   				$("#REVUpdate .modal-content #Revupdate_star").val(star);
-   				$("#REVUpdate .modal-content #Revupdate_cont").val(cont);
-   				$("#REVUpdate .modal-content #Revupdate_num").val(revNum);
-   				$("#REVUpdate .modal-content #Marketupdate_num").val(mNum);
-
-   				var aa =$("#REVUpdate .modal-content #Revupdate_star").val();
-   				var ss =$("#REVUpdate .modal-content #Revupdate_cont").val();
-   				var dd =$("#REVUpdate .modal-content #Revupdate_num").val();
-   				var ff =$("#REVUpdate .modal-content #Marketupdate_num").val();
-   				
-   				alert("1="+aa);
-   				alert("2="+ss);
-   				alert("3="+dd);
-   				alert("4="+ff);
-
-   			});
-   		}
+      function upfile(){
+         var filename = document.getElementById("file").value;
+         document.getElementById("cor_fname_label").innerHTML="파일 선택됨";
+      }   
       
-      $('#submitREVUPdate').click(function(){    
-			var revUPurl=$('#revUPModal').attr('action');
-	  		var queryString=$('#revUPModal').serialize();
-			jQuery.ajax({
-				type:'POST',
-		    	url:revUPurl,
-		    	dataType:'json',
-		    	data:queryString,
-		    	async :true,
-		    	error:onError,
-		    	success: function onSuccessss(marketRevList){
-		    		history.go(); 
-		    	}
-			});		
-		});
-           
-
-</script>
-
-<!-- 
-	    var PRNUM="";
-	    var LEV="";
-	    var SUN="";
-	    
-	    $(document).ready(function() {     
-	        $('#mqModal').on('show.bs.modal', function(event) {          
-	        	PRNUM = $(event.relatedTarget).data('prnum');
-	        	LEV = $(event.relatedTarget).data('lev');
-	        	SUN = $(event.relatedTarget).data('sun');
-	        });
-	    });
- -->  
+//문의파일보는 ajax
+      function QAFile(Qn,MN){
+         var marketQA_num=Qn;
+         var market_num=MN;
+         var images='';
+         $.ajax({
+               type:'get',
+             url:'marketQAFile_show?marketQA_num='+marketQA_num+'&market_num='+market_num,
+             dataType:'json',
+             async :true,
+             error:onError,
+             success:function onSuccess(marketQAcont){
+                console.log("0000"+marketQAcont);
+                console.log("1111"+marketQAcont.marketQA);
+                console.log("1111"+marketQAcont.marketQA.marketQA_cont);
+                console.log("1111"+marketQAcont.marketQAFile);
+                //console.log("111111"+marketQA.marketQAFile[1].marketQAFile_fname);
+                if(marketQAcont.marketQAFile.length>0){
+                   for(i=0;i<marketQAcont.marketQAFile.length;i++){                
+                      images +='<div class="carousel-inner">';
+                      images +='<div class="carousel-item active"> <img src="../hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+                      images +='</div>';   
+                   }
+                   $("#exampleModalLong .carousel-inner").html(images);
+                }
+                $("#exampleModalLong #mqcont").text(marketQAcont.marketQA.marketQA_cont); 
+             }   
+            });           
+         }
+//문의글파일포함 insert후 Listing하는 AJAX
+   function qaList(cntPerPage,nowPage,market_num){
+         $.ajax({
+            type:'GET',
+             url:href='marketQA-list?cntPerPageQ='+cntPerPage+'&nowPageQ='+nowPage+'&market_num='+market_num,
+             dataType:'json',
+             async :true,
+             error:onError,
+             success: onSuccess   
+         });
+         
+      }
+      function mqajax(prnum,lev,sun){
+         if ($.trim($("#marketQA_subID ").val()) == "") {
+              alert("제목을 입력해주세요.");
+              $("#marketQA_subID").focus();
+              return;
+                }
+         if ($.trim($("#marketQA_contID ").val()) == "") {
+              alert("내용을 입력해주세요.");
+              $("#marketQA_contID").focus();
+              return;
+                }
+         //alert(prnum);
+         var url=$("#mqInput").attr("action");
+         var formData = new FormData($("#mqInput")[0]);
+         $.ajax({
+             type:'POST',
+             url: url,
+             dataType:'json',
+             data: formData,
+             processData: false,
+             cache:false,
+             contentType: false,
+             async :false,
+             error:onError,
+             success:onSuccess
+            }); 
+         return false;
+      }
+//문의 리댓글 만따로빼려면이거씀
+     function mqajaxRE(prnum,lev,sun,nowPage,cntPerPage){
+         /*alert("1prnum"+prnum);
+         alert("2lev"+lev);
+         alert("3sun"+sun);
+         alert("nowPage"+nowPage);
+         alert("cntPerPage"+cntPerPage);
+          */
+       
+          
+         $('#CommentQA').on('show.bs.modal', function (event) {
+            //show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
+            //얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..    
+            $("#CommentQA .modal-content #REmarketQA_prnum").val( prnum );
+            $("#CommentQA .modal-content #REmarketQA_lev").val( lev );
+            $("#CommentQA .modal-content #REmarketQA_sun").val( sun );
+            
+            $("#CommentQA .modal-content #REmarketQA_nowPage").val( nowPage );
+            $("#CommentQA .modal-content #REmarketQA_cntPerPage").val( cntPerPage );
+           });              
+      
+      }
+     $('#submitQARE').click(function(){   
+         if ($.trim($("#marketQA_subIDM").val()) == "") {
+              alert("제목을 입력해주세요.");
+             
+              jQuery(document).ready(function () {
+                 $("#CommentQA").show();
+                  $("#marketQA_subID").focus();
+                 });
+              return;
+            }
+         if ($.trim($("#marketQA_contIDM ").val()) == "") {
+              alert("내용을 입력해주세요.");
+              jQuery(document).ready(f

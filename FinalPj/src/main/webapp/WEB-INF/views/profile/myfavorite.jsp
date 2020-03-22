@@ -10,20 +10,32 @@
 
 		<!--Breadcrumb-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Favorite Ads</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item"><a href="#">My Dashboard</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Favorite Ads</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">찜한 프로젝트</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div><!-- /header-text -->
 			</div>
+		</div>
+		<!--/Sliders Section-->
+		
 		</section>
 		<!--/Breadcrumb-->
 
@@ -65,82 +77,27 @@
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
 												<li><a class="slide-item" href="myfavorite?mem_email=${sessionScope.email}">프로젝트 찜</a></li>
-												<li><a class="slide-item" href="myfavoriteMarket?mem_email=${sessionScope.email}">마켓 찜</a></li>
+												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-folder-alt"></i><span class="side-menu__label">마켓관리</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="managed-market.html">마켓관리</a></li>
-												<li><a class="slide-item" href="managed_order.html">구매관리</a></li>
+												<li><a class="slide-item" href="myMarket1">나의마켓</a></li>
+												<li><a class="slide-item" href="myMarket2">판매마켓</a></li>
+												<li><a class="slide-item" href="myMarket3">구매마켓</a></li>
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments.html"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
-											<a class="side-menu__item" href="#"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
+											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
 										</li>
 									</ul>
 								</div>
 							</aside>
 						</div>
-						<!--  
-						<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">Safety Tips For Buyers</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						-->
 					</div>
 					
 					<div class="col-xl-9 col-lg-12 col-md-12">
@@ -155,8 +112,6 @@
 										<ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">찜한 프로젝트</a></li>
 											<li><a href="#tab2" data-toggle="tab">지원한 프로젝트</a></li>
-											<li><a href="#tab3" data-toggle="tab">모집중인 공고</a></li>
-											<li><a href="#tab4" data-toggle="tab">마감된 공고</a></li>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -313,13 +268,10 @@
 												<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.pj_pay}" pattern="#,###,###,###" />원</td>
 												<td>
 												<c:if test="${dto.appliedproject.appp_status==0}">
-													<a href="#" class="badge badge-primary">미승인</a>
+													<a href="#" class="badge badge-secondary">미승인</a>
 												</c:if>
 												<c:if test="${dto.appliedproject.appp_status==1}">
 													<a href="#" class="badge badge-primary">승인</a>
-												</c:if>
-												<c:if test="${dto.appliedproject.appp_status==2}">
-													<a href="#" class="badge badge-danger">진행완료</a>
 												</c:if>
 												</td>
 												<td>
@@ -329,38 +281,6 @@
 											</c:forEach>
 											</c:otherwise>
 										</c:choose>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
 										</tbody>
 									</table>
 								</div>

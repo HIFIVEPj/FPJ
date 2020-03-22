@@ -15,6 +15,8 @@ import fp.freelancerprofile.domain.FreeLancerProfile;
 import fp.freelancerprofile.domain.FreeLancerProfileFile;
 import fp.freelancerprofile.domain.FreeLancerProfileListVO;
 import fp.freelancerprofile.domain.FreePickKeyWord;
+import fp.freelancerprofile.domain.Freelancer_FreeLancerProfile;
+import fp.freelancerprofile.domain.Freelnacer_account;
 import fp.freelancerprofile.domain.KeyWord;
 import fp.freelancerprofile.domain.PagingVO;
 import fp.freelancerprofile.domain.Project;
@@ -46,15 +48,19 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.selectPageList(map);
 	}
 	@Override
-	public List<FreeLancerProfileFile> selectFilename(){
-		return mapper.selectFilename();
+	public FreeLancerProfile selectProflie(){
+		return mapper.selectProflie();
 	}
 	
 	//프로필컨텐츠//
 	@Override
 	public List<FreeLancer> selectProfileContent(long PRO_NUM){
 		return mapper.selectProfileContent(PRO_NUM);
-	}	
+	}
+	@Override
+	public List<FreeLancerProfile> selectTel(long PRO_NUM) {
+		return mapper.selectTel(PRO_NUM);
+	}
 	@Override
 	public List<FreeLancerProfile> selectProfileContent2(long PRO_NUM){
 		return mapper.selectProfileContent2(PRO_NUM);
@@ -86,7 +92,7 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Transactional
 	public void listInsert(FreeLancerProfile freelancerprofile){
 		mapper.listInsert(freelancerprofile);
-		
+		mapper.free_profileoxUpdate(freelancerprofile);
 	}
 
 	@Override
@@ -134,12 +140,15 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public FreeLancerProfile showContent(long pro_num) {
 		return mapper.showContent(pro_num);
 	}
+	//프로필 공개, 비공개//
 	@Override	
 	public void choiceProfile(Map<String, Object> map) {
 		mapper.choiceProfile(map);
 	}
-	
-	
+	@Override	
+	public void closeProfile(Map<String, Object> map) {
+		mapper.closeProfile(map);
+	}
 	//나영추가 + mydash_free
 	@Override
 	public FreeLancer mydash_free_select(String mem_email) {
@@ -194,6 +203,24 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	public List<FreeLancerProfile> selectAllFreeKeywords(){
 		return mapper.selectAllFreeKeywords();
 	}
-
+	
+	//계좌추가
+	@Override
+	public void updateACCTOX(long free_code) {
+		mapper.updateACCTOX(free_code);
+	}
+	@Override
+	public void addACCT(Freelnacer_account freeacct){
+		mapper.addACCT(freeacct);
+	}
+	
+	@Override
+	public Freelnacer_account selectFreeACCT(long free_code) {
+		return mapper.selectFreeACCT(free_code);
+	}
+	@Override
+	public void updateACCT(Freelnacer_account freeacct) {
+		mapper.updateACCT(freeacct);
+	}
 }
 

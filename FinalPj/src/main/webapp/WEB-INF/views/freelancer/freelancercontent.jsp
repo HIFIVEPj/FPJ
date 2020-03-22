@@ -71,17 +71,17 @@
 											 	
 											 	
 											 	
-											 	
+											
 												<c:forEach items="${content}" var="list"  varStatus="status">
 												<div class="ml-4">
 													<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
-														<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">${profile.free_name}</h4></a>
+														<p class="text-dark"><h4 class="mt-3 mb-1 font-weight-bold">${profile.free_name}</h4></p>
 													</c:forEach>
 													<span class="text-gray"></span>&nbsp;
 													<span class="text-muted">${list.pro_exp}&nbsp;년</span><br>
 												<c:forEach items="${content3}" var="key"  varStatus="status">
-												<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
-													<span class="text-muted">${keyword.key_name} </span> / 
+												<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="0" end="3">
+													<span class="text-muted">${keyword.key_name} </span> &nbsp;
 												</c:forEach>
 												</c:forEach>
 												<br/>
@@ -92,7 +92,7 @@
 													<!-- 별점 -->
 														<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
 															<div class="rating-stars d-inline-flex mb-2 mr-3">
-															<c:if test="${empty review}">
+															<c:if test="${empty star}">
 																<span class="rated-products-ratings">
 																	 <i class="fa fa-star-o text-warning"></i>
 																	 <i class="fa fa-star-o text-warning"></i>
@@ -100,25 +100,23 @@
 																	 <i class="fa fa-star-o text-warning"></i>
 																	 <i class="fa fa-star-o text-warning"><span class="text-muted">&nbsp;0</span></i>
 																</span>
-															</c:if>
-														<c:forEach items="${review}" var="review_content"  varStatus="status">	
+															</c:if> 	
+															<c:forEach items="${star}" var="avg_star"  varStatus="status">	
 															<input type="number" readonly="readonly" class="rating-value star" name="rating-stars-value">
 												 		    <span class="rated-products-ratings">
-					                        		        <c:if test="${review_content.freerev_star >= 0}">
-						                                        <c:forEach var="1" begin="1" end="${review_content.freerev_star}">
+					                        		        <c:if test="${avg_star.freerev_star >= 0}">
+						                                        <c:forEach var="1" begin="1" end="${avg_star.freerev_star}">
 						                                          <i class="fa fa-star text-warning"> </i>
 						                                         </c:forEach>
 					                                         
-						                                        <c:forEach var="1" begin="1" end="${5-review_content.freerev_star}">
+						                                        <c:forEach var="1" begin="1" end="${5-avg_star.freerev_star}">
 																  <i class="fa fa-star-o text-warning"> </i>
 																</c:forEach>
-															</c:if>    			
-														</c:forEach>
+															</c:if>    	
 															</div>
 															<!-- 별점표시 텍스트 -->	
-															<c:forEach items="${review}" var="review_content"  varStatus="status">	
-																<c:if test="${review_content.freerev_star ne null}">
-																${review_content.freerev_star}
+																<c:if test="${avg_star.freerev_star ne null}">
+																${avg_star.freerev_star}
 																</c:if>
 															</c:forEach>	 
 															<!-- 별점표시 텍스트 위치 끝 -->	
@@ -128,12 +126,34 @@
 											</div>
 										</div>
 									</div>
-										<div class="item-card2-icons">
-									<a href="" class="item-card9-icons1 wishlist active"><i  class="fa fa fa-heart-o"></i></a>
-								</div>
-	
-								</div>
-						
+									
+								<input type="hidden" value="${cor.cor_code}" class="cor_codes"/>
+									<c:if test="${empty cor}">
+									<div class="item-card9-icons zzim">
+										<a href="javasript:void(0)" class="item-card9-icons wishlist" style="margin-right:40%" onclick="javascript:onlyCor();">
+										 <i class="fa fa fa-heart-o" style=""></i></a>
+									</div>
+								</c:if>
+								<c:if test="${!empty cor}">
+								<c:forEach var="i" begin="0" end="${content.size()-1}">
+									<c:choose>
+										<c:when test="${pronumList.contains(list.list_freelancerprofile.get(i).pro_num)}">
+											<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}" >
+												<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${content.get(i).pro_num})">
+												 <i class="fa fa fa-heart" style="color:white"></i></a> 
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="item-card9-icons">
+												<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${content.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${content.get(i).pro_num})">
+												 <i class="fa fa fa-heart-o" style=""></i></a>
+											</div>
+										</c:otherwise>	
+									</c:choose>
+										<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}"></div>
+								</c:forEach>
+							</c:if>
+						</div> 
 								<h4 class="pb-3 border-bottom mt-4">Profile</h4>
 								<c:forEach items="${content}" var="list"  varStatus="status">
 									<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
@@ -148,21 +168,22 @@
 							<c:forEach items="${content}" var="list"  varStatus="status" >
 								
 									<li><span class="font-weight-semibold">사용기술 :</span>
-								<c:forEach items="${content3}" var="key"  varStatus="status">
-								<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="1" end="3">
-									${keyword.key_name}
-								</c:forEach>
-								</c:forEach>
+										<c:forEach items="${content3}" var="key"  varStatus="status">
+											<c:forEach items="${key.frKeyWord}" var="keyword"  varStatus="status" begin="0" end="2">
+												${keyword.key_name}&nbsp;
+											</c:forEach>
+										</c:forEach>
 									</li>																	
-									<li><span class="font-weight-semibold">주소 :</span> ${list.pro_addr} </li>
+									<!-- <li><span class="font-weight-semibold">주소 :</span> ${list.pro_addr} </li> -->
 									<li><span class="font-weight-semibold">선호지역 :</span> ${list.pro_workplace}</li>														
 									<li><span class="font-weight">Email :</span> ${list.mem_email} </li>
 									<c:forEach items="${list.freelancer}" var="profile"  varStatus="status">
-									<li><span class="font-weight-semibold">연락처 :</span> ${profile.free_tel} </li>
+									<li><span class="font-weight-semibold">연락처 :</span>${tel.get(0).freelancer.get(0).free_tel}</li>
 									</c:forEach>
 									<li><span class="font-weight-semibold">최종학력 : &nbsp;${list.pro_edu}</span></li>
-									<li><span class="font-weight-semibold">현재 근무가능여부 :</span> 
-										<c:if test ="${list.pro_ox == 'on'}">가능</c:if></li>
+									<li><span class="font-weight-semibold">현재 근무가능여부 :
+										<c:if test ="${list.pro_ox == 'on'}">가능</c:if>
+										<c:if test ="${list.pro_ox == 'off'}">불가능</c:if></li></span> 
 									<li><span class="font-weight-semibold">선호근무형태 :</span>
 										<c:choose> 
 											<c:when test="${list.pro_place eq 0}">
@@ -227,21 +248,14 @@
 										</td>
 									</c:forEach>
 								</c:forEach>		
-										<!--		<c:forEach items="${content}" var="list"  varStatus="status">
-												<tr>
-											<c:forEach items="${list.freelancerprofilefile}" var="file"  varStatus="status">
-												<td><a href="#"><i class="fa fa-save"></i>${file.profile_ofname}</td>
-												</c:forEach>
-													</c:forEach>
-											</tr>-->
 										</tbody>	
 									</table>
 								</div>
 							</div>
-							<div class="card-footer" align="right">
+							<div class="card-body" align="right">
 								<div class="icons">
 							<!-- 	<span><a href="freelancerdelete?free_code=${list.free_code}" class="btn btn-secondary icons">삭제</a></span> -->
-									<a href="freelancerList" class="btn btn-secondary icons">목록</a>
+									<a href="freelancerList" class="btn btn-primary icons">목록</a>
 								</div>
 							</div>
 						</div>
@@ -265,19 +279,26 @@
 								    	</div>		
 									</div>
 								</c:if>		
-							<c:if test="${!empty review}">		
-								<c:forEach items="${review}" var="review_content"  varStatus="status">								
-									<div class="col-md-12">
+							<!--<c:if test="${!empty review}">-->		
+								<c:forEach items="${review}" var="review_content"  varStatus="status">							
+									<div class="col-md-12  before_review">
 									<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
 									<div class="media mt-0 p-5">
-			                      	   <div class="d-flex mr-3" >
-			                                <a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/파일이름.jpg" > </a>
-			                            </div>
+			                 
+          								  <div>   
+ 											<c:if test="${fnames ne null}">
+												<img src="../hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround"> 
+											</c:if> 
+											<c:if test="${fnames eq null}">
+												<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>	
+											</c:if> 
+						                     </div> &nbsp;&nbsp;&nbsp;
+
 			                                 <div class="media-body"> 
-						                             <h5 class="mt-0 mb-1 font-weight-semibold">강동원 
-														<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified" >							
-														<i class="fa fa-check-circle-o text-success"></i></span>
-													 	&nbsp;&nbsp;&nbsp;<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;${review_content.freerev_rdate}</small>
+						                          <h5 class="mt-0 mb-1 font-weight-semibold">${review.get(0).mmember.mem_name}
+												<!-- 	<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified" >							
+														<i class="fa fa-check-circle-o text-success"></i></span> -->
+													 	&nbsp;&nbsp;&nbsp;<small class="text-muted" name="freerev_rdate" id="freerev_rdate"><i class="fa fa-calendar"></i>&nbsp;${review_content.freerev_rdate}</small>
 													 </h5>
 													<c:forEach items="${review}" var="review_content"  varStatus="status">	
 												 		 <span class="rated-products-ratings">
@@ -302,78 +323,86 @@
 		                                 <div class="font-13  mb-2 mt-2" style="margin-left:80px;">${review_content.freerev_cont}</div>
 		                              	</c:forEach>      		
 									</div>	
-									
+						
+								<c:if test="${sessionScope.email eq review.get(0).mmember.mem_email}">
 									<div class="card-body item-user" align="right">
 										<div class="icons"> 
-								   	 		<form method="get" action="review_del" name="DeleteReview" style="padding-right:58px;">						
+								   	 		<!-- <form method="get" action="review_del" name="DeleteReview" style="padding-right:58px;">-->
+								   	 		<form method="get" action="review_del" name="DeleteReview" style="margin-right;">						
 								   				 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button>
 								   				 
 								   			</form>
-								   			<form method="post" action="review_update" name="review_update" style="margin-top:-38px;">								    		
+								   		<!-- <form method="post" action="review_update" name="review_update" style="margin-top:-38px;">								    		
 								   				<button type="button" class="btn btn-primary" id="updateReview" onclick="update();">수정</button>
-								   		    </form>	
+								   		    </form> -->		
 								   	 	</div>
-								    </div>		
+								    </div>	
+								 </c:if>   
 								</div>		
 							</c:forEach>									
 									
 					<!-- 페이징 -->				
-						<div class="center-block text-center">
+					<div class='paginationDiv' id="tab-11" style="margin:0 auto; align:center;" >
+						 <div class='center-block text-center'> 
                            <ul class="pagination mb-0">         
-                        <div class="card-body" style="margin:0 auto; align:center;">
+                        <div class="card-body" style="margin:0 auto; align:center;" id="review_paging">
                            <ul class="pagination mg-b-0 page-0 ">
-                   ${review.get(0).free_code} | ${paging}
-                          <c:if test ="${paging.nowPage != paging.startPage}">
-                          
-                           <!--이전 페이지 이동 -->
-                            <li class="page-item">
-                        <a aria-label="Last" class="page-link" href="freelancercontent?free_code=${paging.get(0).free_code}&pro_num=${paging.get(0).pro_num}&nowPage=${paging.nowPage}&cntPerPage=${paging.cntPerPage}">
-                        <i class="fa fa-angle-double-left"></i></a>
-                     
-                     </li>   
-                     <li class="page-item">
-                        <a aria-label="Next" class="page-link" href="freelancercontent?free_code=${paging.get(0).free_code}&pro_num=${paging.get(0).pro_num}&nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
-                        <i class="fa fa-angle-left"></i></a>
-                     </li>   
+                          <c:if test ="${paging.nowPage != 1}">
+                       <!--이전 페이지 이동 -->
+                           <li class="page-item">
+                           <a class="page-link noMem_prev" href="freelancercontent?nowPage=${paging.firstPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
+		                       <i class="fa fa-angle-double-left"></i></a>
+                    		 </li>
+                    		    
+		                   <li class="page-item">
+		                        <a aria-label="Next" class="page-link" href="freelancercontent?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
+		                       <i class="fa fa-angle-left"></i></a>
+		                  </li>   
                               
-                           </c:if>
-                            
+                          </c:if>
+                         
                            <!--페이지번호 -->
            
- <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+ <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="1" end="${paging.lastPage}" >	 
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
-                                    <li class='page-item active'><a class="page-link"  >${p}</a></li>
+                                  <c:if test ="${paging.nowPage != 1}">
+	                                  <c:forEach var='p' begin="${paging.startPage}" end="${p}" >
+	                                  	<li class='page-item active'><a class="page-link">${p}</a></li>
+	                                  </c:forEach>
+                                  </c:if>
+                                  <!--  <li class='page-item active'><a class="page-link">${p}</a></li> --> 
+                                    
                                  </c:when>
                                  <c:when test = "${p != paging.nowPage }">
-                                <c:forEach var='code' items="${review}" >
-                                    <li class="page-item"><a class="page-link"  href="freelancercontent?free_code=${code.free_code}&pro_num=${code.pro_num}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a></li>
-                                 </c:forEach>
+									
+                                  <li class="page-item"><a class="page-link" href="freelancercontent?nowPage=${p}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">${p}</a></li> 
                                  </c:when>
                               </c:choose>
                            </c:forEach>
-                           
-                              <c:if test ="${paging.nowPage != paging.lastPage}">
-                                 <li class="page-item">
-                           <a aria-label="Next" class="page-link" href="freelancercontent?free_code=${list.free_code}&pro_num=${num.pro_num}&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
-                         </li>  
-                        <li class="page-item">
-                           <a aria-label="Last" class="page-link" href="freelancercontent?free_code=${list.free_code}&pro_num=${num.pro_num}&nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
-                        </li>
-                              </c:if>
-             
-                           </ul>
-                           </div>
-                           </ul>
-                           </div>
-									
+                         <c:if test ="${paging.nowPage != paging.lastPage}">
+	                        <li class="page-item">
+	                           <!-- <a aria-label="Next" class="page-link" id="goNextPage"  onclick="reviewList(${paging.free_code},${paging.pro_num},${paging.cntPerPage},${paging.nowPage+1});"> -->
+	                           <a class="page-link" href="freelancercontent?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
+	                           <i class="fa fa-angle-right"></i></a>
+	                         </li>  
+	                        <li class="page-item">
+	                           <a aria-label="Last" class="page-link" href="freelancercontent?nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}"><i class="fa fa-angle-double-right"></i></a>
+	                        </li>
+                         </c:if>
+                        </ul>
+                      </div>
+                    </ul>
+                 </div> 
+                 </div>				
 					<!-- 페이징 끝. 리뷰 끝 -->					
-				</c:if>										
-							
-								</div>
-							<!--	</div>-->
-				</div>
+			<!--	</c:if>	 -->		
+			</div>
+				<!--	</div>-->	
+		</div>
 			<!-- 리뷰작성 -->
+		<c:if test="${sessionScope.email ne null}">
+			<c:if test="${sessionScope.email ne content.get(0).mem_email}">
 			<form method="post" action="InsertReview" name="InsertReview">
 				<div class="card mb-lg-0">
 							<div class="card-header">
@@ -415,238 +444,26 @@
 												<input type="hidden" id="freerev_num" name="freerev_num" value="${review.get(0).freerev_num}" />
 											</c:if>
 												<input type="hidden" id="free_code" name="free_code" value="${content3.get(0).free_code}" />	
-												<input type="hidden" id="mem_email" name="mem_email" value="${content3.get(0).mem_email}" />
+												<input type="hidden" id="mem_email" name="mem_email" value="${sessionScope.email}" />
 												<input type="hidden" id="pro_num" name="pro_num" value="${content3.get(0).pro_num}" />
+												
 										</div>							
 										<div align="right">
 										 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" style="margin-right:-1px;" >작성하기</button>
    										<!-- <button type="button" class="btn btn-primary" id="checkMR" style="margin-right:-1px;" onclick="inreview();">작성하기</button>  -->
    									</form>
-
-   										 </div>
-										</div>
+   								 </div>
+								</div>
 							</div>
 						</div>
-
-				<!-- 덧글작성 -->		
-
+					</c:if></c:if>
 <!-- 지우면깨짐 -->	</div> <!-- 지우면깨짐 -->
-					
-
-					
-
-					<!--Right Side Content-->
-				<!--	<div class="col-xl-4 col-lg-4 col-md-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="input-group">
-									<input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search">
-									<div class="input-group-append ">
-										<button type="button" class="btn btn-primary br-tr-7 br-br-7">
-											Search
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Categories</h3>
-							</div>
-							<div class="card-body">
-								<div class="" id="container">
-									<div class="filter-product-checkboxs">
-									<label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">CGI<span class="label label-secondary float-right">14</span></a>
-		                                 </span>
-		                              </label>
-		
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">jQuery<span class="label label-secondary float-right">22</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox3" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">.Net<span class="label label-secondary float-right">78</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox4" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">Java<span class="label label-secondary float-right">35</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox5" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">C<span class="label label-secondary float-right">23</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox6" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">C++<span class="label label-secondary float-right">14</span></a>
-		                                 </span>
-		                              </label>
-		
-		
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">Angular Js<span class="label label-secondary float-right">45</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">HTML<span class="label label-secondary float-right">34</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">CFML<span class="label label-secondary float-right">12</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">Ajax<span class="label label-secondary float-right">18</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">Flash<span class="label label-secondary float-right">02</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">Android<span class="label label-secondary float-right">15</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">Java Script<span class="label label-secondary float-right">32</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">My SQL<span class="label label-secondary float-right">23</span></a>
-		                                 </span>
-		                              </label>
-		                              <label class="custom-control custom-checkbox mb-3">
-		                                 <input type="checkbox" class="custom-control-input" name="checkbox7" value="option3">
-		                                 <span class="custom-control-label">
-		                                    <a href="#" class="text-dark">SQL<span class="label label-secondary float-right">19</span></a>
-		                                 </span>
-		                              </label>
-
-									</div>
-
-								</div>
-							</div>
-							<div class="card-header border-top">
-								<h3 class="card-title">Price Range</h3>
-							</div>
-							<div class="card-body">
-								<h6>
-								   <label for="price">Package:</label>
-								   <input type="text" id="price">
-								</h6>
-								<div id="mySlider"></div>
-							</div>
-							<div class="card-header border-top">
-								<h3 class="card-title">Condition</h3>
-							</div>
-							<div class="card-body">
-								<div class="filter-product-checkboxs">
-									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox1" value="option1">
-										<span class="custom-control-label">
-											Part time
-										</span>
-									</label>
-									<label class="custom-control custom-checkbox mb-2">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-										<span class="custom-control-label">
-											Full time
-										</span>
-									</label>
-									<label class="custom-control custom-checkbox mb-0">
-										<input type="checkbox" class="custom-control-input" name="checkbox2" value="option2">
-										<span class="custom-control-label">
-											Work Home
-										</span>
-									</label>
-								</div>
-							</div>
-
-							<div class="card-footer">
-								<a href="#" class="btn btn-primary btn-block">검색하기</a>
-							</div>
-						</div>
-				<!-- <div class="card mb-0">
-							<div class="card-header">
-								<h3 class="card-title">Shares</h3>
-							</div>
-							<div class="card-body product-filter-desc">
-								<ul class="vertical-scroll1">
-									<li class="item">
-										<div class="d-flex m-0 mt-0 p-3">
-											<img class="mr-4 avatar avatar-xxl brround" src="../images/faces/female/17.jpg" alt="img">
-											<div class="">
-												<h4 class="mb-1 mt-1">광과스폰문의 환영</h4>
-												<div class="text-muted mb-2">
-													Web Designer (1+ Exp)
-												</div>
-												<a class="btn-link" href="">View Details</a>
-											</div>
-										</div>
-									</li>
-									<li class="item">
-										<div class="d-flex m-0 mt-0 p-3">
-											<img class="mr-4 avatar avatar-xxl brround" src="../images/faces/male/17.jpg" alt="img">
-											<div class="">
-												<h4 class="mb-1 mt-1">광과스폰문의 환영</h4>
-												<div class="text-muted mb-2">
-													Java Programmer (1+ Exp)
-												</div>
-												<a class="btn-link" href="">View Details</a>
-											</div>
-										</div>
-									</li>
-									<li class="item">
-										<div class="d-flex m-0 mt-0 p-3">
-											<img class="mr-4 avatar avatar-xxl brround" src="../images/faces/female/20.jpg" alt="img">
-											<div class="">
-												<h4 class="mt-1 mb-1">광과스폰문의 환영</h4>
-												<div class="text-muted mb-2">
-													PHP Developer (2+ Exp)
-												</div>
-												<a class="btn-link" href="">View Details</a>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>-->
-					<!--</div>-->
-					<!--Right Side Content-->
 				</div>
 			</div>
 		</section>
 		<!--Add Listing-->
 <!-- delete Modal -->   
-      <div id="deleteModal" class="modal fade">
+      <div id="deleteModal" class="modal fade delete">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -667,7 +484,7 @@
       </div>
 <!-- /delete Modal -->
 <!-- insert Modal -->   
-      <div id="insertModal" class="modal fade">
+      <div id="insertModal" class="modal fade insert">
          <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -680,7 +497,8 @@
                   <p>리뷰를 작성 할까요?</p>
                </div>
                <div class="modal-footer">
-             	  <button class="btn btn-primary" type="button" style="color:white;" onclick="inreview();">네</button>
+             	  <!-- <button class="btn btn-primary" type="button" style="color:white;" onclick="inreview();">네</button> -->
+             	  <button class="btn btn-primary" type="button" style="color:white;" onclick="insertOK();">네</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
                </div>
             </div>
@@ -690,11 +508,13 @@
 
 <script>    
 	function inreview(value){
+		
 		cont=$("#freerev_cont").val();
 		pnum=$("#pro_num").val();
 		fcode=$("#free_code").val();
 		mem_email =$("#mem_email").val();
 		freerev_star =$("#freerev_star").val();
+
 		var objParam={
 			"cont" : cont,
 			"pnum" : pnum,
@@ -702,25 +522,44 @@
 			"mem_email" : mem_email,
 			"freerev_star" : freerev_star
 		};
-		alert("freerev_star:"+freerev_star);
 		
 	 $.ajax({
 		 type:"post",
 		 url:"InsertReview",
 		 data:objParam,
-		 dataType: "json",
-		 
-		 success:function(data){	
-			 alert("성공2");  
-			   },
+		 success: function(data) {
+			 $(".insert").remove();
+			 $(".modal-backdrop").remove();
+			
+			 var free_code ="<c:out value="${paging.free_code}" />";
+			 var pro_num ="<c:out value="${paging.pro_num}" />";
+			// var nowpage ="<c:out value="${paging.nowPage}" />";
+			// var cntpage ="<c:out value="${paging.cntPerPage}" />";
+			 //onSuccessReview();
+			 
+			location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num);
+			
+		 },
 		 error:function(data){
-			 alert("에러발생2");
-		       }
+			 alert("별점을 입력해 주세요");
+		 }
 		});
 	 }
 
+	function insertOK(value){
+		
+		cont=$("#freerev_cont").val();
+		var cont_cnt=Object.keys(cont).length;
+		//alert(cont_cnt);
+
+		if (cont_cnt == 0){
+				alert("내용을 입력해 주세요");
+			}else{
+				inreview();
+			}
+		}
+	
 	function update(value){
-		freerev_num=$("#freerev_num").val();
 		
 	 $.ajax({
 		 type:"post",
@@ -728,10 +567,11 @@
 		 data: "cont="+cont+
 			   "&freerev_star="+freerev_star+
 			   "&freerev_num="+freerev_num,
-		 dataType: "json",
 		 
 		 success:function(data){	
-			 alert("성공2");  
+			 $(".insert").remove();
+			 $(".modal-backdrop").remove();
+			 history.go();
 			   },
 		 error:function(data){
 			 alert("에러발생2");
@@ -739,25 +579,199 @@
 		});
 	 }
 
-		function delreview(){
+	function delreview(){
 			freerev_num=$("#freerev_num").val();
 			
 		 $.ajax({
 			 type:"get",
 			 url:"review_del",
 			 data:"freerev_num="+freerev_num,
-			 dataType: "json",
 			 
 			 success:function(data){	
-				 alert("성공2");  
+				 $(".delete").remove();
+				 $(".modal-backdrop").remove();
+				 var free_code ="<c:out value="${paging.free_code}" />";
+				 var pro_num ="<c:out value="${paging.pro_num}" />";
+				 var nowpage ="<c:out value="${paging.nowPage}" />";
+				 var cntpage ="<c:out value="${paging.cntPerPage}" />";
+	
+				 
+				//  onSuccessReview();
+				location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num+"&nowPage="+nowpage+"&cntPerPage="+cntpage);
 				   },
 			 error:function(data){
 				 alert("에러발생2");
 			       }
 			});
 	 }
-</script>
+	
+	//리뷰 페이징//
+	function reviewList(free_code, pro_num, nowPage){
+		
+	
+		var nowPage =1;
+	
+		
+		 var objParam={
+					"free_code" : free_code,
+					"pro_num" : pro_num,
+					"nowPage" : nowPage
+				};
+	
+		$.ajax({
+			type:'GET',
+	  	 	url:'freelancercontent_ajax',
+	    	dataType:'json',
+			data: objParam,
+	    	async :true,
+	    	error:onError,
+	    	success: onSuccessReview
+		});
+		
+		
+	}
+	
 
+	function onError(request,status,error){
+		alert(error);
+	    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	}
+	function onSuccessReview(data){
+		console.log("data:"+data);
+		var list = data.review_ajax;
+		var cnt = list.length;
+		
+		var fname = data.fnames[0].free_fname;
+		var fcnt = data.fnames.length;
+		
+		var pages=data.freelancerreview;
+		
+		console.log("data.fnames.length"+data.fnames.length);
+		console.log("data.fnames:"+data.fnames[0].free_fname);
+		console.log("fcnt"+fcnt);
+		console.log("fname"+fname);
+		
+		for(y=0; y<fcnt; y++){	
+			var filename= fname[y];
+		}
+		
+		var filename=data.fnames.free_fname;
+
+		
+		for(i=0; i<cnt; i++){
+			
+				var cont ='';//문자열
+				var name = list[i].mmember.mem_name; 
+				var star = list[i].freerev_star;
+				var date = list[i].freerev_rdate;
+				var fr_cont = list[i].freerev_cont;
+
+			//	$(".before_review").remove();
+		
+				function getFormatDate(date){
+				    var year = date.getFullYear();             
+				    var month = (1 + date.getMonth());          
+				    month = month >= 10 ? month : '0' + month;  
+				    var day = date.getDate();                  
+				    day = day >= 10 ? day : '0' + day;         
+				    return  year + '-' + month + '-' + day;
+				}
+				var date = new Date();
+				date = getFormatDate(date);
+				
+				cont+=
+				'<div class="col-md-12  before_review">'	
+				+'<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >'
+				+'<div class="media mt-0 p-5">';		
+				if(fcnt > 0){
+					cont+='<div><img  alt="X" class="avatar-xxl brround" src="../hifiveImages/free_thumb/'+fname+'">';
+				}else{
+					cont+='<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>';	
+				}
+					cont+='</div> &nbsp;&nbsp;&nbsp;'
+					
+				+'<div class="media-body">'
+				+'<h5 class="mt-0 mb-1 font-weight-semibold">'+name
+				+'<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified >'
+				+'<i class="fa fa-check-circle-o text-success"></i></span>'
+				+'&nbsp;&nbsp;&nbsp;<small class="text-muted"><i class="fa fa-calendar"></i>&nbsp;'+date+'</small>'
+				+'</h5>'
+				+'<span class="rated-products-ratings">';
+				for(var i=0;i<star;i++){
+					cont+='<i class="fa fa-star text-warning">&nbsp;</i>';
+		  		}
+				for(var i=0;i<(5-star);i++){
+					cont+='<i class="fa fa-star-o text-warning mt-0 mb-1 font-weight-semibold">&nbsp;</i>';
+		  		}
+				cont+= 
+				star+'<div class="col-md-6 text-center align-items-center"></div></div>'
+				+'<div class="font-13  mb-2 mt-2" style="margin-left:80px;"></div></div>'
+				+'<div class="col-md-6 text-center align-items-center"></div></div>'
+				+'<div class="font-13  mb-2 mt-2" style="margin-left:80px;">'+fr_cont+'</div></div>'
+				+'<div class="card-body item-user" align="right">'
+				+'<div class="icons"> '
+				+'<form method="get" action="review_del" name="DeleteReview" style="padding-right:58px;">'
+				+'<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">삭제</button></form>'
+				+'<form method="post" action="review_update" name="review_update" style="margin-top:-38px;">'
+				+'<button type="button" class="btn btn-primary" id="updateReview" onclick="update();">수정</button></form>'
+				+'</div></div></div>'
+			//페이징버튼//
+				+'<div class="center-block text-center paginationDiv" id="tab-11">'
+				+'<ul class="pagination mb-0">'
+				+'<div class="card-body" style="margin:0 auto; align:center;" id="review_paging">'
+				+'<ul class="pagination mg-b-0 page-0 ">'
+				+'<li class="page-item active"><a class="page-link">1</a></li>'
+				+'<li class="page-item">'
+				+'<a aria-label="Next" class="page-link" id="goNextPage" onclick="reviewList();"><i class="fa fa-angle-right"></i></a>'
+				+'</li><li class="page-item">'
+				+'<a aria-label="Last" class="page-link"></a>'
+				+'</li></ul></div> </ul>'//</div></div>'
+		}
+	
+		
+		$(".goNextPage").click(function(){
+			nowPage = eval(pages.nowPage) + 1;	
+			pageFlag = 1;
+			reviewList();
+		    pageFlag = 0;
+	    });
+
+	
+	}
+</script>
+		<script src="../js/dateFormat.js"></script>
+			<script>
+			function onlyCor(){
+				alert("기업 회원만 이용가능한 서비스 입니다.")
+			}
+			function wish(pro_num){	
+				$.ajax({
+					type:"get",  
+					url:"<c:url value='free_wish'/>",
+	    			data:"pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
+					success: function(data){
+						$('#insertwish'+pro_num).remove();
+						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pro_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pro_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
+						alert("프리랜서 프로필이 찜목록에 추가되었습니다.")
+					},
+					error: function(data){
+					alert("에러발생");
+					}
+				});
+			}
+			function del_wish(pro_num){
+				$.ajax({
+					type:"get",
+					url:"<c:url value='free_wish_del'/>",
+					data: "pro_num="+pro_num+"&cor_code="+$(".cor_codes").val(),
+					success:function(data){
+						$('#delwish'+pro_num).remove();
+						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons wishlist' id='insertwish"+pro_num+"' style='margin-right:40%' onclick='javascript:wish("+pro_num+")'><i class='fa fa fa-heart-o'></i></a>");
+					}
+				})
+			}
+			</script>
+		<script>
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

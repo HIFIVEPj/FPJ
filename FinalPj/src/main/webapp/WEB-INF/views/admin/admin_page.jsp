@@ -76,166 +76,39 @@
 									</div>
 								</form>
 							</div> -->
-							<div class="d-flex order-lg-2 ml-auto">
-				<!--  			<div class="dropdown d-none d-md-flex" >
-									<a  class="nav-link icon full-screen-link">
-										<i class="fe fe-maximize floating"  id="fullscreen-button"></i>
+							<div class="d-flex order-lg-2 ml-auto" style="line-height: 35px;">
+				 				<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="project_list">										
+									프로젝트 
 									</a>
-								</div> -->
+								</div> 	
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="market-list">
+										프리마켓
+									</a>
+								</div> 
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="freelancerList">
+										프리랜서
+									</a>
+								</div> 
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="customer_service_notice">
+										공지사항
+									</a>
+								</div> 
+								<div class="dropdown d-none d-md-flex" >
+									<a  class="dropdown-item" href="customer_service_qa">
+										문의하기
+									</a>
+								</div> 					
+								<div class="dropdown d-none d-md-flex" >
+									<a href="logout.do" class="dropdown-item">
+										<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
+									</a>
+								</div> 
 						
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-bell-o"></i>
-										<span class=" nav-unread badge badge-danger  badge-pill">4</span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item text-center">You have 4 notification</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-envelope-o"></i>
-											</div>
-											<div>
-												<strong>2 new Messages</strong>
-												<div class="small text-muted">17:50 Pm</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-calendar"></i>
-											</div>
-											<div>
-												<strong> 1 Event Soon</strong>
-												<div class="small text-muted">19-10-2019</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-comment-o"></i>
-											</div>
-											<div>
-												<strong> 3 new Comments</strong>
-												<div class="small text-muted">05:34 Am</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<div class="notifyimg">
-												<i class="fa fa-exclamation-triangle"></i>
-											</div>
-											<div>
-												<strong> Application Error</strong>
-												<div class="small text-muted">13:45 Pm</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">See all Notification</a>
-									</div>
-								</div>
-								<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fa fa-envelope-o "></i>
-										<span class=" nav-unread badge badge-warning  badge-pill">3</span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/41.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Blake</strong> I've finished it! See you so.......
-												<div class="small text-muted">30 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/1.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Caroline</strong> Just see the my Admin....
-												<div class="small text-muted">12 mins ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/male/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Jonathan</strong> Hi! I'am singer......
-												<div class="small text-muted">1 hour ago</div>
-											</div>
-										</a>
-										<a href="#" class="dropdown-item d-flex pb-3">
-											<img src="../images/faces/female/18.jpg" alt="avatar-img" class="avatar brround mr-3 align-self-center">
-											<div>
-												<strong>Emily</strong> Just a reminder that you have.....
-												<div class="small text-muted">45 mins ago</div>
-											</div>
-										</a>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all Messages</a>
-									</div>
-								</div>
-						<!-- 		<div class="dropdown d-none d-md-flex">
-									<a class="nav-link icon" data-toggle="dropdown">
-										<i class="fe fe-grid"></i>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow  app-selector">
-										<ul class="drop-icon-wrap">
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-envelope text-dark"></i>
-													<span class="block"> E-mail</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-map text-dark"></i>
-													<span class="block">map</span>
-												</a>
-											</li>
-
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-bubbles text-dark"></i>
-													<span class="block">Messages</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-user-follow text-dark"></i>
-													<span class="block">Followers</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-picture text-dark"></i>
-													<span class="block">Photos</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" class="drop-icon-item">
-													<i class="si si-settings text-dark"></i>
-													<span class="block">Settings</span>
-												</a>
-											</li>
-										</ul>
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all</a>
-									</div>
-								</div> -->
-								<div class="dropdown ">
-									<a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
-										<img src="../images/faces/male/25.jpg" alt="profile-img" class="avatar avatar-md brround">
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
-										<a class="dropdown-item" href="profile.html">
-											<i class="dropdown-icon si si-user"></i> My Profile
-										</a>
-										<a class="dropdown-item" href="emailservices.html">
-											<i class="dropdown-icon si si-envelope"></i> Inbox
-										</a>
-										<a class="dropdown-item" href="editprofile.html">
-											<i class="dropdown-icon  si si-settings"></i> Account Settings
-										</a>
-										<a class="dropdown-item" href="login.html">
-											<i class="dropdown-icon si si-power"></i> Log out
-										</a>
-									</div>
-								</div>
+							
 							</div>
 						</div>
 					</div>
@@ -259,23 +132,24 @@
 					</div> -->
 					<ul class="side-menu">
 							<li>	
-                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">통계</span></a>
+                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon si si-chart"></i><span class="side-menu__label">통계</span></a>
                             </li>
                             
 						    <li>	
-                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">회원관리</span></a>
+                                <a class="side-menu__item" href="/admin_member"><i class="side-menu__icon si si-user"></i><span class="side-menu__label">회원관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">마켓관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketF"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">마켓관리</span></a>
                             </li>
                             
                              <li>	
-                                 <a class="side-menu__item" href=""><i class="side-menu__icon fa fa-tachometer"></i><span class="side-menu__label">프로젝트관리</span></a>
+                                 <a class="side-menu__item" href="admin_marketC"><i class="side-menu__icon si si-paypal"></i><span class="side-menu__label">프로젝트관리</span></a>
                             </li>
-      				</ul>
+                                                           
+					</ul>
 
-					<div class="app-sidebar-footer">
+				<!-- 	<div class="app-sidebar-footer">
 						<a href="emailservices.html">
 							<span class="fa fa-envelope" aria-hidden="true"></span>
 						</a>
@@ -291,7 +165,7 @@
 						<a href="chat.html">
 							<span class="fa fa-comment" aria-hidden="true"></span>
 						</a>
-					</div>
+					</div> -->
 				</aside>
 
 				<div class="app-content  my-3 my-md-5">
@@ -390,8 +264,9 @@
 							<div class="col-md-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Product List</h3>
+										<h3 class="card-title">마켓 승인 List</h3>
 									</div>
+								<form id="marketA" name="marketA" action="updateMarketState.do" method="post">	
 									<div class="card-body">
 										<div class="table-responsive border-top userprof-tab">
 											<table class="table table-bordered table-hover mb-0">
@@ -423,7 +298,7 @@
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
 																		<a href="market-content?market_num=${dto.market_num}" class="text-dark"><h4 class="font-weight-semibold">${dto.market_sub}</h4></a>
-																		<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>																		
+																		<!--<a href="#"><i class="fa fa-clock-o mr-1"></i> Nov-25-2018 , 16:54</a><br>		-->																
 																	</div>
 																</div>
 															</div>
@@ -432,33 +307,70 @@
 														<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.market_price}" pattern="#,###,###,###" /></td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
-															<a href="#" class="badge badge-warning">미승인</a>
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-warning">미승인</a>
 															</c:if>
-															<c:if test="${dto.market_state eq 0}">
-															<a href="#" class="badge badge-success">승인</a>
+															<c:if test="${dto.market_state eq 1}">
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-success">승인</a>
 															</c:if>
-															<c:if test="${dto.market_state eq 0}">
-															<a href="#" class="badge badge-primary">거절</a>
+															<c:if test="${dto.market_state eq 2}">
+															<a href="javascript:void(0)" style="color:white;" class="badge badge-danger">거절</a>		
 															</c:if>
 															
 														</td>
 														<td>
-															<button id="admitBt" class="btn btn-primary btn-sm"><a href="updateMarketState.do?market_state=1"></a><i class="fa fa-check"></i> 승인하기</button>
-															<button id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i> 거절하기</button>
+															<c:if test="${dto.market_state eq 0}">
+																<button type="button" id="admitBtn" class="btn btn-primary btn-sm admitBtn" ><i class="fa fa-check"></i>승인하기</button>															
+																<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm refuseBtn"><i class="fa fa-close"></i>거절하기</button>
+																<input type="hidden" id="market_state" name="market_state" value="">
+																<input type="hidden" id="market_num" name="market_num" value="${dto.market_num}">
+															</c:if>						
+															<c:if test="${dto.market_state eq 1}">
+																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>
+															</c:if>
+															<c:if test="${dto.market_state eq 2}">
+																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>		
+															</c:if>
 														<!-- <a class="btn btn-success btn-sm text-white" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
 															<a class="btn btn-danger text-white" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
 															<a class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="Save to Wishlist"><i class="fa fa-heart-o"></i></a>
 															<a class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="View"><i class="fa fa-eye"></i></a> -->
 														</td>
 													</tr>
+													
 												</c:forEach>
 												</tbody>
 											</table>
 										</div>
 									</div>
+								</form>	
 								</div>
 							</div>
-						</div>			
+						</div>	
+						
+						<ul class="pagination mb-5">
+							<!--  이전페이지 -->
+						<c:if test="${pamarket.nowPage != 1}">
+							<li class="page-item page-prev">							
+								<a class="page-link" href="admin?nowPage=${pamarket.nowPage-1}&cntPerPage=${pamarket.cntPerPage}" tabindex="-1">Prev</a>
+							</li>
+						</c:if>
+						<c:forEach var='p' begin="${pamarket.startPage}" end="${pamarket.endPage}">
+								<c:choose>
+									<c:when test="${p == pamarket.nowPage}">
+										<li class='page-item active'><a class="page-link">${p}</a></li>
+									</c:when>
+									<c:when test = "${p != pamarket.nowPage }">
+										<li class="page-item"><a class="page-link" href="admin?nowPage=${p}&cntPerPage=${pamarket.cntPerPage}">${p}</a></li>
+									</c:when>
+								</c:choose>
+						</c:forEach>
+						<c:if test ="${pamarket.nowPage != pamarket.lastPage}">
+							<li class="page-item page-next">
+								<a class="page-link" href="admin?nowPage=${pamarket.nowPage+1}&cntPerPage=${pamarket.cntPerPage}">Next</a>
+							</li>
+						</c:if>
+					</ul> 		
+
 											
 					</div>
 				</div>
@@ -535,14 +447,13 @@
 		<!-- Custom Js-->
 		<script src="../js/admin-custom.js"></script>
 		<script src="../js/custom.js"></script> 
-
 	</body>
 <script>
 $(document).ready(function(){
 	/*  도넛차트 적용하기   */
 	var pieData = {
 		      기업: ${totalCountCor},
-		      개인: ${totalCountFree},
+		      개인: ${totalCountFree}
 		 //인증안한개인: 666,
 
 		}
@@ -609,6 +520,19 @@ $(document).ready(function(){
  });
  
 })
+
+$(".admitBtn").on("click",function(){	
+	$("#market_state").attr("value","1");	
+	var market_state= $("#market_state").val();		
+	marketA.submit();	
+})
+$(".refuseBtn").on("click",function(){	
+	$("#market_state").attr("value","2");	
+	var market_state= $("#market_state").val();	
+	marketA.submit();	
+})
+
+
 		
 </script>
 </html>

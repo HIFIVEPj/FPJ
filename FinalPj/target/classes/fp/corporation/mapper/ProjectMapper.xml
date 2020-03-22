@@ -205,7 +205,9 @@
 		   WHERE pj.PJ_NUM=#{pj_num}
 		  ]]>
 	</select>
-
+	<update id="updateProjectVcnt" parameterType="long">
+		update Project set pj_vcnt=pj_vcnt+1 where PJ_NUM=#{pj_num}
+	</update>	
 	<insert id="insertpj" parameterType="corProject" >
 	<selectKey keyProperty="pj_num" order="BEFORE" resultType="long">
 		select pj_num_seq.nextval from dual
@@ -214,7 +216,7 @@
 		(PJ_NUM, TYPE_NUM, COR_CODE, PJ_SUB, PJ_CONT, PJ_DDATE, PJ_PAY, PJ_TERM, PJ_LOC, pj_postcode,
 		 pj_detailloc, pj_loc_x, pj_loc_y,PJ_RECNUM, PJ_APPNUM, PJ_RDATE, PJ_TOTALP, PJ_PLACE, PJ_HOMEPAGE, PJ_FGRADE)
 		 values(#{pj_num}, #{type_num}, #{cor_code}, #{pj_sub},#{pj_cont},#{pj_ddate},#{pj_pay},
-		 #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage}, #{pj_fgrade})		
+		 #{pj_term},#{pj_loc},#{pj_postcode},#{pj_detailloc},#{pj_loc_x},#{pj_loc_y},#{pj_recnum},#{pj_appnum},sysdate,#{pj_totalp},#{pj_place},#{pj_homepage ,jdbcType=VARCHAR}, #{pj_fgrade})		
 	</insert>
 	
 	 <insert id="insertPjpkeyword" parameterType="map">
@@ -269,6 +271,16 @@
 		update PROJECT set pj_paystatus=1 where pj_num = #{pj_num}
 	</update>
 	
+	<update id="corPointUp" parameterType="long">
+		update CORPORATION set COR_POINT=COR_POINT+1 where cor_code = #{cor_code}
+	</update>
+	<update id="corLevelUp1" parameterType="long">
+		update corporation set cor_level=1 where cor_point in(select cor_point from corporation where cor_point>10 and cor_code=#{cor_code})
+	</update>
+	<update id="corLevelUp2" parameterType="long">
+		update corporation set cor_level=2 where cor_point in(select cor_point from corporation where cor_point>20 and cor_code=#{cor_code})
+	</update>
+	
 	<!-- 프로젝트 찜 -->
 	<select id="pjpick_list" resultType="fp.corporation.domain.ProjectPick" parameterType="long">
 		select * from project_pick where free_code=#{free_code}
@@ -301,9 +313,10 @@
 	<select id="getTotalCountPickPj" resultType="long" >
 		select count(pj.PJ_NUM) from PROJECT pj join project_pick pjp on pj.pj_num=pjp.pj_num where free_code=#{free_code}  
 	</select>
-	<!-- 프로젝트 지원 -->
+	
+		<!-- 프로젝트 지원 -->
 	<insert id="applied_pj" parameterType="map">
-		insert into APPLIED_PROJECT(free_code, pj_num, appp_date) values(#{free_code},#{pj_num}, sysdate)
+		insert into APPLIED_PROJECT(free_code, pro_num,pj_num, appp_date) values(#{free_code},#{pro_num},#{pj_num}, sysdate)
 	</insert>
 	<select id="select_applied_pj" parameterType="map" resultType="fp.corporation.domain.AppliedProject">
 		select * from  APPLIED_PROJECT where free_code=#{free_code} and pj_num=#{pj_num}
@@ -319,5 +332,14 @@
 		where free_code=#{free_code} order by pj.pj_num desc)aa) where rnum>#{ProjectVo.start} and rnum<=#{ProjectVo.end}
 		 ]]>
 	</select>
+	<update id ="appp_status_update" parameterType="map">
+		update applied_project set appp_status=1 where pro_num=#{pro_num} and pj_num=#{pj_num}
+	</update>
+	<select id="appp_count" resultType="int" parameterType="long">
+		select count(pro_num) from applied_project where pj_num=#{pj_num} and appp_status=1
+	</select>
+	<update id ="pj_status_update" parameterType="long">
+		update project set pj_status=1 where pj_num=#{pj_num}
+	</update>
 	
 </mapper>
