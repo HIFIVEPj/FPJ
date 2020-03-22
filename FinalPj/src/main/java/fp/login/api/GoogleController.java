@@ -76,7 +76,8 @@ public class GoogleController {
 		
 		public static JsonNode getGoogleUserInfo(JsonNode accessToken) {
 			log.info("토큰 1: " + accessToken );
-			final String RequestUrl = "https://www.googleapis.com/auth/userinfo.email openid";
+			final String RequestUrl = "https://accounts.google.com/o/oauth2/v2/auth?" + "client_id=" + G_CLIENT_ID +"&redirect_uri="
+					+ G_REDIRECT_URI + "&response_type=code"+"&scope=https://www.googleapis.com/auth/userinfo.email&access_type=offline";
 			//https://www.googleapis.com/oauth2/v2/userinfo
 			final HttpClient client = HttpClientBuilder.create().build();
 			final HttpPost post = new HttpPost(RequestUrl);
