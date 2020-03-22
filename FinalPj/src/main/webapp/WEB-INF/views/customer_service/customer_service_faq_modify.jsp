@@ -26,7 +26,7 @@
 					<h4 class="page-title">FAQ</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_hifive">고객센터</a></li>
+						<li class="breadcrumb-item">고객센터</li>
 						<li class="breadcrumb-item active" aria-current="page">FAQ</li>
 					</ol>
 				</div>

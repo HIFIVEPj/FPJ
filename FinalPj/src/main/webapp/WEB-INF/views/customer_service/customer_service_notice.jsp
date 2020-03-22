@@ -6,21 +6,6 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
-		<!--Sliders Section-->
-		<!--
-		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
-					<div class="container">
-						<div class="text-center text-white">
-							<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		-->
-		<!--/Sliders Section-->
 
 		<!--Sliders Section-->
 		<div>
@@ -32,13 +17,6 @@
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
 									<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
 								</div>
 							</div>
 						</div>
@@ -55,7 +33,7 @@
 					<h4 class="page-title">공지사항</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item">고객센터</li>
 						<li class="breadcrumb-item active" aria-current="page">공지사항</li>
 					</ol>
 				</div>
@@ -101,7 +79,7 @@
 								<br/>
 									<c:if test="${sessionScope.class_num==1}">
 									<div class="text-right">
-										<a href="customer_service_notice_write" class="btn btn-danger">　글쓰기　</a>
+										<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
 									</div>
 									</c:if>
 							</div>

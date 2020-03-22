@@ -15,13 +15,6 @@
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
 									<h1 class="" style="margin-bottom:0rem;">문의하기</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
 								</div>
 							</div>
 						</div>
@@ -38,7 +31,7 @@
 					<h4 class="page-title">문의하기</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item">고객센터</li>
 						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
 					</ol>
 				</div>
@@ -600,10 +593,12 @@
 									<div class="card-footer">
 										<div class="row">
 											<div class="col">
+											<!--
 												<label class="custom-control custom-checkbox mb-0">
 													<input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
 													<span class="custom-control-label">비밀글</span>
 												</label>
+											-->	
 											</div>
 											<div class="col col-auto">
 												<!--
