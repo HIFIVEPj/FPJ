@@ -5,24 +5,7 @@
   
 <configuration>
 	<typeAliases>
-		<!-- 승훈 -->
-		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
-		<typeAlias alias="CustomerServiceQa" type="fp.customer_service.domain.CustomerServiceQa"/>
-		<typeAlias alias="CustomerServiceFaq" type="fp.customer_service.domain.CustomerServiceFaq"/>
-		<typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
-	  	<typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
-	  	<typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
-	  	<typeAlias alias="ReplyPageDTO" type="fp.customer_service.domain.ReplyPageDTO"/>
-	  	<typeAlias alias="AttachFileDTO" type="fp.customer_service.domain.AttachFileDTO"/>
-	  	<typeAlias alias="BoardAttachVO" type="fp.customer_service.domain.BoardAttachVO"/>
-	  	<typeAlias alias="Qa_recommend" type="fp.customer_service.domain.Qa_recommend"/>
-	  	<typeAlias alias="Notice_recommend" type="fp.customer_service.domain.Notice_recommend"/>
-		<!--
-		<typeAlias alias="CustomerServicePagingVO" type="fp.customer_service.domain.CustomerServicePagingVO"/>
-		-->
-		
-		
-		
+
 		<!-- 세영 -->
 		<typeAlias alias="Market" type="fp.market.domain.Market"/>
         <typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
@@ -41,6 +24,23 @@
      	<typeAlias alias="MarketPick" type="fp.market.domain.MarketPick"/>
      	<typeAlias alias="MarketBuysellList" type="fp.market.domain.MarketBuysellList"/>
 
+
+
+<!-- 승훈 -->
+		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
+		<typeAlias alias="CustomerServiceQa" type="fp.customer_service.domain.CustomerServiceQa"/>
+		<typeAlias alias="CustomerServiceFaq" type="fp.customer_service.domain.CustomerServiceFaq"/>
+		<typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
+	  	<typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
+	  	<typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
+	  	<typeAlias alias="ReplyPageDTO" type="fp.customer_service.domain.ReplyPageDTO"/>
+	  	<typeAlias alias="AttachFileDTO" type="fp.customer_service.domain.AttachFileDTO"/>
+	  	<typeAlias alias="BoardAttachVO" type="fp.customer_service.domain.BoardAttachVO"/>
+	  	<typeAlias alias="Qa_recommend" type="fp.customer_service.domain.Qa_recommend"/>
+	  	<typeAlias alias="Notice_recommend" type="fp.customer_service.domain.Notice_recommend"/>
+		<!--
+		<typeAlias alias="CustomerServicePagingVO" type="fp.customer_service.domain.CustomerServicePagingVO"/>
+		-->
 		
 		<!-- 별 -->
 		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
