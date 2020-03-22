@@ -261,13 +261,14 @@
 						</div>
 					<br/>
 						<!--Add lists-->
-							<div class="card">
+						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">리뷰</h3>
 							</div>
 							<!--  <div class="card-body">-->
 								<div class="row">
 							<!-- 리뷰 -->
+							${review}
 								<c:if test="${empty review}">
 									<div class="col-md-12">
 										<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
@@ -279,7 +280,7 @@
 								    	</div>		
 									</div>
 								</c:if>		
-							<!--<c:if test="${!empty review}">-->		
+							<c:if test="${!empty review}">	
 								<c:forEach items="${review}" var="review_content"  varStatus="status">							
 									<div class="col-md-12  before_review">
 									<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
@@ -340,7 +341,7 @@
 								 </c:if>   
 								</div>		
 							</c:forEach>									
-									
+								
 					<!-- 페이징 -->				
 					<div class='paginationDiv' id="tab-11" style="margin:0 auto; align:center;" >
 						 <div class='center-block text-center'> 
@@ -395,8 +396,8 @@
                     </ul>
                  </div> 
                  </div>				
-					<!-- 페이징 끝. 리뷰 끝 -->					
-			<!--	</c:if>	 -->		
+							
+				</c:if>			
 			</div>
 				<!--	</div>-->	
 		</div>
@@ -433,11 +434,6 @@
 										</div>
 									</div>									
 									<div class="col-md-6 text-center align-items-center"></div>
-									<!--
-									<div class="form-group">
-										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
-									</div>
-									  -->
 										<div class="form-group">
 											<textarea class="form-control" id="freerev_cont" name="freerev_cont" rows="6"></textarea>
 											<c:if test="${!empty review}">
@@ -448,9 +444,8 @@
 												<input type="hidden" id="pro_num" name="pro_num" value="${content3.get(0).pro_num}" />
 												
 										</div>							
-										<div align="right">
-										 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" style="margin-right:-1px;" >작성하기</button>
-   										<!-- <button type="button" class="btn btn-primary" id="checkMR" style="margin-right:-1px;" onclick="inreview();">작성하기</button>  -->
+											<div align="right">
+											 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" style="margin-right:-1px;" >작성하기</button>
    									</form>
    								 </div>
 								</div>
@@ -533,9 +528,6 @@
 			
 			 var free_code ="<c:out value="${paging.free_code}" />";
 			 var pro_num ="<c:out value="${paging.pro_num}" />";
-			// var nowpage ="<c:out value="${paging.nowPage}" />";
-			// var cntpage ="<c:out value="${paging.cntPerPage}" />";
-			 //onSuccessReview();
 			 
 			location.replace("freelancercontent?free_code="+free_code+"&pro_num="+pro_num);
 			
