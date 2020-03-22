@@ -58,9 +58,14 @@
 		]]>
 		-->
 		<!-- index 사용 -->
+		<!--
 		<![CDATA[
 		select qacomm_num, qa_num, mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, option1, option2, option3, mem_name, class_num, cor_fname, free_fname from (select /*+INDEX(qa_comment idx_qa_comment) */ rownum rn, qacomm_num, qa_num, qa_comment.mem_email, qacomm_cont, qacomm_prnum, qacomm_lev, qacomm_sun, qacomm_rdate, qacomm_ox, qa_comment.option1, qa_comment.option2, qa_comment.option3, mem_name, class_num, cor_fname, free_fname from qa_comment left outer join member on qa_comment.mem_email = member.mem_email left outer join corporation on qa_comment.mem_email = corporation.mem_email left outer join freelancer on qa_comment.mem_email = freelancer.mem_email where qa_num = #{qa_num} and qacomm_num > 0 and rownum <= (#{cri.pageNum} * #{cri.amount})) where rn > ((#{cri.pageNum}-1) * #{cri.amount})
 		]]>
+		-->
+		<![CDATA[
+		select * from (select rownum rnum, aa.* from (select qc.qacomm_num, qc.qa_num, qc.mem_email, qc.qacomm_cont, qc.qacomm_prnum, qc.qacomm_lev, qc.qacomm_sun, qc.qacomm_rdate, qc.qacomm_ox, m.mem_name, m.class_num, c.cor_fname, f.free_fname from qa_comment qc left outer join MEMBER m on qc.mem_email = m.mem_email left outer join corporation c on qc.mem_email = c.mem_email left outer join freelancer f on qc.mem_email = f.mem_email where qa_num = #{qa_num} order by qacomm_num asc)aa) where rnum > (#{cri.pageNum}-1) * #{cri.amount} and rnum <= #{cri.pageNum} * #{cri.amount}
+        ]]>     
 	</select>
 	
 	<select id="getCountByQa_num" resultType="long">

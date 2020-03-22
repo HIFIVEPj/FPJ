@@ -264,7 +264,7 @@
 										<li aria-haspopup="true"><a href="#">디자인</a></li>
 									</ul>	
 								</li>
-								<li aria-haspopup="true"><a href="customer_service_list">고객센터 <span class="fa fa-caret-down m-0"></span></a>
+								<li aria-haspopup="true"><a href="#">고객센터 <span class="fa fa-caret-down m-0"></span></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="construction">하이파이브 소개</a></li>
 										<li aria-haspopup="true"><a href="customer_service_notice">공지사항</a></li>
@@ -354,9 +354,9 @@
 														</li>
 													</ul>
 													<ul class="col link-list">
-														<li class="title"><a href="customer_service_list">고객센터</a></li>
+														<li class="title">고객센터</li>
 														<li>
-															<a href="#">하이파이브 소개</a>
+															<a href="construction">하이파이브 소개</a>
 														</li>
 														<li>
 															<a href="customer_service_notice">공지사항</a>

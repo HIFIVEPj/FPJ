@@ -1,6 +1,8 @@
+<!-- hifive -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -16,13 +18,6 @@
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
 									<h1 class="" style="margin-bottom:0rem;">문의하기</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
 								</div>
 							</div>
 						</div>
@@ -39,7 +34,7 @@
 					<h4 class="page-title">문의하기</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item">고객센터</li>
 						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
 					</ol>
 				</div>
@@ -57,11 +52,11 @@
 								<div class="card-body text-justify">	
 									<div class="font-weight-semibold" style="font-size: 1.6rem;">${qa_content.qa_sub}</div>
 								</div>
-								
+								<!--
 								<div class="item-card2-icons">
-									<a href="#" class="item-card9-icons1 wishlist" data-toggle="tooltip" data-placement="top" title="신고하기"> <i class="ti ti-face-sad" data-toggle="modal" data-target="#report"></i></a>
-									
+									<a href="#" class="item-card9-icons1 wishlist" data-toggle="tooltip" data-placement="top" title="신고하기"> <i class="ti ti-face-sad" data-toggle="modal" data-target="#report"></i></a>									
 								</div>
+								-->
 							</div>
 							<div class="card-header border-top" style="background-color:#f6f3ed;">
 
@@ -158,6 +153,7 @@
 
 							</div>
 
+
 							<div class="card-body text-justify">	
 								<p>${qa_content.qa_cont}</p>
 							</div>
@@ -202,13 +198,32 @@
 										<a class="btn btn-app" onclick="javascript:del_recomm(${qa_content.qa_num})" id="del_recomm${qa_content.qa_num}">
 										-->
 										<div id="recomm${qa_content.qa_num}">
-											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num})" id="del_recomm${qa_content.qa_num}">
-												<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+											<c:if test="${!empty qa_recommend_names}">
 												<!--
-												<i class="fa fa-thumbs-up"></i>
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="del_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="${qa_recommend_names}">
 												-->
-												<i class="fa fa-thumbs-up" style="color:#e8564a"></i>
-											</a>
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}">
+												
+													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+													<!--
+													<i class="fa fa-thumbs-up"></i>
+													-->
+													<i class="fa fa-thumbs-up" style="color:#e8564a"></i>
+												</a>
+											</c:if>
+											<c:if test="${empty qa_recommend_names}">
+												<!--
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="del_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="추천하기">
+												-->
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}">
+												
+													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+													<!--
+													<i class="fa fa-thumbs-up"></i>
+													-->
+													<i class="fa fa-thumbs-up" style="color:#e8564a"></i>
+												</a>
+											</c:if>	
 										</div>									
 									</c:when>
 									<c:otherwise>
@@ -216,10 +231,26 @@
 										<a class="btn btn-app" onclick="javascript:add_recomm(${qa_content.qa_num})" id="insert_recomm${qa_content.qa_num}">
 										-->
 										<div id="recomm${qa_content.qa_num}">
-											<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num})" id="insert_recomm${qa_content.qa_num}">
-												<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
-												<i class="fa fa-thumbs-o-up"></i>
-											</a>
+											<c:if test="${!empty qa_recommend_names}">
+												<!--
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="insert_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="${qa_recommend_names}">
+												-->
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}">
+												
+													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+													<i class="fa fa-thumbs-o-up"></i>
+												</a>
+											</c:if>
+											<c:if test="${empty qa_recommend_names}">
+												<!--
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="insert_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="추천하기">
+												-->
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}">
+												
+													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
+													<i class="fa fa-thumbs-o-up"></i>
+												</a>
+											</c:if>	
 										</div>									
 									</c:otherwise>	
 								</c:choose>
@@ -232,6 +263,15 @@
 							
 							
 							<script>
+							function removeTooltip(){
+								//alert("1");
+								//$('[data-toggle="tooltip"]').tooltip({
+								//       trigger : 'hover'
+								//});
+								$('[data-toggle="tooltip"]').tooltip('option', 'remove');
+								//alert("2");
+							}
+							
 							function closed(){
 								alert("프로필이 비공개 상태 입니다.")
 							}
@@ -245,6 +285,10 @@
 								alert("게시물이 존재하지 않습니다.")
 							}
 							function add_recomm(qa_num){
+								//$('[data-toggle="tooltip"]').tooltip({
+								//       trigger : 'hover'
+								//});
+								//$('[data-toggle="tooltip"]').tooltip('destroy');
 								//alert("mem_email : " + mem_email)
 								//alert("qa_num : " + qa_num)
 								//alert("qa_recommnum add before: " + qa_recommnum)
@@ -260,7 +304,7 @@
 					    			//data:"qa_num="+qa_num+"&qa_recommnum="+qa_recommnum+"&mem_email="+$(".mem_email").val(),
 					    			data:"qa_num="+qa_num+"&mem_email="+$(".mem_email").val(),
 									success: function(data){
-										//console.log(data);
+										console.log(data);
 										//alert(data.qa_recommnum);
 										$('#insert_recomm'+qa_num).remove();
 										//add_recomm(qa_num, qa_recommnum);
@@ -268,16 +312,23 @@
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+"); javascript:removeTooltip();' id='del_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
 										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
 										//alert("qa_recommnum add after: " + qa_recommnum);
+										//$('#insert_recomm'+qa_num).tooltip('destroy');
 									},
 									error: function(data){
 										alert("실패1");
 									}
 								});
 								//alert("qa_recommnum add last: " + qa_recommnum);
+								//$('#insert_recomm'+qa_num).tooltip('destroy');
 							}
 							function del_recomm(qa_num){
+								//$('[data-toggle="tooltip"]').tooltip({
+								//       trigger : 'hover'
+								//});
+								//$('[data-toggle="tooltip"]').tooltip('destroy');
 								//alert("qa_recommnum del before: " + qa_recommnum)
 								$.ajax({
 									url:"qa_recommend_del",
@@ -290,7 +341,7 @@
 									//data: "qa_num="+qa_num+"&qa_recommnum="+qa_recommnum+"&mem_email="+$(".mem_email").val(),
 									data:"qa_num="+qa_num+"&mem_email="+$(".mem_email").val(),
 									success:function(data){
-										//console.log(data);
+										console.log(data);
 										//alert(data.qa_recommnum);
 										$('#del_recomm'+qa_num).remove();
 										//del_recomm(qa_num, qa_recommnum);
@@ -298,14 +349,17 @@
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+"); javascript:removeTooltip();' id='insert_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//alert("qa_recommnum del after: " + qa_recommnum);
+										//$('#del_recomm'+qa_num).tooltip('destroy');
 									},
 									error: function(data){
 										alert("실패2");
 									}
 								});
 								//alert("qa_recommnum del last: " + qa_recommnum);
+								//$('#del_recomm'+qa_num).tooltip('destroy');
 							}
 							</script>
 					
@@ -424,8 +478,10 @@
 												</c:otherwise>
 											</c:choose>		
 										</c:if>
+										<!--
 										<a href="" class="mr-2" data-toggle="modal" data-target="#message"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8;"><i class=" ml-1 si si-envelope"></i>&nbsp;연락</span></a>	
-										<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>									
+										<a href="" class="mr-2" data-toggle="modal" data-target="#report"><span class="badge badge-danger" style="font-size: 0.8rem; background-color:#ced1cc;"><i class=" ml-1 si si-ban"></i>&nbsp;신고</span></a>
+										-->								
 										
 											<!-- 즐겨찾기 설정 상태 -->
 											<!--
@@ -477,22 +533,27 @@
 						<!--Comments-->
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">댓글</h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<h3 class="card-title">댓글</h3>
+								<!--
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								-->
 								<!--
 								<a href="" class="mr-2" data-toggle="modal" data-target="#Comment"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-clock-o"></i>&nbsp;최신순</span></a>
 								<a href="#" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem; background-color:#7fa5b8"><i class="fa fa-thumbs-o-up"></i>&nbsp;추천순</span></a>	
-								-->							
+								-->
+								<!--				
 								<label class="mr-2 mt-1 mb-sm-1">정렬 :</label>
 								<select name="item" class="form-control select-sm w-15">
 									<option value="1">오래된순</option>
 									<option value="2">추천순</option>
 									<option value="3">최신순</option>
-								</select>		
+								</select>
+								-->		
 							</div>			
 							<div class="card-body p-0">
 								<ul class="chat">
@@ -626,14 +687,31 @@
 											<input id="addReplyBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Comment" value='댓글쓰기'>
 											<a href="" id="addReplyBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Comment">댓글쓰기</a>
 											-->
+											<!--
 											<a href="customer_service_qa_write#" class="btn btn-danger">답글쓰기</a>
+											-->
 										</c:if>	
 									</div>
 									
 									<div class="col col-auto">
-
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num-1}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
-										<a href="customer_service_qa_content?qa_num=${qa_content.qa_num+1}" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+									
+										<c:choose>
+											<c:when test="${qa_prev != 0}">
+												<a href="customer_service_qa_content?qa_num=${qa_prev}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
+											</c:when>
+											<c:otherwise>
+												<a href="javasript:void(0)" onclick="javascript:noQa()" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
+											</c:otherwise>
+										</c:choose>
+										<c:choose>	
+											<c:when test="${qa_next != 0}">
+												<a href="customer_service_qa_content?qa_num=${qa_next}" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+											</c:when>
+											<c:otherwise>
+												<a href="javasript:void(0)" onclick="javascript:noQa()" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+											</c:otherwise>
+										</c:choose>
+									
 										<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 										-->
@@ -685,6 +763,7 @@
 							</div>
 						</div>
 						-->
+						
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">문의하기 분류</h3>
@@ -694,57 +773,57 @@
 									<div class="item-list">
 										<ul class="list-group mb-0">
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=TWCG&keyword=" class="">
 													전체
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">100</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.total}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프로젝트" class="">
 													프로젝트
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">20</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_project}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프리마켓" class="">
 													프리마켓
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">20</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_freemarket}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프리랜서" class="">
 													프리랜서
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">10</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_freelancer}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=가입/탈퇴" class="">
 													가입/탈퇴
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">10</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_sign}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=회원정보" class="">
 													회원정보
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">10</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_meminfo}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=결제/환불" class="">
 													결제/환불
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">10</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_payment}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=할인" class="">
 													할인
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">10</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_discount}</span>
 												</a>
 											</li>
 											<li class="list-group-item">
-												<a href="#" class="">
+												<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=기타">
 													기타
-													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">10</span>
+													<span class="badgetext badge badge-pill badge-secondary mb-0" style="background-color:#e8564a;">${pageMaker.qa_cate_count_etc}</span>
 												</a>
 											</li>
 										</ul>
@@ -752,7 +831,7 @@
 								</div>
 							</div>
 						</div>
-						
+						<!--
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">검색하기</h3>
@@ -779,20 +858,44 @@
 								</div>
 							</div>
 						</div>
+						-->
 						<div class="card mb-0">
 							<div class="card-header">
 								<h3 class="card-title">비슷한 문의</h3>
 							</div>
 							<div class="card-body pb-3">
+								
+								<ul class="">
+									<c:if test="${fn:length(qa_same_cate) == 1}">
+										<li class="item">
+											<div class="item-det card-body">
+												비슷한 문의가 없습니다.
+											</div>										
+										</li>
+									</c:if>						
+								</ul>
 								<ul class="vertical-scroll">
+	
+									<c:forEach items="${qa_same_cate}" var="qa_same_cate">
+										<c:if test="${qa_same_cate.qa_num ne qa_content.qa_num}">
+											<li class="item">
+												<div class="item-det card-body">
+													<a href="customer_service_qa_content?qa_num=${qa_same_cate.qa_num}&mem_email=${qa_same_cate.mem_email}&qa_cate=${qa_same_cate.qa_cate}" class="text-dark"><h4 class="mb-2">${qa_same_cate.qa_sub}</h4></a>
+													<small class="text-muted"><i class="fa fa-tags text-muted mr-2"></i>${qa_same_cate.qa_cate}&nbsp;&nbsp;&nbsp;<i class="fa fa-user text-muted mr-2"></i>${qa_same_cate.mem_name}</small>
+													<div class="icons mt-3 pb-0 ">
+														<a href="customer_service_qa_content?qa_num=${qa_same_cate.qa_num}&mem_email=${qa_same_cate.mem_email}&qa_cate=${qa_same_cate.qa_cate}" class="btn btn-primary btn-sm icons"> 자세히 보기</a>
+													</div>
+												</div>
+											</li>
+										</c:if>
+									</c:forEach>
+								
+									<!--
 									<li class="item">
 										<div class="item-det card-body">
 											<a href="#" class="text-dark"><h4 class="mb-2">프로젝트 기간 변경1</h4></a>
 											<small class="text-muted"><i class="fa fa-tags text-muted mr-2"></i>${qa_content.qa_cate}&nbsp;&nbsp;&nbsp;<i class="fa fa-user text-muted mr-2"></i>${qa_content.mem_email}</small>
 											<div class="icons mt-3 pb-0 ">
-												<!--
-												<a href="#" class="btn btn-info btn-sm icons" data-toggle="modal" data-target="#apply"> Apply</a>
-												-->
 												<a href="#" class="btn btn-primary btn-sm icons"> 자세히 보기</a>
 											</div>
 										</div>
@@ -802,9 +905,6 @@
 											<a href="#" class="text-dark"><h4 class="mb-2">프로젝트 기간 변경2</h4></a>
 											<small class="text-muted"><i class="fa fa-tags text-muted mr-2"></i>${qa_content.qa_cate}&nbsp;&nbsp;&nbsp;<i class="fa fa-user text-muted mr-2"></i>${qa_content.mem_email}</small>
 											<div class="icons mt-3 pb-0 ">
-												<!--
-												<a href="#" class="btn btn-info btn-sm icons" data-toggle="modal" data-target="#apply"> Apply</a>
-												-->
 												<a href="#" class="btn btn-primary btn-sm icons"> 자세히 보기</a>
 											</div>
 										</div>
@@ -814,9 +914,6 @@
 											<a href="#" class="text-dark"><h4 class="mb-2">프로젝트 기간 변경3</h4></a>
 											<small class="text-muted"><i class="fa fa-tags text-muted mr-2"></i>${qa_content.qa_cate}&nbsp;&nbsp;&nbsp;<i class="fa fa-user text-muted mr-2"></i>${qa_content.mem_email}</small>
 											<div class="icons mt-3 pb-0 ">
-												<!--
-												<a href="#" class="btn btn-info btn-sm icons" data-toggle="modal" data-target="#apply"> Apply</a>
-												-->
 												<a href="#" class="btn btn-primary btn-sm icons"> 자세히 보기</a>
 											</div>
 										</div>
@@ -826,9 +923,6 @@
 											<a href="#" class="text-dark"><h4 class="mb-2">프로젝트 기간 변경4</h4></a>
 											<small class="text-muted"><i class="fa fa-tags text-muted mr-2"></i>${qa_content.qa_cate}&nbsp;&nbsp;&nbsp;<i class="fa fa-user text-muted mr-2"></i>${qa_content.mem_email}</small>
 											<div class="icons mt-3 pb-0 ">
-												<!--
-												<a href="#" class="btn btn-info btn-sm icons" data-toggle="modal" data-target="#apply"> Apply</a>
-												-->
 												<a href="#" class="btn btn-primary btn-sm icons"> 자세히 보기</a>
 											</div>
 										</div>
@@ -838,13 +932,11 @@
 											<a href="#" class="text-dark"><h4 class="mb-2">프로젝트 기간 변경5</h4></a>
 											<small class="text-muted"><i class="fa fa-tags text-muted mr-2"></i>${qa_content.qa_cate}&nbsp;&nbsp;&nbsp;<i class="fa fa-user text-muted mr-2"></i>${qa_content.mem_email}</small>
 											<div class="icons mt-3 pb-0 ">
-												<!--
-												<a href="#" class="btn btn-info btn-sm icons" data-toggle="modal" data-target="#apply"> Apply</a>
-												-->
 												<a href="#" class="btn btn-primary btn-sm icons"> 자세히 보기</a>
 											</div>
 										</div>
 									</li>
+									-->
 								</ul>
 							</div>
 						</div>
@@ -1018,6 +1110,30 @@
 			</div>		
 		</div>	
 		<!-- /small Modal -->
+		<!-- delete_comment -->		
+		<div id="delete_comment_modal" class="modal fade">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						<div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>댓글을 정말 삭제할까요?</p>
+					</div>
+					
+					<div class="modal-footer">
+					
+						<button id='modalRemoveBtn' type="button" class="btn btn-primary">네</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+					</div>
+				</div>
+			</div>		
+		</div>	
+		<!-- /delete_comment -->
 		
 		<!--Comment Modal / ajax 적용 댓글 달기 테스트-->
 		<div class="modal fade" id="Comment" tabindex="-1" role="dialog" aria-hidden="true">
@@ -1067,16 +1183,18 @@
 					-->
 					<div class="modal-footer">
 						<div class="col">
+						<!--
 							<label class="custom-control custom-checkbox mb-0">
 								<input type="checkbox" class="custom-control-input" name="example-checkbox1" value="option1">
 								<span class="custom-control-label">비밀글</span>
 							</label>
+						-->	
 						</div>	
-						<div class="col col-auto">
-							<button id='modalCloseBtn'type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+						<div class="col col-auto">							
 							<button id='modalRemoveBtn' type="button" class="btn btn-primary">삭제</button>
 							<button id='modalModBtn' type="button" class="btn btn-primary">수정</button>
 							<button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
+							<button id='modalCloseBtn'type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 						</div>
 					</div>
 					
@@ -1098,7 +1216,7 @@
 			  
 			    showList(1);
 			    
-			function showList(page){
+			function showList(page) {
 				    
 			    replyService.getList({qa_num:qa_numValue, page:page || 1 }, function(replyCnt, list) {
 			    	
@@ -1141,9 +1259,12 @@
 			     commentList.sort(function(a, b){
 			    	 return a.qacomm_num - b.qacomm_num
 			     })
-			     for (var i = 0; i < len; i++) {	 
+			     for (var i = 0; i < len; i++) {
+			    	 
+			       //var button1 = "'"+list[i].mem_email+"'";
 			       //alert("comment_start" + list[i].qacomm_num);
 			       
+			       //str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"' onclick='javascript:button_click("+""+list[i].mem_email+""+");'>";
 			       str +="<li class='media p-5 border-bottom mt-0' data-qacomm_num='"+list[i].qacomm_num+"'>";
 			       str +="	<div class='d-flex mr-3'>";
 			       if(list[i].class_num == 1){
@@ -1168,16 +1289,23 @@
 			       }
 			       str +="	</div>";
 			       str +="	<div class='media-body'>";
+			       //str +="		<h5 class='mt-0 mb-1 font-weight-semibold'>"+list[i].mem_name + list[i].mem_email;
 			       str +="		<h5 class='mt-0 mb-1 font-weight-semibold'>"+list[i].mem_name;
 			       str +="			<span class='fs-14 ml-0' data-toggle='tooltip' data-placement='top' title='verified'><i class='fa fa-check-circle-o text-success'></i></span>&nbsp;&nbsp;&nbsp;";
 			       str +="			<small class='text-muted'><i class='fa fa-calendar'></i>&nbsp;"+replyService.displayTime(list[i].qacomm_rdate)+"</small>";
 			       str +="		</h5>";
 			       str +="		<p class='font-13  mb-2 mt-2'>"+list[i].qacomm_cont+"</p>";
-			       str +="		<a href='#' class='mr-2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#7fa5b8'>&nbsp;<i class='fa fa-thumbs-o-up'></i>&nbsp;21&nbsp;</span></a>";
-			       str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment1'><span class='badge badge-primary' style='font-size: 0.8rem;'><i class=' ml-1 fa fa-comment-o'></i>&nbsp;댓글</span></a>";
-				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
-				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#smallModal1'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 fa fa-trash-o'></i>&nbsp;삭제</span></a>";
-				   str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#report1'><span class='badge badge-danger' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 si si-ban'></i>&nbsp;신고</span></a>";
+			       //str +="		<a href='#' class='mr-2'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#7fa5b8'>&nbsp;<i class='fa fa-thumbs-o-up'></i>&nbsp;21&nbsp;</span></a>";
+			       //str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment1'><span class='badge badge-primary' style='font-size: 0.8rem;'><i class=' ml-1 fa fa-comment-o'></i>&nbsp;댓글</span></a>";
+				   //str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#Comment'><span class='badge badge-primary' style='font-size: 0.8rem; background-color:#ced1cc;'><i class='ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
+				   if(list[i].mem_email == mem_emailValue) {
+				   //str +="		<a href='javasript:void(0)'><span class='badge badge-primary' id='modify_comment' style='font-size: 0.8rem;' data-qacomm_num='"+list[i].qacomm_num+"' data-mem_email='"+list[i].mem_email+"'><i class='ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
+				   str +="		<a href='javasript:void(0)'><span class='badge badge-primary' id='modify_comment' style='font-size: 0.8rem;' data-qacomm_num='"+list[i].qacomm_num+"'><i class='ml-1 fa fa-pencil-square-o'></i>&nbsp;수정</span></a>";
+				   //str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#smallModal1'><span class='badge badge-primary' id='delete_comment' style='font-size: 0.8rem; background-color:#ced1cc;'><i class='ml-1 fa fa-trash-o'></i>&nbsp;삭제</span></a>";
+				   //str +="		<a href='javasript:void(0)' class='mr-2' data-toggle='modal' data-target='#delete_comment_modal'><span class='badge badge-danger' style='font-size: 0.8rem;' data-qacomm_num='"+list[i].qacomm_num+"'><i class='ml-1 fa fa-trash-o'></i>&nbsp;삭제</span>";
+				   str +="		<a href='javasript:void(0)'><span class='badge badge-danger' id='delete_comment' style='font-size: 0.8rem;' data-qacomm_num='"+list[i].qacomm_num+"'><i class='ml-1 fa fa-trash-o'></i>&nbsp;삭제</span></a>";
+			       }
+				   //str +="		<a href='' class='mr-2' data-toggle='modal' data-target='#report1'><span class='badge badge-danger' style='font-size: 0.8rem; background-color:#ced1cc;'><i class=' ml-1 si si-ban'></i>&nbsp;신고</span></a>";
 				   str +="	</div>";
 				   str +="</li>";
 				   //alert("comment_end" + list[i].qacomm_num);
@@ -1252,6 +1380,7 @@
 			// 댓글 모달 처리
 			//var modal = $(".modal");
 		 	var modal = $("#Comment");
+		 	var delete_comment_modal = $("#delete_comment_modal");
 		    var modalInputQacomm_cont = modal.find("textarea[name='qacomm_cont']"); //textarea를 이용해서 입력하려면 "input[name='qacomm_cont']" 대신에 "textarea[name='qacomm_cont']"라고 써야함
 		    //var modalInputMem_email = modal.find("input[name='mem_email']");
 		    var modalInputQacomm_rdate = modal.find("input[name='qacomm_rdate']");
@@ -1290,7 +1419,7 @@
 		          };
 		      replyService.add(qacomm_cont, function(result){
 		        
-		        alert(result);
+		        //alert(result);
 		        
 		        //modal.find("input").val("");
 		        modal.find("textarea").val("");
@@ -1304,13 +1433,15 @@
 		    });
 		    
 		    
-		    // 특정 댓글 클릭 시 이벤트 처리 
-		    //$(".chat").on("click", "li", function(e){
-		    $(".chat").on("click", "li", function(e){
-		      alert(mem_emailValue);
-		    	
+		    // 특정 댓글 클릭 시 이벤트 처리
+		    
+		    // 수정 버튼 클릭 시 이벤트 처리
+		    $(".chat").on("click", "#modify_comment", function(e){
+		      //alert(mem_emailValue); // 세션 email
 		      var qacomm_num = $(this).data("qacomm_num");
-		      
+		      //var mem_email = $(this).data("mem_email");
+		      //alert(qacomm_num);
+		      //alert(mem_email);
 		      replyService.get(qacomm_num, function(qacomm_cont){
 		    	  modalInputQacomm_cont.val(qacomm_cont.qacomm_cont);
 		    	  //modalInputMem_email.val(qacomm_cont.mem_email);
@@ -1319,7 +1450,7 @@
 		          
 		          modal.find("button[id !='modalCloseBtn']").hide();
 		          modalModBtn.show();
-		          modalRemoveBtn.show();
+		          //modalRemoveBtn.show();
 		          
 		          //$(".modal").modal("show");
 		          $("#Comment").modal("show");
@@ -1327,7 +1458,20 @@
 		      });
 		    
 		    });
+			    
+			// 삭제 버튼 클릭 시 이벤트 처리
+		    $(".chat").on("click", "#delete_comment", function(e){
+		      var qacomm_num = $(this).data("qacomm_num");
+			  //alert(qacomm_num);
+			  replyService.get(qacomm_num, function(qacomm_cont){
+		    	  delete_comment_modal.data("qacomm_num", qacomm_cont.qacomm_num);
+
+		          $("#delete_comment_modal").modal("show");
+
+		      });
 		    
+		    });
+			    
 		    
 		    modalModBtn.on("click", function(e){
 		        
@@ -1335,7 +1479,7 @@
 		        
 		        replyService.update(qacomm_cont, function(result){
 		              
-		          alert(result);
+		          //alert(result);
 		          modal.modal("hide");
 		          //showList(1);
 		          showList(pageNum);
@@ -1343,15 +1487,31 @@
 		        });
 		        
 	      	});
-
-	      	modalRemoveBtn.on("click", function (e){
-	      	  
+			
+		    /*
+		    modalRemoveBtn.on("click", function (e){
+		      	  
 	    	  var qacomm_num = modal.data("qacomm_num");
 	    	  
 	    	  replyService.remove(qacomm_num, function(result){
 	    	        
 	    	      alert(result);
 	    	      modal.modal("hide");
+	    	      //showList(1);
+	    	      showList(pageNum);
+	    	      
+	    	  });
+	    	  
+	    	});
+		    */
+		    
+	      	modalRemoveBtn.on("click", function (e){
+	    	  var qacomm_num = delete_comment_modal.data("qacomm_num");
+	    	  //alert(qacomm_num);
+	    	  replyService.remove(qacomm_num, function(result){
+	    	        
+	    	      //alert(result);
+	    	      delete_comment_modal.modal("hide");
 	    	      //showList(1);
 	    	      showList(pageNum);
 	    	      

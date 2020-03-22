@@ -16,13 +16,6 @@
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
 									<h1 class="" style="margin-bottom:0rem;">문의하기</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
 								</div>
 							</div>
 						</div>
@@ -39,7 +32,7 @@
 					<h4 class="page-title">문의하기</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item">고객센터</li>
 						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
 					</ol>
 				</div>
@@ -132,7 +125,8 @@
 
 				
 					<div class="card mb-0">
-							<div class="card-header">	
+							<div class="card-header">
+								<!--	
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -153,6 +147,15 @@
 									</div>
 								</div>
 								&nbsp;&nbsp;
+								-->
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
 									<label class="form-label" style="margin-bottom:-0.05rem;">
@@ -230,15 +233,15 @@
 										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=기타"><li>기타(${pageMaker.qa_cate_count_etc})</li></a>
 										</c:if>
 										<c:if test="${!empty pageMaker.cri.keyword}">
-										<li class="">전체(${pageMaker.total})</li>
-										<li>프로젝트</li>
-										<li>프리마켓</li>
-										<li>프리랜서</li>
-										<li>가입/탈퇴</li>
-										<li>회원정보</li>
-										<li>결제/환불</li>
-										<li>할인</li>
-										<li>기타</li>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=TWCG&keyword="><li class="">전체(${pageMaker.total})</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프로젝트"><li>프로젝트</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프리마켓"><li>프리마켓</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=프리랜서"><li>프리랜서</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=가입/탈퇴"><li>가입/탈퇴</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=회원정보"><li>회원정보</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=결제/환불"><li>결제/환불</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=할인"><li>할인</li></a>
+										<a href="customer_service_qa?pageNum=${1}&amount=${pageMaker.cri.amount}&type=G&keyword=기타"><li>기타</li></a>
 										</c:if>
 									</ul>
 								</div>
@@ -269,7 +272,7 @@
 													<td class="text-center">${qa_list.qa_num}</td>
 													<td class="text-center">${qa_list.qa_cate}</td>
 													<!--<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}">${qa_list.qa_sub}</a>&nbsp;<span style="color:red">+${qa_comment_count.qa_comment_count}</span></td>-->
-													<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}&mem_email=${qa_list.mem_email}">${qa_list.qa_sub}</a>&nbsp;<c:if test="${qa_list.replyCnt > 0}"><span style="color:red"><b>[<c:out value="${qa_list.replyCnt}"/>]</b></span></c:if></td>
+													<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}&mem_email=${qa_list.mem_email}&qa_cate=${qa_list.qa_cate}">${qa_list.qa_sub}</a>&nbsp;<c:if test="${qa_list.replyCnt > 0}"><span style="color:red"><b>[<c:out value="${qa_list.replyCnt}"/>]</b></span></c:if></td>
 													<!--<td><a href="customer_service_qa_content?qa_num=${qa_list.qa_num}&pageNum=${pageMaker.cri.pageNum}&amount='+sel+'&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${qa_list.qa_sub}</a></td>-->
 													<td class="text-center">${qa_list.mem_name}</td>
 													<td class="text-center"><fmt:formatDate value="${qa_list.qa_rdate}" pattern="yyyy.MM.dd"/></td>
@@ -516,9 +519,7 @@
 													<a aria-label="Last" class="page-link" href="customer_service_qa?pageNum=${pageMaker.lastPage}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"><i class="fa fa-angle-double-right"></i></a>
 												</li>
 											</c:if>	
-												
-											
-																
+									
 										</ul>									
 									</div>	
 					
@@ -538,16 +539,12 @@
 						<br/>
 						<br/>
 						<br/>
-						</div>
-				
-				
+						</div>			
 				<!-- 문의하기  연습-->
+				<!--
 					<div class="card mb-0">
 							<div class="card-header">
-							
-							
-								
-								
+				
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
 										<div class="input-group-prepend">
@@ -573,21 +570,14 @@
 									<label class="form-label" style="margin-bottom:-0.05rem;">
 									
 									<select class="form-control select2">
-									
-										<!--
-										<optgroup label="Mountain Time Zone">
-										-->
 										
-											<option value="전체" selected>전체</option>
-											<option value="분류">분류</option>
-											<option value="제목">제목</option>
-											<option value="내용">내용</option>
-											<option value="제목+내용">제목+내용</option>
-											<option value="작성자">작성자</option>
-										
-										<!--
-										</optgroup>
-										-->
+										<option value="전체" selected>전체</option>
+										<option value="분류">분류</option>
+										<option value="제목">제목</option>
+										<option value="내용">내용</option>
+										<option value="제목+내용">제목+내용</option>
+										<option value="작성자">작성자</option>
+
 										
 									</select>
 
@@ -598,9 +588,7 @@
 								</div>
 								<div class="wd-20 mg-b-10">
 									<div class="input-group">
-										<!--
-										<input type="text" class="form-control" id="search-text" placeholder="검색어 입력">
-										-->
+
 										<input type="text" class="form-control" id="keyword" placeholder="검색어 입력">
 									</div>
 								</div>
@@ -778,55 +766,21 @@
 									</tbody>
 									</table>
 								</div>
-								<!--
-								<ul class="pagination">
-									<li class="page-item page-prev disabled">
-										<a class="page-link" href="#" tabindex="-1">Prev</a>
-									</li>
-									<li class="page-item active"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item page-next">
-										<a class="page-link" href="#">Next</a>
-									</li>
-								</ul>
-								-->
+
 								
 								<div class="row">
-									<!--
-									<div class ="col-md-4 text-left">
-										<div>	
-											<label>
-												show
-													<select >
-														<option value="10">10</option>
-														<option value="25">25</option>
-														<option value="50">50</option>
-														<option value="100">100</option>
-													</select>
-													entries
-											</label>
-										</div>
-									</div>					
-									-->
-									<!--
-									<div class="form-group">
-									-->
+
 									<div class="col-md-4 text-left">
 										<div class="row" style="padding-left: 0.75rem;">
 											<label class="form-label">페이지당
 											<select class="form-control select2">
-												<!--
-												<optgroup label="Mountain Time Zone">
-												-->
-													<option value="5">5</option>
-													<option value="10" selected>10</option>
-													<option value="20">20</option>
-													<option value="50">50</option>
-													<option value="100">100</option>
-												<!--
-												</optgroup>
-												-->
+
+												<option value="5">5</option>
+												<option value="10" selected>10</option>
+												<option value="20">20</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+
 											</select>
 											개씩 보기
 											</label>
@@ -877,6 +831,7 @@
 								
 							</div>
 						</div>
+						-->
 					<!-- /문의하기 연습-->		
 					
 					<!--
@@ -1068,21 +1023,13 @@
 								
 							</div>
 						</div>
-						-->
-					
-								
+						-->		
 					</div>
-
 				</div>
 			</div>
 		</section>
 		<!--Add Listing-->
-		
-		
-		
-		
-		
-		
+
 		
 
 <!--footer-->

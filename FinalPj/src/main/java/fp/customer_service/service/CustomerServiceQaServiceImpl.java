@@ -171,4 +171,22 @@ public class CustomerServiceQaServiceImpl implements CustomerServiceQaService {
 		return customerServiceQaMapper.qa_recommend_update_del(map);	
 	}
 	*/
+	@Override
+	public List<Qa_recommend>qa_recommend_namesS(long qa_num) {
+		return customerServiceQaMapper.qa_recommend_names(qa_num);
+	}
+	
+	@Override
+	public long qa_prevS(long qa_num) {
+		return customerServiceQaMapper.qa_prev(qa_num);
+	}
+	@Override
+	public long qa_nextS(long qa_num) {
+		return customerServiceQaMapper.qa_next(qa_num);
+	}
+	
+	@Override
+	public List<CustomerServiceQa> qa_same_cateS(String qa_cate) {
+		return customerServiceQaMapper.qa_same_cate(qa_cate);
+	}
 }

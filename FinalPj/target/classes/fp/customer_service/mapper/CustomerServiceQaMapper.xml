@@ -236,7 +236,7 @@
 	
 	<!-- 문의글 좋아요 -->
 	<select id="qa_recommend_list" resultType="Qa_recommend">
-		select * from qa_recommend where mem_email=#{mem_email}	
+		select * from qa_recommend where mem_email = #{mem_email}	
 	</select>
 	
 	<insert id="qa_recommend_insert" parameterType="map">
@@ -244,16 +244,42 @@
 	</insert>
 	
 	<delete id="qa_recommend_del" parameterType="map">
-		delete from qa_recommend where mem_email=#{mem_email} and qa_num=#{qa_num}
+		delete from qa_recommend where mem_email = #{mem_email} and qa_num = #{qa_num}
 	</delete>
 	
 	<update id="qa_recommend_update_in" parameterType="map">
-		update qa set qa_recommnum=qa_recommnum+1 where qa_num=#{qa_num}
+		update qa set qa_recommnum = qa_recommnum + 1 where qa_num = #{qa_num}
 	</update>
 	
 	<update id="qa_recommend_update_del" parameterType="map">
-		update qa set qa_recommnum=qa_recommnum-1 where qa_num=#{qa_num}
+		update qa set qa_recommnum = qa_recommnum - 1 where qa_num = #{qa_num}
 	</update>
 	
+	<!-- 문의글 좋아요 명단 -->
+	<select id="qa_recommend_names" resultType="Qa_recommend">
+		select qa_recommend_num, qa_recommend.mem_email, qa_num, mem_name from qa_recommend, member where qa_recommend.mem_email=member.mem_email and qa_num = #{qa_num}
+	</select>
+	
+	<!-- 이전글 -->
+	<select id="qa_prev" parameterType="long" resultType="long">
+		<!--
+		select * from (select qa_num, lead (qa_num, 1, 0) over (order by qa_num) next, lag (qa_num, 1, 0) over (order by qa_num) prev from qa) where qa_num = #{qa_num}
+		-->
+		select qa_prev from (select qa_num, lag (qa_num, 1, 0) over (order by qa_num) qa_prev from qa) where qa_num = #{qa_num}
+	</select>	
+	<!-- 다음글 -->
+	<select id="qa_next" parameterType="long" resultType="long">
+		<!--
+		select * from (select qa_num, lead (qa_num, 1, 0) over (order by qa_num) next, lag (qa_num, 1, 0) over (order by qa_num) prev from qa) where qa_num = #{qa_num}
+		-->
+		select qa_next from (select qa_num, lead (qa_num, 1, 0) over (order by qa_num) qa_next from qa) where qa_num = #{qa_num}
+	</select>
+	
+	<!-- 비슷한 문의 -->
+	<select id="qa_same_cate" resultType="CustomerServiceQa" parameterType="String">
+		<![CDATA[   
+		select * from (select qa_num, qa_sub, qa_cate, qa.mem_email, mem_name from qa, member where qa.mem_email = member.mem_email and qa_cate = #{qa_cate} order by DBMS_RANDOM.RANDOM) where rownum < 7
+		]]>
+	</select>
 	
 </mapper>

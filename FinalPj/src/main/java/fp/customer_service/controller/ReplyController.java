@@ -38,7 +38,7 @@ public class ReplyController {
 			produces = { MediaType.APPLICATION_XML_VALUE, 
 					     MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<ReplyVO> get(@PathVariable("qacomm_num") Long qacomm_num) {
-
+		log.info("*****" + replyService.get(qacomm_num));
 		return new ResponseEntity<>(replyService.get(qacomm_num), HttpStatus.OK);
 	}
 	
