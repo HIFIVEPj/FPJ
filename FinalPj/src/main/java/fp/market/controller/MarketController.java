@@ -139,21 +139,22 @@ public class MarketController {
          //log.info("@@@@@@@@@@total:"+total);
          //log.info("@@@@marketVO.getStartPage()"+marketVO.getStartPage());
          //log.info("@@@@@@@@@@searchWord:"+searchWord);
-       List<MarketPick> pickState=new ArrayList<MarketPick>();
-       ArrayList<Long> marketNumList = new ArrayList<Long>();
-       //세션이메일이 존재할때
-       if(mem_email != null) {
-          if(marketService.pickState(mem_email).size() != 0) {
-             pickState = marketService.pickState(mem_email);
-             for(int i=0;i<pickState.size();i++) {
-               long marketNum=pickState.get(i).getMarket_num();
-               marketNumList.add(marketNum);
-             }
-          }
-       }else {
-         //세션이메일이 존재하지 않을 때    
-       }
-       log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
+/*   List<MarketPick> pickState=new ArrayList<MarketPick>();
+   ArrayList<Long> marketNumList = new ArrayList<Long>();
+   //세션이메일이 존재할때
+   if(mem_email != null) {
+      if(marketService.pickState(mem_email).size() != 0) {
+         pickState = marketService.pickState(mem_email);
+         for(int i=0;i<pickState.size();i++) {
+           long marketNum=pickState.get(i).getMarket_num();
+           marketNumList.add(marketNum);
+         }
+      }
+   }else {
+     //세션이메일이 존재하지 않을 때    
+   }*/
+       ArrayList<Long> marketNumList = pickList(mem_email);
+      // log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
        ModelAndView mv = new ModelAndView("market/market-list");
        mv.addObject("list", list);
         mv.addObject("paging", marketVO);  
@@ -162,6 +163,8 @@ public class MarketController {
         mv.addObject("searchWord", searchWord); 
       return mv;
    }
+//픽리스트 메소드   
+
 /*   
  * @GetMapping("market-searchButtonList")
    public ModelAndView getSearchButtonList(@RequestParam(value="nowPage",required=false, defaultValue="1")String nowPage
@@ -345,7 +348,8 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
       }else if(cntPerPageR == null) {
          cntPerPageR = "4";
       }
-
+      String mem_email=(String)session.getAttribute("email");
+      
       HashMap<String,Object> mapr=new HashMap<String,Object>();
       HashMap<String,Object> mapq=new HashMap<String,Object>();
       MarketRev marketRev = new MarketRev();
@@ -414,9 +418,10 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
       //마켓리뷰쓰는조건
       HashMap<String,Object> mapMbs=new HashMap<String,Object>();
       mapMbs.put("market_num",market_num);
-      mapMbs.put("mem_email",(String)session.getAttribute("email"));
+      mapMbs.put("mem_email",mem_email);
       List<MarketBuysellList> mbs =marketService.writeReview(mapMbs);
-      
+
+
       ModelAndView mv = new ModelAndView();
       mv.setViewName("market/market-content"); // 뷰의 이름
       mv.addObject("marketRev", mr); // 뷰로 보낼 데이터 값
@@ -489,9 +494,26 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
       }else {
          return "redirect:market-list";
          }
-      
-      
-      
+
+   }
+   public ArrayList<Long> pickList(String mem_email){
+	   log.info("1111mem_email"+mem_email);
+	   List<MarketPick> pickState=new ArrayList<MarketPick>();
+       ArrayList<Long> marketNumList = new ArrayList<Long>();
+       //세션이메일이 존재할때
+       if(mem_email != null) {
+          if(marketService.pickState(mem_email).size() != 0) {
+             pickState = marketService.pickState(mem_email);
+             for(int i=0;i<pickState.size();i++) {
+               long marketNum=pickState.get(i).getMarket_num();
+               marketNumList.add(marketNum);
+             }
+          }
+       }else {
+         //세션이메일이 존재하지 않을 때    
+       }
+       log.info("!!!!!!marketNumList"+marketNumList);
+       return marketNumList;
    }
    public List<String> doFileupload(MultipartHttpServletRequest mtfRequest) {
 	   log.info("22222222mtfRequest"+mtfRequest);

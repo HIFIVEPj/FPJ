@@ -42,8 +42,8 @@
 					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="market-list">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">찜한  마켓</li>
 					</ol>
 				</div>
 			</div>
@@ -213,6 +213,7 @@
 											</c:forEach>	
 											</table>
 										 <!-- 페이징 -->
+										 <c:if test="${paging.total>0}">
 											<div class="card">
 												<div class="card-body" style="margin:0 auto; align:center;">
 													<ul class="pagination mg-b-0 page-0 ">
@@ -250,6 +251,7 @@
 													</ul>
 												</div>
 											</div>
+											</c:if>
 									<!-- 페이징 -->	
 										</div>
 									</c:if>

@@ -286,8 +286,8 @@ public class ProjectController {
 	@PostMapping("project_write")
 	public String project_write(Project project, HttpServletRequest request) {
 		//String type_num = request.getParameter("type_num");
-		log.info("!@!#(@#*@&$(&*(@!#&&(*@#");
-		String mem_email = request.getParameter("mem_email");
+		HttpSession session = request.getSession();
+		String mem_email= (String)session.getAttribute("email");
 		log.info("!@*@#&(*#&(*&@# mem_email: "+mem_email);
 
 		String[] ListKeyNum = request.getParameterValues("key_num");
@@ -363,13 +363,16 @@ public class ProjectController {
 	
 	@RequestMapping(value="/apply", method=RequestMethod.GET)
 	@ResponseBody
-	public void applied_pj(@RequestParam long pj_num, @RequestParam long free_code, @RequestParam long pro_num) {
+	public String applied_pj(@RequestParam long pj_num, @RequestParam long free_code, @RequestParam long pro_num) {
 		log.info("@#&@(&$ pj_num: "+pj_num+", free_code: "+free_code+", pro_num: "+pro_num);
 		Map<String, Object>map = new HashMap<String, Object>();
 		map.put("pj_num", pj_num);
 		map.put("free_code", free_code);
 		map.put("pro_num", pro_num);
 		service.applied_pj(map);
+		Corporation corInfo = service.corInfo(pj_num);
+		String cor_mail=corInfo.getMem_email();
+		return cor_mail;
 	}
 	
 }

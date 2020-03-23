@@ -38,8 +38,8 @@
 					<h4 class="page-title">Project</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item" aria-current="page">프로젝트 등록</li>
 					</ol>
 				</div>
 			</div>
@@ -1433,11 +1433,10 @@
 
 	function check(){
 		var type_num = $('.active').attr('value');
-		//alert(type_num);
+		
 		document.getElementById('type_num').value = type_num;
 		var key_num = new Array();
 		var key_cnt = 0;
-		//for(var i=0; i<key_num_size; i++){
 		 $('input:checkbox[name="key_num"]').each(function() {
 			if(this.checked){
 				key_num[key_cnt] = this.value;

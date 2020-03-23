@@ -19,7 +19,7 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">등록 프로젝트</h1>
+									<h1 class="" style="margin-bottom:0rem;">내 프로젝트 관리</h1>
 									<!--
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="../">Home</a></li>
@@ -44,8 +44,8 @@
 					<h4 class="page-title">Corporation Profile</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">내 프로젝트 관리</li>
 					</ol>
 				</div>
 			</div>
@@ -86,6 +86,9 @@
 												<li><a class="slide-item " href="mydash_cor">기업</a></li>
 											</ul>
 										</li>
+										<li>
+											<a class="side-menu__item" href="myNotification_cor"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
@@ -123,8 +126,6 @@
 										<ul class="nav panel-tabs">
 											<li class=""><a href="#tab1" class="active" data-toggle="tab">작성한 프로젝트</a></li>
 											<li class=""><a href="#tab2" data-toggle="tab">결제대기 프로젝트</a></li>
-											<li><a href="#tab3" data-toggle="tab">모집중인 공고</a></li>
-											<li><a href="#tab4" data-toggle="tab">마감된 공고</a></li>
 										</ul>
 									</div>
 								<div class="tab-content">
@@ -392,38 +393,6 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab3">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-								<div class="tab-pane  table-responsive border-top userprof-tab" id="tab4">
-									<table class="table table-bordered table-hover mb-0 text-nowrap">
-										<thead style="text-align:center;">
-											<tr>
-												<th></th>
-												<th><b>프로젝트</b></th>
-												<th><b>회사이름</b></th>
-												<th><b>급여</b></th>
-												<th><b>상태</b></th>
-												<th><b>버튼</b></th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
 							</div>
 							</div>
 							
@@ -623,7 +592,7 @@ function free_list(pj_num){
 					//alert(data[i].mem_email+", "+data[i].freelancerprofile[j].profile_sub+ " , "+ data[i].applied_project[j].appp_date);
 					//alert(data[i].free_code);
 					temp += '<tr> <td class="listtd"></td>'+
-					'<td class="listtd" style="height:40px; text-align:center;"> <a href="freelancercontent?free_code='+data[i].free_code+'" class="text-dark font-weight-semibold" target="_blank">' 
+					'<td class="listtd" style="height:40px; text-align:center;"> <a href="freelancercontent?free_code='+data[i].free_code+'&pro_num='+data[i].freelancerprofile[j].pro_num+'" class="text-dark font-weight-semibold" target="_blank">' 
 							+data[i].freelancerprofile[j].profile_sub+'</a></td>' +
 					'<td class="listtd"  style="height:50px; text-align:center;">' +data[i].mem_email+'</td>' +
 					'<td class="listtd"  style="height:40px; text-align:center;">' +startTask+'</td>' +

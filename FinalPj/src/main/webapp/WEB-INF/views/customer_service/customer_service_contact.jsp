@@ -38,7 +38,7 @@
 					<h4 class="page-title">찾아오시는 길</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item">고객센터</li>
 						<li class="breadcrumb-item active" aria-current="page">찾아오시는 길</li>
 					</ol>
 				</div>
@@ -89,9 +89,8 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-volume-control-phone"></i>&nbsp;02-707-1480</p>
 									
 									</div>
-									
-									
-									
+									<!-- 문의하기 섹션 -->		
+									<!--
 									<div class="container">
 										<div class="row">
 											<div class="col-lg-4  col-md-12 mx-auto d-block">
@@ -122,6 +121,7 @@
 											</div>
 										</div>
 									</div>
+									-->
 									<br/>
 									
 									

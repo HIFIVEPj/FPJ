@@ -37,8 +37,10 @@ public class AdminController {
 		List<Long> sumFree=service.sumFree();
 		List<Long> sumCor=service.sumCor();
 		List<Long> month=service.month();
+		long getMarketCountSys=service.getMarketCountSys();
+		long getMarketListState=service.getMarketListState();
+		long getProjectCountSys=service.getProjectCountSys();
 		
-				
 		Map<String,Object> map = new HashMap<String, Object>();	
 		map.put("class_num","2");	
 		long totalCountFree =service.getTotalCount(map);	
@@ -65,6 +67,11 @@ public class AdminController {
 		
 		mv.addObject("list", list);
 		mv.addObject("pamarket", Vo);
+		
+		mv.addObject("getMarketCountSys", getMarketCountSys);
+		mv.addObject("getMarketListState", getMarketListState);
+		mv.addObject("getProjectCountSys", getProjectCountSys);
+		
 		mv.addObject("totalCountFree", totalCountFree);
 		mv.addObject("totalCountCor", totalCountCor);
 		mv.addObject("totalCount", totalCount);

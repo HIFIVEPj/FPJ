@@ -1,5 +1,7 @@
 package fp.customer_service.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -81,6 +83,7 @@ public class CustomerServiceQaController {
 		int qa_cate_count_payment = customerServiceQaService.qa_cate_count_paymentS();
 		int qa_cate_count_discount = customerServiceQaService.qa_cate_count_discountS();
 		int qa_cate_count_etc = customerServiceQaService.qa_cate_count_etcS();
+		
 		model.addAttribute("qa_list", customerServiceQaService.qa_listS(cri));
 		model.addAttribute("pageMaker", new PagingInfo(cri, customerServiceQaService.qa_countS(cri), qa_cate_count_project, qa_cate_count_freemarket, qa_cate_count_freelancer, qa_cate_count_sign, qa_cate_count_meminfo, qa_cate_count_payment, qa_cate_count_discount, qa_cate_count_etc));
 		return "customer_service/customer_service_qa";
@@ -88,7 +91,8 @@ public class CustomerServiceQaController {
 
 	
 	@GetMapping("customer_service_qa_content")
-	public String customer_service_qa_content(Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false) String mem_email_writer, HttpSession session) {
+	public String customer_service_qa_content(Criteria cri, Model model, @RequestParam("qa_num") long qa_num, @RequestParam(value="mem_email", required=false) String mem_email_writer,  @RequestParam("qa_cate") String qa_cate, HttpSession session) {
+		
 		//중간에 자기 게시글 조회수 증가 방지를 위해서 코드 추가했다가 꼬여서 아래와 같이 처리
 		//jsp에서 받아온 mem_email은 글쓴이의 mem_email이어서 controller에서 mem_email_writer의 이름으로 씀
 		//session - email은 mem_email로 씀
@@ -102,8 +106,8 @@ public class CustomerServiceQaController {
 				//pjnumList.add(pjplist.get(j).getPj_num());
 				qa_recommend_num_list.add(qa_recommend_list.get(j).getQa_num());
 			}
-			//log.info("#####qa_recommend_list : " + qa_recommend_list);
-			//log.info("#####qa_recommend_num_list : " + qa_recommend_num_list);	
+			log.info("#####qa_recommend_list : " + qa_recommend_list);
+			log.info("#####qa_recommend_num_list : " + qa_recommend_num_list);	
 			model.addAttribute("qa_recommend_list", qa_recommend_list);
 			model.addAttribute("qa_recommend_num_list", qa_recommend_num_list);
 		}		
@@ -117,7 +121,32 @@ public class CustomerServiceQaController {
 		}else {
 		}
 		
+		// 추천한 사람
+		List<Qa_recommend>qa_recommend_list_with_names = customerServiceQaService.qa_recommend_namesS(qa_num);
+		ArrayList<String>qa_recommend_names = new ArrayList<String>();
+		for(int k = 0; k < qa_recommend_list_with_names.size(); k++) {
+			qa_recommend_names.add(qa_recommend_list_with_names.get(k).getMem_name());
+		}
+		log.info("$$$$$qa_recommend_names : " + qa_recommend_names);
+		model.addAttribute("qa_recommend_names", qa_recommend_names);
+		
+		// sorting
+		int qa_cate_count_project = customerServiceQaService.qa_cate_count_projectS();
+		int qa_cate_count_freemarket = customerServiceQaService.qa_cate_count_freemarketS();
+		int qa_cate_count_freelancer = customerServiceQaService.qa_cate_count_freelancerS();
+		int qa_cate_count_sign = customerServiceQaService.qa_cate_count_signS();
+		int qa_cate_count_meminfo = customerServiceQaService.qa_cate_count_meminfoS();
+		int qa_cate_count_payment = customerServiceQaService.qa_cate_count_paymentS();
+		int qa_cate_count_discount = customerServiceQaService.qa_cate_count_discountS();
+		int qa_cate_count_etc = customerServiceQaService.qa_cate_count_etcS();		
+		model.addAttribute("pageMaker", new PagingInfo(cri, customerServiceQaService.qa_countS(cri), qa_cate_count_project, qa_cate_count_freemarket, qa_cate_count_freelancer, qa_cate_count_sign, qa_cate_count_meminfo, qa_cate_count_payment, qa_cate_count_discount, qa_cate_count_etc));
+	
+		// 비슷한 문의
+		model.addAttribute("qa_same_cate", customerServiceQaService.qa_same_cateS(qa_cate));
+		
 		model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));	
+		model.addAttribute("qa_prev", customerServiceQaService.qa_prevS(qa_num));
+		model.addAttribute("qa_next", customerServiceQaService.qa_nextS(qa_num));
 		
 		return "customer_service/customer_service_qa_content";
 	}
@@ -131,6 +160,18 @@ public class CustomerServiceQaController {
 		//map.put("qa_recommnum", qa_recommnum);
 		map.put("mem_email", mem_email);
 		customerServiceQaService.qa_recommend_insertS(map);
+		
+		// 추천한 사람
+		/*
+		List<Qa_recommend>qa_recommend_list_with_names = customerServiceQaService.qa_recommend_namesS(qa_num);
+		ArrayList<String>qa_recommend_names = new ArrayList<String>();
+		for(int k = 0; k < qa_recommend_list_with_names.size(); k++) {
+			qa_recommend_names.add(qa_recommend_list_with_names.get(k).getMem_name());
+		}
+		log.info("$$$$$qa_recommend_names : " + qa_recommend_names);
+		model.addAttribute("qa_recommend_names", qa_recommend_names);
+		*/
+		
 		//customerServiceQaService.qa_contentS(qa_num);
 		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
 		//log.info("!!qa_num : " + qa_num + ", qa_recommnum : " + qa_recommnum + ", mem_email : " + mem_email);
@@ -150,6 +191,18 @@ public class CustomerServiceQaController {
 		//map.put("qa_recommnum", qa_recommnum);
 		map.put("mem_email", mem_email);
 		customerServiceQaService.qa_recommend_delS(map);
+		
+		// 추천한 사람
+		/*
+		List<Qa_recommend>qa_recommend_list_with_names = customerServiceQaService.qa_recommend_namesS(qa_num);
+		ArrayList<String>qa_recommend_names = new ArrayList<String>();
+		for(int k = 0; k < qa_recommend_list_with_names.size(); k++) {
+			qa_recommend_names.add(qa_recommend_list_with_names.get(k).getMem_name());
+		}
+		log.info("$$$$$qa_recommend_names : " + qa_recommend_names);
+		model.addAttribute("qa_recommend_names", qa_recommend_names);
+		*/
+		
 		//customerServiceQaService.qa_contentS(qa_num);
 		//customerServiceQaService.qa_recommend_update_delS(map);
 		//model.addAttribute("qa_content", customerServiceQaService.qa_contentS(qa_num));
@@ -209,7 +262,15 @@ public class CustomerServiceQaController {
 		}
 		log.info("-------------------------------------------------");
 		customerServiceQaService.qa_writeS(customerServiceQa);
-		return "redirect:customer_service_qa_content?qa_num="+customerServiceQa.getQa_num()+"&mem_email="+customerServiceQa.getMem_email();
+		
+		log.info("$$$qa_cate : " + customerServiceQa.getQa_cate());
+		try {
+			String encodedParam = URLEncoder.encode(customerServiceQa.getQa_cate(), "UTF-8");
+			return "redirect:customer_service_qa_content?qa_num=" + customerServiceQa.getQa_num() + "&mem_email=" + customerServiceQa.getMem_email() + "&qa_cate=" + encodedParam;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 	
 	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -283,6 +344,12 @@ public class CustomerServiceQaController {
 	@PostMapping("customer_service_qa_modify")
 	public String customer_service_qa_modify(CustomerServiceQa customerServiceQa) {
 		customerServiceQaService.qa_modifyS(customerServiceQa);
-		return "redirect:customer_service_qa_content?qa_num="+ customerServiceQa.getQa_num() + "&mem_email=" + customerServiceQa.getMem_email();
+		try {
+			String encodedParam = URLEncoder.encode(customerServiceQa.getQa_cate(), "UTF-8");
+			return "redirect:customer_service_qa_content?qa_num=" + customerServiceQa.getQa_num() + "&mem_email="+customerServiceQa.getMem_email() + "&qa_cate=" + encodedParam;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

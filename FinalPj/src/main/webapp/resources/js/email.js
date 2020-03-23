@@ -63,10 +63,15 @@ $(function(){
           return;
        }
      $.ajax({
+    	 beforeSend: function(){
+    		 document.getElementById('global-loader').setAttribute('style', 'background-color: rgb(255, 255, 255,0.2);');
+    		 $("#global-loader").show();    	 
+		 },		 
         type:"get",
         url:"createEmailCheck.do",
         data:"userEmail="+$("#emailMD").val()+"&random="+$("#random").val(),
         success: function(data){  
+        	$("#global-loader").fadeOut();
         	alert("메일을 발송하였습니다.");
            //$("#emailBtn").attr("disabled", true);
            //$(".emailAuth_div").after("<div id='inj' style='margin-top:10px'><div class='input-group mb-12'><input type='text' id='emailAuth' name='emailAuth' placeholder='인증번호를 입력하세요' class='form-control'/>");						                                   
@@ -180,10 +185,15 @@ $(function(){
        }
 
      $.ajax({
+    	 beforeSend: function(){		
+    		 document.getElementById('global-loader').setAttribute('style', 'background-color: rgb(255, 255, 255,0.2);');
+    		 $("#global-loader").show();    	 
+		 },	
         type:"get",
         url:"createEmailCheck.do",
         data:"userEmail="+$("#c_emailMD").val()+"&random="+$("#random").val(),
         success: function(data){
+           $("#global-loader").fadeOut();
            alert("이메일이 발송되었습니다. 인증번호를 입력하세요.");
            //$(".c_emailAuth_div").after("<div id='c_inj' style='margin-top:10px'><div class='input-group mb-12'><input type='text' id='c_emailAuth' name='c_emailAuth' placeholder='인증번호를 입력하세요' class='form-control'/>");						                                   
           // $("#c_emailAuth").after("<div class='input-group-append'><button class='btn btn-secondary' id='c_emailAuthBtn' >인증하기</button></div></div></div>");

@@ -79,9 +79,9 @@
 				<div class="page-header">
 					<h4 class="page-title">Corporation Profile</h4>
 					<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">나의 정보</li>
 					</ol>
 				</div>
 			</div>
@@ -415,23 +415,49 @@
             input_cor.submit();
          }
       </script>
-      <!--Breadcrumb-->
+        <!--Breadcrumb-->
       <section>
-         <div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-            <div class="header-text mb-0">
-               <div class="container">
-                  <div class="text-center text-white ">
-                     <h1 class="">My Page</h1>
-                     <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">My Page</li>
-                     </ol>
-                  </div>
-               </div>
-            </div>
-         </div>
+     <div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">나의 정보</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		
       </section>
       <!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Corporation Profile</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">나의 정보</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
+
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
@@ -471,6 +497,9 @@
 											<ul class="slide-menu">
 												<li><a class="slide-item " href="mydash_cor">기업</a></li>
 											</ul>
+										</li>
+										<li>
+											<a class="side-menu__item" href="myNotification_cor"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>

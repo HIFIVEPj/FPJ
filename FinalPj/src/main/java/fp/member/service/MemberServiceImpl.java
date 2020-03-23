@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import fp.market.domain.Market;
 import fp.member.domain.Member;
 import fp.member.domain.MemberVo;
+import fp.member.domain.Notification;
 import fp.member.domain.PayInformation;
 import fp.member.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j;
@@ -35,10 +36,6 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.insertMem(member);
 
 	}
-	/*@Override
-	public List<Member> list(Map<String,Object> map){
-		return memberMapper.list(map);
-	} */
 	@Override
 	public long getTotalCount(Map<String,Object> map) {
 		return memberMapper.getTotalCount(map);
@@ -57,7 +54,16 @@ public class MemberServiceImpl implements MemberService {
 	public long getMarketCount() {		
 		return memberMapper.getMarketCount();
 	}
-	
+	@Override
+	public long getMarketCountSys() {
+		
+		return memberMapper.getMarketCountSys();
+	}
+	@Override
+	public long getMarketListState() {
+		
+		return memberMapper.getMarketListState();
+	}
 	@Override
 	public List<Market> getMarketList(MemberVo memberVO) {		
 		return memberMapper.getMarketList(memberVO);
@@ -66,6 +72,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void upMarketS(Map<String,Object> map) {
 		memberMapper.upMarketS(map);
+
 	}
 	
 	//index
@@ -87,7 +94,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getTotalCountMC(memberVO);
 	}
 
-
+	@Override
+	public long getProjectCountSys() {		
+		return memberMapper.getProjectCountSys();
+	}
 	@Override
 	public List<PayInformation> marketListFree(MemberVo memberVO) {
 		return memberMapper.marketListFree(memberVO);
@@ -132,5 +142,22 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<String> sumCountMarketN() {		
 		return memberMapper.sumCountMarketN();
+	}
+	//알람
+	@Override
+	public List<Notification>selectNotification(String mem_email){
+		return memberMapper.selectNotification(mem_email);
+	}
+	@Override
+	public void addNotification(Notification not) {
+		memberMapper.addNotification(not);
+	}
+	@Override
+	public int countNotification(String mem_email) {
+		return memberMapper.countNotification(mem_email);
+	}
+	@Override
+	public void confirm_Notification(long not_num) {
+		memberMapper.confirm_Notification(not_num);
 	}
 }

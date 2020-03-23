@@ -55,9 +55,16 @@
 					<br/><br/>
 						<h1 class="h2  mb-3">마켓이 결제 되었습니다.</h1>
 						<p class="h4 font-weight-normal mb-7 leading-normal "></p>
-						<a class="btn btn-primary" href="myMarket3">
-							주문내역보기
-						</a>
+						<c:if test="${sessionScope.class_num==2||sessionScope.class_num==3}">
+							<a class="btn btn-primary" href="myMarket3">
+								주문내역보기
+							</a>
+						</c:if>
+						<c:if test="${sessionScope.class_num==4}">
+							<a class="btn btn-primary" href="cor-myBuyMarket">
+								주문내역보기
+							</a>
+						</c:if>
 					</div>
 				</div>
 			</div>

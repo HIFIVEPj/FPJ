@@ -41,8 +41,8 @@
 					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="market-list">프리마켓</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프리마켓</li>
 					</ol>
 				</div>
 			</div>
@@ -326,6 +326,9 @@
 											<div class="row">
 											<c:if test="${fn:length(list) == 0}">	
 												<p >검색한 마켓이 없습니다</p>
+												<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
+													<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+												</c:if>
 											</c:if>
 											<c:forEach items="${list}" var="list"  varStatus="status">	
 												<div class="col-lg-6 col-md-12 col-xl-4">

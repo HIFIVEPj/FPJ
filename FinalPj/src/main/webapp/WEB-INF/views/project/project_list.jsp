@@ -49,8 +49,8 @@
 					<ol class="breadcrumb">
 
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="project_list">프로젝트</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프로젝트</li>
 
 					</ol>
 				</div>

@@ -44,8 +44,8 @@
 					<h4 class="page-title">Project</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="project_list">프로젝트</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프로젝트</li>
 					</ol>
 				</div>
 			</div>
@@ -452,19 +452,22 @@
 			}
 			function apply(){
 				var pro_num = $('input:radio[name="pro_num"]:checked').val();
-				
 				$.ajax({
 					type:"get",  
 					url:"<c:url value='apply'/>",
 	    			data:"pj_num=${projectCont.pj_num}&free_code=${free.free_code}&pro_num="+pro_num,
+	    			dataType:"HTML",
 					success: function(data){
 						$('#app_btn').remove();
 						$('#btns').prepend("<a href='javascript:apply_done();' class='btn btn-info icons' > 지원하기</a>")
 						$("#apply").modal('hide');
 						$("#apply_done").modal();
+						contactServer(data);
+						 
 					},
 					error: function(data){
 					alert("에러발생");
+					alert(data);
 					}
 				});
 			}
@@ -472,6 +475,10 @@
 				alert("이미 지원한 프로젝트 입니다");
 				$("#apply").modal('hide');
 			}
+			function contactServer(email){
+				   if(socket.readyState !== 1)return
+				   	socket.send(email+",apply");
+			 };
 			</script>
 <!-- small Modal -->   
       <div id="deleteModal" class="modal fade">
@@ -554,6 +561,10 @@
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
 <!--/footer-->
 <script>
+$(document).ready(function(){
+	
+});
+
 var obShareUrl = document.getElementById("shareUrl");
 obShareUrl.value=window.document.location.href;	
 	function copyUrlToClipboard(){

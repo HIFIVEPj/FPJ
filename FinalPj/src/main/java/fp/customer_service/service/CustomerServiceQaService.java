@@ -41,10 +41,18 @@ public interface CustomerServiceQaService {
 	// 파일
 	public List<BoardAttachVO> getAttachList(Long qa_num);
 	
-	// 공지글 좋아요
+	// 문의글 좋아요
 	List<Qa_recommend>qa_recommend_listS(String mem_email);
 	void qa_recommend_insertS(Map<String, Object>map);
 	void qa_recommend_delS(Map<String, Object>map);
 	//void qa_recommend_update_inS(Map<String, Object>map);
 	//void qa_recommend_update_delS(Map<String, Object>map);
+	List<Qa_recommend>qa_recommend_namesS(long qa_num);
+	
+	// 이전글, 다음글
+	long qa_prevS(long qa_num);
+	long qa_nextS(long qa_num);
+	
+	// 비슷한 문의
+	List<CustomerServiceQa> qa_same_cateS(String qa_cate);
 }

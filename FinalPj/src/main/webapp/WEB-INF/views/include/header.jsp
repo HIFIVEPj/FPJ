@@ -1,3 +1,4 @@
+<!-- hifive / nyoung -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -103,8 +104,7 @@
         <!--
         <link rel="stylesheet" href="../plugins/fileuploads/fonts/*">
         -->
-        
-        <!-- 파일업로드 -->
+		<!-- 파일업로드 -->
 		<link href="../plugins/fileuploads-test/jquery.growl.css" rel="stylesheet" type="text/css">
 		<link href="../plugins/fileuploads-test/fileup.css" rel="stylesheet" type="text/css">
 		
@@ -113,21 +113,181 @@
 		
 		<!-- 커스텀css 로드 -->
 		<link href="../css/custom.css" rel="stylesheet" />
+			<!-- Notifications js -->
+		<script src="../plugins/notify/js/rainbow.js"></script>
+		<script src="../plugins/notify/js/sample.js"></script>
+		<script src="../plugins/notify/js/jquery.growl.js"></script>
+		<!-- 웹소켓 sockJs -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+		<script src="../js/dateFormat.js"></script>
+		<script type="text/javascript">
+	   //전역변수 선언-모든 홈페이지에서 사용 할 수 있게 index에 저장
+	   var socket = null;
+	   var session = "${sessionScope.email}";
+	   var classNum = "${sessionScope.class_num}";
+	   $(document).ready(function (){
+		   if (session !=''){
+			   connectWs(); 
+				$.ajax({
+					url : '/alarmAdd',
+					data: "mem_email="+session,
+					type : 'GET',
+					dataType: 'json',
+					success : function(data) {
+						var noReadNotice = data.countNots;
+						var lists = data.nots;
+						 var cnt = lists.length;
+						 var alarmSet="";
+						if(noReadNotice == '0'){
+							alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+							+'<div class="dropdown-divider"></div><a href="#" class="dropdown-item d-flex pb-3"><div><strong>새로운 알람이 없습니다.</strong><br>'
+							$('#alarmDIV').html(alarmSet);
+						}else{
+							$('.fa-bell-o').after('<span class="badge badge-primary badge-pill bellCount">'+noReadNotice+'</span>');
+							alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+							+'<div class="dropdown-divider"></div>'
+							if(cnt>5){
+								for(i=0; i<5; i++){
+									var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+									var cate = lists[i].not_cate;
+									if(cate=='apply'){
+										alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+									}else if(cate=='market'){
+										alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
+									}
+									alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+								}
+								if(classNum==4){
+									alarmSet+='<div class="dropdown-divider"></div><a href="myNotification_cor" class="dropdown-item text-center">....</a>'
+								}else if(classNum==3 || classNum==2){
+									alarmSet+='<div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center">....</a>'
+								}
+								
+							}else{
+								for(i=0; i<cnt; i++){
+									var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+									var cate = lists[i].not_cate;
+									if(cate=='apply'){
+										alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+									}else if(cate=='market'){
+										alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
+									}
+									alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+								}
+							}
+							$('#alarmDIV').html(alarmSet);
+						}
+					},
+					error : function(err){
+						alert('err');
+					}
+			   	});
+		   }
+	   });
+	  function alarmUpdate(){
+		   	$.ajax({
+				url : '/alarmAdd',
+				data: "mem_email="+session,
+				type : 'GET',
+				dataType: 'json',
+				success : function(data) {
+					var noReadNotice = data.countNots;
+					var lists = data.nots;
+					 var cnt = lists.length;
+					 var alarmSet="";
+					if(noReadNotice == '0'){
+						alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+						+'<div class="dropdown-divider"></div><a href="#" class="dropdown-item d-flex pb-3"><div><strong>새로운 알람이 없습니다.</strong><br>'
+						$('#alarmDIV').html(alarmSet);
+					}else{
+						$('.bellCount').remove();
+						$('.fa-bell-o').after('<span class="badge badge-primary badge-pill bellCount">'+noReadNotice+'</span>');
+						alarmSet+= '<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"><span class="dropdown-item text-center">읽지않은 '+noReadNotice+'개의 알람</span>'
+						+'<div class="dropdown-divider"></div>'
+						if(cnt>5){
+							for(i=0; i<5; i++){
+								var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+								var cate = lists[i].not_cate;
+								if(cate=='apply'){
+									alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+								}else if(cate=='market'){
+									alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
+								}
+								alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+							}
+							if(classNum==4){
+								alarmSet+='<div class="dropdown-divider"></div><a href="myNotification_cor" class="dropdown-item text-center">....</a>'
+							}else if(classNum==3 || classNum==2){
+								alarmSet+='<div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center">....</a>'
+							}
+							
+						}else{
+							for(i=0; i<cnt; i++){
+								var dateFormat = format(lists[i].not_datetime,'yyyy-MM-dd');
+								var cate = lists[i].not_cate;
+								if(cate=='apply'){
+									alarmSet+='<a href="myNotification_cor" class="dropdown-item d-flex pb-3"><div><strong>프로젝트 지원자 </strong><br><span>'
+								}else if(cate=='market'){
+									alarmSet+='<a href="myNotification" class="dropdown-item d-flex pb-3"><div><strong>마켓 구매자알림 </strong><br><span>'
+								}
+								alarmSet+='<div class="small text-muted">'+dateFormat+'</div></div></a>'
+							}
+						}
+						$('#alarmDIV').html(alarmSet);
+					}
+				},
+				error : function(err){
+					alert('err');
+				}
+		   	});
+	  }
+	   function connectWs(){
+	   	sock = new SockJS( "<c:url value="/echo"/>" );
+	   	//sock = new SockJS('/replyEcho');
+	   	socket = sock;
+	 
+	   	sock.onopen = function() {
+	           console.log('info: connection opened.');
+	     };
+	 
+	    sock.onmessage = function(evt) {
+		 	var data = evt.data;
+		 	console.log("ReceivMessage : " + data + "\n");
+		 	var dataSplit = data.split(']');
+			if(dataSplit[0]=="apply"){
+				alarmUpdate();
+				return $.growl.notice({
+					message:dataSplit[1]
+				});
+			}else if(dataSplit[0]=="market"){
+				alarmUpdate();
+				return $.growl.warning({
+					message:dataSplit[1]
+				});
+			}
+	    };
+	 
+	    sock.onclose = function() {
+	      	console.log('connect close');
+	      	setTimeout(function(){conntectWs();} , 180000);
+	    };
+	 
+	    if(session==''){
+	    	sock.onclose();
+	    }
+	    sock.onerror = function (err) {console.log('Errors : ' , err);};
+	 
+	   }
+	   
+        </script>
 	</head>
 	<body>
 
 
 		<!--Loader-->
 		<div id="global-loader">
-			<img src="../images/other/loader.svg" class="loader-img floating" alt="">
+			<img src="../images/other/loader.svg" class="loader-img floating" alt="" >
 		</div>
-		<!--
-		<div class="dimmer active">
-			<div class="lds-hourglass"></div>
-		</div>
-		-->
-
-
 		<!--Topbar-->
 		<div class="header-main">
 			<div class="top-bar" style="background-color:#fff;">
@@ -149,8 +309,6 @@
 						<div class="col-xl-4 col-lg-4 col-sm-8 col-5">
 							<div class="top-bar-right">
 								<ul class="custom">						
-
-								
 								<c:choose>
 									<c:when test="${empty sessionScope.name}">
 									<li>
@@ -164,11 +322,10 @@
 									</li>
 									</c:when>
 									<c:otherwise>
-										<h>${sessionScope.name} 님 환영합니다. </h>														
+										<h>${sessionScope.name} 님 환영합니다.&nbsp;</h>														
 
 									<li class="dropdown">
-									
-										<a href="#" class="text-dark" data-toggle="dropdown">  &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
+										<a href="#" class="text-dark" data-toggle="dropdown"> &nbsp;&nbsp;<i class="fa fa-home mr-1" style="color:#1f719a;"></i><span> 마이 페이지</span></a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 											<c:if test="${sessionScope.class_num==1}">
 											<a href="admin" class="dropdown-item" >
@@ -200,6 +357,11 @@
 												<i class="dropdown-icon si si-power" style="color:#1f719a;"></i> 로그아웃
 											</a>
 										</div>
+									</li>
+									<li class="dropdown">
+										<a href="#" class="text-dark" data-toggle="dropdown"><i class="fa fa-bell-o "></i>
+										</a>
+										<div id="alarmDIV"></div>
 									</li>
 									</c:otherwise>
 									</c:choose>
@@ -266,7 +428,7 @@
 										<li aria-haspopup="true"><a href="#">디자인</a></li>
 									</ul>	
 								</li>
-								<li aria-haspopup="true"><a href="customer_service_list">고객센터 <span class="fa fa-caret-down m-0"></span></a>
+								<li aria-haspopup="true"><a href="#">고객센터 <span class="fa fa-caret-down m-0"></span></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="construction">하이파이브 소개</a></li>
 										<li aria-haspopup="true"><a href="customer_service_notice">공지사항</a></li>
@@ -356,9 +518,9 @@
 														</li>
 													</ul>
 													<ul class="col link-list">
-														<li class="title"><a href="customer_service_list">고객센터</a></li>
+														<li class="title">고객센터</li>
 														<li>
-															<a href="#">하이파이브 소개</a>
+															<a href="construction">하이파이브 소개</a>
 														</li>
 														<li>
 															<a href="customer_service_notice">공지사항</a>

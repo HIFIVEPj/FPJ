@@ -1,3 +1,4 @@
+<!-- hifive -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -8,33 +9,42 @@
 <!--/header-->
 
 		<!--Sliders Section-->
+		<section>
 		<div>
-			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class=""><span class="font-weight-bold">60,85,965</span> Ads Available in Pinlist</h1>
+									<h1 class="" style="margin-bottom:0rem;">프리마켓</h1>
+									<!--
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="../">Home</a></li>
+										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
+										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+									</ol>
+									-->
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
 			</div>
 		</div>
+		</section>
 		<!--/Sliders Section-->
-
+		
 		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Ad Details</h4>
+					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">Pages</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Ad Details</li>
+							<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item"><a href="market-list">프리마켓</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프리마켓</li>
 					</ol>
 				</div>
 			</div>
@@ -52,12 +62,12 @@
 						<div class="card overflow-hidden">
 							<div class="card-body h-100">
 								<div class="item-det mb-4">
-									<a href="#" class="text-dark"><h3 class="">${market.market_sub}</h3></a>
+									<a href="#" class="text-dark"><h3 class="">${market.market_sub}</h3></a>									
 									<ul class="d-flex">
-										<li class="mr-5"><a href="#" class="icons"><i class="si si-briefcase text-muted mr-1"></i>${market.market_pcnt}</a></li>
+										<li class="mr-2"><a href="#" class="icons"><i class="fa fa-gratipay text-muted mr-1"></i>${market.market_pcnt}</a></li>
 									<!--<li class="mr-5"><a href="#" class="icons"><i class="si si-location-pin text-muted mr-1"></i> USA</a></li>
 										<li class="mr-5"><a href="#" class="icons"><i class="si si-calendar text-muted mr-1"></i> 5 hours ago</a></li>  -->
-										<li class="mr-5"><a href="#" class="icons"><i class="si si-eye text-muted mr-1"></i> ${market.market_vcnt}</a></li>
+										<li class="mr-2"><a href="#" class="icons"><i class="si si-eye text-muted mr-1"></i> ${market.market_vcnt}</a></li>
 								<!--    <li class=""><a href="#" class="icons">
 										<i class="fa fa-star text-warning"></i>
 										<i class="fa fa-star text-warning"></i>
@@ -160,16 +170,18 @@
 						<c:if test="${sessionScope.class_num!=1}">
 							<div class="card-footer">
 								<div class="icons">
-									<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
-
+									<p style="float:left;">
+										<button type="button" class="btn btn-primary icons" data-toggle="modal" data-target="#shareModal"><i class="si si-share mr-1"></i> 공유하기</button>
+									</p>
 								<!--<a href="#" class="btn btn-danger icons" data-toggle="modal" data-target="#report"><i class="si si-exclamation mr-1"></i> Report Abuse</a>-->
 									<!--<a href="#" class="btn btn-primary icons"><i class="si si-heart  mr-1"></i> 678</a>-->
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<c:if test="${sessionScope.email== freeProfile.freelancer.mem_email}">
-										<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
-										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
-									</c:if>
+									<p style="float:right;">
+										<c:if test="${sessionScope.email== freeProfile.freelancer.mem_email}">
+											<button type="submit" class="btn btn-info icons"><i class="fa fa-magic" ></i>수정</button> <!--  버튼 대신 이 수정처럼 만들어주면 가능 -->
+											<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">삭제</button>
+										</c:if>
+									</p>
+										
 								</div>
 							</div>
 						</c:if>
@@ -830,7 +842,7 @@
 										<li class="news-item">
 											<table cellpadding="4">
 												<tr>
-													<td><img src="hifiveImages/marketThumbnails/${similarMList.market_fname}"  class="w-8 bg-secondary border" /></td>
+													<td><img src="hifiveImages/marketThumbnails/${similarMList.market_fname}" /></td>
 													<td>
 														<h5 class="mb-1 ">${similarMList.market_sub}</h5>
 														<a href="market-content?market_num=${similarMList.market_num}" class="btn-link">View Details</a>
@@ -1837,6 +1849,7 @@ obShareUrl.value=window.document.location.href;
 	//페이징 아작스 
 </script>
 
+				
 <!-- 
 	    var PRNUM="";
 	    var LEV="";

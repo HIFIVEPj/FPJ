@@ -43,8 +43,8 @@
 					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="market-list">프리마켓</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프리마켓</li>
 					</ol>
 				</div>
 			</div>
@@ -267,7 +267,7 @@
 </script>		
 <script>
 	   function insertCheck(){
-		   alert("insertForm.cate_num."+insertForm.ofname.value);
+		//   alert("insertForm.cate_num."+insertForm.ofname.value);
 		   if(insertForm.market_sub.value=="" ){
 			   alert("제목을 적어주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
@@ -291,9 +291,9 @@
 		  if(insertForm.ofname.value==""){		   
 			   alert("썸네일파일을 선택해주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
-			   return false;
-			   
+			   return false;   
 		   }
+		  alert("포스팅 검사 후 등록이 완료됩니다.(1~2일 정도 소요)");
 		  insertForm.submit();
 	   }
 </script>		

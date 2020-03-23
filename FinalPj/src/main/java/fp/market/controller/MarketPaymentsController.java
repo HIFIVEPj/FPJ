@@ -94,7 +94,7 @@ public class MarketPaymentsController {
 		marketService.insertMarketBuy(buyinfoMarket);
 		
 	//	marketService.insertPaymentMarket(map);바로 맵으로 받아버리면 오류남1111오류
-		return "map";
+		return mem_emailFree;
 	}
 	@RequestMapping(value = "market-paymentsDone", method = RequestMethod.GET)
 	public String marketpaymentsDone(MarketPayment marketPayment) {

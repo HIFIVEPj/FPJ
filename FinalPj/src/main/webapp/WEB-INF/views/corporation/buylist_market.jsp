@@ -75,8 +75,8 @@ $(document).ready(function() {
 					<h4 class="page-title">Corporation Profile</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="mydash_cor">마이페이지</a></li>
+						<li class="breadcrumb-item active" aria-current="page">구매 마켓</li>
 					</ol>
 				</div>
 			</div>
@@ -116,6 +116,9 @@ $(document).ready(function() {
 											<ul class="slide-menu">
 												<li><a class="slide-item " href="mydash_cor">기업</a></li>
 											</ul>
+										</li>
+										<li>
+											<a class="side-menu__item" href="myNotification_cor"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
 										</li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>

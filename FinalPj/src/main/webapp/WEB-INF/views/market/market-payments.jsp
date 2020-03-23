@@ -9,7 +9,6 @@
 <script>
    function requestPay() {
       
-      alert("ssssssss");
       var IMP = window.IMP; // 생략가능
       IMP.init('imp60448504');
       IMP.request_pay({
@@ -36,9 +35,11 @@
                type: 'POST',
                contentType: 'application/json',
                data: data,
+               dataType:'html',
                success: function(data){
                   console.log("data"+data);
                   if(data != null ){
+                	 contactServer(data);
                      location.href="market-paymentsDone";
                    }
                   },
@@ -55,9 +56,12 @@
             var msg = '결제에 실패하였습니다.';
             msg += '에러내용 : ' + rsp.error_msg;
          }
-         alert(msg);
       });
    };
+   function contactServer(email){
+	   if(socket.readyState !== 1)return
+	   	socket.send(email+",market");
+ };
 </script>
 		<!--Sliders Section-->
 		<div>
@@ -91,8 +95,8 @@
 					<h4 class="page-title">FreeMarket</h4>
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="market-list">프리마켓</a></li>
+						<li class="breadcrumb-item active" aria-current="page">프리마켓</li>
 					</ol>
 				</div>
 			</div>
