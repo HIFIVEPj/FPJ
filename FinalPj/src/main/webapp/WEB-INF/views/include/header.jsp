@@ -416,18 +416,18 @@
 								</li>							
 								<li aria-haspopup="true"><a href="market-list">프리마켓</a></li>
 								<c:choose>
-									<c:when test="${empty sessionScope.email}">
-									<li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
-									</c:when>
-									<c:otherwise>
-									<li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
-									</c:otherwise>
-								</c:choose>
-									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="#">개발</a></li>
-										<li aria-haspopup="true"><a href="#">디자인</a></li>
-									</ul>	
-								</li>
+		                           <c:when test="${empty sessionScope.email}">
+		                           <li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
+		                           </c:when>
+		                           <c:otherwise>
+		                           <li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
+		                           </c:otherwise>
+		                        </c:choose>
+		                           <ul class="sub-menu">
+		                              <li aria-haspopup="true"><a href="freelancerList?type=1">개발</a></li>
+		                              <li aria-haspopup="true"><a href="freelancerList?type=3">디자인</a></li>
+		                           </ul>   
+		                        </li>
 								<li aria-haspopup="true"><a href="#">고객센터 <span class="fa fa-caret-down m-0"></span></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="construction">하이파이브 소개</a></li>

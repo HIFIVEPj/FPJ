@@ -6,23 +6,38 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
-		<!--Breadcrumb-->
-		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Dashboard</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item text-white" aria-current="page">My Dashboard</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">회원정보</h1>
+								</div>
+							</div>
 						</div>
 					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">회원정보</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item">프리랜서</li>
+						<li class="breadcrumb-item active" aria-current="page">회원정보</li>
+					</ol>
 				</div>
 			</div>
-		</section>
-		<!--Breadcrumb-->
+		</div>
+		<!--/Breadcrumb-->
 
 		<!--User Dashboard-->
 		<section class="sptb">
@@ -44,7 +59,10 @@
 										</c:if>
 										<c:if test = "${getFileName.get(0).free_fname ne null}">
 											<div class="avatar-xxl brround" style="margin:0 auto;">
+												<!--
 												<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
+												-->
+												<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
 											</div>
 										</c:if>
 									</div>
@@ -2416,7 +2434,7 @@
 		        return ;
 			  }
 			 
-			 if(expDigit>3){
+			 if(expDigit>2){
 				 alert("2글자까지 입력 가능합니다.")
 				 return ;
 			 }else if($('#pro_exp').val()== ""){ 

@@ -373,33 +373,33 @@
 							<div class="card" style="margin-bottom: 0rem; border:0;">
 								<div class="media mt-0 p-5">											
 		                        	<div class="d-flex mr-3">
-		                        		<c:if test="${qa_content.class_num == 1}">
+		                        		<c:if test="${qa_content.class_num eq 1}">
 		                            		<a href='#'><img src='../images/hifive.png' alt='X' class='media-object brround'> </a>                           		
 		                            	</c:if>	
-		                        		<c:if test="${qa_content.class_num == 2 or qa_content.class_num == 3}">
+		                        		<c:if test="${qa_content.class_num eq 2 or qa_content.class_num eq 3}">
 		                        			<c:choose>
 			                            		<c:when test="${qa_content.free_fname ne null}">
-			                            			
+			                            			<!--
 													<a href="#"><img src="../hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
-													
-													<!--
-													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
 													-->
+													
+													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
+													
 												</c:when>
 												<c:otherwise>
 													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
 												</c:otherwise>
 											</c:choose>                           		
 		                            	</c:if>
-		                            	<c:if test="${qa_content.class_num == 4}">
+		                            	<c:if test="${qa_content.class_num eq 4}">
 		                            		<c:choose>
 			                            		<c:when test="${qa_content.cor_fname ne null}">
-			                            			
+			                            			<!--
 													<a href="#"><img src="../hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
-													
-													<!--
-													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
 													-->
+													
+													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
+													
 												</c:when>
 												<c:otherwise>
 													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
@@ -431,11 +431,11 @@
 										</div>									
 										-->
 										
-										<c:if test="${qa_content.class_num == 1}">
+										<c:if test="${qa_content.class_num eq 1}">
 											<small class="text-muted"><i class="si si-briefcase"></i> 하이파이브</small>&nbsp;&nbsp;
 										</c:if>
 										
-										<c:if test="${qa_content.class_num == 2 or qa_content.class_num == 3}">
+										<c:if test="${qa_content.class_num eq 2 or qa_content.class_num eq 3}">
 											<c:choose>
 												<c:when test="${qa_content.type_name ne null and qa_content.type_name ne null}">
 													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.type_name}  |<i class=" ml-1 fa fa-clock-o"></i>&nbsp;경력 ${qa_content.pro_exp}년</small>&nbsp;&nbsp;
@@ -452,7 +452,7 @@
 											</c:choose>
 										</c:if>
 										
-										<c:if test="${qa_content.class_num == 4}">
+										<c:if test="${qa_content.class_num eq 4}">
 											<c:choose>
 												<c:when test="${qa_content.cor_name ne null and qa_content.cor_type ne null}">
 													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.cor_name}  |<i class=" ml-1 si si-settings"></i>&nbsp;${qa_content.cor_type}</small>&nbsp;&nbsp;
@@ -468,7 +468,7 @@
 												</c:otherwise>	
 											</c:choose>
 										</c:if>
-										<c:if test="${qa_content.class_num == 3}">
+										<c:if test="${qa_content.class_num eq 3}">
 											<c:choose>
 												<c:when test="${qa_content.profile_choice == 1}">
 													<a href="freelancercontent?free_code=${qa_content.free_code}&pro_num=${qa_content.pro_num}" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-drivers-license-o"></i>&nbsp;프로필</span></a>
@@ -715,7 +715,7 @@
 										<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 										-->
-										<c:if test="${sessionScope.email == qa_content.mem_email}">
+										<c:if test="${sessionScope.email eq qa_content.mem_email}">
 											<!--
 											<input type="hidden" name="mem_email" value="${sessionScope.email}">
 											-->
@@ -1272,15 +1272,15 @@
 			    	   str +="	<a href='#'><img src='../images/hifive.png' alt='X' class='media-object brround'> </a>";
 			       }else if(list[i].class_num == 2 || list[i].class_num == 3){
 			       		if(list[i].free_fname != null){
-			       str +="			<a href='#'><img src='../hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
-			       //str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+			       //str +="			<a href='#'><img src='../hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+			       str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
 			       		}else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";		
 			       		}    	
 			       }else if(list[i].class_num == 4){
 			    	    if(list[i].cor_fname != null){
-			       str +="			<a href='#'><img src='../hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
-			       //str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+			       //str +="			<a href='#'><img src='../hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+			       str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
 			    	    }else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";    	
 			    	    }

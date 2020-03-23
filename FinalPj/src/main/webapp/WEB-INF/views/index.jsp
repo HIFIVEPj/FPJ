@@ -198,7 +198,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프로젝트</h1>
-					<p>다양한 카테고리와 세분화된 조건으로  IT프로젝트를 만나실 수 있습니다</p>
+					<p>다양한 카테고리와 세분화된 조건으로  IT 프로젝트를 만나실 수 있습니다.</p>
 				</div>
 				<div class="business-item Marketplace ">
 					<div class="items-gallery">
@@ -808,7 +808,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프리마켓</h1>
-					<p>다양한 카테고리와 세분화된 조건으로 IT프리랜서를 만나실 수 있습니다</p>
+					<p>다양한 카테고리와 세분화된 조건으로 IT 서비스를 찾으실 수 있습니다.</p>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
@@ -827,7 +827,10 @@
 											
 											<div class="item-card-img">
 												<a href="market-content?market_num=${list.market_num}"></a>
+												<!--
 												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
+												-->
+												<img  src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
 											</div>
 									<!-- 즐겨찾기 설정 상태 -->
 										 <!-- 
@@ -911,7 +914,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프리랜서</h1>
-					<p>한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈</p>
+					<p>다양한 카테고리와 세분화된 조건으로 IT 프리랜서를 찾으실 수 있습니다.</p>
 				</div>
 				<div id="myCarousel1" class="owl-carousel owl-carousel-icons2">
 					<c:forEach  var="freelancer" items="${freelancerList}" varStatus="status">
@@ -953,7 +956,10 @@
 						<div class="card-body">
 							<c:choose>
                                 <c:when test="${freelancer.free_fname != null}">
-									<img src="../hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto"> 
+                                	<!--
+									<img src="../hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
+									-->
+									<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
 								</c:when>
 								<c:otherwise>
 								 <center><i class="fa fa-user-circle text-muted mr-1 fa-5x avatar-xxl brround mx-auto"></i></center>

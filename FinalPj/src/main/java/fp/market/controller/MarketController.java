@@ -518,8 +518,8 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
    public List<String> doFileupload(MultipartHttpServletRequest mtfRequest) {
 	   log.info("22222222mtfRequest"+mtfRequest);
       //String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
-      String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
-      //String path  = "/home/ubuntu/hifive/hifiveImages/marketThumbnails/"; // for aws
+      //String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
+      String path  = "/home/ubuntu/hifive/hifiveImages/marketThumbnails/"; // for aws
       System.out.println("111111111111111111111111111111111111111111111"+path);
       File Folder = new File(path);
       // 해당 디렉토리가 없을경우 디렉토리를 생성합니다.

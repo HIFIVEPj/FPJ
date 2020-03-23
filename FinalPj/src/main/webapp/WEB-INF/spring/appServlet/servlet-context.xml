@@ -22,9 +22,9 @@
       <resources mapping="/video/**" location="/resources/video/" />
       <resources mapping="/summernote/**" location="/WEB-INF/views/summernote/" />
       <resources mapping="/marketThumbnails/**" location="/resources/marketThumbnails/" />
-      
+      <!-- 
       <resources mapping="/hifiveImages/**" location="file:///C:/hifive/hifiveImages/" />
-      
+      -->
       <!-- for aws -->
       <!-- /for aws -->
    

@@ -219,12 +219,13 @@
 								<!--
 								<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 								-->
-								<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-								<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_notice_modify?notice_num=${notice_content.notice_num}';">
-
-								
-								<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_notice';">				
-								<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
+								<c:if test="${sessionScope.class_num eq 1}">
+									<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
+									<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_notice_modify?notice_num=${notice_content.notice_num}';">
+									
+									<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_notice';">				
+									<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
+								</c:if>
 							</div>
 						</div>
 					</div>

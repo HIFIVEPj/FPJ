@@ -77,7 +77,7 @@
 								</table>
 								
 								<br/>
-									<c:if test="${sessionScope.class_num==1}">
+									<c:if test="${sessionScope.class_num eq 1}">
 									<div class="text-right">
 										<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
 									</div>

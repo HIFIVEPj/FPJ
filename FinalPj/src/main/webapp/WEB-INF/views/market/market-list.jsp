@@ -326,6 +326,9 @@
 											<div class="row">
 											<c:if test="${fn:length(list) == 0}">	
 												<p >검색한 마켓이 없습니다</p>
+													<c:if test="${sessionScope.class_num==3}">
+													    <div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
+													</c:if>
 											</c:if>
 											<c:forEach items="${list}" var="list"  varStatus="status">	
 												<div class="col-lg-6 col-md-12 col-xl-4">
@@ -335,7 +338,10 @@
 															<div class="item-card9-imgs">
 																<a href="market-content?market_num=${list.market_num}"></a>    	
 															<!--	<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}" class="cover-image h-100">  width="가로 길이" height="세로 길이" alt="그림 설명" -->
+															<!--
 															<img src="hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
+															-->															
+															<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
 															</div>
 															<div class="item-card9-icons" id="heartDivID${list.market_num}">
 																<c:if test="${fn:length(marketNumList) > 0}">	
@@ -464,7 +470,7 @@
 											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-										<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
+										<c:if test="${sessionScope.class_num==3}">
 											<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 										</c:if>
 									</ul>

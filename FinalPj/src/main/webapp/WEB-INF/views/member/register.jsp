@@ -18,8 +18,12 @@
 				<div class="header-text1 mb-0">
 					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">회원가입</h1>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">회원가입</h1>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
@@ -245,7 +249,7 @@
                              </div> 
                               
                               <div class="modal-footer">
-                              <input type="hidden" path="random" id="random" value="${random}" />
+                              <input type="hidden" path="random" id="c_random" value="${random}" />
                               </div>
                            </div>
                         </div>

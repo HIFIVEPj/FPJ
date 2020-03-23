@@ -45,8 +45,8 @@ public class UploadController {
 	@PostMapping("uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
 		
-		String uploadFolder = "C:\\upload";
-		//String uploadFolder = "/home/ubuntu/hifive/upload"; // for aws
+		//String uploadFolder = "C:\\upload";
+		String uploadFolder = "/home/ubuntu/hifive/upload"; // for aws
 		//String uploadFolder = "/var/lib/tomcat8/webapps/FinalPj/resources/upload"; // for aws
 		
 		for (MultipartFile multipartFile : uploadFile) {
@@ -99,8 +99,8 @@ public class UploadController {
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 		
 		List<AttachFileDTO> list = new ArrayList<>();
-		String uploadFolder = "C:\\upload";
-		//String uploadFolder = "/home/ubuntu/hifive/upload"; // for aws
+		//String uploadFolder = "C:\\upload";
+		String uploadFolder = "/home/ubuntu/hifive/upload"; // for aws
 		//String uploadFolder = "/var/lib/tomcat8/webapps/FinalPj/resources/upload"; // for aws
 		
 		String uploadFolderPath = getFolder();
@@ -119,8 +119,8 @@ public class UploadController {
 			String uploadFileName = multipartFile.getOriginalFilename();
 		
 			// IE has file path
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-			//uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1); // for aws
+			//uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1); // for aws
 			log.info("only file name: " + uploadFileName);
 			attachDTO.setFileName(uploadFileName);
 		
@@ -157,8 +157,8 @@ public class UploadController {
 		
 		//log.info("fileName : " + fileName);
 		
-		String file_trim = "c:\\upload\\" + fileName;
-		//String file_trim = "/home/ubuntu/hifive/upload/" + fileName; // for aws
+		//String file_trim = "c:\\upload\\" + fileName;
+		String file_trim = "/home/ubuntu/hifive/upload/" + fileName; // for aws
 		//String file_trim = "/var/lib/tomcat8/webapps/FinalPj/resources/upload/" + fileName; // for aws
 		
 		file_trim = file_trim.replace(" ", "");
@@ -186,8 +186,8 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName) {
 		
-		String resource_trim = "c:\\upload\\" + fileName;
-		//String resource_trim = "/home/ubuntu/hifive/upload/" + fileName; // for aws
+		//String resource_trim = "c:\\upload\\" + fileName;
+		String resource_trim = "/home/ubuntu/hifive/upload/" + fileName; // for aws
 		//String resource_trim = "/var/lib/tomcat8/webapps/FinalPj/resources/upload/" + fileName; // for aws
 		
 		resource_trim = resource_trim.replace(" ", "");
@@ -209,8 +209,8 @@ public class UploadController {
 			
 			if(userAgent.contains("Trident")) {
 				log.info("IE browser");
-				downloadName = URLEncoder.encode(resourceOriginalName, "UTF8").replaceAll("\\+", " ");
-				//downloadName = URLEncoder.encode(resourceOriginalName, "UTF8").replaceAll("/+", " "); // for aws
+				//downloadName = URLEncoder.encode(resourceOriginalName, "UTF8").replaceAll("\\+", " ");
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF8").replaceAll("/+", " "); // for aws
 			} else if(userAgent.contains("Edge")) {
 				log.info("Edge browser");
 				downloadName = URLEncoder.encode(resourceOriginalName, "UTF8");
@@ -241,8 +241,8 @@ public class UploadController {
 
 		try {
 			
-			String file_delete_trim = "c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8");
-			//String file_delete_trim = "/home/ubuntu/hifive/upload/" + URLDecoder.decode(fileName, "UTF-8"); // for aws
+			//String file_delete_trim = "c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8");
+			String file_delete_trim = "/home/ubuntu/hifive/upload/" + URLDecoder.decode(fileName, "UTF-8"); // for aws
 			//String file_delete_trim = "/var/lib/tomcat8/webapps/FinalPj/resources/upload/" + URLDecoder.decode(fileName, "UTF-8"); // for aws
 			
 			file_delete_trim = file_delete_trim.replace(" ", "");

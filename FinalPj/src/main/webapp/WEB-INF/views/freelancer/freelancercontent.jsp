@@ -7,23 +7,22 @@
   
 	 	<!--Sliders Section-->
 		<div>
-			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h2 class=""><span class="font-weight-bold"></span> Freelancer</h2>
-									<h6>56,868개의 클라이언트 기업과 73,392개의 개발회사 & 프리랜서가 함께하는 sdfdsfdsfdsfsdfds</h6>
+									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
 			</div>
 		</div>
-		<!--/Sliders Section--> 
+		<!--/Sliders Section-->
 		
 		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
@@ -60,8 +59,10 @@
 											   <!--	<img src="../images/faces/female/25.jpg" class="w100 h-100 brround" alt="user">   --> 
 											<div style="margin-top:21px;">   
  											<c:if test="${content.get(0).freelancer.get(0).free_fname ne null}">
-				
+												<!--
 												<img src="../hifiveImages/free_thumb/${content.get(0).freelancer.get(0).free_fname}" alt="X" class="avatar-xxl brround"> 
+												-->
+												<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${content.get(0).freelancer.get(0).free_fname}" alt="X" class="avatar-xxl brround"> 
 											</c:if> 
 											<c:if test="${content.get(0).freelancer.get(0).free_fname eq null}">
 												<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>	
@@ -220,29 +221,29 @@
 										수행한 프로젝트가 없습니다.
 									</c:if>
 									
-									<c:forEach items="${content2}" var="content"  varStatus="status">
-										<c:forEach items="${content.frProject}" var="project"  varStatus="status">
-											<tr>
-												<c:if test="${project.pj_num ne null}">
-										<thead>
-											<tr>
-												<th class="pb-3 border-bottom mt-4"><h4>수행한 프로젝트</h4></th>
-												<th>사용언어  & 주요기술</th>
-											</tr>
-										</thead>
-									<tbody>	
-										<td scope="row"><b>${project.pj_sub}</b><br/>
-											<c:forEach items="${content.applied_project}" var="apply"  varStatus="status">
-												<span>${apply.appp_date}</span>
-											</c:forEach>	
-										</td>
-											<c:if test="${project.pj_sub ne null}">
-												<td scope="row">
-													<c:forEach items="${content5}" var="content"  varStatus="status">
-															<c:forEach items="${content.frKeyWord}" var="key"  varStatus="status" >
-																${key.key_name}
-															</c:forEach>
-														</c:forEach>
+									<th class="pb-3 border-bottom mt-4"><h4>수행한 프로젝트</h4></th>
+			                              <th>사용언어  & 주요기술</th>
+			                           
+			                           <c:forEach items="${content2}" var="content"  varStatus="status">
+			                              <c:forEach items="${content.frProject}" var="project"  varStatus="status">
+			                                 <tr>
+			                                    <c:if test="${project.pj_num ne null}">
+			                              <thead>
+			                                 <tr>
+			                                    
+			                                 </tr>
+			                              </thead>
+			                           <tbody>   
+			                              <td scope="row"><b>${project.pj_sub}</b><br/>
+			                              </td>
+			                                 <c:if test="${project.pj_sub ne null}">
+			                                    <td scope="row">
+			                                    
+			                                       <c:forEach items="${content5}" var="content"  varStatus="status">
+			                                             <c:forEach items="${content.frKeyWord}" var="key"  varStatus="status" >
+			                                                ${key.key_name}
+			                                             </c:forEach>
+			                                          </c:forEach>
 													</td>
 												</c:if>		
 											</c:if>	
@@ -269,7 +270,7 @@
 							<!--  <div class="card-body">-->
 								<div class="row">
 							<!-- 리뷰 -->
-							${review}
+							
 								<c:if test="${empty review}">
 									<div class="col-md-12">
 										<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
@@ -289,7 +290,10 @@
 			                 
           								  <div>   
  											<c:if test="${fnames ne null}">
+ 												<!--
 												<img src="../hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround"> 
+												-->
+												<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround"> 
 											</c:if> 
 											<c:if test="${fnames eq null}">
 												<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>	
@@ -677,7 +681,8 @@
 				+'<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >'
 				+'<div class="media mt-0 p-5">';		
 				if(fcnt > 0){
-					cont+='<div><img  alt="X" class="avatar-xxl brround" src="../hifiveImages/free_thumb/'+fname+'">';
+					//cont+='<div><img  alt="X" class="avatar-xxl brround" src="../hifiveImages/free_thumb/'+fname+'">';
+					cont+='<div><img  alt="X" class="avatar-xxl brround" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+fname+'">';
 				}else{
 					cont+='<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>';	
 				}

@@ -286,7 +286,10 @@
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
 																	<a href="#"></a>
-																	<img src="../images/products/f1.png" alt="img">
+																	<!--
+																	<img src="../hifiveImages/marketThumbnails/${market.market_fname}" class="icon-left" alt="" id="prev-img">
+																	-->
+																	<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${market.market_fname}" class="icon-left" alt="" id="prev-img">
 																</div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">

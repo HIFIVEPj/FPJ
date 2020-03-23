@@ -5,15 +5,14 @@
 <!--/header-->
 		<!--Sliders Section-->
 		<div>
-			<div class="banner-1 cover-image sptb-2 bg-background" data-image-src="../images/banners/banner7.jpg">
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
 				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-				<!--  				<h1 class=""><span class="font-weight-bold">12,32,523</span> Books Available</h1>  -->	
-								</div>
-								<div class="search-background mb-0">
+									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
 								</div>
 							</div>
 						</div>
@@ -197,7 +196,10 @@
 						<c:if test="${list.member.get(0).class_num == 3}">
 							<c:choose>
                                 <c:when test="${list.free_fname != null}">
+                                	<!--
 									<img src="../hifiveImages/free_thumb/${list.free_fname}" alt="X" class="avatar-xxl brround mx-auto"> 
+									-->
+									<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${list.free_fname}" alt="X" class="avatar-xxl brround mx-auto"> 
 								</c:when>
 								<c:otherwise>
 									<i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i>	
@@ -541,7 +543,8 @@
 						+'<div class="d-flex"><div class="media mt-0 p-1"><div class="d-flex mr-3">'
 						if(lists[i].member[0].class_num==3){
 							if(lists[i].free_fname != null){
-								pageSet+='<img src="../hifiveImages/free_thumb/'+lists[i].free_fname+'" alt="X" class="avatar-xxl brround mx-auto">'
+								//pageSet+='<img src="../hifiveImages/free_thumb/'+lists[i].free_fname+'" alt="X" class="avatar-xxl brround mx-auto">'
+								pageSet+='<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+lists[i].free_fname+'" alt="X" class="avatar-xxl brround mx-auto">'
 							}else{
 								pageSet+='<i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i>'
 							}

@@ -367,6 +367,7 @@
                                         right outer join member m
                                         on m.mem_email=f.mem_email
                                           where profile_choice=1
+                                          and APPP_STATUS=1
       ]]>   
    </select> 
    <!-- 타입 카운트 -->

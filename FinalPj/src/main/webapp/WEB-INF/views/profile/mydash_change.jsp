@@ -30,14 +30,7 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">마이대쉬</h1>
-									<!--
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="../">Home</a></li>
-										<li class="breadcrumb-item"><a href="community_list">고객센터</a></li>
-										<li class="breadcrumb-item active" aria-current="page">문의하기</li>
-									</ol>
-									-->
+									<h1 class="" style="margin-bottom:0rem;">회원정보</h1>
 								</div>
 							</div>
 						</div>
@@ -48,6 +41,20 @@
 		<!--/Sliders Section-->
 		
 		</section>
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">회원정보</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item">프리랜서</li>
+						<li class="breadcrumb-item active" aria-current="page">회원정보</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
 		<!--Breadcrumb-->
 		<!--User Dashboard-->
 		<section class="sptb">
@@ -230,10 +237,11 @@
 								</c:if>
 								<c:if test = "${mydash.free_fname ne null}">
 									<div class="avatar-xxl brround" style="margin:0 auto;">
-										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="avatar-xxl brround" alt="user">
 										<!--
-										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="avatar-xxl brround" alt="user">
 										-->
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+										
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>

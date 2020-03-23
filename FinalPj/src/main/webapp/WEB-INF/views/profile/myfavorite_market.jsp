@@ -69,7 +69,10 @@
 								</c:if>
 								<c:if test = "${free.free_fname ne null}">
 									<div class="profile-pic-img">
+										<!--
 										<img src="../hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
+										-->
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -154,7 +157,10 @@
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
 																	<a href="market-content?market_num=${pickList.market_num }"></a>
+																	<!--
 																	<img src="../hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
+																	-->
+																	<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
 																</div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
