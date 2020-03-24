@@ -85,7 +85,7 @@
 	    </user-data-constraint>
 	</security-constraint>  -->
 
-	<!-- 에러 페이지 -->
+	<!-- 에러 페이지
 	<error-page>
       <error-code>404</error-code>
       <location>/WEB-INF/views/404error.jsp</location>
@@ -94,7 +94,13 @@
       <error-code>500</error-code>
       <location>/WEB-INF/views/500error_test.jsp</location>
  	</error-page>
- 
+  -->
+    <listener>
+  <listener-class>fp.index.controller.CountManager</listener-class>
+  </listener>
+
+
+
 
 </web-app>
 

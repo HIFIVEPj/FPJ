@@ -81,7 +81,7 @@
 							</div>
 							<div class="card-body">
 								<div class="" id="">
-									<div class="filter-product-checkboxs" id="cateCheckbox">
+									<div class="filter-product-checkboxs" id="cateCheckbox">${mapCate}
 										<label for="개발" class="custom-control custom-checkbox mb-3">
 										<c:choose>
 											<c:when test="${mapCate.containsKey('cate0') }">
@@ -326,7 +326,7 @@
 											<div class="row">
 											<c:if test="${fn:length(list) == 0}">	
 												<p >검색한 마켓이 없습니다</p>
-												<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
+												<c:if test="${sessionScope.class_num==3}">
 													<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 												</c:if>
 											</c:if>
@@ -410,20 +410,34 @@
 								<!--이전 페이지 이동 -->
 									<c:if test="${paging.nowPage != 1}">
 										<li class="page-item">
-											<c:if test="${empty mapCate && empty mapExp}">
+										<c:choose>
+											<c:when test="${empty mapCate && empty mapExp && empty searchWord}">
 												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-left"></i></a>
-											</c:if>
-											<c:if test="${!empty mapCate|| !empty mapExp}">
+											</c:when>
+											<c:when test="${!empty mapCate|| !empty mapExp}">
 												<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.startPage},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-double-left"></i></a>
-											</c:if>
+											</c:when>
+											<c:when test="${!empty searchWord}">
+												<a aria-label="Last" class="page-link" href="javascript:void(0)"onclick="searchWord(${paging.startPage},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-double-left"></i></a>
+											</c:when>
+										</c:choose>
+											
+											
+											
 										</li>
 										<li class="page-item">
-											<c:if test="${empty mapCate && empty mapExp}">
-												<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-left"></i></a>
-											</c:if>
-											<c:if test="${!empty mapCate||!empty mapExp}">
-												<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.nowPage-1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-left"></i></a>
-											</c:if>
+											<c:choose>
+												<c:when test="${empty mapCate && empty mapExp && empty searchWord}">
+													<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-left"></i></a>
+												</c:when>
+												<c:when test="${!empty mapCate|| !empty mapExp}">
+													<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.nowPage-1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-left"></i></a>
+												</c:when>
+												<c:when test="${!empty searchWord}">
+													<a aria-label="Last" class="page-link" href="javascript:void(0)"onclick="searchWord(${paging.nowPage-1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-left"></i></a>
+												</c:when>
+											</c:choose>
+
 										</li>
 									</c:if>
 								 <!--페이지번호 -->
@@ -436,38 +450,54 @@
 										</c:when>
 										 <c:when test = "${p != paging.nowPage }">
 											<li class="page-item">
-												<c:if test="${empty mapCate && empty mapExp}">
-													<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}">${p}</a>
-												</c:if>
-												<c:if test="${!empty mapCate|| !empty mapExp}">
+											<c:choose>
+												<c:when test="${empty mapCate && empty mapExp && empty searchWord}">
+												<a class="page-link" href="market-list?nowPage=${p}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}">${p}</a>
+												</c:when>
+												<c:when test="${!empty mapCate|| !empty mapExp}">
 													<a class="page-link" href="javascript:void(0)" onclick="checkedPage(${p},${paging.cntPerPage},${selectedKey})">${p}</a>
-												</c:if>
+												</c:when>
+												<c:when test="${!empty searchWord}">
+													<a class="page-link" href="javascript:void(0)" onclick="searchWord(${p},${paging.cntPerPage},${selectedKey})">${p}</a>
+												</c:when>
+											</c:choose>
+		
 											</li>
 										</c:when>
 									</c:choose>
 	 							 </c:forEach>
 	 								<!--다음페이지이동 --> 
 	 								   <c:if test ="${paging.nowPage != paging.lastPage}">
+	 								   		<li class="page-item">
+	 								  			 <c:choose>
+													<c:when test="${empty mapCate && empty mapExp && empty searchWord}">
+														<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-right"></i></a>
+													</c:when>
+													<c:when test="${!empty mapCate|| !empty mapExp}">
+														<a aria-label="Next" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.nowPage+1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-right"></i></a>
+													</c:when>
+													<c:when test="${!empty searchWord}">
+														<a aria-label="Next" class="page-link" href="javascript:void(0)" onclick="searchWord(${paging.nowPage+1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-right"></i></a>
+													</c:when>
+												</c:choose>
+	 								   		</li>
+
 											<li class="page-item">
-												<c:if test="${empty mapCate && empty mapExp}">
-													<a aria-label="Next" class="page-link" href="market-list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-right"></i></a>
-												</c:if>
-												<c:if test="${!empty mapCate|| !empty mapExp}">
-													<a aria-label="Next" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.nowPage+1},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-right"></i></a>
-												</c:if>
-											</li>
-										
-											<li class="page-item">
-												<c:if test="${empty mapCate && empty mapExp}">
-													<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-right"></i></a>
-												</c:if>
-												<c:if test="${!empty mapCate|| !empty mapExp}">
-													<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.endPage},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-double-right"></i></a>
-												</c:if>
+												<c:choose>
+													<c:when test="${empty mapCate && empty mapExp && empty searchWord}">
+														<a aria-label="Last" class="page-link" href="market-list?nowPage=${paging.endPage}&cntPerPage=${paging.cntPerPage}&selectedKey=${selectedKey}"><i class="fa fa-angle-double-right"></i></a>
+													</c:when>
+													<c:when test="${!empty mapCate|| !empty mapExp}">
+														<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="checkedPage(${paging.endPage},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-double-right"></i></a>
+													</c:when>
+													<c:when test="${!empty searchWord}">
+														<a aria-label="Last" class="page-link" href="javascript:void(0)" onclick="searchWord(${paging.endPage},${paging.cntPerPage},${selectedKey})"><i class="fa fa-angle-double-right"></i></a>
+													</c:when>
+												</c:choose>
 											</li>
 										</c:if>
 									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-										<c:if test="${sessionScope.class_num==3||sessionScope.class_num==2}">
+										<c:if test="${sessionScope.class_num==3}">
 											<div style="margin-left:auto; float:right"><a href="market-posts" class="btn btn-primary">글쓰기</a></div>
 										</c:if>
 									</ul>

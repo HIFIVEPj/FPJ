@@ -201,10 +201,10 @@ $(document).ready(function() {
 														<a href="#" class="badge badge-secondary">거래중</a>
 													</c:if>
 													<c:if test="${mBuyList.mbuysell_state==1}">
-														<a href="#" class="badge badge-secondary">거래완료</a>
+														<a href="#" class="badge badge-primary">거래완료</a>
 													</c:if>
 													<c:if test="${mBuyList.mbuysell_state==2 }">
-														<a href="#" class="badge badge-secondary">거래취소</a>
+														<a href="#" class="badge badge-warning">거래취소</a>
 													</c:if>
 												</td>
 												<td class="font-weight-semibold fs-16" align="center">

@@ -156,7 +156,7 @@ $(document).ready(function() {
 												<th><b>상태</b></th>
 												<th><b>판매일</b></th>
 												<th><b>구매자</b></th>
-												<th><b>완료버튼</b></th>
+												<!-- <th><b>완료버튼</b></th> -->
 											</tr>
 										</thead>
 										
@@ -222,10 +222,11 @@ $(document).ready(function() {
 
 											
 											</td>
+											<!-- 
 											<td class="font-weight-semibold fs-16" align="center">
 												<a href="javascript:void(0)" onclick="deleteCheck(${mySellMarket.marketPaym_num})"  data-toggle="modal" data-target="#smallModal1"   class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="거절하기"><i class="fa fa-trash"></i></a>
 												<a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="완료"><i class="fa fa-shopping-cart"></i></a>
-											</td>
+											</td> -->
 											</tr>
 										</tbody>
 									</c:forEach>

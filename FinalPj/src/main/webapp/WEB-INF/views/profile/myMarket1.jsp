@@ -195,7 +195,7 @@
 														
 														<c:if test="${myMarket.market_state==1}">
 															<td align="center">
-																<a href="#" class="badge badge-warning">판매중</a>
+																<a href="#" class="badge badge-secondary">판매중</a>
 															</td>
 														</c:if>
 														<c:if test="${myMarket.market_state==0}">
@@ -205,7 +205,7 @@
 														</c:if>
 														<td align="center">
 															<a href="market-delete?market_num=${myMarket.market_num}&location=myMarket" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
-															<a href="market-updateRefusalMarket1?market_num=${myMarket.market_num}" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="수정하기"><i class="fa fa-shopping-cart"></i></a>
+															<a href="market-updateRefusalMarket1?market_num=${myMarket.market_num}" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="수정하기"><i class="si si-pencil"></i></a>
 							
 														</td>
 													</tr>

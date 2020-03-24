@@ -7,9 +7,6 @@
 <!--header-->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
-   
-
-
 
 		<!--Sliders Section-->
 		<section>

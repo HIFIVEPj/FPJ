@@ -80,6 +80,8 @@ public interface MarketService {
 	List<String> deletedQA(HashMap<String,Object> map);
 	
 	List<Market> similarMarket(int cate_num);
+	
+	Market getMarketFreelancer2(long market_num);
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 	

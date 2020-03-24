@@ -24,6 +24,8 @@ public class FreelancerProfile {
 	private int pro_vcnt;
 	private int pro_pcnt;
 	private int pro_place;
+
+	 //프로필 공개여부
 	
 	private Freelancer freelancer;
 	private FreelancerReview  freelancerReview;

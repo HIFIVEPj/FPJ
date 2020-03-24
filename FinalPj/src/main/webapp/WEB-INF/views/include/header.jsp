@@ -1,6 +1,8 @@
 <!-- hifive / nyoung -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="fp.index.controller.CountManager" %>
+<jsp:useBean id="CountManager" class="fp.index.controller.CountManager" scope="page" />
 
 <!--header-->
 <!doctype html>
@@ -293,7 +295,7 @@
 			<div class="top-bar" style="background-color:#fff;">
 				<div class="container">
 					<div class="row">
-						<div class="col-xl-8 col-lg-8 col-sm-4 col-7">
+						<div class="col-xl-8 col-lg-8 col-sm-4 col-7">접속자수 : <%=CountManager.getCount()%>
 							<!--
 							<div class="top-bar-left d-flex">
 								<div class="clearfix">
@@ -365,6 +367,9 @@
 									</li>
 									</c:otherwise>
 									</c:choose>
+
+									
+	
 								</ul>
 							</div>
 						</div>

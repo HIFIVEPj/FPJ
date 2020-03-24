@@ -185,12 +185,10 @@
 								</div>
 							</div>
 						</c:if>
-							<c:if test="${sessionScope.class_num==1 && (market.market_state==0 ||market.market_state==2)}">
-								<button type="button" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</button>															
-								<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i>거절하기</button>
-							</c:if>
+						
 						</div>
 					</form>
+					
 					<!-- small Modal -->   
 				      <div id="smallModal1" class="modal fade">
 				         <div class="modal-dialog modal-sm" role="document">
@@ -389,6 +387,7 @@
 								<h3 class="card-title">리뷰 남기기</h3>
 							</div>
 							<div class="card-body">
+							<c:if test="${fn:length(mbs)>0}" >
 								<div>
 									<div class="ml-auto">
 										<div class="rating-stars block">
@@ -418,32 +417,45 @@
 										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
 									</div>
 									  -->
+									  <!--  
 									 <c:if test="${sessionScope.email ==null}" >
 										<div class="form-group">
 											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
 										</div>	
 									</c:if>		
-									<c:if test="${fn:length(mbs)>0}" >
+									
+									-->
+								 <!--  	<c:if test="${fn:length(mbs)>0}" >-->
 										<c:if test="${sessionScope.email!=null||market.market_num ==mbs.market_num}" >
 											<div class="form-group">
 												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="이용 후기를 남겨주세요">${marketRev_cont}</textarea>
 											</div>	
 											<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
 										</c:if>		
-									</c:if>		
+									 <!-- </c:if>		-->
+									<!--
 									<c:if test="${fn:length(mbs)==0}" >
 										<c:if test="${sessionScope.email!=null}" >
 											<div class="form-group">
 												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="마켓 구매 후 이용하실 수 있습니다"></textarea>
 											</div>	
 										</c:if>		
-									</c:if>		
-									
-									
-									
-									
-									
+									</c:if>	
+									-->	
 								</div>
+								</c:if>	
+								 <c:if test="${sessionScope.email ==null}" >
+										<div class="form-group">
+											로그인 후 이용해주세요
+										</div>	
+									</c:if>		
+									<c:if test="${fn:length(mbs)==0}" >
+										<c:if test="${sessionScope.email!=null}" >
+											<div class="form-group">
+												마켓 구매 후 이용하실 수 있습니다
+											</div>	
+										</c:if>		
+									</c:if>	
 							</div>
 						</div>
 					</form>
@@ -493,7 +505,8 @@
 		                                     	 <c:when test="${marketQA.marketQA_ox == 0 }">
 			                                        <c:if test="${marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
 				                                        <p class="font-13  mb-2 mt-2">
-				                                      		 <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                         ${marketQA.marketQA_sub}<br>
+				                                      		 <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> <small>더보기...</small></a><br>
 			                                        	</p>
 		                                        	</c:if>
 		                                        </c:when>
@@ -501,7 +514,8 @@
 			                                        <p class="font-13  mb-2 mt-2">
 			                                       		 <비밀글 입니다.> <br>
 			                                            <p class="font-13  mb-2 mt-2">
-			                                      		 	<a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong">${marketQA.marketQA_sub}</a><br>
+			                                            ${marketQA.marketQA_sub}<br>
+			                                      		 	<a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"><small>더보기...</small></a><br>
 		                                    			</p>
 		                                        	</p>
 		                                        </c:when>
@@ -656,9 +670,15 @@
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
-									<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									<c:if test="${freeProfile.freelancer.free_fname!=null}">
+										<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									</c:if>
+									<c:if test="${freeProfile.freelancer.free_fname==null}">
+										<img src="" class="fa fa-user-circle text-muted mr-1 fa-5x" alt="">
+									</c:if>
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
+											
 											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0}">
 												
 											</c:if >
@@ -696,6 +716,7 @@
 							</div>
 						-->	
 	<!--////////////////////// 결제넘기는 폼////////////////////////////////////// -->
+	
 							<form id="paymentsForm" action="market-payments" method="post">
 								<input type="hidden" value="${market.market_sub}" name="marketPaym_pdName">
 								<input type="hidden" value="${market.market_num}" name="market_num">
@@ -725,12 +746,25 @@
 								
 								<!--	<a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
 										<a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-										<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+										<c:if test="${sessionScope.class_num==4 ||sessionScope.class_num==2 || sessionScope.class_num==3}">
+											<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+										</c:if>
 									</div>
 								</div>
 							</form>
+								<c:if test="${sessionScope.class_num==1 && (market.market_state==0 ||market.market_state==2||market.market_state==1)}">
+									<form id="marketA" name="marketA" action="updateMarketState.do" method="post">
+										<button type="button" id="admitBtn" class="btn btn-primary btn-sm  admitBtn" ><i class="fa fa-check"></i>승인하기</button>															
+										<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm refuseBtn"><i class="fa fa-close"></i>거절하기</button>
+										<input type="hidden" id="market_state" name="market_state" value="">
+										 <input type="hidden" id="market_num" name="market_num" value="${market.market_num}">
+									</form>
+								</c:if>
 						</div>
+		
+				
 				<!--		
+				
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">Keywords</h3>
@@ -835,7 +869,7 @@
 							<div class="card-header">
 								<h3 class="card-title">유사한 마켓</h3>
 							</div>
-							<div class="card-body pb-3">
+							<div class="card-body pb-5">
 								<ul class="vertical-scroll">
 								  <c:if test="${fn:length(similarMarket)>0}">
 									<c:forEach items="${similarMarket}" var="similarMList">
@@ -856,7 +890,7 @@
 									  <c:if test="${fn:length(similarMarket)==0}">
 									  	<li class="news-item">
 		                                    <div class="media p-5 mt-0">
-		                                   		   마켓주인이프로필 등록안해서 유사한프리랜서안뜸
+		                                   		   유사한 마켓 없음 
 		                                    </div>
 		                                 </li>
 									  </c:if>
@@ -875,10 +909,14 @@
 											<c:forEach var="similarFree" items="${similarFree}">
 											<li class="item">
 												<div class="media p-5 mt-0">
+												<c:if test="${similarFree.freelancer.free_fname==null}">
+													<img class="mr-4" src="" alt="">
+												</c:if>
+												<c:if test="${similarFree.freelancer.free_fname!=null}">
 													<img class="mr-4" src="../hifiveImages/free_thumb/${similarFree.freelancer.free_fname}" alt="img">
+												</c:if>
 													<div class="media-body">
 														<h4 class="mt-2 mb-1">${similarFree.freelancer.free_name}</h4>
-														
 														<span class="rated-products-ratings">
 															<c:forEach begin="1" end="${similarFree.freelancerReview.freeRev_star}">
 																<i class="fa fa-star text-warning"> </i>
@@ -899,7 +937,7 @@
 										<c:if test="${fn:length(similarFree)==0}">
 										 	<li class="item">
 												<div class="media p-5 mt-0">
-													프로필 등록안해서 유사한프리랜서안뜸
+													유사한 프리랜서 없음
 												</div>
 											</li>
 										</c:if>
@@ -1083,7 +1121,7 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 					  <div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle"></h5>
+						<h5 class="modal-title" id="exampleModalLongTitle"></h5>더보기...
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						  <span aria-hidden="true">&times;</span>
 						</button>
@@ -1101,6 +1139,7 @@
 				</div>
 			</div>
 <!-- 공유하기Modal -->
+
 			<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -1847,9 +1886,23 @@ obShareUrl.value=window.document.location.href;
 		$('#paging').html(pagingHtml);
 	}
 	//페이징 아작스 
+	
+	
+</script>
+<script>
+
+$(".admitBtn").on("click",function(){	
+	$("#market_state").attr("value","1");	
+	var market_state= $("#market_state").val();		
+	marketA.submit();	
+})
+$(".refuseBtn").on("click",function(){	
+	$("#market_state").attr("value","2");	
+	var market_state= $("#market_state").val();	
+	marketA.submit();	
+})
 </script>
 
-				
 <!-- 
 	    var PRNUM="";
 	    var LEV="";

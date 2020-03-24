@@ -239,13 +239,14 @@ public class MarketController {
 
       log.info("#####price1:"+price1);
       log.info("#####price2"+price2);
-*/   if(marketPrice1=="") {
+*/   if(marketPrice1==""||marketPrice1==null) {
 		marketPrice1="0";
 	 }
-	 if(marketPrice2=="") {
+	 if(marketPrice2==""||marketPrice2==null) {
 		marketPrice2=""+Long.MAX_VALUE;
 	 }
-    
+	 log.info("marketPrice1"+marketPrice1);
+	 log.info("marketPrice2"+marketPrice2);
       marketPrice2 = marketPrice2.replaceAll("[^0-9]", "");
 	  marketPrice1 = marketPrice1.replaceAll("[^0-9]", "");
 
@@ -257,13 +258,19 @@ public class MarketController {
       Map<String,Map<String,Object>> total= new HashMap<String,Map<String,Object>>();
       mapPrice.put("price1", price1);
       mapPrice.put("price2", price2);
-      
+      /*
       if(checkedCate.size()!=0) {
          for(int i=0; i<checkedCate.size();i++) {
             int cate=checkedCate.get(i);
             mapCate.put("cate"+i,cate);
          }
-      }
+      }*/
+     if(checkedCate.contains(1)) {
+    	 mapCate.put("cate0",1);
+     }
+     if(checkedCate.contains(2)) {
+    	 mapCate.put("cate1",2);
+     }
       if(checkedExp.size()!=0) {
          for(int i=0 ; checkedExp.size()>i ; i++) {
             String exp=checkedExp.get(i);
@@ -381,9 +388,12 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
    
    //   m=marketService.getMarketFreelancer(market_num);이렇게해도되고 메소드 따로 만들어서  아래한줄처럼해도됨 
       Market fp=getMarketFreePrefile(market_num);//하지만 왜 마켓테이블 정보는 안나오지->왜냐! 변수 m에 매퍼를 뒤집어썼기때문에 다른 변수에 넣어줘야함//리스트로하는이유는 개인당 여러개의 마켓을 가질수있으므로
+      log.info("fp@@@"+fp);
       int type_num=0;
       if(fp.getFreelancerProfile()!=null) {
          type_num=fp.getFreelancerProfile().getType_num();
+      }else {
+ 
       }
       List<FreelancerProfile> similarFree = marketService.getSimilarFree(type_num);
     //유사한 프리랜서에 자신은 제외하는 for문
@@ -442,6 +452,9 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
    public Market getMarketFreePrefile(long market_num){
       Market marketFreelancer;
       marketFreelancer=marketService.getMarketFreelancer(market_num);
+      if(marketFreelancer==null) {
+    	  marketFreelancer=marketService.getMarketFreelancer2(market_num);
+      }
       return marketFreelancer;
    }
    @RequestMapping(value = "market-posts", method = RequestMethod.GET)

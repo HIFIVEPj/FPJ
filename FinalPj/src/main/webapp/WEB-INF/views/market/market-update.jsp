@@ -161,7 +161,7 @@
 		
 					</div>
 					<div class="card-footer ">
-						<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#smallModal1">Submit Now</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#smallModal1">완료</button>
 					</div>
 				</div>
 			</form>	
@@ -231,7 +231,7 @@
 		
 <script>
 	   function updateCheck(){
-		   alert(" updateForm.cate_num."+updateForm.cate_num.value);
+		  // alert(" updateForm.cate_num."+updateForm.cate_num.value);
 		   if(updateForm.market_sub.value=="" ){
 			   alert("제목을 적어주세요");
 			   $('#smallModal1').modal("hide"); //닫기 
