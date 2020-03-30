@@ -159,7 +159,7 @@ $(document).ready(function() {
 												<th><b>상태</b></th>
 												<th><b>판매일</b></th>
 												<th><b>구매자</b></th>
-												<th><b>완료버튼</b></th>
+												<!--<th><b>완료버튼</b></th>-->
 											</tr>
 										</thead>
 										
@@ -216,22 +216,25 @@ $(document).ready(function() {
 												${mySellMarket.marketPaym_rdate}
 											</td>
 											<td class="font-weight-semibold fs-16" align="center" >
-											
+											<c:set var="doneLoop" value="false"/> 
 												<c:forEach items="${member}" var="entry" varStatus="status">
-													<c:if test="${fn:contains(entry, mySellMarket.mem_emailBuy) }">
-														<c:out value="${entry.NAME}"/></br>
-														<a href="mailto:${mySellMarket.mem_emailBuy}"  class="btn btn-info btn-sm text-white" >메일보내기</a>
+													<c:if test="${not doneLoop}">
+														<c:if test="${fn:contains(entry, mySellMarket.mem_emailBuy) }">
+															<c:out value="${entry.NAME}"/></br>
+															<a href="mailto:${mySellMarket.mem_emailBuy}"  class="btn btn-info btn-sm text-white" >메일보내기</a>
+														<c:set var="doneLoop" value="true"/> 
+														</c:if>
 													</c:if>
 												</c:forEach>
 
-
-
 											
 											</td>
+											<!--
 											<td class="font-weight-semibold fs-16" align="center">
 												<a href="javascript:void(0)" onclick="deleteCheck(${mySellMarket.marketPaym_num})"  data-toggle="modal" data-target="#smallModal1"   class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="거절하기"><i class="fa fa-trash"></i></a>
 												<a href="javascript:void(0)" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="완료"><i class="fa fa-shopping-cart"></i></a>
 											</td>
+											-->
 											</tr>
 										</tbody>
 									</c:forEach>

@@ -83,5 +83,8 @@ public interface MarketService {
 	 // List<Freelancer> getMarketRevFree(long market_num);
 	// List<Corporation> getMarketRevCor(long market_num);
 	
-
+	Market getMarketFreelancer2(long market_num);
+	
+	 long countDevelopoer();
+	 long countDesigner();
 }

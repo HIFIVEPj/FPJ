@@ -203,15 +203,15 @@ $(document).ready(function() {
 													<fmt:formatNumber value="${mBuyList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 												</td> 
 												<td align="center">
-													<c:if test="${mBuyList.mbuysell_state==0 }">
-														<a href="#" class="badge badge-secondary">거래중</a>
-													</c:if>
-													<c:if test="${mBuyList.mbuysell_state==1}">
-														<a href="#" class="badge badge-secondary">거래완료</a>
-													</c:if>
-													<c:if test="${mBuyList.mbuysell_state==2 }">
-														<a href="#" class="badge badge-secondary">거래취소</a>
-													</c:if>
+												   <c:if test="${mBuyList.mbuysell_state==0 }">
+												      <a href="#" class="badge badge-secondary">거래중</a>
+												   </c:if>
+												   <c:if test="${mBuyList.mbuysell_state==1}">
+												      <a href="#" class="badge badge-primary">거래완료</a>
+												   </c:if>
+												   <c:if test="${mBuyList.mbuysell_state==2 }">
+												      <a href="#" class="badge badge-warning">거래취소</a>
+												   </c:if>
 												</td>
 												<td class="font-weight-semibold fs-16" align="center">
 													${mBuyList.mbuysell_date}

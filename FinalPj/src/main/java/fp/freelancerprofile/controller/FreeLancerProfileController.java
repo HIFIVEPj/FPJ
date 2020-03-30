@@ -55,6 +55,8 @@ import fp.freelancerprofile.domain.Type;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.freelancerprofile.service.FreeLancerProfileServiceImpl;
 import fp.member.controller.OpenBankingController;
+import fp.member.domain.Notification;
+import fp.member.service.MemberService;
 import fp.util.file.Path;
 import lombok.extern.log4j.Log4j;
 
@@ -63,12 +65,32 @@ import lombok.extern.log4j.Log4j;
 public class FreeLancerProfileController {
 	
 	@Autowired
-	private ProjectService pjservice;
-	@Autowired
-	private FreeLancerProfileService service;
-	private FreeLancerProfileServiceImpl serviceimple;
-	@Autowired
-	private FreeLancerListService listService;
+	   private FreeLancerListService listService;
+
+	   @Autowired
+	   private ProjectService pjservice;
+	   @Autowired
+	   private FreeLancerProfileService service;
+	   @Autowired
+	   private MemberService memberService;
+	//알림확인
+	   @RequestMapping("confirm_Notification")
+	   public String confirm_Notification_cor(long not_num) {
+	      memberService.confirm_Notification(not_num);
+	      return "redirect:myNotification";
+	   }
+	   //내게온 알림
+	   @RequestMapping("myNotification")
+	   public ModelAndView myNotification_cor(HttpServletRequest request) {
+	      HttpSession session = request.getSession();
+	      String mem_email= (String)session.getAttribute("email");
+	      FreeLancer free = service.mydash_free_select(mem_email);
+	      List<Notification> nots = memberService.selectNotification(mem_email);
+	      ModelAndView mv = new ModelAndView("profile/myNotification");
+	      mv.addObject("list", nots);
+	      mv.addObject("free", free);
+	      return mv;
+	   }
 
 	@GetMapping("freelancerMyprofile_write")	
 	public ModelAndView ProFileWrite(HttpServletRequest request) { 

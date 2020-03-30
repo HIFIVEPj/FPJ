@@ -87,7 +87,7 @@
 												</c:forEach>
 												</c:forEach>
 												<br/>
-													<span class="text-gray">${list.pro_addr}</span>&nbsp;<br/>
+													
 													<a class="icons"><i class="fa fa-eye text-muted mr-1"></i> ${list.pro_vcnt} Views</a>&nbsp;&nbsp;
 													<a class="icons"><i class="fa fa-heart text-muted mr-1"></i>&nbsp;${list.pro_pcnt} Picks<br/>
 													<div class="rating-stars d-inline-flex mb-2 mr-3">
@@ -137,24 +137,24 @@
 									</div>
 								</c:if>
 								<c:if test="${!empty cor}">
-								<c:forEach var="i" begin="0" end="${content.size()-1}">
-									<c:choose>
-										<c:when test="${pronumList.contains(list.list_freelancerprofile.get(i).pro_num)}">
-											<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}" >
-												<a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${content.get(i).pro_num})">
-												 <i class="fa fa fa-heart" style="color:white"></i></a> 
-											</div>
-										</c:when>
-										<c:otherwise>
-											<div class="item-card9-icons">
-												<a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${content.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${content.get(i).pro_num})">
-												 <i class="fa fa fa-heart-o" style=""></i></a>
-											</div>
-										</c:otherwise>	
-									</c:choose>
-										<div class="item-card9-icons"  id="zzim${content.get(i).pro_num}"></div>
-								</c:forEach>
-							</c:if>
+                        
+                           <c:choose>   
+                              <c:when test="${pronumList.contains(content.pro_num)}">
+                                 <div class="item-card9-icons"  id="zzim${content.pro_num}" >
+                                    <a href="javasript:void(0)" class="item-card9-icons delwish" style="margin-right:40%; background-color: #e8564a;" onclick="javascript:del_wish(${content.get(i).pro_num})">
+                                     <i class="fa fa fa-heart" style="color:white"></i></a> 
+                                 </div>
+                              </c:when>
+                              <c:otherwise>
+                                 <div class="item-card9-icons">
+                                    <a href="javasript:void(0)" class="item-card9-icons wishlist" id="insertwish${content.get(i).pro_num}"style="margin-right:40%" onclick="javascript:wish(${content.get(i).pro_num})">
+                                     <i class="fa fa fa-heart-o" style=""></i></a>
+                                 </div>
+                              </c:otherwise>   
+                           </c:choose>
+                              <div class="item-card9-icons"  id="zzim${content.get(i).pro_num}"></div>
+                        
+                     </c:if>
 						</div> 
 								<h4 class="pb-3 border-bottom mt-4">Profile</h4>
 								<c:forEach items="${content}" var="list"  varStatus="status">
@@ -221,35 +221,39 @@
 										수행한 프로젝트가 없습니다.
 									</c:if>
 									
-									<th class="pb-3 border-bottom mt-4"><h4>수행한 프로젝트</h4></th>
-			                              <th>사용언어  & 주요기술</th>
-			                           
-			                           <c:forEach items="${content2}" var="content"  varStatus="status">
-			                              <c:forEach items="${content.frProject}" var="project"  varStatus="status">
-			                                 <tr>
-			                                    <c:if test="${project.pj_num ne null}">
-			                              <thead>
-			                                 <tr>
-			                                    
-			                                 </tr>
-			                              </thead>
-			                           <tbody>   
-			                              <td scope="row"><b>${project.pj_sub}</b><br/>
-			                              </td>
-			                                 <c:if test="${project.pj_sub ne null}">
-			                                    <td scope="row">
-			                                    
-			                                       <c:forEach items="${content5}" var="content"  varStatus="status">
-			                                             <c:forEach items="${content.frKeyWord}" var="key"  varStatus="status" >
-			                                                ${key.key_name}
-			                                             </c:forEach>
-			                                          </c:forEach>
-													</td>
-												</c:if>		
-											</c:if>	
-										</td>
-									</c:forEach>
-								</c:forEach>		
+									<c:if test="${!empty content2}">
+				                              <th>수행한 프로젝트</th>
+				                              <th>사용언어  & 주요기술</th>
+				                           
+				                           <c:forEach items="${content2}" var="content"  varStatus="status">
+				                              <c:forEach items="${content.frProject}" var="project"  varStatus="status">
+				                                 <tr>
+				                                    <c:if test="${project.pj_num ne null}">
+				                              <thead>
+				                                 <tr></tr>
+				                              </thead>
+				                           <tbody>
+				                              <td scope="row"><b>${project.pj_sub}</b><br/>
+				                                 <c:forEach items="${content.applied_project}" var="date"  varStatus="status">
+				                                    <small>${date.appp_date}</small>
+				                                 </c:forEach>
+				                              </td>
+				                                 <c:if test="${project.pj_sub ne null}">
+				                                    <td scope="row">
+				                                       <c:forEach items="${content5}" var="content"  varStatus="status">
+				                                             <c:if test="${project.pj_num eq content.pj_num}">
+				                                                   <c:forEach items="${content.frKeyWord}" var="key"  varStatus="status">
+				                                                      ${key.key_name}
+				                                                   </c:forEach>
+				                                                </c:if>
+				                                       </c:forEach>   
+				                                       </td>
+				                                    </c:if>      
+				                                 </c:if>   
+				                              </td>
+				                           </c:forEach>
+				                        </c:forEach>
+				                        </c:if>		
 										</tbody>	
 									</table>
 								</div>
@@ -281,24 +285,35 @@
 								   	 		</div>
 								    	</div>		
 									</div>
-								</c:if>		
-							<c:if test="${!empty review}">	
-								<c:forEach items="${review}" var="review_content"  varStatus="status">							
-									<div class="col-md-12  before_review">
-									<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
-									<div class="media mt-0 p-5">
-			                 
-          								  <div>   
- 											<c:if test="${fnames ne null}">
- 												<!--
-												<img src="../hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround"> 
-												-->
-												<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround"> 
-											</c:if> 
-											<c:if test="${fnames eq null}">
-												<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>	
-											</c:if> 
-						                     </div> &nbsp;&nbsp;&nbsp;
+								</c:if>	
+
+							<c:if test="${!empty review}">   
+                        <c:forEach items="${review}" var="review_content"  varStatus="status">                     
+                           <div class="col-md-12  before_review">
+                              <div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >
+                                 <div class="media mt-0 p-5">
+                                         <div>
+                                            <c:choose>
+                                          <c:when test="${cnames.cor_fname ne null }">
+                                          	<!--
+                                             <img src="../hifiveImages/cor_thumb/${cnames.cor_fname}" alt="X" class="avatar-xxl brround">
+                                             -->
+                                             <img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cnames.cor_fname}" alt="X" class="avatar-xxl brround">
+                                          </c:when>
+                                       
+                                          <c:when test="${ fnames.free_fname ne null}">
+                                          	<!--
+                                             <img src="../hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround">
+                                             -->
+                                             <img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround">
+                                          </c:when>
+                           
+                                          <c:otherwise>
+                                             <i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i>
+                                          </c:otherwise> 
+                                          
+                                       </c:choose>                                       
+                                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			                                 <div class="media-body"> 
 						                          <h5 class="mt-0 mb-1 font-weight-semibold">${review.get(0).mmember.mem_name}
@@ -349,52 +364,47 @@
 								
 					<!-- 페이징 -->				
 					<div class='paginationDiv' id="tab-11" style="margin:0 auto; align:center;" >
-						 <div class='center-block text-center'> 
+                   <div class='center-block text-center'> 
                            <ul class="pagination mb-0">         
                         <div class="card-body" style="margin:0 auto; align:center;" id="review_paging">
                            <ul class="pagination mg-b-0 page-0 ">
                           <c:if test ="${paging.nowPage != 1}">
                        <!--이전 페이지 이동 -->
-                           <li class="page-item">
-                           <a class="page-link noMem_prev" href="freelancercontent?nowPage=${paging.firstPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
-		                       <i class="fa fa-angle-double-left"></i></a>
-                    		 </li>
-                    		    
-		                   <li class="page-item">
-		                        <a aria-label="Next" class="page-link" href="freelancercontent?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
-		                       <i class="fa fa-angle-left"></i></a>
-		                  </li>   
-                              
+                              <li class="page-item">
+                              <a class="page-link noMem_prev" href="freelancercontent?nowPage=${paging.firstPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
+                                <i class="fa fa-angle-double-left"></i></a>
+                              </li>
+                                 
+                            <li class="page-item">
+                                 <a aria-label="Next" class="page-link" href="freelancercontent?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
+                                <i class="fa fa-angle-left"></i></a>
+                           </li>   
                           </c:if>
-                         
                            <!--페이지번호 -->
            
- <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="1" end="${paging.lastPage}" >	 
-                              <c:choose>
-                                 <c:when test="${p == paging.nowPage}">
-                                  <c:if test ="${paging.nowPage != 1}">
-	                                  <c:forEach var='p' begin="${paging.startPage}" end="${p}" >
-	                                  	<li class='page-item active'><a class="page-link">${p}</a></li>
-	                                  </c:forEach>
-                                  </c:if>
-                                  <!--  <li class='page-item active'><a class="page-link">${p}</a></li> --> 
-                                    
-                                 </c:when>
-                                 <c:when test = "${p != paging.nowPage }">
-									
-                                  <li class="page-item"><a class="page-link" href="freelancercontent?nowPage=${p}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">${p}</a></li> 
-                                 </c:when>
-                              </c:choose>
-                           </c:forEach>
+ <!-- 시작페이지~끝페이지 -->    <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}">
+                             <c:choose>
+                                <c:when test="${p == paging.nowPage}">
+                                 <li class="page-item active">
+                                    <a class="page-link">${p}</a>
+                                 </li>
+                              </c:when>
+                               <c:when test = "${p != paging.nowPage }">
+                                 <li class="page-item">
+                                         <li class="page-item"><a class="page-link" href="freelancercontent?nowPage=${p}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">${p}</a></li>
+                                 </li>
+                              </c:when>
+                           </c:choose>
+                          </c:forEach>
                          <c:if test ="${paging.nowPage != paging.lastPage}">
-	                        <li class="page-item">
-	                           <!-- <a aria-label="Next" class="page-link" id="goNextPage"  onclick="reviewList(${paging.free_code},${paging.pro_num},${paging.cntPerPage},${paging.nowPage+1});"> -->
-	                           <a class="page-link" href="freelancercontent?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
-	                           <i class="fa fa-angle-right"></i></a>
-	                         </li>  
-	                        <li class="page-item">
-	                           <a aria-label="Last" class="page-link" href="freelancercontent?nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}"><i class="fa fa-angle-double-right"></i></a>
-	                        </li>
+                           <li class="page-item">
+                              <!-- <a aria-label="Next" class="page-link" id="goNextPage"  onclick="reviewList(${paging.free_code},${paging.pro_num},${paging.cntPerPage},${paging.nowPage+1});"> -->
+                              <a class="page-link" href="freelancercontent?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}">
+                              <i class="fa fa-angle-right"></i></a>
+                            </li>  
+                           <li class="page-item">
+                              <a aria-label="Last" class="page-link" href="freelancercontent?nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}&free_code=${paging.free_code}&pro_num=${paging.pro_num}"><i class="fa fa-angle-double-right"></i></a>
+                           </li>
                          </c:if>
                         </ul>
                       </div>
@@ -750,7 +760,7 @@
 					success: function(data){
 						$('#insertwish'+pro_num).remove();
 						$('#zzim'+pro_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pro_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pro_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
-						alert("프리랜서 프로필이 찜목록에 추가되었습니다.")
+						//alert("프리랜서 프로필이 찜목록에 추가되었습니다.")
 					},
 					error: function(data){
 					alert("에러발생");

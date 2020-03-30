@@ -94,12 +94,12 @@ $(document).ready(function() {
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${cor.cor_fname eq ''}">
+								<c:if test="${cor.cor_fname == null}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
-								<c:if test = "${cor.cor_fname ne '' }">
+								<c:if test = "${cor.cor_fname != null}">
 									<div class="profile-pic-img">
 										<!--
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
@@ -224,11 +224,12 @@ $(document).ready(function() {
 														<a href="#" class="badge badge-secondary">거래중</a>
 													</c:if>
 													<c:if test="${BuyList.mbuysell_state==1}">
-														<a href="#" class="badge badge-secondary">거래완료</a>
+														<a href="#" class="badge badge-primary">거래완료</a>
 													</c:if>
 													<c:if test="${BuyList.mbuysell_state==2 }">
-														<a href="#" class="badge badge-secondary">거래취소</a>
+														<a href="#" class="badge badge-warning">거래취소</a>
 													</c:if>
+													
 												</td>
 												<td class="font-weight-semibold fs-16" align="center">
 													${BuyList.mbuysell_date}

@@ -226,10 +226,12 @@ public class CorporationController {
 			corporation.setCor_fname(saveStore(fileName));
 			corporation.setCor_ofname(fileName.getOriginalFilename());
 			service.insert(corporation);
-			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			//return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor";
 		}else {
 			service.insert(corporation);
-			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			//return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor";
 		}
 	}
 	@PostMapping("mydash_cor_update")
@@ -241,7 +243,8 @@ public class CorporationController {
 			corporation.setCor_fname(saveStore(fileName));
 			corporation.setCor_ofname(fileName.getOriginalFilename());
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			//return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor";
 		
 		}else if(fileName.getOriginalFilename() != "" && cor.getCor_fname() != null){
 			String str = cor.getCor_fname();
@@ -249,17 +252,20 @@ public class CorporationController {
 			corporation.setCor_fname(saveStore(fileName));
 			corporation.setCor_ofname(fileName.getOriginalFilename());
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			//return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor";
 		
 	}else if(fileName.getOriginalFilename() == "" && cor.getCor_fname() != null){
 			corporation.setCor_fname(cor.getCor_fname());
 			corporation.setCor_ofname(cor.getCor_ofname());
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			//return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor";
 		
 		}else{
 			service.mydash_cor_update(corporation);
-			return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			//return "redirect:mydash_cor?mem_email="+corporation.getMem_email();
+			return "redirect:mydash_cor";
 		}
 	}
 	

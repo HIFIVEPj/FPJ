@@ -204,21 +204,39 @@
 		</script>
 		<!--Breadcrumb-->
 		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+			<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Page</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active text-white" aria-current="page">My Page</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">마이 페이지</h1>
+								</div>
+							</div>
 						</div>
 					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">My Page</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item">프리랜서</li>
+						<li class="breadcrumb-item active" aria-current="page">마이 페이지</li>
+					</ol>
 				</div>
 			</div>
-		</section>
-		<!--Breadcrumb-->
+		</div>
+		<!--/Breadcrumb-->
 		<!--User Dashboard-->
 		<section class="sptb">
 			<div class="container">
@@ -230,12 +248,12 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${mydash.free_fname eq null}">
+								<c:if test="${mydash.free_fname == null}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
-								<c:if test = "${mydash.free_fname ne null}">
+								<c:if test = "${mydash.free_fname != null}">
 									<div class="avatar-xxl brround" style="margin:0 auto;">
 										<!--
 										<img src="../hifiveImages/free_thumb/${mydash.free_fname}" class="avatar-xxl brround" alt="user">
@@ -257,6 +275,9 @@
 												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
+										<li>
+			                                 <a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+			                              </li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">

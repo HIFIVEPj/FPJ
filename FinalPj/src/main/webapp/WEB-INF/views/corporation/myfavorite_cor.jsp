@@ -61,12 +61,12 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${cor.cor_fname eq ''}">
+								<c:if test="${cor.cor_fname == null}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
-								<c:if test = "${cor.cor_fname ne '' }">
+								<c:if test = "${cor.cor_fname != null}">
 									<div class="profile-pic-img">
 										<!--
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
@@ -223,11 +223,11 @@
 												</td>
 												<td class="font-weight-semibold fs-16"> ${dto.pro_exp}년</td>
 												<td>
-													<c:if test = "${dto.pro_ox eq '가능'}">
-														<a href="#" class="badge badge-primary">${dto.pro_ox}</a>
+													<c:if test = "${dto.pro_ox eq 'on'}">
+														<a href="#" class="badge badge-primary">가능</a>
 													</c:if>
-													<c:if test = "${dto.pro_ox eq '불가능'}">
-														<a href="#" class="badge badge-danger">${dto.pro_ox}</a>
+													<c:if test = "${dto.pro_ox eq 'off'}">
+														<a href="#" class="badge badge-danger">불가능</a>
 													</c:if>	
 												</td>
 												<td>
@@ -264,7 +264,7 @@
 											<c:otherwise>
 											<c:forEach var="dto" items="${freeP}">
 											<c:choose>
-											<c:when test="${dto.pro_ox eq '가능'}">
+											<c:when test="${dto.pro_ox eq 'on'}">
 											<tr>
 												<td>
 													<label class="custom-control custom-checkbox">
@@ -336,11 +336,11 @@
 												</td>
 												<td class="font-weight-semibold fs-16"> ${dto.pro_exp}년</td>
 												<td>
-													<c:if test = "${dto.pro_ox eq '가능'}">
-														<a href="#" class="badge badge-primary">${dto.pro_ox}</a>
+													<c:if test = "${dto.pro_ox eq 'on'}">
+														<a href="#" class="badge badge-primary">가능</a>
 													</c:if>
-													<c:if test = "${dto.pro_ox eq '불가능'}">
-														<a href="#" class="badge badge-danger">${dto.pro_ox}</a>
+													<c:if test = "${dto.pro_ox eq 'off'}">
+														<a href="#" class="badge badge-danger">불가능</a>
 													</c:if>	
 												</td>
 												<td>
@@ -349,7 +349,7 @@
 												</td>
 											</tr>
 											</c:when>
-											<c:when test="${dto.pro_ox ne '불가능' }">
+											<c:when test="${dto.pro_ox ne 'off' }">
 											<tr>
 												<td colspan="6" id="center">
 													업무가능한 프리랜서가 없습니다.

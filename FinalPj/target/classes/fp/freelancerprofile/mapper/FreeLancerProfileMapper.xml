@@ -375,10 +375,9 @@
     </update>
    <!-- 프로필 update -->
     <update id="listUpdate" parameterType="fp.freelancerprofile.domain.FreeLancerProfile"> 
-
       <![CDATA[
       update freelancer_profile set
-         pro_exp=#{pro_exp}, pro_cv=#{pro_cv}
+         pro_exp=#{pro_exp}, pro_cv=#{pro_cv}, type_num=#{type_num}
          , pro_addr=#{pro_addr}, pro_postcode=#{pro_postcode}, pro_detailloc=#{pro_detailloc}
          , pro_edu=#{pro_edu}, pro_start=#{pro_start}, pro_ox=#{pro_ox}, pro_grade=#{pro_grade}
          , pro_place=#{pro_place}, pro_workplace=#{pro_workplace}, profile_sub=#{profile_sub}, profile_date=sysdate

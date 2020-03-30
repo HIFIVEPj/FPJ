@@ -41,7 +41,7 @@
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item active" aria-current="page">회원가입</li>
 					</ol>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 										<div class="card mb-0">
 										<form class="form-group" action="signup.do" method="post" id="membercheck">	
 											<div class="card-header">
-												<h3 class="card-title">가입하기</h3>
+												<h3 class="card-title">회원가입</h3>
 												<input type="hidden" name="class_num" value=2>
 											</div>
 
@@ -158,11 +158,11 @@
 												<div class="form-group" style="font-size:12px; line-height:25px;">
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" id="c_tos">
-														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('customer_service_terms_of_service', '이용약관', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">이용약관</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
 													</label>
 													<label class="custom-control custom-checkbox">
 														<input type="checkbox" class="custom-control-input" id="c_topi">
-														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
+														<span class="custom-control-label text-dark"><a href="javascript:void(window.open('customer_service_terms_of_personal_info', '개인정보 취급방침', 'left='+(screen.availWidth-700)/2+',top='+(screen.availHeight-600)/2+', width=700px,height=600px'))" class="color-hover-sign"><span style="text-decoration:underline;">개인정보 취급방침</span></a>에 동의합니다.</span>&nbsp;<span style="color:red;">(필수)</span>
 													</label>
 												</div>
 												<div class="form-footer mt-2">

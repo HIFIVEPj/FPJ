@@ -62,12 +62,12 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${cor.cor_fname eq ''}">
+								<c:if test="${cor.cor_fname == null}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
-								<c:if test = "${cor.cor_fname ne '' }">
+								<c:if test = "${cor.cor_fname != null}">
 									<div class="profile-pic-img">
 										<!--
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
@@ -194,11 +194,24 @@
 															<fmt:formatNumber value="${pickList.market.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span>
 														</td> 
 
-														<c:if test="${pickList.market.market_state==1}" >
-															<td align="center">
-																<a href="#" class="badge badge-warning">판매중</a>
-															</td>
+														<c:if test="${pickList.market.market_state==1}">
+														   <td align="center">
+														      <a href="javascript:void(0);" class="badge badge-primary">판매중</a>
+														   </td>
 														</c:if>
+														<c:if test="${pickList.market..market_state==0}">
+														   <td align="center">
+														      <a href="javascript:void(0);" class="badge badge-warning">검토중</a>
+														   </td>
+														</c:if>
+														<c:if test="${pickList.market..market_state==2}">
+														   <td align="center">
+														      <a href="javascript:void(0);" class="badge badge-secondary">거절됨</a>
+														   </td>
+														</c:if>
+														
+														
+														
 														<td align="center">
 															<a href="deleteMarketPick?marketP_num=${pickList.marketP_num}" class="btn btn-info btn-sm text-white" data-toggle="tooltip" data-original-title="삭제하기"><i class="fa fa-trash"></i></a>
 															<a href="javascript:void(0);" onclick="paymentFormSubmit('${pickList.market.market_sub}',${pickList.market.market_num},'${sessionScope.email}',${pickList.market.market_price});" class="btn btn-primary btn-sm text-white" data-toggle="tooltip" data-original-title="구매하기"><i class="fa fa-shopping-cart"></i></a>

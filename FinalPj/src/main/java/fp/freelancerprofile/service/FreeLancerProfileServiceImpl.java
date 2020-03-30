@@ -104,7 +104,6 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Transactional
 	public void listUpdate(FreeLancerProfile freelancerprofile){
 		mapper.listUpdate(freelancerprofile);
-		mapper.typeUpdate(freelancerprofile.getType_num());
 	  //  mapper.keyUpdate(map);
 	}
 

@@ -60,17 +60,20 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${free.free_fname eq null}">
+								<c:if test="${freelancer.free_fname == null}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
-								<c:if test = "${free.free_fname ne null}">
+								<c:if test = "${freelancer.free_fname != null}">
 									<div class="profile-pic-img">
+										<!--
 										<img src="../hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
+										-->
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${freelancer.free_fname}" class ="brround avatar-xxl" alt="user">
 									</div>
 								</c:if>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
+									<a href="mydash_free" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
 							<aside class="doc-sidebar my-dash">

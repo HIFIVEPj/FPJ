@@ -32,7 +32,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">프로필</h4>
+					<h4 class="page-title">Profile</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item">프리랜서</li>
@@ -79,6 +79,9 @@
 												<li><a class="slide-item" href="freelancerProfile_list?mem_email=${sessionScope.email}">프리랜서 프로필</a></li>
 											</ul>
 										</li>
+										<li>
+			                                 <a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+			                              </li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
@@ -195,43 +198,47 @@
 															</span>
 														</p><br/>
 														<h4 class="pb-3 border-bottom mt-5">프로젝트</h4>
-															<div class="table-responsive">
-																<table class="table table-bordered border-top mb-0">
-																
-																<c:if test="${empty checkProject}">
-																	수행한 프로젝트가 없습니다.
-																</c:if>
-																
-																<c:forEach items="${checkProject}" var="content"  varStatus="status">
-																	<c:forEach items="${content.frProject}" var="project"  varStatus="status">
-																		<c:if test="${project.pj_num ne null}">
-																			<thead>
-																				<tr>
-																					<th class="pb-3 border-bottom mt-4"><h4>수행한 프로젝트</h4></th>
-																					<th>사용언어  & 주요기술</th>
-																				</tr>
-																			</thead>
-																				<tbody>	
-																					<td scope="row"><b>${project.pj_sub}</b><br/>
-																						<c:forEach items="${content.applied_project}" var="apply"  varStatus="status">
-																							<span>${apply.appp_date}</span>
-																						</c:forEach>	
-																					</td>
-																					<c:if test="${project.pj_sub ne null}">
-																						<td scope="row">
-																							<c:forEach items="${getProject}" var="content"  varStatus="status">
-																								<c:forEach items="${content.frKeyWord}" var="key"  varStatus="status" >
-																									${key.key_name}
-																								</c:forEach>
-																							</c:forEach>
-																						</td>
-																					</c:if>		
-																				</c:if>	
-																		</c:forEach>
-																	</c:forEach>		
-																</tbody>	
-															</table>
-														</div>
+                                             <div class="table-responsive">
+                                                <table class="table table-bordered border-top mb-0">
+                                                   <c:if test="${empty checkProject}">
+                                                      수행한 프로젝트가 없습니다.
+                                                   </c:if>
+                                                   <c:if test="${!empty checkProject}">
+                                                <tr>
+                                                   <th>수행한 프로젝트</th>
+                                                   <th>사용언어  & 주요기술</th>
+                                                </tr>
+                                                <c:forEach items="${checkProject}" var="content"  varStatus="status">
+                                                   <c:forEach items="${content.frProject}" var="project"  varStatus="status">
+                                                      <tr>
+                                                         <c:if test="${project.pj_num ne null}">
+                                                      </tr>
+                                                   <tbody>   
+                                                      <td scope="row"><b>${project.pj_sub}</b><br/>
+                                                         <c:forEach items="${content.applied_project}" var="date"  varStatus="status">
+                                                            <small>${date.appp_date}</small>
+                                                         </c:forEach>
+                                                      </td>
+                                                         <c:if test="${project.pj_sub ne null}">
+                                                            <td scope="row">
+                                                               <c:forEach items="${getProject}" var="content_p"  varStatus="status">
+                                                                  <c:if test="${project.pj_num eq content_p.pj_num}">
+                                                                     <c:forEach items="${content_p.frKeyWord}" var="key"  varStatus="status" >
+                                                                        ${key.key_name}
+                                                                     </c:forEach>
+                                                                  </c:if>
+                                                               </c:forEach>
+                                                             </td>
+                                                         </c:if>      
+                                                      </c:if>   
+                                                   </td>
+                                                   </c:forEach>
+                                                </c:forEach>
+                                                </c:if>   
+                                             </tbody>   
+                                          </table>
+                                       </div>
+
 													</div>
 												</div>
 											</div>

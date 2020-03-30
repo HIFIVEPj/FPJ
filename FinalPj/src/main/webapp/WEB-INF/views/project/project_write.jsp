@@ -1165,7 +1165,7 @@
 										<div class="col-sm-6 col-md-6">
 											<div class="form-group ">
 												<label class="form-label"><b>프로젝트 기간</b><span style="color:red;">*</span></label>
-												<input type="text" class="form-control" placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3" name="pj_term" numberOnly>
+												<input type="text" class="form-control" placeholder="개월 수와 주 수를 입력하세요. ex) 3개월 3주 -> 3.3" name="pj_term">
 											</div>	
 										</div>
 										<div class="col-sm-6 col-md-6">
