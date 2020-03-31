@@ -132,7 +132,7 @@
 					</div> -->
 					<ul class="side-menu">
 							<li>	
-                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon si si-chart"></i><span class="side-menu__label">통계</span></a>
+                                 <a class="side-menu__item" href="admin"><i class="side-menu__icon si si-chart"></i><span class="side-menu__label">통계/결재목록</span></a>
                             </li>
                             
 						    <li>	
@@ -171,7 +171,7 @@
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						<div class="page-header">
-							 <h4 class="page-title">통계</h4>
+							 <h4 class="page-title">통계/결재목록</h4>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
 								<li class="breadcrumb-item active" aria-current="page">관리자페이지</li>
@@ -185,7 +185,7 @@
 										<div class="mb-3">
 											<i class="pe-7s-users fs-40 text-primary"></i>
 										</div>
-										<h5>Total Users</h5>
+										<h5>총 회원수</h5>
 										<h2 class="counter mb-0">${totalCount}</h2>
 									</div>
 								</div>
@@ -196,8 +196,8 @@
 										<div class="mb-3">
 											<i class="pe-7s-refresh-2 fs-40 text-primary"></i>
 										</div>
-										<h5>Total Updates</h5>
-										<h2 class="counter mb-0">${totalCount}</h2>
+										<h5>Today 마켓수</h5>
+										<h2 class="counter mb-0">${getMarketCountSys}</h2>
 									</div>
 								</div>
 							</div>
@@ -205,10 +205,10 @@
 								<div class="card">
 									<div class="card-body text-center">
 										<div class="mb-3">
-											<i class="pe-7s-mail fs-40 text-primary"></i>
+											<i class="pe-7s-refresh-2 fs-40 text-primary"></i>
 										</div>
-										<h5>Total E-mail</h5>
-										<h2 class="counter mb-0">276</h2>
+										<h5>Today 프로젝트수</h5>
+										<h2 class="counter mb-0">${getProjectCountSys}</h2>
 									</div>
 								</div>
 							</div>
@@ -218,8 +218,8 @@
 										<div class="mb-3">
 											<i class="pe-7s-photo-gallery fs-40 text-primary"></i>
 										</div>
-										<h5>Total Posts</h5>
-										<h2 class="counter mb-0">9,035</h2>
+										<h5>미승인건</h5>
+										<h2 class="counter mb-0">${getMarketListState}</h2>
 									</div>
 								</div>
 							</div>
@@ -264,17 +264,16 @@
 							<div class="col-md-12">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">마켓 승인 List</h3>
+										<h3 class="card-title">마켓게시글 목록</h3>
 									</div>
 								<form id="marketA" name="marketA" action="updateMarketState.do" method="post">	
 									<div class="card-body">
 										<div class="table-responsive border-top userprof-tab">
 											<table class="table table-bordered table-hover mb-0">
 												<thead>
-													<tr>
-														<th></th>
+													<tr>														
 														<th>제목</th>
-														<th>이메일</th>
+														<th>글쓴날짜</th>
 														<th>가격</th>
 														<th>결제상태</th>
 														<th>Action</th>
@@ -284,17 +283,14 @@
 												<c:forEach var="dto" items="${list}">
 													<tr>
 														<td>
-															<label class="custom-control custom-checkbox">
-																<input type="checkbox" class="custom-control-input" name="checkbox" value="checkbox">
-																<span class="custom-control-label"></span>
-															</label>
-														</td>
-														<td>
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
 																	<a href="#"></a>
-																	<img src="../images/products/f1.png" alt="img">
-																</div>
+																	
+																	<img src="../hifiveImages/marketThumbnails/${market.market_fname}" class="icon-left" alt="" id="prev-img">
+																	
+																	<!--<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${dto.market_fname}" class="icon-left" alt="" id="prev-img">
+																--></div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
 																		<a href="market-content?market_num=${dto.market_num}" class="text-dark"><h4 class="font-weight-semibold">${dto.market_sub}</h4></a>
@@ -303,7 +299,7 @@
 																</div>
 															</div>
 														</td>
-														<td>Restaurant</td>														
+														<td><fmt:formatDate value="${dto.market_rdate}" pattern="yyyy-MM-dd HH:mm:ss" /></td> 														
 														<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.market_price}" pattern="#,###,###,###" /></td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
@@ -319,10 +315,9 @@
 														</td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
-																<button type="button" id="admitBtn" class="btn btn-primary btn-sm admitBtn" ><i class="fa fa-check"></i>승인하기</button>															
-																<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm refuseBtn"><i class="fa fa-close"></i>거절하기</button>
-																<input type="hidden" id="market_state" name="market_state" value="">
-																<input type="hidden" id="market_num" name="market_num" value="${dto.market_num}">
+															<a href="updateMarketState.do?market_num=${dto.market_num}&market_state=1" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</a>
+															<a href="updateMarketState.do?market_num=${dto.market_num}&market_state=2" id="refuseBtn" class="btn btn-secondary btn-sm" ><i class="fa fa-close"></i>거절하기</a>         
+															                                                
 															</c:if>						
 															<c:if test="${dto.market_state eq 1}">
 																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>
@@ -394,7 +389,8 @@
 		</div>
 
 		<!-- Back to top -->
-		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>
+		<!-- <a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>
+			 -->
 
 
 		<!-- Dashboard Core -->

@@ -32,11 +32,11 @@ public interface FreeLancerProfileMapper {
 	
 	//게시물 총 갯수
 	public long countProfileList(long free_code);
-	
+
 	
 	//페이징처리 게시글 조회
 	public List<FreeLancerProfile> selectPageList(Map<String, Object> map);
-	public List<FreeLancerProfileFile> selectFilename();
+	public FreeLancerProfile selectProflie();
 
 	//프로필 작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
@@ -45,7 +45,7 @@ public interface FreeLancerProfileMapper {
 	
 	//프로필 작성페이지 수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
-	public void typeUpdate(int type_num);
+	
 	//public void keyUpdate(Map<String, Object> map);
 	public void keyUpdate(FreePickKeyWord freepickkeyword);
 	//public void keyDelete(Map<String, Object> map);

@@ -19,10 +19,10 @@
 							<div class="col-lg-4 col-md-12 text-center">
 								<h6>서비스</h6>
 								<ul class="list-unstyled mb-0">
-									<li><a href="#">프로젝트</a></li>
-									<li><a href="#">프리마켓</a></li>
-									<li><a href="#">프리랜서</a></li>
-									<li><a href="#">고객센터</a></li>
+									<li><a href="project_list">프로젝트</a></li>
+									<li><a href="market-list">프리마켓</a></li>
+									<li><a href="freelancerList">프리랜서</a></li>
+									<li><a href="customer_service_intro">고객센터</a></li>
 								</ul>
 							</div>
 							<div class="col-lg-4 col-md-12">
@@ -43,7 +43,7 @@
 					<div class="container">
 						<div class="row d-flex">
 							<div class="col-lg-12 col-sm-12  mt-2 mb-2 text-center ">
-								Copyright © 2019 <a href="#">Pinlist</a>. Designed by <a href="#">Spruko</a> All rights reserved.
+								Copyright © 2019 <a href="javasript:void(0)">Pinlist</a>. Designed by <a href="javasript:void(0)">Spruko</a> All rights reserved.
 							</div>
 						</div>
 					</div>

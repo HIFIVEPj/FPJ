@@ -122,7 +122,7 @@
 					
 					
 					<div class="card-footer ">
-						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#smallModal1">Submit Now</button>
+					   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#smallModal1">완료</button>
 					</div>
 				</div>
 			</form>	

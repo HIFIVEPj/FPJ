@@ -30,7 +30,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">공지사항</h4>
+					<h4 class="page-title">Notice</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item">고객센터</li>
@@ -77,7 +77,7 @@
 								</table>
 								
 								<br/>
-									<c:if test="${sessionScope.class_num==1}">
+									<c:if test="${sessionScope.class_num eq 1}">
 									<div class="text-right">
 										<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
 									</div>

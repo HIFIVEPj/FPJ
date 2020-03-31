@@ -49,8 +49,12 @@ $(document).ready(function() {
 				<div class="header-text1 mb-0">
 					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">로그인</h1>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">로그인</h1>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
@@ -68,7 +72,7 @@ $(document).ready(function() {
 					<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item active" aria-current="page">로그인</li>
 					</ol>
 				</div>
 			</div>
@@ -109,13 +113,14 @@ $(document).ready(function() {
 														</a>
 														<a href="${kakao_url}" class="btn btn-block btn-kakao">Kakao</a>
 													</div>
-													
+													<!--
 													<div class="btn-group btn-block mt-2 mb-2">
 														<a href="${google_url}" class="btn btn-google active">
 															<span class="fa fa-google"></span>
 														</a>
 														<a href="${google_url}" class="btn btn-block btn-google">Google</a>
 													</div>
+													-->
 												</div>
 												<hr class="divider">
 												<form class="form-group" action="/login_check" method="post">

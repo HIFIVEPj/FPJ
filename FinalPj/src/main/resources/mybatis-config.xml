@@ -4,10 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
 <configuration>
-	<typeAliases>
-
-		<!-- 세영 -->
-		<typeAlias alias="Market" type="fp.market.domain.Market"/>
+   <typeAliases>
+      <!-- 승훈 -->
+      <typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
+      <typeAlias alias="CustomerServiceQa" type="fp.customer_service.domain.CustomerServiceQa"/>
+      <typeAlias alias="CustomerServiceFaq" type="fp.customer_service.domain.CustomerServiceFaq"/>
+      <typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
+        <typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
+        <typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
+        <typeAlias alias="ReplyPageDTO" type="fp.customer_service.domain.ReplyPageDTO"/>
+        <typeAlias alias="AttachFileDTO" type="fp.customer_service.domain.AttachFileDTO"/>
+        <typeAlias alias="BoardAttachVO" type="fp.customer_service.domain.BoardAttachVO"/>
+        <typeAlias alias="Qa_recommend" type="fp.customer_service.domain.Qa_recommend"/>
+        <typeAlias alias="Notice_recommend" type="fp.customer_service.domain.Notice_recommend"/>
+      
+      
+      <!-- 세영 -->
+      <typeAlias alias="Market" type="fp.market.domain.Market"/>
         <typeAlias alias="MarketRev" type="fp.market.domain.MarketRev"/>
         <typeAlias alias="MarketRevComm" type="fp.market.domain.MarketRevComm"/>
         <typeAlias alias="MarketQA" type="fp.market.domain.MarketQA"/>
@@ -21,73 +34,50 @@
         <typeAlias alias="mMember" type="fp.market.domain.Member"/>
         <typeAlias alias="MarketQAFile" type="fp.market.domain.MarketQAFile"/>
         <typeAlias alias="MarketPayment" type="fp.market.domain.MarketPayment"/>
-     	<typeAlias alias="MarketPick" type="fp.market.domain.MarketPick"/>
-     	<typeAlias alias="MarketBuysellList" type="fp.market.domain.MarketBuysellList"/>
+        <typeAlias alias="MarketPick" type="fp.market.domain.MarketPick"/>
+        <typeAlias alias="MarketBuysellList" type="fp.market.domain.MarketBuysellList"/>
 
-
-
-<!-- 승훈 -->
-		<typeAlias alias="CustomerServiceNotice" type="fp.customer_service.domain.CustomerServiceNotice"/>
-		<typeAlias alias="CustomerServiceQa" type="fp.customer_service.domain.CustomerServiceQa"/>
-		<typeAlias alias="CustomerServiceFaq" type="fp.customer_service.domain.CustomerServiceFaq"/>
-		<typeAlias alias="cri" type="fp.customer_service.domain.Criteria"/>
-	  	<typeAlias alias="page" type="fp.customer_service.domain.PagingInfo"/>
-	  	<typeAlias alias="ReplyVO" type="fp.customer_service.domain.ReplyVO"/>
-	  	<typeAlias alias="ReplyPageDTO" type="fp.customer_service.domain.ReplyPageDTO"/>
-	  	<typeAlias alias="AttachFileDTO" type="fp.customer_service.domain.AttachFileDTO"/>
-	  	<typeAlias alias="BoardAttachVO" type="fp.customer_service.domain.BoardAttachVO"/>
-	  	<typeAlias alias="Qa_recommend" type="fp.customer_service.domain.Qa_recommend"/>
-	  	<typeAlias alias="Notice_recommend" type="fp.customer_service.domain.Notice_recommend"/>
-		<!--
-		<typeAlias alias="CustomerServicePagingVO" type="fp.customer_service.domain.CustomerServicePagingVO"/>
-		-->
-		
-		<!-- 별 -->
-		<typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
-      	<typeAlias alias="frType" type="fp.freelancerprofile.domain.Type"/>
-      	<typeAlias alias="FreePick" type="fp.freelancerprofile.domain.FreePickKeyWord"/>
-      	<typeAlias alias="FreeLancerProfile" type="fp.freelancerprofile.domain.FreeLancerProfile"/>   
+      
+      <!-- 별 -->
+      <typeAlias alias="Freelancer" type="fp.freelancerprofile.domain.FreeLancer"/>
+         <typeAlias alias="frType" type="fp.freelancerprofile.domain.Type"/>
+         <typeAlias alias="FreePick" type="fp.freelancerprofile.domain.FreePickKeyWord"/>
+         <typeAlias alias="FreeLancerProfile" type="fp.freelancerprofile.domain.FreeLancerProfile"/>   
         <typeAlias alias="FreeLancerProfilefile" type="fp.freelancerprofile.domain.FreeLancerProfileFile"/>
         <typeAlias alias="FreeLancerProfileListVO" type="fp.freelancerprofile.domain.FreeLancerProfileListVO"/>
         <typeAlias alias="PagingVO" type="fp.freelancerprofile.domain.PagingVO"/>
 
         <typeAlias alias="frKeyWord" type="fp.freelancerprofile.domain.KeyWord"/>
-       	<typeAlias alias="frProject" type="fp.freelancerprofile.domain.Project"/>
-       	<typeAlias alias="freePickKeyWord" type="fp.freelancerprofile.domain.FreePickKeyWord"/> 
-       	 <typeAlias alias="List_FreeLancerReview" type="fp.freelancerprofile.domain.List_FreeLancerReview"/>
-       	<!-- 프리랜서 리스트 페이지 -->
- 	    <typeAlias alias="FreeLancerListVO" type="fp.freelancerlist.domain.FreeLancerListVO"/>
-	    <typeAlias alias="List_FreeLancer" type="fp.freelancerlist.domain.List_FreeLancer"/>
-	    <typeAlias alias="List_FreeLancerProfile" type="fp.freelancerlist.domain.List_FreeLancerProfile"/>
-	 <!--   <typeAlias alias="List_FreeLancerReview" type="fp.freelancerlist.domain.List_FreeLancerReview"/> -->
-	    <typeAlias alias="List_PagingVO" type="fp.freelancerlist.domain.List_PagingVO"/>
-	    <typeAlias alias="List_Project" type="fp.freelancerlist.domain.List_Project"/>
-	    <typeAlias alias="List_Type" type="fp.freelancerlist.domain.List_Type"/>  
-	    <typeAlias alias="Freelancer_FreeLancerProfile" type="fp.freelancerprofile.domain.Freelancer_FreeLancerProfile"/>  
+          <typeAlias alias="frProject" type="fp.freelancerprofile.domain.Project"/>
+          <typeAlias alias="freePickKeyWord" type="fp.freelancerprofile.domain.FreePickKeyWord"/> 
+           <typeAlias alias="List_FreeLancerReview" type="fp.freelancerprofile.domain.List_FreeLancerReview"/>
+          <!-- 프리랜서 리스트 페이지 -->
+        <typeAlias alias="FreeLancerListVO" type="fp.freelancerlist.domain.FreeLancerListVO"/>
+       <typeAlias alias="List_FreeLancer" type="fp.freelancerlist.domain.List_FreeLancer"/>
+       <typeAlias alias="List_FreeLancerProfile" type="fp.freelancerlist.domain.List_FreeLancerProfile"/>
+    <!--   <typeAlias alias="List_FreeLancerReview" type="fp.freelancerlist.domain.List_FreeLancerReview"/> -->
+       <typeAlias alias="List_PagingVO" type="fp.freelancerlist.domain.List_PagingVO"/>
+       <typeAlias alias="List_Project" type="fp.freelancerlist.domain.List_Project"/>
+       <typeAlias alias="List_Type" type="fp.freelancerlist.domain.List_Type"/>  
+       <typeAlias alias="Freelancer_FreeLancerProfile" type="fp.freelancerprofile.domain.Freelancer_FreeLancerProfile"/>  
         <typeAlias alias="Applied_Project" type="fp.freelancerprofile.domain.Applied_Project"/> 
-   	    <typeAlias alias="Pj_Pick_Keyword" type="fp.freelancerprofile.domain.Pj_Pick_Keyword"/> 
-	   
-		
-		<!-- 나영 -->
-		<typeAlias alias="corProject" type="fp.corporation.domain.Project" />
+          <typeAlias alias="Pj_Pick_Keyword" type="fp.freelancerprofile.domain.Pj_Pick_Keyword"/> 
+      
+      
+      <!-- 나영 -->
+      <typeAlias alias="corProject" type="fp.corporation.domain.Project" />
         <typeAlias alias="corKeyword" type="fp.corporation.domain.Keyword" />
         <typeAlias  alias="PjPickKeyword" type="fp.corporation.domain.PjPickKeyword"/>
         <typeAlias alias="corType" type="fp.corporation.domain.Type" />   
         <typeAlias  alias="Corporation" type="fp.corporation.domain.Corporation"/>   
-		
+      
         <typeAlias alias="ProjectVo" type="fp.corporation.vo.ProjectVo" />
         <typeAlias alias="ProjectKeyNameVo" type="fp.corporation.vo.ProjectKeyNameVo"/>
-			   
-			<!-- 소담 -->
+            
+         <!-- 소담 -->
+         <typeAlias alias="Member" type="fp.member.domain.Member"/>       
+         <typeAlias alias="MemberVo" type="fp.member.domain.MemberVo"/>
+         <typeAlias alias="PayInformation" type="fp.member.domain.PayInformation"/>
+   </typeAliases>
 
-   	   <typeAlias alias="Member" type="fp.member.domain.Member"/>   	 
-   	   <typeAlias alias="MemberVo" type="fp.member.domain.MemberVo"/>
-   	   <typeAlias alias="PayInformation" type="fp.member.domain.PayInformation"/>
-	</typeAliases>
-
-<!--
-	<mappers>
-    	<mapper resource="fp/customer_service/mapper/CustomerServiceNotice.xml"/>
-	</mappers>
---> 
 </configuration>

@@ -31,7 +31,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">문의하기</h4>
+					<h4 class="page-title">Q&A</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item">고객센터</li>
@@ -78,13 +78,13 @@
 								
 							</div>
 							
-
 							<div class="card-header">
 								<!--
 								<div class="item7-card-desc d-flex mb-2 mt-2">
 									<a href="#"><i class="fa fa-paperclip text-muted mr-2"></i>abc.txt</a>	
 								</div>
 								-->								
+
 								
 								<div class='bigPictureWrapper'>
 								  <div class='bigPicture'>
@@ -150,9 +150,8 @@
 									
 									</ul>
 								</div>
-
+							
 							</div>
-
 
 							<div class="card-body text-justify">	
 								<p>${qa_content.qa_cont}</p>
@@ -313,12 +312,12 @@
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+"); javascript:removeTooltip();' id='del_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
-										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
+										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+");' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
 										//alert("qa_recommnum add after: " + qa_recommnum);
 										//$('#insert_recomm'+qa_num).tooltip('destroy');
 									},
 									error: function(data){
-										alert("실패1");
+										//alert("실패1");
 									}
 								});
 								//alert("qa_recommnum add last: " + qa_recommnum);
@@ -350,12 +349,12 @@
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+"); javascript:removeTooltip();' id='insert_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
-										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+");' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//alert("qa_recommnum del after: " + qa_recommnum);
 										//$('#del_recomm'+qa_num).tooltip('destroy');
 									},
 									error: function(data){
-										alert("실패2");
+										//alert("실패2");
 									}
 								});
 								//alert("qa_recommnum del last: " + qa_recommnum);
@@ -373,10 +372,10 @@
 							<div class="card" style="margin-bottom: 0rem; border:0;">
 								<div class="media mt-0 p-5">											
 		                        	<div class="d-flex mr-3">
-		                        		<c:if test="${qa_content.class_num == 1}">
+		                        		<c:if test="${qa_content.class_num eq 1}">
 		                            		<a href='#'><img src='../images/hifive.png' alt='X' class='media-object brround'> </a>                           		
 		                            	</c:if>	
-		                        		<c:if test="${qa_content.class_num == 2 or qa_content.class_num == 3}">
+		                        		<c:if test="${qa_content.class_num eq 2 or qa_content.class_num eq 3}">
 		                        			<c:choose>
 			                            		<c:when test="${qa_content.free_fname ne null}">
 			                            			
@@ -391,7 +390,7 @@
 												</c:otherwise>
 											</c:choose>                           		
 		                            	</c:if>
-		                            	<c:if test="${qa_content.class_num == 4}">
+		                            	<c:if test="${qa_content.class_num eq 4}">
 		                            		<c:choose>
 			                            		<c:when test="${qa_content.cor_fname ne null}">
 			                            			
@@ -431,11 +430,11 @@
 										</div>									
 										-->
 										
-										<c:if test="${qa_content.class_num == 1}">
+										<c:if test="${qa_content.class_num eq 1}">
 											<small class="text-muted"><i class="si si-briefcase"></i> 하이파이브</small>&nbsp;&nbsp;
 										</c:if>
 										
-										<c:if test="${qa_content.class_num == 2 or qa_content.class_num == 3}">
+										<c:if test="${qa_content.class_num eq 2 or qa_content.class_num eq 3}">
 											<c:choose>
 												<c:when test="${qa_content.type_name ne null and qa_content.type_name ne null}">
 													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.type_name}  |<i class=" ml-1 fa fa-clock-o"></i>&nbsp;경력 ${qa_content.pro_exp}년</small>&nbsp;&nbsp;
@@ -452,7 +451,7 @@
 											</c:choose>
 										</c:if>
 										
-										<c:if test="${qa_content.class_num == 4}">
+										<c:if test="${qa_content.class_num eq 4}">
 											<c:choose>
 												<c:when test="${qa_content.cor_name ne null and qa_content.cor_type ne null}">
 													<small class="text-muted"><i class="si si-briefcase"></i> ${qa_content.cor_name}  |<i class=" ml-1 si si-settings"></i>&nbsp;${qa_content.cor_type}</small>&nbsp;&nbsp;
@@ -468,7 +467,7 @@
 												</c:otherwise>	
 											</c:choose>
 										</c:if>
-										<c:if test="${qa_content.class_num == 3}">
+										<c:if test="${qa_content.class_num eq 3}">
 											<c:choose>
 												<c:when test="${qa_content.profile_choice == 1}">
 													<a href="freelancercontent?free_code=${qa_content.free_code}&pro_num=${qa_content.pro_num}" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-drivers-license-o"></i>&nbsp;프로필</span></a>
@@ -697,7 +696,7 @@
 									
 										<c:choose>
 											<c:when test="${qa_prev != 0}">
-												<a href="customer_service_qa_content?qa_num=${qa_prev}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
+												<a href="customer_service_qa_content?qa_num=${qa_prev}&mem_email=${qa_content.mem_email}&qa_cate=${qa_content.qa_cate}" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
 											</c:when>
 											<c:otherwise>
 												<a href="javasript:void(0)" onclick="javascript:noQa()" class="btn btn-primary waves-effect waves-light"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;이전</a>
@@ -705,7 +704,7 @@
 										</c:choose>
 										<c:choose>	
 											<c:when test="${qa_next != 0}">
-												<a href="customer_service_qa_content?qa_num=${qa_next}" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
+												<a href="customer_service_qa_content?qa_num=${qa_next}&mem_email=${qa_content.mem_email}&qa_cate=${qa_content.qa_cate}" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
 											</c:when>
 											<c:otherwise>
 												<a href="javasript:void(0)" onclick="javascript:noQa()" class="btn btn-primary waves-effect waves-light">다음&nbsp;<i class="fa fa-arrow-circle-o-right"></i></a>
@@ -715,7 +714,7 @@
 										<!--
 										<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 										-->
-										<c:if test="${sessionScope.email == qa_content.mem_email}">
+										<c:if test="${sessionScope.email eq qa_content.mem_email}">
 											<!--
 											<input type="hidden" name="mem_email" value="${sessionScope.email}">
 											-->
@@ -1273,14 +1272,14 @@
 			       }else if(list[i].class_num == 2 || list[i].class_num == 3){
 			       		if(list[i].free_fname != null){
 			       str +="			<a href='#'><img src='../hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
-			       //str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+			      // str +="		<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
 			       		}else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";		
 			       		}    	
 			       }else if(list[i].class_num == 4){
 			    	    if(list[i].cor_fname != null){
 			       str +="			<a href='#'><img src='../hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
-			       //str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+			       // str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
 			    	    }else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";    	
 			    	    }
@@ -1650,5 +1649,4 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
->>>>>>> edfd16f0b211aec99f076bec4d16ce919e5884bf
 <!--/footer-->

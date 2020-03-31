@@ -82,20 +82,21 @@ public class AdminController {
 	}
 	
 	@RequestMapping("updateMarketState.do")
-	public String upMarketS(Market market,@RequestParam long market_num) {
-		log.info("market_num : " + market_num);
-		Map<String,Object> map = new HashMap<String, Object>();	
-		map.put("market_num",market_num);
-		int market_state=market.getMarket_state();
-		log.info("market_state : " + market_state);
-		
-		map.put("market_state",market_state);
-		service.upMarketS(map);
-		
-		
-		return "redirect:admin";
-		
-	}
+	   public String upMarketS(Market market,@RequestParam long market_num, @RequestParam int market_state) {
+	      log.info("market_num : " + market_num);
+	      Map<String,Object> map = new HashMap<String, Object>();   
+	      map.put("market_num",market_num);
+	      //int market_state=market.getMarket_state();
+	      log.info("market_state : " + market_state);
+	      
+	      map.put("market_state",market_state);
+	      service.upMarketS(map);
+	      
+	      
+	      return "redirect:admin";
+	      
+	   }
+
 	@RequestMapping("admin_member")
 	public ModelAndView member_list(
 			@RequestParam (required = false)String class_num ,

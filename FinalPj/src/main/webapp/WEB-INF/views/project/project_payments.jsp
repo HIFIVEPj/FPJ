@@ -60,10 +60,21 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
+								<c:if test="${corInfo.cor_fname == null}">
 									<div class="profile-pic-img">
-										<img src="../hifiveImages/cor_thumb/${corInfo.cor_fname}" class="brround" alt="${corInfo.cor_fname}">
+										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
-									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
+								</c:if>
+								<c:if test = "${corInfo.cor_fname != null}">
+									<div class="profile-pic-img">
+										
+										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
+									<!--	
+										<img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${corInfo.cor_fname}" class="brround" alt="user">
+									-->
+									</div>
+								</c:if>
+									<a href="#" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
 							</div>
 							<aside class="doc-sidebar my-dash">
@@ -104,8 +115,9 @@
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card">
 								<div class="card-header">
-								<div class="card-title" style="font-size: 18pt"><strong>프로젝트 등록</strong></div>				
-						</div>	
+									<div class="card-title" style="font-size: 18pt"><strong>프로젝트 등록</strong>
+									</div>				
+								</div>	
 							<div class="card-body">
 								<div class="card-pay">
 							<!-- 	<ul class="tabs-menu nav">
@@ -157,7 +169,11 @@
 											<h4 class="card-header"><strong>등급할인</strong></h4>
 											<br/>
 											<span class="text-dark" style="margin-right:10px;"><strong>등급</strong></span>
-											<span>${corInfo.cor_level}</span><br/><br/>
+											<span>
+				                                 <c:if test="${corInfo.cor_level==0}"><img src="../images/photos/bronze100.png" alt="브"  width="2%">&nbsp; <b>Bronze</b></c:if>
+				                                 <c:if test="${corInfo.cor_level==1}"><img src="../images/photos/silver100.png" alt="실" width="2%"> &nbsp; <b>Silver</b></c:if>
+				                                 <c:if test="${corInfo.cor_level==2}"><img src="../images/photos/gold100.png" alt="골"  width="2%">&nbsp; <b>Gold</b></c:if>
+				                            </span><br/><br/>
 											<span class="text-dark" style="margin-right:10px;"><strong>프로젝트 등록금액</strong></span>
 											<span><strong><fmt:formatNumber value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)}" pattern="#,###,###,###" />원</strong></span>
 											
@@ -228,8 +244,8 @@
 									</div>
 								</div>
 							</div>
-						</div>
-
+						</div></div></div></div></section>
+						
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 function requestPay() {

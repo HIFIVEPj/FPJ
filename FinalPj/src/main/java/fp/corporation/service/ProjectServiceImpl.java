@@ -133,12 +133,20 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	//프로젝트지원
-	@Override
-	@Transactional
-	public void applied_pj(Map<String, Object>map) {
-		mapper.applied_pj(map);
-		pjpick_del(map);
-	}
+	   @Override
+	   @Transactional
+	   public void applied_pj(Map<String, Object>map) {
+	      mapper.applied_pj(map);
+	      List<Long> pjNumLong = new ArrayList<Long>();
+	      
+	      List<ProjectPick>list = mapper.pjpick_list((long)map.get("free_code"));
+	      for(int i=0; i<list.size(); i++) {
+	         pjNumLong.add(list.get(i).getPj_num());
+	      }
+	      if(pjNumLong.contains((long)map.get("pro_num"))) {
+	         pjpick_del(map);
+	      }
+	   }
 	@Override
 	public AppliedProject select_applied_pj(Map<String, Object>map) {
 		return mapper.select_applied_pj(map);

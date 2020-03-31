@@ -28,7 +28,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">문의하기</h4>
+					<h4 class="page-title">Q&A</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item">고객센터</li>
@@ -257,7 +257,7 @@
 									      dataType:'text',
 									      type: 'POST',
 									        success: function(result){
-									           alert(result);
+									           //alert(result);
 									           
 									           targetLi.remove();
 									         }

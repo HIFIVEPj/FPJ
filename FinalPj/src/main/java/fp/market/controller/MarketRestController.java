@@ -391,24 +391,30 @@ boolean sub= false;
 			return list;
 		}
 		
-	@GetMapping("marketQAFile_show")
-	public HashMap<String, Object> marketQAFile_show(@RequestParam(value="marketQA_num") String marketQA_num,
-												@RequestParam(value="market_num") String market_num){
-			log.info("11111111@@@@@@@@@@@@"+marketQA_num);
-			log.info("2222222222@@@@@@@@@@@@"+market_num);
-			
-			HashMap<String,Object>map =new HashMap<String,Object>();
-			map.put("marketQA_num", marketQA_num);
-			map.put("market_num", market_num);
-			List<MarketQAFile> marketQAFile=marketService.marketQAFile(map);
-			MarketQA marketQA=marketService.marketQAcont(map);
-			
-			HashMap<String,Object>mapSubmit =new HashMap<String,Object>();
-			mapSubmit.put("marketQAFile",marketQAFile);
-			mapSubmit.put("marketQA",marketQA);
-			log.info("mapSubmit"+mapSubmit);
-			return mapSubmit;
-		}
+		@GetMapping("marketQAFile_show")
+	      public HashMap<String, Object> marketQAFile_show(@RequestParam(value="marketQA_num") String marketQA_num,
+               @RequestParam(value="market_num") String market_num,
+               @RequestParam(value="marketQA_sun") String marketQA_sun){
+	            log.info("11111111@@@@@@@@@@@@"+marketQA_num);
+	            log.info("2222222222@@@@@@@@@@@@"+market_num);
+	            log.info("2222222222@@@@@@marketQA_sun@@@@@"+marketQA_sun);
+	            
+	            HashMap<String,Object>map =new HashMap<String,Object>();
+	            map.put("marketQA_num", marketQA_num);
+	            map.put("market_num", market_num);
+	            List<MarketQAFile> marketQAFile=null;
+	            if(marketQA_sun.equals("0")) {
+	                marketQAFile=marketService.marketQAFile(map);
+	            }
+	            MarketQA marketQA=marketService.marketQAcont(map);
+	            log.info("2222222222@@@@@@marketQAFile@@@@@"+marketQAFile);
+	            log.info("2222222222@@@@@@marketQA@@@@@"+marketQA);
+	            HashMap<String,Object>mapSubmit =new HashMap<String,Object>();
+	            mapSubmit.put("marketQAFile",marketQAFile);
+	            mapSubmit.put("marketQA",marketQA);
+	            log.info("mapSubmit"+mapSubmit);
+	            return mapSubmit;
+	      }
 
 	
 //market-list.jsp	

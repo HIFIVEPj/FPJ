@@ -24,7 +24,7 @@ public interface FreeLancerProfileService {
 
 	//페이징처리 게시글 조회
 	public  List<FreeLancerProfile> selectPageList(Map<String, Object> map);
-	public List<FreeLancerProfileFile> selectFilename();
+	
 	
 	///프로필 컨텐츠//
 	List<FreeLancer> selectProfileContent(long PRO_NUM);
@@ -38,7 +38,7 @@ public interface FreeLancerProfileService {
 	//작성//
 	public void listInsert(FreeLancerProfile freelancerprofile);
 	public void insertPjpkeyword(Map<String, Object> map);
-	
+	public FreeLancerProfile selectProflie();
 	//수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
 	//public void keyUpdate(Map<String, Object> map);

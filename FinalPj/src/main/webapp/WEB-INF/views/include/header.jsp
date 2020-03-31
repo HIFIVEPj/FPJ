@@ -1,6 +1,8 @@
 <!-- hifive / nyoung -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="fp.index.controller.CountManager" %>
+<jsp:useBean id="CountManager" class="fp.index.controller.CountManager" scope="page" />
 
 <!--header-->
 <!doctype html>
@@ -255,11 +257,13 @@
 		 	console.log("ReceivMessage : " + data + "\n");
 		 	var dataSplit = data.split(']');
 			if(dataSplit[0]=="apply"){
-				alarmUpdate();
+				play();
+				alarmUpdate();				
 				return $.growl.notice({
 					message:dataSplit[1]
 				});
 			}else if(dataSplit[0]=="market"){
+				play();
 				alarmUpdate();
 				return $.growl.warning({
 					message:dataSplit[1]
@@ -269,7 +273,7 @@
 	 
 	    sock.onclose = function() {
 	      	console.log('connect close');
-	      	setTimeout(function(){conntectWs();} , 180000);
+	      	setTimeout(function(){conntectWs();} , 600000);
 	    };
 	 
 	    if(session==''){
@@ -280,9 +284,21 @@
 	   }
 	   
         </script>
+
+        <script type="text/javascript"> 
+           function play() { 
+               var audio = document.getElementById('notification_sound'); 
+               if (audio.paused) { 
+                   audio.play(); 
+               }else{ 
+                   audio.pause(); 
+                   audio.currentTime = 0 
+               } 
+           } 
+        </script>
 	</head>
 	<body>
-
+		<audio id='notification_sound' src='../sound/Doorbell3.wav'></audio> 
 
 		<!--Loader-->
 		<div id="global-loader">
@@ -294,6 +310,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-8 col-lg-8 col-sm-4 col-7">
+						   <div style="padding:8px"><i class="fa fa-group">
+						      </i> 현재 접속자 수 : <%=CountManager.getCount()%>
+						   </div>
 							<!--
 							<div class="top-bar-left d-flex">
 								<div class="clearfix">
@@ -416,27 +435,29 @@
 								</li>							
 								<li aria-haspopup="true"><a href="market-list">프리마켓</a></li>
 								<c:choose>
-									<c:when test="${empty sessionScope.email}">
-									<li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
-									</c:when>
-									<c:otherwise>
-									<li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
-									</c:otherwise>
-								</c:choose>
-									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="#">개발</a></li>
-										<li aria-haspopup="true"><a href="#">디자인</a></li>
-									</ul>	
-								</li>
+		                           <c:when test="${empty sessionScope.email}">
+		                           <li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
+		                           </c:when>
+		                           <c:otherwise>
+		                           <li aria-haspopup="true"><a href="freelancerList">프리랜서 <span class="fa fa-caret-down m-0"></span></a>
+		                           </c:otherwise>
+		                        </c:choose>
+		                           <ul class="sub-menu">
+		                              <li aria-haspopup="true"><a href="freelancerList?type=1">개발</a></li>
+		                              <li aria-haspopup="true"><a href="freelancerList?type=3">디자인</a></li>
+		                           </ul>   
+		                        </li>
 								<li aria-haspopup="true"><a href="#">고객센터 <span class="fa fa-caret-down m-0"></span></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="construction">하이파이브 소개</a></li>
+										<li aria-haspopup="true"><a href="customer_service_intro">하이파이브 소개</a></li>
 										<li aria-haspopup="true"><a href="customer_service_notice">공지사항</a></li>
 										<li aria-haspopup="true"><a href="customer_service_faq">FAQ</a></li>
 										<li aria-haspopup="true"><a href="customer_service_qa">문의하기</a></li>
 										<li aria-haspopup="true"><a href="customer_service_terms_of_service">이용약관</a></li>
 										<li aria-haspopup="true"><a href="customer_service_terms_of_personal_info">개인정보처리방침</a></li>
+										<!--
 										<li aria-haspopup="true"><a href="customer_service_contact">찾아오시는 길</a></li>
+										-->
 									</ul>	
 								</li>
 								<li aria-haspopup="true"><a href="#">사이트맵 <span class="fa fa-caret-down m-0"></span></a>
@@ -454,19 +475,19 @@
 															</c:otherwise>
 														</c:choose>
 														<li>
-															<a href="#">개발</a>
+															<a href="project_list?type=1">개발</a>
 														</li>
 														<li>
-															<a href="#">퍼블리싱</a>
+															<a href="project_list?type=2">퍼블리싱</a>
 														</li>
 														<li>
-															<a href="#">디자인</a>
+															<a href="project_list?type=3">디자인</a>
 														</li>
 														<li>
-															<a href="#">기획</a>
+															<a href="project_list?type=4">기획</a>
 														</li>
 														<li>
-															<a href="#">기타</a>
+															<a href="project_list?type=5">기타</a>
 														</li>														
 													</ul>
 													<ul class="col link-list">
@@ -496,11 +517,11 @@
 													<ul class="col link-list">
 														<li class="title"><a href="freelancerList">프리랜서</a></li>
 														<li>
-															<a href="#">개발</a>
-														</li>
-														<li>
-															<a href="#">디자인</a>
-														</li>
+				                                             <a href="freelancerList?type=1">개발</a>
+				                                          </li>
+				                                          <li>
+				                                             <a href="freelancerList?type=3">디자인</a>
+				                                          </li>
 														<li style="color:white;">
 															<a href="#">　</a>
 														</li>
@@ -520,7 +541,7 @@
 													<ul class="col link-list">
 														<li class="title">고객센터</li>
 														<li>
-															<a href="construction">하이파이브 소개</a>
+															<a href="customer_service_intro">하이파이브 소개</a>
 														</li>
 														<li>
 															<a href="customer_service_notice">공지사항</a>
@@ -537,9 +558,11 @@
 														<li>
 															<a href="customer_service_terms_of_personal_info">개인정보처리방침</a>
 														</li>
+														<!--
 														<li>
 															<a href="customer_service_contact">찾아오시는 길</a>
-														</li>													
+														</li>
+														-->													
 													</ul>
 												</div>
 											</div>

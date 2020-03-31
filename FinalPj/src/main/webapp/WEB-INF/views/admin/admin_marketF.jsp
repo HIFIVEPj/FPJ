@@ -183,7 +183,7 @@
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">마켓/프로젝트 매출</h3>
+										<h3 class="card-title">마켓 매출</h3>
 									</div>
 									<div class="card-body">
 										<div id="chart" class="chartsh"></div>
@@ -193,7 +193,7 @@
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header">
-										<h3 class="card-title">Market 매출 Top5</h3>
+										<h3 class="card-title">마켓 매출 Top5</h3>
 									</div>
 									<div class="card-body">
 										<!--  <div id="chart-donut3" class="chartsh"></div> -->
@@ -299,7 +299,7 @@
 											<td class="">${dto.payinfo_cardname}</td>
 											<td>${dto.payinfo_pgtid}</td>
 											<td >${dto.payinfo_buyername}</td>
-											<td>${dto.payinfo_rdate}</td>
+											<td><fmt:formatDate value="${dto.payinfo_rdate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 										</tr>	
 										</c:forEach>											
 									</tbody>

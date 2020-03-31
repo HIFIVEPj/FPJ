@@ -29,7 +29,7 @@ public class List_FreeLancerReview {
 	
 	private int nowPage, startPage, endPage, cntPerPage, lastPage, start, end;
 	private long total;
-	private int cntPage=1;
+	private int cntPage=5;
 	private int firstPage=1;
 
 

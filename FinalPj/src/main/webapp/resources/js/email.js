@@ -212,9 +212,9 @@ $(function(){
           return;
        }
      $.ajax({
-        type:"POST",
+        type:"GET",
         url:"emailAuth.do",
-        data:"authCode="+$('#c_emailAuth').val()+"&random="+$('#random').val(),
+        data:"authCode="+$('#c_emailAuth').val()+"&random="+$('#c_random').val(),
         success:function(data){
            if(data == "complete"){
               alert("인증되었습니다.");

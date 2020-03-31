@@ -36,14 +36,15 @@
 		
 		</section>
 		<!--Breadcrumb-->
+		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">Freelacer Profile</h4>
+					<h4 class="page-title">Profile</h4>
 					<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
-						<li class="breadcrumb-item active" aria-current="page">문의하기</li>
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item">프리랜서</li>
+						<li class="breadcrumb-item active" aria-current="page">프로필 등록</li>
 					</ol>
 				</div>
 			</div>
@@ -61,14 +62,19 @@
 							</div>
 							<div class="card-body text-center item-user">
 								<div class="profile-pic">
-								<c:if test="${mydash.free_fname eq null}">
+								
+								<c:if test="${getFileName.get(0).free_fname eq null}">
 									<div class="profile-pic-img">
 										<img src="../images/faces/male/25.jpg" class="brround" alt="user">
 									</div>
 								</c:if>
-								<c:if test = "${mydash.free_fname ne null}">
-									<div class="profile-pic-img">
-										<img src="../images/free_thumb/${mydash.free_fname}" class="brround" alt="user">
+								<c:if test = "${getFileName.get(0).free_fname ne null}">
+									<div class="avatar-xxl brround" style="margin:0 auto;">
+										
+										<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
+									<!--	
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
+									-->
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -85,12 +91,12 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
-										</li>
+			                                 <a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+			                              </li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
-												<li><a class="slide-item" href="myfavorite">프로젝트 찜</a></li>
+												<li><a class="slide-item" href="myfavorite.html">프로젝트 찜</a></li>
 												<li><a class="slide-item" href="myfavoriteMarket">마켓 찜</a></li>
 											</ul>
 										</li>
@@ -103,7 +109,7 @@
 											</ul>
 										</li>
 										<li>
-											<a class="side-menu__item" href="payments"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
+											<a class="side-menu__item" href="payment"><i class="side-menu__icon si si-credit-card"></i><span class="side-menu__label">계좌정보</span></a>
 										</li>
 										<li>
 											<a class="side-menu__item" href="logout.do"><i class="side-menu__icon si si-power"></i><span class="side-menu__label">Logout</span></a>
@@ -112,72 +118,13 @@
 								</div>
 							</aside>
 						</div>
-						<!--  
-						<div class="card my-select">
-							<div class="card-header">
-								<h3 class="card-title">Search Ads</h3>
-							</div>
-							<div class="card-body">
-								<div class="form-group">
-									<input type="text" class="form-control" id="text" placeholder="What are you looking for?">
-								</div>
-								<div class="form-group">
-									<select name="country" id="select-countries" class="form-control custom-select select2-show-search">
-										<option value="1" selected="">All Categories</option>
-										<option value="2">RealEstate</option>
-										<option value="3">Restaurant</option>
-										<option value="4">Beauty</option>
-										<option value="5">Jobs</option>
-										<option value="6">Services</option>
-										<option value="7">Vehicle</option>
-										<option value="8">Education</option>
-										<option value="9">Electronics</option>
-										<option value="10">Pets &amp; Animals</option>
-										<option value="11">Computer</option>
-										<option value="12">Mobile</option>
-										<option value="13">Events</option>
-										<option value="14">Travel</option>
-										<option value="15">Clothing</option>
-									</select>
-								</div>
-								<div class="">
-									<a href="#" class="btn  btn-primary">Search</a>
-								</div>
-							</div>
-						</div>
-						
-						<div class="card mb-xl-0">
-							<div class="card-header">
-								<h3 class="card-title">Safety Tips For Buyers</h3>
-							</div>
-							<div class="card-body">
-								<ul class="list-unstyled widget-spec  mb-0">
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Meet Seller at public Place
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Check item before you buy
-									</li>
-									<li class="">
-										<i class="fa fa-check text-success" aria-hidden="true"></i> Pay only after collecting item
-									</li>
-									<li class="ml-5 mb-0">
-										<a href="tips.html"> View more..</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						-->
 					</div>
-					
-					
-						
 					<div class="col-xl-9 col-lg-12 col-md-12">
 						<div class="card mb-0">
 							<div class="card-header">
 								<h3 class="card-title">프로필 등록하기</h3>
 							</div>
-					<form  method='post' id='free_write' name='free_write' action="freelancerMyprofile_write?mem_email=${sessionScope.email}" enctype="multipart/form-data">						
+					<form  method='post' id='free_write' name='free_write' action="freelancerMyprofile_write" enctype="multipart/form-data">						
 							<div class="card-body">
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
@@ -189,10 +136,9 @@
                                     			<option value="1">개발</option>
                                     			<option value="2">퍼블리싱</option>
                                     			<option value="3">디자인</option>
-                                   				 <option value="4">기획</option>
-                                   				 <option value="5">기타</option>
+                                   				<option value="4">기획</option>
+                                   				<option value="5">기타</option>
                                 			 </select>
-
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-6">
@@ -201,40 +147,37 @@
 											<input type="number" class="form-control"  id="pro_exp" name="pro_exp" min="1" max="30" numberOnly placeholder="예) 5년이면->5 숫자만 입력">
 										</div>
 									</div>
-
 									<div class="col-sm-6 col-md-12">
 										<div class="form-group ">
 											<label class="form-label">키워드<span style="color:red;">*</span></label>
 										</div>
 									</div>	
-									
-					
-					
-                     <div class="col-sm-6 col-md-12">
-                        <div class="form-group ">                                                                     
-                        <div class="ads-tabs">
-                           <div class="tabs-menus">
-                              <!-- Tabs -->
-                              <ul class="nav panel-tabs">
-                                  <li><a href="#tab1" class ="active" value="1" data-toggle="tab"  id="type_num"  >개발</a>
-                                 <li><a href="#tab2"  name="type" value="2" data-toggle="tab" id="type_num" >퍼블리셔</a></li>
-                                 <li><a href="#tab3"  name="type" value="3" data-toggle="tab" id="type_num" >디자인</a></li>
-                                 <li><a href="#tab4" name="type"  value="4" data-toggle="tab" id="type_num" >기획</a></li>
-                                 <li><a href="#tab5"  name="type" value="5" data-toggle="tab" id="type_num" >기타</a></li>                              
-                              </ul>
-                              <input type="hidden" name="type_num" class='type' value=""/>    
-                              <input type="hidden" name="free_code"  value="${freelancer.free_code}"/>  
-                                <input type="hidden" name="free_keynum"  value=""/>  
-                           </div>
-                      <!--      <label class="form-label"><b>키워드</b></label> -->
-                           
-                           <div class="tab-content">      
-                              <!-- tab 개발 시작   -->   
-                              <div class="tab-pane tab-pane active table-responsive border-top userprof-tab" id="tab1">
-                                 <!-- 개발자 시작  -->                                 
-                                 <div class="col-sm-6 col-md-12">                           
-                                 <div class="form-group">
-                              
+				                     <div class="col-sm-6 col-md-12">
+				                        <div class="form-group ">                                                                     
+				                        <div class="ads-tabs">
+				                           <div class="tabs-menus">
+				                              <!-- Tabs -->
+				                              <ul class="nav panel-tabs">
+				                                  <li><a href="#tab1" class ="active" value="1" data-toggle="tab"  id="type_num"  >개발</a>
+				                                 <li><a href="#tab2"  name="type" value="2" data-toggle="tab" id="type_num" >퍼블리셔</a></li>
+				                                 <li><a href="#tab3"  name="type" value="3" data-toggle="tab" id="type_num" >디자인</a></li>
+				                                 <li><a href="#tab4" name="type"  value="4" data-toggle="tab" id="type_num" >기획</a></li>
+				                                 <li><a href="#tab5"  name="type" value="5" data-toggle="tab" id="type_num" >기타</a></li>                              
+				                              </ul>
+					                              <input type="hidden" name="type_num" class='type' value=""/>    
+					                              <input type="hidden" name="free_code"  value="${freelancer.free_code}"/>  
+					                              <input type="hidden" name="free_keynum"  value=""/>
+					                              <input type="hidden" name="mem_email"  value="${freelancer.mem_email}"/>  
+				                           </div>
+				                      <!--      <label class="form-label"><b>키워드</b></label> -->
+				                           
+				                           <div class="tab-content">      
+				                              <!-- tab 개발 시작   -->   
+				                              <div class="tab-pane tab-pane active table-responsive border-top userprof-tab" id="tab1">
+				                                 <!-- 개발자 시작  -->                                 
+				                                 <div class="col-sm-6 col-md-12">                           
+				                                 <div class="form-group">
+				                              
                                  <!------------------------ java 시작----------------------------------------------------------->                              
                                     <br/>
                                     <div class="row">                           
@@ -364,11 +307,9 @@
                                        </div>
                                     </div>
                               <!------------------------ java 끝----------------------------------------------------------->
-                                    
                                        <div class="col-md-12">                                 
                                           <HR />                           
                                        </div>   
-                                 
                               <!------------------------ Mobile App 시작---------------------------------------------------->                  
                                     <div class="row">
                                        <div class="col-md-2">                                 
@@ -1377,18 +1318,19 @@
 												<div class="col-md-3">
 													<label class="form-label">업무가능일<span style="color:red;">*</span></label>
 												</div>
-										<div class="col-md-9">
-											<div class="wd-200 mg-b-30">
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<div class="input-group-text">
-															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+											<div class="col-md-9">
+												<div class="wd-200 mg-b-30">
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<div class="input-group-text">
+																<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+															</div>
 														</div>
-													</div><input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" id="pro_start" name="pro_start">
+															<input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" id="pro_start" name="pro_start" readonly>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-										</div>
 										</div>
 									</div>	
 
@@ -1462,54 +1404,41 @@
 											</div>
 										</div>
 									</div>
-
-								<!--  	<div class="col-md-12">
-											<div class="form-group ">
-												<label class="form-label mt-2">첨부파일</label>
-												<div class="custom-file">
-													<input type="file" class="custom-file-input" name="profile_fname" multiple="multiple" >
-													<label class="custom-file-label">Upload Files</label>
-												</div>
-											</div>
-											</div>		
-
-											<div class="col-md-12">
-											<div class="form-group ">
-											
-												<div class="p-2 border mb-4">
-												<div class="upload-images d-flex">
-													<div>
-														<img src="../images/faces/male/25.jpg" alt="img" class="w73 h73 border p-0">
-													</div>
-													<div class="ml-3 mt-2">
-														<h6 class="mb-0 mt-3 font-weight-bold">25.jpg</h6>
-														<small>4.5kb</small>
-													</div>
-													<div class="float-right ml-auto">
-														<a href="#" class="float-right btn btn-icon btn-danger btn-sm mt-5"><i class="fa fa-trash-o"></i></a>
-													</div>
-												</div>
-												</div>	
-											</div>
-											</div>		-->						
-									</div>
 								</div>
 							</div>
-							<div class="card-footer" align="right">
-							
-								<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>			
-</form>										
-								<a href="javascript:void(0)" class="btn btn-primary" onclick="javascript:check();">등록하기</a>	
-						
-										
-							</div>							
 						</div>
+						<div class="card-footer" align="right">
+							<a href="freelancerProfile_list" class="btn btn-secondary icons">목록</a>			
+						</form>										
+							<a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#insertModal">등록하기</a>
+						</div>							
 					</div>
 				</div>
-
 			</div>
-		</section>
-		<!--/User Dashboard-->
+		</div>
+<!-- insert Modal -->   
+      <div id="insertModal" class="modal fade">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <div class="float-right btn btn-icon btn-danger btn-sm mt-3"><i class="fa fa-trash-o"></i></div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p>프로필을 작성 할까요?</p>
+               </div>
+               <div class="modal-footer">
+               <a href="javascript:void(0)" class="btn btn-primary" style="color:white;" onclick="javascript:check();">네</a> 
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+               </div>
+            </div>
+         </div>      
+      </div>
+<!-- /insert Modal -->
+</section>
+<!--/User Dashboard-->
 		   
 <script>
 $("document").ready(function () {
@@ -1519,16 +1448,25 @@ $("document").ready(function () {
 function check(){
       var key_num = new Array();
       var key_cnt = 0;
-	    
+      
+	  var exp_size = $('#pro_exp').val();
+	  exp_size = exp_size.toString();
+	  expDigit = exp_size.length;
+  
 	 if(($('#type_num').val() == "")){
         alert("직종을 선택헤주세요.")
         return ;
 	  }
 	 
-	 if(($('#pro_exp').val() == "")){
-	        alert("경력을 입력해주세요.")
-	        return ;
+	 if(expDigit>2){
+		 alert("경력은 두 글자까지 입력 가능합니다.")
+		 return ;
+	 }else if($('#pro_exp').val()== ""){ 
+		 alert("경력을 입력해주세요.")
+	     return ;
 	}
+	 
+	 
 	 if(free_write.pro_exp.value<0){
 	        alert("경력을 0보다 크게 입력해주세요.")
 	        return ;
@@ -1579,16 +1517,16 @@ function check(){
             key_cnt++;
          }
        });
-      
-      alert("key_num : "+ key_num);    
+	   
       if(key_num == ""){
-         alert("키워드는 1개 이상 설정해야합니다.")
-         return ;
-      }
+	     alert("키워드는 1개 이상 선택해야 합니다.")
+	    	return ;
+	      }
       free_write.submit();
       }
    //});
 </script>
+
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>

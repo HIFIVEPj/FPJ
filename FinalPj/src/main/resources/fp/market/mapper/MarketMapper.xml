@@ -63,13 +63,14 @@
          <result property="mem_email" column ="mem_email" />    
         <association property="freelancer" javaType="mFreelancer" column ="free_code" >
           <id property="free_code" column ="free_code" />
+          <result property="mem_email" column ="fm" />
           <result property="free_name" column ="free_name" />
           <result property="free_fname" column ="free_fname" />
           <result property="free_ofname" column ="free_ofname" />       
       </association>
       <association property="corporation" javaType="Corporation" column ="cor_code" >
              <id property="cor_code" column ="cor_code" />
-           <result property="mem_email" column ="mem_email" />
+           <result property="mem_email" column ="cm" />
            <result property="cor_mname" column ="cor_mname" />    
            <result property="cor_fname" column ="cor_fname" /><!-- result안쓰는 컬럼은 unread 로 나옴 -->
            <result property="cor_ofname" column ="cor_ofname" />    
@@ -173,16 +174,16 @@
    </select>
 <!-- 마켓 검색창 List -->
 <select id="searchButtonMarketCount" resultType="Integer" parameterType="String">
-      SELECT COUNT(*) FROM MARKET m where MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%' and m.MARKET_STATE=1 
-</select>   
+      SELECT COUNT(*) FROM MARKET m where MARKET_STATE=1 and MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%' and m.MARKET_STATE=1 
+</select>  
 <select id="searchButtonMarketList" resultMap="resultMarket" parameterType="hashmap">
-      select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
-          (select FREE_NAME , MARKET_NUM, MARKET_SUB  ,MARKET_cont  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f 
+ 	select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+          (select FREE_NAME , MARKET_NUM, MARKET_SUB ,MARKET_STATE,MARKET_cont  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f 
               join MARKET m on m.FREE_CODE=f.FREE_CODE where MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%' and  m.MARKET_STATE=1) A
       left outer join
           (select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star from MARKET_REVIEW mr 
               right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
-      on A.MARKET_NUM=B.마켓넘 
+      on A.MARKET_NUM=B.마켓넘  where A.MARKET_STATE=1
       
       <if test="selectedKey==1">
          ORDER BY A.MARKET_NUM desc ) aa)
@@ -206,21 +207,21 @@
         <if test="mapExp.size()==0">
            left outer join 
         </if>
-      FREELANCER_PROFILE fp on fp.free_code=m.free_code 
-      where market_state=1 
+      FREELANCER_PROFILE fp on fp.free_code=m.free_code and fp.profile_choice=1 and market_state=1
+      where market_state=1
       <if test="mapPrice.size()>0">
          and market_price between #{mapPrice.price1} and #{mapPrice.price2}
       </if>
       <if test="mapCate.size()>0">   
          and 
-         <foreach collection="mapCate" item="mapCatei" separator="or">
+         <foreach collection="mapCate" item="mapCatei" separator="or" open="(" close=")" >
             cate_num=#{mapCatei} 
          </foreach>
       </if>
 
       <if test="mapExp.size()>0">
          and
-         <foreach collection="mapExp" item="mapExpi" index="index" separator="or">
+         <foreach collection="mapExp" item="mapExpi" index="index" open="(" close=")"  separator="or">
             <if test="mapExpi=='exp3'">
                 fp.pro_exp >=9
             </if>
@@ -244,14 +245,14 @@
             <if test="mapExp.size()==0">
                left outer join 
             </if>
-            FREELANCER_PROFILE fp on f.FREE_CODE=fp.FREE_CODE where m.MARKET_STATE=1 and market_price between #{mapPrice.price1} and #{mapPrice.price2}) A
+            FREELANCER_PROFILE fp on f.FREE_CODE=fp.FREE_CODE and fp.profile_choice=1 where m.MARKET_STATE=1 and market_price between #{mapPrice.price1} and #{mapPrice.price2}) A
          full outer join
          (select m.MARKET_NUM 마켓넘, count(MARKETREV_NUM) marketRev_num , avg(MARKETREV_STAR) marketRev_star 
             from MARKET_REVIEW mr right outer join MARKET m on m.MARKET_NUM=mr.MARKET_NUM where m.MARKET_STATE=1 group by m.MARKET_NUM) B
            on A.MARKET_NUM=B.마켓넘
           <if test="mapCate.size() != 0">   
           where
-            <foreach collection="mapCate" item="mapCatei" separator="or">
+            <foreach collection="mapCate" item="mapCatei" open="(" close=")" separator="or">
                  A.cate_num=#{mapCatei} 
             </foreach>
          </if>
@@ -264,7 +265,7 @@
       <!--exp첫선택x  -->   
           <if test="mapExp.size()>0 and (mapCate.size()>0 or mapPrice.size()>0)">
                and
-               <foreach collection="mapExp" item="mapExpi" index="index" separator="or">
+               <foreach collection="mapExp" item="mapExpi" index="index" separator="or" open="(" close=")" >
                <if test="mapExpi=='exp3'">
                    A.pro_exp >=9
                </if>
@@ -416,7 +417,7 @@
    <select id="getMarketRev" resultMap="resultMarketRev"  parameterType="hashmap">
       <![CDATA[
          select * from (select rownum rnum , aa.* from 
-             (select mem_name,class_num,COR_FNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,
+             (select mem_name,class_num,COR_FNAME,MARKETREV_NUM,MARKET_NUM,MARKETREV_CONT,MARKETREV_RDATE,MARKETREV_STAR,mr.MEM_EMAIL,f.MEM_EMAIL fm,c.MEM_EMAIL cm,
              FREE_FNAME from MARKET_REVIEW mr 
             left outer join FREELANCER f on mr.MEM_EMAIL=f.MEM_EMAIL 
                left outer join CORPORATION c on c.MEM_EMAIL=mr.MEM_EMAIL 
@@ -462,7 +463,12 @@
 <!-- 마켓 프리랜서 정보뽑기 -->
    <select id="getMarketFreelancer" resultMap="resultMarket" parameterType="long">
       select f.MEM_EMAIL,f.FREE_NAME,f.FREE_CODE, fp.PRO_CV, fp.PRO_NUM, fp.PRO_EXP, fp.TYPE_NUM, f.FREE_RDATE, fp.PRO_GRADE,f.FREE_FNAME
-      from FREELANCER f left outer join FREELANCER_PROFILE fp on fp.FREE_CODE=f.FREE_CODE join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
+      from FREELANCER f left outer join FREELANCER_PROFILE fp on fp.FREE_CODE=f.FREE_CODE join MARKET m on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num} and PROFILE_CHOICE=1
+   </select>
+   <select id="getMarketFreelancer2" resultMap="resultMarket" parameterType="long">
+      select f.MEM_EMAIL,f.FREE_NAME,f.FREE_CODE, f.FREE_RDATE,f.FREE_FNAME
+      from FREELANCER f 
+      left outer join MARKET m   on m.FREE_CODE=f.FREE_CODE where market_num=#{market_num}
    </select>
 <!-- 마켓상세보기 -->   
 <!-- 마켓 등록 (전에프리코드필요)-->
@@ -482,7 +488,7 @@
       select * from market where MARKET_NUM=#{market_num}   
    </select>
    <update id="updateMarket2"  parameterType="Market">
-      UPDATE MARKET SET MARKET_PRICE=#{market_price},MARKET_SUB=#{market_sub},MARKET_CONT=#{market_cont},MARKET_FNAME= #{market_fname},MARKET_OFNAME=#{market_ofname} WHERE MARKET_NUM = #{market_num}
+      UPDATE MARKET SET MARKET_PRICE=#{market_price},MARKET_SUB=#{market_sub},MARKET_CONT=#{market_cont},MARKET_FNAME= #{market_fname},MARKET_OFNAME=#{market_ofname},CATE_NUM=#{cate_num} WHERE MARKET_NUM = #{market_num}
    </update>
 <!-- 마켓조회수+ -->
    <update id="updateMarketVcnt" parameterType="long">
@@ -528,19 +534,26 @@
          select * from (
             select free_name,free_fname,fp.free_code, fp.pro_exp,type_num, fp.PRO_NUM, avg(FREEREV_STAR)FreeRev_star from freelancer f left outer join freelancer_profile fp on fp.free_code = f.free_code 
               left outer join FREELANCER_REVIEW fr on fr.PRO_NUM=fp.PRO_NUM
-              where type_num=#{type_num} group by free_name,type_num,fp.PRO_NUM, free_fname,fp.pro_exp,fp.free_code order by DBMS_RANDOM.RANDOM
+              where type_num=#{type_num} and PROFILE_CHOICE=1 group by free_name,type_num,fp.PRO_NUM, free_fname,fp.pro_exp,fp.free_code order by DBMS_RANDOM.RANDOM
            ) where rownum <=10
            ]]>
    </select>
     <select id="similarMarket" resultMap="resultMarket" parameterType="Integer">
      <![CDATA[
 	       select rownum ,m.*,mr.* from
-           (select MARKET_NUM,CATE_NUM,market_price,MARKET_FNAME,MARKET_SUB from market)m
+           (select MARKET_NUM,CATE_NUM,market_price,MARKET_FNAME,MARKET_SUB from market where market_state=1)m
            left outer join 
             (select avg(MARKETREV_STAR) marketRev_star,market_num from market_review group by market_num)mr
-           on m.market_num=mr.market_num where cate_num=#{cate_num} and rownum <=10 order by DBMS_RANDOM.RANDOM 
+           on m.market_num=mr.market_num where cate_num=#{cate_num} and rownum <=10 order by DBMS_RANDOM.RANDOM  
    	]]>
    </select>
    
+   <!--서치박스 개발자 디자이너 마켓 갯수 -->   
+      <select id="countDevelopoer" resultType="long" >
+          select count(*) from market m  where market_state=1 and cate_num=1
+      </select>
+      <select id="countDesigner" resultType="long" >
+          select count(*) from market m  where market_state=1 and cate_num=2
+      </select>
    
 </mapper>   

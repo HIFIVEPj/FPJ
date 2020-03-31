@@ -48,8 +48,8 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		return mapper.selectPageList(map);
 	}
 	@Override
-	public List<FreeLancerProfileFile> selectFilename(){
-		return mapper.selectFilename();
+	public FreeLancerProfile selectProflie(){
+		return mapper.selectProflie();
 	}
 	
 	//프로필컨텐츠//
@@ -104,7 +104,6 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 	@Transactional
 	public void listUpdate(FreeLancerProfile freelancerprofile){
 		mapper.listUpdate(freelancerprofile);
-		mapper.typeUpdate(freelancerprofile.getType_num());
 	  //  mapper.keyUpdate(map);
 	}
 
