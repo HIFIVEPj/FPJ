@@ -160,7 +160,9 @@ $(document).ready(function() {
 												<th><b>상태</b></th>
 												<th><b>판매일</b></th>
 												<th><b>구매자</b></th>
+
 												<!--<th><b>완료버튼</b></th>-->
+
 											</tr>
 										</thead>
 										

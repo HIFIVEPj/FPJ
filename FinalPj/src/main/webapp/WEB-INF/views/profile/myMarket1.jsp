@@ -208,6 +208,7 @@
 														   <td align="center">
 														      <a href="javascript:void(0);" class="badge badge-primary">판매중</a>
 														   </td>
+
 														</c:if>
 														<c:if test="${myMarket.market_state==0}">
 														   <td align="center">

@@ -49,6 +49,7 @@
          <id property="pro_vcnt" column="pro_vcnt" />
          <id property="pro_pcnt" column="pro_pcnt" />   
          <id property="pro_place" column="pro_place" />
+         
       </association> 
    </resultMap>
 
@@ -175,9 +176,11 @@
 <!-- 마켓 검색창 List -->
 <select id="searchButtonMarketCount" resultType="Integer" parameterType="String">
       SELECT COUNT(*) FROM MARKET m where MARKET_STATE=1 and MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%' and m.MARKET_STATE=1 
+
 </select>  
 <select id="searchButtonMarketList" resultMap="resultMarket" parameterType="hashmap">
  	select * from (select ROWNUM rnum , aa.* from (select A.*, B.* from
+
           (select FREE_NAME , MARKET_NUM, MARKET_SUB ,MARKET_STATE,MARKET_cont  , MARKET_PRICE , MARKET_VCNT,MARKET_OFNAME,MARKET_FNAME from FREELANCER f 
               join MARKET m on m.FREE_CODE=f.FREE_CODE where MARKET_SUB like '%' || #{searchWord} || '%' or MARKET_CONT like '%' || #{searchWord} || '%' and  m.MARKET_STATE=1) A
       left outer join

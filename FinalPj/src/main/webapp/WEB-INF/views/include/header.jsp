@@ -309,10 +309,14 @@
 			<div class="top-bar" style="background-color:#fff;">
 				<div class="container">
 					<div class="row">
+<<<<<<< HEAD
 						<div class="col-xl-8 col-lg-8 col-sm-4 col-7">
 						   <div style="padding:8px"><i class="fa fa-group">
 						      </i> 현재 접속자 수 : <%=CountManager.getCount()%>
 						   </div>
+=======
+						<div class="col-xl-8 col-lg-8 col-sm-4 col-7">접속자수 : <%=CountManager.getCount()%>
+>>>>>>> 3453ce48d0f2f040defadd4b45e3a3080c8d6430
 							<!--
 							<div class="top-bar-left d-flex">
 								<div class="clearfix">
@@ -384,6 +388,9 @@
 									</li>
 									</c:otherwise>
 									</c:choose>
+
+									
+	
 								</ul>
 							</div>
 						</div>

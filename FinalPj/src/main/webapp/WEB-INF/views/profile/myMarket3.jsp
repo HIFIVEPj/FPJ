@@ -214,6 +214,7 @@ $(document).ready(function() {
 												   <c:if test="${mBuyList.mbuysell_state==2 }">
 												      <a href="#" class="badge badge-warning">거래취소</a>
 												   </c:if>
+
 												</td>
 												<td class="font-weight-semibold fs-16" align="center">
 													${mBuyList.mbuysell_date}

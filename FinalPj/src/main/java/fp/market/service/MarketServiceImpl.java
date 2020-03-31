@@ -243,12 +243,12 @@ public class MarketServiceImpl implements MarketService {
 	public List<Market> similarMarket(int cate_num) {
 		return mapper.similarMarket(cate_num);
 	}
-	
+//프로필 널을 대비한컬럼	
 	@Override
-    public Market getMarketFreelancer2(long market_num) {
-       return mapper.getMarketFreelancer2(market_num);
-    }
-	
+	public Market getMarketFreelancer2(long market_num) {
+		return mapper.getMarketFreelancer2(market_num);
+	}
+
 	//서치박스 개발자 디자이너 마켓 갯수 
    @Override
    public long countDevelopoer() {

@@ -16,9 +16,9 @@ public class CountManager implements HttpSessionListener {
         HttpSession session = event.getSession(); //request에서 얻는 session과 동일한 객체
         session.setMaxInactiveInterval(60*20);
          
-        count++;
-         
+        count++;  
         session.getServletContext().log(session.getId() + " 세션생성 " + ", 접속자수 : " + count+1);
+
     }
  
     public void sessionDestroyed(HttpSessionEvent event) {
@@ -31,3 +31,4 @@ public class CountManager implements HttpSessionListener {
         session.getServletContext().log(session.getId() + " 세션소멸 " + ", 접속자수 : " + count);
     }
 }
+

@@ -101,6 +101,7 @@ public class CustomerServiceNoticeController {
 		log.info("%%%%%mem_email : " + mem_email);
 		log.info("%%%%%sessionEmail : " + sessionEmail);
 		if (sessionEmail != null) {
+
 			if(!mem_email.equals(sessionEmail)) { //자기 게시글 조회수 증가 방지
 				customerServiceNoticeService.notice_countS(notice_num);
 			}else {	
@@ -109,6 +110,7 @@ public class CustomerServiceNoticeController {
 			customerServiceNoticeService.notice_countS(notice_num);
 		}
 		*/
+
 		
 		model.addAttribute("notice_content", customerServiceNoticeService.notice_contentS(notice_num));
 		//model.addAttribute("notice_recommend_list", notice_recommend_list);
