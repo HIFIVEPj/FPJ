@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import fp.util.file.Path;
 
 import javax.mail.Flags.Flag;
 
@@ -347,12 +348,8 @@ boolean sub= false;
 	}
 		public ArrayList<Object[]> Fileupload(MultipartHttpServletRequest mtfRequest){
 			ArrayList<Object[]> list = new ArrayList<Object[]> ();
-			String path = "C:\\hifive\\hifiveImages\\marketQAFiles\\";
-			//String path = "/home/ubuntu/hifive/hifiveImages/marketQAFiles/"; // for aws
-			//학원경로
-			//String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
-			//집경로
-			//String path  = "C:\\Users\\DeskTop\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketQAFiles\\";
+			String path = Path.MARKETQA_FILE;
+
 			List<MultipartFile> fileList = mtfRequest.getFiles("fname");
 			File Folder = new File(path);
 			// 해당 디렉토리가 없을경우 디렉토리를 생성합니다.

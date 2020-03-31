@@ -203,12 +203,12 @@
 														      <a href="javascript:void(0);" class="badge badge-primary">판매중</a>
 														   </td>
 														</c:if>
-														<c:if test="${pickList.market..market_state==0}">
+														<c:if test="${pickList.market.market_state==0}">
 														   <td align="center">
 														      <a href="javascript:void(0);" class="badge badge-warning">검토중</a>
 														   </td>
 														</c:if>
-														<c:if test="${pickList.market..market_state==2}">
+														<c:if test="${pickList.market.market_state==2}">
 														   <td align="center">
 														      <a href="javascript:void(0);" class="badge badge-secondary">거절됨</a>
 														   </td>
