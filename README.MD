@@ -1,5 +1,7 @@
 ▣ project name : HIFIVE
 
+▣ team name : IT crowd
+
 ▣ project period : 13/01/20 ~ 26/03/25
 
 ▣ members : nayoung, sodam, byeol, seyoung, seunghoon
