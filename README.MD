@@ -6,5 +6,5 @@
 
 ▣ members : nayoung, sodam, byeol, seyoung, seunghoon
 
-▣ tech : spring, oracle db, aws(ec2 based on ubuntu), tomcat, bootstrap, js, jquery
+▣ tech : spring, oracle db, aws(ec2 based on ubuntu), tomcat, js, jquery
 
