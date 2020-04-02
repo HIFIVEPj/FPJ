@@ -19,10 +19,10 @@
 							<div class="col-lg-4 col-md-12 text-center">
 								<h6>서비스</h6>
 								<ul class="list-unstyled mb-0">
-									<li><a href="#">프로젝트</a></li>
-									<li><a href="#">프리마켓</a></li>
-									<li><a href="#">프리랜서</a></li>
-									<li><a href="#">고객센터</a></li>
+									<li><a href="project_list">프로젝트</a></li>
+									<li><a href="market-list">프리마켓</a></li>
+									<li><a href="freelancerList">프리랜서</a></li>
+									<li><a href="customer_service_intro">고객센터</a></li>
 								</ul>
 							</div>
 							<div class="col-lg-4 col-md-12">
@@ -43,7 +43,7 @@
 					<div class="container">
 						<div class="row d-flex">
 							<div class="col-lg-12 col-sm-12  mt-2 mb-2 text-center ">
-								Copyright © 2019 <a href="#">Pinlist</a>. Designed by <a href="#">Spruko</a> All rights reserved.
+								Copyright © 2019 <a href="javasript:void(0)">Pinlist</a>. Designed by <a href="javasript:void(0)">Spruko</a> All rights reserved.
 							</div>
 						</div>
 					</div>
@@ -56,12 +56,14 @@
 		<a href="#top" id="back-to-top" ><i class="fa fa-rocket"></i></a>
 
 		<!-- JQuery js-->
+		<!--
 		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
-
+		-->
 		<!-- Bootstrap js -->
+		<!--	
 		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
 		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
-
+		-->
 		<!--JQuery Sparkline Js-->
 		<script src="../js/vendors/jquery.sparkline.min.js"></script>
 
@@ -108,7 +110,7 @@
 
         <!-- Custom scroll bar Js-->
 		<script src="../plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
-
+		
 		<!-- sticky Js-->
 		<script src="../js/sticky.js"></script>
 
@@ -127,6 +129,7 @@
 		<!-- Custom Js-->
 		<script src="../js/custom.js"></script>
 		<script src="../js/custom2.js"></script>
+		<script src="../js/admin-custom.js"></script>
 		<script>
 		$(window).on("load", function(e) {
 		$("#loading").fadeOut("slow");
@@ -145,7 +148,28 @@
 		<script src="../js/formelements.js"></script>
 		
 		<!-- file uploads js -->
+		<!--
         <script src="../plugins/fileuploads/js/dropify.js"></script>
+        -->
+        <script src="../plugins/fileuploads/js/dropify.min.js"></script>
+        <script src="../plugins/fileuploads/js/dropify-multiple.min.js"></script>
+        <script src="../plugins/fileuploads/js/dropify-multiple.js"></script>
+        
+        <!--
+        <script type="text/javascript">
+            $(document).ready(function(){
+                // Basic
+               $('.dropify').dropify();
+            });
+         </script>
+         
+
+         <script type="text/javascript">   
+         	$(".dropify-clear").trigger("click");
+      	 </script>
+		-->
+
+
         
         <!---Tabs JS-->
 		<script src="../plugins/tabs/jquery.multipurpose_tabcontent.js"></script>
@@ -154,7 +178,50 @@
 		<!-- Sweet alert Plugin -->
 		<script src="../plugins/sweet-alert/sweetalert.min.js"></script>
 		<script src="../js/sweet-alert.js"></script>
-
+		
+		<!-- Animation -->
+        <script src="../plugins/particles/particles.js"></script>
+        <script src="../plugins/particles/particlesapp_default.js"></script>
+        
+        <!--InputMask Js-->
+		<script src="../plugins/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+		
+		<!-- Vertical scroll bar Js-->
+		<script src="../plugins/vertical-scroll/jquery.bootstrap.newsbox.js"></script>
+		<script src="../plugins/vertical-scroll/vertical-scroll.js"></script>
+		
+		<!-- Google Maps Plugin -->
+		<!--
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyAykAdIIsNMu0V2wyGOMQcguo8zKngWlyM"></script>
+		<script src="../plugins/maps-google/jquery.googlemap.js"></script>
+		<script src="../plugins/maps-google/map.js"></script>
+		-->
+		<!-- Dashboard js -->
+		<!--
+		<script src="../js/vendors/jquery-3.2.1.min.js"></script>
+		<script src="../plugins/bootstrap-4.1.3/popper.min.js"></script>
+		<script src="../plugins/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+		<script src="../js/vendors/jquery.sparkline.min.js"></script>
+		<script src="../js/vendors/circle-progress.min.js"></script>
+		<script src="../plugins/rating/jquery.rating-stars.js"></script>
+		-->
+		<script src="../js/vendors/selectize.min.js"></script>
+		<script src="../js/vendors/jquery.tablesorter.min.js"></script>
+		
+		<!-- Fullside-menu Js-->
+		<!--
+		<script src="../plugins/toggle-sidebar/sidemenu.js"></script>
+		-->
+		
+		<!-- popover js -->
+        <script src="../js/popover.js"></script>
+        
+        <!-- Notifications js -->
+        <!--
+		<script src="../plugins/notify/js/rainbow.js"></script>
+		<script src="../plugins/notify/js/sample.js"></script>
+		<script src="../plugins/notify/js/jquery.growl.js"></script>
+		-->
 	</body>
 </html>
 <!--/footer-->

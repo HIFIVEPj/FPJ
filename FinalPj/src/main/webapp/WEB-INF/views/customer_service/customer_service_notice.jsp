@@ -6,28 +6,34 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
+
 		<!--Sliders Section-->
-		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">공지사항</h1>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- /header-text -->
 			</div>
-		</section>
+		</div>
 		<!--/Sliders Section-->
 
 		<!--Breadcrumb-->
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">공지사항</h4>
+					<h4 class="page-title">Notice</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
-						<li class="breadcrumb-item"><a href="customer_service_list">고객센터</a></li>
+						<li class="breadcrumb-item">고객센터</li>
 						<li class="breadcrumb-item active" aria-current="page">공지사항</li>
 					</ol>
 				</div>
@@ -49,7 +55,7 @@
 											<th class="font-weight-bold">번호</th>
 											<th class="font-weight-bold">분류</th>
 											<th class="font-weight-bold">제목</th>
-											<th class="font-weight-bold">글쓴이</th>
+											<th class="font-weight-bold">작성자</th>
 											<th class="font-weight-bold">날짜</th>
 											<th class="font-weight-bold">조회</th>
 											<th class="font-weight-bold">추천</th>
@@ -60,8 +66,8 @@
 										<tr class="border-bottom">
 											<td class="text-center">${notice_list.notice_num}</td>
 											<td class="text-center">${notice_list.notice_cate}</td>
-											<td><a href='customer_service_notice_content?notice_num=${notice_list.notice_num}'>${notice_list.notice_sub}</a></td>
-											<td class="text-center">${notice_list.mem_email}</td>
+											<td><a href='customer_service_notice_content?notice_num=${notice_list.notice_num}&mem_email=${notice_list.mem_email}'>${notice_list.notice_sub}</a></td>
+											<td class="text-center">${notice_list.mem_name}</td>
 											<td class="text-center"><fmt:formatDate value="${notice_list.notice_rdate}" pattern="yyyy.MM.dd"/></td>
 											<td class="text-center">${notice_list.notice_vcnt}</td>
 											<td class="text-center">${notice_list.notice_recommnum}</td>
@@ -71,10 +77,11 @@
 								</table>
 								
 								<br/>
+									<c:if test="${sessionScope.class_num eq 1}">
 									<div class="text-right">
-										<a href="customer_service_notice_write" class="btn btn-danger">　글쓰기　</a>
+										<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
 									</div>
-								
+									</c:if>
 							</div>
 						</div>
 					</div>

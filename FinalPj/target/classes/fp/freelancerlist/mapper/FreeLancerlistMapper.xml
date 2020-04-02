@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="fp.freelancerlist.mapper.FreeLancerlistMapper">
+
+      <resultMap type="List_FreeLancer" id="List_FreeLancerResult">
+           <id column="free_code" property="free_code"/>
+          <result column="mem_email" property="mem_email"/>      
+         <result column="free_name" property="free_name"/>
+         <result column="free_ofname" property="free_ofname"/>
+         <result column="free_fname" property="free_fname"/>
+      <collection  property="member" javaType="java.util.ArrayList" ofType="Member">
+         <id property="email" column="email"/>
+         <result property="class_num" column="class_num"/>
+      </collection>   
+
+      <collection  property="list_type" javaType="java.util.ArrayList" ofType="List_Type">
+         <id property="type_num" column="type_num"/>
+         <result property="type_name" column="type_name"/>
+      </collection>       
+      <collection property="list_freelancerprofile" javaType="java.util.ArrayList" ofType="list_freelancerprofile">   
+            <id property="free_code" column="free_code"/>
+            <result property="pro_num" column="pro_num"/>
+            <result property="type_num" column="type_num"/>
+            <result column="mem_email" property="mem_email"/>   
+            <result property="pro_exp" column="pro_exp"/>
+            <result property="pro_vcnt" column="pro_vcnt"/>
+            <result property="pro_pcnt" column="pro_pcnt"/>
+            <result property="profile_choice" column="profile_choice"/>
+      </collection>    
+        <collection property="list_project" javaType="java.util.ArrayList" ofType="List_Project" >
+         <id property="pj_num" column="pj_num"/>
+           <result property="type_num" column="type_num"/>
+           <result property="cate_num" column="cate_num"/>
+           <result property="cor_code" column="cor_code"/>
+           <result property="pj_sub" column="pj_sub"/>
+           <result property="pj_num" column="pj_num"/>
+           <result property="pj_ddate" column="pj_ddate"/>
+           <result property="pj_place" column="pj_place"/>
+           <result property="pj_name" column="pj_name"/>   
+      </collection>   
+      <collection property="list_review" javaType="java.util.ArrayList" ofType="List_FreeLancerReview">
+           <id property="freerev_num" column="freerev_num"/>   
+           <id property="free_code" column="free_code"/>
+           <result property="pro_num" column="pro_num"/>
+            <result property="mem_email" column="mem_email"/>   
+           <result property="freerev_star" column="freerev_star"/>
+      </collection>
+      <collection property="applied_Project" javaType="java.util.ArrayList" ofType="Applied_Project" >
+           <result property="free_code" column="free_code"/>
+           <result property="pro_num" column="pro_num"/>
+           <result property="pj_num" column="pj_num"/>
+           <result property="appp_status" column="appp_status"/>
+      </collection>
+   </resultMap>
+      
+      <!-- 리스트페이지  타입 select -->
+      <resultMap type="list_freelancerprofile" id="TypeNpjSub">
+         <id property="free_code" column="free_code"/>
+            <result property="pro_num" column="pro_num"/>
+            <result property="type_num" column="type_num"/>
+            <result column="mem_email" property="mem_email"/>   
+            <result property="pro_exp" column="pro_exp"/>
+            <result property="pro_vcnt" column="pro_vcnt"/>
+         <collection  property="list_type" javaType="java.util.ArrayList" ofType="List_Type">
+              <id property="type_num" column="type_num"/>
+             <result property="type_name" column="type_name"/>
+         </collection>    
+      </resultMap>
+
+      <!-- 프리랜서 컨텐츠 1 -->
+         <resultMap type="Freelancer_FreeLancerProfile" id="freelancerContent">
+            <id property="free_code" column="free_code"/>
+              <result property="pro_num" column="pro_num"/>
+              <result property="type_num" column="type_num"/>
+              <result column="mem_email" property="mem_email"/>   
+              <result property="pro_exp" column="pro_exp"/>
+              <result property="pro_addr" column="pro_addr"/>
+              <result property="pro_vcnt" column="pro_vcnt"/>
+              <result property="pro_edu" column="pro_edu"/>
+              <result property="pro_start" column="pro_start"/>
+               <result property="pro_ox" column="pro_ox"/>
+              <result property="pro_place" column="pro_place"/>
+              <result property="pro_cv" column="pro_cv"/>
+              <result property="pro_pcnt" column="pro_pcnt"/>
+              <result property="pro_workplace" column="pro_workplace"/>
+   
+              <collection property="freelancer" javaType="java.util.ArrayList" ofType="freelancer">
+               <id property="free_code" column="free_code"/>
+                 <result property="free_name" column="free_name"/>
+                 <result property="mem_email" column="mem_email"/>
+                 <result property="free_tel" column="free_tel"/>
+                 <result property="free_fname" column="free_fname"/>
+            </collection>   
+            <collection property="freelancerprofilefile" javaType="java.util.ArrayList" ofType="freelancerprofilefile" >
+                 <id property="free_code" column="free_code"/>
+                 <id property="profile_num" column="profile_num"/>
+                 <result property="pro_num" column="pro_num"/>
+                 <result property="profile_fname" column="profile_fname"/>
+                 <result property="profile_ofname" column="profile_ofname"/>
+                 <result property="profile_size" column="profile_size"/>
+                 <result property="profile_ext" column="profile_ext"/>
+              </collection>   
+            <collection property="list_freeLancerReview" javaType="java.util.ArrayList" ofType="List_FreeLancerReview">   
+            <id property="free_code" column="free_code"/>
+                <result property="pro_num" column="pro_num"/>
+                 <result column="mem_email" property="mem_email"/>   
+                  <result property="freerev_star" column="freerev_star"/>
+            </collection>
+         </resultMap>
+         
+            <!-- 프로젝트 컨텐츠 2 -->
+         <resultMap type="Freelancer_FreeLancerProfile" id="freelancerContent2">
+               <id property="free_code" column="free_code"/>
+               <result property="pro_num" column="pro_num"/>
+               <result property="type_num" column="type_num"/>
+              <collection property="frProject" javaType="java.util.ArrayList" ofType="frProject" >
+               <id property="pj_num" column="pj_num"/>
+               <result property="type_num" column="type_num"/>
+               <result property="cate_num" column="cate_num"/>
+               <result property="cor_code" column="cor_code"/>
+               <result property="pj_sub" column="pj_sub"/>
+               <result property="pj_ddate" column="pj_ddate"/>
+               <result property="pj_place" column="pj_place"/>
+               <result property="pj_name" column="pj_name"/>   
+            </collection>   
+            <collection property="applied_project" javaType="java.util.ArrayList" ofType="Applied_Project" >
+               <result property="free_code" column="free_code"/>
+               <result property="pro_num" column="pro_num"/>
+               <result property="pj_num" column="pj_num"/>
+               <result property="appp_date" column="appp_date"/>
+               <result property="appp_status" column="appp_status"/>
+            </collection>   
+         </resultMap>
+                  
+      <!-- 프로젝트 컨텐츠 3 -->
+         <resultMap type="Freelancer_FreeLancerProfile" id="freelancerContent3">
+               <id property="free_code" column="free_code"/>
+               <result property="pro_num" column="pro_num"/>
+               <result property="type_num" column="type_num"/>
+               <result property="mem_email" column="mem_email"/>
+            <collection property="freePick" javaType="java.util.ArrayList" ofType="FreePick" >
+               <id property="free_keynum" column="free_keynum"/>
+               <result property="key_num" column="key_num"/>
+               <result property="free_code" column="free_code"/>
+                <result property="pro_num" column="pro_num"/>
+            </collection>                 
+            <collection property="frKeyWord" javaType="java.util.ArrayList" ofType="frKeyWord" >
+               <id property="key_num" column="key_num"/>
+               <result property="key_name" column="key_name"/>
+            </collection>   
+         </resultMap>
+            
+      <!-- 프로젝트 컨텐츠 4-->
+         <resultMap type="frType" id="freelancerContent4">
+                <id property="type_num" column="type_num"/>
+                <result property="type_name" column="type_name"/>
+            <collection property="Freelancer_FreeLancerProfile" javaType="java.util.ArrayList" ofType="Freelancer_FreeLancerProfile">
+               <id property="free_code" column="free_code"/>
+               <result property="pro_num" column="pro_num"/>
+               <result property="type_num" column="type_num"/>
+            </collection>
+         </resultMap>
+
+   <!-- 프로젝트 컨텐츠 5-->
+         <resultMap type="Pj_Pick_Keyword" id="freelancerContent5">                  
+               <id property="pjp_keynum" column="pjp_keynum"/>
+               <result property="key_num" column="key_num"/>
+                <result property="pj_num" column="pj_num"/>
+            <collection property="frKeyWord" javaType="java.util.ArrayList" ofType="frKeyWord" >
+               <id property="key_num" column="key_num"/>
+               <result property="key_name" column="key_name"/>
+            </collection>
+            <collection property="list_project" javaType="java.util.ArrayList" ofType="List_Project" >
+               <id property="pj_num" column="pj_num"/>
+               <result property="type_num" column="type_num"/>
+               <result property="cate_num" column="cate_num"/>
+               <result property="cor_code" column="cor_code"/>
+               <result property="pj_sub" column="pj_sub"/>
+               <result property="pj_num" column="pj_num"/>
+               <result property="pj_ddate" column="pj_ddate"/>
+               <result property="pj_place" column="pj_place"/>
+               <result property="pj_name" column="pj_name"/>   
+            </collection>   
+         </resultMap>   
+
+      <!-- 프로필 리뷰 content-->
+         <resultMap type="List_FreeLancerReview" id="freelancerReview">
+               <id property="freerev_num" column="freerev_num"/>
+               <result property="freerev_cont" column="freerev_cont"/>
+               <result property="freerev_star" column="freerev_star"/>
+               <result property="freerev_rdate" column="freerev_rdate"/>
+               <result property="pro_num" column="pro_num"/>
+               <result property="free_code" column="free_code"/>
+               <result property="mem_email" column="mem_email"/>         
+            <association javaType="mMember" property="mmember">
+               <id property="mem_email" column="mem_email"/>
+                 <result property="mem_name" column="mem_name"/>
+                 <result property="class_num" column="class_num"/>
+                 <result property="mem_status" column="mem_status"/>   
+            </association>
+            <collection property="freeLancerProfile" javaType="java.util.ArrayList" ofType="FreeLancerProfile" >
+                <id property="pro_num" column="pro_num"/>        
+            </collection>            
+         </resultMap>
+               
+      <!-- 인덱스 key-->
+         <resultMap type="freePick" id="key">
+               <id property="free_keynum" column="free_keynum"/>
+               <result property="key_num" column="key_num"/>
+               <result property="free_code" column="free_code"/>
+               <result property="pro_num" column="pro_num"/>    
+            <collection property="frKeyWord" javaType="java.util.ArrayList" ofType="frKeyWord" >
+               <id property="key_num" column="key_num"/>
+               <result property="key_name" column="key_name"/>
+            </collection>
+            <collection property="freeLancerProfile" javaType="java.util.ArrayList" ofType="FreeLancerProfile" >
+                <id property="free_code" column="free_code"/>    
+            </collection>            
+         </resultMap>
+         
+         
+
+   <!-- 리스트 select -->
+         <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
+
+  <select id="profile_select"  parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancerProfile">
+         select * from FREELANCER_PROFILE where free_code=#{free_code}
+    </select>   
+    <select id="countFreeLancer" resultType="int">
+         select count(*) from FreeLancer_Profile where profile_choice=1
+    </select>    
+    
+    <select id="countFreeLancerPaging" resultType="int" parameterType="map">
+         select count(*) from FreeLancer_Profile where profile_choice=1
+         <if test="type != null"> and type_num in
+         <foreach collection ="type" item="type" open="(" separator="," close=")">
+            #{type}
+         </foreach>
+      </if>
+      <if test="grade != null">
+         and
+         <foreach collection="grade" item="grade" index="index" separator="or">
+            <if test="grade==3">
+                pro_exp >=9
+            </if>
+            <if test="grade==2">
+               pro_exp between 4 and 8
+            </if>
+            <if test="grade==1">
+               pro_exp between 1 and 3
+            </if>
+         </foreach>
+      </if>   
+      <if test="pro_place!=null">and PRO_PLACE in
+            <foreach collection ="pro_place" item="pro_place" open="(" separator="," close=")">
+               #{pro_place}
+            </foreach>
+      </if>
+      <if test="searchKey != null">
+         <if test ="searchKey != '%%'">
+            and  PROFILE_SUB like #{searchKey}
+         </if>
+      </if>
+    </select>
+   <select id="SelectList" resultMap="List_FreeLancerResult" parameterType="map">
+         <![CDATA[
+        select * from 
+         (select ROWNUM rnum , aa.* from 
+            (select fp.free_code, free_name
+                           , profile_date
+                           , free_ofname
+                           , free_fname
+                            , fp.PRO_NUM
+                              , PRO_EXP 
+                            , PRO_VCNT
+                             , profile_choice
+                                   , m.class_num
+                                   , pro_pcnt
+                                        from FREELANCER_PROFILE fp
+                                 left outer join FREELANCER f
+                                 on fp.free_code=f.free_code             
+                                              right outer join member m
+                                              on m.mem_email=f.mem_email
+                                                    where profile_choice=1 
+                                                   ]]> 
+                     <if test="type!=null">
+                     and type_num in
+                        <foreach collection ="type" item="type" open="(" separator="," close=")">
+                           #{type}
+                        </foreach>
+                     </if>
+                     <if test="grade!=null">
+                        and
+                        <foreach collection="grade" item="grade" index="index" separator="or">
+                           <if test="grade==3">
+                               pro_exp >=9
+                           </if>
+                           <if test="grade==2">
+                              pro_exp between 4 and 8
+                           </if>
+                           <if test="grade==1">
+                              pro_exp between 1 and 3
+                           </if>
+                        </foreach>
+                     </if>   
+                     <if test="pro_place!=null">
+                     and PRO_PLACE in
+                        <foreach collection ="pro_place" item="pro_place" open="(" separator="," close=")">
+                           #{pro_place}
+                        </foreach>
+                     </if>
+                     <if test="searchKey != null">
+                        <if test ="searchKey != '%%'">
+                           and PROFILE_SUB like #{searchKey}
+                        </if>
+                     </if>
+                     <if test="SortingKey == null">
+                     order by PROFILE_DATE desc
+                     </if>
+                     <if test="SortingKey == 'pro_vcnt'">
+                     order by PRO_VCNT desc
+                     </if>
+                     <if test="SortingKey == 'profile_date'">
+                     order by  PROFILE_DATE desc
+                     </if>
+                  <![CDATA[
+                             )aa)where rnum>=#{PagingVo.start} and rnum <=#{PagingVo.end}                     
+                  ]]>
+   </select>
+   
+      <!-- 리스트페이지 타입 select -->
+   <select id="SelectList2" resultMap="List_FreeLancerResult" parameterType="long">
+     <![CDATA[
+         select fp.free_code
+               , fp.PRO_NUM
+                , profile_choice
+                    , t.TYPE_NUM
+                    , t.TYPE_NAME  
+                        from FREELANCER_PROFILE fp      
+                           right outer join type t
+                           on fp.type_num=t.type_num
+                             where profile_choice=1
+      ]]>         
+   </select> 
+   
+      <!-- 리스트페이지 프로젝트 select -->
+   <select id="SelectList3" resultMap="List_FreeLancerResult" >
+      <![CDATA[      
+         select fp.free_code
+                  , free_name  
+                  , ap.pj_num
+                  , fp.PRO_NUM
+                  , profile_choice
+                        , p.pj_num 
+                        , p.pj_sub 
+                        , m.class_num
+                           from FREELANCER_PROFILE fp
+                        left outer join FREELANCER f
+                        on fp.free_code=f.free_code        
+                                    inner join applied_project ap
+                                    on fp.free_code=ap.free_code
+                                       right OUTER join PROJECT p 
+                                       on ap.pj_num = p.pj_num 
+                                        right outer join member m
+                                        on m.mem_email=f.mem_email
+                                          where profile_choice=1
+                                          and APPP_STATUS=1
+      ]]>   
+   </select> 
+   <!-- 타입 카운트 -->
+   <select id="count_type" resultType="long" parameterType="int">
+      <![CDATA[select count(*) from freelancer_profile where type_num=#{type_num} and profile_choice=1]]>
+   </select>
+   
+   <!-- 컨텐츠 -->
+   <select id="freelancercontent" resultMap="freelancerContent" parameterType="map">
+      <![CDATA[
+         select distinct fp.free_code 
+                     , free_name 
+                     , f.mem_email
+                     , free_fname 
+                     , fp.pro_num
+                     , pro_exp 
+                     , pro_addr 
+                     , pro_workplace 
+                     , pro_vcnt
+                     , pro_edu 
+                     , pro_start 
+                     , pro_ox 
+                     , pro_place 
+                     , pro_cv
+                     , pro_pcnt
+                        from freelancer f, freelancer_profile fp 
+                        where fp.free_code=f.free_code 
+                           and fp.free_code=#{free_code}
+                           and fp.pro_num=#{pro_num}      
+       ]]>      
+   </select>   
+   <!-- 연락처 -->
+   <select id="selectTel"  resultMap="freelancerContent" parameterType="map">
+
+      <![CDATA[
+      SELECT REGEXP_REPLACE(free_tel, '(.{3})(.+)(.{4})', '\1-\2-\3') as free_tel
+         from freelancer f, freelancer_profile fp 
+               where fp.free_code=f.free_code 
+                  and fp.free_code=#{free_code}
+                  and fp.pro_num=#{pro_num}      
+       ]]>
+   </select>
+
+
+
+   <!--프로필 조회수-->
+   <update id="vcnt" parameterType="map">
+   update freelancer_profile set pro_vcnt= pro_vcnt+1 where pro_num=#{pro_num}
+   </update>
+      <!-- 컨텐츠 2-->
+   <select id="freelancercontent2" resultMap="freelancerContent2" parameterType="long">
+     <![CDATA[
+         select fp.free_code 
+               , ap.pj_num
+               , pj_sub
+               , appp_date
+               from freelancer_profile fp
+                  inner join APPLIED_PROJECT ap
+                  on  fp.free_code=ap.free_code
+                     inner join Project p
+                     on ap.pj_num= p.pj_num
+                        where fp.free_code=#{FREE_CODE}
+                        and appp_status=1
+      ]]>
+   </select> 
+      <!-- 컨텐츠 3-->
+   <select id="freelancercontent3" resultMap="freelancerContent3" parameterType="long">
+     <![CDATA[
+         select fp.free_code
+               , fpk.KEY_NUM
+               , KEY_NAME
+               , fp.pro_num
+               , mem_email
+                  from FREELANCER_PROFILE fp
+                     left outer join FREE_PICK_KEYWORD fpk
+                     on fp.FREE_CODE=fpk.FREE_CODE
+                        left outer join KEYWORD k
+                        on fpk.KEY_NUM= k.KEY_NUM
+                           where fp.free_code=#{FREE_CODE}
+                           
+         ]]>      
+   </select> 
+      <!-- 컨텐츠 4-->
+   <select id="freelancercontent4" resultMap="freelancerContent4" parameterType="long">
+     <![CDATA[
+         select fp.FREE_CODE
+               , t.Type_num
+               , TYPE_NAME
+                  from FREELANCER_PROFILE fp
+                     left outer join TYPE t
+                     on t.TYPE_NUM=fp.TYPE_NUM
+                        where FREE_CODE=#{FREE_CODE}
+         ]]>      
+   </select> 
+      <!-- 컨텐츠 5-->
+   <select id="freelancercontent5" resultMap="freelancerContent5" parameterType="long">
+     <![CDATA[
+      select pk.*, key_name,pk.pj_num, p.pj_num , free_code
+          from pj_pick_keyword pk
+              inner join keyword k
+              on pk.key_num = k.key_num
+                  left outer join project p
+                  on pk.pj_num = p.pj_num   
+                        left outer join applied_project ap
+                        on p.pj_num = ap.pj_num 
+                           where free_code=#{free_code}
+     ]]>      
+   </select> 
+   
+   <!-- 별점 -->
+   <select id="selectStar" resultType="List_FreeLancerReview" parameterType="map">
+      <![CDATA[select round(avg(FREEREV_STAR),0) as freerev_star from freelancer_review where free_code=#{free_code}]]>   
+   </select>
+
+      <select id="selectStar_list" resultMap="freelancerReview">
+      <![CDATA[select fp.free_code,round(avg(FREEREV_STAR),0) as freerev_star from freelancer_review fr join freelancer_profile fp on fr.free_code = fp.free_code group by fp.free_code]]>   
+   </select>
+   
+   <!-- 프리랜서 리뷰(+페이징) -->
+   <select id="countReview" resultType="long" parameterType="map">
+           <![CDATA[select count(*) from freelancer_review where free_code=#{free_code} and pro_num=#{pro_num}]]>   
+    </select>
+   <select id="freelancerReview" resultMap="freelancerReview" parameterType="map">
+        <![CDATA[
+      select * from 
+         (select ROWNUM rnum , aa.* from 
+            (select ROWNUM , fr.freerev_num
+                    , fr.freerev_cont
+                          , fr.FREEREV_STAR
+                          , fr.freerev_rdate
+                          , fr.pro_num
+                          , fr.free_code
+                          , fr.mem_email
+                          , mem_name
+                          from freelancer_review  fr
+                           inner join member m
+                             on fr.mem_email = m.mem_email
+                                 inner join freelancer_profile fp
+                                 on fr.pro_num = fp.pro_num
+                                     where fr.fREE_CODE=#{free_code} and fr.pro_num=#{pro_num}
+                                     order by freerev_rdate desc)aa) 
+                                        where rnum>=#{start} and rnum<=#{end}                 
+     ]]>   
+     </select>
+   <select id="selectFile" resultType="Freelancer" parameterType="String">
+           <![CDATA[select free_fname, mem_email from freelancer where mem_email=#{mem_email}]]>   
+    </select> 
+      <select id="selectFile_cor" resultType="Corporation" parameterType="String">
+           <![CDATA[select cor_fname, mem_email from corporation where mem_email=#{mem_email}]]>   
+    </select> 
+     <!-- 인덱스 -->
+    <select id="index_select" resultMap="List_FreeLancerResult">
+        <![CDATA[
+         select fp.free_code, free_name
+                              , profile_date
+                              , free_ofname
+                              , free_fname
+                               , fp.PRO_NUM
+                                 , PRO_EXP 
+                               , PRO_VCNT
+                                , profile_choice
+                                      , m.class_num
+                                      , pro_pcnt
+                                           from FREELANCER_PROFILE fp
+                                    left outer join FREELANCER f
+                                    on fp.free_code=f.free_code             
+                                                 right outer join member m
+                                                 on m.mem_email=f.mem_email
+                                                       where profile_choice=1 
+         ]]>         
+   </select> 
+   <select id="keyname_select" resultMap="key">
+     <![CDATA[
+      select  distinct fp.free_code
+               , fpk.KEY_NUM
+               , KEY_NAME
+               , fp.pro_num
+                  from FREE_PICK_KEYWORD fpk, FREELANCER_PROFILE fp, KEYWORD k
+                     where  fpk.FREE_CODE = fp.FREE_CODE
+                        and fpk.KEY_NUM= k.KEY_NUM
+                                and fp.pro_num = fpk.pro_num
+                                 and profile_choice=1
+     ]]>      
+   </select> 
+     
+     
+    
+   <!-- 리뷰 insert -->
+    <insert id="reviewInsert" parameterType="map" >
+   <![CDATA[
+      insert into freelancer_review (freerev_num, freerev_star,  freerev_cont, freerev_rdate, pro_num, free_code, mem_email)
+   values
+      (freerev_num_seq.nextval,  #{freerev_star}, #{cont}, sysdate, #{pnum} , #{fcode}, #{mem_email})
+         ]]>
+   </insert>
+   <!-- 리뷰 update -->
+    <update id="reviewUpdate" parameterType="long">
+   <![CDATA[
+      update freelancer_review set freerev_star=#{review_star}, freerev_cont= #{freerev_cont}, freerev_rdate=sysdate, where freerev_num= #{freerev_num}
+         ]]>
+   </update>  
+   <!-- 리뷰 delete -->
+    <delete id="reviewDelete" parameterType="long"> 
+   <![CDATA[
+      delete from freelancer_review where freerev_num=#{freerev_num}
+         ]]>
+   </delete> 
+   
+</mapper>
