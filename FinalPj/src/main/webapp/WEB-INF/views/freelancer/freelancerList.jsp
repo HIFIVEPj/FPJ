@@ -200,12 +200,10 @@
                   <c:if test="${list.member.get(0).class_num == 3}">
                      <c:choose>
                                 <c:when test="${list.free_fname != null}">
-                           
+                           <!--  
                            <img src="../hifiveImages/free_thumb/${list.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
-                          
-                           <!-- 
+                           -->
                            <img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${list.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
-                      -->
                         </c:when>
                         <c:otherwise>
                            <i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i>   
@@ -550,8 +548,8 @@
                   +'<div class="d-flex"><div class="media mt-0 p-1"><div class="d-flex mr-3">'
                   if(lists[i].member[0].class_num==3){
                      if(lists[i].free_fname != null){
-                        pageSet+='<img src="../hifiveImages/free_thumb/'+lists[i].free_fname+'" alt="X" class="avatar-xxl brround mx-auto">'
-                    	// pageSet+='<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+lists[i].free_fname+'" alt="X" class="avatar-xxl brround mx-auto">'
+                        //pageSet+='<img src="../hifiveImages/free_thumb/'+lists[i].free_fname+'" alt="X" class="avatar-xxl brround mx-auto">'
+                    	 pageSet+='<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+lists[i].free_fname+'" alt="X" class="avatar-xxl brround mx-auto">'
                      }else{
                         pageSet+='<i class="fa fa-user-circle text-muted mr-1 fa-3x" ></i>'
                      }
@@ -680,4 +678,5 @@
    </script>
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 <!--/footer-->

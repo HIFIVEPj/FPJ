@@ -59,12 +59,10 @@
 											   <!--	<img src="../images/faces/female/25.jpg" class="w100 h-100 brround" alt="user">   --> 
 											<div style="margin-top:21px;">   
  											<c:if test="${content.get(0).freelancer.get(0).free_fname ne null}">
-												
+												<!--
 												<img src="../hifiveImages/free_thumb/${content.get(0).freelancer.get(0).free_fname}" alt="X" class="avatar-xxl brround"> 
-												
-											<!--	
+												-->
 												<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${content.get(0).freelancer.get(0).free_fname}" alt="X" class="avatar-xxl brround"> 
-											-->
 											</c:if> 
 											<c:if test="${content.get(0).freelancer.get(0).free_fname eq null}">
 												<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>	
@@ -297,21 +295,17 @@
                                          <div>
                                             <c:choose>
                                           <c:when test="${cnames.cor_fname ne null }">
-                                          	
+                                          	<!--
                                              <img src="../hifiveImages/cor_thumb/${cnames.cor_fname}" alt="X" class="avatar-xxl brround">
                                              -->
-                                             <!--
                                              <img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cnames.cor_fname}" alt="X" class="avatar-xxl brround">
-                                         -->
                                           </c:when>
                                        
                                           <c:when test="${ fnames.free_fname ne null}">
-                                          	
+                                          	<!--
                                              <img src="../hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround">
-                                             
-                                             <!--
+                                             -->
                                              <img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${fnames.free_fname}" alt="X" class="avatar-xxl brround">
-                                         -->
                                           </c:when>
                            
                                           <c:otherwise>
@@ -697,8 +691,8 @@
 				+'<div id="replyItem0" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: 0px; display: inline-block" >'
 				+'<div class="media mt-0 p-5">';		
 				if(fcnt > 0){
-					cont+='<div><img  alt="X" class="avatar-xxl brround" src="../hifiveImages/free_thumb/'+fname+'">';
-					//cont+='<div><img  alt="X" class="avatar-xxl brround" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+fname+'">';
+					//cont+='<div><img  alt="X" class="avatar-xxl brround" src="../hifiveImages/free_thumb/'+fname+'">';
+					cont+='<div><img  alt="X" class="avatar-xxl brround" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+fname+'">';
 				}else{
 					cont+='<i class="fa fa-user-circle text-muted mr-1 fa-5x" ></i>';	
 				}
@@ -789,4 +783,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 <!--/footer-->

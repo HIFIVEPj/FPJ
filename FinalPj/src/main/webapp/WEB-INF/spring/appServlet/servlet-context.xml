@@ -22,8 +22,10 @@
       <resources mapping="/video/**" location="/resources/video/" />
       <resources mapping="/sound/**" location="/resources/sound/" />
       <resources mapping="/summernote/**" location="/WEB-INF/views/summernote/" />
+      <resources mapping="/marketThumbnails/**" location="/resources/marketThumbnails/" />
+      <!-- 
       <resources mapping="/hifiveImages/**" location="file:///C:/hifive/hifiveImages/" />
-    
+      -->
       <!-- for aws -->
       <!-- /for aws -->
    
@@ -82,4 +84,5 @@
 	<context:component-scan base-package="fp.login.controller" />
 	<context:component-scan base-package="fp.login.api" />
 </beans:beans>
+
 

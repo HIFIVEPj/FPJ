@@ -80,11 +80,12 @@
 									<div id="carousel" class="carousel slide" data-ride="carousel">
 										<!--<div class="arrow-ribbon2 bg-primary">$539</div>-->
 										<div class="carousel-inner">
-											 
+
+											<!-- 
 											<div class="carousel-item active"> <img src="../hifiveImages/marketThumbnails/${market.market_fname}" alt="img"> </div>
-										 <!--
+										 -->
 										 	<div class="carousel-item active"> <img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${market.market_fname}" alt="img"> </div>
-										-->
+
 										<!--
 											<div class="carousel-item"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
@@ -285,9 +286,9 @@
                                    			<c:when test="${marketRev.member.class_num==2||marketRev.member.class_num==3}">
                                    				<c:if test="${marketRev.freelancer!=null}">
                                    					<c:if test="${marketRev.freelancer.free_fname!=null}">
-                                   					<!-- <a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
-                                   					 -->
-                                     		  			<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
+
+                                     		  			<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
+
                                    					</c:if>
                                    					<c:if test="${marketRev.freelancer.free_fname==null}">
                                      		  			<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
@@ -509,12 +510,12 @@
 	                                   			<c:when test="${marketQA.member.class_num==2||marketQA.member.class_num==3}">
 	                                   				<c:if test="${marketQA.freelancer!=null}">
 		                                   				<c:if test="${marketQA.freelancer.free_fname!=null}">
-		                                   				
+
+		                                   				<!-- 
 		                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
-		                                   				
-		                                   				 <!-- 
-		                                   				 <a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
 		                                   				 -->
+		                                   				 <a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
+
 		                                   				</c:if>
 		                                   				<c:if test="${marketQA.freelancer.free_fname==null}">
 		                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
@@ -528,12 +529,13 @@
 	                                   			<c:when test="${marketQA.member.class_num==4}">
 	                                   				<c:if test="${marketQA.corporation!=null}">
 	                                   					<c:if test="${marketQA.corporation.cor_fname!=null}">
-	                                   					
+
+	                                   					<!-- 
 	                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/cor_thumb/${marketQA.corporation.cor_fname}"> </a>
-	                                     		  		
-	                                     		  		<!-- 
-	                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${marketQA.corporation.cor_fname}"> </a>
 	                                     		  		-->
+	                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${marketQA.corporation.cor_fname}"> </a>
+	                                     		  		
+
 	                                     		  		</c:if>
 	                                     		  		<c:if test="${marketQA.corporation.cor_fname==null}">
 		                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
@@ -730,11 +732,13 @@
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
 									<c:if test="${freeProfile.freelancer.free_fname!=null}">
-									
+
+									<!-- 
 										<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
-									<!--  
+									 -->
 									 	<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
-									-->
+									
+
 									</c:if>
 									<c:if test="${freeProfile.freelancer.free_fname==null}">
 										<img src="" class="fa fa-user-circle text-muted mr-1 fa-5x" alt="">
@@ -946,11 +950,12 @@
 										<li class="news-item">
 											<table cellpadding="4">
 												<tr>
-													<td>
+
+													<td><!-- 
 													<img src="hifiveImages/marketThumbnails/${similarMList.market_fname}" />
-													 <!-- 
+													 -->
 													 <img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${similarMList.market_fname}" />
-													-->
+
 													</td>
 													<td>
 														<h5 class="mb-1 ">${similarMList.market_sub}</h5>
@@ -988,11 +993,12 @@
 													<img class="mr-4" src="" alt="">
 												</c:if>
 												<c:if test="${similarFree.freelancer.free_fname!=null}">
-												
+
+												<!-- 
 													<img class="mr-4" src="../hifiveImages/free_thumb/${similarFree.freelancer.free_fname}" alt="img">
-												 <!-- 
+												 -->
 												 	<img class="mr-4" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${similarFree.freelancer.free_fname}" alt="img">
-												-->
+												
 												</c:if>
 													<div class="media-body">
 														<h4 class="mt-2 mb-1">${similarFree.freelancer.free_name}</h4>
@@ -1452,8 +1458,10 @@ obShareUrl.value=window.document.location.href;
 				    		for(i=0;i<marketQAcont.marketQAFile.length;i++){	    			
 				    			images +='<div class="carousel-inner">';
 				    			
-				    			images +='<div class="carousel-item active"> <img src="../hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
-				    			//images +='<div class="carousel-item active"> <img src="/home/ubuntu/hifive/hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+
+				    			//images +='<div class="carousel-item active"> <img src="../hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+				    			images +='<div class="carousel-item active"> <img src="/home/ubuntu/hifive/hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+
 				    			
 				    			images +='</div>';	
 				    		}
@@ -1768,8 +1776,10 @@ obShareUrl.value=window.document.location.href;
 	    			}
 		    		if(data[0].marketQAList[i].freelancer!=null){
 		    			if(data[0].marketQAList[i].freelancer.free_fname!=null){
-		    				html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketQAList[i].freelancer.free_fname+'"> </a>';
-		    				//html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketQAList[i].freelancer.free_fname+'"> </a>';
+
+		    				//html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketQAList[i].freelancer.free_fname+'"> </a>';
+		    				html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketQAList[i].freelancer.free_fname+'"> </a>';
+
 			    			
 		    			}else{
 		    				html+='<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
@@ -1777,8 +1787,10 @@ obShareUrl.value=window.document.location.href;
 		    		}
 	    		}else if(data[0].marketQAList[i].member.class_num==4){
 	    			if(data[0].marketQAList[i].corporation==null){
-	    				html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/cor_thumb/'+data[0].marketQAList[i].corporation.cor_fname+'"> </a>';
-	    				//html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/cor_thumb/'+data[0].marketQAList[i].corporation.cor_fname+'"> </a>';
+
+	    				//html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/cor_thumb/'+data[0].marketQAList[i].corporation.cor_fname+'"> </a>';
+	    				html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/cor_thumb/'+data[0].marketQAList[i].corporation.cor_fname+'"> </a>';
+
 	    	    		
 	    			}
 		    		if(data[0].marketQAList[i].corporation!=null){
@@ -1936,8 +1948,10 @@ obShareUrl.value=window.document.location.href;
 				if(data[0].marketrevList[i].member.class_num==2||data[0].marketrevList[i].member.class_num==3){//개인일때 		
 					if(data[0].marketrevList[i].freelancer!=null){
 						if(data[0].marketrevList[i].freelancer.free_fname!=null){
-			    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
-			    			//html += '<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
+
+			    			//html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
+			    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
+
 			    			
 			    			html += '</div>';
 		    			}else{
@@ -1950,8 +1964,10 @@ obShareUrl.value=window.document.location.href;
 	    		}else if(data[0].marketrevList[i].member.class_num==4){
 	    			if(data[0].marketrevList[i].corporation!=null){
 	    				if(data[0].marketrevList[i].corporation.cor_fname!=null){
-			    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
-			    			//html += '<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
+
+			    			//html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
+			    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
+
 			    			
 			    			html += '</div>';
 		    			}

@@ -487,5 +487,4 @@ public class FreeLancerListController {
       proService.freepick_del(map);
    }
 
-
 }

@@ -1,4 +1,3 @@
-
 package fp.freelancerprofile.service;
 
 import java.util.*;
@@ -222,4 +221,3 @@ public class FreeLancerProfileServiceImpl implements FreeLancerProfileService{
 		mapper.updateACCT(freeacct);
 	}
 }
-

@@ -170,11 +170,12 @@
                                        <div class="col-lg-6 border-right">
                                           <div class=" pb-0 image-zoom-container">
                                              <div class="small-img">
-                                             	
+
+                                             	<!--
                                                 <img src="../hifiveImages/marketThumbnails/${market.market_fname}" class="icon-left" alt="" id="prev-img">
-                                              <!-- 
+                                                -->
                                                 <img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${market.market_fname}" class="icon-left" alt="" id="prev-img">
-                                              -->
+
                                              </div>
                                           </div>
                                        </div>

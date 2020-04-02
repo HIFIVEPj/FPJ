@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -59,11 +58,10 @@
 										</c:if>
 										<c:if test = "${getFileName.get(0).free_fname ne null}">
 											<div class="avatar-xxl brround" style="margin:0 auto;">
-												
+												<!--
 												<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
-											<!--	
+												-->
 												<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
-											-->
 											</div>
 										</c:if>
 									</div>
@@ -2514,4 +2512,5 @@
 
 <!--footer-->
 <%@ include file="/WEB-INF/views/include/footer.jsp"%>
+>>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 <!--/footer-->

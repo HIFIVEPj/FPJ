@@ -88,11 +88,18 @@ $(document).ready(function() {
 								</c:if>
 								<c:if test = "${free.free_fname ne null}">
 									<div class="profile-pic-img">
+<<<<<<< HEAD
 										
 										<img src="../hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
 									<!--	
 										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
 									-->
+=======
+										<!--
+										<img src="../hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
+										-->
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
+>>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -168,11 +175,12 @@ $(document).ready(function() {
 													<div class="media mt-0 mb-0">
 													 	<div class="card-aside-img">
 															<a href="market-content?market_num=${mBuyList.market_num }"></a>
-															
+
+															<!--
 															<img src="../hifiveImages/marketThumbnails/${mBuyList.market.market_fname}" alt="img">
-														<!--	
+															-->
 															<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${mBuyList.market.market_fname}" alt="img">
-														-->
+
 														</div>
 																										
 														 <div class="media-body">
@@ -214,7 +222,10 @@ $(document).ready(function() {
 												   <c:if test="${mBuyList.mbuysell_state==2 }">
 												      <a href="#" class="badge badge-warning">거래취소</a>
 												   </c:if>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 												</td>
 												<td class="font-weight-semibold fs-16" align="center">
 													${mBuyList.mbuysell_date}

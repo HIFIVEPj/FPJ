@@ -378,12 +378,12 @@
 		                        		<c:if test="${qa_content.class_num eq 2 or qa_content.class_num eq 3}">
 		                        			<c:choose>
 			                            		<c:when test="${qa_content.free_fname ne null}">
-			                            			
+			                            			<!--
 													<a href="#"><img src="../hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
-													
-													<!--
-													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
 													-->
+													
+													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${qa_content.free_fname}" alt="X" class="media-object brround"> </a>
+													
 												</c:when>
 												<c:otherwise>
 													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
@@ -393,12 +393,12 @@
 		                            	<c:if test="${qa_content.class_num eq 4}">
 		                            		<c:choose>
 			                            		<c:when test="${qa_content.cor_fname ne null}">
-			                            			
+			                            			<!--
 													<a href="#"><img src="../hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
-													
-													<!--
-													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
 													-->
+													
+													<a href="#"><img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${qa_content.cor_fname}" alt="X" class="media-object brround"> </a>
+													
 												</c:when>
 												<c:otherwise>
 													<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>
@@ -1271,15 +1271,19 @@
 			    	   str +="	<a href='#'><img src='../images/hifive.png' alt='X' class='media-object brround'> </a>";
 			       }else if(list[i].class_num == 2 || list[i].class_num == 3){
 			       		if(list[i].free_fname != null){
-			       str +="			<a href='#'><img src='../hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
-			      // str +="		<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+
+			       //str +="			<a href='#'><img src='../hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+			       str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/free_thumb/"+list[i].free_fname+"' alt='X' class='media-object brround'> </a>";
+
 			       		}else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";		
 			       		}    	
 			       }else if(list[i].class_num == 4){
 			    	    if(list[i].cor_fname != null){
-			       str +="			<a href='#'><img src='../hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
-			       // str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+
+			       //str +="			<a href='#'><img src='../hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+			       str +="			<a href='#'><img src='/home/ubuntu/hifive/hifiveImages/cor_thumb/"+list[i].cor_fname+"' alt='X' class='media-object brround'> </a>";
+
 			    	    }else{
 			       str +="			<a class='icons'><i class='fa fa-user-circle text-muted mr-1 fa-3x'></i></a>";    	
 			    	    }
