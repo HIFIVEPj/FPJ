@@ -832,10 +832,11 @@
 											
 											<div class="item-card-img">
 												<a href="market-content?market_num=${list.market_num}"></a>
-												<!--
+												
 												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
-												-->
+											<!--	
 												<img  src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
+											-->
 											</div>
 									<!-- 즐겨찾기 설정 상태 -->
 										 <!-- 
@@ -961,10 +962,11 @@
 						<div class="card-body">
 							<c:choose>
                                 <c:when test="${freelancer.free_fname != null}">
-                                	<!--
+                                	
 									<img src="../hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
-									-->
+								<!--	
 									<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
+								-->
 								</c:when>
 								<c:otherwise>
 								 <center><i class="fa fa-user-circle text-muted mr-1 fa-5x avatar-xxl brround mx-auto"></i></center>
