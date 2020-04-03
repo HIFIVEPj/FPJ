@@ -157,7 +157,11 @@
 											<h4 class="card-header"><strong>등급할인</strong></h4>
 											<br/>
 											<span class="text-dark" style="margin-right:10px;"><strong>등급</strong></span>
-											<span>${corInfo.cor_level}</span><br/><br/>
+											<span>
+											<c:if test="${corInfo.cor_level==0}"><img src="../images/photos/bronze100.png" alt="브"  width="2%">&nbsp; <b>Bronze</b></c:if>
+											<c:if test="${corInfo.cor_level==1}"><img src="../images/photos/silver100.png" alt="실" width="2%"> &nbsp; <b>Silver</b></c:if>
+											<c:if test="${corInfo.cor_level==2}"><img src="../images/photos/gold100.png" alt="골"  width="2%">&nbsp; <b>Gold</b></c:if>
+											</span><br/><br/>
 											<span class="text-dark" style="margin-right:10px;"><strong>프로젝트 등록금액</strong></span>
 											<span><strong><fmt:formatNumber value="${((projectCont.pj_pay/200) + (projectCont.pj_recnum * projectCont.pj_pay)/100)}" pattern="#,###,###,###" />원</strong></span>
 											
@@ -222,7 +226,7 @@
 												</div>
 											</div>
 											<center>
-											<button onclick="requestPay()" type="button" class="btn btn-primary">결제</button>
+											<button onclick="requestPay()" type="button" class="btn btn-primary">이건데 왜 안먹히지</button>
 											</center>
 										</div>				
 									</div>

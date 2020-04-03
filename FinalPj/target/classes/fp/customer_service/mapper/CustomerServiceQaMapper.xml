@@ -23,7 +23,17 @@
 		<!--
 		select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, replyCnt, qa.option2, qa.option3, mem_name, class_num, cor_fname, cor_name, cor_type, free_fname, type_num, pro_exp from qa left outer join member on member.mem_email=qa.mem_email left outer join corporation on qa.mem_email=corporation.mem_email left outer join freelancer on qa.mem_email = freelancer.mem_email left outer join freelancer_profile on qa.mem_email = freelancer_profile.mem_email where qa_num=#{qa_num}
 		-->
+		<!--  
 		select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum, replyCnt, qa.option2, qa.option3, mem_name, class_num, cor_fname, cor_name, cor_type, free_fname, freelancer_profile.type_num, type_name, pro_exp, pro_num, freelancer_profile.free_code, profile_choice from qa left outer join member on member.mem_email=qa.mem_email left outer join corporation on qa.mem_email=corporation.mem_email left outer join freelancer on qa.mem_email = freelancer.mem_email left outer join freelancer_profile on qa.mem_email = freelancer_profile.mem_email left outer join type on freelancer_profile.type_num=type.type_num where qa_num=#{qa_num}
+		-->
+		select qa_num, qa.mem_email, qa_sub, qa_cont, qa_rdate, qa_vcnt, qa_prnum, qa_lev, qa_sun, qa_ox, qa_cate, qa_recommnum,
+		replyCnt, qa.option2, qa.option3, mem_name, class_num, cor_fname, cor_name, cor_type, free_fname, freelancer_profile.type_num, 
+		type_name, pro_exp, pro_num, freelancer_profile.free_code, profile_choice from
+		qa left outer join member on member.mem_email=qa.mem_email 
+		left outer join corporation on qa.mem_email=corporation.mem_email 
+		left outer join freelancer on qa.mem_email = freelancer.mem_email 
+		left outer join freelancer_profile on freelancer_profile.profile_choice=1 and freelancer_profile.free_code = freelancer.free_code 
+		left outer join type on type.type_num = freelancer_profile.type_num where qa_num=#{qa_num}
 	</select>
 	
 	<update id="qa_vcnt" parameterType="long">

@@ -26,7 +26,6 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Project> list(Map<String, Object> map) {
 		return mapper.list(map);
 	}
-
 	@Override
 	public long getTotalCount(Map<String, Object> map) {
 		return mapper.getTotalCount(map);
@@ -137,7 +136,15 @@ public class ProjectServiceImpl implements ProjectService {
 	@Transactional
 	public void applied_pj(Map<String, Object>map) {
 		mapper.applied_pj(map);
-		pjpick_del(map);
+		List<Long> pjNumLong = new ArrayList<Long>();
+		
+		List<ProjectPick>list = mapper.pjpick_list((long)map.get("free_code"));
+		for(int i=0; i<list.size(); i++) {
+			pjNumLong.add(list.get(i).getPj_num());
+		}
+		if(pjNumLong.contains((long)map.get("pro_num"))) {
+			pjpick_del(map);
+		}
 	}
 	@Override
 	public AppliedProject select_applied_pj(Map<String, Object>map) {

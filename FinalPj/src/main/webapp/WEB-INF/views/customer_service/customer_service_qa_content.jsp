@@ -156,6 +156,7 @@
 
 							<div class="card-body text-justify">	
 								<p>${qa_content.qa_cont}</p>
+								<span> ${qa_recommend_names}</span>
 							</div>
 							<!--
 							<div class="card-footer mx-auto" style="border-top: #fff;">	
@@ -199,11 +200,11 @@
 										-->
 										<div id="recomm${qa_content.qa_num}">
 											<c:if test="${!empty qa_recommend_names}">
-												<!--
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="del_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="${qa_recommend_names}">
-												-->
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}">
 												
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="${qa_recommend_names}">
+												<!--
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}">
+												-->
 													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
 													<!--
 													<i class="fa fa-thumbs-up"></i>
@@ -211,11 +212,12 @@
 													<i class="fa fa-thumbs-up" style="color:#e8564a"></i>
 												</a>
 											</c:if>
+											
 											<c:if test="${empty qa_recommend_names}">
-												<!--
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="del_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="추천하기">
-												-->
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}">
+												
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="추천하기">
+												
+												<!--<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:del_recomm(${qa_content.qa_num});" id="del_recomm${qa_content.qa_num}">-->
 												
 													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
 													<!--
@@ -232,21 +234,21 @@
 										-->
 										<div id="recomm${qa_content.qa_num}">
 											<c:if test="${!empty qa_recommend_names}">
-												<!--
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="insert_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="${qa_recommend_names}">
-												-->
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}">
 												
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="${qa_recommend_names}">
+												<!--
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}">
+												-->
 													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
 													<i class="fa fa-thumbs-o-up"></i>
 												</a>
 											</c:if>
 											<c:if test="${empty qa_recommend_names}">
-												<!--
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num}); javascript:removeTooltip();" id="insert_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="추천하기">
-												-->
-												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}">
 												
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}" data-toggle="tooltip" data-placement="bottom" title="추천하기">
+												<!--
+												<a class="btn btn-app" href="javascript:void(0)" onclick="javascript:add_recomm(${qa_content.qa_num});" id="insert_recomm${qa_content.qa_num}">
+												-->
 													<span class="badge badge-pill bg-blue">${qa_content.qa_recommnum}</span>
 													<i class="fa fa-thumbs-o-up"></i>
 												</a>
@@ -254,11 +256,11 @@
 										</div>									
 									</c:otherwise>	
 								</c:choose>
-								
+								<!-- 
 								<div id="recomm${qa_content.qa_num}">
 								
 								</div>
-					
+					 -->
 							</c:if>
 							
 							
@@ -268,7 +270,7 @@
 								//$('[data-toggle="tooltip"]').tooltip({
 								//       trigger : 'hover'
 								//});
-								$('[data-toggle="tooltip"]').tooltip('option', 'remove');
+								//$('[data-toggle="tooltip"]').tooltip('option', 'remove');
 								//alert("2");
 							}
 							
@@ -307,13 +309,15 @@
 										console.log(data);
 										//alert(data.qa_recommnum);
 										$('#insert_recomm'+qa_num).remove();
+										alert(data.qa_recommend_names[0]);
 										//add_recomm(qa_num, qa_recommnum);
 										//$('#insert_recomm'+qa_num);
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-up'></i></a>");
-										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+"); javascript:removeTooltip();' id='del_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
-										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
+										alert("1");
+										$('#recomm'+qa_num).prepend("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+");' id='del_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+qa_num+")' id='del_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
 										//alert("qa_recommnum add after: " + qa_recommnum);
 										//$('#insert_recomm'+qa_num).tooltip('destroy');
 									},
@@ -344,13 +348,14 @@
 										console.log(data);
 										//alert(data.qa_recommnum);
 										$('#del_recomm'+qa_num).remove();
+										alert(data.qa_recommend_names[0]);
 										//del_recomm(qa_num, qa_recommnum);
 										//$('#del_recomm'+qa_num);
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>"+qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue' id='recomm"+qa_num+"'>${qa_content.qa_recommnum}</span><i class='fa fa-thumbs-o-up'></i></a>");
-										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+"); javascript:removeTooltip();' id='insert_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
-										$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+										$('#recomm'+qa_num).prepend("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+"); ' id='insert_recomm"+qa_num+"' data-toggle='tooltip' data-placement='bottom' title='"+data.qa_recommend_names+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
+										//$('#recomm'+qa_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+qa_num+")' id='insert_recomm"+qa_num+"'><span class='badge badge-pill bg-blue'>"+data.qa_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 										//alert("qa_recommnum del after: " + qa_recommnum);
 										//$('#del_recomm'+qa_num).tooltip('destroy');
 									},

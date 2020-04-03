@@ -14,7 +14,7 @@
 		<!--Sliders Section-->
 		<section>
         <div id="output"></div>
-			<div class="banner-2 cover-image sptb-2 sptb-tab bg-background2" data-image-src="../images/banners/education.jpg">
+			<div class="banner-2 cover-image sptb-2 sptb-tab bg-background2" data-image-src="../images/banners/test10.png">
 				<div class="header-text mb-0">
 					<div class="container">
 						<div class="text-center text-white ">
@@ -317,7 +317,7 @@
 								<div class="tab-pane" id="tab-2">
 				<!--Project section-->
 					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
-					<c:forEach items="${pjList}" var="pjList">
+					<c:forEach items="${pjListDevelop}" var="pjList">
 					<c:choose>
 					<c:when test ="${pjList.type_num==1}">
 						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
@@ -414,7 +414,7 @@
 								<div class="tab-pane" id="tab-3">
 				<!--Project section-->
 					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
-					<c:forEach items="${pjList}" var="pjList">
+					<c:forEach items="${pjListPubli}" var="pjList">
 					<c:choose>
 					<c:when test ="${pjList.type_num==2}">
 						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
@@ -510,7 +510,7 @@
 								<div class="tab-pane" id="tab-4">
 				<!--Project section-->
 					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
-					<c:forEach items="${pjList}" var="pjList">
+					<c:forEach items="${pjListDesign}" var="pjList">
 					<c:choose>
 					<c:when test ="${pjList.type_num==3}">
 						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
@@ -606,7 +606,7 @@
 								<div class="tab-pane" id="tab-5">
 				<!--Project section-->
 					<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
-					<c:forEach items="${pjList}" var="pjList">
+					<c:forEach items="${pjListPlan}" var="pjList">
 					<c:choose>
 					<c:when test ="${pjList.type_num==4}">
 						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">
@@ -702,7 +702,7 @@
 								<div class="tab-pane" id="tab-6">
 				<!--Project section-->
 				<div class="row" style="margin:0 auto; align:center;padding-left:9%;">
-					<c:forEach items="${pjList}" var="pjList">
+					<c:forEach items="${pjListEtc}" var="pjList">
 					<c:choose>
 					<c:when test ="${pjList.type_num==5}">
 						<div class="card overflow-hidden col-xl-5 projectBack" style="margin-left:2%">

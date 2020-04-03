@@ -461,7 +461,6 @@
 					success: function(data){
 						$('#insertwish'+pj_num).remove();
 						$('#zzim'+pj_num).append("<a href='javasript:void(0)' class='item-card9-icons' id='delwish"+pj_num+"' style='margin-right:40%; background-color:#e8564a' onclick='javascript:del_wish("+pj_num+")'><i class='fa fa fa-heart' style='color:white'></i></a>");
-						alert("프로젝트가 찜목록에 추가되었습니다.")
 					},
 					error: function(data){
 					alert("에러발생");

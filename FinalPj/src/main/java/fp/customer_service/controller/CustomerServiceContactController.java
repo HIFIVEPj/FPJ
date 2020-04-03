@@ -27,4 +27,9 @@ public class CustomerServiceContactController {
 	public String customer_service_contact() {
 		return "customer_service/customer_service_contact";
 	}
+	
+	@RequestMapping("customer_service_intro")
+	public String customer_service_intro() {
+		return"customer_service/customer_service_intro";
+	}
 }

@@ -13,6 +13,7 @@ import fp.corporation.vo.ProjectVo;
 
 public interface ProjectMapper {
 	List<Project> list (Map<String, Object> map);
+	List<Project> list_index();
 	long getTotalCount(Map<String, Object> map);
 	List<Project> pjKeywords();
 	Project content(long pj_num);

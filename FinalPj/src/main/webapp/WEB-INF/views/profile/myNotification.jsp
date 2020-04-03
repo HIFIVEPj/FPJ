@@ -142,7 +142,7 @@
 											<c:if test="${dto.not_cate eq 'market'}">
 												<td class="text-primary"><b>마켓 상품 구매자</b></td>
 											</c:if>
-												<td><a href="managed_project">${dto.not_message}</a></td>
+												<td><a href="myMarket2">${dto.not_message}</a></td>
 												<td>${dto.not_datetime}</td>
 									
 												<td>

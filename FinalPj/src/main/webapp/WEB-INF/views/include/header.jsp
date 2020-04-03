@@ -191,6 +191,7 @@
 				type : 'GET',
 				dataType: 'json',
 				success : function(data) {
+					
 					var noReadNotice = data.countNots;
 					var lists = data.nots;
 					 var cnt = lists.length;
@@ -255,11 +256,13 @@
 		 	console.log("ReceivMessage : " + data + "\n");
 		 	var dataSplit = data.split(']');
 			if(dataSplit[0]=="apply"){
+				play();
 				alarmUpdate();
 				return $.growl.notice({
 					message:dataSplit[1]
 				});
 			}else if(dataSplit[0]=="market"){
+				play();
 				alarmUpdate();
 				return $.growl.warning({
 					message:dataSplit[1]
@@ -269,7 +272,7 @@
 	 
 	    sock.onclose = function() {
 	      	console.log('connect close');
-	      	setTimeout(function(){conntectWs();} , 180000);
+	      	setTimeout(function(){conntectWs();} , 600000);
 	    };
 	 
 	    if(session==''){
@@ -279,11 +282,23 @@
 	 
 	   }
 	   
+	   <!-- 알림 사운드 테스트 -->
+     
+          function play() { 
+              var audio = document.getElementById('notification_sound'); 
+              if (audio.paused) { 
+                  audio.play(); 
+              }else{ 
+                  audio.pause(); 
+                  audio.currentTime = 0 
+              } 
+          } 
         </script>
+        
 	</head>
 	<body>
 
-
+ 	<audio id='notification_sound' src='../sound/Doorbell3.wav'></audio> 
 		<!--Loader-->
 		<div id="global-loader">
 			<img src="../images/other/loader.svg" class="loader-img floating" alt="" >
@@ -430,7 +445,7 @@
 								</li>
 								<li aria-haspopup="true"><a href="#">고객센터 <span class="fa fa-caret-down m-0"></span></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="construction">하이파이브 소개</a></li>
+										<li aria-haspopup="true"><a href="customer_service_intro">하이파이브 소개</a></li>
 										<li aria-haspopup="true"><a href="customer_service_notice">공지사항</a></li>
 										<li aria-haspopup="true"><a href="customer_service_faq">FAQ</a></li>
 										<li aria-haspopup="true"><a href="customer_service_qa">문의하기</a></li>

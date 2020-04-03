@@ -95,7 +95,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function initialize(location) {
           var id;
           id = 'growls-' + location;
-          return $('section:not(:has(#' + id + '))').append('<div id="' + id + '" style="position:absolute; top:10px; right:0px; z-index:100000000000;" />');
+          return $('section:not(:has(#' + id + '))').append('<div id="' + id + '" style="position:fixed; top:10px; right:0px; z-index:100000000000;" />');
         }
       }, {
         key: "render",
