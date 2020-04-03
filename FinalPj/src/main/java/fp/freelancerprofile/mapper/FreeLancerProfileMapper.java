@@ -45,7 +45,7 @@ public interface FreeLancerProfileMapper {
 	
 	//프로필 작성페이지 수정//
 	public void listUpdate(FreeLancerProfile freelancerprofile);
-	public void typeUpdate(int type_num);
+	
 	//public void keyUpdate(Map<String, Object> map);
 	public void keyUpdate(FreePickKeyWord freepickkeyword);
 	//public void keyDelete(Map<String, Object> map);

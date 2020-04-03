@@ -30,7 +30,7 @@
 		<div class="bg-white border-bottom">
 			<div class="container">
 				<div class="page-header">
-					<h4 class="page-title">공지사항</h4>
+					<h4 class="page-title">Notice</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="../">Home</a></li>
 						<li class="breadcrumb-item">고객센터</li>
@@ -182,7 +182,7 @@
 										$('#recomm'+notice_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:del_recomm("+notice_num+")' id='del_recomm"+notice_num+"'><span class='badge badge-pill bg-blue'>"+data.notice_recommnum+"</span><i class='fa fa-thumbs-up' style='color:#e8564a'></i></a>");
 									},
 									error: function(data){
-										alert("실패1");
+										//alert("실패1");
 									}
 								});
 							}
@@ -199,7 +199,7 @@
 										$('#recomm'+notice_num).append("<a class='btn btn-app' href='javascript:void(0)' onclick='javascript:add_recomm("+notice_num+")' id='insert_recomm"+notice_num+"'><span class='badge badge-pill bg-blue'>"+data.notice_recommnum+"</span><i class='fa fa-thumbs-o-up'></i></a>");
 									},
 									error: function(data){
-										alert("실패2");
+										//alert("실패2");
 									}
 								});
 							}
@@ -219,12 +219,14 @@
 								<!--
 								<input type="button" class="btn btn-primary waves-effect waves-light" value="삭제" onclick="delete(${notice_content.notice_num})">
 								-->
-								<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
-								<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_notice_modify?notice_num=${notice_content.notice_num}';">
-
-								
-								<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_notice';">				
-								<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
+								<c:if test="${sessionScope.class_num eq 1}">
+									<input type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target="#smallModal1" value='삭제'>
+									<input type="button" class="btn btn-primary waves-effect waves-light" value="수정" onclick="location.href='customer_service_notice_modify?notice_num=${notice_content.notice_num}';">
+								</c:if>
+									<input type="button" class="btn btn-primary waves-effect waves-light" value="목록" onclick="location.href='customer_service_notice';">
+								<c:if test="${sessionScope.class_num eq 1}">
+									<a href="customer_service_notice_write" class="btn btn-danger"><i class="si si-pencil"></i>&nbsp;글쓰기</a>
+								</c:if>
 							</div>
 						</div>
 					</div>

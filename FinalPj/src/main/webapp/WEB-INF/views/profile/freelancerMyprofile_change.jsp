@@ -6,23 +6,38 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--/header-->
 
-		<!--Breadcrumb-->
-		<section>
-			<div class="bannerimg cover-image bg-background3" data-image-src="../images/banners/banner2.jpg">
-				<div class="header-text mb-0">
+		<!--Sliders Section-->
+		<div>
+			<div class="bannerimg cover-image sptb-2 bg-background" data-image-src="../images/banners/banner1.jpg">
+				<div class="header-text1 mb-0">
+					<div id="particles-js" ></div>
 					<div class="container">
-						<div class="text-center text-white ">
-							<h1 class="">My Dashboard</h1>
-							<ol class="breadcrumb text-center">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item text-white" aria-current="page">My Dashboard</li>
-							</ol>
+						<div class="row">
+							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
+								<div class="text-center text-white ">
+									<h1 class="" style="margin-bottom:0rem;">회원정보</h1>
+								</div>
+							</div>
 						</div>
 					</div>
+				</div><!-- /header-text -->
+			</div>
+		</div>
+		<!--/Sliders Section-->
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Profile</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item">프리랜서</li>
+						<li class="breadcrumb-item active" aria-current="page">회원정보</li>
+					</ol>
 				</div>
 			</div>
-		</section>
-		<!--Breadcrumb-->
+		</div>
+		<!--/Breadcrumb-->
 
 		<!--User Dashboard-->
 		<section class="sptb">
@@ -44,7 +59,10 @@
 										</c:if>
 										<c:if test = "${getFileName.get(0).free_fname ne null}">
 											<div class="avatar-xxl brround" style="margin:0 auto;">
+												<!--
 												<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
+												-->
+												<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
 											</div>
 										</c:if>
 									</div>
@@ -61,6 +79,9 @@
 												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
+										<li>
+			                                 <a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+			                              </li>
 								<!-- 		<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-diamond"></i><span class="side-menu__label"> My Ads</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
@@ -1942,7 +1963,7 @@
 														<div class="input-group-text">
 															<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 														</div>
-													</div><input class="form-control fc-datepicker" type="text" id="pro_start" name="pro_start" value="${profile.pro_start}" >
+													</div><input class="form-control fc-datepicker" type="text" id="pro_start" name="pro_start" value="${profile.pro_start}" readonly>
 												</div>
 											</div>
 										</div>
@@ -2416,8 +2437,8 @@
 		        return ;
 			  }
 			 
-			 if(expDigit>3){
-				 alert("2글자까지 입력 가능합니다.")
+			 if(expDigit>2){
+				 alert("경력은 두 글자까지 입력 가능합니다.")
 				 return ;
 			 }else if($('#pro_exp').val()== ""){ 
 				 alert("경력을 입력해주세요.")
@@ -2476,7 +2497,7 @@
 	
 			 });
 			 if(key_num == ""){
-					alert("키워드는 1개 이상 설정해야합니다.")
+					alert("키워드는 1개 이상 선택해야 합니다.")
 					return;
 			}	
 		var free_keynum = new Array();

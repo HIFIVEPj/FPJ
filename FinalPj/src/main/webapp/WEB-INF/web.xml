@@ -95,6 +95,9 @@
       <location>/WEB-INF/views/500error_test.jsp</location>
  	</error-page>
  
+ 	<listener>
+     <listener-class>fp.index.controller.CountManager</listener-class>
+  </listener>
 
 </web-app>
 

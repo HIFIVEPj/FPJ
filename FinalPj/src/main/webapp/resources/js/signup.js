@@ -94,13 +94,13 @@ $(document).ready(function() { //여기부터 시작
 		
 			
 		//이름 입력여부
-		if (($('#name').val() == "")){
-				inval_Arr[1] = false;
-				alert('이름 또는 닉네임을 입력해주세요.');
-				return false;
-			} else {
-				inval_Arr[1] = true;	
-			} 
+	      if (($('#name').val() != "")&& nameJ.test($('#name').val())){
+	            inval_Arr[1] = true;            
+	         } else {
+	            inval_Arr[1] = false;
+	            alert('이름 또는 닉네임을 확인하세요.');
+	            return false;
+	         } 
 	
 		// 개인비밀번호가 같은 경우 && 비밀번호 정규식
 		if (($('#mem_pw').val() == ($('#mem_pw2').val()))&& pwJ.test($('#mem_pw').val())) {
@@ -135,7 +135,7 @@ $(document).ready(function() { //여기부터 시작
 			}	
 		}
 		if(validAll == true){ // 유효성 모두 통과
-			alert('HIFIVE 가족이 되어주셔 감사합니다.');
+			swal('가입성공!', $('#name').val()+'님 환영합니다.', 'success');
 		} else{
 			alert('정보를 다시 확인하세요.');
 		}
@@ -155,13 +155,13 @@ $(document).ready(function() { //여기부터 시작
 		
 			
 		//이름 입력여부
-		if (($('#c_name').val() == "")){
-				inval_Arr[1] = false;
-				alert('이름 또는 닉네임을 입력해주세요.');
-				return false;
-			} else {
-				inval_Arr[1] = true;	
-			} 
+	      if (($('#c_name').val() != "")&& nameJ.test($('#c_name').val())){
+	            inval_Arr[1] = true;            
+	         } else {
+	            inval_Arr[1] = false;   
+	            alert('이름 또는 닉네임을 확인하세요.');
+	            return false;
+	         } 
 	
 		// 개인비밀번호가 같은 경우 && 비밀번호 정규식
 		if (($('#c_mem_pw').val() == ($('#c_mem_pw2').val()))&& pwJ.test($('#c_mem_pw').val())) {
@@ -196,7 +196,7 @@ $(document).ready(function() { //여기부터 시작
 			}	
 		}
 		if(validAll == true){ // 유효성 모두 통과
-			alert('HIFIVE 가족이 되어주셔 감사합니다.');
+			swal('가입성공!', $('#c_name').val()+'님 환영합니다.', 'success');
 		} else{
 			alert('정보를 다시 확인하세요.');
 		}

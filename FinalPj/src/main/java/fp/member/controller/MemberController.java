@@ -36,6 +36,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +47,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import fp.member.service.LoginService;
 import fp.member.service.MailService;
 import fp.freelancerprofile.service.FreeLancerProfileService;
 import fp.market.domain.Freelancer;
@@ -65,6 +66,9 @@ public class MemberController {
     
     @Autowired
     MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
+    
+    @Autowired 
+    LoginService loginService;
 
     @RequestMapping(value="createEmailCheck.do", method=RequestMethod.GET)
     @ResponseBody
@@ -118,13 +122,20 @@ public class MemberController {
 
 	}
     
-    @RequestMapping(value = "signup.do" , method=RequestMethod.POST )
-    public String signUp (Member member) throws IOException {
-    	String bcpwd=member.getPwd();  	
-    	member.setPwd(BCrypt.hashpw(bcpwd, BCrypt.gensalt(10)));  
-       	memberservice.insertM(member);    
-       	
-    	return "member/login";
+	@RequestMapping(value = "signup.do" , method=RequestMethod.POST )
+    public ModelAndView signUp (@ModelAttribute Member member, HttpSession session) throws IOException {
+       String bcpwd=member.getPwd();     
+       member.setPwd(BCrypt.hashpw(bcpwd, BCrypt.gensalt(10)));  
+          memberservice.insertM(member);    
+          
+          member.setPwd(bcpwd);
+        boolean result = loginService.loginCheck(member, session);
+       
+        session.getAttribute("name");
+        session.getAttribute("email");           
+       return new ModelAndView("redirect:/");
+        
+    
     } 
     
     @RequestMapping(value="alarmAdd",  method=RequestMethod.GET)

@@ -36,6 +36,20 @@
 		
 		</section>
 		<!--Breadcrumb-->
+		<!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Profile</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item">프리랜서</li>
+						<li class="breadcrumb-item active" aria-current="page">프로필 등록</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
 
 		<!--User Dashboard-->
 		<section class="sptb">
@@ -56,7 +70,10 @@
 								</c:if>
 								<c:if test = "${getFileName.get(0).free_fname ne null}">
 									<div class="avatar-xxl brround" style="margin:0 auto;">
+										<!--
 										<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
+										-->
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -72,6 +89,9 @@
 												<li><a class="slide-item" href="freelancerProfile_list">프리랜서 프로필</a></li>
 											</ul>
 										</li>
+										<li>
+			                                 <a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+			                              </li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
@@ -1305,7 +1325,7 @@
 																<i class="fa fa-calendar tx-16 lh-0 op-6"></i>
 															</div>
 														</div>
-															<input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" id="pro_start" name="pro_start">
+															<input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" id="pro_start" name="pro_start" readonly>
 														</div>
 													</div>
 												</div>
@@ -1437,8 +1457,8 @@ function check(){
         return ;
 	  }
 	 
-	 if(expDigit>3){
-		 alert("2글자까지 입력 가능합니다.")
+	 if(expDigit>2){
+		 alert("경력은 두 글자까지 입력 가능합니다.")
 		 return ;
 	 }else if($('#pro_exp').val()== ""){ 
 		 alert("경력을 입력해주세요.")
@@ -1498,7 +1518,7 @@ function check(){
        });
 	   
       if(key_num == ""){
-	     alert("키워드는 1개 이상 설정해야합니다.")
+	     alert("키워드는 1개 이상 선택해야 합니다.")
 	    	return ;
 	      }
       free_write.submit();

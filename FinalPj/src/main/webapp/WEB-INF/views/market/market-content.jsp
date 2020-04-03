@@ -80,7 +80,11 @@
 									<div id="carousel" class="carousel slide" data-ride="carousel">
 										<!--<div class="arrow-ribbon2 bg-primary">$539</div>-->
 										<div class="carousel-inner">
+											<!-- 
 											<div class="carousel-item active"> <img src="../hifiveImages/marketThumbnails/${market.market_fname}" alt="img"> </div>
+										 -->
+										 	<div class="carousel-item active"> <img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${market.market_fname}" alt="img"> </div>
+										
 										<!--
 											<div class="carousel-item"> <img src="../marketThumbnails/${market.market_fname}" alt="img"> </div>
 											<div class="carousel-item"> <img src="../images/products/products/h3.jpg" alt="img"> </div>
@@ -185,12 +189,10 @@
 								</div>
 							</div>
 						</c:if>
-							<c:if test="${sessionScope.class_num==1 && (market.market_state==0 ||market.market_state==2)}">
-								<button type="button" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</button>															
-								<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm "><i class="fa fa-close"></i>거절하기</button>
-							</c:if>
+						
 						</div>
 					</form>
+					
 					<!-- small Modal -->   
 				      <div id="smallModal1" class="modal fade">
 				         <div class="modal-dialog modal-sm" role="document">
@@ -281,10 +283,31 @@
                                    	<div class="d-flex mr-3">
                                    		<c:choose>
                                    			<c:when test="${marketRev.member.class_num==2||marketRev.member.class_num==3}">
-                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
+                                   				<c:if test="${marketRev.freelancer!=null}">
+                                   					<c:if test="${marketRev.freelancer.free_fname!=null}">
+                                     		  			<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${marketRev.freelancer.free_fname}"> </a>
+                                   					</c:if>
+                                   					<c:if test="${marketRev.freelancer.free_fname==null}">
+                                     		  			<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+                                   					</c:if>
+                                   				</c:if>
+                                   				<c:if test="${marketRev.freelancer==null}">
+                                   					<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+                                   				</c:if>
                                    			</c:when>
                                    			<c:when test="${marketRev.member.class_num==4}">
-                                     		  		<a href="#"><img class="media-object brround"  alt="64x64" src="../hifiveImages/cor_thumb/${marketRev.corporation.cor_fname}"> </a>
+                                   				<c:if test="${marketRev.corporation!=null}">
+                                   					<c:if test="${marketRev.corporation.cor_fname!=null}">
+                                   					<!-- 
+                                     		  			<a href="#"><img class="media-object brround"  alt="64x64" src="../hifiveImages/cor_thumb/${marketRev.corporation.cor_fname}"> </a>
+                                   					 -->	
+                                   					 <a href="#"><img class="media-object brround"  alt="64x64" src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${marketRev.corporation.cor_fname}"> </a>
+                                   					
+                                   					</c:if>
+                                   				</c:if>
+                                   				<c:if test="${marketRev.corporation==null}">
+                                   					<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+                                   				</c:if>
                                    			</c:when>
                                    			<c:otherwise>
                                    				<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
@@ -389,6 +412,7 @@
 								<h3 class="card-title">리뷰 남기기</h3>
 							</div>
 							<div class="card-body">
+							<c:if test="${fn:length(mbs)>0}" >
 								<div>
 									<div class="ml-auto">
 										<div class="rating-stars block">
@@ -418,32 +442,45 @@
 										<input type="text" class="form-control"  name="subject" id="name1" placeholder="subject">
 									</div>
 									  -->
+									  <!--  
 									 <c:if test="${sessionScope.email ==null}" >
 										<div class="form-group">
 											<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="로그인 후 이용해주세요"></textarea>
 										</div>	
 									</c:if>		
-									<c:if test="${fn:length(mbs)>0}" >
+									
+									-->
+								 <!--  	<c:if test="${fn:length(mbs)>0}" >-->
 										<c:if test="${sessionScope.email!=null||market.market_num ==mbs.market_num}" >
 											<div class="form-group">
 												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="이용 후기를 남겨주세요">${marketRev_cont}</textarea>
 											</div>	
 											<button type="button" class="btn btn-primary" id="checkMR">Send Reply</button>
 										</c:if>		
-									</c:if>		
+									 <!-- </c:if>		-->
+									<!--
 									<c:if test="${fn:length(mbs)==0}" >
 										<c:if test="${sessionScope.email!=null}" >
 											<div class="form-group">
 												<textarea class="form-control" id="marketRev_contID" name="marketRev_cont" rows="6" placeholder="마켓 구매 후 이용하실 수 있습니다"></textarea>
 											</div>	
 										</c:if>		
-									</c:if>		
-									
-									
-									
-									
-									
+									</c:if>	
+									-->	
 								</div>
+								</c:if>	
+								 <c:if test="${sessionScope.email ==null}" >
+										<div class="form-group">
+											로그인 후 이용해주세요
+										</div>	
+									</c:if>		
+									<c:if test="${fn:length(mbs)==0}" >
+										<c:if test="${sessionScope.email!=null}" >
+											<div class="form-group">
+												마켓 구매 후 이용하실 수 있습니다
+											</div>	
+										</c:if>		
+									</c:if>	
 							</div>
 						</div>
 					</form>
@@ -466,20 +503,47 @@
 									<div  id="replyItem<c:out value="${marketQA.marketQA_lev}"/>" style="width: 600px; padding: 5px; margin-top: 5px; margin-left: <c:out value="${40*marketQA.marketQA_lev}"/>px; display: inline-block">
 									<div class="media mt-0 p-5">
 	                      	    		 <div class="d-flex mr-3">
-	                      	    		 
 	                      	    		 	<c:choose>
 	                                   			<c:when test="${marketQA.member.class_num==2||marketQA.member.class_num==3}">
-	                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
+	                                   				<c:if test="${marketQA.freelancer!=null}">
+		                                   				<c:if test="${marketQA.freelancer.free_fname!=null}">
+		                                   				<!-- 
+		                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
+		                                   				 -->
+		                                   				 <a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${marketQA.freelancer.free_fname}"> </a>
+		                                   				</c:if>
+		                                   				<c:if test="${marketQA.freelancer.free_fname==null}">
+		                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+		                                   				</c:if>
+		                                   		
+	                                   				</c:if>
+	                                   				<c:if test="${marketQA.freelancer==null}">
+	                                   					<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+	                                   				</c:if>
 	                                   			</c:when>
 	                                   			<c:when test="${marketQA.member.class_num==4}">
+	                                   				<c:if test="${marketQA.corporation!=null}">
+	                                   					<c:if test="${marketQA.corporation.cor_fname!=null}">
+	                                   					<!-- 
 	                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/cor_thumb/${marketQA.corporation.cor_fname}"> </a>
+	                                     		  		-->
+	                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${marketQA.corporation.cor_fname}"> </a>
+	                                     		  		
+	                                     		  		</c:if>
+	                                     		  		<c:if test="${marketQA.corporation.cor_fname==null}">
+		                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+		                                   				</c:if>
+	                                     		  	</c:if>
+	                                     		  	<c:if test="${marketQA.corporation==null}">
+	                                     		  		<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
+	                                     		  	</c:if>
 	                                   			</c:when>
 	                                   			<c:otherwise>
 	                                   				<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>
 	                                   			</c:otherwise>
 	                                   		</c:choose>
-	                      	    		 
 	                                      </div>
+	                                      
 	                                      <div class="media-body"> 
 				                             <h5 class="mt-0 mb-1 font-weight-semibold">${marketQA.member.mem_name}
 												<span class="fs-14 ml-0" data-toggle="tooltip" data-placement="top" title="" data-original-title="verified"><i class="fa fa-check-circle-o text-success"></i></span>
@@ -493,7 +557,8 @@
 		                                     	 <c:when test="${marketQA.marketQA_ox == 0 }">
 			                                        <c:if test="${marketQA.marketQA_sub ne '삭제된 댓글입니다'}">
 				                                        <p class="font-13  mb-2 mt-2">
-				                                      		 <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong"> ${marketQA.marketQA_sub}</a><br>
+				                                         ${marketQA.marketQA_sub}<br>
+				                                      		 <a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}',${marketQA.marketQA_sun});"  data-toggle="modal" data-target="#exampleModalLong"> <small>더보기...</small></a><br>
 			                                        	</p>
 		                                        	</c:if>
 		                                        </c:when>
@@ -501,14 +566,14 @@
 			                                        <p class="font-13  mb-2 mt-2">
 			                                       		 <비밀글 입니다.> <br>
 			                                            <p class="font-13  mb-2 mt-2">
-			                                      		 	<a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}');"  data-toggle="modal" data-target="#exampleModalLong">${marketQA.marketQA_sub}</a><br>
+			                                            ${marketQA.marketQA_sub}<br>
+			                                      		 	<a href="javascript:void(0)" onclick="javascript:QAFile('${marketQA.marketQA_num}','${marketQA.market_num}',${marketQA.marketQA_sun});"  data-toggle="modal" data-target="#exampleModalLong"><small>더보기...</small></a><br>
 		                                    			</p>
 		                                        	</p>
 		                                        </c:when>
 		                                        <c:when test="${(marketQA.marketQA_ox == 1 )&&( marketQA.marketQA_sub ne '삭제된 댓글입니다')}">
 			                                        <p class="font-13  mb-2 mt-2"> 비밀글 입니다.</p>
-		                                        </c:when>	
-		                                                                              
+		                                        </c:when>	                               
 	                                        </c:choose> 
 	                                        
 			                                  <!-- 모달로 정보보내기
@@ -526,6 +591,7 @@
 													<a href="javascript:void(0)" onclick="mqajaxRE('${marketQA.marketQA_prnum}','${marketQA.marketQA_lev}','${marketQA.marketQA_sun}',${marketVOQA.nowPage},${marketVOQA.cntPerPage});" data-toggle="modal" data-target="#CommentQA" class="mr-2" ><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글</span></a>
 												</c:when>
 										  </c:choose>
+										  
 										 </div>                                             		
 									</div>	
 									</div>
@@ -606,7 +672,9 @@
 								    	 <input type="hidden" id="nowPageQAID" name="nowPageQ" value= "${marketVOQA.nowPage}">
 
 										<div class="form-group">
-											<input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
+											<c:if test="${sessionScope.email !=null}" >
+												<input type="text" class="form-control" id="marketQA_subID" name="marketQA_sub" placeholder="subject">
+											</c:if>
 										</div>
 										<div class="form-group">
 											<textarea class="form-control" name="marketQA_cont" id="marketQA_contID" rows="6" placeholder="Comment"></textarea>
@@ -627,7 +695,7 @@
 									
 									<c:if test="${sessionScope.email ==null}" >
 										<div class="form-group">
-											<textarea class="form-control" name="marketQA_cont"  rows="6" placeholder="로그인 후 이용해주세요"></textarea>
+											로그인 후 이용해주세요
 										</div>
 									</c:if>
 									
@@ -656,9 +724,19 @@
 							</div>
 							<div class="card-body  item-user">
 								<div class="profile-pic mb-0">
-									<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									<c:if test="${freeProfile.freelancer.free_fname!=null}">
+									<!-- 
+										<img src="../hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									 -->
+									 	<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${freeProfile.freelancer.free_fname}" class="brround avatar-xxl" alt="user">
+									
+									</c:if>
+									<c:if test="${freeProfile.freelancer.free_fname==null}">
+										<img src="" class="fa fa-user-circle text-muted mr-1 fa-5x" alt="">
+									</c:if>
 									<div class="">
 										<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-1 font-weight-semibold">${freeProfile.freelancer.free_name}</h4></a>
+											
 											<c:if test="${freeProfile.freelancerProfile.pro_exp == 0}">
 												
 											</c:if >
@@ -696,6 +774,7 @@
 							</div>
 						-->	
 	<!--////////////////////// 결제넘기는 폼////////////////////////////////////// -->
+	
 							<form id="paymentsForm" action="market-payments" method="post">
 								<input type="hidden" value="${market.market_sub}" name="marketPaym_pdName">
 								<input type="hidden" value="${market.market_num}" name="market_num">
@@ -725,12 +804,32 @@
 								
 								<!--	<a href="marketPayments" class="btn btn-info"><i class="ti-credit-card"></i> 문의하기</a> 
 										<a href="marketPayments" class="btn btn-primary" data-toggle="modal" data-target="#contact"><i class="fa fa-user"></i> 구매하기</a>-->
-										<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+										<c:if test="${sessionScope.class_num==4 ||sessionScope.class_num==2 || sessionScope.class_num==3}">
+											<button type="submit" class="btn btn-primary2"><i class="ti-credit-card"></i > 구매하기</button>
+										</c:if>
 									</div>
 								</div>
 							</form>
+							
+								 <div align="center" style="margin-bottom:35px">	
+								 	<c:if test="${sessionScope.class_num==1 && (market.market_state==0)}">
+									<a href="updateMarketState.do?market_num=${market.market_num}&market_state=1" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</a>
+                                       <a href="updateMarketState.do?market_num=${market.market_num}&market_state=2" id="refuseBtn" class="btn btn-secondary btn-sm" ><i class="fa fa-close"></i>거절하기</a>  
+									</c:if>
+									 <c:if test="${sessionScope.class_num==1 &&market.market_state eq 1}">
+                                       <a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결제완료</a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.class_num==1 &&market.market_state eq 2}">
+                                       <a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>      
+                                    </c:if>
+								</div>								
+							
+								         
 						</div>
+		
+				
 				<!--		
+				
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">Keywords</h3>
@@ -835,14 +934,18 @@
 							<div class="card-header">
 								<h3 class="card-title">유사한 마켓</h3>
 							</div>
-							<div class="card-body pb-3">
+							<div class="card-body pb-5">
 								<ul class="vertical-scroll">
 								  <c:if test="${fn:length(similarMarket)>0}">
 									<c:forEach items="${similarMarket}" var="similarMList">
 										<li class="news-item">
 											<table cellpadding="4">
 												<tr>
-													<td><img src="hifiveImages/marketThumbnails/${similarMList.market_fname}" /></td>
+													<td><!-- 
+													<img src="hifiveImages/marketThumbnails/${similarMList.market_fname}" />
+													 -->
+													 <img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${similarMList.market_fname}" />
+													</td>
 													<td>
 														<h5 class="mb-1 ">${similarMList.market_sub}</h5>
 														<a href="market-content?market_num=${similarMList.market_num}" class="btn-link">View Details</a>
@@ -856,7 +959,7 @@
 									  <c:if test="${fn:length(similarMarket)==0}">
 									  	<li class="news-item">
 		                                    <div class="media p-5 mt-0">
-		                                   		   마켓주인이프로필 등록안해서 유사한프리랜서안뜸
+		                                   		   유사한 마켓 없음 
 		                                    </div>
 		                                 </li>
 									  </c:if>
@@ -875,10 +978,18 @@
 											<c:forEach var="similarFree" items="${similarFree}">
 											<li class="item">
 												<div class="media p-5 mt-0">
+												<c:if test="${similarFree.freelancer.free_fname==null}">
+													<img class="mr-4" src="" alt="">
+												</c:if>
+												<c:if test="${similarFree.freelancer.free_fname!=null}">
+												<!-- 
 													<img class="mr-4" src="../hifiveImages/free_thumb/${similarFree.freelancer.free_fname}" alt="img">
+												 -->
+												 	<img class="mr-4" src="/home/ubuntu/hifive/hifiveImages/free_thumb/${similarFree.freelancer.free_fname}" alt="img">
+												
+												</c:if>
 													<div class="media-body">
 														<h4 class="mt-2 mb-1">${similarFree.freelancer.free_name}</h4>
-														
 														<span class="rated-products-ratings">
 															<c:forEach begin="1" end="${similarFree.freelancerReview.freeRev_star}">
 																<i class="fa fa-star text-warning"> </i>
@@ -899,7 +1010,7 @@
 										<c:if test="${fn:length(similarFree)==0}">
 										 	<li class="item">
 												<div class="media p-5 mt-0">
-													프로필 등록안해서 유사한프리랜서안뜸
+													유사한 프리랜서 없음
 												</div>
 											</li>
 										</c:if>
@@ -1078,12 +1189,11 @@
 
 
 <!--Scrolling Modal-->
-
 			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 					  <div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle"></h5>
+						<h5 class="modal-title" id="exampleModalLongTitle"></h5>더보기...
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						  <span aria-hidden="true">&times;</span>
 						</button>
@@ -1100,7 +1210,9 @@
 					</div>
 				</div>
 			</div>
+
 <!-- 공유하기Modal -->
+
 			<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -1309,13 +1421,14 @@ obShareUrl.value=window.document.location.href;
 	   }   
 	   
 //문의파일보는 ajax
-		function QAFile(Qn,MN){
+		function QAFile(Qn,MN,Qsun){
 			var marketQA_num=Qn;
 			var market_num=MN;
+			console.log("111Qsun1"+Qsun);
 			var images='';
 		   $.ajax({
 			   	type:'get',
-		    	url:'marketQAFile_show?marketQA_num='+marketQA_num+'&market_num='+market_num,
+		    	url:'marketQAFile_show?marketQA_num='+marketQA_num+'&market_num='+market_num+'&marketQA_sun='+Qsun,
 		    	dataType:'json',
 		    	async :true,
 		    	error:onError,
@@ -1325,18 +1438,41 @@ obShareUrl.value=window.document.location.href;
 		    		console.log("1111"+marketQAcont.marketQA.marketQA_cont);
 		    		console.log("1111"+marketQAcont.marketQAFile);
 		    		//console.log("111111"+marketQA.marketQAFile[1].marketQAFile_fname);
-		    		if(marketQAcont.marketQAFile.length>0){
-			    		for(i=0;i<marketQAcont.marketQAFile.length;i++){	    			
-			    			images +='<div class="carousel-inner">';
-			    			images +='<div class="carousel-item active"> <img src="../hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
-			    			images +='</div>';	
-			    		}
-			    		$("#exampleModalLong .carousel-inner").html(images);
+		    		if(marketQAcont.marketQAFile==null){	    		
+			    		$("#exampleModalLong #mqcont").text(marketQAcont.marketQA.marketQA_cont);
 		    		}
-		    		$("#exampleModalLong #mqcont").text(marketQAcont.marketQA.marketQA_cont); 
+		    		if(marketQAcont.marketQAFile!=null){
+			    		if(marketQAcont.marketQAFile.length>0){
+				    		for(i=0;i<marketQAcont.marketQAFile.length;i++){	    			
+				    			images +='<div class="carousel-inner">';
+				    			
+				    			//images +='<div class="carousel-item active"> <img src="../hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+				    			images +='<div class="carousel-item active"> <img src="/home/ubuntu/hifive/hifiveImages/marketQAFiles/'+marketQAcont.marketQAFile[i].marketQAFile_fname+'"alt="img"> </div>';
+				    			
+				    			images +='</div>';	
+				    		}
+				    		$("#exampleModalLong .carousel-inner").html(images);	
+			    		}
+			    		$("#exampleModalLong #mqcont").text(marketQAcont.marketQA.marketQA_cont);
+		    		}
+		    		
 		    	}	
 		   	}); 	    	
 	   	}
+
+		$(exampleModalLong).on('hide.bs.modal', function(e){
+			var noImages='';
+			noImages+='<div class="carousel-inner">';
+			noImages+='<div class="carousel-item active"></div>';
+			noImages+='</div>';
+			$("#exampleModalLong .carousel-inner").html(noImages);
+			$("#exampleModalLong #mqcont").text(""); 
+			//$(this).find('form')[0].reset()
+
+			e.stopImmediatePropagation();
+			//e.stopImmediatePropagation(); => 이 이벤트는 위 closer 를 여러번 호출시 실행되는 함수가 여러번 호출되는 것을 방지하는 이벤트 핸들러이다. 
+
+		});
 //문의글파일포함 insert후 Listing하는 AJAX
 	function qaList(cntPerPage,nowPage,market_num){
 			$.ajax({
@@ -1620,9 +1756,32 @@ obShareUrl.value=window.document.location.href;
 	    		html+='<div class="d-flex mr-3">';
 	    		
 	    		if(data[0].marketQAList[i].member.class_num==2||data[0].marketQAList[i].member.class_num==3){
-	    			html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketQAList[i].freelancer.free_fname+'"> </a>';
+	    			if(data[0].marketQAList[i].freelancer==null){
+	    				
+	    				html+='<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
+	    			}
+		    		if(data[0].marketQAList[i].freelancer!=null){
+		    			if(data[0].marketQAList[i].freelancer.free_fname!=null){
+		    				//html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketQAList[i].freelancer.free_fname+'"> </a>';
+		    				html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketQAList[i].freelancer.free_fname+'"> </a>';
+			    			
+		    			}else{
+		    				html+='<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
+		    			}
+		    		}
 	    		}else if(data[0].marketQAList[i].member.class_num==4){
-	    			html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/cor_thumb/'+data[0].marketQAList[i].corporation.cor_fname+'"> </a>';
+	    			if(data[0].marketQAList[i].corporation==null){
+	    				//html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../hifiveImages/cor_thumb/'+data[0].marketQAList[i].corporation.cor_fname+'"> </a>';
+	    				html+='	<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/cor_thumb/'+data[0].marketQAList[i].corporation.cor_fname+'"> </a>';
+	    	    		
+	    			}
+		    		if(data[0].marketQAList[i].corporation!=null){
+		    			if(data[0].marketQAList[i].corporation.cor_fname!=null){
+	    					html+='<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
+	    				}else{
+	    					html+='<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
+	    				}
+	    			}
 	    		}else{
 	    			html += '<a href="javascript:void(0)"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
 	    		}
@@ -1645,7 +1804,8 @@ obShareUrl.value=window.document.location.href;
 	    		}
 	    		//공개
 	    		if(data[0].marketQAList[i].marketQA_ox ==0 && data[0].marketQAList[i].marketQA_sub !='삭제된 댓글입니다'){
-	    			html+='<a href="javascript:void(0)" onclick="javascript:QAFile('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+');"  data-toggle="modal" data-target="#exampleModalLong">'+data[0].marketQAList[i].marketQA_sub+'</a><br>';
+
+	    			html+=data[0].marketQAList[i].marketQA_sub+'<br><a href="javascript:void(0)" onclick="javascript:QAFile('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketQAList[i].marketQA_sun+');"  data-toggle="modal" data-target="#exampleModalLong"> <small>더보기...</small></a><br>';
 	    			html+='<a href="javascript:void(0)" onclick="mqajaxRE('+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_lev+' ,'+data[0].marketQAList[i].marketQA_sun+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>';
 	    			//수정삭제는 글쓴이만
 	    			if(sessionEmail == data[0].marketQAList[i].mem_email){
@@ -1659,8 +1819,9 @@ obShareUrl.value=window.document.location.href;
 	    			
 	    		//마켓주인과 글쓴이만 볼슈있음	
 	    			if(data[0].marketQAList[i].mem_email == sessionEmail|| sessionEmail  == freeEmail){
+
 		    			html+=' <p class="font-13  mb-2 mt-2">';
-		    			html+='<a href="javascript:void(0)" onclick="javascript:QAFile('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+');"  data-toggle="modal" data-target="#exampleModalLong">'+data[0].marketQAList[i].marketQA_sub+'</a><br>';
+		    			html+=data[0].marketQAList[i].marketQA_sub+'<br><a href="javascript:void(0)" onclick="javascript:QAFile('+data[0].marketQAList[i].marketQA_num+','+data[0].marketQAList[i].market_num+','+data[0].marketQAList[i].marketQA_sun+');"  data-toggle="modal" data-target="#exampleModalLong"><small>더보기...</small></a><br>';
 		    			html+='</p>';
 		    			html+='<a href="javascript:void(0)" onclick="mqajaxRE('+data[0].marketQAList[i].marketQA_prnum+','+data[0].marketQAList[i].marketQA_lev+' ,'+data[0].marketQAList[i].marketQA_sun+','+data[0].marketVOQA.nowPage+','+data[0].marketVOQA.cntPerPage+ ');" data-toggle="modal" data-target="#CommentQA" class="mr-2"><span class="badge badge-primary" style="font-size: 0.8rem;"><i class=" ml-1 fa fa-comment-o"></i>&nbsp;댓글 </span></a>';
 			    		
@@ -1756,6 +1917,7 @@ obShareUrl.value=window.document.location.href;
 		}
 		
 		for(var i=0; data[0].marketrevList.length>i; i++){	
+			var session="${sessionScope.email}";
 			//alert("11111111"+data[i].freelancer.free_fname);
 			 var someTimestamp = Number(data[0].marketrevList[i].marketRev_rdate);
 			 var dateTime = new Date(someTimestamp);
@@ -1766,11 +1928,31 @@ obShareUrl.value=window.document.location.href;
 				html +='<div class="media mt-0 p-5" >';
 				html +='<div class="d-flex mr-3">';
 				if(data[0].marketrevList[i].member.class_num==2||data[0].marketrevList[i].member.class_num==3){//개인일때 		
-	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
-	    			html += '</div>';
+					if(data[0].marketrevList[i].freelancer!=null){
+						if(data[0].marketrevList[i].freelancer.free_fname!=null){
+			    			//html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
+			    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketrevList[i].freelancer.free_fname+'"> </a>';
+			    			
+			    			html += '</div>';
+		    			}else{
+		    				html += '<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
+		    			}
+	    			}
+					if(data[0].marketrevList[i].freelancer==null){
+						html += '<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
+					}
 	    		}else if(data[0].marketrevList[i].member.class_num==4){
-	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
-	    			html += '</div>';
+	    			if(data[0].marketrevList[i].corporation!=null){
+	    				if(data[0].marketrevList[i].corporation.cor_fname!=null){
+			    			//html += '<a href="#"><img class="media-object brround" alt="64x64" src="../hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
+			    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="/home/ubuntu/hifive/hifiveImages/free_thumb/'+data[0].marketrevList[i].corporation.cor_fname+'"> </a>';
+			    			
+			    			html += '</div>';
+		    			}
+		    		}
+	    			if(data[0].marketrevList[i].corporation==null){
+						html += '<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
+					}
 	    		}else{
 	    			html += '<a href="#"><img class="media-object brround" alt="64x64" src="../images/faces/male/1.jpg"> </a>';
 	    			html += '</div>';
@@ -1782,8 +1964,18 @@ obShareUrl.value=window.document.location.href;
 				html+='</h5>';
 				html+='<small><i class="fa fa-calendar"></i></small><small class="text-muted" id="rdateR" name="marketRev_rdate"> '+dateTime+' </small>';
 				html+='<p class="font-13  mb-2 mt-2" name="marketRev_cont"  id="contentR"> '+data[0].marketrevList[i].marketRev_cont+'</p>';
-				html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+', '+cont+' ,'+data[0].marketrevList[i].marketRev_star+','+data[0].marketVORev.nowPage+','+data[0].marketVORev.cntPerPage+');" ><span class="">수정</span></a>';
-				html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" onclick="Revdelete('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+','+data[0].marketVORev.nowPage+','+data[0].marketVORev.cntPerPage+');" ><span class="">삭제</span></a>';
+				if(data[0].marketrevList[i].freelancer!=null&&session!=null){
+					if(data[0].marketrevList[i].freelancer.mem_email==session){
+						html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+', '+cont+' ,'+data[0].marketrevList[i].marketRev_star+','+data[0].marketVORev.nowPage+','+data[0].marketVORev.cntPerPage+');" ><span class="">수정</span></a>';
+						html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" onclick="Revdelete('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+','+data[0].marketVORev.nowPage+','+data[0].marketVORev.cntPerPage+');" ><span class="">삭제</span></a>';
+					}
+				}
+				if(data[0].marketrevList[i].corporation!=null&&session!=null){
+					if(data[0].marketrevList[i].corporation.mem_email==session){
+						html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" data-target="#REVUpdate" onclick="Revupdate('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+', '+cont+' ,'+data[0].marketrevList[i].marketRev_star+','+data[0].marketVORev.nowPage+','+data[0].marketVORev.cntPerPage+');" ><span class="">수정</span></a>';
+						html+='<a href="javascript:void(0)" class="mr-2" data-toggle="modal" onclick="Revdelete('+data[0].marketrevList[i].marketRev_num+','+data[0].marketrevList[i].market_num+','+data[0].marketVORev.nowPage+','+data[0].marketVORev.cntPerPage+');" ><span class="">삭제</span></a>';
+					}
+				}
 				html+='</div>';
 				html+='</div>';
 				html+='</div>';	    		
@@ -1847,9 +2039,11 @@ obShareUrl.value=window.document.location.href;
 		$('#paging').html(pagingHtml);
 	}
 	//페이징 아작스 
+	
+	
 </script>
 
-				
+
 <!-- 
 	    var PRNUM="";
 	    var LEV="";

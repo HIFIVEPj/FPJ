@@ -185,7 +185,6 @@
                <result property="pj_name" column="pj_name"/>   
             </collection>   
          </resultMap>   
-         
 
       <!-- 프로필 리뷰 content-->
          <resultMap type="List_FreeLancerReview" id="freelancerReview">
@@ -195,7 +194,7 @@
                <result property="freerev_rdate" column="freerev_rdate"/>
                <result property="pro_num" column="pro_num"/>
                <result property="free_code" column="free_code"/>
-                <result property="mem_email" column="mem_email"/>         
+               <result property="mem_email" column="mem_email"/>         
             <association javaType="mMember" property="mmember">
                <id property="mem_email" column="mem_email"/>
                  <result property="mem_name" column="mem_name"/>
@@ -226,6 +225,7 @@
 
    <!-- 리스트 select -->
          <!-- 리스트 페이징 (총 게시글 갯수 출력 ) -->
+
   <select id="profile_select"  parameterType="String" resultType="fp.freelancerprofile.domain.FreeLancerProfile">
          select * from FREELANCER_PROFILE where free_code=#{free_code}
     </select>   
@@ -327,7 +327,7 @@
                      order by  PROFILE_DATE desc
                      </if>
                   <![CDATA[
-                             )aa)where rnum>=#{PagingVo.start} and rownum <=#{PagingVo.end}                     
+                             )aa)where rnum>=#{PagingVo.start} and rnum <=#{PagingVo.end}                     
                   ]]>
    </select>
    
@@ -353,7 +353,7 @@
                   , free_name  
                   , ap.pj_num
                   , fp.PRO_NUM
-                   , profile_choice
+                  , profile_choice
                         , p.pj_num 
                         , p.pj_sub 
                         , m.class_num
@@ -367,6 +367,7 @@
                                         right outer join member m
                                         on m.mem_email=f.mem_email
                                           where profile_choice=1
+                                          and APPP_STATUS=1
       ]]>   
    </select> 
    <!-- 타입 카운트 -->
@@ -400,6 +401,7 @@
    </select>   
    <!-- 연락처 -->
    <select id="selectTel"  resultMap="freelancerContent" parameterType="map">
+
       <![CDATA[
       SELECT REGEXP_REPLACE(free_tel, '(.{3})(.+)(.{4})', '\1-\2-\3') as free_tel
          from freelancer f, freelancer_profile fp 
@@ -408,6 +410,7 @@
                   and fp.pro_num=#{pro_num}      
        ]]>
    </select>
+
 
 
    <!--프로필 조회수-->
@@ -427,7 +430,8 @@
                      inner join Project p
                      on ap.pj_num= p.pj_num
                         where fp.free_code=#{FREE_CODE}
-     ]]>      
+                        and appp_status=1
+      ]]>
    </select> 
       <!-- 컨텐츠 3-->
    <select id="freelancercontent3" resultMap="freelancerContent3" parameterType="long">
@@ -461,7 +465,7 @@
       <!-- 컨텐츠 5-->
    <select id="freelancercontent5" resultMap="freelancerContent5" parameterType="long">
      <![CDATA[
-      select pk.*, key_name, p.pj_num , free_code
+      select pk.*, key_name,pk.pj_num, p.pj_num , free_code
           from pj_pick_keyword pk
               inner join keyword k
               on pk.key_num = k.key_num
@@ -510,7 +514,10 @@
      </select>
    <select id="selectFile" resultType="Freelancer" parameterType="String">
            <![CDATA[select free_fname, mem_email from freelancer where mem_email=#{mem_email}]]>   
-    </select>  
+    </select> 
+      <select id="selectFile_cor" resultType="Corporation" parameterType="String">
+           <![CDATA[select cor_fname, mem_email from corporation where mem_email=#{mem_email}]]>   
+    </select> 
      <!-- 인덱스 -->
     <select id="index_select" resultMap="List_FreeLancerResult">
         <![CDATA[

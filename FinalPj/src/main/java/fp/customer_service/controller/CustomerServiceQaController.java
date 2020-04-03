@@ -311,16 +311,16 @@ public class CustomerServiceQaController {
 	    
 	    attachList.forEach(attach -> {
 	      try {
-	    	String file_path_else = "C:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName();
-	    	//String file_path_else = "/home/ubuntu/hifive/upload/"+attach.getUploadPath()+"/" + attach.getUuid()+"_"+ attach.getFileName();  
+	    	//String file_path_else = "C:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName();
+	    	String file_path_else = "/home/ubuntu/hifive/upload/"+attach.getUploadPath()+"/" + attach.getUuid()+"_"+ attach.getFileName();  
 	    	file_path_else = file_path_else.replace(" ", "");
 	        Path file  = Paths.get(file_path_else);
 	        log.info("*****file : " + file);
 	        Files.deleteIfExists(file);
 	        
 	        if(Files.probeContentType(file).startsWith("image")) {
-	          String file_path_image = "C:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName();
-	          //String file_path_image = "/home/ubuntu/hifive/upload/"+attach.getUploadPath()+"/s_" + attach.getUuid()+"_"+ attach.getFileName();
+	          //String file_path_image = "C:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName();
+	          String file_path_image = "/home/ubuntu/hifive/upload/"+attach.getUploadPath()+"/s_" + attach.getUuid()+"_"+ attach.getFileName();
 	          file_path_image = file_path_image.replace(" ", "");
 	          Path thumbNail = Paths.get(file_path_image);
 	          log.info("*****thumbNail" + thumbNail);

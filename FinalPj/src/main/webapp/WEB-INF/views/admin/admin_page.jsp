@@ -293,7 +293,10 @@
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
 																	<a href="#"></a>
-																	<img src="../images/products/f1.png" alt="img">
+																	<!--
+																	<img src="../hifiveImages/marketThumbnails/${market.market_fname}" class="icon-left" alt="" id="prev-img">
+																	-->
+																	<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${dto.market_fname}" class="icon-left" alt="" id="prev-img">
 																</div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
@@ -303,7 +306,7 @@
 																</div>
 															</div>
 														</td>
-														<td>Restaurant</td>														
+														<td><fmt:formatDate value="${dto.market_rdate}" pattern="yyyy-MM-dd HH:mm:ss" /></td> 														
 														<td class="font-weight-semibold fs-16"><fmt:formatNumber value="${dto.market_price}" pattern="#,###,###,###" /></td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
@@ -319,10 +322,9 @@
 														</td>
 														<td>
 															<c:if test="${dto.market_state eq 0}">
-																<button type="button" id="admitBtn" class="btn btn-primary btn-sm admitBtn" ><i class="fa fa-check"></i>승인하기</button>															
-																<button type="button" id="refuseBtn" class="btn btn-secondary btn-sm refuseBtn"><i class="fa fa-close"></i>거절하기</button>
-																<input type="hidden" id="market_state" name="market_state" value="">
-																<input type="hidden" id="market_num" name="market_num" value="${dto.market_num}">
+															<a href="updateMarketState.do?market_num=${dto.market_num}&market_state=1" id="admitBtn" class="btn btn-primary btn-sm" ><i class="fa fa-check"></i>승인하기</a>
+															<a href="updateMarketState.do?market_num=${dto.market_num}&market_state=2" id="refuseBtn" class="btn btn-secondary btn-sm" ><i class="fa fa-close"></i>거절하기</a>         
+															                                                
 															</c:if>						
 															<c:if test="${dto.market_state eq 1}">
 																<a href="javascript:void(0)" style="color:white;" class="tag tag-gray">결재완료</a>

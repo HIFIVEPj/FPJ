@@ -244,5 +244,19 @@ public class MarketServiceImpl implements MarketService {
 		return mapper.similarMarket(cate_num);
 	}
 	
+	@Override
+    public Market getMarketFreelancer2(long market_num) {
+       return mapper.getMarketFreelancer2(market_num);
+    }
+	
+	//서치박스 개발자 디자이너 마켓 갯수 
+   @Override
+   public long countDevelopoer() {
+      return mapper.countDevelopoer();
+   }
+   @Override
+   public long countDesigner() {
+      return mapper.countDesigner();
+   }
 
 }

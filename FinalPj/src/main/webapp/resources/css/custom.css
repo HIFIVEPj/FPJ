@@ -29,3 +29,7 @@
 	border-radius: 3px;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 } */
+
+/* 텍스트 오버플로우 히든 */
+h4 {z-index:9999 !important;}
+.overflow {white-space: nowrap; overflow:hidden; text-overflow:ellipsis;}

@@ -14,7 +14,7 @@
 		<!--Sliders Section-->
 		<section>
         <div id="output"></div>
-			<div class="banner-2 cover-image sptb-2 sptb-tab bg-background2" data-image-src="../images/banners/test10.png">
+			<div class="banner-2 cover-image sptb-2 sptb-tab bg-background2" data-image-src="../images/banners/hifive_bg.png">
 				<div class="header-text mb-0">
 					<div class="container">
 						<div class="text-center text-white ">
@@ -104,35 +104,43 @@
 										<!-- 프리마켓검색 -->
 										
 										<div class="tab-pane" id="tab3">
-											<div class="search-background">
-												<div class="form row no-gutters">
-													<div class="form-group  col-xl-6 col-lg-6 col-md-12 mb-0">
-														<input type="text" class="form-control" id="diploma-text" placeholder="프리랜서 검색">
-													</div>
-													<div class="form-group col-xl-4 col-lg-4 col-md-12 mb-0">
-														<select class="form-control select2-show-search border-bottom-0 w-100" data-placeholder="Select">
-															<optgroup label="Categories">
-																<option value="0">All</option>
-																<option value="1">개발</option>
-																<option value="2">디자인</option>
-															</optgroup>
-														</select>
-													</div>
-													<div class="form-group col-xl-2 col-lg-2  col-md-12 mb-0 location">
-														<div class="row no-gutters bg-white br-2">
-															<!-- 
-															<div class="form-group  col-xl-8 col-lg-7 col-md-12 mb-0">
-																<input type="text" class="form-control border" id="diploma-location" placeholder="Location">
-															</div>
-															 -->
-															<div class="col-xl-12 col-lg-12 col-md-12 mb-0">
-																<a href="#" class="btn btn-block btn-secondary fs-14"><i class="fa fa-search"></i> Search</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+                                 <div class="search-background">
+                                    <div class="form row no-gutters">
+                                       <div class="form-group  col-xl-6 col-lg-6 col-md-12 mb-0">
+                                          <input type="text" class="form-control freeSearch" id="diploma-text" placeholder="프리랜서 검색">
+                                       </div>
+                                       <div class="form-group col-xl-4 col-lg-4 col-md-12 mb-0">
+                                          <select class="form-control select2-show-search border-bottom-0 w-100 freeType" data-placeholder="Select">
+                                             <optgroup label="Categories">
+                                                <option value="0">All</option>
+                                                <option value="1">개발</option>
+                                                <option value="3">디자인</option>
+                                             </optgroup>
+                                          </select>
+                                       </div>
+                                          <script type="text/javascript">
+                                             function freeSearch(){
+                                                var type= $(".freeType").val();
+                                                var searchKey=$(".freeSearch").val();
+                                                
+                                                location.href="freelancerList?type="+type+"&searchKey="+searchKey;
+                                             }
+                                          </script>
+                                       <div class="form-group col-xl-2 col-lg-2  col-md-12 mb-0 location">
+                                          <div class="row no-gutters bg-white br-2">
+                                             <!-- 
+                                             <div class="form-group  col-xl-8 col-lg-7 col-md-12 mb-0">
+                                                <input type="text" class="form-control border" id="diploma-location" placeholder="Location">
+                                             </div>
+                                              -->
+                                             <div class="col-xl-12 col-lg-12 col-md-12 mb-0">
+                                                <a href="javascript:void(0)" class="btn btn-block btn-secondary fs-14" onclick="freeSearch();"><i class="fa fa-search"></i> Search</a>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
 									</div>
 								</div>
 							</div>
@@ -198,7 +206,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프로젝트</h1>
-					<p>다양한 카테고리와 세분화된 조건으로  IT프로젝트를 만나실 수 있습니다</p>
+					<p>다양한 카테고리와 세분화된 조건으로  IT 프로젝트를 만나실 수 있습니다.</p>
 				</div>
 				<div class="business-item Marketplace ">
 					<div class="items-gallery">
@@ -808,7 +816,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프리마켓</h1>
-					<p>다양한 카테고리와 세분화된 조건으로 IT프리랜서를 만나실 수 있습니다</p>
+					<p>다양한 카테고리와 세분화된 조건으로 IT 서비스를 찾으실 수 있습니다.</p>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
@@ -827,7 +835,10 @@
 											
 											<div class="item-card-img">
 												<a href="market-content?market_num=${list.market_num}"></a>
+												<!--
 												<img  src="../hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
+												-->
+												<img  src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${list.market_fname}" alt="${list.market_fname}">
 											</div>
 									<!-- 즐겨찾기 설정 상태 -->
 										 <!-- 
@@ -860,7 +871,7 @@
 													<div class="item-card2-desc">
 														<small class="">By: ${list.freelancer.free_name}</small>
 														<div class="item-card2-text mt-1">
-															<a href="market-content?market_num=${list.market_num}" class="text-dark"><h4 class="font-weight-bold">${list.market_sub}</h4></a>
+															<a href="market-content?market_num=${list.market_num}" class="text-dark"><h4 class="font-weight-bold overflow">${list.market_sub}</h4></a>
 														</div>
 														<!--  <p class="">AWS(아마존 웹 서비스) 및 리눅스 서버 구축,이전,컨설팅,기술지원 해드립니다.</p>-->
 														<h2><fmt:formatNumber value="${list.market_price}" pattern="#,###,###,###" /><span class="fs-16">원</span></h2>
@@ -911,7 +922,7 @@
 			<div class="container">
 				<div class="section-title center-block text-center">
 					<h1>프리랜서</h1>
-					<p>한나영 김소담 윤별 김세영 송승훈 한나영 김소담 윤별 김세영 송승훈</p>
+					<p>다양한 카테고리와 세분화된 조건으로 IT 프리랜서를 찾으실 수 있습니다.</p>
 				</div>
 				<div id="myCarousel1" class="owl-carousel owl-carousel-icons2">
 					<c:forEach  var="freelancer" items="${freelancerList}" varStatus="status">
@@ -953,7 +964,10 @@
 						<div class="card-body">
 							<c:choose>
                                 <c:when test="${freelancer.free_fname != null}">
-									<img src="../hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto"> 
+                                	<!--
+									<img src="../hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
+									-->
+									<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${freelancer.free_fname}" alt="X" class="avatar-xxl brround mx-auto">
 								</c:when>
 								<c:otherwise>
 								 <center><i class="fa fa-user-circle text-muted mr-1 fa-5x avatar-xxl brround mx-auto"></i></center>
@@ -975,7 +989,7 @@
 										</c:forEach>
 										</c:forEach>
 									<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-									<p style="background-color:#eae8ed;">
+									<p class="overflow" style="background-color:#eae8ed;">
 											<c:forEach  var="key" items="${list_key}" varStatus="status">
 												<c:if test="${freelancer.free_code eq key.free_code}">
 												<c:forEach  var="i"  begin="0" end="0" varStatus="status">
@@ -1004,8 +1018,7 @@
 								<c:forEach  var="exp" items="${freelancer.list_freelancerprofile}" varStatus="status">
 								<div class="icons text-dark"><i class="si si-user text-muted mr-1"></i> 경력 ${exp.pro_exp}&nbsp;년
 								</c:forEach>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							
+								&nbsp;&nbsp;							
 								 <c:forEach  var="star" items="${list_star}" varStatus="status">	
 									<c:if test="${freelancer.free_code eq star.free_code}">
 										  <c:if test="${star.freerev_star >= 0}">
@@ -1015,7 +1028,7 @@
 						                     <c:forEach var="1" begin="1" end="${5-star.freerev_star}">
 												<i class="fa fa-star-o text-warning"> </i>
 											 </c:forEach>
-					                            <span class="rated-products-ratings">&nbsp; ${star.freerev_star}	&nbsp;&nbsp;&nbsp;	</span>
+					                            <span class="rated-products-ratings">&nbsp; ${star.freerev_star}&nbsp;</span>
 					                       </c:if>
 									 </c:if>
 								  </c:forEach>

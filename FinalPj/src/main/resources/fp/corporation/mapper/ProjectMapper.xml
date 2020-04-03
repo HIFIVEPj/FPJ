@@ -266,8 +266,8 @@
 	</select>
 
 	<insert id="payinsert" parameterType="java.util.Map">
-		insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME,PAYINFO_RDATE ) values
-		(PAYINFO_NUM_SEQ.nextval, #{data.imp_uid}, #{data.merchant_uid}, #{data.paid_amount}, #{data.apply_num, jdbcType=VARCHAR}, #{data.status}, #{data.card_name, jdbcType=VARCHAR}, #{data.pg_tid}, #{data.buyer_name},sysdate)
+	insert into PAY_INFORMATION( PAYINFO_NUM, PAYINFO_PAYID, PAYINFO_UID, PAYINFO_PRICE,  PAYINFO_CARDNUM, PAYINFO_STATUS, PAYINFO_CARDNAME, PAYINFO_PGTID, PAYINFO_BUYERNAME,PAYINFO_RDATE ) values
+	(PAYINFO_NUM_SEQ.nextval, #{data.imp_uid}, #{data.merchant_uid}, #{data.paid_amount}, #{data.apply_num, jdbcType=VARCHAR}, #{data.status}, #{data.card_name, jdbcType=VARCHAR}, #{data.pg_tid}, #{data.buyer_name},sysdate)
 	</insert>
 	<update id="payStatusUpdate" parameterType="java.util.Map">
 		update PROJECT set pj_paystatus=1 where pj_num = #{pj_num}

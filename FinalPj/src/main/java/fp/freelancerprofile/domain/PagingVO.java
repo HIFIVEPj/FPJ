@@ -14,7 +14,7 @@ public class PagingVO {
 	//total:게시글총개수, cntPerPage:페이지당글개수  start, end : 쿼리용
 	long total;
 	private int nowPage, startPage, endPage,  cntPerPage, lastPage, start, end;
-	private int cntPage=4;
+	private int cntPage=5;
 
 	public PagingVO(long total, int nowPage, int cntPerPage) {
 		setNowPage(nowPage);

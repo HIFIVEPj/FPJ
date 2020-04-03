@@ -155,12 +155,17 @@ public class MarketController {
    }*/
        ArrayList<Long> marketNumList = pickList(mem_email);
       // log.info("~!!~!~@!#@!$#@$@#$!#!pickState"+pickState);
+       long countDv=marketService.countDevelopoer();
+       long countDs=marketService.countDesigner();
+
        ModelAndView mv = new ModelAndView("market/market-list");
        mv.addObject("list", list);
         mv.addObject("paging", marketVO);  
         mv.addObject("marketNumList", marketNumList); 
         mv.addObject("selectedKey", selectedKey); 
-        mv.addObject("searchWord", searchWord); 
+        mv.addObject("searchWord", searchWord);
+        mv.addObject("countDv", countDv); 
+        mv.addObject("countDs", countDs);
       return mv;
    }
 //픽리스트 메소드   
@@ -239,12 +244,12 @@ public class MarketController {
 
       log.info("#####price1:"+price1);
       log.info("#####price2"+price2);
-*/   if(marketPrice1=="") {
-		marketPrice1="0";
-	 }
-	 if(marketPrice2=="") {
-		marketPrice2=""+Long.MAX_VALUE;
-	 }
+*/   if(marketPrice1==""||marketPrice1==null) {
+	    marketPrice1="0";
+	  }
+	  if(marketPrice2==""||marketPrice2==null) {
+	    marketPrice2=""+Long.MAX_VALUE;
+	  }
     
       marketPrice2 = marketPrice2.replaceAll("[^0-9]", "");
 	  marketPrice1 = marketPrice1.replaceAll("[^0-9]", "");
@@ -258,12 +263,19 @@ public class MarketController {
       mapPrice.put("price1", price1);
       mapPrice.put("price2", price2);
       
+      /*
       if(checkedCate.size()!=0) {
          for(int i=0; i<checkedCate.size();i++) {
             int cate=checkedCate.get(i);
             mapCate.put("cate"+i,cate);
          }
-      }
+      }*/
+     if(checkedCate.contains(1)) {
+        mapCate.put("cate0",1);
+     }
+     if(checkedCate.contains(2)) {
+        mapCate.put("cate1",2);
+     }
       if(checkedExp.size()!=0) {
          for(int i=0 ; checkedExp.size()>i ; i++) {
             String exp=checkedExp.get(i);
@@ -307,6 +319,9 @@ public class MarketController {
          //세션이메일이 존재하지 않을 때    
        }
 log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
+		long countDv=marketService.countDevelopoer();
+		long countDs=marketService.countDesigner();
+
        ModelAndView mv = new ModelAndView("market/market-list");
        mv.addObject("list", list);
         mv.addObject("paging", marketVO);  
@@ -316,6 +331,8 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
         mv.addObject("mapCate", mapCate);
         mv.addObject("mapExp", mapExp);
         mv.addObject("mapPrice", mapPrice);
+        mv.addObject("countDv", countDv); 
+        mv.addObject("countDs", countDs); 
 
       return mv;
    }
@@ -438,12 +455,15 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
       return mv;
       
    }
-   //마켓에 필요한 프리랜서정보를 리턴하는 메소드 
    public Market getMarketFreePrefile(long market_num){
-      Market marketFreelancer;
-      marketFreelancer=marketService.getMarketFreelancer(market_num);
-      return marketFreelancer;
-   }
+	      Market marketFreelancer;
+	      marketFreelancer=marketService.getMarketFreelancer(market_num);
+	      if(marketFreelancer==null) {
+	         marketFreelancer=marketService.getMarketFreelancer2(market_num);
+	      }
+	      return marketFreelancer;
+	   }
+
    @RequestMapping(value = "market-posts", method = RequestMethod.GET)
    public String market_post(Locale locale, Model model) {
 
@@ -518,8 +538,8 @@ log.info("!@@@@@@@@@@@@@@mapPrice"+mapPrice);
    public List<String> doFileupload(MultipartHttpServletRequest mtfRequest) {
 	   log.info("22222222mtfRequest"+mtfRequest);
       //String path  = "C:\\Users\\user\\git\\FPJ\\FinalPj\\src\\main\\webapp\\resources\\hifiveImages\\market\\marketThumbnails\\";
-      String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
-      //String path  = "/home/ubuntu/hifive/hifiveImages/marketThumbnails/"; // for aws
+      //String path  = "C:\\hifive\\hifiveImages\\marketThumbnails\\";
+      String path  = "/home/ubuntu/hifive/hifiveImages/marketThumbnails/"; // for aws
       System.out.println("111111111111111111111111111111111111111111111"+path);
       File Folder = new File(path);
       // 해당 디렉토리가 없을경우 디렉토리를 생성합니다.

@@ -29,7 +29,7 @@
 						<div class="row">
 							<div class="col-xl-8 col-lg-12 col-md-12 d-block mx-auto">
 								<div class="text-center text-white ">
-									<h1 class="" style="margin-bottom:0rem;">프리랜서</h1>
+									<h1 class="" style="margin-bottom:0rem;">프로필</h1>
 								</div>
 							</div>
 						</div>
@@ -40,6 +40,20 @@
 		<!--/Sliders Section-->
       </section>
       <!--/Breadcrumb-->
+      <!--Breadcrumb-->
+		<div class="bg-white border-bottom">
+			<div class="container">
+				<div class="page-header">
+					<h4 class="page-title">Profile</h4>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="../">Home</a></li>
+						<li class="breadcrumb-item">프리랜서</li>
+						<li class="breadcrumb-item active" aria-current="page">프로필</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<!--/Breadcrumb-->
 
       <!--User Dashboard-->
       <section class="sptb">
@@ -60,7 +74,10 @@
 									
 								<c:if test = "${getFileName.get(0).free_fname ne null}">
 									<div class="avatar-xxl brround" style="margin:0 auto;">
+										<!--
 										<img src="../hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
+										-->
+										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${getFileName.get(0).free_fname}" class="avatar-xxl brround" alt="user">
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -78,6 +95,9 @@
 											
 											
 										</li>
+										<li>
+			                                 <a class="side-menu__item" href="myNotification"><i class="side-menu__icon si si-bell"></i><span class="side-menu__label">새로 온 알림</span></a>
+			                              </li>
 										<li class="slide">
 											<a class="side-menu__item" data-toggle="slide" href="#"><i class="side-menu__icon si si-heart"></i><span class="side-menu__label">찜 목록</span><i class="angle fa fa-angle-right"></i></a>
 											<ul class="slide-menu">
@@ -179,17 +199,17 @@
                           <c:if test ="${paging.nowPage != paging.startPage}">
                            <!--이전 페이지 이동 -->
                             <li class="page-item">
-	                        <a aria-label="Last" class="page-link" href="freelancerProfile_list?&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
-	                        <i class="fa fa-angle-double-left"></i></a>
-		                     </li>   
-		                     <li class="page-item">
-		                        <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
-		                        <i class="fa fa-angle-left"></i></a>
-		                     </li>   
+                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}">
+                           <i class="fa fa-angle-double-left"></i></a>
+                           </li>   
+                           <li class="page-item">
+                              <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage-1}&cntPerPage=${paging.cntPerPage}">
+                              <i class="fa fa-angle-left"></i></a>
+                           </li>   
                           </c:if>
                            <!--페이지번호 -->
                             <!-- 시작페이지~끝페이지 -->  
- 							 <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
+                       <c:forEach var='p' begin="${paging.startPage}" end="${paging.endPage}" >
                               <c:choose>
                                  <c:when test="${p == paging.nowPage}">
                                     <li class='page-item active'><a class="page-link"  >${p}</a></li>
@@ -204,7 +224,7 @@
                            <a aria-label="Next" class="page-link" href="freelancerProfile_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-right"></i></a>
                          </li>  
                         <li class="page-item">
-                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.endPage}"><i class="fa fa-angle-double-right"></i></a>
+                           <a aria-label="Last" class="page-link" href="freelancerProfile_list?nowPage=${paging.lastPage}&cntPerPage=${paging.cntPerPage}"><i class="fa fa-angle-double-right"></i></a>
                         </li>
                            </c:if>
                            </ul>
