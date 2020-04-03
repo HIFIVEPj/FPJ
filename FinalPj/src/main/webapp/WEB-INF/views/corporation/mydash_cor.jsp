@@ -476,14 +476,12 @@
 								</c:if>
 								<c:if test = "${cor.cor_fname != null}">
 									<div class="profile-pic-img">
-
-										<!--
-
+										
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
-										-->
 										
+										<!--
 										<img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
-										
+										-->
 
 									</div>
 								</c:if>

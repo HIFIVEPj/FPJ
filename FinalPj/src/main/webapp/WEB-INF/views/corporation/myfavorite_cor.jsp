@@ -68,12 +68,12 @@
 								</c:if>
 								<c:if test = "${cor.cor_fname != null}">
 									<div class="profile-pic-img">
-
-										<!--
+										
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
-										-->
+										
+										<!--
 										<img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
-
+									-->
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -170,12 +170,12 @@
 																<i class="fa fa-user-circle text-muted mr-1 fa-3x"></i>
 															</c:if>
 															<c:if test = "${dto.free.free_fname ne null}">
-
-																<!--
+																
 																<img src="../hifiveImages/free_thumb/${dto.free.free_fname}" class="brround" alt="${dto.free.free_fname}">
-																-->
+																
+																<!--
 																<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${dto.free.free_fname}" class="brround" alt="${dto.free.free_fname}">
-
+															-->
 															</c:if>
 														</div>
 														<div class="media-body">
@@ -285,12 +285,12 @@
 																<i class="fa fa-user-circle text-muted mr-1 fa-3x"></i>
 															</c:if>
 															<c:if test = "${dto.free.free_fname ne null}">
-
-																<!--
+																
 																<img src="../hifiveImages/free_thumb/${dto.free.free_fname}" class="brround" alt="${dto.free.free_fname}">
-																-->
+																
+																<!--
 																<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${dto.free.free_fname}" class="brround" alt="${dto.free.free_fname}">
-
+															-->
 															</c:if>
 														</div>
 														<div class="media-body">

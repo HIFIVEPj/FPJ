@@ -101,13 +101,11 @@ $(document).ready(function() {
 								</c:if>
 								<c:if test = "${cor.cor_fname != null}">
 									<div class="profile-pic-img">
-
-										<!--
+										
 										<img src="../hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
-										-->
+										<!--
 										<img src="/home/ubuntu/hifive/hifiveImages/cor_thumb/${cor.cor_fname}" class="brround" alt="user">
-									</div>
-
+									--></div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
 								</div>
@@ -185,13 +183,11 @@ $(document).ready(function() {
 													<div class="media mt-0 mb-0">
 													 	<div class="card-aside-img">
 															<a href="market-content?market_num=${BuyList.market_num }"></a>
-
-															<!--
+															
 															<img src="../hifiveImages/marketThumbnails/${BuyList.market.market_fname}" alt="img">
-															-->
+															<!--
 															<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${BuyList.market.market_fname}" alt="img">
-														</div>
-
+														--></div>
 																										
 														 <div class="media-body">
 															<div class="card-item-desc ml-4 p-0 mt-2">

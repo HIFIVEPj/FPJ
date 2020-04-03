@@ -151,4 +151,3 @@ import fp.freelancerprofile.domain.Type;
 
 
 }
-

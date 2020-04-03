@@ -286,13 +286,11 @@
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
 																	<a href="#"></a>
-
-																	<!--
+																	
 																	<img src="../hifiveImages/marketThumbnails/${market.market_fname}" class="icon-left" alt="" id="prev-img">
-																	-->
-																	<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${dto.market_fname}" class="icon-left" alt="" id="prev-img">
-																</div>
-
+																	
+																	<!--<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${dto.market_fname}" class="icon-left" alt="" id="prev-img">
+																--></div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
 																		<a href="market-content?market_num=${dto.market_num}" class="text-dark"><h4 class="font-weight-semibold">${dto.market_sub}</h4></a>

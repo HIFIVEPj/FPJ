@@ -348,7 +348,6 @@ boolean sub= false;
 	}
 		public ArrayList<Object[]> Fileupload(MultipartHttpServletRequest mtfRequest){
 			ArrayList<Object[]> list = new ArrayList<Object[]> ();
-
 			String path = Path.MARKETQA_FILE;
 
 			List<MultipartFile> fileList = mtfRequest.getFiles("fname");

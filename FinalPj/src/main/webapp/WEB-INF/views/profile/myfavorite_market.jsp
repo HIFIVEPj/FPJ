@@ -69,18 +69,11 @@
 								</c:if>
 								<c:if test = "${free.free_fname ne null}">
 									<div class="profile-pic-img">
-<<<<<<< HEAD
 										
 										<img src="../hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
 									<!--	
 										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
 									-->
-=======
-										<!--
-										<img src="../hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
-										-->
-										<img src="/home/ubuntu/hifive/hifiveImages/free_thumb/${free.free_fname}" class="brround" alt="user">
->>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 									</div>
 								</c:if>
 									<a href="userprofile.html" class="text-dark"><h4 class="mt-3 mb-0 font-weight-semibold">${sessionScope.name}</h4></a>
@@ -165,18 +158,11 @@
 															<div class="media mt-0 mb-0">
 																<div class="card-aside-img">
 																	<a href="market-content?market_num=${pickList.market_num }"></a>
-<<<<<<< HEAD
 																	
 																	<img src="../hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
 																<!--	
 																	<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
 																-->
-=======
-																	<!--
-																	<img src="../hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
-																	-->
-																	<img src="/home/ubuntu/hifive/hifiveImages/marketThumbnails/${pickList.market.market_fname}" alt="img">
->>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 																</div>
 																<div class="media-body">
 																	<div class="card-item-desc ml-4 p-0 mt-2">
@@ -216,7 +202,6 @@
 														   <td align="center">
 														      <a href="javascript:void(0);" class="badge badge-primary">판매중</a>
 														   </td>
-<<<<<<< HEAD
 														</c:if>
 														<c:if test="${pickList.market.market_state==0}">
 														   <td align="center">
@@ -224,15 +209,6 @@
 														   </td>
 														</c:if>
 														<c:if test="${pickList.market.market_state==2}">
-=======
-														</c:if>
-														<c:if test="${pickList.market..market_state==0}">
-														   <td align="center">
-														      <a href="javascript:void(0);" class="badge badge-warning">검토중</a>
-														   </td>
-														</c:if>
-														<c:if test="${pickList.market..market_state==2}">
->>>>>>> 0e834a18e874ca4442e2398498f093a393ef2a2c
 														   <td align="center">
 														      <a href="javascript:void(0);" class="badge badge-secondary">거절됨</a>
 														   </td>

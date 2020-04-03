@@ -98,7 +98,6 @@
   -->
     <listener>
   <listener-class>fp.index.controller.CountManager</listener-class>
-
   </listener>
 
 </web-app>

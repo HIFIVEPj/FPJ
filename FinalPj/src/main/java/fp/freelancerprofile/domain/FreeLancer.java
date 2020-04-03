@@ -1,3 +1,4 @@
+
 package fp.freelancerprofile.domain;
 
 import java.sql.Date;
