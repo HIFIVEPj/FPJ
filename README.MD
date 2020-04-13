@@ -2,7 +2,7 @@
 
 ▣ team name : IT crowd
 
-▣ project period : 13/01/20 ~ 26/03/25
+▣ project period : 13/01/20 ~ 26/03/20
 
 ▣ members : nayoung, sodam, byeol, seyoung, seunghoon
 
